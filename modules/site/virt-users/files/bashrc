@@ -1,0 +1,16 @@
+#
+# DO NOT EDIT! This file is managed by Puppet so any changes you make locally will be lost.
+#
+
+# .bashrc
+
+# User specific aliases and functions
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+if [ -f ~/.ctierrc ]; then
+	. ~/.ctierrc
+fi

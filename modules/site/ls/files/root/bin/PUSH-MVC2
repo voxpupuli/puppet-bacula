@@ -1,0 +1,41 @@
+#!/bin/sh
+
+trap "exit 1" INT
+
+. ~interch/etc/server-list.sh
+
+for i in $servers
+#for i in $all_servers
+#for i in $backup_servers
+#for i in $rodb_servers belay
+#for i in $rodb_servers
+#for i in $other_servers
+#for i in $new_syslog_servers
+do
+    echo $i
+	# Step 1
+	#su - -c "push-files --groups='interchange, docroot_cvs, catalogs' -p $i" interch
+	#rsync -e 'ssh -axqT -o BatchMode=yes -i /var/lib/interchange/.ssh/id_dsa.bcs-push-robot' -a --progress /var/www/html/images/items/tiny/TNF1556.jpg /var/www/html/images/items/tiny/TNF1565.jpg interch@$i:/var/www/html/images/items/tiny/
+	
+	# Step 2
+    #scp -i ~/.ssh/id_dsa.bcs-push-robot-root -p /etc/httpd/conf/steepcheap.conf root@$i:/etc/httpd/conf/
+
+	# Step 3
+	#ssh -i ~/.ssh/id_dsa.bcs-push-robot-root root@$i '
+	#	mv -v /var/lib/interchange/bcs/tmp/file_cache_lockable /var/lib/interchange/bcs/tmp/file_cache_lockable.old 
+	#	mv -v /var/lib/interchange/outlet/tmp/file_cache_lockable /var/lib/interchange/outlet/tmp/file_cache_lockable.old 
+	#	mv -v /var/lib/interchange/dogfunk/tmp/file_cache_lockable /var/lib/interchange/dogfunk/tmp/file_cache_lockable.old 
+	#	mv -v /var/lib/interchange/tramdock/tmp/file_cache_lockable  /var/lib/interchange/tramdock/tmp/file_cache_lockable.old  
+	#	mv -v /var/lib/interchange/explore64/tmp/file_cache_lockable /var/lib/interchange/explore64/tmp/file_cache_lockable.old 
+	#	mv -v /var/lib/interchange/steepcheap/tmp/file_cache_lockable /var/lib/interchange/steepcheap/tmp/file_cache_lockable.old 
+	#	mv -v /var/lib/interchange/wm/tmp/file_cache_lockable /var/lib/interchange/wm/tmp/file_cache_lockable.old';
+
+	ssh -i ~/.ssh/id_dsa.bcs-push-robot-root root@$i '
+		rm -rf /var/lib/interchange/bcs/tmp/file_cache_lockable.old;
+		rm -rf /var/lib/interchange/outlet/tmp/file_cache_lockable.old;
+		rm -rf /var/lib/interchange/dogfunk/tmp/file_cache_lockable.old;
+		rm -rf /var/lib/interchange/tramdock/tmp/file_cache_lockable.old;
+		rm -rf /var/lib/interchange/explore64/tmp/file_cache_lockable.old;
+		rm -rf /var/lib/interchange/steepcheap/tmp/file_cache_lockable.old;
+		rm -rf /var/lib/interchange/wm/tmp/file_cache_lockable.old;'
+done

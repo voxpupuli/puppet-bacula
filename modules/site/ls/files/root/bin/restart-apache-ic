@@ -1,0 +1,5 @@
+#!/bin/sh
+
+service httpd stop
+su - interch -c bin/restart-ic
+service httpd start

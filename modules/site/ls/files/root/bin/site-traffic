@@ -1,0 +1,47 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+my %hit;
+
+for my $host (qw( chelan nile darling dinkey snake volga rhine zigzag colorado congo )) {
+
+	print "Working on server $host\n";
+
+	system(qq{ssh $host 'service httpd stop'});
+
+	open my $LOG, qq{ssh $host 'cat /var/log/httpd/access_log' |} or die;
+
+	print "Processing log file\n";
+
+	while (<$LOG>) {
+		next unless m,\[(\d+)/(\w+)/(\d+):(\d\d):(\d\d):\d\d -\w+\] "\w+ /(store|outlet|dogfunk|tramdock|steepcheap|corporate),;
+		++$hit{$6}{"$3-$2-$1 $4:$5"};
+	}
+
+	close $LOG;
+
+	system(qq{ssh $host 'service httpd start'}) == 0 or die;
+	print $/;
+}
+
+
+print "Creating reports\n";
+
+mkdir '/var/log/bc_traffic';
+
+for my $cat (keys %hit) {
+	open my $OUT, '>', "/var/log/bc_traffic/$cat" or die;
+	for (sort keys %{$hit{$cat}}) {
+		print $OUT $_, ' ', $hit{$cat}{$_}, $/;
+	}
+	close $OUT or die;
+}
+
+print "Done\n";
+
+
+__END__
+
+64.34.179.237 - - [26/Mar/2006:04:38:46 -0700] "GET /steepcheap?id=XMhIUbgt HTTP/1.1" 301 20 "-" "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2.1; aggregator:TailRank; http://tailrank.com/robot) Gecko/20021130" 55416

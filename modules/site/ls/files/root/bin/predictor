@@ -1,0 +1,10 @@
+#!/bin/sh
+for server in backcountry outlet corp sac explore64 tramdock dogfunk
+do
+	echo "
+server vir $server
+predictor $1
+exit"
+done
+
+exit 0

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+myhost=`hostname -s`
+catalogs="bcs outlet dogfunk tramdock explore64 steepcheap wm"
+
+echo "Renaming robots.txt to take webserver out of load balancer"
+mv -v /var/www/html/robots.txt /var/www/html/robots.txt.bak
+if [ $? -ne 0 ]; then
+    echo "Failed to rename robots.txt.  err=$?"
+    exit $?
+fi
+
+
+echo "Starting to remove 'junk' caches on $myhost"
+
+for c in $catalogs
+do
+    echo "Removing Junk Cacheable dirs and files under $c"
+    cacheables=`ls /var/lib/interchange/$c/tmp/file_cache_lockable/ | grep -v ^_ | grep -v '.junk'`
+    for x in $cacheables
+    do
+        # Get the highest junk.(\d) number so we can remove it
+        dir_to_rm=`ls /var/lib/interchange/$c/tmp/file_cache_lockable/ | grep "junk." | grep $x | sort -r | head -n 1`
+
+        if [ "$dir_to_rm" != "" ]; then
+            echo "Removing /var/lib/interchange/$c/tmp/file_cache_lockable/$dir_to_rm"
+            #time rm -rf /var/lib/interchange/$c/tmp/file_cache_lockable/$dir_to_rm
+        else
+            echo "skipping $x, no junk dir found to remove"
+        fi
+
+    done
+
+done
+
+
+echo "Renaming robots.txt.bak back to robots.txt"
+mv -v /var/www/html/robots.txt.bak /var/www/html/robots.txt
+if [ $? -ne 0 ]; then
+    echo "Failed to rename robots.txt.bak.  err=$?"
+    exit $?
+fi
+
+
+echo "Done clearing cache for $myhost"

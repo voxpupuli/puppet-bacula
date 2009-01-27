@@ -1,0 +1,20 @@
+#!/bin/sh
+
+trap "exit 1" INT
+
+. ~interch/etc/server-list.sh
+
+for i in $servers
+#for i in $all_servers
+#for i in $backup_servers
+#for i in $rodb_servers belay
+#for i in $rodb_servers
+#for i in $other_servers
+#for i in $new_syslog_servers
+do
+    echo $i
+
+	#ssh root@$i 'rm /var/run/interchange/nfs_status/tribe_cache'
+	ssh $i 'echo 1 > /var/run/interchange/nfs_status/tribe_cache'
+	ssh $i 'cat /var/run/interchange/nfs_status/tribe_cache'
+done

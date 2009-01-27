@@ -1,0 +1,43 @@
+#!/bin/sh
+
+trap "exit 1" INT
+
+. ~interch/etc/server-list.sh
+
+
+for i in $servers
+#for i in $all_servers
+#for i in $rodb_servers angelfire
+#for i in $other_servers
+do
+    echo $i
+
+	# 2008-10-01 Ethan ODAT cache rebuilder rollout/rollback options
+    # /root/odat_rebuild_rollout/deploy $i
+    # /root/odat_rebuild_rollout/rollback $i
+	#ssh $i 'date; for c in steepcheap wm chainlove tramdock; do ls -l /var/www/html/page_cache/$c; done'
+    # ssh $i 'echo --------------------------------; service mvc_cached status; cat ~interch/bin/mvc_cached_run/config.yml'
+
+    # cat ~/tmp/interchange_local.cfg.patch | ssh $i 'cp /usr/lib/interchange/interchange_local.cfg /tmp/ && su - -c "patch -i - /usr/lib/interchange/interchange_local.cfg" interch && tail -n 7 /usr/lib/interchange/interchange_local.cfg'
+    # ssh $i 'ls -l /usr/lib/interchange/*.cfg'
+	#ssh $i 'su - -c "bin/tribe-active-flag --deactivate" interch'
+	#ssh $i 'su - -c "bin/tribe-active-flag --activate" interch'
+
+    ssh -i /root/.ssh/id_dsa.bcs-push-robot-root $i \ 
+	    'sed -i.bak.f5 /usr/local/etc/nrpe.cfg -e "s/check_procs -w 250 -c 300/check_procs -w 333 -c 400/" && kill -HUP `pidof nrpe`'
+
+	#scp -p /var/lib/interchange/bin/tribe-active-flag $i:/var/lib/interchange/bin/
+
+	#ssh $i '/usr/local/bin/perl -e "use Sys::Hostname;"'
+	#scp -p /var/lib/interchange/bin/lb_healthcheck $i:/var/lib/interchange/bin/
+	#ssh $i 'cd /root/bin; rm -f lb_healthcheck; ln -s /var/lib/interchange/bin/lb_healthcheck'
+
+	#ssh $i "mount -o remount,noatime,nodiratime /boot; mount"
+	#ssh $i "cat /etc/fstab; mount"; echo; echo
+	#ssh $i 'tail -n 100 /tmp/error500.log | grep Time: | tail -n 1'
+
+	#scp -p /etc/bashrc $i:/etc/
+    #scp -p /usr/lib/interchange/custom/lib/Backcountry/Component/Tribe/UserRanking.pm $i:/usr/lib/interchange/custom/lib/Backcountry/Component/Tribe/UserRanking.pm
+    #ssh interch@$i 'bin/restart-ic'
+
+done

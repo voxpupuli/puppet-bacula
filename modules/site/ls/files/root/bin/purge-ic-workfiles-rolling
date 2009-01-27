@@ -1,0 +1,31 @@
+#!/bin/sh
+
+trap "exit 1" INT
+
+. ~interch/etc/server-list.sh
+
+sleeptime=30
+
+for i in beavermtn copper
+#for i in $servers
+do
+    echo $i
+
+    echo "Moving robots.txt to robots.txt.bak for $i.  sleeping $sleeptime..."
+    ssh interch@$i 'mv /var/www/html/robots.txt /var/www/html/robots.txt.bak'
+    sleep $sleeptime
+
+    for cat in bcs outlet dogfunk tramdock steepcheap wm explore64 corporate
+    do
+        echo "    Purging tmp files for $cat, `date`"
+        ssh interch@$i "rm -rf /var/lib/interchange/$cat/tmp/{file_cache_lockable,retired}/*"
+        echo "    Done, `date`"
+    done
+
+    ssh interch@$i 'mv /var/www/html/robots.txt.bak /var/www/html/robots.txt'
+    if [ $? -gt 0 ]; then
+        echo "Error putting robots.txt back to normal for $i!! exiting..."
+        exit 1
+    fi
+
+done

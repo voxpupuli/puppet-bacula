@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+$output=`ps auxww | grep postgres | grep -i "[W]aiting"`;
+$count=`echo $output |wc -l`;
+if ($count < 3) { print "No queries waiting"; exit 0; }
+else { print $output; exit 2; }
+

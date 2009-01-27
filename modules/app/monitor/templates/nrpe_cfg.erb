@@ -1,0 +1,45 @@
+#Version 0.1 
+
+server_port=5666
+allowed_hosts=127.0.0.1,206.71.94.65,10.40.16.22,10.40.20.22,10.40.16.65,10.40.20.65,206.71.94.22
+nrpe_user=nrpe
+nrpe_group=nrpe
+dont_blame_nrpe=1
+debug=0
+command_timeout=60
+
+command[check_users]=/usr/lib64/nagios/plugins/check_users -w 20 -c 25
+command[check_load]=/usr/lib64/nagios/plugins/check_load -w 18,13,10 -c 30,25,20
+command[check_load_custom]=/usr/lib64/nagios/plugins/check_load -w $ARG1$ -c $ARG2$
+command[check_disk]=/usr/lib64/nagios/plugins/check_disk -w 10% -c 5% -p /
+command[check_zombie_procs]=/usr/lib64/nagios/plugins/check_procs -w 5 -c 10 -s Z
+command[check_total_procs]=/usr/lib64/nagios/plugins/check_procs -w 275 -c 325 
+command[check_total_procs_custom]=/usr/lib64/nagios/plugins/check_procs -w $ARG1$ -c $ARG2$ 
+command[check_mem]=/usr/lib64/nagios/plugins/contrib/check_mem.pl -f -w 10 -c 5
+command[check_swap]=/usr/lib64/nagios/plugins/check_swap -w 99 -c 90
+
+## Keep an eye on pg_xlog directory
+command[check_jewels2]=/usr/lib64/nagios/plugins/check_disk -w 50% -c 55% -p /jewels2
+
+## Custom Checks
+command[check_bucardo_ping]=/home/bucardo/bin/bucardo_ctl ping
+command[check_sac_rosync]=/usr/local/libexec/nrpe_checks/check_odat_in_sync.pl --catalog_id=steepcheap
+command[check_wm_rosync]=/usr/local/libexec/nrpe_checks/check_odat_in_sync.pl --catalog_id=wm
+command[check_hotproc]=/usr/local/libexec/nrpe_checks/check_hotproc.pl $ARG1$ $ARG2$
+command[check_pgbackend]=/usr/local/libexec/nrpe_checks/check_pgbackend 60 80
+command[check_querywait]=/usr/local/libexec/nrpe_checks/waiting-query-check
+
+## CACTI COMMANDS
+command[pgmonitor]=/usr/local/libexec/nrpe_checks/pgmonitor
+command[pgmon_bucardo]=/usr/local/libexec/nrpe_checks/pgmonitor bucardo
+command[pgmon_bcs]=/usr/local/libexec/nrpe_checks/pgmonitor bcs
+command[sar]=sar -Brcquwv -n SOCK 1 1|grep Average
+command[iostat]=iostat -dx|tail -n +3|head -n -1
+command[bucardo]=/usr/local/libexec/nrpe_checks/bucardo
+command[ic_tb_stats=/usr/local/libexec/nrpe_checks/tb_cache_counts.pl
+command[sarparse_cpustat]=sar -P ALL 1 1 |grep Average |grep -v all
+
+## MGMT COMMANDS
+command[repull]=/usr/local/sbin/pull_nrpe
+command[refresh]=/etc/init.d/nrpe reload
+command[restart]=/etc/init.d/nrpe restart&

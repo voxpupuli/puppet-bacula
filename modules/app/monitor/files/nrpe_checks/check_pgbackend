@@ -1,0 +1,31 @@
+#!/bin/bash
+
+WARN=$1
+CRIT=$2
+
+if [ -z $1 ]; then 
+	echo "Usage: check_pgbackend <warn> <crit>";
+	exit 2;
+fi
+if [ -z $2 ]; then 
+	echo "Usage: check_pgbackend <warn> <crit>";
+	exit 2;
+fi
+
+
+BACKENDS=`/usr/local/libexec/pgmonitor|awk '{ print $4}' |cut -d : -f 2`
+if [ $BACKENDS -gt $WARN ]; then
+	OUTPUT="WARNING: ${BACKENDS} backends running";
+	exitc=1;
+fi
+if [ $BACKENDS -gt $CRIT ]; then
+	OUTPUT="CRITICAL: ${BACKENDS} backends running";
+	exitc=2;
+fi
+if [ $BACKENDS -lt $WARN ]; then
+	OUTPUT="OK: ${BACKENDS} backends running";
+	exitc=0;
+fi
+
+echo $OUTPUT
+exit $exitc

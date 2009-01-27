@@ -1,0 +1,68 @@
+#!/bin/bash
+
+LVL1WGT=4
+LVL2WGT=10
+
+PWRLVL1=(
+dinkey
+snake
+volga
+rhine
+zigzag
+colorado
+congo 
+elbert
+boivin 
+)
+PWRLVL2=(
+eldora
+teton
+banff
+snowbird
+solitude
+bigsky
+green
+brighton
+telluride
+taos
+whistler
+whitewater
+)
+RODB=(
+vail
+bearmtn
+bogus
+aspen
+nile
+timp
+uinta 
+mammoth
+powder
+darling
+)
+UNUSED=(
+belay
+wilkwire
+peeg-03
+peeg-02 
+peeg-01
+)
+
+ALL_SERVERS=( ${PWRLVL1[@]} ${PWRLVL2[@]} ${UNUSED[@]} )
+
+for server in ${PWRLVL1[@]}
+do
+	echo -en "server real $server
+weight ${LVL1WGT}
+exit
+"
+done
+for server in ${PWRLVL2[@]}
+do
+	echo -en "server real $server
+weight ${LVL2WGT}
+exit
+"
+done
+
+exit 0

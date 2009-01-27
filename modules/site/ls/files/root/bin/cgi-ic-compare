@@ -1,0 +1,12 @@
+#!/bin/sh
+
+trap "exit 1" INT
+
+. ~interch/etc/server-list.sh
+
+for i in $servers
+do
+	echo $i
+	ssh $i 'psfile=/tmp/ps.$$; ps auxww > $psfile; grep -c interchange $psfile; grep -c /var/www/cgi-bin/ $psfile; rm -f $psfile'
+	echo
+done

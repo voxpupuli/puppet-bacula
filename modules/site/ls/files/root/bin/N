@@ -1,0 +1,45 @@
+#!/bin/sh
+
+. ~interch/etc/server-list.sh
+
+#for i in $rodb_servers 
+for i in $rodb_servers angelfire 
+#for i in $servers $rodb_servers angelfire
+do
+	echo $i
+
+    cat /root/20081014-00_EA_rodb_only.sql | ssh $i 'psql -U bcs bcs'
+    cat /root/20081014-04-EA_data_livedb_rodb.sql | ssh $i 'psql -U bcs bcs'
+
+    #ssh $i 'psql -U bcs bcs -c "GRANT SELECT ON page_rank TO chainlove_readonly"'
+#    ssh -i .ssh/id_dsa.bcs-push-robot-root $i "service bc_server_agent stop && service postgresql restart && service bc_server_agent start"
+    #ssh -i .ssh/id_dsa.bcs-push-robot-root $i 'ls > /dev/null'
+
+#    for s in public chainlove wm steepcheap bcs outlet tramdock dogfunk explore64
+#    do
+#        query="update $s.brand set vendor_plus_enabled = false"
+#        query="select count(1) from $s.brand where vendor_plus_enabled is true"
+#        query="alter table $s.brand alter column vendor_plus_enabled set default false"
+#        echo $query
+#        ssh -i .ssh/id_dsa.bcs-push-robot-root $i "psql -U bcs bcs -c '$query'"
+#    done
+#    cat /tmp/vendor.csv.sql | ssh -i .ssh/id_dsa.bcs-push-robot-root $i 'psql -U bcs bcs'
+
+    #cat /root/grants_for_vendor_brand.sql | ssh $i 'psql -U bcs bcs'
+#    cat /root/update_vendor_plus_to_false.sql | ssh $i 'psql -U bcs bcs'
+
+    #cat /root/20070518-add-vendor-columns.sql | ssh $i 'psql -U bcs bcs'
+    #cat /root/20080828-add_vendor_plus_columns_to_brand.sql | ssh $i 'psql -U bcs bcs'
+	#ssh $i 'service syslog-ng restart'
+    #cat /root/20080801-customs_invoice.sql | ssh $i 'psql -U bcs bcs'
+    #echo "SELECT hostname()" | ssh $i 'psql -U bcs bcs'
+    #cat /root/page_rank.sql | ssh $i 'psql -U bcs bcs'
+    #scp -p /root/bin/set_hostname_db_function $i:bin/
+    #ssh $i '/root/bin/set_hostname_db_function | psql -U bcs bcs'
+    #echo "SELECT * FROM bcs.category" | ssh $i 'psql -U bcs bcs' > /tmp/sql.tmp.$i
+    #md5sum /tmp/sql.tmp.$i
+    #ssh $i 'pg_dump -t public.country -U bcs bcs' > /tmp/category.dump.$i
+    #md5sum /tmp/category.dump.$i
+    #ssh $i 'du -hcs /var/lib/pgsql/data/base/'
+
+done

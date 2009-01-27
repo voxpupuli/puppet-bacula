@@ -1,0 +1,5 @@
+#!/bin/bash
+/usr/local/libexec/pgmonitor.worker
+OUTPUT=`cat /tmp/pgmonitor.out|grep bcs`
+echo $OUTPUT
+exit 0

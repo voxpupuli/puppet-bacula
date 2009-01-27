@@ -1,0 +1,30 @@
+#!/bin/sh
+
+[ "`cat /etc/bc-role`" = standby ] || exit 1
+
+column_reorder() {
+	awk '{printf "%-12s %4s %5s %-10s %5s %6s %5s %4s\n", $2,$3,$4,$1,$5,$6,$7,$8}'
+}
+
+sleep_time=30
+
+while :
+do
+	file=/var/www/html/server-gear-check
+	workfile=$file.build
+	workfile2=$file.build2
+	bin/server-inventory | tail -n +2 > $workfile
+	{
+		echo "<html><head><meta http-equiv=\"refresh\" content=\"30\"></head><body><pre>"
+		date
+		echo
+		head -n 1 $workfile | column_reorder
+		tail -n +2 $workfile | column_reorder | sort
+		echo
+		echo "This file updated every ~$sleep_time seconds."
+		echo "</pre></body></html>"
+	} > $workfile2
+	mv -f $workfile2 $file
+	rm -f $workfile
+	sleep $sleep_time
+done

@@ -1,0 +1,28 @@
+node lvxentest inherits lvxentest{
+
+       exports::nfs { "data1":
+               export => "/export/data1",
+               hosts => "172.24.8.0/255.255.255.0(sync,rw,subtree_check) 172.24.9.0/255.255.255.0(sync,rw,subtree_check) 172.24.16.14/255.255.255.0(sync,rw,subtree_check) lvpremediax01 172.24.16.137",
+       }
+
+       service {"nfs":
+               name => $operatingsystem {
+                       Darwin => "com.apple.nfsd",
+                       Solaris => "network/nfs/server",
+                       default => "nfs",
+               }
+
+               ensure => tagged(production) ? {
+                       true => running,
+                       false => stopped,
+               }
+       }
+}
+
+node lvxentest01 inherits lvxentest {
+   tag(production)
+}
+
+node lvxentest02 inherits lvxentest {
+}
+

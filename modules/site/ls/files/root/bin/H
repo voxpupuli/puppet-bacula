@@ -1,0 +1,27 @@
+#!/bin/sh
+
+trap "exit 1" INT
+
+. ~interch/etc/server-list.sh
+
+#for i in $all_servers
+for i in $servers
+#for i in $rodb_servers
+#for i in $other_servers
+#for i in $mogile_servers
+do
+    echo $i
+	#ssh $i 'w; free'
+	#ssh $i 'rpm -q local-perl-DBD-Pg'
+	#ssh $i "mount -o remount,noatime,nodiratime /boot; mount"
+	#ssh $i "cat /etc/fstab; mount"; echo; echo
+	#ssh $i 'tail -n 100 /tmp/error500.log | grep Time: | tail -n 1'
+	#ssh $i 'cat /etc/bc-role'
+	#ssh $i "echo mogilefs > /etc/bc-role"
+	#ssh $i 'rm -f /var/spool/mail/{nagios,root,capman}; ls -lFa /var/spool/mail'
+	#ssh $i "tar -C / --backup=numbered -xvvpf /tmp/DateTime_MemcachedFast_20081008.tar"
+	ssh $i "/usr/local/bin/perl -MDateTime::Format::Pg -e 'print \$DateTime::Format::Pg::VERSION'; echo; /usr/local/bin/perl -MCache::Memcached::Fast -e 'print \$Cache::Memcached::Fast::VERSION'"; echo
+	#ssh $i "find /usr/local/ -iname '*\~1\~'"
+	#ssh $i "for k in \`find /usr/local -iname '*\~1\~'\`; do mv -v \$k \`echo \$k | sed 's:\.\~1\~::'\`; done"
+	#ssh $i "rm -vf /tmp/DateTime_MemcachedFast_20081008.tar"
+done

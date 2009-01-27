@@ -1,0 +1,20 @@
+#!/bin/sh
+
+trap "exit 1" INT
+
+. ~interch/etc/server-list.sh
+
+
+for i in $servers
+#for i in $all_servers
+#for i in $rodb_servers angelfire
+#for i in $other_servers
+do
+    echo $i
+
+	ssh $i 'bin/lb_healthcheck stop'
+    sleep 5
+    ssh interch@$i 'bin/restart-ic'
+	ssh $i 'bin/lb_healthcheck start'
+
+done

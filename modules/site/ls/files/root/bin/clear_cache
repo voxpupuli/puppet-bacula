@@ -1,0 +1,38 @@
+#!/bin/bash
+
+myhost=`hostname -s`
+#catalogs="bcs outlet dogfunk tramdock steepcheap wm chainlove"
+catalogs="tramdock steepcheap wm chainlove"
+
+echo "Starting to clear caches on $myhost"
+
+
+echo "Clearing ODAT homepage caches"
+time rm -f /var/www/html/page_cache/steepcheap/sac.html /var/www/html/page_cache/wm/wm.html /var/www/html/page_cache/chainlove/cl.html /var/www/html/page_cache/tramdock/td.html
+
+
+for c in $catalogs
+#for c in dogfunk
+do
+#    echo "Clearing timed builds"
+#    time rm -rf /var/lib/interchange/$c/timed_build/product_list_view/*
+
+    echo "Clearing Cacheable files"
+#    cacheables=`ls /var/lib/interchange/$c/tmp/file_cache_lockable/ | grep -v ^_ | grep -v '.junk'`
+    cacheables="index category"
+    for x in $cacheables
+    do
+        # Get the highest junk.(\d) number so we can increment it by one
+        num=`ls /var/lib/interchange/$c/tmp/file_cache_lockable/ | grep "junk." | grep $x | sort -r | head -n 1 | perl -pi -e 's/[^0-9]//g'`
+        if [ "$num" == "" ]; then
+			num=0
+        fi
+        new_num=$(( $num + 1 ))
+
+        echo "for /var/lib/interchange/$c/tmp/file_cache_lockable/$x, num=$num, new_num=$new_num"
+        time mv /var/lib/interchange/$c/tmp/file_cache_lockable/$x /var/lib/interchange/$c/tmp/file_cache_lockable/$x.junk.$new_num
+    done
+
+done
+
+echo "Done clearing cache for $myhost"

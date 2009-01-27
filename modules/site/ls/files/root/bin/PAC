@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if [ -z $1 ]
+then
+	MODE="restart"
+else
+	MODE=$1
+fi
+
+die() {
+	echo $@ >&2
+	exit 1
+}
+ 
+. ~interch/etc/server-list.sh
+
+for i in $servers
+do
+	echo "Pushing Apache configuration changes to $i"
+	{
+		tar cp /etc/sysconfig/httpd /etc/httpd/conf/*.conf | \
+			ssh -axqT -o BatchMode=yes -i /root/.ssh/id_dsa.bcs-push-robot-root \
+				root@$i "cd / && tar xvp && (service httpd graceful)"
+	} || :   #die "Error pushing!"
+done

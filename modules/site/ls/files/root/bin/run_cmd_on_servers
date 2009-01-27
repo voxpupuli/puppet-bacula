@@ -1,0 +1,42 @@
+#!/bin/sh
+
+trap "exit 1" INT
+
+. ~interch/etc/server-list.sh
+
+list=
+if [ "$1" == "apps" ]; then
+   list=$servers
+   cmd=$2
+else
+   if [ "$1" == "rodbs" ]; then
+      list="$rodb_servers angelfire"
+      cmd=$2
+   else
+      if [ "$2" != "" ]; then
+         list=$servers
+         cmd=$2
+      fi
+   fi
+fi
+
+echo "List=$list"
+echo "cmd=$cmd"
+#exit
+
+
+for i in $list
+#for i in $servers
+#for i in $rodb_servers
+#for i in $other_servers
+#for i in $sessionsn_servers
+do
+    echo $i
+
+    if [ "$cmd" != "" ]; then
+        ssh $i "$cmd"
+    fi
+
+    echo
+
+done

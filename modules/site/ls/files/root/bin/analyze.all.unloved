@@ -1,0 +1,18 @@
+#!/bin/sh
+
+## Quick fix for slow queries - Greg
+
+. ~interch/etc/server-list.sh
+
+key=/root/.ssh/id_dsa.bcs-push-robot-root
+
+
+xtemp="tahoe telluride"
+for server in $rodb_servers
+do
+  echo Trying $server
+  #scp analyze.unloved.sql root@$server:
+  ssh -i $key $server "psql -U bcs bcs -f analyze.unloved.sql"
+done
+
+psql -U bcs bcs -f analyze.unloved.sql

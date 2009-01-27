@@ -1,0 +1,38 @@
+#!/bin/sh
+
+#servers="darling "
+. ~interch/etc/server-list.sh
+
+#ident="/var/lib/interchange/.ssh/id_dsa.bcs-push-robot"
+ident="/root/.ssh/id_dsa.bcs-push-robot-root"
+for x in $rodb_servers
+do
+	echo $x
+	#scp -i $ident /tmp/20071031-picking-schema-livedb-ro.sql root@$x:/tmp/.
+	#ssh -i $ident root@$x 'psql -U bcs bcs -f /tmp/20071031-picking-schema-livedb-ro.sql'
+	scp -i $ident /tmp/single_axis_skus_other_db.sql root@$x:/tmp/.
+	ssh -i $ident root@$x 'psql -U bcs bcs -f /tmp/single_axis_skus_other_db.sql'
+	#scp -i $ident /tmp/20070531-price_display_update.sql root@$x:/tmp/.
+	#ssh -i $ident root@$x 'psql -U bcs bcs -f /tmp/20070604-sort-by-size.sql'
+	#ssh -i $ident interch@$x "psql -U bcs bcs -c '\d woot_items'"
+	#cat woot_items_available_to_sell.sql | ssh -i $ident interch@$x "psql -U bcs bcs"
+	#ssh -i $ident interch@$x "psql -U bcs bcs -c 'SELECT * FROM woot_items wi JOIN woot_prices wp USING (woot_id) WHERE wi.start_date = current_date'"
+	#ssh -i $ident interch@$x "psql -U bcs bcs -f /tmp/detail_images_ro.sql"
+	#ssh -i $ident interch@$x "psql -U bcs bcs -c 'select * from woot_items limit 5'"
+	#ssh -i $ident interch@$x "psql -U bcs bcs -c 'ALTER TABLE woot_items Drop COLUMN woot_desplayed'"
+	#ssh -i $ident interch@$x "psql -U bcs bcs -c 'ALTER TABLE woot_items ADD COLUMN woot_displayed TIMESTAMP(0) WITHOUT TIME ZONE'"
+	#ssh -i $ident interch@$x "psql -U bcs bcs -c 'select * from woot_items limit 5'"
+	#ssh -i $ident $x 'rm -rf {bcs,outlet,dogfunk,tramdock,explore64}/timed_build/weekly_promo';
+	#ssh -i $ident $x 'psql -U bcs bcs' < ~/new_userdb_remove.sql
+	#ssh -i $ident $x "psql -U bcs -c \"SELECT * FROM best_sellers WHERE sku = 'TNF0117'\""
+	#ssh -i $ident $x 'rm -f atomz_tables.sql';
+	#ssh -i $ident $x 'rm -f promo_content_update.sql';
+	#scp -p -i $ident /usr/lib/interchange/bin/interchange $x:/usr/lib/interchange/bin/
+	#ssh -i $ident $x '/var/lib/interchange/bin/restart-ic';
+	#scp -i $ident discontinued* $x:
+	#ssh -i $ident $x 'uptime';
+	#ssh -i $ident $x 'ps auwwwx | grep ^interch';
+	#ssh -i $ident $x '~/bin/service-httpd status';
+	#ssh -i $ident interch@$x "psql -U bcs bcs -c 'SELECT COUNT(*) FROM inventory'"
+	echo ;
+done

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+. ~interch/etc/server-list.sh
+
+for server in $rodb_servers
+do
+    /root/bin/rodb-vacuum $server
+done

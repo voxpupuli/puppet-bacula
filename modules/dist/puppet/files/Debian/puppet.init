@@ -9,7 +9,7 @@
 ### END INIT INFO                                                                                                                                          
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/usr/sbin/puppetd
+DAEMON=/usr/bin/puppetd
 DAEMON_OPTS="-w 0"
 NAME=puppetd
 DESC="puppet configuration management tool"
@@ -39,8 +39,19 @@ if [ ! -d /var/run/puppet ]; then
 fi
 
 chown puppet:puppet /var/run/puppet
+do_status() {
+        if [ -f /var/run/puppet/$NAME.pid ]; then
+	  ps -ef `cat /var/run/puppet/${NAME}.pid`
+          exit $?
+        else
+          exit 4
+        fi          
+}
 
 case "$1" in
+    status)
+        do_status
+	;;
     start)
 	log_begin_msg "Starting $DESC"
 	start_puppet
@@ -64,7 +75,7 @@ case "$1" in
 	log_end_msg 0
 	;;
   *)
-	echo "Usage: $0 {start|stop|restart|force-reload|reload}" >&2
+	echo "Usage: $0 {start|stop|restart|force-reload|reload|status}" >&2
 	exit 1
 	;;
 esac

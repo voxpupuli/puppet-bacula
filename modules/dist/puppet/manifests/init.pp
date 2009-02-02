@@ -11,12 +11,6 @@ class puppet {
       mode    => "755",
       owner   => "root",
       group   => "root";
-    "sysconfpuppet":
-      path    => "/etc/sysconfig/puppet",
-      content => template("puppet/sysconfpuppet.erb"),
-      mode    => "644",
-      owner   => "root",
-      group   => "root";
     }
 
   # A simple exec that rebuilds puppet.conf file if any of the fragments change and restarts the service.

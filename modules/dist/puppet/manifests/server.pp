@@ -50,4 +50,28 @@ class puppet::server inherits puppet {
      require => File["/var/lib/puppet/modules"],
      require => File["/var/lib/puppet/manifests"],
   }
+
+ define storeconfig($dbuser = puppet, $dbpass = puppet, $dbserver = localhost, $socket = "/var/run/mysqld/mysqld.sock") {
+   include rails
+
+   file { "${puppet::confd}/conf.d/storeconfig":
+     content => template("puppet/storeconfig.erb"),
+     mode    => "644",
+     owner   => "root",
+     group   => "root",
+     notify => Exec[rebuild-puppetconf] 
+   }
+
+    exec { "create-storeconfigs-db":
+      command => "/usr/bin/mysqladmin create puppet",
+      unless  => "/usr/bin/mysqlcheck -s puppet",
+      notify  => Exec["create-storeconfigs-user"],
+      require => Class['mysql::server']
+    }
+
+    exec { "create-storeconfigs-user":
+      command => "/usr/bin/mysql -e 'grant all privileges on puppet.* to puppet@localhost identified by \"$dbuser\"'",
+      refreshonly => true,
+    }
+  }
 }

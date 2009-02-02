@@ -39,5 +39,6 @@ class puppet {
     enable      => true,
     ensure      => running,
     require     => File["puppet.init"],
+    hasstatus   => true,
   }
 }

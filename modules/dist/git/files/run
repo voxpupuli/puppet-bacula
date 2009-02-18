@@ -1,0 +1,4 @@
+#!/bin/sh
+exec 2>&1
+echo 'git-daemon starting.'
+exec git-daemon --syslog --verbose --base-path=/opt/rl/git/repositories

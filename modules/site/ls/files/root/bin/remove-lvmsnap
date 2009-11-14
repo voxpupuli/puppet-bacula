@@ -1,5 +1,0 @@
-#!/bin/sh
-
-umount -v /mnt/root-snap
-
-/usr/sbin/lvremove -f VolGroup00/ROOT-SNAP

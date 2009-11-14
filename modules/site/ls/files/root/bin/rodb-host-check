@@ -1,7 +1,0 @@
-#!/bin/sh
-
-while :
-do
-	psql -h rodb -U bcs bcs -c 'SELECT inet_server_addr()'
-	sleep 1
-done

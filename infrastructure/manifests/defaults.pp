@@ -11,7 +11,7 @@ File {
 }
 # do not manage packages until yum client is setup
 Package {
-  require => Class["yum"],
+#  require => Class["yum"],
   ensure => latest,
 }
 

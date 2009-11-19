@@ -13,24 +13,66 @@
 #
 # installs mysql 
 class mysql::server {
-	# set the mysql root password
-	case $mysql_rootpw {
-		'': { fail("You need to define a mysql root password! Please set \$mysql_rootpw in your site.pp or host config") }
-	}
-    case $operatingsystem {
-		centos, redhat: { include mysql::redhat::server }
-		default: { fail("${title} is not defined for operating system ${operatingsystem}.") }
-	}
+  # set the mysql root password
+  if(! $mysql_rootpw) {
+    fail('$mysql_rootpw must be set for class mysql::server')
+  }
+  package{'mysql-server':
+    #name   => 'MySQL-server-community',
+    notify => Service['mysqld'],
+  }
+  service { 'mysqld':
+    ensure => running,
+    enable => true,
+    subscribe => File['/etc/my.cnf'],
+  }
 
-	# setup the base items
-	include mysql::server::base
-	include mysql::server::mysqltuner
+  File{
+    require => Package['mysql-server'],
+  }
 
-	# install monitoring username if nrpe or snmp is enabled
-	if tagged(nrpe) {
-		include mysql::server::monitor
-	}
-	if tagged(cacti) {
-		include mysql::server::monitor
-	}
+  file{'/var/lib/mysql/data':
+    ensure => directory,
+    owner  => 'mysql',
+    group  => 'mysql',
+    mode   => 755,
+    before => File['/usr/local/sbin/setmysqlpass.sh'],
+  }
+  file{'/var/lib/mysql/data/ibdata1':
+    ensure => file,
+    owner  => 'mysql',
+    group  => 'mysql',
+    mode   => 0660,
+    before => File['/usr/local/sbin/setmysqlpass.sh'],
+  }  
+  file{ '/usr/local/sbin/setmysqlpass.sh':
+    mode   => 0500,
+    source => 'puppet:///mysql/setmysqlpass.sh',
+  }
+  exec{ 'set_mysql_rootpw':
+    command => "/usr/local/sbin/setmysqlpass.sh $mysql_rootpw",
+    unless  => '/usr/bin/mysqladmin -uroot status > /dev/null',
+    require => [File['/usr/local/sbin/setmysqlpass.sh'], Package['mysql-server']],
+    before  => File['/root/.my.cnf'],
+  } 
+
+  file{'/etc/my.cnf':
+    ensure => file,
+  }
+ 
+  file{'/root/.my.cnf':
+    mode    => '0400',
+    content => template('mysql/my.cnf.erb'),
+    notify  => Service['mysqld'],
+  }
+
+  # install monitoring username if nrpe or snmp is enabled
+  # does this actually work
+  include mysql::server::mysqltuner
+  if tagged(nrpe) {
+    include mysql::server::monitor
+  }
+  if tagged(cacti) {
+    include mysql::server::monitor
+  }
 }

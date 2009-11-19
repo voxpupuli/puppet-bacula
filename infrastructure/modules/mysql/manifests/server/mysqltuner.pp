@@ -12,14 +12,10 @@
 # permissions and limitations under the License. 
 #
 class mysql::server::mysqltuner {
-	# mysql performance tester
-	file { '/usr/bin/mysqltuner':
-		checksum     => md5, 
-		ensure       => present,
-		replace      => true,
-		owner        => 'root',
-		group        => 'root',
-		mode         => '0550',
-		source       => 'puppet:///mysql/mysqltuner.pl',
-	}
+  # mysql performance tester
+  file { '/usr/bin/mysqltuner':
+    ensure  => present,
+    mode    => '0550',
+    source  => 'puppet:///mysql/mysqltuner.pl',
+  }
 }

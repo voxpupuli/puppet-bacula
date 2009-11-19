@@ -1,4 +1,4 @@
-class ssh::server 
+class ssh::server  inherits ssh {
   include ssh
   package{'openssh-server':
     require => Package['openssh'],

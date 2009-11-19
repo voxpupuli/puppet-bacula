@@ -13,23 +13,24 @@
 #
 # install mysql user to allow remote monitoring
 class mysql::server::monitor {
-    case $mysql_monitor_username {
-		'': { fail("You need to define a mysql monitor username! Please set \$mysql_monitor_username in your site.pp or node config") }
-	}
-    case $mysql_monitor_password {
-		'': { fail("You need to define a mysql monitor password! Please set \$mysql_monitor_password in your site.pp or node config") }
-	}
-    case $mysql_monitor_hostname {
-		'': { fail("You need to define a mysql monitor hostname! Please set \$mysql_monitor_hostname in your site.pp or node config") }
-	}
-	mysql_user{ "${mysql_monitor_username}@${mysql_monitor_hostname}":
-		password_hash => mysql_password($mysql_monitor_password),
-		ensure        => present,
-		require       => Service['mysqld'],
-	}
-	mysql_grant { "${mysql_monitor_username}@${mysql_monitor_hostname}":
-		privileges    => [ 'process_priv', 'super_priv' ],
-		require       => Mysql_user["${mysql_monitor_username}@${mysql_monitor_hostname}"], 
-		require       => Service['mysqld'],
-	}
+  if(!$mysql_monitor_username) {
+    fail('$mysql_monitor_username not defined')
+  }
+  if(!$mysql_monitor_password) {
+    fail('$mysql_monitor_password not defined')
+  }
+  if(!$mysql_monitor_hostname) {
+    fail('$mysql_monitor_hostname not defined')
+  }
+  mysql_user{ 
+    "${mysql_monitor_username}@${mysql_monitor_hostname}":
+      password_hash => mysql_password($mysql_monitor_password),
+      ensure        => present,
+      require       => Service['mysqld'],
+  }
+  mysql_grant { "${mysql_monitor_username}@${mysql_monitor_hostname}":
+    privileges    => [ 'process_priv', 'super_priv' ],
+    require       => Mysql_user["${mysql_monitor_username}@${mysql_monitor_hostname}"], 
+    require       => Service['mysqld'],
+  }
 }

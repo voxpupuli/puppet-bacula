@@ -32,7 +32,7 @@ class cacti {
     ensure     => present,
     source     => "puppet:///cacti/cacti.conf",
     # this should do a reload and not a restart
-    notify     => Service["apache"],
+    notify     => Service["httpd"],
   }
 
   file { "/var/www/cacti/include/config.php":
@@ -51,11 +51,14 @@ class cacti {
     require    => Package["cacti"],
     notify     => Exec["create-mysql-cacti"],
   }
-  
   mysql_user{ "cacti@localhost":
     password_hash => mysql_password($cacti_password),
     ensure        => present,
     require       => Mysql_database["cacti"],
+  }
+  mysql_grant{'cacti@localhost':
+    privileges    => [ 'alter_priv', 'insert_priv', 'select_priv', 'update_priv' ],
+    require       => Mysql_user["cacti@localhost"],
   }
   
   exec { "create-mysql-cacti":

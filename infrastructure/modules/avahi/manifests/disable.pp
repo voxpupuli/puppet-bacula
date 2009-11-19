@@ -1,6 +1,6 @@
 class avahi::disable {
-  service{"avahi":
-    ensure => stopped,
-    enable => false,
+  service{['avahi-daemon', 'avahi-dnsconfd']:
+    ensure    => stopped,
+    enable    => false,
   }
 }

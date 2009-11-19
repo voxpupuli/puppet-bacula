@@ -1,6 +1,7 @@
 class hal::disable {
   service{"haldaemon":
-    ensure => stopped,
-    enable => false,
+    ensure    => stopped,
+    enable    => false,
+    hasstatus => true,
   }
 }

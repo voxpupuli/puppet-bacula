@@ -15,14 +15,16 @@
 # $Id$
 #
 # installs vixie-cron 
-class cron::redhat {
+class cron {
   package {['vixie-cron', 'crontabs']:
+    ensure => latest,
     notify => Service["crond"],
   }
   file { "/etc/crontab":
-    ensure  => present,
+    owner   => root,
+    group   => root,
     mode    => '0400',
-    source  => "puppet:///cron/crontab"
+    source  => "puppet:///modules/cron/crontab",
     require => Package["crontabs"],
     notify  => Service["crond"],
   }

@@ -1,5 +1,9 @@
 class bind::server {
-  package{'bind':}
+  include bind
+  require bind
+  package{'bind':
+    ensure => installed,
+  }
   service{'named':
     ensure    => running,
     enable    => true,

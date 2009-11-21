@@ -1,11 +1,14 @@
 class users::sysadmins {
-  include users
+  if(! $my_sysadmins) {
+    fail('must set \$my_sysadmins')
+  }
   include sudo
-  $my_sysadmins = ['dan', 'teyo', 'luke']
   group{'sysadmin':
     ensure => present
   }
-  @user{$my_sysadmins:
-    
+  $password = sha1('asdf1234')
+  users::create{$my_sysadmins:
+    password => $password,
+    comment  => 'creating sysadmin user',
   }
 }

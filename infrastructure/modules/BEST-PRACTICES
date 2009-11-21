@@ -1,0 +1,5 @@
+ensure that all modules are self sufficient
+
+create dir test, and have one test file per class in the module
+
+

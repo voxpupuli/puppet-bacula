@@ -2,5 +2,6 @@
 class ruby {
   package {
     ['rubygems', 'ruby-rdoc', 'ruby-irb']:
+    ensure => installed,
   }
 }

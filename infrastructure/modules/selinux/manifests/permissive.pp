@@ -1,8 +1,9 @@
 class selinux::permissive { 
   file{'/etc/selinux/config':
-    content => template('selinux/config'),
+    content => template('selinux/config.erb'),
   } 
   exec{'setenforce Permissive':
-    onlyif 'selinuxenabled',
+    onlyif => 'getenforce | grep Enforcing',
+    path   => '/usr/sbin/',
   }
 }

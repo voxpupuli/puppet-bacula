@@ -1,13 +1,19 @@
 class puppet::server inherits puppet {
-  package{'puppet-server':}
+  package{'puppet-server':
+    ensure => installed,
+  }
   service{'puppetmaster':
-    ensure => running,
-    enable => true,
+    ensure    => running,
+    enable    => true,
+    hasstatus => true,
   }
   file{'/etc/puppet/namespaceauth.conf':
+    owner  => root,
+    group  => root,
+    mode   => 644,
     source => 'puppet:///puppet/namespaceauth.conf',
   }
-  file{'/etc/puppet/puppet.conf':
+  File['/etc/puppet/puppet.conf'] {
     content => template('puppet/puppet.conf.erb'),
     notify  +> Service['puppetmaster'],
   }

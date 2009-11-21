@@ -1,8 +1,9 @@
 class dbus {
   package{'dbus':
-    notify => Service['dbus'],
+    ensure => installed,
+    notify => Service['messagebus'],
   }
-  service{'dbus':
+  service{'messagebus':
     ensure    => running,
     enable    => true,
     hasstatus => true,

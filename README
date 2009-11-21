@@ -205,3 +205,12 @@ Larry's sudoers is totally different.
 tmpwatch is my friend
 
 I dont care about rsh
+
+I need to create an httpd reload that is notified when conf files change
+
+
+-
+
+everything needs to be self contained, we cannot use default params
+ 
+It woudl make sense to be able to reset default params form outside the modules

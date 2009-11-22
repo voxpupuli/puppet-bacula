@@ -46,6 +46,7 @@ class yum::repo {
     ensure => present,
     content    => template('yum/yum.conf.erb'),
     notify     => Service['httpd'],		
+    require    => Package['httpd'],
   }
   package { "createrepo":}
   # yum repos to create

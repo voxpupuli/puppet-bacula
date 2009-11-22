@@ -11,7 +11,7 @@ class puppet::server inherits puppet {
     owner  => root,
     group  => root,
     mode   => 644,
-    source => 'puppet:///puppet/namespaceauth.conf',
+    source => 'puppet:///modules/puppet/namespaceauth.conf',
   }
   File['/etc/puppet/puppet.conf'] {
     content => template('puppet/puppet.conf.erb'),

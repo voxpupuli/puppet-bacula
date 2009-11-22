@@ -30,7 +30,7 @@ class cacti {
 
   file { "/etc/httpd/conf.d/cacti.conf":
     ensure     => present,
-    source     => "puppet:///cacti/cacti.conf",
+    source     => "puppet:///modules/cacti/cacti.conf",
     # this should do a reload and not a restart
     notify     => Service["httpd"],
   }

@@ -1,4 +1,9 @@
 BROKEN-
-  yum
+  users - I had to move slash_escape by hand
+          could not get the pluginsyn to work with puppet
+  cacti - not sure, need to test it again with the
+          mysql functions
+  iptables - havent tested yet
 DONE-
   
+

@@ -17,7 +17,7 @@
 # installs vixie-cron 
 class cron {
   package {['vixie-cron', 'crontabs']:
-    ensure => latest,
+    ensure => installed,
     notify => Service["crond"],
   }
   file { "/etc/crontab":
@@ -30,8 +30,8 @@ class cron {
   }
   # make sure crond is running
   service { "crond":
-    ensure => running,
-    enable => true,
+    ensure     => running,
+    enable     => true,
     hasrestart => true,
     hasstatus  => true,
   }

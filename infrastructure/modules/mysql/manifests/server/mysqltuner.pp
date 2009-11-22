@@ -16,6 +16,6 @@ class mysql::server::mysqltuner {
   file { '/usr/bin/mysqltuner':
     ensure  => present,
     mode    => '0550',
-    source  => 'puppet:///mysql/mysqltuner.pl',
+    source  => 'puppet:///modules/mysql/mysqltuner.pl',
   }
 }

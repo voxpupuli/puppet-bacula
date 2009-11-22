@@ -19,6 +19,7 @@ class mysql::server {
   }
   package{'mysql-server':
     #name   => 'MySQL-server-community',
+    ensure => installed,
     notify => Service['mysqld'],
   }
   service { 'mysqld':
@@ -28,26 +29,24 @@ class mysql::server {
   }
 
   File{
+    owner   => 'mysql',
+    group   => 'mysql',
     require => Package['mysql-server'],
   }
 
   file{'/var/lib/mysql/data':
     ensure => directory,
-    owner  => 'mysql',
-    group  => 'mysql',
     mode   => 755,
     before => File['/usr/local/sbin/setmysqlpass.sh'],
   }
   file{'/var/lib/mysql/data/ibdata1':
     ensure => file,
-    owner  => 'mysql',
-    group  => 'mysql',
     mode   => 0660,
     before => File['/usr/local/sbin/setmysqlpass.sh'],
   }  
   file{ '/usr/local/sbin/setmysqlpass.sh':
     mode   => 0500,
-    source => 'puppet:///mysql/setmysqlpass.sh',
+    source => 'puppet:///modules/mysql/setmysqlpass.sh',
   }
   exec{ 'set_mysql_rootpw':
     command => "/usr/local/sbin/setmysqlpass.sh $mysql_rootpw",
@@ -61,6 +60,8 @@ class mysql::server {
   }
  
   file{'/root/.my.cnf':
+    owner   => 'root',
+    group   => 'root',
     mode    => '0400',
     content => template('mysql/my.cnf.erb'),
     notify  => Service['mysqld'],

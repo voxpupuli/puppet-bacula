@@ -1,5 +1,5 @@
 class motd {
   file{'/etc/motd':
-    source => 'puppet:///motd/motd',
+    source => 'puppet:///modules/motd/motd',
   }
 }

@@ -5,15 +5,17 @@ class ssh::server  inherits ssh {
     require => Package['openssh'],
     notify  => Service['sshd'],
   }  
+  # not managing the defaults for this file, yet
   file{'sshd_config':
-    source => '/etc/ssh/sshd_config',
-    notify => Service['sshd'],
+    path    => '/etc/ssh/sshd_config',
+    #source  => '/etc/ssh/sshd_config',
+    notify  => Service['sshd'],
     require => Package['openssh-server'],
-    mode   => 640,
+    mode    => 640,
   }
   service{"sshd":
     ensure     => running,
-    enabled    => true,
+    enable     => true,
     hasstatus  => true,
     hasrestart => true,
   }

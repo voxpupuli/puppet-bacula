@@ -9,8 +9,12 @@ class rkhunter::dbinit {
   }
   exec{'init_rkunter_db':
     command => 'rkhunter --propupd',
-    path    => '/usr/bin',
+    path => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
     creates => '/var/lib/rkhunter/db/rkhunter.dat',
-    require => [Package['rkhunter'], File['/var/lib/rkhunter/tmp']],
+    logoutput => on_failure,
+    require => [
+                 Package['rkhunter'],
+                 File['/var/lib/rkhunter/tmp']
+               ],
   }
 }

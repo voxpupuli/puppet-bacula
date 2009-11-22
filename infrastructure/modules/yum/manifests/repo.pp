@@ -25,10 +25,17 @@ class yum::repo {
   }
   user { $yum_user:
     ensure     => present,
+    gid        => $yum_user,
     comment    => 'yum repo',
     home       => $yum_home,
     managehome => true,
     shell      => '/sbin/nologin',
+  }
+  file{$yum_home:
+    owner  => yum,
+    group  => yum,
+    mode   => 755,
+    ensure => directory,
   }
   # make sure home folder is proper perms
   # make sure home folder is proper perms

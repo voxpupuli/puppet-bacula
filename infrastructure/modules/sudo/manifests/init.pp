@@ -5,6 +5,6 @@ class sudo {
     owner   => "root", 
     group   => "root", 
     mode    => "400",
-    source  => "puppet:///sudo/sudoers",
+    source  => "puppet:///modules/sudo/sudoers",
   }
 }

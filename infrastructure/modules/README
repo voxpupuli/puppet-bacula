@@ -4,6 +4,11 @@ BROKEN-
   cacti - not sure, need to test it again with the
           mysql functions
   iptables - havent tested yet
+  bind server - /etc/named.conf  not found
+  mysql-server - not sure if it works with cacti
+  nagios       - 
+  nrpe
+  net-snmp
 DONE-
   
 

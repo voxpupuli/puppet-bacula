@@ -3,12 +3,13 @@ BROKEN-
           could not get the pluginsyn to work with puppet
   cacti - not sure, need to test it again with the
           mysql functions
-  iptables - havent tested yet
+  iptables - havent tested yet - should use a file fragment manager
   bind server - /etc/named.conf  not found
   mysql-server - not sure if it works with cacti
   nagios       - 
   nrpe
-  net-snmp
+  net-snmp - I implemented snmp, need diskio
+  sshd_config - should use a file fragment manager
 DONE-
   
 

@@ -11,10 +11,8 @@
 # or implied. See the License for the specific language governing 
 # permissions and limitations under the License. 
 #
-# install sysadmin accounts
-
-import "defines/*.pp"
-
-class accounts {
-	include accounts::sysadmin
+class mailx {
+  package{'mailx':
+    ensure => installed,
+  }
 }

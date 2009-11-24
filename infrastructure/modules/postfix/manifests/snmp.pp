@@ -1,5 +1,6 @@
 class postfix::snmp {
-  include snmp, postfix
+  include ::snmp
+  include postfix
   # track check_ports.conf changes 
   file {'fetch_mail_statistics.pl':
     name     => '/usr/local/sbin/fetch_mail_statistics.pl',
@@ -8,7 +9,7 @@ class postfix::snmp {
     owner    => 'root',                        
     group    => 'root',
     mode     => '0700',
-    source   => 'puppet:///postfix/fetch_mail_statistics.pl',
+    source   => 'puppet:///modules/postfix/fetch_mail_statistics.pl',
     require  => Package['postfix'],
   }
   fragment{'postfix':

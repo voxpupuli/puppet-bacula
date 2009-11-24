@@ -17,12 +17,10 @@ define users::create($comment, $password, $shell='/bin/bash'){
     owner    => $name,
     group    => $name,
   }
-  line::ensure { "sshd_config_AllowUsers-${title}":
-    file    => "/etc/ssh/sshd_config",
-    line    => "AllowUsers ${name}",
-    pattern => "^AllowUsers ${name}$",
-    require => File["sshd_config"],
-    notify  => Service['sshd'], 
+  # add AllowUser line fragment to sshd_config
+  fragment{ "sshd_config_AllowUsers-${title}":
+    directory  => "/etc/ssh/sshd_config.d",
+    content    => "AllowUsers ${name}",
   }
   file{"/home/${name}/.ssh":
       mode     => '0700',

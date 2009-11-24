@@ -1,15 +1,15 @@
 BROKEN-
-  users - I had to move slash_escape by hand
-          could not get the pluginsyn to work with puppet
   cacti - not sure, need to test it again with the
           mysql functions
   iptables - havent tested yet - should use a file fragment manager
   bind server - /etc/named.conf  not found
   mysql-server - not sure if it works with cacti
   nagios       - 
+    - not sure about some of these RPMs
   nrpe
   net-snmp - I implemented snmp, need diskio
-  sshd_config - should use a file fragment manager
 DONE-
+  users - 
+    uses fragment
   
 

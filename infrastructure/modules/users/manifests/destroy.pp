@@ -17,15 +17,6 @@ define users::destory () {
 		ensure => absent,
 	}
 	# remove from sshd_config file
-	/*
-	ensure_line { "sshd_config_AllowUsers-${title}":
-		file    => "/etc/ssh/sshd_config",
-		pattern => "^AllowUsers ${title}$",
-		ensure  => absent,
-		require => [ File["sshd_config"], User["${title}"] ],
-		notify  => Service["sshd"],
-	}
-	*/
 	file { "/home/${title}":
 		ensure  => absent,
 		require => User["${title}"],

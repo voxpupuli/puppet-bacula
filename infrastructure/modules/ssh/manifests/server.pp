@@ -6,12 +6,17 @@ class ssh::server  inherits ssh {
     notify  => Service['sshd'],
   }  
   # not managing the defaults for this file, yet
-  file{'sshd_config':
-    path    => '/etc/ssh/sshd_config',
-    #source  => '/etc/ssh/sshd_config',
-    notify  => Service['sshd'],
+  fragment{'sshd_config-header':
+    order     => '00',
+    directory => '/etc/ssh/sshd_config.d',
+    source    => 'puppet:///modules/ssh/sshd_config',
+  }
+  fragment::concat{'/etc/ssh/sshd_config':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0640',
     require => Package['openssh-server'],
-    mode    => 640,
+    notify  => Service['sshd'],
   }
   service{"sshd":
     ensure     => running,

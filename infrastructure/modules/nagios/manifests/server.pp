@@ -12,57 +12,56 @@
 # permissions and limitations under the License. 
 #
 # installs nagios::server
-class nagios::server {
-	case $operatingsystem {
-		centos, redhat: { include nagios::redhat::server }
-		debian, ubuntu: { include nagios::debian::server }
-		default: { fail("nagios::server is not defined for this operating system.") }
-	}
-
-	# install commands.cfg
-	file { "/etc/nagios/commands.cfg":
-		checksum   => md5,
-		ensure     => present,
-		replace    => true,
-		owner      => 'root',
-		group      => 'nagios',
-		mode       => '0440',
-		source     => "puppet:///nagios/commands.cfg",
-		require    => Package["nagios"],
-		notify     => Service["nagios"],
-	}
+class nagios::server inherits nagios{
+  include apache::ssl, mailx, yum
+  File{
+    checksum   => md5,
+    ensure     => present,
+    replace    => true,
+    owner      => 'root',
+    group      => 'nagios',
+    mode       => '0440',
+    require    => Package["nagios"],
+    notify     => Service["nagios"],
+  }
+  # install commands.cfg
+  file { "/etc/nagios/commands.cfg":
+  source => "puppet:///nagios/commands.cfg",
+  }
 	# install event_handlers.cfg
-	file { "/etc/nagios/event_handlers.cfg":
-		checksum   => md5,
-		ensure     => present,
-		replace    => true,
-		owner      => 'root',
-		group      => 'nagios',
-		mode       => '0440',
-		source     => "puppet:///nagios/event_handlers.cfg",
-		require    => Package["nagios"],
-		notify     => Service["nagios"],
-	}
-	# install timeperiods.cfg
-	file { "/etc/nagios/timeperiods.cfg":
-		checksum   => md5,
-		ensure     => present,
-		replace    => true,
-		owner      => 'root',
-		group      => 'nagios',
-		mode       => '0440',
-		source     => "puppet:///nagios/timeperiods.cfg",
-		require    => Package["nagios"],
-		notify     => Service["nagios"],
-	}
-	# make sure resource.cfg has proper perms
-	file { "/etc/nagios/private/resource.cfg":
-		checksum   => md5,
-		ensure     => present,
-		owner      => 'root',
-		group      => 'nagios',
+  file { "/etc/nagios/event_handlers.cfg":
+    source => "puppet:///nagios/event_handlers.cfg",
+  }
+  # install timeperiods.cfg
+  file { "/etc/nagios/timeperiods.cfg":
+    source     => "puppet:///nagios/timeperiods.cfg",
+  }
+  # make sure resource.cfg has proper perms
+  file { "/etc/nagios/private/resource.cfg":
 		mode       => '0640',
-		require    => Package["nagios"],
-		notify     => Service["nagios"],
-	}
+  }
+  package { "nagios":
+    notify  => Service["nagios"],
+    require => [ Class["yum"], Class["apache::ssl"], Class["mailx"] ],
+  }
+  # allow for NRPE communciation
+  package { "nagios-plugins-nrpe":
+    require    => [ Package["nagios"], Package["nagios-plugins"] ],
+  }
+	# make sure our nagios.conf is installed 
+  file { "/etc/httpd/conf.d/nagios.conf":
+    source => "puppet:///nagios/nagios.conf",
+    group  => 'root',
+    notify => undef,
+  }
+	# monitor htpasswd.users
+  file { "/etc/nagios/htpasswd.users":
+    mode       => '0640',
+  }
+  # make sure nagios is setup to run
+  service { "nagios":
+    ensure     => running,
+    enable     => true,
+    hasrestart => true,
+  }
 }

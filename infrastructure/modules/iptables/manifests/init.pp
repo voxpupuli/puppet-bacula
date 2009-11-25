@@ -10,12 +10,12 @@ class iptables {
   }
   file { "iptables":
     name     => "/etc/sysconfig/iptables",
-    backup   => ".bak",
+    backup   => '.bak',
   }
   # track iptables-config changes 
   file { "iptables-config":
     name     => "/etc/sysconfig/iptables-config",
-    backup   => local,
+    backup   => '.bak',
   }
   file { "/proc/net/ip_tables_names":
     mode => 0444,

@@ -3,6 +3,15 @@ class bind::server {
   require bind
   package{'bind':
     ensure => installed,
+    notify => Service['named'],
+  }
+  file{'/etc/named.conf':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0664',
+    ensure  => file,
+    require => Package['bind'],
+    notify  => Service['named'],
   }
   service{'named':
     ensure    => running,

@@ -1,5 +1,6 @@
 class iptables::disable inherits iptables {
-  Service { "iptables":
+  Service["iptables"] {
     ensure     => stopped,
     enable     => false,
+  }
 }

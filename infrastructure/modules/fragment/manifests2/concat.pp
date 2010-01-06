@@ -1,6 +1,7 @@
 # Concatanates file snippets into one file. 
 # NOTE: the purge feauture will not work on .24.8 or earlier
 # OPTIONS:
+#  - directory		The directory where snippets are found, defaults to ${name}.d
 #  - mode		The mode of the final file
 #  - owner		owner of final file
 #  - group		group for final file
@@ -20,11 +21,13 @@
 #  - The exec can notified using Exec["concat_/path/to/file"] or Exec["concat_/path/to/directory"]
 #  - The final file can be referened as File["/path/to/file"] or File["concat_/path/to/file"]  
 define fragment::concat(
-    $mode = 0644, $owner = "root", $group = "root"
+  $directory = '', $mode = 0644, $owner = "root", $group = "root"
   ) {
 	
-  $file = regsubst($name,'.*/','', 'G')
-  $snipdir = "/tmp/${file}.d"
+  $snipdir = $directory ? {
+    ''	    => "${name}.d",
+    default => $directory,
+  }
 
   File{
     owner  => $owner,
@@ -45,7 +48,7 @@ define fragment::concat(
     force    => true,
     ignore   => ['.svn', '.git'],
     # notify the exec in case we have to purge
-    notify   => Exec["concat_${file}"],
+    notify   => Exec["concat_${name}"],
   }
 
   file{"${snipdir}/snippets.concat":
@@ -57,7 +60,7 @@ define fragment::concat(
     source => 'puppet:///modules/fragment/concatsnippets.sh',
   }
 
-  exec{"concat_${file}":
+  exec{"concat_${name}":
     user      => $owner,
     group     => $group,
     notify    => File[$name],
@@ -73,6 +76,6 @@ define fragment::concat(
 
   file{$name:
     ensure   => present,
-    alias    => "concat_${file}",
+    alias    => "concat_${name}",
   }
 }

@@ -1,0 +1,19 @@
+ensure that all modules are self sufficient
+
+create dir test, and have one test file per class in the module
+
+there should be a way to do the following:
+
+if I am the class X in module X (base namespace),
+
+then I should be able to search through all modules (Y) in the catalog scope and
+call Y::X on them.
+
+for example, iptables, calls any modules such as 
+  apache::iptables
+  puppet::server::iptables
+
+nagios calls
+  apache::nagios
+
+and so on.

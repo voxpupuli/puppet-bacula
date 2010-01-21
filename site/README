@@ -1,0 +1,26 @@
+BROKEN-
+  cacti - not sure, need to test it again with the
+          mysql functions
+  iptables - havent tested yet - should use a file fragment manager
+  mysql-server - not sure if it works with cacti
+  nagios       - 
+    - not sure about some of these RPMs
+  nrpe
+  net-snmp - I implemented snmp, need diskio
+INCOMPLETE-
+  bind server
+    - /etc/named.conf - need to be able to fill in values for this.. somehow
+  cacti -
+    I want this server to be fully installed after puppet config runs
+  yum -
+    need to install mirror scripts (install in cron.weekly)
+      which repos should we be mirroring?
+  nagios
+    nrpe
+  snmp 
+    I am no snmp expert
+DONE-
+  users - 
+    uses fragment
+  
+

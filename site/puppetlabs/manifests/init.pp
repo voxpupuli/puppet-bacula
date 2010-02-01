@@ -2,12 +2,9 @@ class puppetlabs {
   #
   # This is our base install for all of our servers. 
   #  
-  include ssh::servers
-  include accounts
-  include virtual-users 
-  include virtual-groups
-  include puppet::client
+  include ssh::server
+  include virtual::users 
   include sudo
-  Users <| tag == 'sysadmin' |>
-  Users <| tag == 'sysadmin' |>
+  Account::User <| tag == 'sysadmin' |>
+  Group <| tag == 'sysadmin' |>
 }

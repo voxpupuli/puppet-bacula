@@ -1,12 +1,20 @@
-define account::user ($ensure='present', $comment, $password, $shell='/bin/bash', $home='' , $group='', $groups=''){
+define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false'){
   #
   # Creating an ssh user so we must require ssh::server.
   #
   include ssh::server
   #
   # requires expects a userdir module that is managed by git. 
+  # group is set here for testing as well.  
   #
-  $userdir = "puppet:///site-files/userdirs/${name}"
+  if $test == true {
+    $userdir = "puppet:///modules/account/${name}"
+    group { $groupname: ensure => $ensure }
+  }
+  else {
+    $userdir = "puppet:///modules/site-files/userdirs/${name}"
+  }
+    
   #
   # Setting the groupname.
   #
@@ -34,15 +42,14 @@ define account::user ($ensure='present', $comment, $password, $shell='/bin/bash'
     comment => $comment,
     home => $homedir,
     managehome => true,   
-    password => $password,
+    password => setpass($name),
     shell => $shell,
   }
-  group { $groupname: ensure => $ensure }
   File { owner => $name, group => $groupname}
   file {
     "${homedir}": recurse => true, ensure => directory, source => $userdir;
-    "${homedir}/.ssh/": mode => 700, ensure => directory;
-    "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys";
+    "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname;
+    "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname;
   }
   #
   # Add AllowUser line fragment to sshd_config.

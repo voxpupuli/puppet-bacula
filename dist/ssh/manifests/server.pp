@@ -2,7 +2,7 @@ class ssh::server {
   include ssh
   package{'openssh-server':
     ensure => latest, 
-    require => Package['openssh'],
+    require => Package['openssh-client'],
     notify => Service['ssh'],
   }  
   fragment{'sshd_config-header':

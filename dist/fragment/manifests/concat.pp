@@ -25,7 +25,6 @@ define fragment::concat ( $path, $mode = 0644, $owner = "root", $group = "root")
   $concatscript = '/usr/local/bin/concatsnippets.sh'
   $target = "${path}/${name}"
   $fragdir = "${path}/${name}.snippets"
-  notice $fragdir
   File { owner => $owner, group => $group, mode => $mode }
   file {
     $path: mode => 755, ensure => directory;  

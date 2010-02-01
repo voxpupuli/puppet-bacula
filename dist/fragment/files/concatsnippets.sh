@@ -86,7 +86,7 @@ if [ ! -d "${SNIPPETS}" ]  && [ ! -x "${SNIPPETS}" ]; then
 fi
 
 # find all the files in the snippets directory, sort them numerically and concat to snippets.concat in the working dir
-find /tmp/test/fragment.snippets -type f |grep -v snippets.concat|sort |xargs cat > ${CONCAT}
+find "${SNIPPETS}" -type f |grep -v snippets.concat|sort |xargs cat > ${CONCAT}
 
 if [ x${TEST} = "x" ]; then
 	# This is a real run, copy the file to outfile

@@ -1,5 +1,5 @@
-account::user { 'foopresent':
-  comment => 'testing foo',
-  password => 'foopresent',
+account::user { 'testuser':
+  comment => 'testing user',
   group => sysadmin,
+  test => true,
 } 

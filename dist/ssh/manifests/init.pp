@@ -1,5 +1,5 @@
 class ssh{
-  package{'openssh':
+  package{'openssh-client':
     ensure => latest,
   }
   file{'/etc/ssh/ssh_config':
@@ -7,6 +7,6 @@ class ssh{
     group   => root,
     mode    => 0644,
     ensure  => file,
-    require => Package['openssh']
+    require => Package['openssh-client']
   }
 }

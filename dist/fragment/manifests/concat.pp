@@ -24,20 +24,22 @@
 define fragment::concat ( $path, $mode = 0644, $owner = "root", $group = "root") {
   $concatscript = '/usr/local/bin/concatsnippets.sh'
   $target = "${path}/${name}"
-  $fragdir = "${path}/${name}_frag.d"
+  $fragdir = "${path}/${name}.snippets"
+  notice $fragdir
   File { owner => $owner, group => $group, mode => $mode }
   file {
     $path: mode => 755, ensure => directory;  
     $concatscript: mode => 755, source => 'puppet:///modules/fragment/concatsnippets.sh';
-    $fragdir: ensure => directory, recurse => true, purge => true, force => true, ignore => ['.svn', '.git'], notify => Exec["concat_${name}"];
-    $target: ensure => present, 
+    "${fragdir}": ensure => directory, recurse => true, purge => true, force => true, ignore => ['.svn', '.git'], notify => Exec["concat_${name}"];
+    "${fragdir}/snippets.concat": ensure => present;
+    $target: ensure => present; 
   }
   exec{"concat_${name}":
     user => $owner,
     group => $group,
     notify => File [$target],
     require => File [ $concatscript, $path, $fragdir ], 
-    unless  => "${concatscript} -o ${target} -d ${fragdir} -t",
-    command => "${concatscript} -o ${target} -d ${fragdir}",
+    unless  => "${concatscript} -o ${name} -p ${path} -t",
+    command => "${concatscript} -o ${name} -p ${path}",
   }
 }

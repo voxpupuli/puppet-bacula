@@ -1,1 +1,0 @@
-include yum::repo

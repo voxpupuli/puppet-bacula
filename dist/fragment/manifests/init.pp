@@ -15,7 +15,7 @@ define fragment( $content='source', $source='content', $order=10, $mode = 0644, 
   #
   #  Add function to test for existence of con 
   #
-  file {"${path}/${target}_frag.d/${order_}${name}":
+  file {"${path}/${target}.snippets/${order}_${name}":
     mode => $mode,
     owner => $owner,
     group => $group,

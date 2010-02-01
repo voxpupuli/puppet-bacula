@@ -36,20 +36,24 @@
 # sure things don't fail.
 
 OUTFILE=""
-WORKDIR=""
+DIRPATH=""
 TEST=""
 SORTARG="-z"
 
-while getopts "o:d:tn" options; do
+while getopts "o:p:tn" options; do
 	case $options in
 		o ) OUTFILE=$OPTARG;;
-		d ) WORKDIR=$OPTARG;;
+		p ) DIRPATH=$OPTARG;;
 		n ) SORTARG="-zn";;
 		t ) TEST="true";;
 		* ) echo "Specify output file with -o and snippet directory with -d"
 		    exit 1;;
 	esac
 done
+
+TARGET="${DIRPATH}/${OUTFILE}"
+SNIPPETS="${TARGET}.snippets"
+CONCAT="${SNIPPETS}/snippets.concat"
 
 # do we have -o?
 if [ x${OUTFILE} = "x" ]; then
@@ -58,41 +62,39 @@ if [ x${OUTFILE} = "x" ]; then
 fi
 
 # do we have -d?
-if [ x${WORKDIR} = "x" ]; then
-	echo "Please snippet directory with -d"
+if [ x${DIRPATH} = "x" ]; then
+	echo "Please snippet directory with -p"
 	exit 1
 fi
 
 # can we write to -o?
-if [ -a ${OUTFILE} ]; then
-	if [ ! -w ${OUTFILE} ]; then
-		echo "Cannot write to ${OUTFILE}"
+if [ -a ${TARGET} ]; then
+	if [ ! -w ${TARGET} ]; then
+		echo "Cannot write to ${TARGET}"
 		exit 1
 	fi
 else
-	if [ ! -w `dirname ${OUTFILE}` ]; then
-		echo "Cannot write to `dirname ${OUTFILE}` to create ${OUTFILE}"
+	if [ ! -w `dirname ${DIRPATH}}` ]; then
+		echo "Cannot write to `dirname ${DIRPATH}` to create ${TARGET}}"
 		exit 1
 	fi
 fi
 
 # do we have a snippets subdir inside the work dir?
-if [ ! -d "${WORKDIR}/snippets" ]  && [ ! -x "${WORKDIR}/snippets" ]; then
+if [ ! -d "${SNIPPETS}" ]  && [ ! -x "${SNIPPETS}" ]; then
 	echo "Cannot access the snippets directory"
 fi
 
-cd ${WORKDIR}
-
 # find all the files in the snippets directory, sort them numerically and concat to snippets.concat in the working dir
-/usr/bin/find snippets/ -type f -print0 |/bin/sort ${SORTARG}|/usr/bin/xargs -0 /bin/cat >|"snippets.concat"
+find /tmp/test/fragment.snippets -type f |grep -v snippets.concat|sort |xargs cat > ${CONCAT}
 
 if [ x${TEST} = "x" ]; then
 	# This is a real run, copy the file to outfile
-	/bin/cp snippets.concat ${OUTFILE}
+	/bin/cp ${CONCAT} ${TARGET}
 	RETVAL=$?
 else
 	# Just compare the result to outfile to help the exec decide
-	/usr/bin/cmp ${OUTFILE} snippets.concat
+	/usr/bin/cmp ${TARGET} ${CONCAT}
 	RETVAL=$?
 fi
 

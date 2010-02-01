@@ -5,7 +5,6 @@
 ## These are groups of related commands...
 
 ## Installation and management of software
-Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum, /sbin/service httpd *, /sbin/service interchange *, /sbin/service puppet *, /sbin/service mvc_cached *
 
 #
 # This flag needs to be off for ControlTier to work:
@@ -21,7 +20,5 @@ Defaults    env_keep = "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR \
 #
 # User and group based sudo permissions
 #
-
 root	   ALL=(ALL) 	ALL
-%wheel	ALL=(ALL)	ALL
-%interch	ALL=NOPASSWD:  SOFTWARE 	
+%sysadmin	ALL=(ALL)	ALL

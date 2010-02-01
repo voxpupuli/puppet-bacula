@@ -1,5 +1,0 @@
-[local]
-name=Backcountry Local Repo
-baseurl=http://yum.bcinfra.net/mrepo/local-rpms/$basearch/
-enabled=1
-gpgcheck=0

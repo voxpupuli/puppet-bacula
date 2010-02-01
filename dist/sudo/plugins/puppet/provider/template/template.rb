@@ -1,3 +1,0 @@
-#
-#Provider Template file.
-#

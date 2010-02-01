@@ -1,6 +1,0 @@
-[rhel-backcountry]
-name=Red Hat Enterprise Linux $releasever - $basearch - Updates
-baseurl=http://rpm.bcinfra.net/mrepo/5Server-$basearch
-enabled=1
-gpgcheck=0
-#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release

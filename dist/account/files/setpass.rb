@@ -24,12 +24,16 @@ def setpasswd(user)
     puts 'Enter new password'
     begin
       system "stty -echo"
-      password = STDIN.gets.chomp
+      password = '\\' + STDIN.gets.strip
     ensure
       system "stty echo"
     end
     #@passinfo = { 'password' => "#{OpenSSL::Digest::SHA512.new(password)}" }
-    @passinfo = { 'password' => %x{mkpasswd -m SHA-512 #{password}}.chomp }
+    puts password
+    crypt = %x{mkpasswd -m SHA-512 #{password}}.strip 
+    puts crypt
+    @passinfo = { 'password' =>  "#{crypt}" }
+    #@passinfo = { 'password' => "#{password}"}
     File.open("#{passfile}", 'w') { |f| f.puts @passinfo.to_yaml }
   end
 end

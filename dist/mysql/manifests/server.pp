@@ -1,6 +1,6 @@
 class mysql::server inherits mysql {
   package {'mysql-server': ensure => installed }
-  service { 'mysqld':
+  service { 'mysql':
     ensure=> running,
     enable=> true,
     hasrestart=> true,

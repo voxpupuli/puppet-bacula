@@ -1,17 +1,8 @@
 # ensure apache is installed
 class apache {
-    package { ["httpd"]: ensure => present }
-    file    { "/etc/sysconfig/httpd":
-        ensure      => present,
-        owner       => "root",
-        group       => "root",
-        mode        => "644",
-        source      => "puppet:///modules/apache/httpd",
-        require     => Package["httpd"],
-    }
-    service { "httpd":
-        ensure      => running,
-        enable      => true,
-        subscribe   => File["/etc/sysconfig/httpd"],
-    }
+  package { ["apache2"]: ensure => present }
+  service { "apache2":
+    ensure => running,
+    enable => true,
+  }
 }

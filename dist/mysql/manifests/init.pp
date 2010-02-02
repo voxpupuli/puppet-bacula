@@ -1,3 +1,3 @@
 class mysql {
-  package {"mysql": ensure => installed }
+  package {"mysql-client": ensure => installed }
 }

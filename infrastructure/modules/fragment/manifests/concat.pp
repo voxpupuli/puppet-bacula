@@ -23,7 +23,7 @@ define fragment::concat(
     $mode = 0644, $owner = "root", $group = "root"
   ) {
 	
-  $file = regsubst($name,'.*/','', 'G')
+  $file = regsubst($name,'/','_', 'G')
   $snipdir = "/tmp/${file}.d"
 
   File{

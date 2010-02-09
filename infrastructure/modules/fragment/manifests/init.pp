@@ -25,7 +25,7 @@ define fragment(
     default: { File{ content => $content } }
   }
 
-  $file = regsubst($filename,'.*/','', 'G')
+  $file = regsubst($filename,'/','_', 'G')
 
   # this should be changed to $vardir when the fact exists.
   file{"/tmp/${file}.d/snippets/${order}_${name}":

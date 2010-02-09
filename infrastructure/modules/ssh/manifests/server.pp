@@ -8,7 +8,7 @@ class ssh::server  inherits ssh {
   # not managing the defaults for this file, yet
   fragment{'sshd_config-header':
     order     => '00',
-    directory => '/etc/ssh/sshd_config.d',
+    filename  => '/etc/ssh/sshd_config',
     source    => 'puppet:///modules/ssh/sshd_config',
   }
   fragment::concat{'/etc/ssh/sshd_config':

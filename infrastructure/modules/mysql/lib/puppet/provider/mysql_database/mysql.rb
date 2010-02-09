@@ -6,15 +6,15 @@ Puppet::Type.type(:mysql_database).provide(:mysql,
 	desc "Use mysql as database."
 	commands :mysqladmin => '/usr/bin/mysqladmin'
 	commands :mysql => '/usr/bin/mysql'
-
-	# retrieve the current set of mysql users
+	
+        # retrieve the current set of mysql databases
 	def self.instances
 		dbs = []
 
-		cmd = "#{command(:mysql)} mysql -NBe 'show databases'"
+		cmd = "#{command(:mysql)} -uuser -ppassword mysql -NBe 'show databases'"
 		execpipe(cmd) do |process|
 			process.each do |line|
-				dbs << new( { :ensure => :present, :name => line.chomp } )
+				dbs << new( { :ensure => :present, :name => line.chomp,  } )
 			end
 		end
 		return dbs
@@ -26,7 +26,7 @@ Puppet::Type.type(:mysql_database).provide(:mysql,
 			:ensure => :absent
 		}
 
-		cmd = "#{command(:mysql)} mysql -NBe 'show databases'"
+		cmd = "#{command(:mysql)} -uroot -ppassword mysql -NBe 'show databases'"
 		execpipe(cmd) do |process|
 			process.each do |line|
 				if line.chomp.eql?(@resource[:name])
@@ -38,18 +38,14 @@ Puppet::Type.type(:mysql_database).provide(:mysql,
 	end
 
 	def create
-		mysqladmin "create", @resource[:name]
+		mysqladmin "create", @resource[:name], *@resource[:args]
 	end
 	def destroy
 		mysqladmin "-f", "drop", @resource[:name]
 	end
 
 	def exists?
-		if mysql("mysql", "-NBe", "show databases").match(/^#{@resource[:name]}$/)
-			true
-		else
-			false
-		end
+		mysql("-uuser", "-ppassword", "mysql", "-NBe", "show databases").match(/^#{@resource[:name]}$/)
 	end
 end
 

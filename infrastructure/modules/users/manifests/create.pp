@@ -19,7 +19,7 @@ define users::create($comment, $password, $shell='/bin/bash'){
   }
   # add AllowUser line fragment to sshd_config
   fragment{ "sshd_config_AllowUsers-${title}":
-    directory  => "/etc/ssh/sshd_config.d",
+    filename   => "/etc/ssh/sshd_config",
     content    => "AllowUsers ${name}",
   }
   file{"/home/${name}/.ssh":

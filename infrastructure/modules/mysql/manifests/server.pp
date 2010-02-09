@@ -18,41 +18,46 @@ class mysql::server {
     fail('$mysql_rootpw must be set for class mysql::server')
   }
   package{'mysql-server':
-    #name   => 'MySQL-server-community',
+    name   => 'MySQL-server-community',
     ensure => installed,
-    notify => Service['mysqld'],
+    notify => Service['mysql'],
   }
-  service { 'mysqld':
+  service { 'mysql':
     ensure => running,
     enable => true,
     subscribe => File['/etc/my.cnf'],
   }
-
   File{
     owner   => 'mysql',
     group   => 'mysql',
     require => Package['mysql-server'],
   }
-
+  # what is this for??
   file{'/var/lib/mysql/data':
     ensure => directory,
     mode   => 755,
     before => File['/usr/local/sbin/setmysqlpass.sh'],
   }
+  # what is this for??
   file{'/var/lib/mysql/data/ibdata1':
     ensure => file,
     mode   => 0660,
     before => File['/usr/local/sbin/setmysqlpass.sh'],
   }  
+  # does this need to be a script?
   file{ '/usr/local/sbin/setmysqlpass.sh':
     mode   => 0500,
     source => 'puppet:///modules/mysql/setmysqlpass.sh',
   }
   exec{ 'set_mysql_rootpw':
-    command => "/usr/local/sbin/setmysqlpass.sh $mysql_rootpw",
-    unless  => '/usr/bin/mysqladmin -uroot status > /dev/null',
-    require => [File['/usr/local/sbin/setmysqlpass.sh'], Package['mysql-server']],
-    before  => File['/root/.my.cnf'],
+    command   => "setmysqlpass.sh ${mysql_rootpw}",
+    #logoutput => on_failure,
+    logoutput => true,
+    unless   => "mysqladmin -uroot -p${mysql_rootpw} status > /dev/null",
+    path      => '/usr/local/sbin:/usr/bin',
+    require   => [File['/usr/local/sbin/setmysqlpass.sh'], Package['mysql-server']],
+    before    => File['/root/.my.cnf'],
+    notify    => Service['mysql'],
   } 
 
   file{'/etc/my.cnf':
@@ -64,7 +69,7 @@ class mysql::server {
     group   => 'root',
     mode    => '0400',
     content => template('mysql/my.cnf.erb'),
-    notify  => Service['mysqld'],
+    notify  => Service['mysql'],
   }
 
   # install monitoring username if nrpe or snmp is enabled

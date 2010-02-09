@@ -1,7 +1,5 @@
 # installs some extra ruby rpms
-class ruby {
-  package {
-    ['rubygems', 'ruby-rdoc', 'ruby-irb']:
-    ensure => installed,
-  }
+class ruby::dev {
+  package{'ruby': ensure => installed,}
+  package{'rubygems': ensure => installed, require => Package['ruby'],}
 }

@@ -9,7 +9,7 @@ class snmp::diskio {
   }
   fragment { "diskio":
     order     => 01,
-    directory => "/etc/snmp/snmpd.conf.d",
+    filename  => "/etc/snmp/snmpd.conf.d",
     source    => "puppet:///modules/snmp/diskio.conf",
     require   => Package['net-snmp'],
   }

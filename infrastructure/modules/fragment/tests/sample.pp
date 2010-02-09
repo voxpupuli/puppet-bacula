@@ -8,17 +8,13 @@ fragment{'test1':
   filename => '/tmp/test.txt',
   content  => "test1\n",
 }
-# will be created at order 10 by default
-#fragment{'test2':
-#  content   =>'test2',
-#  directory => '/tmp/test.d',
-#}
 
 #fragment{'test3':
-#  content   =>"test3\n",
+#  order    => '11',
+#  content  => "test3\n",
 #  filename => '/tmp/test.txt',
 #}
 fragment{'test4':
   content   =>"test4\n",
-  filename => 'test.txt',
+  filename => '/tmp/test.txt',
 }

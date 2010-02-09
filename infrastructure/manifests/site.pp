@@ -10,7 +10,7 @@ include avahi::disable
       , hal::disable
 # configure some stuff
 include git
-      , cacti
+#      , cacti
       , apache::ssl
 #     , bind::server # does not work
       , motd
@@ -18,4 +18,5 @@ include git
       , ruby
       , vim
       , dbus
+      , yum
 #$my_admins =['dan', 'teyo', 'luke']

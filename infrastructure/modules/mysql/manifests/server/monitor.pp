@@ -30,7 +30,6 @@ class mysql::server::monitor {
   }
   mysql_grant { "${mysql_monitor_username}@${mysql_monitor_hostname}":
     privileges    => [ 'process_priv', 'super_priv' ],
-    require       => Mysql_user["${mysql_monitor_username}@${mysql_monitor_hostname}"], 
-    require       => Service['mysqld'],
+    require       => [ Mysql_user["${mysql_monitor_username}@${mysql_monitor_hostname}"], Service['mysqld']],
   }
 }

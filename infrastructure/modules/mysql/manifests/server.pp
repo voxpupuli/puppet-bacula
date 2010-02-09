@@ -47,12 +47,16 @@ class mysql::server {
     ensure => file,
     mode   => 0660,
   }  
-  # this sets the root password only if one is not already set.
+  # use the previous password for the case where its not configured in /root/.my.cnf
+  case $mysql_oldpw {
+    '': {$old_pw=''}
+    default: {$old_pw="-p${mysql_oldpw}"}  
+  }
   exec{ 'set_mysql_rootpw':
-    command   => "mysqladmin -u root password ${mysql_rootpw}",
+    command   => "mysqladmin -u root ${old_pw} password ${mysql_rootpw}",
     #logoutput => on_failure,
     logoutput => true,
-    unless   => "mysqladmin -u root -p ${mysql_rootpw} status > /dev/null",
+    unless   => "mysqladmin -u root -p${mysql_rootpw} status > /dev/null",
     path      => '/usr/local/sbin:/usr/bin',
     require   => [Package['mysql-server'], Service['mysqld']],
     before    => File['/root/.my.cnf'],

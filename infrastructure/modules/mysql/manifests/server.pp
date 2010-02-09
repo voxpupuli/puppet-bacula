@@ -14,8 +14,8 @@
 # installs mysql 
 class mysql::server {
   # set the mysql root password
-  if(! $mysql_rootpw) {
-    fail('$mysql_rootpw must be set for class mysql::server')
+  if(! $mysql_root_pw) {
+    fail('$mysql_root_pw must be set for class mysql::server')
   }
   package{'mysql-server':
     name   => 'mysql-server',
@@ -48,15 +48,15 @@ class mysql::server {
     mode   => 0660,
   }  
   # use the previous password for the case where its not configured in /root/.my.cnf
-  case $mysql_oldpw {
+  case $mysql_old_pw {
     '': {$old_pw=''}
-    default: {$old_pw="-p${mysql_oldpw}"}  
+    default: {$old_pw="-p${mysql_old_pw}"}  
   }
   exec{ 'set_mysql_rootpw':
     command   => "mysqladmin -u root ${old_pw} password ${mysql_rootpw}",
     #logoutput => on_failure,
     logoutput => true,
-    unless   => "mysqladmin -u root -p${mysql_rootpw} status > /dev/null",
+    unless   => "mysqladmin -u root -p${mysql_root_pw} status > /dev/null",
     path      => '/usr/local/sbin:/usr/bin',
     require   => [Package['mysql-server'], Service['mysqld']],
     before    => File['/root/.my.cnf'],

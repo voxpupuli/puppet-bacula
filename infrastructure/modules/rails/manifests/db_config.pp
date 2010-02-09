@@ -1,5 +1,8 @@
+#
+# right now, this only works for mysql
+#
 define rails::db_config(
-  $adapter='mysql',
+  $adapter,
   $database,
   $host='localhost',
   $username,

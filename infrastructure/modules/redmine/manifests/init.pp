@@ -2,6 +2,11 @@
 # or url can be set to some inernal location
 # redmine server
 #
+
+
+#
+# I think I need to change this to download the latest version from git
+#
 class redmine {
   $version = '0.8.7'
   $verstr  = "redmine-${version}"
@@ -33,9 +38,25 @@ class redmine {
   }
 # this should probably be a file fragment for managing multi environments
   rails::db_config{$reddir:
-    username => 'redmine',
-    password => 'redmine',
-    database => 'redmine',
-    require => Exec['untar redmine'],
+    adapter  => 'mysql',
+    username => $redmine_db_user,
+    password => $redmine_db_pw,
+    database => $redmine_db,
+    require  => Exec['untar redmine'],
   }
+#
+# now, lets fire up this database
+#
+
+#  exec{'rake db:migrate':
+#    path => '/usr/bin',
+#    require => [Class['rails'], Class['redmine::mysql']],
+#  }
+
+#
+# now lets configure fusion
+#
+#  include passenger
+
+
 }

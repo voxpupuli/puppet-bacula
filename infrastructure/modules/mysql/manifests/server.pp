@@ -25,7 +25,12 @@ class mysql::server {
   service { 'mysqld':
     ensure => running,
     enable => true,
-    subscribe => File['/etc/my.cnf'],
+  }
+  # this kind of sucks, that I have to specify a difference resource for restart.
+  # the reason is that I need the service to be started before mods to the config
+  # file which can cause a refresh
+  service{'mysqld-restart':
+    restart => '/usr/sbin/service mysqld restart'
   }
   File{
     owner   => 'mysql',
@@ -47,15 +52,16 @@ class mysql::server {
     command   => "mysqladmin -u root password ${mysql_rootpw}",
     #logoutput => on_failure,
     logoutput => true,
-    unless   => "mysqladmin -u root -p password status > /dev/null",
+    unless   => "mysqladmin -u root -p ${mysql_rootpw} status > /dev/null",
     path      => '/usr/local/sbin:/usr/bin',
-    require   => Package['mysql-server'],
+    require   => [Package['mysql-server'], Service['mysqld']],
     before    => File['/root/.my.cnf'],
-    notify    => Service['mysqld'],
+    notify    => Service['mysqld-restart'],
   } 
 
   file{'/etc/my.cnf':
     ensure => file,
+    notify    => Service['mysqld-restart'],
   }
  
   file{'/root/.my.cnf':
@@ -63,7 +69,7 @@ class mysql::server {
     group   => 'root',
     mode    => '0400',
     content => template('mysql/my.cnf.erb'),
-    notify  => Service['mysqld'],
+    notify    => Service['mysqld-restart'],
   }
 
   # install monitoring username if nrpe or snmp is enabled

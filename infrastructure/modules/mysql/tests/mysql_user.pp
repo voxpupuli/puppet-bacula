@@ -1,10 +1,8 @@
 $mysql_root_pw='password'
 include mysql::server
-mysql_user{['test1@localhost', 'test2@localhost', 'test3@localhost']:
+database_user{['test1@localhost', 'test2@localhost', 'test3@localhost']:
 #  ensure => absent,
   ensure => present,
+  password_hash => mysql_password('blah2'),
   require => Class['mysql::server'],
-}
-mysql_database{'test4':
-  ensure => present,
 }

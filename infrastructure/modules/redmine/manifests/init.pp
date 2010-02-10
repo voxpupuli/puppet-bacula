@@ -8,6 +8,11 @@
 # I think I need to change this to download the latest version from git
 #
 class redmine {
+
+  # redmine_version
+  # redmine_git_url
+  # 
+
   $version = '0.8.7'
   $verstr  = "redmine-${version}"
   $url     = "http://github.com/edavis10/redmine/tarball/${version}"

@@ -7,17 +7,18 @@ Puppet::Type.type(:database).provide(:mysql) do
 	
   def create
     mysql('-NBe', "create database #{resource[:name]} CHARACTER SET #{resource[:charset]}")
-    #mysqladmin('create', resource[:name], '--default-character-set', resource[:charset])
   end
+
   def destroy
     mysqladmin('-f', 'drop', @resource[:name])
   end
+
   def exists?
     begin
       mysqlshow(@resource[:name])
     rescue => e
       debug(e.message)
-      return false
+      return nil
     end
   end
 

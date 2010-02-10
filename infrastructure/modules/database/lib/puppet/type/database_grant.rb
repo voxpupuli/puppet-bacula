@@ -1,9 +1,9 @@
 # This has to be a separate type to enable collecting
-Puppet::Type.newtype(:mysql_grant) do
+Puppet::Type.newtype(:database_grant) do
 	@doc = "Manage a database user's rights."
 	#ensurable
 
-	autorequire :mysql_db do
+	autorequire :database do
 		# puts "Starting db autoreq for %s" % self[:name]
 		reqs = []
 		matches = self[:name].match(/^([^@]+)@([^\/]+)\/(.+)$/)
@@ -14,7 +14,7 @@ Puppet::Type.newtype(:mysql_grant) do
 		reqs
 	end
 
-	autorequire :mysql_user do
+	autorequire :database_user do
 		# puts "Starting user autoreq for %s" % self[:name]
 		reqs = []
 		matches = self[:name].match(/^([^@]+)@([^\/]+).*$/)

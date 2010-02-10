@@ -37,16 +37,6 @@ class mysql::server {
     group   => 'mysql',
     require => Package['mysql-server'],
   }
-  # what is this for??
-  file{'/var/lib/mysql/data':
-    ensure => directory,
-    mode   => 755,
-  }
-  # what is this for??
-  file{'/var/lib/mysql/data/ibdata1':
-    ensure => file,
-    mode   => 0660,
-  }  
   # use the previous password for the case where its not configured in /root/.my.cnf
   case $mysql_old_pw {
     '': {$old_pw=''}
@@ -78,11 +68,11 @@ class mysql::server {
 
   # install monitoring username if nrpe or snmp is enabled
   # does this actually work
-  include mysql::server::mysqltuner
-  if tagged(nrpe) {
-    include mysql::server::monitor
-  }
-  if tagged(cacti) {
-    include mysql::server::monitor
-  }
+#  include mysql::server::mysqltuner
+#  if tagged(nrpe) {
+#    include mysql::server::monitor
+#  }
+#  if tagged(cacti) {
+#    include mysql::server::monitor
+#  }
 }

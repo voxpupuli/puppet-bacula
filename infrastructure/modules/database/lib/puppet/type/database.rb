@@ -8,10 +8,9 @@ Puppet::Type.newtype(:database) do
     desc "The name of the database."
     isnamevar
   end
-#  newparam(:args) do
-#    desc "array of arguments for database creation"
-#  end
+  
   newproperty(:charset) do
+    desc "The characterset to use for a database"
     defaultto :utf8
     newvalue(/^\S+$/)
   end

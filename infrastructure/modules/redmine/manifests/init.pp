@@ -2,8 +2,6 @@
 # or url can be set to some inernal location
 # redmine server
 #
-
-
 #
 # I think I need to change this to download the latest version from git
 #
@@ -25,12 +23,15 @@ class redmine {
   # installs and configures rails for redmine
   require rails
   # configures the database for redmine
-  include redmine::mysql
+  require redmine::mysql
   file {[$base, $dir]:
     ensure => directory,
   }
   # download the module from git 
-  Exec{logoutput => on_failure , path => '/usr/bin:/bin'}
+  Exec{
+    logoutput => on_failure , 
+    path => '/usr/bin:/bin'
+  }
   exec {'download-redmine':
     command   => "wget ${url} -O ${tgz}",
     creates   => $tgz,
@@ -40,6 +41,7 @@ class redmine {
     cwd     => $dir,
     require => [ Exec['download-redmine'], File[$dir]],
     creates => $reddir,
+    before   => Exec['session'],
   }
 # this should probably be a file fragment for managing multi environments
   rails::db_config{$reddir:
@@ -47,18 +49,28 @@ class redmine {
     username => $redmine_db_user,
     password => $redmine_db_pw,
     database => $redmine_db,
+    socket   => $redmine_db_socket,
     require  => Exec['untar redmine'],
+    before   => Exec['session'],
   }
 #
 # now, lets fire up this database
 #
 
-#  exec{'rake db:migrate':
-#    path => '/usr/bin',
-#    require => [Class['rails'], Class['redmine::mysql']],
-#  }
+  exec{'session':
+    #command     => 'echo $RAILS_ENV >> blah',
+    command    => '/usr/bin/rake config/initializers/session_store.rb',
+    environment => 'RAILS_ENV=production',
+    cwd         => $reddir,
+  }
 
-#
+  exec{'migrate':
+    command => '/usr/bin/rake db:migrate',
+    #command => 'echo $RAILS_ENV >> /tmp/blah',
+    cwd     => $reddir,
+    environment => 'RAILS_ENV=production',
+    require => Exec['session'],
+  }
 # now lets configure fusion
 #
 #  include passenger

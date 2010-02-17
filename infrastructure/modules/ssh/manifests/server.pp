@@ -2,7 +2,7 @@ class ssh::server  inherits ssh {
   include ssh
   package{'openssh-server':
     ensure  => latest, 
-    require => Package['openssh'],
+    require => Package['openssh-client'],
     notify  => Service['sshd'],
   }  
   # not managing the defaults for this file, yet
@@ -19,6 +19,11 @@ class ssh::server  inherits ssh {
     notify  => Service['sshd'],
   }
   service{"sshd":
+    name       => $operatingsystem? {
+      'ubuntu' => 'ssh',
+      'debian' => 'ssh',
+      'default' => 'sshd', 
+    }, 
     ensure     => running,
     enable     => true,
     hasstatus  => true,

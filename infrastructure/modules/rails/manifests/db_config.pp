@@ -8,7 +8,8 @@ define rails::db_config(
   $username,
   $password,
   $encoding='utf8',
-  $environment='production'
+  $environment='production',
+  $socket='/tmp/mysql.sock'
 ){
   file{"${name}/config/database.yml":
     content => template('rails/database.yml.erb'),

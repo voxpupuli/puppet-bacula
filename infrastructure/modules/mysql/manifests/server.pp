@@ -23,6 +23,10 @@ class mysql::server {
     notify => Service['mysqld'],
   }
   service { 'mysqld':
+    name => $operatingsystem?{
+      ubuntu  => 'mysql',
+      default => 'mysqld',
+    },
     ensure => running,
     enable => true,
   }
@@ -43,7 +47,7 @@ class mysql::server {
     default: {$old_pw="-p${mysql_old_pw}"}  
   }
   exec{ 'set_mysql_rootpw':
-    command   => "mysqladmin -u root ${old_pw} password ${mysql_rootpw}",
+    command   => "mysqladmin -u root ${old_pw} password ${mysql_root_pw}",
     #logoutput => on_failure,
     logoutput => true,
     unless   => "mysqladmin -u root -p${mysql_root_pw} status > /dev/null",

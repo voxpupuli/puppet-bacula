@@ -11,13 +11,18 @@ class redmine::mysql {
   database{$redmine_db:
     ensure  => present,
     charset => 'utf8',
+    
+    provider => 'mysql',
   }
   database_user{"${redmine_db_user}@localhost":
     ensure        => present,
     password_hash => mysql_password($redmine_db_password),
+    require => Database[$redmine_db],
+    provider => 'mysql',
   }
   database_grant{"${redmine_db}}@localhost/${redmine_db}":
     privileges => [ 'alter_priv', 'insert_priv', 'select_priv', 'update_priv' ],
-#    privileges => all,
+    provider => 'mysql'
+##    privileges => all,
   }
 }

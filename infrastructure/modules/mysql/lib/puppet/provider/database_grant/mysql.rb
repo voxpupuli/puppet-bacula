@@ -22,6 +22,8 @@ Puppet::Type.type(:database_grant).provide(:mysql) do
 
 	desc "Uses mysql as database."
 
+        defaultfor :kernel => 'Linux'
+
 	commands :mysql => 'mysql'
 	commands :mysqladmin => 'mysqladmin'
 

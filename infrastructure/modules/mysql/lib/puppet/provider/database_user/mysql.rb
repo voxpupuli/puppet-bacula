@@ -1,6 +1,9 @@
 Puppet::Type.type(:database_user).provide(:mysql) do
 
   desc "manage users for a mysql database."
+
+  defaultfor :kernel => 'Linux'
+
   commands :mysql => 'mysql'
   commands :mysqladmin => 'mysqladmin'
 

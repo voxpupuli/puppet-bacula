@@ -1,6 +1,9 @@
 Puppet::Type.type(:database).provide(:mysql) do
 
   desc "Create mysql database."
+
+  defaultfor :kernel => 'Linux'
+
   commands :mysqladmin => 'mysqladmin'
   commands :mysql => 'mysql'
   commands :mysqlshow => 'mysqlshow'

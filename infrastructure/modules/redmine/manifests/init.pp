@@ -9,7 +9,8 @@ class redmine {
 
   require rails
   require redmine::mysql
-
+  include redmine::params
+  
   $version = '0.8.7'
   $verstr  = "redmine-${version}"
   $url     = "http://github.com/edavis10/redmine/tarball/${version}"
@@ -59,7 +60,7 @@ class redmine {
     command    => '/usr/bin/rake config/initializers/session_store.rb',
     environment => 'RAILS_ENV=production',
     cwd         => $reddir,
-    require     => [Class['rails'], Class['ruby::mysql']],
+    require     => [Class['rails'], Class['redmine::mysql']],
     creates     => "${reddir}/config/initializers/session_store.rb"
   }
 

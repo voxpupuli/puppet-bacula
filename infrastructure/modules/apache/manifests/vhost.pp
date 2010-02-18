@@ -1,10 +1,20 @@
 define apache::vhost(
     $port, 
+    $docroot,
+    $webdir,
     $ssl=true, 
-    $template='apache/http-default.conf'
-    $basedir='/etc/http/'
+    $template='apache/vhost-default.conf.erb'
   ) {
-  file{$name}":
-
+  include apache
+  $apachedir = $operatingsystem? {
+    'ubuntu' => '/etc/apache2/sites-enabled/',
+    default  => '/etc/httpd/conf.d',
+  }
+  file{"${apachedir}/${name}.conf":
+    content => template($template),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '777',
+    notify  => Service['httpd'],
   }
 }

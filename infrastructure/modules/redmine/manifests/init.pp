@@ -82,6 +82,33 @@ class redmine {
       require     => Exec['migrate'],
     }
   }
+
+  user{'redmine':
+    ensure => 'present',
+    shell  => '/bin/nologin',
+  }
+
+  file{
+    [ "${reddir}/public", 
+      "${reddir}/files", 
+      "${reddir}/log", 
+      "${reddir}/tmp", 
+      "${reddir}/public/plugin_assets"
+    ]:
+    ensure  => directory,
+    recurse => true,
+    owner   => 'redmine',
+    group   => 'redmine',
+    mode    => '0755',
+    require  => Exec['migrate'],
+  }
+  $redmine_port='3000'
+  exec{'start-redmine':
+    command => 'ruby script/server webrick -e production &',
+    unless  => "netstat -ltn | grep ${redmine_port}",
+    cwd     => $reddir,
+    user    => 'redmine',
+  }
 # now lets configure fusion
 #
 #  include passenger

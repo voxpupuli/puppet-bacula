@@ -7,9 +7,8 @@
 #
 class redmine {
 
-  # redmine_version
-  # redmine_git_url
-  # 
+  require rails
+  require redmine::mysql
 
   $version = '0.8.7'
   $verstr  = "redmine-${version}"
@@ -21,9 +20,7 @@ class redmine {
   $reddir  = "${dir}/edavis10-redmine-78db298"
   # this installed rails, and mysql, as well as ruby dev tools
   # installs and configures rails for redmine
-  require rails
   # configures the database for redmine
-  require redmine::mysql
   file {[$base, $dir]:
     ensure => directory,
   }

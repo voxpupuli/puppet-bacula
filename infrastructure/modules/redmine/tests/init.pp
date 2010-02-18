@@ -1,4 +1,4 @@
-$mysql_old_pw='redmine'
+#$mysql_old_pw='redmine'
 $mysql_root_pw='password'
 $redmine_db='redmine'
 $redmine_db_user='redmine'

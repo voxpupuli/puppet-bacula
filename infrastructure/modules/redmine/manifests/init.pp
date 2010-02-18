@@ -108,6 +108,7 @@ class redmine {
     unless  => "netstat -ltn | grep ${redmine_port}",
     cwd     => $reddir,
     user    => 'redmine',
+    require  => Exec['migrate'],
   }
 # now lets configure fusion
 #

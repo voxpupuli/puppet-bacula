@@ -59,6 +59,7 @@ class redmine {
     command    => '/usr/bin/rake config/initializers/session_store.rb',
     environment => 'RAILS_ENV=production',
     cwd         => $reddir,
+    require     => [Class['rails'], Class['ruby::mysql']],
     creates     => "${reddir}/config/initializers/session_store.rb"
   }
 
@@ -102,17 +103,4 @@ class redmine {
     mode    => '0755',
     require  => Exec['migrate'],
   }
-  $redmine_port='3000'
-  exec{'start-redmine':
-    command => 'ruby script/server webrick -e production &',
-    unless  => "netstat -ltn | grep ${redmine_port}",
-    cwd     => $reddir,
-    user    => 'redmine',
-    require  => Exec['migrate'],
-  }
-# now lets configure fusion
-#
-#  include passenger
-
-
 }

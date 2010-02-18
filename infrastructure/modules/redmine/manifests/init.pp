@@ -13,9 +13,8 @@ class redmine {
   $version = '0.8.7'
   $verstr  = "redmine-${version}"
   $url     = "http://github.com/edavis10/redmine/tarball/${version}"
-  $srcdir  = '/usr/local/src'
   $base    = '/usr/local/redmine'
-  $tgz     = "${srcdir}/${verstr}.tgz"
+  $tgz     = "${base}/${verstr}.tgz"
   $dir     = "${base}/${verstr}"
   $reddir  = "${dir}/edavis10-redmine-78db298"
   # this installed rails, and mysql, as well as ruby dev tools
@@ -27,16 +26,17 @@ class redmine {
   # download the module from git 
   Exec{
     logoutput => on_failure , 
-    path => '/usr/bin:/bin'
+    path      => '/usr/bin:/bin'
   }
   exec {'download-redmine':
-    command   => "wget ${url} -O ${tgz}",
-    creates   => $tgz,
+    command => "wget ${url} -O ${tgz}",
+    creates => $tgz,
+    require => File[$dir], 
   }
   exec {'untar redmine':
     command => "tar -xvzf ${tgz}",
     cwd     => $dir,
-    require => [ Exec['download-redmine'], File[$dir]],
+    require => Exec['download-redmine'],
     creates => $reddir,
     before   => Exec['session'],
   }

@@ -59,6 +59,7 @@ class redmine {
     command    => '/usr/bin/rake config/initializers/session_store.rb',
     environment => 'RAILS_ENV=production',
     cwd         => $reddir,
+    creates     => "${reddir}/config/initializers/session_store.rb"
   }
 
   exec{'migrate':
@@ -67,6 +68,19 @@ class redmine {
     cwd     => $reddir,
     environment => 'RAILS_ENV=production',
     require => Exec['session'],
+    creates => "${reddir}/db/schema.rb"
+  }
+#
+# this is totally untested, and I need to set a limiting facter that determines when to 
+# apply this resource
+#
+  if $redmine_default_data {
+    exec{'default':
+      command     => '/usr/bin/rake redmine:load_default_data',
+      cwd         => $reddir,
+      environment => 'RAILS_ENV=production',
+      require     => Exec['migrate'],
+    }
   }
 # now lets configure fusion
 #

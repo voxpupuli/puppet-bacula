@@ -98,7 +98,7 @@ class redmine {
       "${reddir}/public/plugin_assets"
     ]:
     ensure  => directory,
-    recurse => true,
+#    recurse => true,
     owner   => 'redmine',
     group   => 'redmine',
     mode    => '0755',

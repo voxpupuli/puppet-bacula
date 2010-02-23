@@ -7,70 +7,54 @@
 #
 class redmine {
 
+  require git
   require rails
   require redmine::mysql
   include redmine::params
-  
-  $version = '0.8.7'
-  $verstr  = "redmine-${version}"
-  $url     = "http://github.com/edavis10/redmine/tarball/${version}"
-  $base    = '/usr/local/redmine'
-  $tgz     = "${base}/${verstr}.tgz"
-  $dir     = "${base}/${verstr}"
-  $reddir  = "${dir}/edavis10-redmine-78db298"
-  # this installed rails, and mysql, as well as ruby dev tools
-  # installs and configures rails for redmine
-  # configures the database for redmine
-  file {[$base, $dir]:
-    ensure => directory,
-  }
+ 
+  $redmine_dir     = $redmine::params::redmine_dir 
+  $redmine_version = $redmine::params::redmine_version
+  $redmine_source  = $redmine::params::redmine_source
   # download the module from git 
-  Exec{
-    logoutput => on_failure , 
-    path      => '/usr/bin:/bin'
-  }
-  exec {'download-redmine':
-    command => "wget ${url} -O ${tgz}",
-    creates => $tgz,
-    require => File[$dir], 
-  }
-  exec {'untar redmine':
-    command => "tar -xvzf ${tgz}",
-    cwd     => $dir,
-    require => Exec['download-redmine'],
-    creates => $reddir,
-    before   => Exec['session'],
+  vcsrepo{$redmine_dir:
+    source  => $redmine_source,
+    revision => $redmine_version, 
   }
 # this should probably be a file fragment for managing multi environments
-  rails::db_config{$reddir:
+  rails::db_config{$redmine_dir:
     adapter  => 'mysql',
     username => $redmine_db_user,
     password => $redmine_db_pw,
     database => $redmine_db,
     socket   => $redmine_db_socket,
-    require  => Exec['untar redmine'],
+    require  => Vcsrepo[$redmine_dir],
     before   => Exec['session'],
   }
 #
 # now, lets fire up this database
 #
 
+  Exec{
+    logoutput => on_failure , 
+    path      => '/usr/bin:/bin'
+  }
+
   exec{'session':
     #command     => 'echo $RAILS_ENV >> blah',
     command    => '/usr/bin/rake config/initializers/session_store.rb',
     environment => 'RAILS_ENV=production',
-    cwd         => $reddir,
+    cwd         => $redmine_dir,
     require     => [Class['rails'], Class['redmine::mysql']],
-    creates     => "${reddir}/config/initializers/session_store.rb"
+    creates     => "${redmine_dir}/config/initializers/session_store.rb"
   }
 
   exec{'migrate':
     command => '/usr/bin/rake db:migrate',
     #command => 'echo $RAILS_ENV >> /tmp/blah',
-    cwd     => $reddir,
+    cwd     => $redmine_dir,
     environment => 'RAILS_ENV=production',
     require => Exec['session'],
-    creates => "${reddir}/db/schema.rb"
+    creates => "${redmine_dir}/db/schema.rb"
   }
 #
 # this is totally untested, and I need to set a limiting facter that determines when to 
@@ -79,7 +63,7 @@ class redmine {
   if $redmine_default_data {
     exec{'default':
       command     => '/usr/bin/rake redmine:load_default_data',
-      cwd         => $reddir,
+      cwd         => $redmine_dir,
       environment => 'RAILS_ENV=production',
       require     => Exec['migrate'],
     }
@@ -91,11 +75,11 @@ class redmine {
   }
 
   file{
-    [ "${reddir}/public", 
-      "${reddir}/files", 
-      "${reddir}/log", 
-      "${reddir}/tmp", 
-      "${reddir}/public/plugin_assets"
+    [ "${redmine_dir}/public", 
+      "${redmine_dir}/files", 
+      "${redmine_dir}/log", 
+      "${redmine_dir}/tmp", 
+      "${redmine_dir}/public/plugin_assets"
     ]:
     ensure  => directory,
 #    recurse => true,

@@ -1,12 +1,11 @@
 class redmine::passenger {
-  include redmine
+  require redmine
   include passenger
   include redmine::params
-  $redmine_dir = $redmine::params::redmine_dir
+  $dir = $redmine::params::dir
   apache::vhost{'puppet-ubuntu':
     port    => '80',
-    docroot => "${redmine_dir}/public/",
-    webdir  => "${redmine_dir}/",
+    docroot => "${dir}/public/",
+    webdir  => "${dir}/",
   }
-   #require  => Class['redmine'],
 }

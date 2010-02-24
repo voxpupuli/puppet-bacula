@@ -6,28 +6,28 @@
 # I think I need to change this to download the latest version from git
 #
 class redmine {
-
+  
   require git
   require rails
   require redmine::mysql
   include redmine::params
  
-  $redmine_dir     = $redmine::params::redmine_dir 
-  $redmine_version = $redmine::params::redmine_version
-  $redmine_source  = $redmine::params::redmine_source
+  $dir     = $redmine::params::dir 
+  $version = $redmine::params::version
+  $source  = $redmine::params::source
   # download the module from git 
-  vcsrepo{$redmine_dir:
-    source  => $redmine_source,
-    revision => $redmine_version, 
+  vcsrepo{$dir:
+    source  => $source,
+    revision => $version, 
   }
 # this should probably be a file fragment for managing multi environments
-  rails::db_config{$redmine_dir:
+  rails::db_config{$dir:
     adapter  => 'mysql',
     username => $redmine_db_user,
     password => $redmine_db_pw,
     database => $redmine_db,
     socket   => $redmine_db_socket,
-    require  => Vcsrepo[$redmine_dir],
+    require  => Vcsrepo[$dir],
     before   => Exec['session'],
   }
 #
@@ -43,18 +43,18 @@ class redmine {
     #command     => 'echo $RAILS_ENV >> blah',
     command    => '/usr/bin/rake config/initializers/session_store.rb',
     environment => 'RAILS_ENV=production',
-    cwd         => $redmine_dir,
+    cwd         => $dir,
     require     => [Class['rails'], Class['redmine::mysql']],
-    creates     => "${redmine_dir}/config/initializers/session_store.rb"
+    creates     => "${dir}/config/initializers/session_store.rb"
   }
 
   exec{'migrate':
     command => '/usr/bin/rake db:migrate',
     #command => 'echo $RAILS_ENV >> /tmp/blah',
-    cwd     => $redmine_dir,
+    cwd     => $dir,
     environment => 'RAILS_ENV=production',
     require => Exec['session'],
-    creates => "${redmine_dir}/db/schema.rb"
+    creates => "${dir}/db/schema.rb"
   }
 #
 # this is totally untested, and I need to set a limiting facter that determines when to 
@@ -63,7 +63,7 @@ class redmine {
   if $redmine_default_data {
     exec{'default':
       command     => '/usr/bin/rake redmine:load_default_data',
-      cwd         => $redmine_dir,
+      cwd         => $dir,
       environment => 'RAILS_ENV=production',
       require     => Exec['migrate'],
     }
@@ -75,11 +75,11 @@ class redmine {
   }
 
   file{
-    [ "${redmine_dir}/public", 
-      "${redmine_dir}/files", 
-      "${redmine_dir}/log", 
-      "${redmine_dir}/tmp", 
-      "${redmine_dir}/public/plugin_assets"
+    [ "${dir}/public", 
+      "${dir}/files", 
+      "${dir}/log", 
+      "${dir}/tmp", 
+      "${dir}/public/plugin_assets"
     ]:
     ensure  => directory,
 #    recurse => true,

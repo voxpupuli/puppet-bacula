@@ -14,9 +14,9 @@ class snmp{
     hasstatus  => true,
   }
 
-  fragment{'header':
+  fragment{'snmp-header':
     order     => '00',
-    directory => '/etc/snmp/snmpd.conf.d',
+    filename  => '/etc/snmp/snmpd.conf',
     source    => 'puppet:///modules/snmp/00header.conf',
     require   => Package['net-snmp'],
   }

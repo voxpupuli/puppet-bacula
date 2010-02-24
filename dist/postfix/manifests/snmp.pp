@@ -12,9 +12,9 @@ class postfix::snmp {
     source   => 'puppet:///modules/postfix/fetch_mail_statistics.pl',
     require  => Package['postfix'],
   }
-  fragment{'postfix':
+  fragment{'postfix-snmp':
     order     => '99',
-    directory => '/etc/snmp/snmpd.conf.d',
+    filename  => '/etc/snmp/snmpd.conf',
     source    => 'puppet:///modules/postfix/snmpd.conf',
     require   => Package['net-snmp'],
   }

@@ -15,7 +15,7 @@ define apache::vhost(
     owner   => 'root',
     group   => 'root',
     mode    => '777',
-    require => Package['apache'],
+    require => Package['httpd'],
     notify  => Service['httpd'],
   }
 }

@@ -4,7 +4,7 @@ class apache {
     'ubuntu'  => 'apache2',
     default => 'httpd',
   }
-  package{"apache": 
+  package{'httpd': 
     name   => $apache_name,
     ensure => present,
   }
@@ -17,7 +17,7 @@ class apache {
 #    source  => "puppet:///modules/apache/httpd",
 #    require => Package["httpd"],
 #  }
-  service { "httpd":
+  service { 'httpd':
     name      => $apache_name,
     ensure    => running,
     enable    => true,

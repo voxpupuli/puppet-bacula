@@ -57,6 +57,6 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
   fragment { "sshd_config_AllowUsers-${name}":
     path => "/etc/ssh",
     target => "sshd_config",
-    content => "AllowUsers ${name}",
+    content => "AllowUsers ${name}\n",
   }
 }

@@ -4,7 +4,7 @@ class apache {
     'ubuntu'  => 'apache2',
     default => 'httpd',
   }
-  package{"httpd": 
+  package{"apache": 
     name   => $apache_name,
     ensure => present,
   }

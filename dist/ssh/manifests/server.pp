@@ -1,22 +1,32 @@
-# setup ssh server
-class ssh::server inherits ssh {
-  package { "ssh-server":
-    name => $operatingsystem ? {
-    redhat  => "openssh-server",
-    default => "openssh-server",
-    },
-    ensure => present,
+class ssh::server  inherits ssh {
+  include ssh
+  package{'openssh-server':
+    ensure  => latest, 
+    require => Package['openssh-client'],
+    notify  => Service['sshd'],
+  }  
+  # not managing the defaults for this file, yet
+  fragment{'sshd_config-header':
+    order     => '00',
+    filename  => '/etc/ssh/sshd_config',
+    source    => 'puppet:///modules/ssh/sshd_config',
   }
-  file {
-    '/etc/ssh/sshd_config': owner => "root", group => "root", mode => "644", source => "puppet:///ssh/sshd_config", require => Package["ssh-server"];
+  fragment::concat{'/etc/ssh/sshd_config':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0640',
+    require => Package['openssh-server'],
+    notify  => Service['sshd'],
   }
-  service { "sshd":
-    enable      => "true",
-    ensure      => "running",
-    subscribe   => [ Package["ssh-server"], File["/etc/ssh/sshd_config"] ],
-    require     => Package["ssh-server"],
+  service{"sshd":
+    name       => $operatingsystem? {
+      'ubuntu' => 'ssh',
+      'debian' => 'ssh',
+      'default' => 'sshd', 
+    }, 
+    ensure     => running,
+    enable     => true,
+    hasstatus  => true,
+    hasrestart => true,
   }
-  @@sshkey { "$fqdn": type => rsa, key => $sshrsakey }
-  Sshkey <<||>>
-  resources { sshkey: purge => true }
 }

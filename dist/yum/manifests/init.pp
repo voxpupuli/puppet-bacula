@@ -1,33 +1,26 @@
-# setup repositories
-class yum {
-    file {
-        "/etc/yum.repos.d":
-            ensure  => directory,
-            recurse => true;
-        "/etc/yum/pluginconf.d/rhnplugin.conf":
-            ensure  => present,
-            owner   => "root",
-            group   => "root",
-            mode    => "644",
-            source  => "puppet:///yum/rhnplugin.conf";
-        "/etc/yum.repos.d/5Server-x86_64.repo":
-            ensure  => present,
-            owner   => "root",
-            group   => "root",
-            mode    => "644",
-            source  => "puppet:///yum/5Server-x86_64.repo",
-            require => File["/etc/yum/pluginconf.d/rhnplugin.conf"],
-            # 
-            # This is not exactly how I want to model this prerequisite.  It is necessary to make sure that the yum repo is added before packages are installed.
-            #
-            before  => Class["bc"];
-        "/etc/yum.repos.d/backcountry-local.repo":
-            ensure  => present,
-            owner   => "root",
-            group   => "root",
-            mode    => "644",
-            source  => "puppet:///yum/backcountry-local.repo",
-            require => File["/etc/yum.repos.d/5Server-x86_64.repo"],
-            before  => Class["bc"];
-   }
-}
+class yum{
+  package{['yum', 'yum-priorities']:
+    ensure => latest,
+  }
+  $yumdir = '/etc/yum.repos.d'
+  File{owner => 'root', group => 'root', mode => '0644'}
+  file {$yumdir: 
+    ensure => directory, 
+    purge => true,
+    recurse => true,
+  }
+  file{
+    "${yumdir}/epel.repo":
+      source => 'puppet:///yum/epel.repo';
+    "${yumdir}/epel-testing.repo":
+      source => 'puppet:///yum/epel-testing.repo';
+    "${yumdir}/CentOS-Base.repo":
+      source => 'puppet:///yum/CentOS-Base.repo';
+#    "${yumdir}/CentOS-Media.repo":
+#      source => 'puppet:///yum/CentOS-Media.repo';
+    "${yumdir}/local-arch.repo":
+      source => 'puppet:///yum/local-arch.repo';
+    "${yumdir}/local-noarch.repo":
+      source => 'puppet:///yum/local-noarch.repo';
+  }
+} 

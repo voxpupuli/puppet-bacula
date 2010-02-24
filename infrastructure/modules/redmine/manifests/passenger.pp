@@ -8,4 +8,9 @@ class redmine::passenger {
     docroot => "${dir}/public/",
     webdir  => "${dir}/",
   }
+  file{"${dir}/config/environment.rb":
+    owner   => 'www-data',
+    group   => 'www-data',
+    require => Class['redmine'],
+  }
 }

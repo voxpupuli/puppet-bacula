@@ -1,4 +1,5 @@
-class redmine::passenger {
+define redmine::passenger ( er, $db_pw, $db, $db_socket, $user, $group, $dir, $port, ) {
+
   include ::passenger
   include redmine::params
   require redmine

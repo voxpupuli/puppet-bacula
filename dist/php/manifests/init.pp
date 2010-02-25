@@ -1,9 +1,5 @@
 class php{
-  package{'php':
+  package{'php5':
     ensure => installed,
-  }
-  package{'php-pdo':
-    ensure  => installed,
-    require => Package['php'],
   }
 }

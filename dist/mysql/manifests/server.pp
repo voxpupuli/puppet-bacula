@@ -1,13 +1,3 @@
-<<<<<<< HEAD:dist/mysql/manifests/server.pp
-class mysql::server inherits mysql {
-  package {'mysql-server': ensure => installed }
-  service { 'mysql':
-    ensure=> running,
-    enable=> true,
-    hasrestart=> true,
-    hasstatus => true,
-    require => Package['mysql-server'],
-=======
 # Copyright 2009 Larry Ludwig (larrylud@gmail.com)
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you 
@@ -26,7 +16,6 @@ class mysql::server {
   # set the mysql root password
   if(! $mysql_root_pw) {
     fail('$mysql_root_pw must be set for class mysql::server')
->>>>>>> 5f9ac9a1f18b54cf5b8f03dbe0515d69134e5085:dist/mysql/manifests/server.pp
   }
   package{'mysql-server':
     name   => 'mysql-server',

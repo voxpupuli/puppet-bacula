@@ -1,17 +1,22 @@
-define redmine::passenger ( er, $db_pw, $db, $db_socket, $user, $group, $dir, $port, ) {
-
+define redmine::passenger ($db, $db_user, $db_pw, $dir, $port) {
+  include apache::params
   include ::passenger
-  include redmine::params
   require redmine
-  $dir = $redmine::params::dir
-  apache::vhost{'puppet-ubuntu':
-    port    => '80',
-    docroot => "${dir}/public/",
-    webdir  => "${dir}/",
+  redmine::instance{$name:
+    db => $db,
+    db_user => $db_user,
+    db_pw => $db_pw, 
+    user => $apache::params::user, 
+    group => $apache::params::group, 
+    dir => $dir,
   }
-  file{"${dir}/config/environment.rb":
-    owner   => 'www-data',
-    group   => 'www-data',
-    require => Class['redmine'],
+  apache::vhost{$name:
+    port    => $port,
+    docroot => "${dir}/${name}/public/",
+    webdir  => "${dir}/${name}/",
+  }
+  file{"${dir}/${name}/config/environment.rb":
+    owner   => $apache::params::user,
+    group   => $apache::params::group,
   }
 }

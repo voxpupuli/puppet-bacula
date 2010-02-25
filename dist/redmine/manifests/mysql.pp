@@ -6,34 +6,33 @@
 #   db_user
 #   db_pw
 #
-define redmine::mysql ($db_user, $db_pw, $db, $db_charset = 'utf8', $db_socket) {
+define redmine::mysql ($db_user, $db_pw, $db_charset = 'utf8', $dir) {
   require mysql::server
   require mysql::ruby
-  database{$db:
-    ensure   => present,
-    charset  => 'utf8',
+  include mysql::params
+  database{$name:
+    ensure => present,
+    charset => $db_charset,
     provider => 'mysql',
-    require  => Class['mysql::server'],
+    require => Class['mysql::server'],
   }
   database_user{"${db_user}@localhost":
-    ensure        => present,
+    ensure => present,
     password_hash => mysql_password($db_pw),
-    require       => [Database[$db],Class['mysql::server']],
-    provider      => 'mysql',
+    require => Database[$name],
+    provider => 'mysql',
   }
-  database_grant{"${db}@localhost/${db}":
+  database_grant{"${db_user}@localhost/${name}":
 #    privileges => [ 'alter_priv', 'insert_priv', 'select_priv', 'update_priv' ],
-    provider   => 'mysql',
+    provider => 'mysql',
     privileges => all,
-    require  => Class['mysql::server'],
+    require => Database_user["${db_user}@localhost"],
   }
-  rails::db_config{$name:
-    adapter  => 'mysql',
+  rails::db_config{"$dir":
+    adapter => 'mysql',
     username => $db_user,
     password => $db_pw,
-    database => $db,
-    socket   => $db_socket,
-    #require  => Vcsrepo[$name],
-    #before   => Exec['session'],
+    database => $name,
+    socket => $mysql::params::socket,
   }
 }

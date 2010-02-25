@@ -26,7 +26,7 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
     fail("redmine::instance declared with duplicate database ${db}")
   }
 
-  redmine::mysql {$db:
+  rails::mysql::db {$db:
     db_user => $db_user,
     db_pw => $db_pw,
     dir => "${dir}/${name}",

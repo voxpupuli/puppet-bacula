@@ -1,4 +1,4 @@
-define redmine::passenger ($db, $db_user, $db_pw, $dir, $port) {
+define redmine::passenger ($db, $db_user, $db_pw, $dir, $port='80') {
   include apache::params
   include ::passenger
   require redmine

@@ -1,4 +1,3 @@
-#
 # Puts a file snippet into a directory previously setup using fragment::concat
 #
 # OPTIONS:
@@ -11,17 +10,32 @@
 #   - mode              Mode for the file
 #   - owner             Owner of the file
 #   - group             Owner of the file
-define fragment( $content='source', $source='content', $order=10, $mode = 0644, $owner = root, $group = root, $target, $path ) {
-  #
-  #  Add function to test for existence of con 
-  #
-  file {"${path}/${target}.snippets/${order}_${name}":
-    mode => $mode,
-    owner => $owner,
-    group => $group,
-    ensure => present,
-    source => $source ? {content => undef, default => $source}, 
-    content => $content ? { source => undef, default => $content}, 
-    notify => Exec["concat_${target}"],
+define fragment(
+  $filename, $content='', $source='', $order=10,
+  $mode = 0644, $owner = root, $group = root
+  ) {
+  # if content is passed, use that, else if source is passed use that
+  case $content {
+    '':      {
+      case $source {
+        '':      { crit('No content or source specified')  }
+        default: { File{ source => $source } }
+      }
+    }
+    default: { File{ content => $content } }
+  }
+
+  $file = regsubst($filename,'/','_', 'G')
+
+  # this should be changed to $vardir when the fact exists.
+  file{"/tmp/${file}.d/snippets/${order}_${name}":
+    mode    => $mode,
+    owner   => $owner,
+    group   => $group,
+    ensure  => present,
+    # this requires that a matching concat be declared in the same scope
+    require => File["/tmp/${file}.d/snippets"],
+    alias   => "concat_snippet_${name}",
+    notify  => Exec["concat_${file}"]
   }
 }

@@ -1,0 +1,6 @@
+[local-arch]
+name=Local Base repo arch
+baseurl=http://yum.reductivelabs.net/yum/$releasever/base/$basearch/
+enabled=1
+gpgcheck=0
+keepalive=1

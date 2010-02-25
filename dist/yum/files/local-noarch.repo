@@ -1,0 +1,6 @@
+[local-noarch]
+name=Local - Base repo noarch
+baseurl=http://yum.reductivelabs.net/yum/$releasever/base/noarch/
+enabled=1
+gpgcheck=0
+keepalive=1

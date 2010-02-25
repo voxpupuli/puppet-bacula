@@ -1,0 +1,18 @@
+This module will hold types and providers related to managing node provisioning.
+
+The basic idea is as follows:
+
+  - node 
+    - node type
+      - name (is this hostname)
+      - do we have any control over MAC/ipaddres?
+      - memory - amount of memory provisioned
+      - disksize
+      - ncpus - number of CPUS
+      - owner - machines have owners
+      - group - information that determines how machine should be parameterized.
+      - role - list of classes that define a machines role.
+    - linode provider
+    - EC2 provider
+    - rackspace cloud provider
+  - manifests - it doesnt make sense to have any manifests. The providers may need manifests to initialize connections of something (install required APIs and whatnot)

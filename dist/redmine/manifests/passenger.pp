@@ -18,5 +18,6 @@ define redmine::passenger ($db, $db_user, $db_pw, $dir, $port='80') {
   file{"${dir}/${name}/config/environment.rb":
     owner   => $apache::params::user,
     group   => $apache::params::group,
+    require => Redmine::Instance[$name],
   }
 }

@@ -1,9 +1,11 @@
 # Concatanates file snippets into one file. 
 # NOTE: the purge feauture will not work on .24.8 or earlier
 # OPTIONS:
-#  - mode		The mode of the final file
-#  - owner		owner of final file
-#  - group		group for final file
+#  - name       The name of the file we are creating
+#  - mode		    The mode of the final file
+#  - owner		  owner of final file
+#  - group		  group for final file
+#  - directory  directory prefix for snippet and target 
 #
 # ACTIONS:
 #  - Creates directory and directory/snippets if it didn't exist already
@@ -19,60 +21,24 @@
 # ALIASES:
 #  - The exec can notified using Exec["concat_/path/to/file"] or Exec["concat_/path/to/directory"]
 #  - The final file can be referened as File["/path/to/file"] or File["concat_/path/to/file"]  
-define fragment::concat(
-    $mode = 0644, $owner = "root", $group = "root"
-  ) {
-	
-  $file = regsubst($name,'/','_', 'G')
-  $snipdir = "/tmp/${file}.d"
-
-  File{
-    owner  => $owner,
-    group  => $group,
-    mode   => $mode,
+define fragment::concat ( $path, $mode = 0644, $owner = "root", $group = "root") {
+  $concatscript = '/usr/local/bin/concatsnippets.sh'
+  $target = "${path}/${name}"
+  $fragdir = "${path}/${name}.snippets"
+  File { owner => $owner, group => $group, mode => $mode }
+  file {
+    $path: mode => 755, ensure => directory;  
+    $concatscript: mode => 755, source => 'puppet:///modules/fragment/concatsnippets.sh';
+    "${fragdir}": ensure => directory, recurse => true, purge => true, force => true, ignore => ['.svn', '.git'], notify => Exec["concat_${name}"];
+    "${fragdir}/snippets.concat": ensure => present;
+    $target: ensure => present; 
   }
-
-  file{$snipdir:
-    ensure  => directory,
-#    notify  => Exec["concat_${name}"],
-  }
-
-  file{"${snipdir}/snippets":
-    ensure   => directory,
-    recurse  => true,
-    # purge any fragments not explicity managed by puppet
-    purge    => true,
-    force    => true,
-    ignore   => ['.svn', '.git'],
-    # notify the exec in case we have to purge
-    notify   => Exec["concat_${file}"],
-  }
-
-  file{"${snipdir}/snippets.concat":
-    ensure  => present,
-  }
-
-  file{'/usr/local/bin/concatsnippets.sh':
-    mode   => 755,
-    source => 'puppet:///modules/fragment/concatsnippets.sh',
-  }
-
-  exec{"concat_${file}":
-    user      => $owner,
-    group     => $group,
-    notify    => File[$name],
-    alias     => "concat_${snipdir}",
-    require   => [ 
-      File["/usr/local/bin/concatsnippets.sh"], 
-      File["${snipdir}/snippets"], 
-      File["${snipdir}/snippets.concat"] 
-    ],
-    unless  => "/usr/local/bin/concatsnippets.sh -o ${name} -d ${snipdir} -t",
-    command => "/usr/local/bin/concatsnippets.sh -o ${name} -d ${snipdir}",
-  }
-
-  file{$name:
-    ensure   => present,
-    alias    => "concat_${file}",
+  exec{"concat_${name}":
+    user => $owner,
+    group => $group,
+    notify => File [$target],
+    require => File [ $concatscript, $path, $fragdir ], 
+    unless  => "${concatscript} -o ${name} -p ${path} -t",
+    command => "${concatscript} -o ${name} -p ${path}",
   }
 }

@@ -20,11 +20,7 @@ class ssh::server {
     notify => Service['sshd'],
   }
   service{"sshd":
-    name       => $operatingsystem? {
-      'ubuntu' => 'ssh',
-      'debian' => 'ssh',
-      'default' => 'sshd', 
-    }, 
+    name => ssh,
     ensure => running,
     enable => true,
     hasstatus => true,

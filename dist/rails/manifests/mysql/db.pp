@@ -1,6 +1,5 @@
 define rails::mysql::db($db_user, $db_pw, $db_charset = 'utf8', $dir, $host = 'localhost', $grant='all') {
   require mysql::ruby
-  include mysql::myparams
   mysql::db{$name:
     db_user => $db_user,
     db_pw => $db_pw,

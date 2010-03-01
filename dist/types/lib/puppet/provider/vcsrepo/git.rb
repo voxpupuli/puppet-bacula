@@ -15,7 +15,7 @@ Puppet::Type.type(:vcsrepo).provide(:git) do
     else 
       Dir.chdir(@resource.value(:path)) do
         git('clone', @resource.value(:source).to_s)
-        git('reset', '--hard', value) if 
+        git('reset', '--hard', value) 
       end
     end
   end

@@ -29,7 +29,6 @@ def setpasswd(user)
       system "stty echo"
     end
     #@passinfo = { 'password' => "#{OpenSSL::Digest::SHA512.new(password)}" }
-    puts password
     crypt = %x{mkpasswd -m SHA-512 #{password}}.strip 
     puts crypt
     @passinfo = { 'password' =>  "#{crypt}" }

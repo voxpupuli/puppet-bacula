@@ -1,10 +1,7 @@
+#
 # this module requires access to the gitrepo
 # or url can be set to some inernal location
 # redmine server
-#
-#
-# I think I need to change this to download the latest version from git
-#
 #
 
 define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
@@ -16,8 +13,6 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
     source => $source,
     revision => $version, 
     require => File[$dir],
-    #before => Redmine::mysql[$db],
-#    provider => 'git',
   }
   #
   # this should probably be a file fragment for managing multi environments
@@ -44,7 +39,6 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
     require => Class['rails'],
     creates => "${dir}/${name}/config/initializers/session_store.rb"
   }
-
   exec{"${name}-migrate":
     command => '/usr/bin/rake db:migrate',
     cwd => "${dir}/${name}",

@@ -1,11 +1,11 @@
 class puppetlabs::projects {
   include puppetlabs
-  #$mysql_old_pw='redmine'
-  $mysql_root_pw='password'
-  $redmine_db='redmine'
-  $redmine_db_user='redmine'
-  $redmine_db_pw='redmine'
-  $redmine_db_socket='/var/run/mysqld/mysqld.sock'
-  $rails_version='2.1.2'
-  include redmine::passenger
+  redmine::instance {'projects.puppetlabs.com':
+    db => 'projects.puppetlabs.com',
+    db_user => 'redmine',
+    db_pw => 'c@11-m3-m1st3r-p1t4ul',
+    user => 'redmine',
+    group => 'redmine',
+    dir => '/var/www'
+  }
 }

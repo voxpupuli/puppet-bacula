@@ -1,7 +1,6 @@
 define redmine::passenger ($db, $db_user, $db_pw, $dir, $port='80') {
   include apache::params
   include ::passenger
-  require redmine
   redmine::instance{$name:
     db => $db,
     db_user => $db_user,

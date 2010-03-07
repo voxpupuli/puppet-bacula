@@ -5,19 +5,19 @@
 #
 
 define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
-  include redmine  
+  require redmine  
   $version = $redmine::params::version
   $source = $redmine::params::source
   #
   #commenting it out until vcsrepo is fixed.
   # download the module from git 
   #notice ("${dir}/${name}")
-  #vcsrepo{"${dir}/${name}":
-  #  source => $source,
-  #  revision => $version, 
-  #  require => File[$dir],
+  vcsrepo{"${dir}/${name}":
+    source => $source,
+    revision => $version, 
+    require => File[$dir],
   #  path => $dir,
-  #}
+  }
   #
   # this should probably be a file fragment for managing multi environments
   #

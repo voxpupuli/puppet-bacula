@@ -27,7 +27,7 @@ Puppet::Type.type(:database).provide(:mysql) do
 
 
   def charset
-    mysql('-NBe', "create database #{resource[:name]}").match(/.*?(\S+)\s\*\//)[1]
+    mysql('-NBe', "show create database #{resource[:name]}").match(/.*?(\S+)\s\*\//)[1]
   end
 
   def charset=(value)

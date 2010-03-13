@@ -29,10 +29,9 @@ define mysql::db (
     require => Database_user["${db_user}@${host}"],
   }
   if($sql) {
-    exec{'import':
-      command => "mysqlimport -u ${user} -p${db_pw} -h ${host} ${name} ${mysql}":
+    exec{"${name}-import-import":
+      command => "/usr/bin/mysql -u ${db_user} -p${db_pw} -h ${host} ${name} < ${sql}",
       logoutput => true,
-      path => '/usr/bin',
       require => Database_grant["${db_user}@${host}/${name}"],
     }
   }

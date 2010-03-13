@@ -33,10 +33,12 @@ $mysql_root_pw='password'
 
   file{"${app_dir}/wp-config.php":
     content => template('wordpress/wp-config.php.erb'),
+    require => Exec['unzip-puppetlabs'],
   }
   apache::vhost{'puppet-ubuntu2':
     port    => 80,
     docroot => $app_dir,
     webdir  => $app_dir,
+    require => File["${app_dir}/wp-config.php"],
   }
  

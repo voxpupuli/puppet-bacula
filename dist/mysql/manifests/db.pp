@@ -4,7 +4,11 @@
 #   db_user
 #   db_pw
 #
-define mysql::db ($db_user, $db_pw, $db_charset = 'utf8', $host = 'localhost', $grant='all') {
+define mysql::db (
+  $db_user, $db_pw, $db_charset = 'utf8', 
+  $host = 'localhost', $grant='all',
+  $sql=''
+) {
   require mysql::server
   database{$name:
     ensure => present,
@@ -23,5 +27,13 @@ define mysql::db ($db_user, $db_pw, $db_charset = 'utf8', $host = 'localhost', $
     privileges => $grant,
     provider => 'mysql',
     require => Database_user["${db_user}@${host}"],
+  }
+  if($sql) {
+    exec{'import':
+      command => "mysqlimport -u ${user} -p${db_pw} -h ${host} ${name} ${mysql}":
+      logoutput => true,
+      path => '/usr/bin',
+      require => Database_grant["${db_user}@${host}/${name}"],
+    }
   }
 }

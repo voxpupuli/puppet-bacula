@@ -1,10 +1,12 @@
 class passenger {
+  include passenger::params
   include ruby::dev
   include gcc
   include apache::dev
+  $version=$passenger::params::version
   package{'passenger':
     name   => 'passenger',
-    ensure => installed,
+    ensure => $version,
     provider => 'gem',
   }
   exec{'compile-passenger':
@@ -12,6 +14,6 @@ class passenger {
     command => 'passenger-install-apache2-module -a',
     logoutput => true,
     # this creates path doesnt seem very general
-    creates => '/usr/lib/ruby/gems/1.8/gems/passenger-2.2.11/ext/apache2/mod_passenger.so',
+    creates => "/usr/lib/ruby/gems/1.8/gems/passenger-${version}/ext/apache2/mod_passenger.so",
   }
 }

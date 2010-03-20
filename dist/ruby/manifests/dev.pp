@@ -13,8 +13,8 @@
 #
 class ruby::dev {
   require ruby
-  
-  package {[$ruby_rdoc, $ruby_irb, $ruby_rake, $ruby_dev]:
+
+  package { $ruby_dev:
     ensure => installed,
   }
 }

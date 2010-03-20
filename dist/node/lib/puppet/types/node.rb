@@ -38,4 +38,4 @@ Puppet::Type.newtype(:node) do
   newproperty(:memory) do
     desc "Total amount of memory for machine"
   end
-
+end

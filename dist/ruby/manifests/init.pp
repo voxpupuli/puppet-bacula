@@ -15,6 +15,11 @@
 class ruby {
   include ruby::params
 
-  package{'ruby': ensure => installed,}
-  package{'rubygems': ensure => installed, require => Package['ruby'],}
+  package{'ruby': 
+     ensure => installed,
+  }
+  package{'rubygems': 
+     ensure => installed, 
+     require => Package['ruby'],
+  }
 }

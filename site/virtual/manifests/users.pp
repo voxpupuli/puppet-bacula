@@ -5,8 +5,13 @@ class virtual::users {
     group => sysadmin,
     tag => sysadmin,
  }
- @account::user {'bruce':
-    comment => 'Bruce, Williams',
+ @account::user {'james':
+    comment => 'James Turnbull',
+    group => sysadmin,
+    tag => sysadmin,
+ }
+ @account::user {'dan':
+    comment => 'Dan Bode',
     group => sysadmin,
     tag => sysadmin,
  }

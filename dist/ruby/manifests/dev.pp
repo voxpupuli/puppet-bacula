@@ -13,8 +13,9 @@
 #
 class ruby::dev {
   require ruby
+  include ruby::params
 
-  package { $ruby_dev:
+  package { $ruby::params::ruby_dev:
     ensure => installed,
   }
 }

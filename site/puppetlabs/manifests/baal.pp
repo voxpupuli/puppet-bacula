@@ -13,4 +13,5 @@
 class puppetlabs::baal {
   include puppetlabs
   include puppet::server
+  include aptrepo
 }

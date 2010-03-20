@@ -42,7 +42,7 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
     comment => $comment,
     home => $homedir,
     managehome => true,   
-    password => setpass($name),
+    #password => setpass($name),
     shell => $shell,
   }
   File { owner => $name, group => $groupname}

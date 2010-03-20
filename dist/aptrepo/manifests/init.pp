@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 class aptrepo {
-  require apache
+  include apache
 
   package { "dpkg-dev":
     ensure => present,
@@ -21,14 +21,14 @@ class aptrepo {
     ensure => directory,
   }
 
-  file { [ "/opt/respository/binary", "/opt/repository/source" ]:
+  file { [ "/opt/repository/binary", "/opt/repository/source" ]:
     ensure => directory,
     require => File["/opt/repository"],
   }
 
-  apache::vhost { "apt-repository": 
+  apache::vhost { "repository.reductivelabs.com": 
     port => "80",
-    docroot => "/opt/respository",
+    docroot => "/opt/repository",
     webdir => "/opt/repository",
   }
 }

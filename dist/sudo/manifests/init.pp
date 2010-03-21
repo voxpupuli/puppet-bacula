@@ -4,7 +4,7 @@ class sudo {
   file{"/etc/sudoers": 
     owner => "root", 
     group => "root", 
-    mode => "400",
+    mode => "440",
     source => ["puppet:///modules/site-files/sudoers", "puppet:///modules/sudo/sudoers" ]
   }
 }

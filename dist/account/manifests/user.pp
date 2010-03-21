@@ -32,6 +32,8 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
   } else {
     $homedir = "/home/${name}" 
   }  
+  $pass = setpass($name)
+  notice("${user} password is ${pass}")
   #
   # Add finally the create the user.
   #
@@ -41,8 +43,11 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
     ensure => $ensure,
     comment => $comment,
     home => $homedir,
-    managehome => true,   
-    password => setpass($name),
+    managehome => true,
+    password => setpass($name) ? {
+      '' => undef,
+      default => setpass($name),
+    },
     shell => $shell,
   }
   File { owner => $name, group => $groupname}

@@ -6,7 +6,7 @@ module Puppet::Parser::Functions
       if FileTest.exist?(passfile) && data = YAML.load_file(passfile)
         data['password']   
       else
-        return nil
+        return ''
       end
   end
 end

@@ -9,14 +9,8 @@ class apache::ssl {
         }
      }
      "ubuntu": {
-        exec { "a2enmod ssl": 
-           path => "/usr/bin:/usr/sbin:/bin",
-           creates => "/etc/apache2/mods-enabled/ssl.load",
-        }
-        exec { "a2enmod headers":
-           path => "/usr/bin:/usr/sbin:/bin",
-           creates => "/etc/apache2/mods-enabled/headers.load",
-        }
+        a2mod { "ssl": ensure => present, }
+        a2mod { "headers": ensure => present, }
      }
   }
 }

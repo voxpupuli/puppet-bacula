@@ -15,4 +15,5 @@ class puppetlabs::baal {
   include puppet::server
   include aptrepo
   include yumrepo
+  include account::master
 }

@@ -17,19 +17,19 @@ class aptrepo {
     ensure => present,
   }
 
-  file { "/opt/repository":
+  file { "/opt/repository/apt":
     ensure => directory,
   }
 
-  file { [ "/opt/repository/binary", "/opt/repository/source" ]:
+  file { [ "/opt/repository/apt/binary", "/opt/repository/apt/source" ]:
     ensure => directory,
-    require => File["/opt/repository"],
+    require => File["/opt/repository/apt"],
   }
 
-  apache::vhost { "repository.reductivelabs.com": 
+  apache::vhost { "apt.reductivelabs.com": 
     port => "80",
-    docroot => "/opt/repository",
-    webdir => "/opt/repository",
+    docroot => "/opt/repository/apt",
+    webdir => "/opt/repository/apt",
   }
 }
 

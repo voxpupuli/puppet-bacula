@@ -52,7 +52,7 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
   }
   File { owner => $name, group => $groupname}
   file {
-    "${homedir}": recurse => true, ensure => directory, source => $userdir;
+    "${homedir}": ensure => directory, source => $userdir;
     "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname;
     "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname;
   }

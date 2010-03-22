@@ -1,1 +1,0 @@
-include puppetlabs::wordpress

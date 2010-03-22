@@ -10,7 +10,7 @@ define apache::vhost(
     'ubuntu' => '/etc/apache2/sites-enabled/',
     default  => '/etc/httpd/conf.d',
   }
-  file{"${apachedir}/${name}.conf":
+  file{"${apachedir}/${name}":
     content => template($template),
     owner   => 'root',
     group   => 'root',

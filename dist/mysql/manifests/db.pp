@@ -10,7 +10,6 @@ define mysql::db ( $db_user, $db_pw, $db_charset = 'utf8', $host = 'localhost', 
   # make this cleaner along with external node tools.
   #
   if defined(Class['mysql::server']) {
-    notice($mysql_server_class)
     $mysql_server_class = Class['mysql::server'] 
   } else {
     $mysql_server_class = undef

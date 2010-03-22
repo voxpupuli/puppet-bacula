@@ -15,11 +15,7 @@ Puppet::Type.type(:a2mod).provide(:a2mod) do
     end
  
     def exists?
-        output = encmd, resource[:name]
-        if output =~ /already enabled/
-            return :true
-        else
-            return :false
-        end
+        mod= "/etc/apache2/mods-enabled/" + resource[:name] + ".load" 
+        File.exists?(mod)
     end
 end

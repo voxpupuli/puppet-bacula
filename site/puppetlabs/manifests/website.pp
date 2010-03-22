@@ -1,4 +1,5 @@
 class puppetlabs::website {
+  include puppetlabs
   $mysql_root_pw = 'afmesackjebhee'
   include mysql::server
   wordpress::instance {'puppetlabs.com':

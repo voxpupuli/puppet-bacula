@@ -1,0 +1,32 @@
+# $Id$
+#
+# DO NOT MODIFY!!!!
+# AUTO GENERATED FILE. ANY CHANGES TO THIS FILE WILL BE OVERWRITTEN
+#
+#
+
+Director {
+  Name = <%= bacula_director %>-dir
+  Password = "<%= baculapassword %>"
+}
+
+Director {
+  Name = <%= bacula_director %>-mon
+  Password = "<%= baculapassword %>"
+  Monitor = yes
+}
+
+FileDaemon {
+  Name = <%= hostname  %>-fd
+  FDAddress = <%= ipaddress_eth1 %>
+  FDport = 9102
+  WorkingDirectory = /var/lib/bacula
+  Pid Directory = /var/run
+  Maximum Concurrent Jobs = 20
+}
+
+Messages {
+  Name = Standard
+  director = <%= bacula_director %>-dir = all, !skipped, !restored
+}
+

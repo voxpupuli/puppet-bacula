@@ -6,17 +6,30 @@
 #
 #
 # Actions:
-#   Installs the bacula-director-common package
+#  - Installs the bacula-director packages
+#  - Installs the bacula storage daemon packages
+#  - Starts the Bacula services
+#  - Creates the /bacula mount point 
 #
 # Requires:
-#   - On CentOS the epel module
 #
 # Sample Usage:
 #
 class bacula::director {
+  require mysql::server
   require bacula
 
-  package { [ "bacula-director-common", "bacula-console" ]: 
+  package { $bacula::params::bacula_director_packages:
     ensure => present,
   }
 
+  service { $bacula::params::bacula_director_services:
+    ensure => running,
+    enable => true,
+    require => Package[$bacula::params::bacula_director_packages],
+  }
+
+  file { "/bacula":
+    ensure => directory,
+  }
+}

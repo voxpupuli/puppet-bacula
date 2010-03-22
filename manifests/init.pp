@@ -14,7 +14,6 @@
 # Sample Usage:
 #
 class bacula {
-  require yum::epel
 
   include bacula::params
 

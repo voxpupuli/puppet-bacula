@@ -1,0 +1,29 @@
+NameVirtualHost 74.207.250.144:80
+<VirtualHost 74.207.250.144:80>
+    servername puppetlabs.com
+    serveralias www.puppetlabs.com
+    ServerAdmin webmaster@puppetlabs.com
+    DocumentRoot /var/www/puppetlabs.com
+    UseCanonicalName On
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride ALL
+        AuthType Digest
+        AuthName "puppetlabs"
+        AuthDigestProvider file
+        AuthUserFile /etc/apache2/digest
+        Require valid-user
+    </Directory>
+    <Directory /var/www/puppetlabs.com>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        HeaderName IndexHeader.html
+        allow from all
+    </Directory>
+    ErrorLog /var/log/apache2/puppetlabs.com-error.log
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel debug
+    CustomLog /var/log/apache2/puppetlabs.com.access.log combined
+</VirtualHost>

@@ -26,7 +26,7 @@ class aptrepo {
     require => File["/opt/repository/apt"],
   }
 
-  apache::vhost { "apt.reductivelabs.com": 
+  apache::vhost { "apt.puppetlabs.com": 
     port => "80",
     docroot => "/opt/repository/apt",
     webdir => "/opt/repository/apt",

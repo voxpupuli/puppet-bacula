@@ -9,13 +9,12 @@
 #   - Install flapjack
 #
 # Requires:
-#   - EPEL
 #
 # Sample Usage:
 #
 class flapjack {
-  require yum::epel
   require ruby::dev
+  include flapjack::params
 
   package { "beanstalkd":
     ensure   => installed,
@@ -24,6 +23,11 @@ class flapjack {
   package { "flapjack":
     ensure   => installed,
     provider => gem,
+  }
+
+  service { [ "flapjack-notifier", "flapjack-workers" ]:
+    ensure => running,
+    enable => true,
   }
 }
 

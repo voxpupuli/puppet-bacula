@@ -22,7 +22,7 @@ class yumrepo {
     require => File["/opt/repository/apt"],
   }
 
-  apache::vhost { "yum.reductivelabs.com": 
+  apache::vhost { "yum.puppetlabs.com": 
     port => "80",
     docroot => "/opt/repository/yum",
     webdir => "/opt/repository/yum",

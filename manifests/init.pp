@@ -16,7 +16,7 @@ class apache {
   # A2mod resource type is broken.  Look into fixing it and moving it into apache.
   #
   A2mod { require => Package['httpd'], notify => Service['httpd']}
-  @a2mod { 'mod_rewrite' : ensure => present }
+  @a2mod { 'rewrite' : ensure => present }
   $vdir = $operatingsystem? {
     'ubuntu' => '/etc/apache2/sites-enabled/',
     default => '/etc/httpd/conf.d',

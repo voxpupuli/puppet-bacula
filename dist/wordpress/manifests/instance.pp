@@ -1,7 +1,7 @@
 #
 # installs an instance of wordpress
 #
-define wordpress::instance( $auth_key, $secure_auth_key, $logged_in_key, $nonce_key, $dir='/var/www/', $port='80', $db_pw, $template) {
+define wordpress::instance( $auth_key, $secure_auth_key, $logged_in_key, $nonce_key, $dir='/var/www/', $port='80', $db_pw, $template, $priority = '00') {
   include wordpress
   $dbname = regsubst($name, '\.', '', 'G')
   $vhost_dir = "${dir}/${name}"
@@ -15,8 +15,8 @@ define wordpress::instance( $auth_key, $secure_auth_key, $logged_in_key, $nonce_
   apache::vhost{$name:
     port    => $port,
     docroot => $vhost_dir,
-    webdir  => $vhost_dir,
     template => $template,
+    priority => $priority,
   }
   #
   # Develop a wordpress versioning/staging strategy.

@@ -11,7 +11,6 @@
 # Sample Usage:
 #
 class bacula::params {
-  $bacula_director = "baal.puppetlabs.com"
   
   case $operatingsystem {
      "ubuntu": {

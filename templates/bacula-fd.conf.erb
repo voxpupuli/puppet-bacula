@@ -7,18 +7,18 @@
 
 Director {
   Name = <%= bacula_director %>-dir
-  Password = "<%= baculapassword %>"
+  Password = "<%= bacula_password %>"
 }
 
 Director {
   Name = <%= bacula_director %>-mon
-  Password = "<%= baculapassword %>"
+  Password = "<%= bacula_password %>"
   Monitor = yes
 }
 
 FileDaemon {
   Name = <%= hostname  %>-fd
-  FDAddress = <%= ipaddress_eth1 %>
+  FDAddress = <%= ipaddress %>
   FDport = 9102
   WorkingDirectory = /var/lib/bacula
   Pid Directory = /var/run

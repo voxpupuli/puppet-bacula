@@ -26,6 +26,7 @@ class bacula::director {
   service { $bacula::params::bacula_director_services:
     ensure => running,
     enable => true,
+    hasrestart => true,
     require => Package[$bacula::params::bacula_director_packages],
   }
 

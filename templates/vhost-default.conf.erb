@@ -1,8 +1,13 @@
 NameVirtualHost *:<%= port %>
 <VirtualHost *:<%= port %>>
   ServerName <%= name %>
+<%if serveraliases.is_a? Array -%>
+<% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+<% elsif serveraliases != '' -%>
+<%= "  ServerAlias #{serveraliases}" -%> 
+<% end -%>
   DocumentRoot <%= docroot %>
-  <Directory <%= webdir %>>        
+  <Directory <%= docroot %>>        
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
     Order allow,deny

@@ -1,8 +1,8 @@
 class puppetlabs::docs {
+  include puppetlabs
   #
   # This is temp so as to not purge the puppetlabs.com vhost.
   #
-  file {'/etc/apache2/sites-enabled/puppetlabs.com': ensure => present }
   $docroot = '/var/www/docs.puppetlabs.com'
   apache::vhost {'docs.puppetlabs.com':
     port => 80,

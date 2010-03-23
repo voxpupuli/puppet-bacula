@@ -12,6 +12,11 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
     AllowOverride None
     Order allow,deny
     allow from all
+    AuthType Digest
+    AuthName "puppetlabs"
+    AuthDigestProvider file
+    AuthUserFile /etc/apache2/digest
+    Require valid-user
   </Directory>
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn

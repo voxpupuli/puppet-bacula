@@ -57,26 +57,11 @@ class mysql::server {
     notify    => Service['mysqld-restart'],
   } 
 
-  file{'/etc/my.cnf':
-    ensure => file,
-    notify    => Service['mysqld-restart'],
-  }
- 
-  file{'/root/.my.cnf':
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0400',
+  file{['/root/.my.cnf', '/etc/mycnf']:
+    owner => 'root',
+    group => 'root',
+    mode  => '0400',
     content => template('mysql/my.cnf.erb'),
-    notify    => Service['mysqld-restart'],
+    notify => Service['mysqld-restart'],
   }
-
-  # install monitoring username if nrpe or snmp is enabled
-  # does this actually work
-#  include mysql::server::mysqltuner
-#  if tagged(nrpe) {
-#    include mysql::server::monitor
-#  }
-#  if tagged(cacti) {
-#    include mysql::server::monitor
-#  }
 }

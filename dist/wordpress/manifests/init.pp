@@ -1,5 +1,5 @@
 class wordpress {
   include php::mysql
   include apache::php
-  #blah
+  realize(A2mod['rewrite'])
 }

@@ -1,21 +1,15 @@
-define apache::vhost(
-    $port, 
-    $docroot,
-    $webdir,
-    $ssl=true, 
-    $template='apache/vhost-default.conf.erb'
-  ) {
+define apache::vhost( $port, $docroot, $ssl=true, $template='apache/vhost-default.conf.erb', $priority, $serveraliases = '' ) {
   include apache
-  $apachedir = $operatingsystem? {
+  $vdir = $operatingsystem? {
     'ubuntu' => '/etc/apache2/sites-enabled/',
-    default  => '/etc/httpd/conf.d',
+    default => '/etc/httpd/conf.d',
   }
-  file{"${apachedir}/${name}.conf":
+  file{"${vdir}/${priority}-${name}":
     content => template($template),
-    owner   => 'root',
-    group   => 'root',
-    mode    => '777',
+    owner => 'root',
+    group => 'root',
+    mode => '777',
     require => Package['httpd'],
-    notify  => Service['httpd'],
+    notify => Service['httpd'],
   }
 }

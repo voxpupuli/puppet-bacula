@@ -23,9 +23,9 @@ class yumrepo {
   }
 
   apache::vhost { "yum.puppetlabs.com": 
+    priority => '20',
     port => "80",
     docroot => "/opt/repository/yum",
-    webdir => "/opt/repository/yum",
   }
 }
 

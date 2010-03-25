@@ -1,19 +1,21 @@
-# Copyright 2009 Larry Ludwig (larrylud@gmail.com)
+# Class: nagios::server
 #
-# Licensed under the Apache License, Version 2.0 (the "License"); you 
-# may not use this file except in compliance with the License. You 
-# may obtain a copy of the License at 
+# This class installs and configures the Nagios server
 #
-# http://www.apache.org/licenses/LICENSE-2.0
-# Unless required by applicable law or agreed to in writing, 
-# software distributed under the License is distributed on an "AS IS"
-# BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
-# or implied. See the License for the specific language governing 
-# permissions and limitations under the License. 
+# Parameters:
 #
-# installs nagios::server
-class nagios::server inherits nagios{
-  include apache::ssl, mailx, yum
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+class nagios::server {
+  include nagios
+  include nagios::params
+  include apache::ssl 
+  include mailx
+  
   File{
     checksum   => md5,
     ensure     => present,
@@ -26,7 +28,7 @@ class nagios::server inherits nagios{
   }
   # install commands.cfg
   file { "/etc/nagios/commands.cfg":
-  source => "puppet:///nagios/commands.cfg",
+    source => "puppet:///nagios/commands.cfg",
   }
 	# install event_handlers.cfg
   file { "/etc/nagios/event_handlers.cfg":
@@ -42,7 +44,7 @@ class nagios::server inherits nagios{
   }
   package { "nagios":
     notify  => Service["nagios"],
-    require => [ Class["yum"], Class["apache::ssl"], Class["mailx"] ],
+    require => [ Class["apache::ssl"], Class["mailx"] ],
   }
   # allow for NRPE communciation
   package { "nagios-plugins-nrpe":

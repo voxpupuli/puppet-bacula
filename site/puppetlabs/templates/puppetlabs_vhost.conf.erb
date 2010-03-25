@@ -1,29 +1,52 @@
 NameVirtualHost 74.207.250.144:80
 <VirtualHost 74.207.250.144:80>
-    servername puppetlabs.com
-    serveralias www.puppetlabs.com
-    ServerAdmin webmaster@puppetlabs.com
-    DocumentRoot /var/www/puppetlabs.com
-    UseCanonicalName On
-    <Directory />
-        Options FollowSymLinks
-        AllowOverride ALL
-        AuthType Digest
-        AuthName "puppetlabs"
-        AuthDigestProvider file
-        AuthUserFile /etc/apache2/digest
-        Require valid-user
-    </Directory>
-    <Directory /var/www/puppetlabs.com>
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride All
-        Order allow,deny
-        HeaderName IndexHeader.html
-        allow from all
-    </Directory>
-    ErrorLog /var/log/apache2/puppetlabs.com-error.log
-    # Possible values include: debug, info, notice, warn, error, crit,
-    # alert, emerg.
-    LogLevel debug
-    CustomLog /var/log/apache2/puppetlabs.com.access.log combined
+  servername www.puppetlabs.com
+  serveralias puppetlabs.com
+  ServerAdmin webmaster@puppetlabs.com
+  DocumentRoot /var/www/puppetlabs.com
+  UseCanonicalName On
+  <Directory />
+   Options FollowSymLinks
+    AllowOverride ALL
+    AuthType Digest
+  </Directory>
+  <Directory /var/www/puppetlabs.com>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Order allow,deny
+    HeaderName IndexHeader.html
+    allow from all
+  </Directory>
+  ErrorLog /var/log/apache2/puppetlabs.com-error.log
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  LogLevel debug
+  CustomLog /var/log/apache2/puppetlabs.com.access.log combined
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^reductivelabs\.com$
+  RewriteRule ^(.*)$ http://www.puppetlabs.com%{REQUEST_URI} [R=permanent,L]
+  Redirect permanent /category/news http://puppetlabs.com/category/blog/general-news/
+  Redirect permanent /category/puppet http://puppetlabs.com/category/blog
+  RedirectMatch permanent ^/download(.*)$ http://puppetlabs.com/resources/downloads
+  RedirectMatch permanent ^/download(.*)$ http://puppetlabs.com/resources/downloads
+  RedirectMatch permanent ^/category/downloads$ http://puppetlabs.com/resources/downloads
+  Redirect permanent /home/about/puppet-mailing-list http://puppetlabs.com/company/#contact
+  Redirect permanent /home/about http://puppetlabs.com/company
+  Redirect permanent /home/irc http://www.puppetlabs.com/blog 
+  Redirect permanent /jobs http://www.puppetlabs.com/company 
+  RedirectMatch permanent ^/podcast(.*)$ http://puppetlabs.com/blog
+  Redirect permanent /products/feed http://www.puppetlabs.com/blog
+  Redirect permanent /products/home/users http://www.puppetlabs.com/blog
+  Redirect permanent /products/home http://www.puppetlabs.com
+  Redirect permanent /products http://www.puppetlabs.com/puppet
+  Redirect permanent /services/feed http://www.puppetlabs.com/blog
+  Redirect permanent /services/subscription-support http://www.puppetlabs.com/services/support
+  Redirect permanent /tag/puppet http://www.puppetlabs.com/blog
+  Redirect permanent /training/feed http://www.puppetlabs.com/category/events
+  RedirectMatch permanent ^/training/(.*)$ http://www.puppetlabs.com/category/events
+  Redirect permanent /training http://www.puppetlabs.com/services/training-workshops
+  Redirect permanent /wp-content/uploads/2010/01 http://puppetlabs.com/files/
+#  http://puppetlabs.com/wp-content/themes/reductive/favicon.ico
+#  http://puppetlabs.com/wp-content/themes/reductive/scripts/mainimage.js
+#  http://puppetlabs.com/puppet.ico
 </VirtualHost>

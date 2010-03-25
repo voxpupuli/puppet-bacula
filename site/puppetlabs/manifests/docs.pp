@@ -1,5 +1,5 @@
 class puppetlabs::docs {
-  include puppetlabs
+  #include puppetlabs
   #
   # This is temp so as to not purge the puppetlabs.com vhost.
   #
@@ -9,7 +9,8 @@ class puppetlabs::docs {
     docroot => $docroot,
     ssl => false,
     priority => 20,
-    template => 'puppetlabs/docs_vhost.erb'
+    template => 'puppetlabs/docs_vhost.erb',
+    serveraliases => 'docs.reductivelabs.com', 
   }    
   #
   # Since this sourced from git we should probably use VCS repo and a variable for the tag to make up date these files.

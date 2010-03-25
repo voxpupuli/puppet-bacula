@@ -1,7 +1,8 @@
 class puppetlabs::website {
-  include puppetlabs
+  #include puppetlabs
   $mysql_root_pw = 'afmesackjebhee'
   include mysql::server
+  include postfix
   wordpress::instance {'puppetlabs.com':
     auth_key => 'PE{TEN%T).U~V6Cl;b_?0mcrvhoUVIP#+0R|e-LB>00:o*((b%[8pve/1Y+H}P(o',
     secure_auth_key => 'PDqD)bN|B22D.hxk@Uvy;nkT0#9QVB8=~J^r3@9f:7gRn9PmNGBth(t2+hLt|=Ne',
@@ -11,4 +12,6 @@ class puppetlabs::website {
     template => 'puppetlabs/puppetlabs_vhost.conf.erb',
   }
   package {'php5-curl': ensure => present, notify => Service[httpd] }
+  realize(a2mod['headers'])
+  realize(a2mod['expires'])
 }

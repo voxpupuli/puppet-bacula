@@ -1,19 +1,23 @@
-# Copyright 2009 Larry Ludwig (larrylud@gmail.com)
+# Class: nagios::server
 #
-# Licensed under the Apache License, Version 2.0 (the "License"); you 
-# may not use this file except in compliance with the License. You 
-# may obtain a copy of the License at 
+# This class installs and configures the Nagios server
 #
-# http://www.apache.org/licenses/LICENSE-2.0
-# Unless required by applicable law or agreed to in writing, 
-# software distributed under the License is distributed on an "AS IS"
-# BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express 
-# or implied. See the License for the specific language governing 
-# permissions and limitations under the License. 
+# Parameters:
 #
-# installs nagios::server
-class nagios::server inherits nagios{
-  include apache::ssl, mailx, yum
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+class nagios::server {
+  include nagios
+  include nagios::params
+  include nagios::command
+
+  include apache::ssl 
+  include mailx
+  
   File{
     checksum   => md5,
     ensure     => present,
@@ -21,44 +25,38 @@ class nagios::server inherits nagios{
     owner      => 'root',
     group      => 'nagios',
     mode       => '0440',
-    require    => Package["nagios"],
+    require    => Package[$nagios::params::nagios_packages],
     notify     => Service["nagios"],
   }
-  # install commands.cfg
-  file { "/etc/nagios/commands.cfg":
-  source => "puppet:///nagios/commands.cfg",
-  }
-	# install event_handlers.cfg
-  file { "/etc/nagios/event_handlers.cfg":
-    source => "puppet:///nagios/event_handlers.cfg",
-  }
-  # install timeperiods.cfg
-  file { "/etc/nagios/timeperiods.cfg":
-    source     => "puppet:///nagios/timeperiods.cfg",
+  file{  [ "/etc/nagios/nagios_command.cfg",
+           "/etc/nagios/nagios_contact.cfg",
+           "/etc/nagios/nagios_contactgroup.cfg",
+           "/etc/nagios/nagios_host.cfg",
+           "/etc/nagios/nagios_hostextinfo.cfg",
+           "/etc/nagios/nagios_hostgroup.cfg",
+           "/etc/nagios/nagios_hostgroupescalation.cfg",
+           "/etc/nagios/nagios_service.cfg",
+           "/etc/nagios/nagios_servicedependency.cfg",
+           "/etc/nagios/nagios_serviceescalation.cfg",
+           "/etc/nagios/nagios_serviceextinfo.cfg",
+           "/etc/nagios/nagios_timeperdiod.cfg" ]:
+        ensure => file,
+        replace => false,
+        notify => Service[nagios],
   }
   # make sure resource.cfg has proper perms
   file { "/etc/nagios/private/resource.cfg":
-		mode       => '0640',
+    mode       => '0640',
   }
-  package { "nagios":
+  package { $nagios::params::nagios_packages:
     notify  => Service["nagios"],
-    require => [ Class["yum"], Class["apache::ssl"], Class["mailx"] ],
+    require => [ Class["apache::ssl"], Class["mailx"] ],
   }
-  # allow for NRPE communciation
-  package { "nagios-plugins-nrpe":
-    require    => [ Package["nagios"], Package["nagios-plugins"] ],
-  }
-	# make sure our nagios.conf is installed 
-  file { "/etc/httpd/conf.d/nagios.conf":
-    source => "puppet:///nagios/nagios.conf",
-    group  => 'root',
-    notify => undef,
-  }
-	# monitor htpasswd.users
+  
   file { "/etc/nagios/htpasswd.users":
     mode       => '0640',
   }
-  # make sure nagios is setup to run
+  
   service { "nagios":
     ensure     => running,
     enable     => true,

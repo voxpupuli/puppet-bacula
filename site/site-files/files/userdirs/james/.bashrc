@@ -36,7 +36,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -90,6 +90,11 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+alias vi=vim
+
+DEBEMAIL=james@lovedthanlost.net
+DEBFULLNAME="James Turnbull"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

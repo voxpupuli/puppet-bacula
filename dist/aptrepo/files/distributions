@@ -1,0 +1,9 @@
+Origin: Puppet Labs
+Label: Puppet Labs
+Codename: lucid
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+#SignWith: yes
+#DebOverride: override.lucid
+#DscOverride: override.lucid

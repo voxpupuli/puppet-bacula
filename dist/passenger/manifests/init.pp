@@ -27,10 +27,10 @@ class passenger {
     provider => 'gem',
   }
   exec{'compile-passenger':
-    path => ['/usr/bin', '/bin'],
+    path => ['/var/lib/gems/1.8/bin/', '/usr/bin', '/bin'],
     command => 'passenger-install-apache2-module -a',
     logoutput => true,
-    creates => "/usr/lib/ruby/gems/1.8/gems/passenger-${version}/ext/apache2/mod_passenger.so",
+    creates => "/usr/lib/ruby/gems/1.8/gems/passenger-2.2.11/ext/apache2/mod_passenger.so",
     require => Package["passenger"],
   }
 }

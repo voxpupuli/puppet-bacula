@@ -13,23 +13,42 @@
 class aptrepo {
   include apache
 
-  package { "dpkg-dev":
+  package { [ 'lintian', 'reprepro', 'fakeroot', 'cdbs', 'devscripts', 'ruby-pkg-tools', 'dpkg-dev', 'debhelper', 'dh-make' ]:
     ensure => present,
   }
 
-  file { "/opt/repository/apt":
+  file { '/opt/repository/apt':
     ensure => directory,
   }
 
-  file { [ "/opt/repository/apt/binary", "/opt/repository/apt/source" ]:
+  file { [ '/opt/repository/apt/ubuntu', '/opt/repository/apt/ubuntu/conf', '/opt/repository/apt/ubuntu/override' ]:
     ensure => directory,
-    require => File["/opt/repository/apt"],
+    require => File['/opt/repository/apt'],
   }
 
-  apache::vhost { "apt.puppetlabs.com": 
-    port => "80",
-    docroot => "/opt/repository/apt",
-    webdir => "/opt/repository/apt",
+  file { '/opt/repository/apt/ubuntu/conf/distributions':
+    ensure => present,
+    source => 'puppet:///modules/aptrepo/distributions',
+    require => File['/opt/repository/apt/ubuntu/conf'],
+  }
+
+  file { '/opt/repository/apt/ubuntu/conf/options':
+    ensure => present,
+    source => 'puppet:///modules/aptrepo/options',
+    require => File['/opt/repository/apt/ubuntu/conf'],
+  }
+
+  file { '/opt/repository/apt/ubuntu/override/override.lucid':
+    ensure => present,
+    source => 'puppet:///modules/aptrepo/override.lucid',
+    require => File['/opt/repository/apt/ubuntu/override'],
+  }
+
+  apache::vhost { 'apt.puppetlabs.com': 
+    priority => '10',
+    port => '80',
+    docroot => '/opt/repository/apt',
+    template => 'aptrepo/apache2.conf.erb'
   }
 }
 

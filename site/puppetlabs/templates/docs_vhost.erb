@@ -1,21 +1,17 @@
-NameVirtualHost <%= ipaddress %>:<%= port %>
-<VirtualHost <%= ipaddress %>:<%= port %>>
-  ServerName <%= name %>
-<%if serveraliases.is_a? Array -%>
-<% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
-<% elsif serveraliases != '' -%>
-<%= "  ServerAlias #{serveraliases}" -%> 
-<% end -%>
-  DocumentRoot <%= docroot %>
-  <Directory <%= docroot %>>        
+NameVirtualHost 74.207.250.144:80
+<VirtualHost 74.207.250.144:80>
+  ServerName docs.puppetlabs.com
+  ServerAlias docs.reductivelabs.com 
+  DocumentRoot /var/www/docs.puppetlabs.com
+  <Directory /var/www/docs.puppetlabs.com>        
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
     Order allow,deny
     allow from all
   </Directory>
-  ErrorLog /var/log/apache2/<%= name %>_error.log
+  ErrorLog /var/log/apache2/docs.puppetlabs.com_error.log
   LogLevel warn
-  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  CustomLog /var/log/apache2/docs.puppetlabs.com_access.log combined
   ServerSignature On
   RewriteCond %{HTTP_HOST} docs\.reductivelabs\.com$
   RewriteRule ^(.*)$ http://docs.puppetlabs.com%{REQUEST_URI} [R=permanent,L]

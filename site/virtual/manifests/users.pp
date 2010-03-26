@@ -15,4 +15,14 @@ class virtual::users {
     group => sysadmin,
     tag => sysadmin,
  }
+ @account::user {'luke':
+    comment => 'Luke Kanies',
+    group => sysadmin,
+    tag => sysadmin,
+ }
+ @account::user {'mpdehaan':
+    comment => 'Michael Dehaan',
+    group => sysadmin,
+    tag => sysadmin,
+ }
 }

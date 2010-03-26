@@ -1,5 +1,5 @@
-class puppetlabs::website {
-  #include puppetlabs
+class puppetlabs::www {
+  include puppetlabs
   $mysql_root_pw = 'afmesackjebhee'
   include mysql::server
   include postfix
@@ -12,6 +12,6 @@ class puppetlabs::website {
     template => 'puppetlabs/puppetlabs_vhost.conf.erb',
   }
   package {'php5-curl': ensure => present, notify => Service[httpd] }
-  realize(a2mod['headers'])
-  realize(a2mod['expires'])
+  realize(A2mod['headers'])
+  realize(A2mod['expires'])
 }

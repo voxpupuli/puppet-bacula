@@ -1,5 +1,5 @@
 class puppetlabs::docs {
-  #include puppetlabs
+  include puppetlabs
   #
   # This is temp so as to not purge the puppetlabs.com vhost.
   #

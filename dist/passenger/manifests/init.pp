@@ -21,16 +21,18 @@ class passenger {
   require gcc
   require apache::dev
   $version=$passenger::params::version
+
   package{'passenger':
     name   => 'passenger',
     ensure => $version,
     provider => 'gem',
   }
+
   exec{'compile-passenger':
-    path => ['/var/lib/gems/1.8/bin/', '/usr/bin', '/bin'],
+    path => [ $passenger::params::gem_binary_path, '/usr/bin', '/bin'],
     command => 'passenger-install-apache2-module -a',
     logoutput => true,
-    creates => "/usr/lib/ruby/gems/1.8/gems/passenger-2.2.11/ext/apache2/mod_passenger.so",
-    require => Package["passenger"],
+    creates => $passenger::params::mod_passenger_location,
+    require => Package['passenger'],
   }
 }

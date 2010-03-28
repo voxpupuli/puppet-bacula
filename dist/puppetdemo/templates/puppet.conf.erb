@@ -1,15 +1,17 @@
 [main]
+    confdir = /etc/puppetdemo
+
     # Where Puppet stores dynamic and growing data.
     # The default value is '/var/puppet'.
-    vardir = /var/lib/puppet
+    vardir = /var/lib/puppetdemo
 
     # The Puppet log directory.
     # The default value is '$vardir/log'.
-    logdir = /var/log/puppet
+    logdir = /var/log/puppetdemo
 
     # Where Puppet PID files are kept.
     # The default value is '$vardir/run'.
-    rundir = /var/run/puppet
+    rundir = /var/run/puppetdemo
 
     # Where SSL certificates are kept.
     # The default value is '$confdir/ssl'.
@@ -28,27 +30,5 @@
     # The default value is '$confdir/localconfig'.
     localconfig = $vardir/localconfig
     server=puppet
-
-[puppetmasterd]
-  <% if classes.include?('puppet::storedconfiguration') %>
-  storeconfigs = true
-  dbadapter = mysql
-  dbuser = puppet
-  dbpassword = <%= puppet_storedconfig_password %> 
-  dbserver = localhost
-  dbsocket = /var/run/mysqld/mysqld.sock
-  <% end %>
-
-<% tags.each do |tag| -%>
-The tag <%= tag %> is part of the current scope
-<% end -%>
-
-<% all_tags.each do |tag| -%>
-The tag <%= tag %> is defined
-<% end -%>
-
-<% classes.each do |klass| -%>
-The class <%= klass %> is defined
-<% end -%>
 
 

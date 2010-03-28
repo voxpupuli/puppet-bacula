@@ -18,7 +18,8 @@ class puppetlabs::dxul {
 
   include puppetlabs
   include puppet
-  include 'puppet-demo'
+  include puppet::server
+  include puppet::storedconfiguration
   include account::master
   include bacula::client
 }

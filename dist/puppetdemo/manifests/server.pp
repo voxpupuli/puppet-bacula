@@ -1,4 +1,4 @@
-# Class: puppet::server
+# Class: puppetdemo::server
 #
 # This class installs and configures a Puppet master
 #
@@ -11,24 +11,24 @@
 # Sample Usage:
 #
 class puppet::server {
-  include puppet
-  include puppet::passenger
+  include puppetdemo
+  include puppetdemo::passenger
 
-  package { $puppet::params::puppetmaster_package:
+  package { $puppetdemo::params::puppetmaster_package:
     ensure => present,
   }
-  file { '/etc/puppet/namespaceauth.conf':
+  file { '/etc/puppetdemo/namespaceauth.conf':
     owner => root,
     group => root,
     mode => 644,
-    source => 'puppet:///modules/puppet/namespaceauth.conf',
+    source => 'puppet:///modules/puppetdemo/namespaceauth.conf',
   }
   
   service {'puppetmaster': 
     ensure => stopped, 
     enable => false, 
     hasstatus => true,
-    require => File['/etc/puppet/puppet.conf'],
+    require => File['/etc/puppetdemo/puppet.conf'],
     before => Service['httpd'] 
   }
 }

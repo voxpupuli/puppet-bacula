@@ -13,7 +13,7 @@
 class aptrepo {
   include apache
 
-  package { [ 'lintian', 'reprepro', 'fakeroot', 'cdbs', 'devscripts', 'ruby-pkg-tools', 'dpkg-dev', 'debhelper', 'dh-make' ]:
+  package { 'reprepro':
     ensure => present,
   }
 

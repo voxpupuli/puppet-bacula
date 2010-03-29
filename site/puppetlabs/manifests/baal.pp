@@ -15,12 +15,15 @@ class puppetlabs::baal {
   $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'
 
+  $puppet_storedconfig_password = 'password'
+  $dashboard_site = 'dashboard.puppetlabs.com'
+
   include puppetlabs
   include puppet::server
+  include puppet::dashboard
   include aptrepo
   include yumrepo
   include account::master
   include bacula::director
   include bacula::client
-  include nagios::server
 }

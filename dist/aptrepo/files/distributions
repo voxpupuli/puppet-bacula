@@ -4,6 +4,6 @@ Codename: lucid
 Architectures: i386 amd64 source
 Components: main
 Description: Puppet Labs APT Repository
-#SignWith: yes
+SignWith: yes
 #DebOverride: override.lucid
 #DscOverride: override.lucid

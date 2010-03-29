@@ -1,3 +1,15 @@
+# Class: puppetlabs
+#
+# This class installs and configures the Puppet Labs base classes
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
 class puppetlabs {
   #
   # This is our base install for all of our servers. 

@@ -18,6 +18,9 @@ define wordpress::instance( $auth_key, $secure_auth_key, $logged_in_key, $nonce_
     template => $template,
     priority => $priority,
   }
+  bacula::mysql { $dbname:
+    require => Mysql::db[$dbname],
+  }
   #
   # Develop a wordpress versioning/staging strategy.
   #

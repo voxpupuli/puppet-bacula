@@ -32,6 +32,10 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
     require => Vcsrepo["${dir}/${name}"],
     before => Exec["${name}-session"],
   }
+  bacula::mysql { $db:
+    require => Mysql::db[$db],
+  }
+ 
   #
   # now, lets fire up this database
   #

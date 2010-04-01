@@ -32,5 +32,10 @@ class bacula::client {
     content => template("bacula/bacula-fd.conf.erb"),
     notify => Service[$bacula::params::bacula_client_services],
   }
-}
 
+  file { "/var/lib/bacula/mysql":
+    ensure => directory,
+    require => Package[$bacula::params::bacula_client_packages],
+  }
+
+}

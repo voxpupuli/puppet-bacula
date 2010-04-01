@@ -33,4 +33,6 @@ class bacula::director {
   file { "/bacula":
     ensure => directory,
   }
+
+  bacula::mysql { 'bacula': }
 }

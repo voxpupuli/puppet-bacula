@@ -1,5 +1,7 @@
 class puppetlabs::www {
   include puppetlabs
+  include nagios
+  include nagios::web
   $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = 'MQI/vywQq5pSlAYaEUJKrmt24Wu8FOIPfT7tFoaOc5X6'
   $mysql_root_pw = 'afmesackjebhee'

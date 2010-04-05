@@ -19,7 +19,7 @@ class nagios::contacts {
     before => Service[$nagios::params::nagios_service],
   }
 
-  nagios_contractgroup { 'admins':
+  nagios_contactgroup { 'admins':
     alias => 'admins',
     members => 'jamtur01',
     ensure => present,

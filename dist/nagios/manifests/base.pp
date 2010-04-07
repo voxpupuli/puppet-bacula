@@ -23,6 +23,15 @@ class nagios::base {
     notify => Service[$nagios::params::nagios_service],
   }
 
+  @@nagios_hostextinfo { $fqdn:
+    ensure => present,
+    icon_image_alt => $operatingsystem,
+    icon_image => "base/$operatingsystem.png",
+    statusmap_image => "base/$operatingsystem.gd2",
+    target => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
+    notify => Service[$nagios::params::nagios_service],
+  }
+
   @@nagios_service { "check_ping_${hostname}":
     use => 'generic-service',
     check_command => 'check_ping!100.0,20%!500.0,60%',

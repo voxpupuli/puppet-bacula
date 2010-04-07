@@ -23,6 +23,7 @@ class nagios::contacts {
     alias => 'admins',
     members => 'jamtur01',
     ensure => present,
+    target => '/etc/nagios3/conf.d/nagios_contactgroup.cfg',
   }
 
   nagios_contact { 'jamtur01':
@@ -34,7 +35,8 @@ class nagios::contacts {
     service_notification_period => '24x7',
     host_notification_period => '24x7',
     service_notification_options => 'w,u,c,r',
-    host_notifications_options => 'd,r',
+    host_notification_options => 'd,r',
+    target => '/etc/nagios3/conf.d/nagios_contact.cfg',
     ensure => present,
   }
 }

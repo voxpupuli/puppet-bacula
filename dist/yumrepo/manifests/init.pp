@@ -13,19 +13,23 @@
 class yumrepo {
   include apache
 
-  file { "/opt/repository/yum":
+  package { 'createrepo':
+    ensure => present,
+  }
+
+  file { '/opt/repository/yum':
     ensure => directory,
   }
 
-  file { [ "/opt/repository/yum/base", "/opt/repository/yum/updates" ]:
+  file { [ '/opt/repository/yum/base', '/opt/repository/yum/updates' ]:
     ensure => directory,
-    require => File["/opt/repository/apt"],
+    require => File['/opt/repository/apt'],
   }
 
-  apache::vhost { "yum.puppetlabs.com": 
+  apache::vhost { 'yum.puppetlabs.com': 
     priority => '20',
-    port => "80",
-    docroot => "/opt/repository/yum",
+    port => '80',
+    docroot => '/opt/repository/yum',
   }
 }
 

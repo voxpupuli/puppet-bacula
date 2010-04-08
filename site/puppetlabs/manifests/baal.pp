@@ -29,12 +29,12 @@ class puppetlabs::baal {
   include yumrepo
 
   # Backup
-  $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'
+  $bacula_director = 'baal.puppetlabs.com'
+  include bacula
   include bacula::director
-  include bacula::client
   
   # Monitoring
   include nagios::server
-  include nagios::web
+  include nagios::webservices
 }

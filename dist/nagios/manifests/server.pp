@@ -11,6 +11,7 @@
 # Sample Usage:
 #
 class nagios::server {
+  include apache
   include nagios
   include nagios::commands
   include nagios::contacts
@@ -22,6 +23,10 @@ class nagios::server {
     before => Service[$nagios::params::nagios_service],
   }
 
+  file { [ '/etc/nagios/apache2.conf', '/etc/apache2/conf.d/nagios3.conf' ]:
+    ensure => absent,
+  }
+
   package { $nagios::params::nagios_packages:
     notify  => Service[$nagios::params::nagios_service],
   }
@@ -31,7 +36,14 @@ class nagios::server {
     enable     => true,
     hasrestart => true,
     hasstatus  => true,
-    
+  }
+
+  apache::vhost { 'nagios.puppetlabs.com':
+    port => '80',
+    priority => '30',
+    docroot => '/usr/share/nagios3/htdocs',
+    template => 'nagios/nagios-apache.conf.erb',
+    require => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 
   }
 
   Nagios_host <<||>>

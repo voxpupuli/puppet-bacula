@@ -1,4 +1,4 @@
-# Class: nagios::web
+# Class: nagios::webservices
 #
 # This class installs and configures the Nagios hosts and services
 #
@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class nagios::web {
+class nagios::webservices {
 
   @@nagios_service { "check_http_${hostname}":
     use => 'generic-service',

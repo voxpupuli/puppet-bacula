@@ -1,0 +1,39 @@
+<VirtualHost *:<%= port %>>
+        ServerName <%= name %>
+        DocumentRoot <%= docroot %>
+
+        ScriptAlias /cgi-bin/nagios3 /usr/lib/cgi-bin/nagios3
+
+        Alias /nagios3/stylesheets /etc/nagios3/stylesheets
+        Alias /nagios3 /usr/share/nagios3/htdocs
+
+        <Directory <%= docroot %>>
+                Options None
+                AllowOverride AuthConfig
+                Order allow,deny
+                allow from all
+        
+                AuthName "Nagios Access"
+                AuthType Basic
+                AuthUserFile /etc/nagios3/htpasswd.users
+                require valid-user
+        </Directory>
+
+        <Directory /usr/lib/cgi-bin/nagios3>
+                Options ExecCGI
+
+                AllowOverride None
+                Order allow,deny
+                Allow from all
+
+                AuthName "Nagios Access"
+                AuthType Basic
+                AuthUserFile /etc/nagios3/htpasswd.users
+                Require valid-user
+        </Directory>
+
+  ErrorLog /var/log/apache2/<%= name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  ServerSignature On
+</VirtualHost>

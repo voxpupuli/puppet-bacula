@@ -14,7 +14,7 @@
 # bacula::mysql { database_name: }
 #
 define bacula::mysql {
-    include bacula::client
+    include bacula
 
     cron { "bacula_mysql_$name":
       command => "mysqldump -p$mysql_root_pw $name > /var/lib/bacula/mysql/$name.sql",

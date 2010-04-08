@@ -25,9 +25,8 @@ class puppetlabs::dxul {
   # Backup
   $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = '9haB2+SxaNXF2C1LFdptETvihkk/zKro2Hxf+cQFEbIQ'
-  include bacula::client
+  include bacula
 
   # Nagios
-  include nagios
-  include nagios::web
+  include nagios::webservices
 }

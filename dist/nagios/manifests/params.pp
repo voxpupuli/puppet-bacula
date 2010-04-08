@@ -12,11 +12,16 @@
 #
 class nagios::params {
 
+       $nrpe_server = '74.207.240.137'
+
        case $operatingsystem {
          "ubuntu": {
            $nagios_plugin_packages = [ 'nagios-plugins-standard', 'nagios-plugins-basic', 'nagios-plugins', 'nagios-plugins-extra', 'nagios-nrpe-plugin' ]
-           $nagios_packages = [ 'nagios3', 'nagios-nrpe-server' ]
-           $nagios_service = [ 'nagios3', 'nagios-nrpe-server' ]
+           $nrpe_packages = 'nagios-nrpe-server'
+           $nrpe_service = 'nagios-nrpe-server'
+           $nrpe_configuration = '/etc/nagios/nrpe.cfg'
+           $nagios_packages = 'nagios3'
+           $nagios_service = 'nagios3'
          }
          "centos": {
            $nagios_packages = [ 'nagios', 'nagios-devel' ]

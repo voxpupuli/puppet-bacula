@@ -1,11 +1,10 @@
 class puppetlabs::www {
   include puppetlabs
-  include nagios
-  include nagios::web
+  include nagios::webservices
   $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = 'MQI/vywQq5pSlAYaEUJKrmt24Wu8FOIPfT7tFoaOc5X6'
   $mysql_root_pw = 'afmesackjebhee'
-  include bacula::client
+  include bacula
   include mysql::server
   include postfix
   wordpress::instance {'puppetlabs.com':

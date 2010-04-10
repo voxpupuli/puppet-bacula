@@ -1,6 +1,6 @@
 # Class: nagios::webservices
 #
-# This class installs and configures the Nagios hosts and services
+# This class installs and configures the Nagios web service checks
 #
 # Parameters:
 #
@@ -21,4 +21,14 @@ class nagios::webservices {
     notify => Service[$nagios::params::nagios_service],
   }
 
-}
+  define nagios::website {
+    nagios_service { "$name":
+      use => 'generic-service',
+      check_command => "check_http_site!$name",
+      host_name => "$fqdn",
+      service_description => "$name",
+      target => '/etc/nagios3/conf.d/nagios_service.cfg',
+      notify => Service[$nagios::params::nagios_service],
+    }
+  }
+} 

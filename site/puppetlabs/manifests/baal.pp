@@ -37,4 +37,8 @@ class puppetlabs::baal {
   # Monitoring
   include nagios::server
   include nagios::webservices
+  nagios::website { 'apt.puppetlabs.com': }
+  nagios::website { 'yum.puppetlabs.com': }
+  nagios::website { 'nagios.puppetlabs.com': auth => 'monit:5kUg8uha', }
+  nagios::website { 'dashboard.puppetlabs.com': auth => 'monit:5kUg8uha', }
 }

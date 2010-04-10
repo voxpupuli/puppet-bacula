@@ -21,7 +21,7 @@ class yumrepo {
     ensure => directory,
   }
 
-  file { [ '/opt/repository/yum/base', '/opt/repository/yum/updates' ]:
+  file { '/opt/repository/yum/base':
     ensure => directory,
     require => File['/opt/repository/apt'],
   }

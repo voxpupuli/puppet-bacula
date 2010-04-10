@@ -3,10 +3,13 @@
 # This class installs and configures Nagios
 #
 # Parameters:
+#   $nrpe_server:
+#     IP address of the NRPE monitoring server
 #
 # Actions:
 #
 # Requires:
+#   - The nagios::params class
 #
 # Sample Usage:
 #
@@ -19,12 +22,18 @@ class nagios {
     ensure => installed,
   }
 
+  file { '/etc/nagios': 
+    ensure => present,
+    require => Package[$nagios::params::nrpe_packages],
+  }
+
   file { $nagios::params::nrpe_configuration:
     ensure => present,
     owner => nagios,
     group => nagios,
     content => template('nagios/nrpe.cfg.erb'),
     notify => Service[$nagios::params::nrpe_service],
+    require => File['/etc/nagios'],
   }
 
   service { $nagios::params::nrpe_service:

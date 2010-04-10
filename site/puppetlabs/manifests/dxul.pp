@@ -29,4 +29,5 @@ class puppetlabs::dxul {
 
   # Nagios
   include nagios::webservices
+  nagios::website { 'demo.puppetlabs.com': }
 }

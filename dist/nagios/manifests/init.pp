@@ -116,6 +116,24 @@ class nagios {
     notify => Service[$nagios::params::nagios_service],
   }
 
+  @@nagios_service { "check_zombie_${hostname}":
+    use => 'generic-service',
+    host_name => "$fqdn",
+    check_command => 'check_nrpe_1arg!check_zombie_procs',
+    service_description => "check_zombie_${hostname}",
+    target => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify => Service[$nagios::params::nagios_service],
+  }
+  
+  @@nagios_service { "check_puppetd_${hostname}":
+    use => 'generic-service',
+    host_name => "$fqdn",
+    check_command => 'check_nrpe!check_proc!1:1 puppetd',
+    service_description => "check_puppetd_${hostname}",
+    target => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify => Service[$nagios::params::nagios_service],
+  }
+
   file { "/usr/lib/nagios/plugins/check_bacula.pl":
     source => "puppet:///modules/nagios/check_bacula.pl",
     mode => 0755,

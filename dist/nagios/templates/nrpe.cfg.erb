@@ -4,7 +4,7 @@ server_port=5666
 nrpe_user=nagios
 nrpe_group=nagios
 allowed_hosts=<%= nrpe_server %>
-dont_blame_nrpe=0
+dont_blame_nrpe=1
 # command_prefix=/usr/bin/sudo 
 debug=0
 command_timeout=60
@@ -22,7 +22,8 @@ command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200
 #command[check_users]=/usr/lib/nagios/plugins/check_users -w $ARG1$ -c $ARG2$
 #command[check_load]=/usr/lib/nagios/plugins/check_load -w $ARG1$ -c $ARG2$
 #command[check_disk]=/usr/lib/nagios/plugins/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$
-#command[check_procs]=/usr/lib/nagios/plugins/check_procs -w $ARG1$ -c $ARG2$ -s $ARG3$
+command[check_procs]=/usr/lib/nagios/plugins/check_procs -w $ARG1$ -c $ARG2$ -s $ARG3$
+command[check_proc]=/usr/lib/nagios/plugins/check_procs -c $ARG1$ -C $ARG2$
 
 # 
 # you can place your config snipplets into nrpe.d/

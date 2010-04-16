@@ -39,4 +39,33 @@ class nagios::contacts {
     target => '/etc/nagios3/conf.d/nagios_contact.cfg',
     ensure => present,
   }
+
+  nagios_contact { 'teyo':
+    alias => 'teyo',
+    contact_name => 'teyo',
+    email => 'teyo@puppetlabs.com',
+    host_notification_commands => 'notify-host-by-email',
+    service_notification_commands => 'notify-service-by-email',
+    service_notification_period => '24x7',
+    host_notification_period => '24x7',
+    service_notification_options => 'w,u,c,r',
+    host_notification_options => 'd,r',
+    target => '/etc/nagios3/conf.d/nagios_contact.cfg',
+    ensure => present,
+  }
+
+  nagios_contact { 'luke':
+    alias => 'luke',
+    contact_name => 'luke',
+    email => 'luke@puppetlabs.com',
+    host_notification_commands => 'notify-host-by-email',
+    service_notification_commands => 'notify-service-by-email',
+    service_notification_period => '24x7',
+    host_notification_period => '24x7',
+    service_notification_options => 'w,u,c,r',
+    host_notification_options => 'd,r',
+    target => '/etc/nagios3/conf.d/nagios_contact.cfg',
+    ensure => present,
+  }
+
 }

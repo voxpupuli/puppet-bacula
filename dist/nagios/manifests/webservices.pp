@@ -24,7 +24,7 @@ class nagios::webservices {
   @@nagios_service { "check_apache2_${hostname}":
     use => 'generic-service',
     host_name => "$fqdn",
-    check_command => 'check_nrpe!check_proc!1:20 apache2',
+    check_command => 'check_nrpe!check_proc!1:50 apache2',
     service_description => "check_apache2_${hostname}",
     target => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify => Service[$nagios::params::nagios_service],

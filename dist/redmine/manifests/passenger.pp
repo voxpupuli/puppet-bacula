@@ -10,9 +10,9 @@ define redmine::passenger ($db, $db_user, $db_pw, $dir, $port='80') {
     dir => $dir,
   }
   apache::vhost{$name:
-    port    => $port,
-    docroot => "${dir}/${name}/public/",
-    webdir  => "${dir}/${name}/",
+    port     => $port,
+    priority => '30',
+    docroot  => "${dir}/${name}/public/",
   }
   file{"${dir}/${name}/config/environment.rb":
     owner   => $apache::params::user,

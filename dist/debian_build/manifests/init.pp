@@ -19,7 +19,7 @@ class debian_build {
   user { 'debianbuild':
     ensure => present,
     managehome => true,
-    home => /home/debianbuild,
+    home => '/home/debianbuild',
     require => File['/home/debianbuild'],
   }
 

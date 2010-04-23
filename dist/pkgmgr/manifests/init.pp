@@ -1,6 +1,6 @@
 class pkgmgr {
   case $operatingsystem {
-    case Debian: {include pkgmgr::apt}
+    Debian: {include pkgmgr::apt}
   }
 
 }

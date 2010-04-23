@@ -5,7 +5,11 @@ class puppetlabs::www {
 
   # Nagios
   include nagios::webservices
+  include nagios::dbservices
   nagios::website { [ 'www.puppetlabs.com', 'docs.puppetlabs.com' ]: }
+
+  # Puppet
+  include puppet
 
   # Bacula
   $bacula_director = 'baal.puppetlabs.com'

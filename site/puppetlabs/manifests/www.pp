@@ -8,6 +8,10 @@ class puppetlabs::www {
   include nagios::dbservices
   nagios::website { [ 'www.puppetlabs.com', 'docs.puppetlabs.com' ]: }
 
+  # Munin
+  include munin
+  include munin::dbservices
+
   # Puppet
   include puppet
 

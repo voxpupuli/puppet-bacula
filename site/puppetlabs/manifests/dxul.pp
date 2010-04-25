@@ -30,4 +30,8 @@ class puppetlabs::dxul {
   # Nagios
   include nagios::webservices
   nagios::website { 'demo.puppetlabs.com': }
+
+  # Munin
+  include munin
+  include munin::dbservices
 }

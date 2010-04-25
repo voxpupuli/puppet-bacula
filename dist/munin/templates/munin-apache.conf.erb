@@ -1,0 +1,26 @@
+<VirtualHost *:<%= port %>>
+        ServerName <%= name %>
+        DocumentRoot <%= docroot %>
+
+        <Directory <%= docroot %>>
+                Options Indexes
+                AllowOverride AuthConfig
+                Order allow,deny
+                allow from all
+        
+                AuthName "Munin Access"
+                AuthType Basic
+                AuthUserFile /etc/munin/htpasswd.users
+                require valid-user
+        </Directory>
+
+        <IfModule mod_expires.c>
+                ExpiresActive On
+                ExpiresDefault M310
+        </IfModule>
+
+  ErrorLog /var/log/apache2/<%= name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  ServerSignature On
+</VirtualHost>

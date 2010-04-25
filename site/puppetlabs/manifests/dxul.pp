@@ -34,4 +34,5 @@ class puppetlabs::dxul {
   # Munin
   include munin
   include munin::dbservices
+  include munin::passenger
 }

@@ -15,6 +15,6 @@ class munin::dbservices {
   include munin::params
   include munin
 
-  munin::plugin { [ 'mysql_', 'mysql_bytes', 'mysql_innodb', 'mysql_queries', 'mysql_threads', 'mysql_slowqueries' ]: }
+  munin::plugin { [ 'mysql_bytes', 'mysql_queries', 'mysql_threads', 'mysql_slowqueries' ]: }
 
 }

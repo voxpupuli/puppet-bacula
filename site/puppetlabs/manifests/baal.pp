@@ -49,4 +49,5 @@ class puppetlabs::baal {
   include munin
   include munin::server
   include munin::dbservices
+  include munin::passenger
 }

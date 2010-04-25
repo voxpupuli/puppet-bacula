@@ -10,6 +10,7 @@
 # This flag needs to be off for ControlTier to work:
 #
 # Defaults    requiretty
+Defaults visiblepw
 Defaults    env_reset
 Defaults    env_keep = "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR \
                         LS_COLORS MAIL PS1 PS2 QTDIR USERNAME \
@@ -22,3 +23,7 @@ Defaults    env_keep = "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR \
 #
 root	   ALL=(ALL) 	ALL
 %sysadmin	ALL=(ALL)	ALL
+
+# Support for munin passenger plugins
+munin ALL=(ALL) NOPASSWD:/usr/bin/passenger-status, /usr/bin/passenger-memory-stats
+

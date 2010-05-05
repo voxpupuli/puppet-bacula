@@ -53,15 +53,6 @@ class nagios {
     notify => Service[$nagios::params::nagios_service],
   }
 
-  @@nagios_hostextinfo { $fqdn:
-    ensure => present,
-    icon_image_alt => $operatingsystem,
-    icon_image => "base/$operatingsystem.png",
-    statusmap_image => "base/$operatingsystem.gd2",
-    target => '/etc/nagios3/conf.d/nagios_hostextinfo.cfg',
-    notify => Service[$nagios::params::nagios_service],
-  }
-
   @@nagios_service { "check_ping_${hostname}":
     use => 'generic-service',
     check_command => 'check_ping!100.0,20%!500.0,60%',
@@ -130,6 +121,33 @@ class nagios {
     host_name => "$fqdn",
     check_command => 'check_nrpe!check_proc!1:1 puppetd',
     service_description => "check_puppetd_${hostname}",
+    target => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify => Service[$nagios::params::nagios_service],
+  }
+
+  @@nagios_service { "check_munin-node_${hostname}":
+    use => 'generic-service',
+    host_name => "$fqdn",
+    check_command => 'check_nrpe!check_proc!1:1 munin-node',
+    service_description => "check_munin-node_${hostname}",
+    target => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify => Service[$nagios::params::nagios_service],
+  }
+
+  @@nagios_service { "check_collectd_${hostname}":
+    use => 'generic-service',
+    host_name => "$fqdn",
+    check_command => 'check_nrpe!check_proc!1:1 collectd',
+    service_description => "check_collectd_${hostname}",
+    target => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify => Service[$nagios::params::nagios_service],
+  }
+
+  @@nagios_service { "check_collectdmon_${hostname}":
+    use => 'generic-service',
+    host_name => "$fqdn",
+    check_command => 'check_nrpe!check_proc!1:1 collectdmon',
+    service_description => "check_collectdmon_${hostname}",
     target => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify => Service[$nagios::params::nagios_service],
   }

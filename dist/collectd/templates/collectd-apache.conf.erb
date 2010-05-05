@@ -1,0 +1,24 @@
+<VirtualHost *:<%= port %>>
+  ServerName <%= name %>
+
+  DocumentRoot <%= docroot %>
+
+  <Directory "<%= docroot %>">
+     Options FollowSymLinks Indexes
+     AllowOverride None
+     Order allow,deny
+     Allow from all
+
+     AuthName "Visage Access"
+     AuthType Basic
+     AuthUserFile /var/www/visage/config/htpasswd.users
+     require valid-user
+   </Directory>
+
+  ErrorLog /var/log/apache2/<%= name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  ServerSignature On
+
+</VirtualHost>
+

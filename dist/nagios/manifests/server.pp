@@ -17,7 +17,7 @@ class nagios::server {
   include nagios::contacts
   include nagios::params
 
-  file { [ '/etc/nagios/conf.d/nagios_host.cfg', '/etc/nagios/conf.d/nagios_service.cfg', '/etc/nagios/conf.d/nagios_hostextinfo.cfg' ]:
+  file { [ '/etc/nagios/conf.d/nagios_host.cfg', '/etc/nagios/conf.d/nagios_service.cfg'  ]:
     mode => 0644,
     ensure => present,
     before => Service[$nagios::params::nagios_service],
@@ -47,7 +47,6 @@ class nagios::server {
   }
 
   Nagios_host <<||>>
-  Nagios_hostextinfo <<||>>
   Nagios_service <<||>>
 }
 

@@ -12,6 +12,9 @@ class puppetlabs::www {
   include munin
   include munin::dbservices
 
+  # Collectd
+  include collectd::client
+
   # Puppet
   include puppet
 

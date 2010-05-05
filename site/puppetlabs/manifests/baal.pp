@@ -44,10 +44,16 @@ class puppetlabs::baal {
   nagios::website { 'nagios.puppetlabs.com': auth => 'monit:5kUg8uha', }
   nagios::website { 'dashboard.puppetlabs.com': auth => 'monit:5kUg8uha', }
   nagios::website { 'munin.puppetlabs.com': auth => 'monit:5kUg8uha', }
+  nagios::website { 'visage.puppetlabs.com': auth => 'monit:5kUg8uha', }
 
   # Munin
   include munin
   include munin::server
   include munin::dbservices
   include munin::passenger
+
+  # Collectd
+  include collectd::server
+
 }
+

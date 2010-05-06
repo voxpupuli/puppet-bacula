@@ -1,0 +1,65 @@
+#! /bin/env ruby
+
+def config
+  puts <<-END
+graph_title puppet clients usage
+graph_vlabel clients
+known_clients.label Known Clients
+avg_compile.label Average configuration compile
+last5m_count.label Clients in the last 5 minutes
+last24h_unique_count.label unique clients in the last 24 hours
+graph_category puppet
+END
+  exit 0
+end
+
+# reports how many clients compiled in the last 5 minutes
+# repotrs how many unique clients compiled since the begining of the day
+# report the average compilation time for all clients in the last 5 minutes.
+def phaselog
+	logfile = ENV['puppet_logfile'] || '/var/log/syslog'
+	count,avg,day_count_unique,day_count = 0 ,0 ,0, 0
+	t = Time.now
+	today = t.strftime("^%b %e")
+	hour = t.strftime("^%b %e %H:")
+	m = t.min.to_i
+	last5m = ""
+	6.times do |i|
+		last5m += hour
+		last5m += "0" if (m-i) < 10
+		last5m += (m-i).to_s  
+		last5m += "|" unless i==5
+	end
+	hosts = Array.new
+	regexp = ".* for (.*) in (.*) seconds"
+
+	File.open(logfile).grep(/#{today}/).grep(/Compiled catalog/).each do |line|
+  	        case line
+			when /#{last5m}/ then
+				if line =~ /#{regexp}/
+					avg += $2.to_f
+					count += 1
+					unless hosts.include?($1)
+						hosts << $1
+					end
+				end
+			when /#{regexp}/ then
+				day_count += 1
+				unless hosts.include?($1)
+					hosts << $1 
+					day_count_unique += 1
+				end
+		end
+	end
+	puts "avg_compile.value #{(avg / count).to_s[0..3]}" unless count == 0
+	puts "last5m_count.value #{count}" 
+	puts "last24h_unique_count.value #{day_count_unique}" 
+end
+
+
+if ARGV[0] == 'config'
+  config
+else
+  puts "known_clients.value #{Dir.entries('/var/lib/puppet/yaml/facts/').size-2}"
+  phaselog
+end

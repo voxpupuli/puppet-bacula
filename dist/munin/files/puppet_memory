@@ -1,0 +1,3 @@
+[puppet_memory]
+user munin
+command ruby %c

@@ -1,0 +1,32 @@
+#! /bin/env ruby
+
+def config
+  puts <<-END
+graph_category Puppet
+graph_title puppet memory usage
+graph_vlabel memory
+puppetd_1.label puppetd
+puppetmaster.label puppetmasterd 
+END
+  exit 0
+end
+
+# Find the mem usage of a given process
+def plist(psname)
+  counter = 0
+  %x{ps h -o rss,size,vsize,pcpu -C #{psname}}.each do |ps|
+    rss,size,vsize,cpu = ps.split
+    counter += 1
+    puts "#{psname}_#{counter}.value #{rss}"
+
+  end
+  return
+end
+
+if ARGV[0] == "config"
+  config
+else
+  plist("puppetmasterd")
+  plist("puppetd")
+end
+

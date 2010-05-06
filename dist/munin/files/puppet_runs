@@ -1,0 +1,4 @@
+[puppet_runs]
+user root
+command ruby %c
+

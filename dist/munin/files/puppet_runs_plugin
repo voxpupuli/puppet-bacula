@@ -1,0 +1,44 @@
+#! /bin/env ruby
+
+def config
+  puts <<-END
+graph_title puppet run times
+run_time.label Configuration run time
+graph_category puppet
+END
+  exit 0
+end
+
+def phaselog
+	logfile = ENV['puppet_logfile'] || '/var/log/syslog'
+	run = 0
+	t = Time.now
+	today = t.strftime("^%b %e")
+	hour = t.strftime("^%b %e %H:")
+	m = t.min.to_i
+	last5m = ""
+	6.times do |i|
+		last5m += hour
+		last5m += "0" if (m-i) < 10
+		last5m += (m-i).to_s  
+		last5m += "|" unless i==5
+	end
+	hosts = Array.new
+	regexp = "in (.*) seconds"
+
+	File.open(logfile).grep(/#{today}/).grep(/Finished catalog run/).each do |line|
+    	        if line =~ /#{last5m}/
+	           if line =~ /#{regexp}/
+	             run += $1.to_f
+		    end
+		end
+	end
+	puts "run_time.value #{run.to_s[0..3]}" 
+end
+
+
+if ARGV[0] == 'config'
+  config
+else
+  phaselog
+end

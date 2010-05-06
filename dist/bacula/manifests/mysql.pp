@@ -20,6 +20,7 @@ define bacula::mysql {
       command => "mysqldump -p$mysql_root_pw $name > /var/lib/bacula/mysql/$name.sql",
       user => root,
       hour => 0,
+      minute => 15,
       require => File['/var/lib/bacula/mysql'],
     }
 }

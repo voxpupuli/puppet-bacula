@@ -1,0 +1,4 @@
+[puppet_clients]
+user root
+command ruby %c
+

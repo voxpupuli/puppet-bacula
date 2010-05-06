@@ -2,7 +2,7 @@
  
 def output_config
   puts <<-END
-graph_category App
+graph_category passenger
 graph_title passenger status
 graph_vlabel count
  

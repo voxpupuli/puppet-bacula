@@ -3,7 +3,9 @@
 def config
   puts <<-END
 graph_title puppet run times
-run_time.label Configuration run time
+graph_period second
+graph_vlabel run time in seconds
+run_time.label Configuration run time (seconds)
 graph_category puppet
 END
   exit 0
@@ -29,11 +31,11 @@ def phaselog
 	File.open(logfile).grep(/#{today}/).grep(/Finished catalog run/).each do |line|
     	        if line =~ /#{last5m}/
 	           if line =~ /#{regexp}/
-	             run += $1.to_f
+	             run = $1
 		    end
 		end
 	end
-	puts "run_time.value #{run.to_s[0..3]}" 
+	puts "run_time.value #{run.to_s}" 
 end
 
 

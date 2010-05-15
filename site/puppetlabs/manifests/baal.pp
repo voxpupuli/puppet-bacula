@@ -20,7 +20,6 @@ class puppetlabs::baal {
   # Puppet modules
   $puppet_storedconfig_password = 'password'
   $dashboard_site = 'dashboard.puppetlabs.com'
-  include puppet
   include puppet::server
   include puppet::dashboard
 

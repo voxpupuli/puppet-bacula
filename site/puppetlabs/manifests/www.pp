@@ -16,9 +16,6 @@ class puppetlabs::www {
   # Collectd
   include collectd::client
 
-  # Puppet
-  include puppet
-
   # Bacula
   $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = 'MQI/vywQq5pSlAYaEUJKrmt24Wu8FOIPfT7tFoaOc5X6'

@@ -15,6 +15,9 @@ class puppetlabs {
   # This is our base install for all of our servers. 
   #  
   include nagios
+  include puppet
+  include mailx
+  #include postfix
   include ssh::server
   include virtual::users 
   include sudo

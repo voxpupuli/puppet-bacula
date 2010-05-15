@@ -18,9 +18,11 @@ class puppetlabs::dxul {
   include account::master
  
   # Puppet
-  $dashboard_site = 'demo.puppetlabs.com'
-  $puppet_storedconfig_password = 'password'
-  include puppet
+  #$dashboard_site = 'demo.puppetlabs.com'
+  #$puppet_storedconfig_password = 'password'
+
+  # Puppet Forge
+  include forge
 
   # Backup
   $bacula_director = 'baal.puppetlabs.com'
@@ -29,7 +31,8 @@ class puppetlabs::dxul {
 
   # Nagios
   include nagios::webservices
-  nagios::website { 'demo.puppetlabs.com': }
+  #nagios::website { 'demo.puppetlabs.com': }
+  nagios::website { 'forge.puppetlabs.com': }
 
   # Munin
   include munin

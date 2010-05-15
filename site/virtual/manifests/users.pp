@@ -25,4 +25,9 @@ class virtual::users {
     group => sysadmin,
     tag => sysadmin,
  }
+ @account::user {'igal':
+    comment => 'Igal Koshevoy',
+    group => sysadmin,
+    tag => sysadmin,
+ }
 }

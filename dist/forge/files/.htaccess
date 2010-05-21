@@ -1,5 +1,0 @@
- AuthName "restricted stuff"
-  AuthType Basic
-  AuthUserFile /opt/forge/forge.htpasswd
-  require valid-user
-

@@ -6,14 +6,16 @@
 #
 # Actions:
 #   - Install the gcc package
-#   - Install the build-essential package
 #
 # Requires:
 #
 # Sample Usage:
 #
 class gcc {
-  package{ [ "gcc", "build-essential" ]: 
+ 
+  include gcc:params
+
+  package { $gcc::params::$gcc_package:
     ensure => installed 
   }
 }

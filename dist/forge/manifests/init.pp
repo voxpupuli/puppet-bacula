@@ -95,12 +95,6 @@ class forge {
     require => Vcsrepo['/opt/forge'],
   }
 
-  file { '/opt/forge/public/.htaccess':
-    ensure => present,
-    source => 'puppet:///modules/forge/.htaccess',
-    require => Vcsrepo['/opt/forge'],
-  }
-
   apache::vhost { 'forge.puppetlabs.com':
     port => '80',
     priority => '60',

@@ -22,13 +22,13 @@ class passenger {
   require apache::dev
   $version=$passenger::params::version
 
-  package{'passenger':
+  package {'passenger':
     name   => 'passenger',
     ensure => $version,
     provider => 'gem',
   }
 
-  exec{'compile-passenger':
+  exec {'compile-passenger':
     path => [ $passenger::params::gem_binary_path, '/usr/bin', '/bin'],
     command => 'passenger-install-apache2-module -a',
     logoutput => true,

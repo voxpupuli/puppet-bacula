@@ -1,7 +1,20 @@
-# ensure apache is installed
+# Class: apache
+#
+# This class installs Apache
+#
+# Parameters:
+#
+# Actions:
+#   - Install Apache
+#   - Manage Apache service
+#
+# Requires:
+#
+# Sample Usage:
+#
 class apache {
   include apache::params
-  package{'httpd': 
+  package { 'httpd': 
     name   => $apache::params::apache_name,
     ensure => present,
   }

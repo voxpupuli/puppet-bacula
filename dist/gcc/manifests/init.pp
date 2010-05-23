@@ -13,9 +13,9 @@
 #
 class gcc {
  
-  include gcc:params
+  include gcc::params
 
-  package { $gcc::params::$gcc_package:
+  package { $gcc::params::gcc_package:
     ensure => installed 
   }
 }

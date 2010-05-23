@@ -12,10 +12,12 @@
 #
 class puppetlabs_ssl {
 
- include puppetlabs_ssl::params
+  include puppetlabs_ssl::params
 
-
-puppet:///modules/site-files/ssl
-
+  file { [ "$ssl_path/pl.cert", "$ssl_path/root.cert", "$ssl_path/pl.key" ]:
+    source => 'puppet:///modules/site-files/ssl/$name',
+    owner => 'root',
+    group => 'root',
+  }
 
 }

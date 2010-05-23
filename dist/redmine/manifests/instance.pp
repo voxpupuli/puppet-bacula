@@ -15,7 +15,7 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
   vcsrepo{"${dir}/${name}":
     source => $source,
     revision => $version, 
-    require => File[$dir],
+    #require => File[$dir],
   #  path => $dir,
   }
   #

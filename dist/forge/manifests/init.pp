@@ -20,6 +20,8 @@ class forge {
   include ruby::dev
   include vcsrepo
 
+  $rails_version='2.3.5'
+  require rails
   $passenger_version=$passenger::params::version
   $gem_path=$passenger::params::gem_path
 
@@ -63,13 +65,7 @@ class forge {
     provider => gem,
     require => Vcsrepo['/opt/forge'],
   }
-
-  package { 'rails':
-    ensure => '2.3.5',
-    provider => gem,
-    require => Vcsrepo['/opt/forge'],
-  }
-
+  
   file { '/opt/forge/config/database.yml':
     ensure => present,
     content => template('forge/database.yml.erb'),

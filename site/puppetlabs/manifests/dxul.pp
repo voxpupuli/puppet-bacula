@@ -33,6 +33,7 @@ class puppetlabs::dxul {
   include nagios::webservices
   #nagios::website { 'demo.puppetlabs.com': }
   nagios::website { 'forge.puppetlabs.com': }
+  nagios::website { 'projects.puppetlabs.com': }
 
   # Munin
   include munin
@@ -42,4 +43,13 @@ class puppetlabs::dxul {
 
   # Collectd
   include collectd::client
+
+  include mysql::server
+  redmine::passenger { 'projects.puppetlabs.com':
+    dir => '/opt',
+    db => 'projectspuppetlabscom',
+    db_user => 'redmine',
+    db_pw => 'c@11-m3-m1st3r-p1t4ul',
+    port => '80',
+  }
 }

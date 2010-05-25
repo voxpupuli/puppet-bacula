@@ -13,18 +13,14 @@ RailsAutoDetect On
 RailsSpawnMethod smart
 RailsFrameworkSpawnerIdleTime 0
 RailsAppSpawnerIdleTime 0
+
 <VirtualHost *:<%= port %>>
         ServerName <%= name %>
         DocumentRoot <%= docroot %>
 
-        #SSLEngine On
-        #SSLCertificateFile /etc/ssl/pl.cert
-        #SSLCertificateKey  /etc/ssl/key.cert
-        #SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
-
         <Directory <%= docroot %>>
-                Options None
-                AllowOverride AuthConfig
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
                 Order allow,deny
                 allow from all
         </Directory>

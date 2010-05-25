@@ -19,6 +19,7 @@ class forge {
   include passenger::params
   include ruby::dev
   include vcsrepo
+  include apache::ssl
 
   $rails_version='2.3.5'
   require rails
@@ -32,11 +33,12 @@ class forge {
   vcsrepo { '/opt/forge':
     source => 'http://github.com/reductivelabs/puppet-module-site.git',
     provider => git,
+    revision => 'r0.1.1',
     ensure => present,
     require => File['/opt/forge'],
   }
  
-  package { [ 'json', 'less', 'archive-tar-minitar', 'bcrypt-ruby', 'diff-lcs', 'haml', 'maruku', 'paperclip', 'versionomy', 'warden', 'will_paginate', 'sqlite3-ruby', 'hpricot' ]:
+  package { [ 'json', 'less', 'archive-tar-minitar', 'bcrypt-ruby', 'diff-lcs', 'haml', 'maruku', 'paperclip', 'versionomy', 'warden', 'will_paginate', 'sqlite3-ruby', 'hpricot', 'factory_girl', 'remarkable_activerecord', 'remarkable_rails', 'rspec', 'rspec-rails', 'vlad', 'vlad-git' ]:
     ensure => present,
     provider => gem,
     require => Vcsrepo['/opt/forge'],
@@ -78,12 +80,45 @@ class forge {
     require => Vcsrepo['/opt/forge'],
   }
 
+  file { '/opt/forge/config/newrelic.yml':
+    ensure => present,
+    source => 'puppet:///modules/forge/newrelic.yml',
+    require => Vcsrepo['/opt/forge'],
+  }
+
   file { [ '/opt/forge/tmp', '/opt/forge/log' ]:
     ensure => directory,
     require => Vcsrepo['/opt/forge'],
   }
 
-  exec { 'RAILS_ENV=production rake db:create db:migrate':
+  exec { 'RAILS_ENV=production rake db:migrate':
+    alias => 'rakeforgemigrate',
+    cwd => '/opt/forge',
+    path => '/usr/bin:/usr/sbin:/bin',
+    require => Vcsrepo['/opt/forge'],
+    subscribe => Vcsrepo['/opt/forge'],
+    refreshonly => true,
+  }
+
+  exec { 'RAILS_ENV=production rake clear':
+    alias => 'rakeforgeclear',
+    cwd => '/opt/forge',
+    path => '/usr/bin:/usr/sbin:/bin',
+    require => Vcsrepo['/opt/forge'],
+    subscribe => Vcsrepo['/opt/forge'],
+    refreshonly => true,
+    notify => Exec['rakeforgerestart'],
+  }
+
+  exec { 'touch /opt/forge/tmp/restart.txt':
+    alias => 'rakeforgerestart',
+    cwd => '/opt/forge',
+    path => '/usr/bin:/usr/sbin:/bin',
+    require => Vcsrepo['/opt/forge'],
+    refreshonly => true,
+  }
+
+  exec { 'RAILS_ENV=production rake db:create':
     alias => 'rakeforgedb',
     cwd => '/opt/forge',
     path => '/usr/bin:/usr/sbin:/bin',

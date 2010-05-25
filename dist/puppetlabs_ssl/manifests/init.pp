@@ -5,6 +5,7 @@
 # Parameters:
 #
 # Actions:
+# - Installs the Puppet Labs certificates
 #
 # Requires:
 #

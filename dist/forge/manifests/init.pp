@@ -27,13 +27,17 @@ class forge {
   $gem_path=$passenger::params::gem_path
 
   file { '/opt/forge':
+    owner => 'www-data',
+    group => 'sysadmin',
+    recurse => true,
+    ignore => '.git',
     ensure => directory,
   }
 
   vcsrepo { '/opt/forge':
     source => 'http://github.com/reductivelabs/puppet-module-site.git',
     provider => git,
-    revision => 'r0.1.1',
+    revision => 'r0.1.7',
     ensure => present,
     require => File['/opt/forge'],
   }
@@ -71,22 +75,30 @@ class forge {
   file { '/opt/forge/config/database.yml':
     ensure => present,
     content => template('forge/database.yml.erb'),
+    owner => 'www-data',
+    group => 'sysadmin',
     require => Vcsrepo['/opt/forge'],
   }  
 
   file { '/opt/forge/config/secrets.yml':
+    owner => 'www-data',
+    group => 'sysadmin',
     ensure => present,
     content => template('forge/secrets.yml.erb'),
     require => Vcsrepo['/opt/forge'],
   }
 
   file { '/opt/forge/config/newrelic.yml':
+    owner => 'www-data',
+    group => 'sysadmin',
     ensure => present,
     source => 'puppet:///modules/forge/newrelic.yml',
     require => Vcsrepo['/opt/forge'],
   }
 
   file { [ '/opt/forge/tmp', '/opt/forge/log' ]:
+    owner => 'www-data',
+    group => 'sysadmin',
     ensure => directory,
     require => Vcsrepo['/opt/forge'],
   }

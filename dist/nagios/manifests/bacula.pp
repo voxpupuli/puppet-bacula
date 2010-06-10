@@ -1,4 +1,4 @@
-# Class: nagios::baculaservices
+# Class: nagios::bacula
 #
 # This class installs and configures the Nagios hosts and services
 #
@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class nagios::baculaservices {
+class nagios::bacula {
 
   @@nagios_service { "check_baculadir_${hostname}":
     use => 'generic-service',

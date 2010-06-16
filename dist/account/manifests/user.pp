@@ -1,3 +1,15 @@
+# Definition: account::user
+#
+# This class installs and manages user accounts
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
 define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false'){
   #
   # Creating an ssh user so we must require ssh::server.

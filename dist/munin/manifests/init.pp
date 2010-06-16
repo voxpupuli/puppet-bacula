@@ -16,7 +16,7 @@ class munin {
 
   $munin_server = $munin::params::munin_server
 
-  package { 'munin-node':
+  package { $munin::params::munin_base_packages:
     ensure => present,
   }
 

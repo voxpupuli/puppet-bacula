@@ -33,7 +33,7 @@ LoadPlugin RRDtool
  Listen "<%= collectd_server %>"
 </Plugin>
 
-#LoadPlugin apache
+LoadPlugin apache
 #LoadPlugin apcups
 #LoadPlugin ascent
 #LoadPlugin battery
@@ -47,8 +47,8 @@ LoadPlugin cpu
 #LoadPlugin dbi
 LoadPlugin df
 LoadPlugin disk
-#LoadPlugin dns
-#LoadPlugin email
+LoadPlugin dns
+LoadPlugin email
 LoadPlugin entropy
 #LoadPlugin exec
 #LoadPlugin filecount
@@ -69,23 +69,23 @@ LoadPlugin load
 #LoadPlugin memcached
 LoadPlugin memory
 #LoadPlugin multimeter
-#LoadPlugin mysql
+LoadPlugin mysql
 #LoadPlugin netlink
-#LoadPlugin network
+LoadPlugin network
 #LoadPlugin nfs
 #LoadPlugin nginx
 #LoadPlugin notify_desktop
 #LoadPlugin notify_email
-#LoadPlugin ntpd
+LoadPlugin ntpd
 #LoadPlugin nut
 #LoadPlugin olsrd
 #LoadPlugin openvpn
 #LoadPlugin perl
-#LoadPlugin ping
+LoadPlugin ping
 #LoadPlugin postgresql
 #LoadPlugin powerdns
 LoadPlugin processes
-#LoadPlugin protocols
+LoadPlugin protocols
 LoadPlugin rrdtool
 #LoadPlugin sensors
 #LoadPlugin serial
@@ -98,7 +98,7 @@ LoadPlugin swap
 #LoadPlugin ted
 #LoadPlugin thermal
 #LoadPlugin unixsock
-#LoadPlugin uptime
+LoadPlugin uptime
 LoadPlugin users
 #LoadPlugin uuid
 #LoadPlugin vmem

@@ -1,7 +1,9 @@
+# Definition: fragment
 #
 # Puts a file snippet into a directory previously setup using fragment::concat
 #
-# OPTIONS:
+# Parameters:
+#
 #   - filename          Name of file that this fragment belongs to.
 #   - content           If present puts the content into the file
 #   - source            If content was not specified, use the source
@@ -11,6 +13,11 @@
 #   - mode              Mode for the file
 #   - owner             Owner of the file
 #   - group             Owner of the file
+#
+# Actions:
+#
+# Requires:
+#
 define fragment( $content='source', $source='content', $order=10, $mode = 0644, $owner = root, $group = root, $target, $path ) {
   #
   #  Add function to test for existence of con 

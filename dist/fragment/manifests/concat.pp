@@ -1,13 +1,14 @@
-# Concatanates file snippets into one file. 
-# NOTE: the purge feauture will not work on .24.8 or earlier
-# OPTIONS:
-#  - name       The name of the file we are creating
-#  - mode		    The mode of the final file
-#  - owner		  owner of final file
-#  - group		  group for final file
-#  - directory  directory prefix for snippet and target 
+# Definition: concat::fragment
 #
-# ACTIONS:
+# Concatanates file snippets into one file.
+#
+# Parameters:
+#  - name       The name of the file we are creating
+#  - mode       The mode of the final file
+#  - owner      Owner of final file
+#  - group      Group for final file
+#
+# Actions:
 #  - Creates directory and directory/snippets if it didn't exist already
 #  - Executes the concatsnippets.sh script to build the final file, this script will create
 #    directory/snippets.concat and copy it to the final destination.   Execution happens only when:
@@ -18,7 +19,11 @@
 #  - Defines a File resource to ensure $mode is set correctly but also to provide another 
 #    means of requiring
 #
-# ALIASES:
+# Requires:
+#  - The purge feauture will not work on .24.8 or earlier
+#
+# Sample Usage:
+#
 #  - The exec can notified using Exec["concat_/path/to/file"] or Exec["concat_/path/to/directory"]
 #  - The final file can be referened as File["/path/to/file"] or File["concat_/path/to/file"]  
 define fragment::concat ( $path, $mode = 0644, $owner = "root", $group = "root") {

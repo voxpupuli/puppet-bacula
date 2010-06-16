@@ -1,17 +1,29 @@
+# Class: ssh::server
+#
+# This class installs and manages SSH servers
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
 class ssh::server {
   include ssh
-  package{'openssh-server':
+  package { 'openssh-server':
     ensure => latest, 
     require => Package['openssh-client'],
     notify => Service['ssh'],
   }  
-  fragment{'sshd_config-header':
+  fragment { 'sshd_config-header':
     order => '00',
     path => '/etc/ssh',
     target => 'sshd_config',
     source => 'puppet:///modules/ssh/sshd_config',
   }
-  fragment::concat{'sshd_config':
+  fragment::concat { 'sshd_config':
     owner => 'root',
     group => 'root',
     mode => '0640',
@@ -19,7 +31,7 @@ class ssh::server {
     require => Package['openssh-server'],
     notify => Service['sshd'],
   }
-  service{"sshd":
+  service { 'sshd':
     name => ssh,
     ensure => running,
     enable => true,

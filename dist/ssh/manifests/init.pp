@@ -1,8 +1,21 @@
-class ssh{
-  package{'openssh-client':
+# Class: ssh
+#
+# This class installs and manages SSH
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
+class ssh {
+  package { 'openssh-client':
     ensure => latest,
   }
-  file{'/etc/ssh/ssh_config':
+
+  file { '/etc/ssh/ssh_config':
     owner   => root,
     group   => root,
     mode    => 0644,

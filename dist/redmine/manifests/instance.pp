@@ -68,7 +68,7 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
       require => Exec["${name}-migrate"],
     }
   }
-  file{ [ "${dir}/${name}/public", "${dir}/${name}/files", "${dir}/${name}/log", "${dir}/${name}/tmp", "${dir}/${name}/public/plugin_assets" ]:
+  file{ [ "${dir}/${name}/public", "${dir}/${name}/files", "${dir}/${name}/tmp", "${dir}/${name}/public/plugin_assets" ]:
     ensure => directory,
     recurse => true,
     owner => $user,
@@ -76,4 +76,14 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
     mode => '0755',
     require => Exec["${name}-migrate"],
   }
+
+  file{ "${dir}/${name}/log":
+    ensure => directory,
+    recurse => true,
+    owner => $user,
+    group => $group,
+    mode => '0666',
+    require => Exec["${name}-migrate"],
+  }
+
 }

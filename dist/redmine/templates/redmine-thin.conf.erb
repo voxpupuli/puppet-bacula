@@ -1,0 +1,33 @@
+<VirtualHost *:80>
+  ServerName <%= name %>
+  DocumentRoot <%= docroot %>
+
+  RewriteEngine On
+
+  <Proxy balancer://thinservers>
+    BalancerMember http://127.0.0.1:5000
+    BalancerMember http://127.0.0.1:5001
+    BalancerMember http://127.0.0.1:5002
+    BalancerMember http://127.0.0.1:5003
+  </Proxy>
+
+  # Redirect all non-static requests to thin
+  RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+  RewriteRule ^/(.*)$ balancer://thinservers%{REQUEST_URI} [P,QSA,L]
+
+  ProxyPass / balancer://thinservers/
+  ProxyPassReverse / balancer://thinservers/
+  ProxyPreserveHost on
+
+  <Proxy *>
+    Order deny,allow
+    Allow from all
+  </Proxy>
+
+  # Custom log file locations
+  ErrorLog  /var/log/apache2/<%= name %>_error.log
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+
+</VirtualHost>
+
+

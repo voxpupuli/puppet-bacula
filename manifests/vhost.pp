@@ -27,12 +27,7 @@ define apache::vhost( $port, $docroot, $ssl=true, $template='apache/vhost-defaul
 
   include apache
 
-  $vdir = $operatingsystem? {
-    /(ubuntu|debian)/ => '/etc/apache2/sites-enabled/',
-    default => '/etc/httpd/conf.d',
-  }
-
-  file {"${vdir}/${priority}-${name}":
+  file {"${apache::params::vdir}/${priority}-${name}":
     content => template($template),
     owner => 'root',
     group => 'root',

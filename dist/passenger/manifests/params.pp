@@ -24,5 +24,10 @@ class passenger::params {
       $gem_binary_path = '/usr/lib/ruby/gems/1.8/gems/bin'
       $mod_passenger_location = "/usr/lib/ruby/gems/1.8/gems/passenger-$version/ext/apache2/mod_passenger.so"
     }
+    'darwin':{
+      $gem_path = '/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin'
+      $gem_binary_path = '/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin'
+      $mod_passenger_location = "/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin/passenger-$version/ext/apache2/mod_passenger.so" 
+    }
   }
 }

@@ -27,18 +27,21 @@ class apache::params {
        $php_package = 'php'
        $ssl_package = 'mod_ssl'
        $apache_dev  = 'httpd-devel'
+       $vdir = '/etc/httpd/conf.d/'
     }
     'ubuntu', 'debian': {
        $apache_name = 'apache2'
        $php_package = 'libapache2-mod-php5'
        $ssl_package = 'apache-ssl'
        $apache_dev  = [ 'libaprutil1-dev', 'libapr1-dev', 'apache2-prefork-dev' ]
+       $vdir = '/etc/apache2/sites-enabled/'
     }
     default: {
        $apache_name = 'apache2'
        $php_package = 'libapache2-mod-php5'
        $ssl_package = 'apache-ssl'
        $apache_dev  = 'apache-dev'
+       $vdir = '/etc/apache2/sites-enabled/'
     }
   }
 }

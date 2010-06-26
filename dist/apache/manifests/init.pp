@@ -26,7 +26,6 @@ class apache {
   }
   #
   # May want to purge all none realize modules using the resources resource type.
-  # A2mod resource type is broken.  Look into fixing it and moving it into apache.
   #
   A2mod { require => Package['httpd'], notify => Service['httpd']}
   @a2mod {
@@ -34,11 +33,9 @@ class apache {
    'headers' : ensure => present;
    'expires' : ensure => present;
   }
-  $vdir = $operatingsystem? {
-    'ubuntu' => '/etc/apache2/sites-enabled/',
-    default => '/etc/httpd/conf.d',
-  }
-  file { $vdir:
+  
+  
+  file { $apache::params::vdir:
     ensure => directory,
     recurse => true,
     purge => true,

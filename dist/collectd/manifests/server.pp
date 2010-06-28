@@ -15,15 +15,19 @@ class collectd::server {
   include collectd::params
   include collectd
   include apache
-  require vcsrepo
+  include ::passenger
+  include passenger::params
+  include ::rack
 
+  $passenger_version=$passenger::params::version
+  $gem_path=$passenger::params::gem_path
   $collectd_server = $collectd::params::collectd_server
 
   package { [ 'librrd-dev', 'librrd-ruby' ]:
     ensure => present,
   }
 
-  package { [ 'sinatra' , 'haml', 'errand', 'yajl-ruby' ]:
+  package { [ 'sinatra' , 'haml', 'errand', 'yajl-ruby', 'tilt', 'visage-app' ]:
     provider => gem,
     ensure => present,
     require => Package['librrd-dev'],
@@ -41,12 +45,6 @@ class collectd::server {
     priority => '55',
     docroot => '/var/www/visage/public',
     template => 'collectd/collectd-apache.conf.erb',
-  }
-
-  vcsrepo { '/var/www/visage':
-    source => 'http://github.com/auxesis/visage.git',
-    provider => git,
-    ensure => present,
   }
 
 }

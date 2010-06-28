@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+  servername www.madstop.com
+  serveralias madstop.com
+  ServerAdmin webmaster@madstop.com
+  DocumentRoot /var/www/madstop.com
+  UseCanonicalName On
+  <Directory /var/www/madstop.com>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Order allow,deny
+    allow from all
+  </Directory>
+  ErrorLog /var/log/apache2/madstop.com-error.log
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  LogLevel debug
+  CustomLog /var/log/apache2/madstop.com.access.log combined
+   <Location /server-status/>
+     SetHandler server-status
+	     Allow from all
+   </Location>
+</VirtualHost>

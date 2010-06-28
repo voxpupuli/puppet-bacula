@@ -16,7 +16,7 @@ class puppetlabs {
   #  
   include nagios
   include puppet
-  include mailx
+  #include mailx
   #include postfix
   include ssh::server
   include virtual::users 

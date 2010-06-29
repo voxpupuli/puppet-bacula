@@ -15,6 +15,7 @@ class puppetlabs {
   # This is our base install for all of our servers. 
   #  
   include nagios
+  include ntp
   include puppet
   #include mailx
   #include postfix

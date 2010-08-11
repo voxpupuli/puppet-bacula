@@ -55,5 +55,19 @@ class puppetlabs::baal {
   # Collectd
   include collectd::server
 
+  # pDNS
+  include pdns
+  
+  # Gitolite
+  Account::User <| tag == 'git' |>
+
+  apache::vhost {'mail.puppetlabs.com':
+    port => 80,
+    docroot => null,
+    ssl => false,
+    priority => 60,
+    template => 'puppetlabs/redirection_vhost.conf.erb',
+  }
+
 }
 

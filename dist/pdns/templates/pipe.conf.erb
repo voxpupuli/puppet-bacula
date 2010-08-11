@@ -1,0 +1,14 @@
+no-shuffle=yes
+skip-cname=yes
+query-cache-ttl=0
+negquery-cache-ttl=0
+cache-ttl=0
+loglevel=7
+log-dns-details=no
+wildcards=no
+out-of-zone-additional-processing=no
+local-address=<%= ipaddress %>
+launch=pipe
+pipe-command=/usr/bin/pdns-pipe-runner.rb
+pipebackend-abi-version=2
+distributor-threads=3

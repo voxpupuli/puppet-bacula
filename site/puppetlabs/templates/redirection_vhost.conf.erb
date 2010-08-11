@@ -1,0 +1,16 @@
+NameVirtualHost *:80
+<VirtualHost *:80>
+  servername mail.puppetlabs.com
+  serveralias calendar.puppetlabs.com
+  Options +FollowSymlinks
+  RewriteEngine on
+  RewriteCond %{HTTP_HOST} ^mail\.puppetlabs\.com
+  RewriteRule ^(.*)$ https://mail.google.com/a/puppetlabs.com [R=permanent,L]
+  RewriteCond %{HTTP_HOST} ^calendar\.puppetlabs\.com  
+  RewriteRule ^(.*)$ https://calendar.google.com/a/puppetlabs.com [R=permanent,L]
+  ErrorLog /var/log/apache2/redirects.puppetlabs.com_error.log
+  LogLevel info
+  CustomLog /var/log/apache2/redirects.puppetlabs.com_access.log combined
+  ServerSignature On
+</VirtualHost>
+

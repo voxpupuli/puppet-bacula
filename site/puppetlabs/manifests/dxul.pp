@@ -52,4 +52,7 @@ class puppetlabs::dxul {
     db_pw => 'c@11-m3-m1st3r-p1t4ul',
     port => '80',
   }
+ 
+  # pDNS
+  include pdns
 }

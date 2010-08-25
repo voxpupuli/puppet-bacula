@@ -45,7 +45,7 @@ class puppetlabs::dxul {
   include collectd::client
 
   include mysql::server
-  redmine::thin { 'projects.puppetlabs.com':
+  redmine::unicorn { 'projects.puppetlabs.com':
     dir => '/opt',
     db => 'projectspuppetlabscom',
     db_user => 'redmine',

@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+  ServerName <%= name %>
+  DocumentRoot <%= docroot %>
+
+  ProxyRequests Off
+   
+  <Proxy *>
+     Order deny,allow
+     Allow from all
+  </Proxy>
+   
+  ProxyPass / http://localhost:8080/
+  ProxyPassReverse / http://localhost:8080/
+
+  # Custom log file locations
+  ErrorLog  /var/log/apache2/<%= name %>_error.log
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+
+</VirtualHost>

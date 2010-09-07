@@ -21,6 +21,7 @@ class collectd::client {
     content => template('collectd/collectd-client.conf.erb'),
     ensure => present,
     require => [ Package['collectd'], Service['collectd'] ],
+    notify => Service['collectd'],
   }
 
 }

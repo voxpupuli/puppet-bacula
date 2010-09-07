@@ -25,6 +25,11 @@ class virtual::users {
     group => sysadmin,
     tag => sysadmin,
  }
+  @account::user {'zach':
+    comment => 'Zach Leslie',
+    group => sysadmin,
+    tag => sysadmin,
+ }
  @account::user { 'deploy':
     comment => 'Deployment User',
     group => www-data,

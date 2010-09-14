@@ -19,7 +19,7 @@ class puppetlabs_ssl::params {
     'ubuntu', 'debian': {
        $ssl_path = '/etc/ssl/'
     }
+    Default: { $ssl_path = '/etc/ssl/' }
   }
-
 
 }

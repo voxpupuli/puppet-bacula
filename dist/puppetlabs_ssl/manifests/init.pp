@@ -15,10 +15,23 @@ class puppetlabs_ssl {
 
   include puppetlabs_ssl::params
 
-  file { [ "$ssl_path/pl.cert", "$ssl_path/root.cert", "$ssl_path/pl.key" ]:
-    source => 'puppet:///modules/site-files/ssl/$name',
-    owner => 'root',
-    group => 'root',
-  }
+  $ssl_path = $puppetlabs_ssl::params::ssl_path
 
+  file {
+    "$ssl_path/certs/pl.cert":
+      source => "puppet:///modules/puppetlabs_ssl/pl.cert",
+      mode => 0644,
+      owner => 'root',
+      group => 'root';
+    "$ssl_path/certs/ca.cert":
+      source => "puppet:///modules/puppetlabs_ssl/ca.cert",
+      mode => 0644,
+      owner => 'root',
+      group => 'root';
+    "$ssl_path/private/pl.key":
+      source => "puppet:///modules/puppetlabs_ssl/pl.key",
+      mode => 0400,
+      owner => 'root',
+      group => 'root';
+  }
 }

@@ -21,7 +21,8 @@ class nagios::contacts {
 
   nagios_contactgroup { 'admins':
     alias => 'admins',
-    members => [ 'jamtur01', 'zach' ],
+    #members => [ 'jamtur01', 'zach' ],
+    members => 'jamtur01,zach',
     ensure => present,
     target => '/etc/nagios3/conf.d/nagios_contactgroup.cfg',
   }

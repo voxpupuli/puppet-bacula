@@ -36,5 +36,11 @@ define redmine::unicorn ($db, $db_user, $db_pw, $dir, $port='80') {
     group   => $apache::params::group,
     require => Redmine::Instance[$name],
   }
+  file { "${dir}/${name}/config/unicorn.config.rb":
+    owner   => $apache::params::user,
+    group   => $apache::params::group,
+    require => Redmine::Instance[$name],
+    source  => "puppet:///modules/redmine/unicorn.config.rb";
+  }
 
 }

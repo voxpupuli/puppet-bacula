@@ -1,3 +1,9 @@
+NameVirtualHost *:80
+<VirtualHost *:80>
+  ServerName projects.reductivelabs.com
+  Redirect / http://projects.puppetlabs.com
+</VirtualHost>
+
 <VirtualHost *:80>
   ServerName <%= name %>
   DocumentRoot <%= docroot %>

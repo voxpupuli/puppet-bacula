@@ -25,8 +25,18 @@ class virtual::users {
     group => sysadmin,
     tag => sysadmin,
  }
+ @account::user {'jeff':
+    comment => 'Jeff McCune',
+    group => sysadmin,
+    tag => sysadmin,
+ }
   @account::user {'zach':
     comment => 'Zach Leslie',
+    group => sysadmin,
+    tag => sysadmin,
+ }
+ @account::user {'djm':
+    comment => 'Dominic Maraglia',
     group => sysadmin,
     tag => sysadmin,
  }
@@ -39,5 +49,10 @@ class virtual::users {
     comment => 'Git User',
     group => sysadmin,
     tag => git,
+ }
+ @account::user { 'test':
+    comment => 'Testing User',
+    group => www-data,
+    tag => testing,
  }
 }

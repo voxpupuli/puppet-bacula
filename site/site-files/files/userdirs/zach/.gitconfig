@@ -1,0 +1,18 @@
+[user]
+	name = Zach Leslie
+	email = zach@puppetlabs.com
+	signingkey = zach@puppetlabs.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+
+[gui]
+
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	last = log -1 HEAD
+

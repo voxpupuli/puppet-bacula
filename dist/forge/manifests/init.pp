@@ -37,7 +37,7 @@ class forge {
   vcsrepo { '/opt/forge':
     source => 'http://github.com/reductivelabs/puppet-module-site.git',
     provider => git,
-    revision => 'r0.1.13',
+    revision => 'r0.1.14',
     ensure => present,
     require => File['/opt/forge'],
   }
@@ -103,6 +103,14 @@ class forge {
     require => Vcsrepo['/opt/forge'],
   }
 
+  file { "/etc/apache2/conf.d/passenger.conf":
+    owner   => root,
+    group   => root,
+    mode    => 0644,
+    notify  => Service["httpd"],
+    content => template("forge/passenger.conf.erb");
+  }
+
   exec { 'RAILS_ENV=production rake db:migrate':
     alias => 'rakeforgemigrate',
     cwd => '/opt/forge',
@@ -141,8 +149,19 @@ class forge {
   apache::vhost { 'forge.puppetlabs.com':
     port => '80',
     priority => '60',
+    ssl => false,
     docroot => '/opt/forge/public/',
     template => 'forge/puppet-forge-passenger.conf.erb',
     require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
   }
+  
+  apache::vhost { 'forge.puppetlabs.com_ssl':
+    port => 443,
+    priority => 61,
+    docroot => '/opt/forge/public/',
+    ssl => true,
+    template => 'forge/puppet-forge-passenger.conf.erb',
+    require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
+  }
+
 }

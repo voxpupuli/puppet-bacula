@@ -21,6 +21,17 @@ class puppetlabs::www {
   $bacula_password = 'MQI/vywQq5pSlAYaEUJKrmt24Wu8FOIPfT7tFoaOc5X6'
   include bacula
 
+	# Training downloads
+	file {
+		"/var/www/puppetlabs.com/downloads/training/current-pm-training.tar.gz":
+			ensure => link,
+			target => "centos-5.5-2.6.1.tar.gz";
+		"/var/www/puppetlabs.com/downloads/training/current-pm-training-ovf.tar.gz":
+			ensure => link,
+			target => "centos-5.5-2.6.1-ovf.tar.gz";
+	}
+		
+
   # Mysql
   $mysql_root_pw = 'afmesackjebhee'
   include mysql::server

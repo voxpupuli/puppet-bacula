@@ -26,11 +26,21 @@ define redmine::unicorn ($db, $db_user, $db_pw, $dir, $port='80') {
   apache::vhost { $name:
     port     => $port,
     priority => '30',
+    ssl => false,
     docroot  => "${dir}/${name}/public/",
     template => 'redmine/redmine-unicorn.conf.erb',
     require => Service['unicorn'],
   }
 
+  apache::vhost { "${name}_ssl":
+    port     => 443,
+    priority => '31',
+    ssl => true,
+    docroot  => "${dir}/${name}/public/",
+    template => 'redmine/redmine-unicorn.conf.erb',
+    require => Service['unicorn'],
+  }
+  
   file { "${dir}/${name}/config/environment.rb":
     owner   => $apache::params::user,
     group   => $apache::params::group,

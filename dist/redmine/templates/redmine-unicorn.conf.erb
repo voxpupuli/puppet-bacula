@@ -1,12 +1,35 @@
-NameVirtualHost *:80
-<VirtualHost *:80>
+NameVirtualHost <%= ipaddress %>:<%= port %>
+<VirtualHost <%= ipaddress %>:<%= port %>>
   ServerName projects.reductivelabs.com
-  Redirect / http://projects.puppetlabs.com
+<% if ssl == true %>
+  Redirect / https://projects.puppetlabs.com/
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/certs/pl.cert
+  SSLCertificateKeyFile /etc/ssl/private/pl.key
+<% else %>
+  Redirect / http://projects.puppetlabs.com/
+<% end %>
 </VirtualHost>
 
-<VirtualHost *:80>
-  ServerName <%= name %>
+<VirtualHost <%= ipaddress %>:<%= port %>>
+  #ServerName <%= name %>
+  ServerName projects.puppetlabs.com
   DocumentRoot <%= docroot %>
+
+	RewriteEngine On
+	RewriteCond %{HTTPS} !=on
+	#RewriteRule ^/login$ https://%{SERVER_NAME}/login [R,L]
+  RewriteRule ^/login(.*)$ https://%{SERVER_NAME}/login$1 [R,L]
+
+	RewriteCond %{HTTPS} !=on
+	RewriteRule ^/account/register$ https://%{SERVER_NAME}/account/register [R,L]
+
+<% if ssl == true %>
+  RequestHeader set X_FORWARDED_PROTO 'https'
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/certs/pl.cert
+  SSLCertificateKeyFile /etc/ssl/private/pl.key
+<% end %>
 
   ProxyRequests Off
    

@@ -1,0 +1,11 @@
+-P INPUT DROP
+-P OUTPUT DROP
+-P FORWARD DROP
+-A INPUT -i lo -j ACCEPT
+-A INPUT ! -i lo -d 127.0.0.0/8 -j DROP
+-A INPUT -m state --state INVALID -j DROP
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp -m icmp --icmp-type echo-request -j ACCEPT
+-A OUTPUT -m state --state INVALID -j DROP
+-A OUTPUT -j ACCEPT
+

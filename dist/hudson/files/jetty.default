@@ -24,7 +24,7 @@ JETTY_HOST=localhost
 #JETTY_ARGS=
 
 # Extra options to pass to the JVM         
-#JAVA_OPTIONS="-Xmx256m -Djava.awt.headless=true"
+JAVA_OPTIONS="-Xms256m -Xmx1024m -Djava.awt.headless=true"
 
 # Home of Java installation.
 #JAVA_HOME=

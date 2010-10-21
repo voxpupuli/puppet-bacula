@@ -13,7 +13,7 @@ define mysql::db ( $db_user, $db_pw, $db_charset = 'utf8', $host = 'localhost', 
     $mysql_server_class = Class['mysql::server'] 
   } else {
     $mysql_server_class = undef
-    fail ( 'must include mysql::server class at top level of node definition and set $mysql_rool_pw' )
+    fail ( 'must include mysql::server class at top level of node definition and set $mysql_root_pw' )
   }
   database{$name:
     ensure => present,

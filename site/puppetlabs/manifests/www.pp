@@ -23,10 +23,10 @@ class puppetlabs::www {
 
 	# Training downloads
 	file {
-		"/var/www/puppetlabs.com/downloads/training/current-pm-training.tar.gz":
+		"/var/www/puppetlabs.com/downloads/training/current-pm-vm.tar.gz":
 			ensure => link,
 			target => "centos-5.5-2.6.1.tar.gz";
-		"/var/www/puppetlabs.com/downloads/training/current-pm-training-ovf.tar.gz":
+		"/var/www/puppetlabs.com/downloads/training/current-pm-vm-ovf.tar.gz":
 			ensure => link,
 			target => "centos-5.5-2.6.1-ovf.tar.gz";
 	}

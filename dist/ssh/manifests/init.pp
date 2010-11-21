@@ -11,7 +11,9 @@
 # Sample Usage:
 #
 class ssh {
-  package { 'openssh-client':
+	include ssh::params
+	$sshclient_package = $ssh::params::sshclient_package
+  package { "${sshclient_package}":
     ensure => latest,
   }
 
@@ -20,6 +22,6 @@ class ssh {
     group   => root,
     mode    => 0644,
     ensure  => file,
-    require => Package['openssh-client']
+    require => Package["${sshclient_package}"]
   }
 }

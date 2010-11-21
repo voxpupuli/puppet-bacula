@@ -1,5 +1,7 @@
 class pxe {
 	include pxe::params
+	#include pxe::centos
+
 	include apache
 
 	$tftp_root = $pxe::params::tftp_root
@@ -30,9 +32,8 @@ class pxe {
 		"${tftp_root}/chain.c32": ensure => directory, owner => root, group => root, mode => 755,
 			source => "/usr/lib/syslinux/chain.c32";
 		#"${tftp_root}/pxelinux.cfg": ensure => directory, owner => root, group => root, mode => 755;
-		"${tftp_root}/images":										ensure => directory, owner => root, group => root, mode => 755;
-		"${tftp_root}/images/centos":						ensure => directory, owner => root, group => root, mode => 755;
-		"${ks_root}": ensure => directory, owner => root, group => root, mode => 755;
+		"${tftp_root}/images": ensure => directory, owner => root, group => root, mode => 755;
+		#"${ks_root}": ensure => directory, owner => root, group => root, mode => 755;
 	}
 
 	service {
@@ -42,33 +43,23 @@ class pxe {
 	}
 	
 	$dirs = [
+		"${tftp_root}/images/centos",
 		"${tftp_root}/images/centos/i386",
 		"${tftp_root}/images/centos/x86_64",
+		"${tftp_root}/images/ubuntu",
+		"${tftp_root}/images/ubuntu/i386",
+		"${tftp_root}/images/ubuntu/amd64",
 	]
 	
 	file { $dirs: ensure => directory, owner => root, group => root, mode => 755; }
 	
-	#fragment { "cent-header":
-  #  order => '00',
-  #  path => "${tftp_root}/pxelinux.cfg",
-  #  target => 'cent',
-  #  source => 'puppet:///modules/pxe/centosPXE-header',
-  #}
-
-  #fragment::concat { 'cent':
-  #  owner => 'root',
-  #  group => 'root',
-  #  mode => '0644',
-  #  path => "${tftp_root}/pxelinux.cfg",
-  #}
-
-	centosimages { 
-		"centos_i386_4.8":
-			arch => "i386",
-			ver => "4.8";
-		"centos_x86_64_4.8":
-			arch => "x86_64",
-			ver => "4.8";
+	pxe::centos { 
+#		"centos_i386_4.8":
+#			arch => "i386",
+#			ver => "4.8";
+#		"centos_x86_64_4.8":
+#			arch => "x86_64",
+#			ver => "4.8";
 		"centos_i386_5.5":
 			arch => "i386",
 			ver => "5.5";
@@ -76,38 +67,20 @@ class pxe {
 			arch => "x86_64",
 			ver => "5.5";
 	}
-	
-}
+    
+    pxe::ubuntu {
+        "ubuntu lucid i386":
+            arch => "i386",
+            ver => "lucid";
+        "ubuntu lucid amd64":
+            arch => "amd64",
+            ver => "lucid";
+        "ubuntu maverick i386":
+            arch => "i386",
+            ver => "maverick";
+        "ubuntu maverick amd64":
+            arch => "amd64",
+            ver => "maverick";
+    }
 
-define centosimages($arch,$ver) {
-	
-	$dirs = [
-		"${tftp_root}/images/centos/${arch}/${ver}",
-	]
-
-	file { $dirs: ensure => directory, owner => root, group => root, mode => 755; }
-
-	exec {
-		"pull centos pxe vmlinuz $arch $ver":
-			cwd => "${tftp_root}/images/centos/${arch}/${ver}",
-			command => "/usr/bin/wget http://mirrors.kernel.org/centos/${ver}/os/${arch}/images/pxeboot/vmlinuz",
-			creates => "${tftp_root}/images/centos/${arch}/${ver}/vmlinuz";
-		"pull centos pxe initrd.img $arch $ver":
-			cwd => "${tftp_root}/images/centos/${arch}/${ver}",
-			command => "/usr/bin/wget http://mirrors.kernel.org/centos/${ver}/os/${arch}/images/pxeboot/initrd.img",
-			creates => "${tftp_root}/images/centos/${arch}/${ver}/initrd.img";
-	}
-
-	file {
-		"${ks_root}/centos_${arch}_${ver}.cfg":
-			owner => root, group => root, mode => 644, content => template("pxe/centos_ks.cfg.erb");
-	}
-
-  #fragment{ "cent-${title}":
-  #  filename   => "${tftp_root}/pxelinux.cfg/cent",
-  #  content    => template("pxe/centosPXE-entry"),
-  #}
-
-
-}
-
+}	

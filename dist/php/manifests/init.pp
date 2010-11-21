@@ -1,5 +1,7 @@
 class php{
-  package{'php5':
+	include php::params
+
+  package{"$php::params::php_package":
     ensure => installed,
   }
 }

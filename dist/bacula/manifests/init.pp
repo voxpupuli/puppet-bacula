@@ -36,6 +36,11 @@ class bacula {
     notify => Service[$bacula::params::bacula_client_services],
   }
 
+  file { '/var/lib/bacula':
+    ensure => directory,
+    require => Package[$bacula::params::bacula_client_packages],
+  }
+
   file { '/var/lib/bacula/mysql':
     ensure => directory,
     require => Package[$bacula::params::bacula_client_packages],

@@ -30,8 +30,10 @@ class bacula::director {
     require => Package[$bacula::params::bacula_director_packages],
   }
 
-  file { "/bacula":
-    ensure => directory,
+  file { 
+		"/bacula": ensure => directory;
+		"/etc/bacula/bacula-dir.conf": owner => root, group => bacula, mode => 640,
+			content => template("bacula/bacula-dir.conf.erb");
   }
 
   bacula::mysql { 'bacula': }

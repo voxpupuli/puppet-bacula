@@ -18,26 +18,22 @@ class hudson {
 
   $hudson_alias = $hudson::params::hudson_alias
 
-  package { $hudson::params::jetty_packages: 
-    ensure => installed,
-  }
+	package { $hudson::params::jetty_packages: 
+		ensure => installed,
+	}
 
-  package { $hudson::params::build_packages_gems:
-    ensure => installed,
-    provider => gem,
-  }
+	package { $hudson::params::build_packages_gems:
+		ensure => installed,
+		provider => gem,
+	}
 
   file { 'hudson.war':
-    path => '/usr/share/jetty/webapps/hudson.war',
+    path => '/usr/share/jetty/webapps/root.war',
     source => 'puppet:///modules/hudson/hudson.war',
     owner => 'jetty',
     group => 'adm',
     require => Package[$hudson::params::jetty_packages],
-  }
-
-  file { '/usr/share/jetty/webapps/root.war':
-    ensure => '/usr/share/jetty/webapps/hudson.war',
-    require => File['hudson.war'],
+    notify => Service['jetty'],
   }
 
   file { '/etc/default/jetty':

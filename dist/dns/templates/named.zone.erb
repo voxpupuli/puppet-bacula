@@ -1,0 +1,7 @@
+    zone "<%= zone %>" {
+        type <%= zonetype %>;
+        // file "master/zlan.zone";
+        file "<%= zonefilename %>";
+        allow-transfer { none; };
+        notify no;
+    };

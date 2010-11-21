@@ -20,10 +20,12 @@ class ntp {
   }
 
   service { 'ntp':
-    ensure => running,
+    name       => "$ntp::params::ntpd_service",
+    ensure     => running,
     enable     => true,
     hasrestart => true,
     require => Package['ntp'],
   }
 
 }
+

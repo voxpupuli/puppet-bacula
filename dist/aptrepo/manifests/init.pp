@@ -50,5 +50,34 @@ class aptrepo {
     docroot => '/opt/repository/apt',
     template => 'aptrepo/apache2.conf.erb'
   }
+
+  file { '/opt/repository/plapt':
+    ensure => directory,
+  }
+
+  file { [ '/opt/repository/plapt/ubuntu', '/opt/repository/plapt/ubuntu/conf', '/opt/repository/plapt/ubuntu/override' ]:
+    ensure => directory,
+    require => File['/opt/repository/plapt'],
+  }
+
+  file { '/opt/repository/plapt/ubuntu/conf/distributions':
+    ensure => present,
+    source => 'puppet:///modules/aptrepo/distributions',
+    require => File['/opt/repository/plapt/ubuntu/conf'],
+  }
+
+  file { '/opt/repository/plapt/ubuntu/conf/options':
+    ensure => present,
+    source => 'puppet:///modules/aptrepo/options',
+    require => File['/opt/repository/apt/ubuntu/conf'],
+  }
+
+  file { '/opt/repository/plapt/ubuntu/override/override.lucid':
+    ensure => present,
+    source => 'puppet:///modules/aptrepo/override.lucid',
+    require => File['/opt/repository/plapt/ubuntu/override'],
+  }
+
+
 }
 

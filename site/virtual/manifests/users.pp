@@ -2,28 +2,53 @@ class virtual::users {
  include virtual::groups
  @account::user {'teyo':
     comment => 'Teyo, Tyree',
-    group => sysadmin,
-    tag => sysadmin,
+    group => developers,
+    tag => developers,
  }
  @account::user {'james':
     comment => 'James Turnbull',
     group => sysadmin,
     tag => sysadmin,
  }
+ @account::user {'nan':
+    comment => 'Nan Liu',
+    group => prosvc,
+    tag => prosvc,
+ }
  @account::user {'dan':
     comment => 'Dan Bode',
-    group => sysadmin,
-    tag => sysadmin,
+    group => prosvc,
+    tag => prosvc,
  }
+ @account::user {'nigel':
+    comment => 'Nigel Kersten',
+    group => prosvc,
+    tag => prosvc,
+}
  @account::user {'luke':
     comment => 'Luke Kanies',
-    group => sysadmin,
-    tag => sysadmin,
+    group => developers,
+    tag => developers,
  }
  @account::user {'igal':
     comment => 'Igal Koshevoy',
     group => sysadmin,
     tag => sysadmin,
+ }
+ @account::user {'matt':
+    comment => 'Matt Robinson',
+    group => developers,
+    tag => developers,
+ }
+ @account::user {'jhelwig':
+    comment => 'Jacob Helwig',
+    group => developers,
+    tag => developers,
+ }
+ @account::user {'pberry':
+    comment => 'Paul Berry',
+    group => developers,
+    tag => developers,
  }
  @account::user {'jeff':
     comment => 'Jeff McCune',
@@ -40,6 +65,11 @@ class virtual::users {
     group => sysadmin,
     tag => sysadmin,
  }
+ @account::user {'nfagerlund':
+    comment => 'Nick Fagerlund',
+    group => prosvc,
+    tag => prosvc,
+ }
  @account::user { 'deploy':
     comment => 'Deployment User',
     group => www-data,
@@ -50,9 +80,9 @@ class virtual::users {
     group => sysadmin,
     tag => git,
  }
- @account::user { 'test':
-    comment => 'Testing User',
-    group => www-data,
-    tag => testing,
+ @account::user { 'hudson':
+    comment => 'Hudson User',
+    group => hudson,
+    tag => hudson,
  }
 }

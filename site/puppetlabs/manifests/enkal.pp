@@ -32,5 +32,12 @@ class puppetlabs::enkal {
 
   # Hudson
   include hudson
+	cron { "restart jetty": hour => 1, minute => 0,
+		command => "/etc/init.d/jetty stop; sleep 5; /etc/init.d/jetty start; /etc/init.d/apache2 restart";
+	}
+
+	Account::User <| tag == 'developers' |>
+	Group <| tag == 'developers' |>
+
 }
 

@@ -8,6 +8,8 @@ NameVirtualHost *:80
   RewriteRule ^(.*)$ https://mail.google.com/a/puppetlabs.com [R=permanent,L]
   RewriteCond %{HTTP_HOST} ^calendar\.puppetlabs\.com  
   RewriteRule ^(.*)$ https://calendar.google.com/a/puppetlabs.com [R=permanent,L]
+  RewriteCond %{HTTP_HOST} ^sites\.puppetlabs\.com
+  RewriteRule ^(.*)$ https://sites.google.com/a/puppetlabs.com [R=permanent,L]
   ErrorLog /var/log/apache2/redirects.puppetlabs.com_error.log
   LogLevel info
   CustomLog /var/log/apache2/redirects.puppetlabs.com_access.log combined

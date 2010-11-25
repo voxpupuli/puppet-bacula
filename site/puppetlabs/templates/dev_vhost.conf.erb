@@ -1,0 +1,299 @@
+NameVirtualHost <%= ipaddress %>:80
+<VirtualHost <%= ipaddress %>:80>
+  servername dev.puppetlabs.com
+  serveralias dev
+  ServerAdmin webmaster@puppetlabs.com
+  DocumentRoot /var/www/dev
+  UseCanonicalName On
+  <Directory />
+   Options FollowSymLinks
+    AllowOverride ALL
+    AuthType Digest
+  </Directory>
+  <Directory /var/www/dev>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Order allow,deny
+    HeaderName IndexHeader.html
+    allow from all
+  </Directory>
+  ErrorLog /var/log/apache2/puppetlabs.com-error.log
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  LogLevel debug
+  CustomLog /var/log/apache2/puppetlabs.com.access.log combined
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^reductivelabs\.com$
+  RewriteRule ^(.*)$ http://www.puppetlabs.com%{REQUEST_URI} [R=permanent,L]
+  Redirect permanent /category/news http://puppetlabs.com/category/blog/general-news/
+  Redirect permanent /category/puppet http://puppetlabs.com/category/blog
+  RedirectMatch permanent ^/category/downloads$ http://puppetlabs.com/resources/downloads
+  RedirectMatch permanent ^/download$ http://puppetlabs.com/resources/downloads
+  Redirect permanent /home/about/puppet-mailing-list http://puppetlabs.com/company/#contact
+  Redirect permanent /home/about http://puppetlabs.com/company
+  Redirect permanent /home/irc http://www.puppetlabs.com/blog 
+  Redirect permanent /jobs http://www.puppetlabs.com/company 
+  RedirectMatch permanent ^/podcast(.*)$ http://puppetlabs.com/blog
+  Redirect permanent /products/feed http://www.puppetlabs.com/blog
+  Redirect permanent /products/home/users http://www.puppetlabs.com/blog
+  Redirect permanent /products/home http://www.puppetlabs.com
+  Redirect permanent /products/facter http://www.puppetlabs.com/puppet/related-projects/facter/
+  Redirect permanent /products/puppet http://www.puppetlabs.com
+  Redirect permanent /products http://www.puppetlabs.com/puppet
+  Redirect permanent /services/feed http://www.puppetlabs.com/blog
+  Redirect permanent /services/subscription-support http://www.puppetlabs.com/services/support
+  Redirect permanent /tag/puppet http://www.puppetlabs.com/blog
+  Redirect permanent /training/feed http://www.puppetlabs.com/category/events
+  RedirectMatch permanent ^/training/(.*)$ http://www.puppetlabs.com/category/events
+  Redirect permanent /training http://www.puppetlabs.com/services/training-workshops
+  Redirect permanent /wp-content/uploads/2010/01 http://puppetlabs.com/files/
+  #  http://puppetlabs.com/wp-content/themes/reductive/favicon.ico
+  #  http://puppetlabs.com/wp-content/themes/reductive/scripts/mainimage.js
+  #  http://puppetlabs.com/puppet.ico
+  #
+  # Legacy Redirects
+  #
+  Redirect permanent /projects                      http://puppetlabs.com/products
+  Redirect permanent /about.html                    http://puppetlabs.com/company
+  Redirect permanent /services.html                 http://puppetlabs.com/services
+  Redirect permanent /training.html                 http://puppetlabs.com/services/training-workshops
+  Redirect permanent /contact.html                  http://puppetlabs.com/contact/company/#contact
+  Redirect permanent /redmine                       http://projects.puppetlabs.com
+  Redirect permanent /usr/lib/cgi-bin/puppet.cgi    http://projects.puppetlabs.com
+  Redirect permanent /trac/puppet/wiki/ManagedByPuppet http://puppetlabs.com/trac/puppet/wiki/Recipes
+  Redirect permanent /products/facter/index.html  http://puppetlabs.com/products/facter
+  Redirect permanent /products/puppet/documentation/configref.html http://docs.puppetlabs.com/references/stable/configuration.html
+  Redirect permanent /trac/puppet/wiki/TypeReference http://docs.puppetlabs.com/references/stable/type.html 
+  Redirect permanent /trac/puppet/wiki/PuppetIntroduction http://docs.puppetlabs.com/guides/introduction.html
+  Redirect permanent /trac/puppet/wiki/FunctionReference   http://docs.puppetlabs.com/references/stable/function.html
+  Redirect permanent /trac/puppet/wiki/MetaparameterReference   http://docs.puppetlabs.com/references/stable/metaparameter.html
+  Redirect permanent /trac/puppet/wiki/ConfigurationReference   http://docs.puppetlabs.com/references/stable/configuration.html
+  Redirect permanent /trac/puppet/wiki/NetworkReference   http://docs.puppetlabs.com/references/stable/network.html
+  Redirect permanent /trac/puppet/wiki/ReportReference   http://docs.puppetlabs.com/references/stable/report.html
+  Redirect permanent /trac/puppet/wiki/IndirectionReference   http://docs.puppetlabs.com/references/stable/indirection.html
+  Redirect permanent /trac/puppet/wiki/InstallationGuide   http://docs.puppetlabs.com/guides/installation.html
+  Redirect permanent /trac/puppet/wiki/AboutPuppet http://projects.puppetlabs.com/projects/puppet/wiki/About_Puppet
+  Redirect permanent /trac/puppet/wiki/AddingFacts http://projects.puppetlabs.com/projects/puppet/wiki/Adding_Facts
+  Redirect permanent /trac/puppet/wiki/AdvancedPuppetRecipe http://projects.puppetlabs.com/projects/puppet/wiki/Advanced_Puppet_Pattern
+  Redirect permanent /trac/puppet/wiki/BadContent http://projects.puppetlabs.com/projects/puppet/wiki/Bad_Content
+  Redirect permanent /trac/puppet/wiki/BigPicture http://projects.puppetlabs.com/projects/puppet/wiki/Big_Picture
+  Redirect permanent /trac/puppet/wiki/BootstrappingWithPuppet http://projects.puppetlabs.com/projects/puppet/wiki/Bootstrapping_With_Puppet
+  Redirect permanent /trac/puppet/wiki/BracketEditor http://projects.puppetlabs.com/projects/puppet/wiki/Bracket_Editor
+  Redirect permanent /trac/puppet/wiki/BranchTesting http://projects.puppetlabs.com/projects/puppet/wiki/Branch_Testing
+  Redirect permanent /trac/puppet/wiki/CertificatesAndSecurity http://projects.puppetlabs.com/projects/puppet/wiki/Certificates_And_Security
+  Redirect permanent /trac/puppet/wiki/ChangeManagement http://projects.puppetlabs.com/projects/puppet/wiki/Change_Management
+  Redirect permanent /trac/puppet/wiki/CommonMisconceptions http://projects.puppetlabs.com/projects/puppet/wiki/Common_Misconceptions
+  Redirect permanent /trac/puppet/wiki/CommonModules http://projects.puppetlabs.com/projects/puppet/wiki/Common_Modules
+  Redirect permanent /trac/puppet/wiki/CommunityRoles http://projects.puppetlabs.com/projects/puppet/wiki/Community_Roles
+  Redirect permanent /trac/puppet/wiki/CompleteConfiguration http://projects.puppetlabs.com/projects/puppet/wiki/Complete_Configuration
+  Redirect permanent /trac/puppet/wiki/Development/CodeNames http://projects.puppetlabs.com/projects/puppet/wiki/Development_Code_Names
+  Redirect permanent /trac/puppet/wiki/Development/CompleteResourceExample http://projects.puppetlabs.com/projects/puppet/wiki/Development_Complete_Resource_Example
+  Redirect permanent /trac/puppet/wiki/Development/CreatingCustomTypes http://projects.puppetlabs.com/projects/puppet/wiki/Development_Creating_Custom_Types
+  Redirect permanent /trac/puppet/wiki/Development/DeveloperRepositories http://projects.puppetlabs.com/projects/puppet/wiki/Developer_Repositories
+  Redirect permanent /trac/puppet/wiki/Development/DevelopmentLifecycle http://projects.puppetlabs.com/projects/puppet/wiki/Development_Development_Lifecycle
+  Redirect permanent /trac/puppet/wiki/Development/LanguageEvolution http://projects.puppetlabs.com/projects/puppet/wiki/Development_Language_Evolution
+  Redirect permanent /trac/puppet/wiki/Development/PracticalTypes http://projects.puppetlabs.com/projects/puppet/wiki/Development_Practical_Types
+  Redirect permanent /trac/puppet/wiki/Development/ProviderDevelopment http://projects.puppetlabs.com/projects/puppet/wiki/Development_Provider_Development
+  Redirect permanent /trac/puppet/wiki/Development/PuppetContinuousIntegration http://projects.puppetlabs.com/projects/puppet/wiki/Development_Puppet_Continuous_Integration
+  Redirect permanent /trac/puppet/wiki/Development/ReleaseChecklist http://projects.puppetlabs.com/projects/puppet/wiki/Development_Release_Checklist
+  Redirect permanent /trac/puppet/wiki/Development/WritingTests http://projects.puppetlabs.com/projects/puppet/wiki/Development_Writing_Tests
+  Redirect permanent /trac/puppet/wiki/DocumentationStandards http://projects.puppetlabs.com/projects/puppet/wiki/Documentation_Standards
+  Redirect permanent /trac/puppet/wiki/DocumentationStart http://projects.puppetlabs.com/projects/puppet/wiki/Documentation_Start
+  Redirect permanent /trac/puppet/wiki/DownloadingPuppet http://projects.puppetlabs.com/projects/puppet/wiki/Downloading_Puppet
+  Redirect permanent /trac/puppet/wiki/EditorTips http://projects.puppetlabs.com/projects/puppet/wiki/Editor_Tips
+  Redirect permanent /trac/puppet/wiki/ExportedResources http://projects.puppetlabs.com/projects/puppet/wiki/Exported_Resources
+  Redirect permanent /trac/puppet/wiki/ExternalNodes http://projects.puppetlabs.com/projects/puppet/wiki/External_Nodes
+  Redirect permanent /trac/puppet/wiki/FacterRecipes http://projects.puppetlabs.com/projects/puppet/wiki/Facter_Patterns
+  Redirect permanent /trac/puppet/wiki/FileServingConfiguration http://projects.puppetlabs.com/projects/puppet/wiki/File_Serving_Configuration
+  Redirect permanent /trac/puppet/wiki/FrequentlyAskedQuestions http://projects.puppetlabs.com/projects/puppet/wiki/Frequently_Asked_Questions
+  Redirect permanent /trac/puppet/wiki/GettingHelp http://projects.puppetlabs.com/projects/puppet/wiki/Getting_Help
+  Redirect permanent /trac/puppet/wiki/GettingStarted http://projects.puppetlabs.com/projects/puppet/wiki/Getting_Started
+  Redirect permanent /trac/puppet/wiki/GlossaryOfTerms http://projects.puppetlabs.com/projects/puppet/wiki/Glossary_Of_Terms
+  Redirect permanent /trac/puppet/wiki/InfrastructureDesignGuidelines http://projects.puppetlabs.com/projects/puppet/wiki/Infrastructure_Design_Guidelines
+  Redirect permanent /trac/puppet/wiki/IrcChannel http://projects.puppetlabs.com/projects/puppet/wiki/Irc_Channel
+  Redirect permanent /trac/puppet/wiki/LDAPNodes http://projects.puppetlabs.com/projects/puppet/wiki/Ldap_Nodes
+  Redirect permanent /trac/puppet/wiki/Lab42Infrastructure http://projects.puppetlabs.com/projects/puppet/wiki/Lab42_Infrastructure
+  Redirect permanent /trac/puppet/wiki/LanguageTutorial http://projects.puppetlabs.com/projects/puppet/wiki/Language_Tutorial
+  Redirect permanent /trac/puppet/wiki/ManagedByPuppet http://projects.puppetlabs.com/projects/puppet/wiki/Managed_By_Puppet
+  Redirect permanent /trac/puppet/wiki/ModuleOrganisation http://projects.puppetlabs.com/projects/puppet/wiki/Module_Organisation
+  Redirect permanent /trac/puppet/wiki/ModuleStandards http://projects.puppetlabs.com/projects/puppet/wiki/Module_Standards
+  Redirect permanent /trac/puppet/wiki/MultipleCertificateAuthorities http://projects.puppetlabs.com/projects/puppet/wiki/Multiple_Certificate_Authorities
+  Redirect permanent /trac/puppet/wiki/NameSpaceAuth http://projects.puppetlabs.com/projects/puppet/wiki/Name_Space_Auth
+  Redirect permanent /trac/puppet/wiki/NetworkedClasses http://projects.puppetlabs.com/projects/puppet/wiki/Networked_Classes
+  Redirect permanent /trac/puppet/wiki/NewToPuppet http://projects.puppetlabs.com/projects/puppet/wiki/New_To_Puppet
+  Redirect permanent /trac/puppet/wiki/ParsingArchitecture http://projects.puppetlabs.com/projects/puppet/wiki/Parsing_Architecture
+  Redirect permanent /trac/puppet/wiki/People/DigantCKasundra http://projects.puppetlabs.com/projects/puppet/wiki/People_Digant_C_Kasundra
+  Redirect permanent /trac/puppet/wiki/People/LukeKanies http://projects.puppetlabs.com/projects/puppet/wiki/People_Luke_Kanies
+  Redirect permanent /trac/puppet/wiki/PluginsInModules http://projects.puppetlabs.com/projects/puppet/wiki/Plugins_In_Modules
+  Redirect permanent /trac/puppet/wiki/Publications http://projects.puppetlabs.com/projects/puppet/wiki/Publications
+  Redirect permanent /trac/puppet/wiki/Puppet%20AIX http://projects.puppetlabs.com/projects/puppet/wiki/Puppet%20_Aix
+  Redirect permanent /trac/puppet/wiki/PuppetAugeas http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Augeas
+  Redirect permanent /trac/puppet/wiki/PuppetBestPractice http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Best_Practice
+  Redirect permanent /trac/puppet/wiki/PuppetBestPractice2 http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Best_Practice2
+  Redirect permanent /trac/puppet/wiki/PuppetBookErrata http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Book_Errata
+  Redirect permanent /trac/puppet/wiki/PuppetBooks http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Books
+  Redirect permanent /trac/puppet/wiki/PuppetCommonModules/SSH http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Common_Modules_Ssh
+  Redirect permanent /trac/puppet/wiki/PuppetCompatibility http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Compatibility
+  Redirect permanent /trac/puppet/wiki/PuppetCygwin http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Cygwin
+  Redirect permanent /trac/puppet/wiki/PuppetDebian http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Debian
+  Redirect permanent /trac/puppet/wiki/PuppetExecutables http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Executables
+  Redirect permanent /trac/puppet/wiki/PuppetFreeBSD http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Free_Bsd
+  Redirect permanent /trac/puppet/wiki/PuppetGentoo http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Gentoo
+  Redirect permanent /trac/puppet/wiki/PuppetInternals http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Internals
+  Redirect permanent /trac/puppet/wiki/PuppetIntrospection http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Introspection
+  Redirect permanent /trac/puppet/wiki/PuppetMacOSX http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Mac_Osx
+  Redirect permanent /trac/puppet/wiki/PuppetManifestDocumentation http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Manifest_Documentation
+  Redirect permanent /trac/puppet/wiki/PuppetMasters http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Masters
+  Redirect permanent /trac/puppet/wiki/PuppetModules http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Modules
+  Redirect permanent /trac/puppet/wiki/PuppetOpenBSD http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Open_Bsd
+  Redirect permanent /trac/puppet/wiki/PuppetPresentations http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Presentations
+  Redirect permanent /trac/puppet/wiki/PuppetRecipeManager http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Recipe_Manager
+  Redirect permanent /trac/puppet/wiki/PuppetRecipes http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Patterns
+  Redirect permanent /trac/puppet/wiki/PuppetRedHatCentos http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Red_Hat_Centos
+  Redirect permanent /trac/puppet/wiki/PuppetReporting http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Reporting
+  Redirect permanent /trac/puppet/wiki/PuppetSSL http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Ssl
+  Redirect permanent /trac/puppet/wiki/PuppetScalability http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Scalability
+  Redirect permanent /trac/puppet/wiki/PuppetShow http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Show
+  Redirect permanent /trac/puppet/wiki/PuppetSolaris http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Solaris
+  Redirect permanent /trac/puppet/wiki/PuppetSource http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Source
+  Redirect permanent /trac/puppet/wiki/PuppetSuSE http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_SuSE
+  Redirect permanent /trac/puppet/wiki/PuppetTemplating http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Templating
+  Redirect permanent /trac/puppet/wiki/PuppetUbuntu http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Ubuntu
+  Redirect permanent /trac/puppet/wiki/PuppetVersionControl http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Version_Control
+  Redirect permanent /trac/puppet/wiki/PuppetWindows http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_Windows
+  Redirect permanent /trac/puppet/wiki/PuppetWithLaunchd http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_With_Launchd
+  Redirect permanent /trac/puppet/wiki/PuppetWithRunit http://projects.puppetlabs.com/projects/puppet/wiki/Puppet_With_Runit
+  Redirect permanent /trac/puppet/wiki/RecipeRequests http://projects.puppetlabs.com/projects/puppet/wiki/Pattern_Requests
+  Redirect permanent /trac/puppet/wiki/RecipeTemplate http://projects.puppetlabs.com/projects/puppet/wiki/Pattern_Template
+  Redirect permanent /trac/puppet/wiki/Recipes http://projects.puppetlabs.com/projects/puppet/wiki/Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/ActiveNode http://projects.puppetlabs.com/projects/puppet/wiki/Active_Node_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/AmazonWebService http://projects.puppetlabs.com/projects/puppet/wiki/Amazon_Web_Service_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Amazon-EC2-Recipe http://projects.puppetlabs.com/projects/puppet/wiki/Amazon_Ec2_Recipe_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/AmazonEC2 http://projects.puppetlabs.com/projects/puppet/wiki/Amazon_Ec2_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/AptKeys http://projects.puppetlabs.com/projects/puppet/wiki/Apt_Keys_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Apt_Repositories http://projects.puppetlabs.com/projects/puppet/wiki/Apt_Repositories_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/AqueosFacterVps http://projects.puppetlabs.com/projects/puppet/wiki/Aqueos_Facter_Vps_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/AqueosShorewall http://projects.puppetlabs.com/projects/puppet/wiki/Aqueos_Shorewall_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Asterisk http://projects.puppetlabs.com/projects/puppet/wiki/Asterisk_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Authorized_keys http://projects.puppetlabs.com/projects/puppet/wiki/Authorized_Keys_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Autofs http://projects.puppetlabs.com/projects/puppet/wiki/Autofs_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/BuildingMultipartFiles http://projects.puppetlabs.com/projects/puppet/wiki/Building_Multipart_Files_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/CentralizedSudoers http://projects.puppetlabs.com/projects/puppet/wiki/Centralized_Sudoers_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/ClamAV http://projects.puppetlabs.com/projects/puppet/wiki/Clam_Av_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/DRBDFacts http://projects.puppetlabs.com/projects/puppet/wiki/Drbd_Facts_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Debian http://projects.puppetlabs.com/projects/puppet/wiki/Debian_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/DebianApache2Recipe http://projects.puppetlabs.com/projects/puppet/wiki/Debian_Apache2_Recipe_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/DebianPreseed http://projects.puppetlabs.com/projects/puppet/wiki/Debian_Preseed_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/DmiHardwareInfoRecipe http://projects.puppetlabs.com/projects/puppet/wiki/Dmi_Hardware_Info_Recipe_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/DownloadFileRecipe http://projects.puppetlabs.com/projects/puppet/wiki/Download_File_Recipe_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Drupal http://projects.puppetlabs.com/projects/puppet/wiki/Drupal_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/DslHintsAndTips http://projects.puppetlabs.com/projects/puppet/wiki/Dsl_Hints_And_Tips_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/EnvironmentVariables http://projects.puppetlabs.com/projects/puppet/wiki/Environment_Variables_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/FastRecursiveCopy http://projects.puppetlabs.com/projects/puppet/wiki/Fast_Recursive_Copy_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/FileBucket http://projects.puppetlabs.com/projects/puppet/wiki/File_Bucket_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/FilePermissionCheck http://projects.puppetlabs.com/projects/puppet/wiki/File_Permission_Check_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/FirmwarePassword http://projects.puppetlabs.com/projects/puppet/wiki/Firmware_Password_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Fonts http://projects.puppetlabs.com/projects/puppet/wiki/Fonts_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/GetGID http://projects.puppetlabs.com/projects/puppet/wiki/Get_Gid_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/GetUID http://projects.puppetlabs.com/projects/puppet/wiki/Get_Uid_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/GrowlManifestErrors http://projects.puppetlabs.com/projects/puppet/wiki/Growl_Manifest_Errors_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/HandlingDisparateDefinesWithClasses http://projects.puppetlabs.com/projects/puppet/wiki/Handling_Disparate_Defines_With_Classes_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Heartbeatv2 http://projects.puppetlabs.com/projects/puppet/wiki/Heartbeatv2_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/HighAvailability http://projects.puppetlabs.com/projects/puppet/wiki/High_Availability_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/HomeFact http://projects.puppetlabs.com/projects/puppet/wiki/Home_Fact_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/HostgroupFact http://projects.puppetlabs.com/projects/puppet/wiki/Hostgroup_Fact_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/InterfaceAliases http://projects.puppetlabs.com/projects/puppet/wiki/Interface_Aliases_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/InterfaceName http://projects.puppetlabs.com/projects/puppet/wiki/Interface_Name_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/KernelModules http://projects.puppetlabs.com/projects/puppet/wiki/Kernel_Modules_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/LDAPClientNSSwitch http://projects.puppetlabs.com/projects/puppet/wiki/Ldap_Client_Ns_Switch_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Logadm http://projects.puppetlabs.com/projects/puppet/wiki/Logadm_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Logrotate http://projects.puppetlabs.com/projects/puppet/wiki/Logrotate_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/ModuleIptables http://projects.puppetlabs.com/projects/puppet/wiki/Module_Iptables_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/ModuleSSHAuth http://projects.puppetlabs.com/projects/puppet/wiki/Module_Ssh_Auth_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Monit http://projects.puppetlabs.com/projects/puppet/wiki/Monit_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/MutualRestart http://projects.puppetlabs.com/projects/puppet/wiki/Mutual_Restart_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/MySQLServer http://projects.puppetlabs.com/projects/puppet/wiki/My_Sql_Server_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/MySQLStoredConfiguration http://projects.puppetlabs.com/projects/puppet/wiki/My_Sql_Stored_Configuration_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/MysqlWithSslAndPuppetCerts http://projects.puppetlabs.com/projects/puppet/wiki/Mysql_With_Ssl_And_Puppet_Certs_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/NFS http://projects.puppetlabs.com/projects/puppet/wiki/Nfs_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Nagios http://projects.puppetlabs.com/projects/puppet/wiki/Nagios_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/NetworkInterfaceTemplates http://projects.puppetlabs.com/projects/puppet/wiki/Network_Interface_Templates_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/NetworksFactsRecipe http://projects.puppetlabs.com/projects/puppet/wiki/Networks_Facts_Recipe_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/OpenNTPD http://projects.puppetlabs.com/projects/puppet/wiki/Open_Ntpd_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/PackageManagementWithDMG http://projects.puppetlabs.com/projects/puppet/wiki/Package_Management_With_Dmg_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/PackageVersionMatching http://projects.puppetlabs.com/projects/puppet/wiki/Package_Version_Matching_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/PasswordManagement http://projects.puppetlabs.com/projects/puppet/wiki/Password_Management_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Pkgsync http://projects.puppetlabs.com/projects/puppet/wiki/Pkgsync_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/PythonVersion http://projects.puppetlabs.com/projects/puppet/wiki/Python_Version_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/RaidFact http://projects.puppetlabs.com/projects/puppet/wiki/Raid_Fact_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/RailsMongrelApacheProxybalancer http://projects.puppetlabs.com/projects/puppet/wiki/Rails_Mongrel_Apache_Proxybalancer_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/RdiffBackup http://projects.puppetlabs.com/projects/puppet/wiki/Rdiff_Backup_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/ResolvConf http://projects.puppetlabs.com/projects/puppet/wiki/Resolv_Conf_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/ShowNodeObjects http://projects.puppetlabs.com/projects/puppet/wiki/Show_Node_Objects_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/SimpleText http://projects.puppetlabs.com/projects/puppet/wiki/Simple_Text_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Solaris_cde-login http://projects.puppetlabs.com/projects/puppet/wiki/Solaris_Cde_Login_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/SquidConfiguration http://projects.puppetlabs.com/projects/puppet/wiki/Squid_Configuration_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/SuSE_Version http://projects.puppetlabs.com/projects/puppet/wiki/Su_Se_Version_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/SubversionCommitHooks http://projects.puppetlabs.com/projects/puppet/wiki/Subversion_Commit_Hooks_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/SubversionIntegration http://projects.puppetlabs.com/projects/puppet/wiki/Subversion_Integration_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/SubversionWorkingCopy http://projects.puppetlabs.com/projects/puppet/wiki/Subversion_Working_Copy_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Sudo http://projects.puppetlabs.com/projects/puppet/wiki/Sudo_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/TemplateValidationFunction http://projects.puppetlabs.com/projects/puppet/wiki/Template_Validation_Function_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Timezone http://projects.puppetlabs.com/projects/puppet/wiki/Timezone_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/TracIntegration http://projects.puppetlabs.com/projects/puppet/wiki/Trac_Integration_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/UpdateFromSubversionRepo http://projects.puppetlabs.com/projects/puppet/wiki/Update_From_Subversion_Repo_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/UserAndHomedirRecipe http://projects.puppetlabs.com/projects/puppet/wiki/User_And_Homedir_Recipe_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/UserFact http://projects.puppetlabs.com/projects/puppet/wiki/User_Fact_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/VMWareGuest http://projects.puppetlabs.com/projects/puppet/wiki/Vm_Ware_Guest_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Vim http://projects.puppetlabs.com/projects/puppet/wiki/Vim_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/VirtualMachine http://projects.puppetlabs.com/projects/puppet/wiki/Virtual_Machine_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/Webmin http://projects.puppetlabs.com/projects/puppet/wiki/Webmin_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/WorkstationInheritance http://projects.puppetlabs.com/projects/puppet/wiki/Workstation_Inheritance_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/YumServerBuild http://projects.puppetlabs.com/projects/puppet/wiki/Yum_Server_Build_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/ZabbixAgent http://projects.puppetlabs.com/projects/puppet/wiki/Zabbix_Agent_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/ZonenameFact http://projects.puppetlabs.com/projects/puppet/wiki/Zonename_Fact_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/atjobs http://projects.puppetlabs.com/projects/puppet/wiki/Atjobs_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/cron http://projects.puppetlabs.com/projects/puppet/wiki/Cron_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/dmidecode http://projects.puppetlabs.com/projects/puppet/wiki/Dmidecode_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/sshdconfigTemplate http://projects.puppetlabs.com/projects/puppet/wiki/Sshdconfig_Template_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/sysctl http://projects.puppetlabs.com/projects/puppet/wiki/Sysctl_Patterns
+  Redirect permanent /trac/puppet/wiki/Recipes/syslog-ng http://projects.puppetlabs.com/projects/puppet/wiki/Syslog_Ng_Patterns
+  Redirect permanent /trac/puppet/wiki/ReferenceIndex http://projects.puppetlabs.com/projects/puppet/wiki/Reference_Index
+  Redirect permanent /trac/puppet/wiki/RegenerateSSL http://projects.puppetlabs.com/projects/puppet/wiki/Regenerate_Ssl
+  Redirect permanent /trac/puppet/wiki/ReleaseNotes http://projects.puppetlabs.com/projects/puppet/wiki/Release_Notes
+  Redirect permanent /trac/puppet/wiki/ReportsAndReporting http://projects.puppetlabs.com/projects/puppet/wiki/Reports_And_Reporting
+  Redirect permanent /trac/puppet/wiki/RoadMap http://projects.puppetlabs.com/projects/puppet/wiki/Road_Map
+  Redirect permanent /trac/puppet/wiki/RubyDSL http://projects.puppetlabs.com/projects/puppet/wiki/Ruby_Dsl
+  Redirect permanent /trac/puppet/wiki/RubySSL-2007-006 http://projects.puppetlabs.com/projects/puppet/wiki/Ruby_Ssl_2007_006
+  Redirect permanent /trac/puppet/wiki/SSLinTheYear2038 http://projects.puppetlabs.com/projects/puppet/wiki/Ss_Lin_The_Year2038
+  Redirect permanent /trac/puppet/wiki/ShadowPuppet http://projects.puppetlabs.com/projects/puppet/wiki/Shadow_Puppet
+  Redirect permanent /trac/puppet/wiki/SimplestPuppetInstallRecipe http://projects.puppetlabs.com/projects/puppet/wiki/Simplest_Puppet_Install_Pattern
+  Redirect permanent /trac/puppet/wiki/StablePlatforms http://projects.puppetlabs.com/projects/puppet/wiki/Stable_Platforms
+  Redirect permanent /trac/puppet/wiki/StyleGuide http://projects.puppetlabs.com/projects/puppet/wiki/Style_Guide
+  Redirect permanent /trac/puppet/wiki/TOC http://projects.puppetlabs.com/projects/puppet/wiki/Toc
+  Redirect permanent /trac/puppet/wiki/TransitioningFromCfengine http://projects.puppetlabs.com/projects/puppet/wiki/Transitioning_From_Cfengine
+  Redirect permanent /trac/puppet/wiki/UPGRADE http://projects.puppetlabs.com/projects/puppet/wiki/Upgrade
+  Redirect permanent /trac/puppet/wiki/UsingMongrel http://projects.puppetlabs.com/projects/puppet/wiki/Using_Mongrel
+  Redirect permanent /trac/puppet/wiki/UsingMongrelDebugging http://projects.puppetlabs.com/projects/puppet/wiki/Using_Mongrel_Debugging
+  Redirect permanent /trac/puppet/wiki/UsingMongrelNginx http://projects.puppetlabs.com/projects/puppet/wiki/Using_Mongrel_Nginx
+  Redirect permanent /trac/puppet/wiki/UsingMongrelOnDebian http://projects.puppetlabs.com/projects/puppet/wiki/Using_Mongrel_On_Debian
+  Redirect permanent /trac/puppet/wiki/UsingMongrelOnEnterpriseLinux http://projects.puppetlabs.com/projects/puppet/wiki/Using_Mongrel_On_Enterprise_Linux
+  Redirect permanent /trac/puppet/wiki/UsingMongrelPound http://projects.puppetlabs.com/projects/puppet/wiki/Using_Mongrel_Pound
+  Redirect permanent /trac/puppet/wiki/UsingMultipleEnvironments http://projects.puppetlabs.com/projects/puppet/wiki/Using_Multiple_Environments
+  Redirect permanent /trac/puppet/wiki/UsingPassenger http://projects.puppetlabs.com/projects/puppet/wiki/Using_Passenger
+  Redirect permanent /trac/puppet/wiki/UsingStoredConfiguration http://projects.puppetlabs.com/projects/puppet/wiki/Using_Stored_Configuration
+  Redirect permanent /trac/puppet/wiki/UsingTags http://projects.puppetlabs.com/projects/puppet/wiki/Using_Tags
+  Redirect permanent /trac/puppet/wiki/UsingUnicorn http://projects.puppetlabs.com/projects/puppet/wiki/Using_Unicorn
+  Redirect permanent /trac/puppet/wiki/VirtualResources http://projects.puppetlabs.com/projects/puppet/wiki/Virtual_Resources
+  Redirect permanent /trac/puppet/wiki/WhosUsingPuppet http://projects.puppetlabs.com/projects/puppet/wiki/Whos_Using_Puppet
+  Redirect permanent /trac/puppet/wiki/WikiStart http://projects.puppetlabs.com/projects/puppet/wiki/Wiki
+  Redirect permanent /trac/puppet/wiki/WritingYourOwnFunctions http://projects.puppetlabs.com/projects/puppet/wiki/Writing_Your_Own_Functions
+  Redirect permanent /trac/puppet/wiki/PageTemplates http://projects.puppetlabs.com/projects/puppet/wiki/Page_Templates
+  Redirect permanent /trac/puppet http://projects.puppetlabs.com/projects/puppet
+  Redirect permanent /trac/puppet/wiki http://projects.puppetlabs.com/projects/puppet/wiki
+  Redirect permanent /trac http://projects.puppetlabs.com
+   <Location /server-status/>
+     SetHandler server-status
+	     Allow from all
+   </Location>
+</VirtualHost>

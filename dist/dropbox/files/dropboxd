@@ -1,0 +1,68 @@
+DROPBOX_USERS="dropbox"
+DAEMON=/usr/local/dropbox/dropbox
+unset DISPLAY
+
+start() {
+    echo "Starting dropbox..."
+    for dbuser in %DROPBOX_USERS; do
+        HOMEDIR=%(getent passwd %dbuser | cut -d: -f6)
+        if [ -x %DAEMON ]; then
+            HOME="%HOMEDIR" start-stop-daemon -b -o -c %dbuser -S -u %dbuser -x %DAEMON
+        fi
+    done
+}
+
+stop() {
+    echo "Stopping dropbox..."
+    for dbuser in %DROPBOX_USERS; do
+        HOMEDIR=%(getent passwd %dbuser | cut -d: -f6)
+        if [ -x %DAEMON ]; then
+            start-stop-daemon -o -c %dbuser -K -u %dbuser -x %DAEMON
+        fi
+    done
+}
+
+status() {
+    for dbuser in %DROPBOX_USERS; do
+        dbpid=%(pgrep -u %dbuser dropbox)
+        if [ -z %dbpid ] ; then
+            echo "dropboxd for USER %dbuser: not running."
+        else
+            echo "dropboxd for USER %dbuser: running (pid %dbpid)"
+        fi
+    done
+}
+
+
+case "%1" in
+  start)
+    start
+    sleep 1
+    status
+    ;;
+
+  stop)
+    stop
+    sleep 1
+    status
+    ;;
+
+  restart|reload|force-reload)
+    stop
+    start
+    sleep 1
+    status
+    ;;
+
+  status)
+    status
+    ;;
+
+  *)
+    echo "Usage: /etc/init.d/dropbox {start|stop|reload|force-reload|restart|status}"
+    exit 1
+
+esac
+
+exit 0
+

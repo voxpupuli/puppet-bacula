@@ -13,8 +13,11 @@
 class puppetlabs::dxul {
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
 
+	include dropbox
+
   # Base
   include puppetlabs
+  include puppetlabs_ssl
   include account::master
  
   # Puppet
@@ -52,7 +55,39 @@ class puppetlabs::dxul {
     db_pw => 'c@11-m3-m1st3r-p1t4ul',
     port => '80',
   }
+
+	#vcsrepo{"${dir}/${name}":
+	#	source => $source,
+	#	revision => $version, 
+		#require => File[$dir],
+		#  path => $dir,
+	#}
+
+ 
+  # for redirection only 
+  #apache::vhost { 'projects.reductivelabs.com':
+  #  port => 80,
+  #  docroot => null,
+  #  ssl => false,
+  #  priority => 29,
+  #  template => 'puppetlabs/projects.reduct_vhost.erb',
+  #}
+
+
  
   # pDNS
   include pdns
+
+	cron {
+		"redmine issue dump":
+			user => root,
+			minute => 10,
+			hour => 1,
+			command => "(cd /opt/projects.puppetlabs.com; ./script/console production < console-csv.rb; cp issues_dump.csv ~james/Dropbox/Redmine\ Data/)";
+		"dropbox hourly sync":
+			user => james,
+			minute => 20,
+			command => "/home/james/bin/dropbox.py start";
+	}
+
 }

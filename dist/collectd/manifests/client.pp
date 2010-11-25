@@ -20,8 +20,7 @@ class collectd::client {
     path => '/etc/collectd/collectd.conf',
     content => template('collectd/collectd-client.conf.erb'),
     ensure => present,
-    require => [ Package['collectd'], Service['collectd'] ],
-    notify => Service['collectd'],
+    require => Package['collectd'],
   }
 
 }

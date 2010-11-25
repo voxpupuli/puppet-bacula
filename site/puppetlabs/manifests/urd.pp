@@ -1,7 +1,7 @@
 class puppetlabs::urd {
+	include puppetlabs::lan
 	include pkgs::admin
-	#include yumrepo::mirror
-	include yum::mirror
+	#include yum::mirror
 	include pxe
 
 }

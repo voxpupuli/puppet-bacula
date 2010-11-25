@@ -1,0 +1,27 @@
+NameVirtualHost *:<%= port %>
+<VirtualHost *:<%= port %>>
+        ServerName <%= name %>
+        DocumentRoot <%= docroot %>
+        <Directory <%= docroot %>>
+                Options Indexes
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        <Directory <%= docroot %>/*/conf>
+                Order allow,deny
+                Deny from all
+                Satisfy all
+        </Directory>
+
+       <Directory <%= docroot %>/*/db>
+                Order allow,deny
+                Deny from all
+                Satisfy all
+        </Directory>
+  ErrorLog /var/log/apache2/<%= name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  ServerSignature On
+</VirtualHost>

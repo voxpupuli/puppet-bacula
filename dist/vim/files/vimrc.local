@@ -1,0 +1,12 @@
+set showmode
+set nomodeline
+set tabstop=2
+set shiftwidth=2
+set nopaste
+set bs=2                " Allow backspacing over everything in insert mode
+set autoindent                          " Always set auto-indenting on
+set smartindent
+set history=50          " keep 50 lines of command history
+set ruler               " Show the cursor position all the time
+set viminfo='20,\"500   " Keep a .viminfo file.
+

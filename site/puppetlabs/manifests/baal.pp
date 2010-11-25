@@ -16,6 +16,7 @@ class puppetlabs::baal {
   # Base
   include puppetlabs
   include account::master
+  include vim
 
   # Puppet modules
   $dashboard_site = 'dashboard.puppetlabs.com'
@@ -68,6 +69,21 @@ class puppetlabs::baal {
     priority => 60,
     template => 'puppetlabs/redirection_vhost.conf.erb',
   }
+
+  apache::vhost { 'baal.puppetlabs.com': # vhost supporting plapt repo
+    priority => '08',
+    port => '80',
+    docroot => '/var/www',
+    template => 'puppetlabs/baal.conf.erb'
+  }
+
+	file { 
+		"/var/www/ubuntu": 
+			ensure => link, 
+			target => "/opt/repository/plapt/ubuntu"; 
+	}
+
+
 
 }
 

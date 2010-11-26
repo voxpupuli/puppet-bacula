@@ -34,8 +34,8 @@ class nagios::params {
 					 $nrpe_user = 'nrpe'
 					 $nrpe_group = 'nrpe'
 					 $nrpe_service = 'nrpe'
-           $nagios_plugin_packages = [ 'nagios-plugins-nrpe', 'nagios-plugins' ]
-           $nagios_service = 'nagios'
+           $nagios_plugin_packages = [ 'nagios-plugins-nrpe', 'nagios-plugins', 'nagios-plugins-all' ]
+           $nagios_service = 'nagios3'
          }
       }
 

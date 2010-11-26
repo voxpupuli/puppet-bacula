@@ -29,9 +29,14 @@ class puppetlabs::shell {
 	include apache
 
 	include munin
-  
+  include munin::puppet
+	
+	# Collectd
+	include collectd::client
+
 	$bacula_director = 'baal.puppetlabs.com'
 	$bacula_password = 'aNXF2C1LFdptETvihkk/z'
+  include bacula
 
   #include postfix
   wordpress::instance {'dev':

@@ -17,7 +17,7 @@ class collectd::client {
   $collectd_server = $collectd::params::collectd_server
 
   file { 'collectd-client':
-    path => '/etc/collectd/collectd.conf',
+    path => $collectd::params::collectd_configuration,
     content => template('collectd/collectd-client.conf.erb'),
     ensure => present,
     require => Package['collectd'],

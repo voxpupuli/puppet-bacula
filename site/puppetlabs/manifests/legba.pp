@@ -14,6 +14,7 @@ class puppetlabs::legba {
 
   include puppetlabs
   include account::master
+  include collectd::client
 
 	Account::User <| tag == 'prosvc' |>
 	Group <| tag == 'prosvc' |>

@@ -14,7 +14,7 @@
 class collectd {
   include collectd::params
 
-  package { 'collectd':
+  package { $collectd::params::collectd_packages:
     ensure => present,
   }
 

@@ -20,7 +20,7 @@ class puppetlabs::shell {
   include account::master
 
   # Puppet modules
-  $dashboard_site = 'pupdemo2.puppetlabs.com'
+  $dashboard_site = 'shell.puppetlabs.com'
   #include puppet::server
   include puppet::dashboard
 	include hudson::slave

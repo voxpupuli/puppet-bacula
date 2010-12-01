@@ -1,0 +1,62 @@
+#!/bin/sh
+
+BASEDIR=/var/www/html/yum
+
+echo "********************************"
+echo "*         SYNCING CORE         *"
+echo "********************************"
+# CentOS core
+for i in 4 5; do
+  for a in x86_64 i386 SRPMS; do
+    echo "********************************"
+    echo "* CORE ${i}/${a}"
+    echo "********************************"
+    mkdir -p $BASEDIR/centos/${i}/os/${a}/
+    rsync -avxHiy --progress  \
+      rsync://mirror.csclub.uwaterloo.ca/centos/${i}/os/${a}/ \
+      $BASEDIR/centos/${i}/os/${a}/
+  done
+done
+
+echo "********************************"
+echo "*       SYNCING UPDATES        *"
+echo "********************************"
+# CentOS Updates
+for i in 4 5; do
+  for a in x86_64 i386 SRPMS; do
+    echo "********************************"
+    echo "* UPDATES ${i}/${a}"
+    echo "********************************"
+    mkdir -p $BASEDIR/centos/${i}/updates/${a}/
+    rsync -avxHiy --progress  \
+      rsync://mirror.csclub.uwaterloo.ca/centos/${i}/updates/${a}/ \
+      $BASEDIR/centos/${i}/updates/${a}/
+  done
+done
+
+echo "********************************"
+echo "*         SYNCING EPEL         *"
+echo "********************************"
+# EPEL
+for i in 4 5; do
+  for a in x86_64 i386 SRPMS; do
+    echo "********************************"
+    echo "* EPEL ${i}/${a}"
+    echo "********************************"
+    mkdir -p $BASEDIR/epel/${i}/${a}/
+    rsync -vaxHiy --progress --numeric-ids --delay-updates --delete --delete-after \
+      rsync://mirrors.servercentral.net/fedora-epel/${i}/${a}/ \
+      $BASEDIR/epel/${i}/${a}/
+  done
+done
+
+# Groups
+cd $BASEDIR/
+for i in 4 5; do
+  for a in i386 x86_64; do
+    wget -e robots=off --wait 1 --accept=.html,.rpm,.gz,.xml -np -rmk \
+      http://buildsys.fedoraproject.org/buildgroups/rhel${i}/${a}/
+  done
+done
+
+

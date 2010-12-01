@@ -51,7 +51,7 @@ class pxe {
 		"${tftp_root}/images/ubuntu/amd64",
 	]
 	
-	file { $dirs: ensure => directory, owner => root, group => root, mode => 755; }
+	file { $dirs: ensure => directory, owner => root, group => root, mode => 755, checksum => none; }
 	
 	pxe::centos { 
 #		"centos_i386_4.8":

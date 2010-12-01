@@ -4,17 +4,35 @@ class yum::mirror {
 	include apache 
 
 	$storage = '/var/www/html'
-	$dirs = [
-		"${storage}/centos",
-	]
 
- package { 
-		"createrepo": ensure => present,
-  }
-
-	centos { [5.5, 4.8]:
-		require => Package['createrepo']
+	file { 
+		"/usr/local/bin/yum-mirror":
+			owner => root,
+			group => root,
+			mode => 750,
+			source => "puppet:///modules/yum/yum-mirror";
 	}
+
+	cron {
+		"yum-mirror":
+			user => root,
+			command => "/usr/local/bin/yum-mirror",
+			minute => 10,
+			hour => 1,
+			require => File["/usr/local/bin/yum-mirror"];
+	}
+
+	#$dirs = [
+	#	"${storage}/centos",
+	#]
+
+	#package { 
+	#	"createrepo": ensure => present,
+  #}
+
+	#centos { [5.5, 4.8]:
+	#	require => Package['createrepo']
+	#}
 
 }
 

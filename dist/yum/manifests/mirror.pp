@@ -5,6 +5,14 @@ class yum::mirror {
 
 	$storage = '/var/www/html'
 
+	file {
+		"${storage}/yum":
+			checksum => none,
+			owner => root,
+			group => root,
+			mode => 644;
+	}
+
 	file { 
 		"/usr/local/bin/yum-mirror":
 			owner => root,

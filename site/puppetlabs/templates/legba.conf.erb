@@ -1,0 +1,25 @@
+NameVirtualHost <%=ipaddress%>:<%= port %>
+<VirtualHost <%=ipaddress%>:<%= port %>>
+	<% if ssl == true %>
+	SSLEngine on
+	SSLCertificateFile <%=ssl_path%>/certs/pl.cert
+	SSLCertificateKeyFile <%=ssl_path%>/private/pl.key
+	<% end %>
+	ServerName <%= name %>
+	ServerAlias <%= serveraliases %>
+	DocumentRoot <%= docroot %>
+	<Directory <%= docroot %>>
+		<% if auth == true %>
+		AuthType basic
+		AuthName "private area"
+		AuthBasicProvider file
+		AuthUserFile <%=docroot%>/.htpasswd
+		Require valid-user
+		<% end %>
+		Options Indexes FollowSymLinks
+		AllowOverride FileInfo
+		Order allow,deny
+		allow from all
+	</Directory>
+	ServerSignature Off
+</VirtualHost>

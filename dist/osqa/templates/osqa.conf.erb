@@ -1,0 +1,37 @@
+# Must be readable and writable by apache
+WSGISocketPrefix ${APACHE_RUN_DIR}
+
+#NOTE: all urs below will need to be adjusted if
+#settings.FORUM_SCRIPT_ALIAS !='' (e.g. = 'forum/')
+#this allows "rooting" forum at [http://example.com/forum], if you like
+<VirtualHost *:<%=port%>>
+	ServerAdmin sysadm@puppetlabs.com
+	DocumentRoot <%=docroot%>
+	ServerName <%=fqdn%>
+
+	#run mod_wsgi process for django in daemon mode
+	#this allows avoiding confused timezone settings when
+	#another application runs in the same virtual host
+	WSGIDaemonProcess OSQA
+	WSGIProcessGroup OSQA
+
+	#force all content to be served as static files
+	#otherwise django will be crunching images through itself wasting time
+	Alias /m/ "/home/osqa/osqa-server/forum/skins/"
+        <Directory "/home/osqa/osqa-server/forum/skins">
+                Order deny,allow
+                Allow from all
+        </Directory>
+	Alias /upfiles/ "/home/osqa/osqa-server/forum/upfiles/"
+	<Directory "/home/osqa/osqa-server/forum/upfiles">
+		Order deny,allow
+		Allow from all
+	</Directory>
+
+	#this is your wsgi script described in the prev section
+	WSGIScriptAlias / /home/osqa/osqa-server/osqa.wsgi
+
+	CustomLog /var/log/apache2/osqa.access.log common
+	ErrorLog /var/log/apache2/osqa.error.log
+</VirtualHost>
+

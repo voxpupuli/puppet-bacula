@@ -20,8 +20,23 @@ class virtual::users {
     group => prosvc,
     tag => prosvc,
  }
+ @account::user {'gh':
+    comment => 'Garrett Honeycutt',
+    group => prosvc,
+    tag => prosvc,
+ }
+ @account::user {'cody':
+    comment => 'Cody Herriges',
+    group => prosvc,
+    tag => prosvc,
+ }
  @account::user {'nigel':
     comment => 'Nigel Kersten',
+    group => prosvc,
+    tag => prosvc,
+}
+ @account::user {'hunter':
+    comment => 'Hunter Haugen',
     group => prosvc,
     tag => prosvc,
 }
@@ -32,8 +47,8 @@ class virtual::users {
  }
  @account::user {'igal':
     comment => 'Igal Koshevoy',
-    group => sysadmin,
-    tag => sysadmin,
+    group => developers,
+    tag => developers,
  }
  @account::user {'matt':
     comment => 'Matt Robinson',
@@ -47,6 +62,11 @@ class virtual::users {
  }
  @account::user {'pberry':
     comment => 'Paul Berry',
+    group => developers,
+    tag => developers,
+ }
+ @account::user {'daniel':
+    comment => 'Daniel Pittman',
     group => developers,
     tag => developers,
  }
@@ -80,9 +100,20 @@ class virtual::users {
     group => sysadmin,
     tag => git,
  }
+# App users
  @account::user { 'hudson':
     comment => 'Hudson User',
     group => hudson,
     tag => hudson,
+ }
+ @account::user { 'patchwork':
+    comment => 'Patchwork User',
+    group => patchwork,
+    tag => patchwork,
+  }
+ @account::user { 'osqa':
+    comment => 'OSQA User',
+    group => osqa,
+    tag => osqa,
  }
 }

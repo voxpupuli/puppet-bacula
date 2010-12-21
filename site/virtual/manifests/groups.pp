@@ -15,4 +15,12 @@ class virtual::groups {
     ensure => present,
     gid => 669,
   }
+  @group {'osqa':
+    ensure => present,
+    gid => 670,
+  }
+  @group {'patchwork':
+    ensure => present,
+    gid => 671,
+  }
 }

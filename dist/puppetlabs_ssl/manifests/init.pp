@@ -18,6 +18,11 @@ class puppetlabs_ssl {
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 
   file {
+    "$ssl_path/certs":
+			ensure => directory,
+      mode => 0755,
+      owner => 'root',
+      group => 'root';
     "$ssl_path/certs/pl.cert":
       source => "puppet:///modules/puppetlabs_ssl/pl.cert",
       mode => 0644,
@@ -26,6 +31,11 @@ class puppetlabs_ssl {
     "$ssl_path/certs/ca.cert":
       source => "puppet:///modules/puppetlabs_ssl/ca.cert",
       mode => 0644,
+      owner => 'root',
+      group => 'root';
+    "$ssl_path/private":
+			ensure => directory,
+      mode => 0600,
       owner => 'root',
       group => 'root';
     "$ssl_path/private/pl.key":

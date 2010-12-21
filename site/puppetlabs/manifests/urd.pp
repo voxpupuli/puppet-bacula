@@ -3,5 +3,6 @@ class puppetlabs::urd {
 	include pkgs::admin
 	include yum::mirror
 	include pxe
+	include jumpstart
 
 }

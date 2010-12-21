@@ -1,4 +1,6 @@
 class puppetlabs::app01 {
+
+	include patchwork
 #	include pkgs::admin
 #	include django
 #  

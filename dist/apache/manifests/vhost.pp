@@ -23,7 +23,7 @@
 #    docroot => '/path/to/docroot',
 #  }
 #
-define apache::vhost( $port, $docroot, $ssl=true, $template='apache/vhost-default.conf.erb', $priority, $serveraliases = '' ) {
+define apache::vhost( $port, $docroot, $ssl=true, $template='apache/vhost-default.conf.erb', $priority, $serveraliases = '', $auth='false' ) {
 
   include apache
 

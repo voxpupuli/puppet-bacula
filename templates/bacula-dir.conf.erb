@@ -194,6 +194,7 @@ Schedule {
 Pool {
   Name = Default
   Pool Type = Backup
+	Action On Purge = Truncate
 }
 
 Pool {
@@ -212,7 +213,7 @@ Pool {
   Pool Type = Backup
   Recycle = yes           # automatically recycle Volumes
   AutoPrune = yes         # Prune expired volumes
-  Volume Retention = 24 days
+  Volume Retention = 21 days
   Maximum Volume Jobs = 60
   Label Format = Inc-
   Maximum Volumes = 7

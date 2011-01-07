@@ -4,7 +4,7 @@
 # redmine server
 #
 
-define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
+define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir, $backup='true') {
   require redmine  
   $version = $redmine::params::version
   $source = $redmine::params::source
@@ -36,8 +36,9 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
   #
   # Let's make sure the database is backed up
   #
-  bacula::mysql { $db: }
- 
+	if $backup == 'true' {
+  	bacula::mysql { $db: }
+	} 
   #
   # now, lets fire up this database
   #
@@ -86,13 +87,21 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir) {
     require => Exec["${name}-migrate"],
   }
 
-  file{ [ "${dir}/${name}/files", "${dir}/${name}/tmp" ]:
-    ensure => directory,
-    recurse => true,
-    owner => $user,
-    group => $group,
-    mode => '0777',
-    require => Exec["${name}-migrate"],
-  }
+  #file{ [ "${dir}/${name}/files", "${dir}/${name}/tmp" ]:
+  #  ensure => directory,
+  #  recurse => true,
+  #  owner => $user,
+  #  group => $group,
+  #  mode => '0777',
+  #  require => Exec["${name}-migrate"],
+  #}
+
+	cron { 
+		"redmine_files_and_tmp_permissions": # recursion file type makes for huge reports
+			command => "/usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chown $user:$group {} \; ; /usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chmod 777 {} \;",
+			user => root,
+			minute => "*/15";
+	}
+
 
 }

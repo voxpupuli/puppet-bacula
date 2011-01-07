@@ -63,6 +63,7 @@ NameVirtualHost 74.207.250.144:80
   Redirect permanent /trac/puppet/wiki/ManagedByPuppet http://puppetlabs.com/trac/puppet/wiki/Recipes
   Redirect permanent /products/facter/index.html  http://puppetlabs.com/products/facter
   Redirect permanent /products/puppet/documentation/configref.html http://docs.puppetlabs.com/references/stable/configuration.html
+  RedirectMatch permanent ^/trac/puppet/ticket/(.*)$ http://projects.puppetlabs.com/issues/$1
   Redirect permanent /trac/puppet/wiki/TypeReference http://docs.puppetlabs.com/references/stable/type.html 
   Redirect permanent /trac/puppet/wiki/PuppetIntroduction http://docs.puppetlabs.com/guides/introduction.html
   Redirect permanent /trac/puppet/wiki/FunctionReference   http://docs.puppetlabs.com/references/stable/function.html

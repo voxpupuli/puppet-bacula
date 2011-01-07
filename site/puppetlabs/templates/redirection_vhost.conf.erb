@@ -2,6 +2,7 @@ NameVirtualHost *:80
 <VirtualHost *:80>
   servername mail.puppetlabs.com
   serveralias calendar.puppetlabs.com
+  serveralias sites.puppetlabs.com
   Options +FollowSymlinks
   RewriteEngine on
   RewriteCond %{HTTP_HOST} ^mail\.puppetlabs\.com
@@ -9,7 +10,7 @@ NameVirtualHost *:80
   RewriteCond %{HTTP_HOST} ^calendar\.puppetlabs\.com  
   RewriteRule ^(.*)$ https://calendar.google.com/a/puppetlabs.com [R=permanent,L]
   RewriteCond %{HTTP_HOST} ^sites\.puppetlabs\.com
-  RewriteRule ^(.*)$ https://sites.google.com/a/puppetlabs.com [R=permanent,L]
+  RewriteRule ^(.*)$ https://sites.google.com/a/puppetlabs.com/$1 [R=permanent,L]
   ErrorLog /var/log/apache2/redirects.puppetlabs.com_error.log
   LogLevel info
   CustomLog /var/log/apache2/redirects.puppetlabs.com_access.log combined

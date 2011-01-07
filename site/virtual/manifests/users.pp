@@ -45,11 +45,12 @@ class virtual::users {
     group => developers,
     tag => developers,
  }
- @account::user {'igal':
-    comment => 'Igal Koshevoy',
-    group => developers,
-    tag => developers,
- }
+# @account::user {'igal':
+#    ensure => absent,
+#    comment => 'Igal Koshevoy',
+#    group => developers,
+#    tag => developers,
+# }
  @account::user {'matt':
     comment => 'Matt Robinson',
     group => developers,

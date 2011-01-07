@@ -56,25 +56,6 @@ class puppetlabs::dxul {
     port => '80',
   }
 
-	#vcsrepo{"${dir}/${name}":
-	#	source => $source,
-	#	revision => $version, 
-		#require => File[$dir],
-		#  path => $dir,
-	#}
-
- 
-  # for redirection only 
-  #apache::vhost { 'projects.reductivelabs.com':
-  #  port => 80,
-  #  docroot => null,
-  #  ssl => false,
-  #  priority => 29,
-  #  template => 'puppetlabs/projects.reduct_vhost.erb',
-  #}
-
-
- 
   # pDNS
   include pdns
 
@@ -89,5 +70,12 @@ class puppetlabs::dxul {
 			minute => 20,
 			command => "/home/james/bin/dropbox.py start";
 	}
+
+	#vcsrepo {
+	#	"/opt/git/puppetmaster-training.git":
+	#		ensure => bare,
+	#		provider => git,
+	#		source => "git@github.com:puppetlabs/puppetmaster-training.git";
+	#}
 
 }

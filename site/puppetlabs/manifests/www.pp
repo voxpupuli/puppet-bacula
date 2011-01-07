@@ -25,10 +25,10 @@ class puppetlabs::www {
 	file {
 		"/var/www/puppetlabs.com/downloads/training/current-pm-vm.tar.gz":
 			ensure => link,
-			target => "centos-5.5-2.6.1.tar.gz";
+			target => "centos-5.5-2.6.4.tar.gz";
 		"/var/www/puppetlabs.com/downloads/training/current-pm-vm-ovf.tar.gz":
 			ensure => link,
-			target => "centos-5.5-2.6.1-ovf.tar.gz";
+			target => "centos-5.5-2.6.4-ovf.tar.gz";
 	}
 		
 

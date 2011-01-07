@@ -37,7 +37,7 @@ class forge {
   vcsrepo { '/opt/forge':
     source => 'http://github.com/reductivelabs/puppet-module-site.git',
     provider => git,
-    revision => 'r0.1.14',
+    revision => 'r0.1.15',
     ensure => present,
     require => File['/opt/forge'],
   }

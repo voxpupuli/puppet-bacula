@@ -2,7 +2,7 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
 <VirtualHost <%= ipaddress %>:<%= port %>>
   ServerName projects.reductivelabs.com
 <% if ssl == true %>
-  Redirect / https://projects.puppetlabs.com/
+  Redirect / https://<%=srvname%>/
   SSLEngine on
   SSLCertificateFile /etc/ssl/certs/pl.cert
   SSLCertificateKeyFile /etc/ssl/private/pl.key
@@ -13,7 +13,7 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
 
 <VirtualHost <%= ipaddress %>:<%= port %>>
   #ServerName <%= name %>
-  ServerName projects.puppetlabs.com
+  ServerName <%=srvname%>
   DocumentRoot <%= docroot %>
 
 	RewriteEngine On

@@ -1,5 +1,7 @@
-define redmine::unicorn ($db, $db_user, $db_pw, $dir, $port='80') {
+define redmine::unicorn ($db, $db_user, $db_pw, $dir, $port='80', $backup='true') {
   include apache::params
+
+	# more modules: rewrite, ssl, headers
 
   a2mod { [ 'proxy', 'proxy_balancer', 'proxy_http' ]: ensure => present, }
 
@@ -11,7 +13,7 @@ define redmine::unicorn ($db, $db_user, $db_pw, $dir, $port='80') {
   service { 'unicorn':
     ensure => running,
     enable => true,
-    require => Package['unicorn'],
+    require => [Package['unicorn'],File["/etc/init.d/unicorn"]],
   }
 
   redmine::instance { $name:
@@ -21,9 +23,11 @@ define redmine::unicorn ($db, $db_user, $db_pw, $dir, $port='80') {
     user => $apache::params::user, 
     group => $apache::params::group, 
     dir => $dir,
+		backup => $backup,
   }
 
   apache::vhost { $name:
+	  servername => $name,
     port     => $port,
     priority => '30',
     ssl => false,
@@ -33,6 +37,7 @@ define redmine::unicorn ($db, $db_user, $db_pw, $dir, $port='80') {
   }
 
   apache::vhost { "${name}_ssl":
+	  servername => $name,
     port     => 443,
     priority => '31',
     ssl => true,
@@ -50,7 +55,17 @@ define redmine::unicorn ($db, $db_user, $db_pw, $dir, $port='80') {
     owner   => $apache::params::user,
     group   => $apache::params::group,
     require => Redmine::Instance[$name],
-    source  => "puppet:///modules/redmine/unicorn.config.rb";
+    content  => template("redmine/unicorn.config.rb.erb");
   }
+	file { "/etc/init.d/unicorn":
+		owner => root,
+		group => root,
+		mode => 755,
+		content => template("redmine/unicorn.initscript.erb");
+	}
+	file { "/usr/bin/unicorn_rails":
+		ensure => symlink,
+		target => "/var/lib/gems/1.8/bin/unicorn_rails";
+	}
 
 }

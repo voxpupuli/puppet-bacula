@@ -23,9 +23,15 @@
 #    docroot => '/path/to/docroot',
 #  }
 #
-define apache::vhost( $port, $docroot, $ssl=true, $template='apache/vhost-default.conf.erb', $priority, $serveraliases = '', $auth='false' ) {
+define apache::vhost( $port, $docroot, $ssl=true, $template='apache/vhost-default.conf.erb', $priority, $serveraliases = '', $auth='false', $servername = '' ) {
 
   include apache
+
+	if $servername == '' {
+		$srvname = "$name"
+	} else {
+		$srvname = "$servername"
+	}
 
   file {"${apache::params::vdir}/${priority}-${name}":
     content => template($template),

@@ -203,9 +203,10 @@ Pool {
   Recycle = Yes
   AutoPrune = Yes
   Volume Retention = 6 months
-  Maximum Volume Jobs = 24
+  Maximum Volume Jobs = 1
+	Maximum Volume Bytes = 1000000000
   Label Format = Full-
-  Maximum Volumes = 18
+  #Maximum Volumes = 30
 }
 
 Pool {
@@ -214,9 +215,10 @@ Pool {
   Recycle = yes           # automatically recycle Volumes
   AutoPrune = yes         # Prune expired volumes
   Volume Retention = 21 days
-  Maximum Volume Jobs = 60
+  #Maximum Volume Jobs = 60
+	Maximum Volume Bytes = 4000000000
   Label Format = Inc-
-  Maximum Volumes = 7
+  #Maximum Volumes = 7
 }
 # Definition of file storage device
 Storage {

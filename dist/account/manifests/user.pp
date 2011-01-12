@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false'){
+define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false', $uid =''){
   
 	if $test == true { # what does this even do?
     $userdir = "puppet:///modules/account/${name}"
@@ -38,43 +38,45 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
     $homedir = $home 
   } else {
     $homedir = $kernel ? {
+			Darwin  => "/Users/${name}",
 			default => "/home/${name}",
-			Darwin => "/Users/${name}",
 		}
   }
+
+	if $uid {
+		$userid = $uid
+	} else {
+		$userid = undef
+	}
   
 	$setpass = setpass($name)
   
 	user { $name: # do stuff
-    groups => $groups,
-    gid => $groupname,
-    ensure => $ensure,
-    comment => $comment,
-    home => $homedir,
+    gid        => $groupname,
+		uid        => $userid,
+    home       => $homedir,
+    ensure     => $ensure,
+    groups     => $groups,
+    comment    => $comment,
     managehome => $kernel ? {
-			Darwin => false,
+			Darwin  => false,
 			default => true,
 		},
     password => $setpass ? {
-      '' => undef,
+      ''      => undef,
       default => $setpass,
     },
     shell => $shell,
   }
 
-  File { owner => $name, group => $groupname}
-  file {
-    "${homedir}": ensure => directory, source => $userdir;
-  #  "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname;
-  #  "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname;
-  }
-  #
-  # Add AllowUser line fragment to sshd_config.
-  #
-  #fragment { "sshd_config_AllowUsers-${name}":
-  #  path => "/etc/ssh",
-  #  target => "sshd_config",
-  #  content => "AllowUsers ${name}\n",
-  #}
+	if $ensure == 'present' {
+	  File { owner => $name, group => $groupname}
+	  file {
+	    "${homedir}": ensure => directory, owner => $name, group => $groupname, source => $userdir;
+	    "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname;
+	    "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname;
+	  }
+	}
+
 }
 

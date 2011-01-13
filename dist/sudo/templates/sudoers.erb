@@ -1,0 +1,29 @@
+#
+# DO NOT EDIT! This file is managed by Puppet so any changes you make locally will be lost.
+#
+## Command Aliases
+## These are groups of related commands...
+
+## Installation and management of software
+
+#
+# This flag needs to be off for ControlTier to work:
+#
+# Defaults    requiretty
+Defaults visiblepw
+Defaults    env_reset
+Defaults    env_keep = "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR \
+                        LS_COLORS MAIL PS1 PS2 QTDIR USERNAME \
+                        LANG LC_ADDRESS LC_CTYPE LC_COLLATE LC_IDENTIFICATION \
+                        LC_MEASUREMENT LC_MESSAGES LC_MONETARY LC_NAME LC_NUMERIC \
+                        LC_PAPER LC_TELEPHONE LC_TIME LC_ALL LANGUAGE LINGUAS \
+                        _XKB_CHARSET XAUTHORITY"
+#
+# User and group based sudo permissions
+#
+root	   ALL=(ALL) 	ALL
+%sysadmin	ALL=(ALL)	ALL
+
+# Support for munin passenger plugins
+munin ALL=(ALL) NOPASSWD:/usr/bin/passenger-status, /usr/bin/passenger-memory-stats
+

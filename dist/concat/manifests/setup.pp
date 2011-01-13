@@ -7,7 +7,8 @@
 class concat::setup {
     $concatdir = "/var/lib/puppet/concat"
     $sortpath = $operatingsystem ? {
-        darwin => "/usr/bin/sort",
+        Darwin => "/usr/bin/sort",
+        Ubuntu => "/usr/bin/sort",
         default => "/bin/sort",
     }
 

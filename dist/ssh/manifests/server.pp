@@ -13,6 +13,7 @@
 class ssh::server {
   include ssh
 	include ssh::params
+	include concat::setup
 	$ssh_service = $ssh::params::ssh_service
 	$sshclient_package = $ssh::params::sshclient_package
 
@@ -21,17 +22,13 @@ class ssh::server {
     require => Package["${sshclient_package}"],
     notify => Service['sshd'],
   }  
-  fragment { 'sshd_config-header':
+  concat::fragment { 'sshd_config-header':
     order => '00',
-    path => '/etc/ssh',
-    target => 'sshd_config',
-    source => 'puppet:///modules/ssh/sshd_config',
+    target => '/etc/ssh/sshd_config',
+    content => template("ssh/sshd_config.erb"),
   }
-  fragment::concat { 'sshd_config':
-    owner => 'root',
-    group => 'root',
+  concat { '/etc/ssh/sshd_config':
     mode => '0640',
-    path => '/etc/ssh',
     require => Package['openssh-server'],
     notify => Service['sshd'],
   }

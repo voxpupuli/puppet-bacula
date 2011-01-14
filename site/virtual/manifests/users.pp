@@ -81,6 +81,14 @@ class virtual::users {
     tag     => allstaff,
  }
 
+ @account::user {'jose':
+    comment => 'Jose Palafox',
+		uid     => '1120',
+    group   => allstaff,
+		groups  => ["prosvc"],
+    tag     => allstaff,
+ }
+
  @account::user {'jhelwig':
     comment => 'Jacob Helwig',
 		uid     => '1121',

@@ -41,10 +41,20 @@ class nagios::server {
   apache::vhost { 'nagios.puppetlabs.com':
     port => '80',
     priority => '30',
+		#ssl      => 'false',
     docroot => '/usr/share/nagios3/htdocs',
     template => 'nagios/nagios-apache.conf.erb',
     require => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 
   }
+
+  #apache::vhost { 'nagios.puppetlabs.com_ssl':
+  #  port => '443',
+  #  priority => '31',
+	#	ssl      => 'true',
+  #  docroot => '/usr/share/nagios3/htdocs',
+  #  template => 'nagios/nagios-apache.conf.erb',
+  #  require => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 
+  #}
 
   Nagios_host <<||>>
   Nagios_service <<||>>

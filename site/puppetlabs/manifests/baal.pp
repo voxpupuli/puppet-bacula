@@ -15,6 +15,7 @@ class puppetlabs::baal {
 
   # Base
   include puppetlabs
+	include puppetlabs_ssl
   include account::master
   include vim
 
@@ -62,14 +63,6 @@ class puppetlabs::baal {
   # Gitolite
   Account::User <| tag == 'git' |>
 
-  apache::vhost {'mail.puppetlabs.com':
-    port => 80,
-    docroot => null,
-    ssl => false,
-    priority => 60,
-    template => 'puppetlabs/redirection_vhost.conf.erb',
-  }
-
   apache::vhost { 'baal.puppetlabs.com': # vhost supporting plapt repo
     priority => '08',
     port => '80',
@@ -83,7 +76,14 @@ class puppetlabs::baal {
 			target => "/opt/repository/plapt/ubuntu"; 
 	}
 
-
+	cron {
+		"compress_reports":
+		  user => root,
+			command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml" -mtime +90 -exec gzip {} \;',
+			minute => '0',
+			hour => '1',
+			weekday => '1';
+	}
 
 }
 

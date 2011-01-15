@@ -1,19 +1,21 @@
 define redmine::unicorn ($db, $db_user, $db_pw, $dir, $port='80', $backup='true') {
   include apache::params
 
-	# more modules: rewrite, ssl, headers
+	# more modules: ssl
 
   a2mod { [ 'proxy', 'proxy_balancer', 'proxy_http' ]: ensure => present, }
 
-  package { 'unicorn':
-    ensure => installed,
-    provider => gem,
-  }
+
+	package {
+		"libmysql-ruby": ensure => installed;
+  	'unicorn': ensure => installed, provider => gem;
+  	'i18n': ensure => '0.4.2', provider => gem;
+	}
 
   service { 'unicorn':
     ensure => running,
     enable => true,
-    require => [Package['unicorn'],File["/etc/init.d/unicorn"]],
+    require => [Package['unicorn'],File["/etc/init.d/unicorn","${dir}/${name}/config/unicorn.config.rb"]],
   }
 
   redmine::instance { $name:

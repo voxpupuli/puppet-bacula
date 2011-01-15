@@ -2,6 +2,12 @@
         ServerName <%= name %>
         DocumentRoot <%= docroot %>
 
+        #<% if ssl == true %>
+        #SSLEngine on
+        #SSLCertificateFile /etc/ssl/certs/pl.cert
+        #SSLCertificateKeyFile /etc/ssl/private/pl.key
+        #<% end %>
+
         ScriptAlias /cgi-bin/nagios3 /usr/lib/cgi-bin/nagios3
 
         Alias /nagios3/stylesheets /etc/nagios3/stylesheets

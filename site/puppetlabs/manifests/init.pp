@@ -14,6 +14,10 @@ class puppetlabs {
   #
   # This is our base install for all of our servers. 
   #  
+
+	ssh::allowgroup { "sysadmin": }
+	sudo::allowgroup { "sysadmin": }
+
   include nagios
 	include munin
   include ntp
@@ -21,6 +25,7 @@ class puppetlabs {
   include ssh::server
   include virtual::users 
   include sudo
-  Account::User <| tag == 'sysadmin' |>
-  Group <| tag == 'sysadmin' |>
+
+	Account::User <| tag == 'allstaff' |>
+	Group <| tag == 'allstaff' |>
 }

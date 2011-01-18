@@ -1,0 +1,40 @@
+#WSGIPythonPath /srv/patchwork/apps:/srv/patchwork/lib/python
+<VirtualHost *:443>
+    ServerAdmin webmaster@localhost
+
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/certs/pl.cert
+  SSLCertificateKeyFile /etc/ssl/private/pl.key
+
+
+    ErrorLog /var/log/apache2/error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    CustomLog /var/log/apache2/access.log combined
+
+    <IfModule mod_alias.c>
+        Alias /images/ "/srv/patchwork/htdocs/images/"
+        Alias /css/ "/srv/patchwork/htdocs/css/"
+        Alias /js/ "/srv/patchwork/htdocs/js/"
+        Alias /robots.txt "/srv/patchwork/htdocs/robots.txt"
+        <Directory "/srv/patchwork/htdocs">
+            Order allow,deny
+            Allow from all
+        </Directory>
+
+        Alias /media/ "/srv/patchwork/lib/packages/django-1.2/django/contrib/admin/media/"
+
+        <Directory "/srv/patchwork/lib/packages/django-1.2/django/contrib/admin/media/">
+            Order allow,deny
+            Allow from all
+        </Directory>
+    </IfModule>
+
+    WSGIScriptAlias / "/srv/patchwork/patchwork.wsgi"
+    WSGIPassAuthorization On
+
+</VirtualHost>
+

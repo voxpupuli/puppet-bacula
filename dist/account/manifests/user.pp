@@ -10,6 +10,7 @@
 #
 # Sample Usage:
 #
+
 define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false', $uid =''){
   
 	if $test == true { # what does this even do?
@@ -19,6 +20,10 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
   else {
     $userdir = "puppet:///modules/site-files/userdirs/${name}"
   }
+
+	if $shell == '/bin/zsh' {
+	  Package <| title == 'zsh' |>
+	}
     
   if $group { # realize needed groups
     $groupname = $group

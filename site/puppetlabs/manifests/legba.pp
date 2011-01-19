@@ -17,6 +17,10 @@ class puppetlabs::legba {
   include account::master
   include collectd::client
 
+	#Acount::User <| tag == 'developers' |>
+	#Group <| tag == 'developers' |>
+	ssh::allowgroup { "prosvc": }
+
 	$ssl_path = $puppetlabs_ssl::params::ssl_path
 
   apache::vhost {'ps.puppetlabs.com':

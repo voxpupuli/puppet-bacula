@@ -100,6 +100,7 @@ class virtual::users {
  @account::user {'zach':
     comment => 'Zach Leslie',
 		uid     => '1123',
+		shell   => '/bin/bash',
     group   => allstaff,
 		groups  => ["sysadmin","operations"],
     tag     => allstaff,

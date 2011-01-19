@@ -11,6 +11,8 @@
 # Sample Usage:
 #
 class puppetlabs::shell {
+	ssh::allowgroup { "allstaff": }
+
   # Mysql
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4a1'
   include mysql::server
@@ -55,12 +57,6 @@ class puppetlabs::shell {
     db_user => 'bbpress',
     db_pw => 'alskjdasidjLKLKJoiajksldmalskjLIJSd817238172u',
   }
-
-	
-	Account::User <| tag == 'prosvc' |>
-	Group <| tag == 'prosvc' |>
-	Account::User <| tag == 'developers' |>
-	Group <| tag == 'developers' |>
 
 }
 

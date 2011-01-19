@@ -25,6 +25,7 @@ class puppetlabs {
   include ssh::server
   include virtual::users 
   include sudo
+	include packages
 
 	Account::User <| tag == 'allstaff' |>
 	Group <| tag == 'allstaff' |>

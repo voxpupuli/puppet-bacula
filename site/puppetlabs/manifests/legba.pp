@@ -20,6 +20,7 @@ class puppetlabs::legba {
 	#Acount::User <| tag == 'developers' |>
 	#Group <| tag == 'developers' |>
 	ssh::allowgroup { "prosvc": }
+	ssh::allowgroup { "enterprise": }
 
 	$ssl_path = $puppetlabs_ssl::params::ssl_path
 

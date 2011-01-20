@@ -93,7 +93,7 @@ class virtual::users {
     comment => 'Jacob Helwig',
 		uid     => '1121',
     group   => allstaff,
-		groups  => ["developers"],
+		groups  => ["developers","enterprise"],
     tag     => allstaff,
  }
 
@@ -118,7 +118,7 @@ class virtual::users {
     comment => 'Nigel Kersten',
     group   => allstaff,
 		uid     => '1127',
-		groups  => ["prosvc"],
+		groups  => ["prosvc","enterprise"],
     tag     => allstaff,
  }
 
@@ -157,7 +157,7 @@ class virtual::users {
     comment => 'Daniel Pittman',
 		uid     => '1134',
     group   => allstaff,
-		groups  => ["developers"],
+		groups  => ["developers","enterprise"],
     tag     => allstaff,
  }
  

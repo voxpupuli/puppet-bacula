@@ -23,6 +23,10 @@ class virtual::groups {
 		ensure => present,
 		gid    => 674,
 	}
+	@group {'enterprise':
+		ensure => present,
+		gid    => 675,
+	}
 
 #
 # Service Groups

@@ -81,14 +81,12 @@ class puppetlabs::baal {
 		  user => root,
 			command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml" -mtime +3 -exec gzip {} \;',
 			minute => '0',
-			hour => '1',
-			weekday => '1';
+			hour => '1';
 		"clean_old_reports":
 		  user => root,
 			command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml.gz" -mtime +30 -exec rm {} \;',
 			minute => '0',
-			hour => '2',
-			weekday => '1';
+			hour => '2';
 	}
 
 }

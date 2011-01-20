@@ -12,6 +12,7 @@
 #
 
 define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false', $uid =''){
+	include packages::shells
   
 	if $test == true { # what does this even do?
     $userdir = "puppet:///modules/account/${name}"
@@ -63,10 +64,7 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
     ensure     => $ensure,
     groups     => $groups,
     comment    => $comment,
-    managehome => $kernel ? {
-			Darwin  => false,
-			default => true,
-		},
+		managehome => false,
     password => $setpass ? {
       ''      => undef,
       default => $setpass,
@@ -77,9 +75,9 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
 	if $ensure == 'present' {
 	  File { owner => $name, group => $groupname}
 	  file {
-	    "${homedir}": ensure => directory, owner => $name, group => $groupname, source => $userdir;
-	    "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname;
-	    "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname;
+	    "${homedir}": ensure => directory, owner => $name, group => $groupname, source => $userdir, require => User["$name"];
+	    "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname, require => User["$name"];
+	    "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname, require => User["$name"];
 	  }
 	}
 

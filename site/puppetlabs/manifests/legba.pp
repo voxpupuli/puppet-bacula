@@ -21,6 +21,7 @@ class puppetlabs::legba {
 	#Group <| tag == 'developers' |>
 	ssh::allowgroup { "prosvc": }
 	ssh::allowgroup { "enterprise": }
+	ssh::allowgroup { "developers": }
 
 	$ssl_path = $puppetlabs_ssl::params::ssl_path
 
@@ -65,13 +66,8 @@ class puppetlabs::legba {
     template => 'puppetlabs/legba.conf.erb',
 	}
 
-	file { "/opt/pm": ensure => directory, owner => root, group => prosvc, mode => 664, recurse => true, checksum => none; }
-	file { "/opt/pm/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/legba_htaccess"; }
-
-	Account::User <| tag == 'prosvc' |>
-	Group <| tag == 'prosvc' |>
-	Account::User <| tag == 'developers' |>
-	Group <| tag == 'developers' |>
+	file { "/opt/pm": ensure => directory, owner => root, group => enterprise, mode => 664, recurse => true, checksum => none; }
+	file { "/opt/pm/.htaccess": owner => root, group => enterprise, mode => 644, source => "puppet:///modules/puppetlabs/legba_htaccess"; }
 
 }
 

@@ -25,11 +25,11 @@ class puppetlabs::mon0 {
       user => zach,
       minute => "*/5";
     "start_ii.sh":
-			command => "~/start_ii.sh",
+			command => "~/bin/start_ii.sh",
       user => zach,
-      minute => "*";
+      minute => "*/3";
     "ircusers_graph":
-			command => '/usr/bin/gmetric -c /etc/ganglia/gmond.conf --name="ircusers" --value=`echo "/LIST #puppet" > ~/irc/irc.freenode.net/in; sleep 10; grep \#puppet ~/irc/irc.freenode.net/out | tail -n 1 | awk \'{ print $4 }\'` --type=int16',
+			command => '/usr/bin/gmetric -c /etc/ganglia/gmond.conf --name="ircusers" --value=`~/bin/get_irc_users.sh` --type=int16',
       user => zach,
       minute => "*/5";
     "puppet-users-count":
@@ -40,6 +40,11 @@ class puppetlabs::mon0 {
 			command => '/usr/bin/gmetric -c /etc/ganglia/gmond.conf --name="puppet-dev-count" --value=`wget -q -O - http://groups.google.com/group/puppet-dev | grep Members | awk \'{ print $NF }\'` --type=int16',
       user => zach,
       minute => "*/10";
+    "gd_irc.sh":
+			command => '~/bin/gd_irc_csv.sh >> ~/projects/irc/irc_users.csv',
+      user => zach,
+      minute => "*/10";
+
   }
 
 }

@@ -70,18 +70,11 @@ class puppetlabs::baal {
     template => 'puppetlabs/baal.conf.erb'
   }
 
-	file { 
-		"/var/www/ubuntu": 
-			ensure => link, 
-			target => "/opt/repository/plapt/ubuntu"; 
-	}
-
 	cron {
 		"compress_reports":
 		  user => root,
-			command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml" -mtime +3 -exec gzip {} \;',
-			minute => '0',
-			hour => '1';
+			command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml" -mtime +1 -exec gzip {} \;',
+			minute => '9';
 		"clean_old_reports":
 		  user => root,
 			command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml.gz" -mtime +30 -exec rm {} \;',

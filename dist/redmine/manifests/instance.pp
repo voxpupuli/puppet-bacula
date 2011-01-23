@@ -71,7 +71,7 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir, $backup='t
   }
   file{ [ "${dir}/${name}/public", "${dir}/${name}/public/plugin_assets" ]:
     ensure => directory,
-    recurse => true,
+  #  recurse => true,
     owner => $user,
     group => $group,
     mode => '0755',
@@ -80,28 +80,31 @@ define redmine::instance ($db, $db_user, $db_pw, $user, $group, $dir, $backup='t
 
   file{ "${dir}/${name}/log":
     ensure => directory,
-    recurse => true,
+  #  recurse => true,
     owner => $user,
     group => $group,
     mode => '0666',
     require => Exec["${name}-migrate"],
   }
 
-  #file{ [ "${dir}/${name}/files", "${dir}/${name}/tmp" ]:
-  #  ensure => directory,
+  file{ [ "${dir}/${name}/files", "${dir}/${name}/tmp" ]:
+    ensure => directory,
   #  recurse => true,
-  #  owner => $user,
-  #  group => $group,
-  #  mode => '0777',
-  #  require => Exec["${name}-migrate"],
-  #}
+    owner => $user,
+    group => $group,
+    mode => '0777',
+    require => Exec["${name}-migrate"],
+  }
 
 	cron { 
 		"redmine_files_and_tmp_permissions": # recursion file type makes for huge reports
 			command => "/usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chown $user:$group {} \; ; /usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chmod 777 {} \;",
 			user => root,
 			minute => "*/15";
+		"redmine_public_and_log_permissions": # recursion file type makes for huge reports
+			command => "/usr/bin/find ${dir}/${name}/public ${dir}/${name}/log -exec chown $user:$group {} \; ; /usr/bin/find ${dir}/${name}/public ${dir}/${name}/log -exec chmod 755 {} \;",
+			user => root,
+			minute => "*/15";
 	}
-
 
 }

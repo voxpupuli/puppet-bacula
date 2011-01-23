@@ -29,10 +29,17 @@ class forge {
   file { '/opt/forge':
     owner => 'www-data',
     group => 'sysadmin',
-    recurse => true,
+    #recurse => true,
     ignore => '.git',
     ensure => directory,
   }
+
+  cron {
+    "/opt/forge_permissions": # recursion file type makes for huge reports
+      command => "/usr/bin/find /opt/forge -print | grep -v \.git | xargs -I {} chown www-data:sysadmin {}",
+      user => root,
+      minute => "*/30";
+	}
 
   vcsrepo { '/opt/forge':
     source => 'http://github.com/reductivelabs/puppet-module-site.git',

@@ -15,6 +15,7 @@
 class bacula {
 
   include bacula::params
+	include bacula::nagios
 
   package { 'bacula-common':
     ensure => present,

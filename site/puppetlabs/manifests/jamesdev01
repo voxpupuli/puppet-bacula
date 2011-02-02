@@ -1,0 +1,12 @@
+class puppetlabs::jamesdev01 {
+  include ssh::server
+  include virtual::users 
+  include sudo
+
+	ssh::allowgroup { "sysadmin": }
+	sudo::allowgroup { "sysadmin": }
+
+  Account::User <| tag == 'allstaff' |>
+  Group <| tag == 'allstaff' |>
+
+}

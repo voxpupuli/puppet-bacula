@@ -61,7 +61,7 @@ class puppetlabs::legba {
     port => 443,
     docroot => '/opt/pm',
     ssl => true,
-		auth => true,
+		auth => false,
     priority => 16,
     template => 'puppetlabs/legba.conf.erb',
 	}

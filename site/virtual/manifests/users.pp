@@ -85,7 +85,7 @@ class virtual::users {
     comment => 'Jose Palafox',
 		uid     => '1120',
     group   => allstaff,
-		groups  => ["prosvc"],
+		groups  => ["prosvc","operations"],
     tag     => allstaff,
  }
 
@@ -142,6 +142,7 @@ class virtual::users {
     comment => 'Nick Fagerlund',
 		uid     => '1130',
     group   => allstaff,
+		groups  => ["developers","operations"],
     tag     => allstaff,
  }
 

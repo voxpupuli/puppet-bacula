@@ -4,6 +4,11 @@ class puppetlabs::pluto {
 	ssh::allowgroup { "developers": }
 	ssh::allowgroup { "prosvc": }
 
+	# Customer Groups
+  Account::User <| group == vmware |>
+  Group <| title == vmware |>
+  ssh::allowgroup { "vmware": chroot => true; }
+	
 	package { "cryptsetup": ensure => installed; }
 
 	exec { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4":

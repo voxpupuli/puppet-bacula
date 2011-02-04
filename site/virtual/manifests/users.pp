@@ -50,7 +50,6 @@ class virtual::users {
 
  @account::user {'nick':
     comment => 'Nick Lewis',
-		ensure  => absent,
 		uid     => '1115',
     group   => allstaff,
 		groups  => ["developers"],

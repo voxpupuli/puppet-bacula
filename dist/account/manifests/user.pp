@@ -77,13 +77,13 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
 	  file {
 	    "${homedir}": ensure => directory, require => User["$name"];
 		}
-		if $usekey == true {
-			file {
-  	    "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname, require => User["$name"];
-  	    "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname, require => User["$name"];
+    if $usekey == true {
+      file {
+        "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname, require => User["$name"];
+        "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname, require => User["$name"];
       }
     }
-	}
+  }
 
 }
 

@@ -37,8 +37,8 @@ class puppetlabs::shell {
 	# Collectd
 	include collectd::client
 
-	#$bacula_director = 'baal.puppetlabs.com'
-	#$bacula_password = 'aNXF2C1LFdptETvihkk/z'
+	$bacula_director = 'baal.puppetlabs.com'
+	$bacula_password = 'aNXF2C1LFdptETvihkk/z'
   #include bacula
 
   #include postfix

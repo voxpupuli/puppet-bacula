@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 
-define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false', $uid ='',usekey=true){
+define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false', $uid ='',usekey='true'){
 	include packages::shells
   
 	if $test == true { # what does this even do?
@@ -75,7 +75,7 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
 	if $ensure == 'present' {
 	  File { owner => $name, group => $groupname}
 	  file {
-	    "${homedir}": ensure => directory, owner => $name, group => $groupname, source => $userdir, require => User["$name"];
+	    "${homedir}": ensure => directory, require => User["$name"];
 		}
 		if $usekey == true {
 			file {

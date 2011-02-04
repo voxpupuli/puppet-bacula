@@ -43,5 +43,10 @@ class virtual::groups {
     ensure => present,
     gid    => 622,
   }
+
+  @group {'vmware':
+    ensure => present,
+    gid    => 1050,
+  }
 }
 

@@ -3,7 +3,6 @@ class virtual::customers {
   @account::user {'menglund':
     comment => 'Martin Englund',
 		usekey  => false,
-		chroot  => true,
     group   => vmware,
     tag     => customer,
   }

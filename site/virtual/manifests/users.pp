@@ -1,5 +1,6 @@
 class virtual::users {
  include virtual::groups
+ include virtual::customers
  @account::user {'luke':
     comment => 'Luke Kanies',
 		uid     => '1101',

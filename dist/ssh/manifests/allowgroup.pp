@@ -6,7 +6,8 @@ define ssh::allowgroup ($chroot=false) {
   if $chroot == true {
   include ssh::chroot
 		file {
-			"/var/chroot/${name}": ensure => directory;
+			"/var/chroot/${name}": ensure => directory, owner => root, group => root, mode => 755;
+			"/var/chroot/${name}/drop": ensure => directory, owner => root, group => $name, mode => 775;
 		}
 		concat::fragment { "sshd_config_chroot_group-${name}":
 		  target => "/etc/ssh/sshd_config",

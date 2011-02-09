@@ -162,6 +162,14 @@ class virtual::users {
     tag     => allstaff,
  }
  
+ @account::user {'max':
+    comment => 'Max Martin',
+		uid     => '1136',
+    group   => allstaff,
+		groups  => ["developers"],
+    tag     => allstaff,
+ }
+ 
 
 #
 # Service accounts

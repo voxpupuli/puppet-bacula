@@ -27,6 +27,10 @@ class virtual::groups {
 		ensure => present,
 		gid    => 675,
 	}
+	@group {'release':
+		ensure => present,
+		gid    => 676,
+	}
 
 #
 # Service Groups

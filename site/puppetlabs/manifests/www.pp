@@ -23,6 +23,12 @@ class puppetlabs::www {
 
 	# Training downloads
 	file {
+		"/var/www/puppetlabs.com/downloads":
+			owner    => root,
+			group    => release,
+			mode     => 664,
+			recurse  => true,
+			checksum => none;
 		"/var/www/puppetlabs.com/downloads/training/current-pm-vm.tar.gz":
 			ensure => link,
 			target => "centos-5.5-2.6.4.tar.gz";

@@ -118,7 +118,7 @@ class virtual::users {
     comment => 'Nigel Kersten',
     group   => allstaff,
 		uid     => '1127',
-		groups  => ["prosvc","enterprise","release"],
+		groups  => ["prosvc","enterprise"],
     tag     => allstaff,
  }
 
@@ -167,6 +167,14 @@ class virtual::users {
 		uid     => '1136',
     group   => allstaff,
 		groups  => ["developers"],
+    tag     => allstaff,
+ }
+
+ @account::user {'ben':
+    comment => 'Ben Hughes',
+		uid     => '1025',
+    group   => allstaff,
+		groups  => ["sysadmin","operations"],
     tag     => allstaff,
  }
  

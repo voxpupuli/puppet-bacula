@@ -28,7 +28,7 @@ class forge {
 
   file { '/opt/forge':
     owner => 'www-data',
-    group => 'sysadmin',
+    group => 'www-data',
     #recurse => true,
     ignore => '.git',
     ensure => directory,
@@ -36,7 +36,7 @@ class forge {
 
   cron {
     "/opt/forge_permissions": # recursion file type makes for huge reports
-      command => "/usr/bin/find /opt/forge -print | grep -v \.git | xargs -I {} chown www-data:sysadmin {}",
+      command => "/usr/bin/find /opt/forge -print | grep -v \.git | xargs -I {} chown www-data:www-data {}",
       user => root,
       minute => "*/30";
 	}
@@ -44,7 +44,7 @@ class forge {
   vcsrepo { '/opt/forge':
     source => 'http://github.com/reductivelabs/puppet-module-site.git',
     provider => git,
-    revision => 'r0.1.15',
+    revision => 'r0.1.16',
     ensure => present,
     require => File['/opt/forge'],
   }
@@ -83,13 +83,13 @@ class forge {
     ensure => present,
     content => template('forge/database.yml.erb'),
     owner => 'www-data',
-    group => 'sysadmin',
+    group => 'www-data',
     require => Vcsrepo['/opt/forge'],
   }  
 
   file { '/opt/forge/config/secrets.yml':
     owner => 'www-data',
-    group => 'sysadmin',
+    group => 'www-data',
     ensure => present,
     content => template('forge/secrets.yml.erb'),
     require => Vcsrepo['/opt/forge'],
@@ -97,7 +97,7 @@ class forge {
 
   file { '/opt/forge/config/newrelic.yml':
     owner => 'www-data',
-    group => 'sysadmin',
+    group => 'www-data',
     ensure => present,
     source => 'puppet:///modules/forge/newrelic.yml',
     require => Vcsrepo['/opt/forge'],
@@ -105,7 +105,7 @@ class forge {
 
   file { [ '/opt/forge/tmp', '/opt/forge/log' ]:
     owner => 'www-data',
-    group => 'sysadmin',
+    group => 'www-data',
     ensure => directory,
     require => Vcsrepo['/opt/forge'],
   }
@@ -118,7 +118,7 @@ class forge {
     content => template("forge/passenger.conf.erb");
   }
 
-  exec { 'RAILS_ENV=production rake db:migrate':
+  exec { 'rake db:migrate RAILS_ENV=production':
     alias => 'rakeforgemigrate',
     cwd => '/opt/forge',
     path => '/usr/bin:/usr/sbin:/bin',
@@ -127,7 +127,7 @@ class forge {
     refreshonly => true,
   }
 
-  exec { 'RAILS_ENV=production rake clear':
+  exec { 'rake clear RAILS_ENV=production':
     alias => 'rakeforgeclear',
     cwd => '/opt/forge',
     path => '/usr/bin:/usr/sbin:/bin',
@@ -145,7 +145,7 @@ class forge {
     refreshonly => true,
   }
 
-  exec { 'RAILS_ENV=production rake db:create':
+  exec { 'rake db:create RAILS_ENV=production':
     alias => 'rakeforgedb',
     cwd => '/opt/forge',
     path => '/usr/bin:/usr/sbin:/bin',

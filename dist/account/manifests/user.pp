@@ -28,7 +28,7 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
     
   if $group { # realize needed groups
     $groupname = $group
-    Group <| name == $group |>
+    Group <| title == $group |>
   } else {
     $groupname = undef 
   }

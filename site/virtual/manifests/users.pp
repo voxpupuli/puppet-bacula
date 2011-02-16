@@ -174,6 +174,7 @@ class virtual::users {
     comment => 'Ben Hughes',
 		uid     => '1025',
     group   => allstaff,
+		shell   => '/bin/zsh',
 		groups  => ["sysadmin","operations"],
     tag     => allstaff,
  }

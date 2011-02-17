@@ -210,6 +210,7 @@ class virtual::users {
 
  @account::user { 'osqa':
     comment => 'OSQA User',
+    usekey  => false,
     group   => osqa,
     tag     => osqa,
  }

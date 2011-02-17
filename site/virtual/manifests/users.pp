@@ -203,6 +203,7 @@ class virtual::users {
 
  @account::user { 'patchwork':
     comment => 'Patchwork User',
+    usekey  => false,
     group   => patchwork,
     tag     => patchwork,
  }

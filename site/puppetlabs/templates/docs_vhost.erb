@@ -21,4 +21,5 @@ NameVirtualHost 74.207.250.144:80
   ServerSignature On
   RewriteCond %{HTTP_HOST} docs\.reductivelabs\.com$
   RewriteRule ^(.*)$ http://docs.puppetlabs.com%{REQUEST_URI} [R=permanent,L]
+  Redirect permanent /guides/language_tutorial.html http://docs.puppetlabs.com/guides/language_guide.html
 </VirtualHost>

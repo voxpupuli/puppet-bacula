@@ -27,8 +27,6 @@ class patchwork {
     "/home/patchwork/bin/pwparser":
         ensure => symlink,
         target => "/srv/patchwork/apps/patchwork/parser.py";
-    } 
-    }
 	}
 
 	apache::vhost {'app01.puppetlabs.lan':

@@ -24,6 +24,10 @@ class patchwork {
         group  => patchwork,
         mode   => 644,
         source => "puppet:///modules/patchwork/_pwclientrc";
+    "/home/patchwork/bin/pwparser":
+        ensure => symlink,
+        target => "/srv/patchwork/apps/patchwork/parser.py";
+    } 
     }
 	}
 

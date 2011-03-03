@@ -52,5 +52,10 @@ class virtual::groups {
     ensure => present,
     gid    => 1050,
   }
+  
+  @group {'motorola':
+    ensure => present,
+    gid    => 1051,
+  }
 }
 

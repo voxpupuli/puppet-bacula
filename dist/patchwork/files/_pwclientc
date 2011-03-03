@@ -1,0 +1,9 @@
+[base]
+url: https://app01.puppetlabs.lan/xmlrpc/
+project: puppet
+
+# Adding authentication parameters will allow you to use the 'update'
+# command on patches that you are allowed to edit.
+[auth]
+username: patchwork
+password: toPaim5M

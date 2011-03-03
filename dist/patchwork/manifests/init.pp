@@ -19,6 +19,14 @@ class patchwork {
 			content => template("patchwork/local_settings.py.erb");
 		"/var/lib/bacula": ensure => directory;
 		"/var/lib/bacula/pgsql": ensure => directory;
+    "/home/patchwork/.pwclientrc":
+        owner  => patchwork,
+        group  => patchwork,
+        mode   => 644,
+        source => "puppet:///modules/patchwork/_pwclientrc";
+    "/home/patchwork/bin/pwparser":
+        ensure => symlink,
+        target => "/srv/patchwork/apps/patchwork/parser.py";
 	}
 
 	apache::vhost {'app01.puppetlabs.lan':

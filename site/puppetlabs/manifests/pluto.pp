@@ -8,6 +8,9 @@ class puppetlabs::pluto {
   Account::User <| group == vmware |>
   Group <| title == vmware |>
   ssh::allowgroup { "vmware": chroot => true; }
+  Account::User <| group == motorola |>
+  Group <| title == motorola |>
+  ssh::allowgroup { "motorola": chroot => true; }
 	
 	package { "cryptsetup": ensure => installed; }
 

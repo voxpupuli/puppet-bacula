@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 
-define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false', $uid ='', $usekey=true){
+define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' , $group='', $groups='', $test='false', $uid ='', $usekey=true, $key='',$keytype=''){
 	include packages::shells
   
 	if $test == true { # what does this even do?
@@ -78,9 +78,18 @@ define account::user ($ensure='present', $comment, $shell='/bin/bash', $home='' 
 	    "${homedir}": ensure => directory, require => User["$name"];
 		}
     if $usekey == true {
-      file {
-        "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname, require => User["$name"];
-        "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname, require => User["$name"];
+      if $key { 
+        ssh_authorized_key { "$name@$group":
+          ensure => present,
+          key    => $key,
+          type   => $keytype,
+          user   => $name,
+        }
+      } else {
+        file {
+          "${homedir}/.ssh/": mode => 700, ensure => directory, owner => $name, group => $groupname, require => User["$name"];
+          "${homedir}/.ssh/authorized_keys": mode => 644, recurse => true, source => "${userdir}/.ssh/authorized_keys", owner => $name, group => $groupname, require => User["$name"];
+      }
       }
     }
   }

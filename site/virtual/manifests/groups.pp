@@ -48,6 +48,10 @@ class virtual::groups {
     gid    => 622,
   }
 
+#
+# Customers
+#
+
   @group {'vmware':
     ensure => present,
     gid    => 1050,
@@ -56,6 +60,11 @@ class virtual::groups {
   @group {'motorola':
     ensure => present,
     gid    => 1051,
+  }
+  
+  @group {'nokia':
+    ensure => present,
+    gid    => 1052,
   }
 }
 

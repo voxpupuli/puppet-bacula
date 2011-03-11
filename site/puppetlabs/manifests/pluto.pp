@@ -16,6 +16,10 @@ class puppetlabs::pluto {
   Account::User <| group == nokia |>
   Group <| title == nokia |>
   ssh::allowgroup { "nokia": chroot => true; }
+  
+  Account::User <| group == blackrock |>
+  Group <| title == blackrock |>
+  ssh::allowgroup { "blackrock": chroot => true; }
 	
 	package { "cryptsetup": ensure => installed; }
 

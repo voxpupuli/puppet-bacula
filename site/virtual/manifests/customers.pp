@@ -25,6 +25,13 @@ class virtual::customers {
     #expiry  => "2010-04-01",
   }
 
+  @account::user {'johnwarburton':
+    comment => 'John Warburton',
+    group   => blackrock,
+    tag     => customer,
+    key     => "AAAAB3NzaC1kc3MAAACBAMckTwxqGtCxHxlMnWUG188kjqchMPo53N+9jDzqxrNEuDo+AVqoMgparLWs5jqKc32MxlW1iKVu+XHH9pgwF8inNsApwPuXxqFjlMm1P/dan3Z7mY0nI7Z51xYue3HVyjVJWTNsgfLpf70MuKl3sQlCPCJ5vdPGEEcRNWvmq9MRAAAAFQDvBtMrya5K8QDdfxEBHPkCUKl6lQAAAIAVYPfUj4GnSkbW73aovldfW6usmffuefW4E6xnjgymi8GkNkW8nyUyhQZYLtWMj/RYU1aB4rZvtTtTALAW9HKbMkaf1naXaPhN7CE/tBWU7QjZkhKghIPUaWGLWguGoHS6Iofe9JtpJLpG1uyhXpeZfti/jyvmgxuyiof63+jH7wAAAIEAuUHePZVYd+KcRP7IQ1Zl+z2xqCuT1jx6CAmbZjgiMoeOLyPBAKzamDfhN+dIlXl55mHBANC8PoRX4BVWHUdLmJtN//JicZK3XVrjgp94bI3bYkC3gtGpefJ4j1eveQyHcVh1fq20/DcnXm6Wh7PEHtduJGz54GwaR84h0=",
+    keytype => "ssh-dss",
+  }
 
 }
 

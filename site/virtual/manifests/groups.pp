@@ -66,5 +66,11 @@ class virtual::groups {
     ensure => present,
     gid    => 1052,
   }
+  
+  @group {'blackrock':
+    ensure => present,
+    gid    => 1053,
+  }
+
 }
 

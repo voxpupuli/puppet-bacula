@@ -23,7 +23,17 @@
 #    docroot => '/path/to/docroot',
 #  }
 #
-define apache::vhost( $port, $docroot, $ssl=true, $template='apache/vhost-default.conf.erb', $priority, $serveraliases = '', $auth='false', $servername = '' ) {
+define apache::vhost( 
+    $port,
+    $docroot,
+    $ssl = true,
+    $template = 'apache/vhost-default.conf.erb',
+    $priority,
+    $serveraliases = '',
+    $servername = '',
+    $auth = false,
+    $redirect_ssl = false
+    ) {
 
   include apache
 
@@ -33,6 +43,14 @@ define apache::vhost( $port, $docroot, $ssl=true, $template='apache/vhost-defaul
 		$srvname = "$servername"
 	}
 
+  if $ssl == true {
+    include apache::ssl
+  }
+
+  if $redirect_ssl == true { # Since the template will use auth, redirect to https requires mod_rewrite
+    A2mod <| title == 'rewrite' |>
+  }
+
   file {"${apache::params::vdir}/${priority}-${name}":
     content => template($template),
     owner => 'root',
@@ -41,4 +59,6 @@ define apache::vhost( $port, $docroot, $ssl=true, $template='apache/vhost-defaul
     require => Package['httpd'],
     notify => Service['httpd'],
   }
+
 }
+

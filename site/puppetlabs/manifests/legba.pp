@@ -31,7 +31,7 @@ class puppetlabs::legba {
       port          => 80,
       docroot       => '/opt/prosvc',
       ssl           => false,
-      redirect_ssl  => true
+      redirect_ssl  => true,
       priority      => 10,
       template      => 'puppetlabs/legba.conf.erb';
     'ps.puppetlabs.com_ssl':
@@ -53,7 +53,7 @@ class puppetlabs::legba {
       port          => 80,
       docroot       => '/opt/pm',
       ssl           => false,
-      redirect_ssl  => true
+      redirect_ssl  => true,
       priority      => 15,
       template      => 'puppetlabs/legba.conf.erb';
     'pm.puppetlabs.com_ssl':

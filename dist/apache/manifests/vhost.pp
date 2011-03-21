@@ -37,18 +37,23 @@ define apache::vhost(
 
   include apache
 
-	if $servername == '' {
-		$srvname = "$name"
-	} else {
-		$srvname = "$servername"
-	}
+  if $servername == '' {
+    $srvname = "$name"
+  } else {
+    $srvname = "$servername"
+  }
 
   if $ssl == true {
     include apache::ssl
   }
 
   if $redirect_ssl == true { # Since the template will use auth, redirect to https requires mod_rewrite
-    A2mod <| title == 'rewrite' |>
+    case $operatingsystem {
+      'debian','ubuntu': {
+        A2mod <| title == 'rewrite' |>
+      }
+      default: { }
+    }
   }
 
   file {"${apache::params::vdir}/${priority}-${name}":

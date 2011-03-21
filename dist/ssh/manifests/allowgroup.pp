@@ -2,6 +2,8 @@ define ssh::allowgroup ($chroot=false) {
 
   #include virtual::users
 	#Account::User <| group == $name |>
+  
+  include ssh::server
 
   if $chroot == true {
   include ssh::chroot

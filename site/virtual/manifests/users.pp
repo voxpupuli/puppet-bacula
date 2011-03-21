@@ -3,179 +3,180 @@ class virtual::users {
  include virtual::customers
  @account::user {'luke':
     comment => 'Luke Kanies',
-		uid     => '1101',
+    uid     => '1101',
     group   => allstaff,
     tag     => allstaff,
  }
 
  @account::user {'teyo':
     comment => 'Teyo, Tyree',
-		uid     => '1102',
+    uid     => '1102',
     group   => allstaff,
-		groups  => ["developers"],
+    groups  => ["developers"],
     tag     => allstaff,
  }
 
  @account::user {'markus':
     comment => 'Markus Roberts',
-		ensure  => absent,
-		uid     => '1106',
+    ensure  => absent,
+    uid     => '1106',
     group   => allstaff,
-		groups  => ["developers"],
+    groups  => ["developers"],
     tag     => allstaff,
  }
 
  @account::user {'dan':
     comment => 'Dan Bode',
-		uid     => '1109',
+    uid     => '1109',
     group   => allstaff,
-		groups  => ["prosvc"],
+    groups  => ["prosvc"],
     tag     => allstaff,
  }
 
  @account::user {'jeff':
     comment => 'Jeff McCune',
-		uid     => '1112',
+    uid     => '1112',
     group   => allstaff,
-		groups  => ["prosvc"],
+    groups  => ["prosvc"],
     tag     => allstaff,
  }
 
  @account::user {'matt':
     comment => 'Matt Robinson',
-		uid     => '1114',
+    uid     => '1114',
     group   => allstaff,
-		groups  => ["developers"],
+    groups  => ["developers"],
     tag     => allstaff,
  }
 
  @account::user {'nick':
     comment => 'Nick Lewis',
-		uid     => '1115',
+    uid     => '1115',
     group   => allstaff,
-		groups  => ["developers"],
+    groups  => ["developers"],
     tag     => allstaff,
  }
  
  @account::user {'nan':
     comment => 'Nan Liu',
-		uid     => '1117',
+    uid     => '1117',
     group   => allstaff,
-		groups  => ["prosvc"],
+    groups  => ["prosvc"],
     tag     => allstaff,
  }
 
  @account::user {'james':
     comment => 'James Turnbull',
-		uid     => '1118',
+    uid     => '1118',
     group   => allstaff,
-		groups  => ["sysadmin","operations"],
+    groups  => ["sysadmin","operations"],
     tag     => allstaff,
  }
 
  @account::user {'cody':
     comment => 'Cody Herriges',
-		uid     => '1119',
+    uid     => '1119',
     group   => allstaff,
-		groups  => ["prosvc"],
+    groups  => ["prosvc"],
     tag     => allstaff,
  }
 
  @account::user {'jose':
     comment => 'Jose Palafox',
-		uid     => '1120',
+    uid     => '1120',
     group   => allstaff,
-		groups  => ["prosvc","operations"],
+    groups  => ["prosvc","operations"],
     tag     => allstaff,
  }
 
  @account::user {'jhelwig':
     comment => 'Jacob Helwig',
-		uid     => '1121',
+    uid     => '1121',
     group   => allstaff,
-		groups  => ["developers","enterprise","release"],
+    groups  => ["developers","enterprise","release"],
     tag     => allstaff,
  }
 
  @account::user {'zach':
     comment => 'Zach Leslie',
-		uid     => '1123',
-		shell   => '/bin/bash',
+    uid     => '1123',
+    shell   => '/bin/bash',
     group   => allstaff,
-		groups  => ["sysadmin","operations"],
+    groups  => ["sysadmin","operations"],
     tag     => allstaff,
  }
 
  @account::user {'djm':
     comment => 'Dominic Maraglia',
-		uid     => '1124',
+    uid     => '1124',
     group   => allstaff,
-		groups  => ["developers"],
+    groups  => ["developers"],
     tag     => allstaff,
  }
 
  @account::user {'nigel':
     comment => 'Nigel Kersten',
     group   => allstaff,
-		uid     => '1127',
-		groups  => ["prosvc","enterprise"],
+    uid     => '1127',
+    groups  => ["prosvc","enterprise"],
     tag     => allstaff,
  }
 
  @account::user {'pberry':
     comment => 'Paul Berry',
-		uid     => '1128',
+    ensure  => absent,
+    uid     => '1128',
     group   => allstaff,
-		groups  => ["developers"],
+    groups  => ["developers"],
     tag     => allstaff,
  }
 
  @account::user {'gh':
     comment => 'Garrett Honeycutt',
-		uid     => '1129',
+    uid     => '1129',
     group   => allstaff,
-		groups  => ["prosvc"],
+    groups  => ["prosvc"],
     tag     => allstaff,
  }
 
  @account::user {'nfagerlund':
     comment => 'Nick Fagerlund',
-		uid     => '1130',
+    uid     => '1130',
     group   => allstaff,
-		groups  => ["developers","operations"],
+    groups  => ["developers","operations"],
     tag     => allstaff,
  }
 
  @account::user {'hunter':
     comment => 'Hunter Haugen',
-		uid     => '1131',
+    uid     => '1131',
     group   => allstaff,
-		groups  => ["prosvc"],
+    groups  => ["prosvc"],
     tag     => allstaff,
  }
 
  @account::user {'daniel':
     comment => 'Daniel Pittman',
-		uid     => '1134',
+    uid     => '1134',
     group   => allstaff,
-		groups  => ["developers","enterprise"],
+    groups  => ["developers","enterprise"],
     tag     => allstaff,
  }
  
  @account::user {'max':
     comment => 'Max Martin',
-		uid     => '1136',
+    uid     => '1136',
     group   => allstaff,
-		groups  => ["developers"],
+    groups  => ["developers"],
     tag     => allstaff,
  }
 
  @account::user {'ben':
     comment => 'Ben Hughes',
-		uid     => '1025',
+    uid     => '1025',
     group   => allstaff,
-		shell   => '/bin/zsh',
-		groups  => ["sysadmin","operations"],
+    shell   => '/bin/zsh',
+    groups  => ["sysadmin","operations"],
     tag     => allstaff,
  }
  

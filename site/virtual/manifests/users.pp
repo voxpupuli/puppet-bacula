@@ -143,7 +143,7 @@ class virtual::users {
     comment => 'Nick Fagerlund',
     uid     => '1130',
     group   => allstaff,
-    groups  => ["developers","operations"],
+    groups  => ["developers","operations","release"],
     tag     => allstaff,
  }
 

@@ -31,5 +31,4 @@ class puppetlabs {
 	Account::User <| tag == 'allstaff' |>
 	Group <| tag == 'allstaff' |>
 
-  Package <| title == 'mlocate' |>
 }

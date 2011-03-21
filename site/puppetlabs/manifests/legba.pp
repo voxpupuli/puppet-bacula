@@ -23,6 +23,8 @@ class puppetlabs::legba {
   ssh::allowgroup { "enterprise": }
   ssh::allowgroup { "developers": }
 
+  Package <| title == 'mlocate' |>
+
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 
   apache::vhost {

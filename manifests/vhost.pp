@@ -26,28 +26,29 @@
 define apache::vhost( 
     $port,
     $docroot,
-    $ssl = true,
-    $template = 'apache/vhost-default.conf.erb',
-    $priority,
+    $ssl           = true,
+    $template      = 'apache/vhost-default.conf.erb',
+    $priority      = '25',
+    $servername    = '',
     $serveraliases = '',
-    $servername = '',
-    $auth = false,
-    $redirect_ssl = false
+    $auth          = false,
+    $redirect_ssl  = false
     ) {
 
   include apache
 
   if $servername == '' {
-    $srvname = "$name"
+    $srvname = $name
   } else {
-    $srvname = "$servername"
+    $srvname = $servername
   }
 
   if $ssl == true {
     include apache::ssl
   }
-
-  if $redirect_ssl == true { # Since the template will use auth, redirect to https requires mod_rewrite
+  
+  # Since the template will use auth, redirect to https requires mod_rewrite
+  if $redirect_ssl == true {
     case $operatingsystem {
       'debian','ubuntu': {
         A2mod <| title == 'rewrite' |>
@@ -60,7 +61,7 @@ define apache::vhost(
     content => template($template),
     owner => 'root',
     group => 'root',
-    mode => '777',
+    mode => '755',
     require => Package['httpd'],
     notify => Service['httpd'],
   }

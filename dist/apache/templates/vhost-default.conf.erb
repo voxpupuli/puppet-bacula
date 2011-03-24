@@ -6,7 +6,7 @@
 NameVirtualHost *:<%= port %>
 <VirtualHost *:<%= port %>>
   ServerName <%= name %>
-<%if serveraliases.is_a? Array -%>
+<% if serveraliases.is_a? Array -%>
 <% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
 <% elsif serveraliases != '' -%>
 <%= "  ServerAlias #{serveraliases}" -%>
@@ -21,5 +21,5 @@ NameVirtualHost *:<%= port %>
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
   CustomLog /var/log/apache2/<%= name %>_access.log combined
-  ServerSignature On
+  ServerSignature Off
 </VirtualHost>

@@ -24,7 +24,7 @@ class apache {
     enable    => true,
     subscribe => Package['httpd'],
   }
-  #
+
   # May want to purge all none realize modules using the resources resource type.
   #
   A2mod { require => Package['httpd'], notify => Service['httpd']}

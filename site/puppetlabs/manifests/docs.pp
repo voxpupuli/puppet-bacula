@@ -4,13 +4,21 @@ class puppetlabs::docs {
   # This is temp so as to not purge the puppetlabs.com vhost.
   #
   $docroot = '/var/www/docs.puppetlabs.com'
-  apache::vhost {'docs.puppetlabs.com':
-    port => 80,
-    docroot => $docroot,
-    ssl => false,
-    priority => 20,
-    template => 'puppetlabs/docs_vhost.erb',
-    serveraliases => 'docs.reductivelabs.com', 
+
+  apache::vhost::redirect {
+    'docs.reductivelabs.com':
+      port => '80',
+      dest => 'http://docs.puppetlabs.com'
+  }
+
+  apache::vhost {
+    'docs.puppetlabs.com':
+      port          => 80,
+      docroot       => $docroot,
+      ssl           => false,
+      priority      => 20,
+      template      => 'puppetlabs/docs_vhost.erb',
+      serveraliases => 'docs.reductivelabs.com', 
   }    
   #
   # Since this sourced from git we should probably use VCS repo and a variable for the tag to make up date these files.

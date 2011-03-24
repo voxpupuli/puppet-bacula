@@ -18,7 +18,7 @@ class nagios::server {
   include nagios::params
 
   file { [ '/etc/nagios/conf.d/nagios_host.cfg', '/etc/nagios/conf.d/nagios_service.cfg'  ]:
-    mode => 0644,
+    mode   => 0644,
     ensure => present,
     before => Service[$nagios::params::nagios_service],
   }
@@ -39,12 +39,12 @@ class nagios::server {
   }
 
   apache::vhost { 'nagios.puppetlabs.com':
-    port => '80',
+    port     => '80',
     priority => '30',
-		#ssl      => 'false',
-    docroot => '/usr/share/nagios3/htdocs',
+    #ssl      => 'false',
+    docroot  => '/usr/share/nagios3/htdocs',
     template => 'nagios/nagios-apache.conf.erb',
-    require => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 
+    require  => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 
   }
 
   #apache::vhost { 'nagios.puppetlabs.com_ssl':

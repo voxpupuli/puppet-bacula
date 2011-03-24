@@ -12,7 +12,6 @@
 #
 class ntp::params {
 
-  $ntp_server = 'baal.puppetlabs.com'
   $ntpd_service = $operatingsystem ? {
     centos => "ntpd",
     default => "ntp",

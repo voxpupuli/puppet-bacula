@@ -21,21 +21,21 @@ class puppetlabs::www {
   $bacula_password = 'MQI/vywQq5pSlAYaEUJKrmt24Wu8FOIPfT7tFoaOc5X6'
   include bacula
 
-	# Training downloads
-	file {
-		"/var/www/puppetlabs.com/downloads":
-			owner    => root,
-			group    => release,
-			mode     => 664,
-			recurse  => true,
-			checksum => none;
-		"/var/www/puppetlabs.com/downloads/training/current-pm-vm.tar.gz":
-			ensure => link,
-			target => "centos-5.5-pe-1.0.tar.gz";
-		"/var/www/puppetlabs.com/downloads/training/current-pm-vm-ovf.tar.gz":
-			ensure => link,
-			target => "centos-5.5-pe-1.0-ovf.tar.gz";
-	}
+  # Training downloads
+  file {
+    "/var/www/puppetlabs.com/downloads":
+      owner    => root,
+      group    => release,
+      mode     => 664,
+      recurse  => true,
+      checksum => none;
+    "/var/www/puppetlabs.com/downloads/training/current-pm-vm.tar.gz":
+      ensure => link,
+      target => "centos-5.5-pe-1.0.tar.gz";
+    "/var/www/puppetlabs.com/downloads/training/current-pm-vm-ovf.tar.gz":
+      ensure => link,
+      target => "centos-5.5-pe-1.0-ovf.tar.gz";
+  }
 
 
   # Mysql

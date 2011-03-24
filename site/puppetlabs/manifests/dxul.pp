@@ -49,11 +49,17 @@ class puppetlabs::dxul {
 
   include mysql::server
   redmine::unicorn { 'projects.puppetlabs.com':
-    dir => '/opt',
-    db => 'projectspuppetlabscom',
+    dir     => '/opt',
+    db      => 'projectspuppetlabscom',
     db_user => 'redmine',
-    db_pw => 'c@11-m3-m1st3r-p1t4ul',
-    port => '80',
+    db_pw   => 'c@11-m3-m1st3r-p1t4ul',
+    port    => '80',
+  }
+
+  apache::vhost::redirect {
+    'projects.reductivelabs.com':
+      port => '80',
+      dest => 'http://projects.puppetlabs.com'
   }
 
   # pDNS

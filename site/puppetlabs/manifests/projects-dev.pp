@@ -8,11 +8,11 @@ class puppetlabs::projects-dev {
 
   include mysql::server
   redmine::unicorn { 'projects-dev.puppetlabs.com':
-    dir => '/opt',
-    db => 'projectsdevpuppetlabscom',
+    dir     => '/opt',
+    db      => 'projectsdevpuppetlabscom',
     db_user => 'redmine',
-    db_pw => 'notproductI0N',
-    port => '80',
+    db_pw   => 'notproductI0N',
+    port    => '80',
   }
 
 }

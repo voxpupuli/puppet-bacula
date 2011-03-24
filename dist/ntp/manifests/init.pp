@@ -11,9 +11,16 @@
 #
 # Sample Usage:
 #
-class ntp {
+class ntp (
+    $nagios = false,
+    $server = '0.pool.ntp.org'
+  ) {
+
   include ntp::params
-  include ntp::nagios
+
+  if $nagios == true {
+    include ntp::nagios
+  }
 
   package { 'ntp':
     ensure => present,

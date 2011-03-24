@@ -17,6 +17,7 @@
 # Sample Usage:
 #
 #
+
 define apache::vhost::redirect (
     $port,
     $dest,
@@ -26,7 +27,7 @@ define apache::vhost::redirect (
 
   include apache
 
-  $srvname == $name
+  $srvname = $name
 
   file {"${apache::params::vdir}/${priority}-${name}":
     content => template($template),

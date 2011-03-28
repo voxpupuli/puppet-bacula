@@ -27,15 +27,22 @@ class patchwork {
     "/home/patchwork/bin/pwparser":
         ensure => symlink,
         target => "/srv/patchwork/apps/patchwork/parser.py";
-	}
+  }
 
-	apache::vhost {'app01.puppetlabs.lan':
-	  port => 80,
-	  docroot => '/srv/patchwork',
-	  ssl => false,
-	  priority => 10,
-	  template => 'patchwork/patchwork.conf.erb',
-	}
+  apache::vhost {'app01.puppetlabs.lan':
+    port     => 443,
+    docroot  => '/srv/patchwork',
+    ssl      => false,
+    priority => 10,
+    template => 'patchwork/patchwork.conf.erb',
+  }
+
+  apache::vhost::redirect {
+    'patchwork.puppetlabs.com':
+      port => '80',
+      dest => 'https://patchwork.puppetlabs.com'
+  }
+  
 
 	cron {
 		"patchwork_sql_dump":

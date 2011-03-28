@@ -72,5 +72,15 @@ class virtual::groups {
     gid    => 1053,
   }
 
+#
+# Interns
+# 
+  @group {'interns':
+    ensure => present,
+    gid    => 677,
+  }
+
+
+
 }
 

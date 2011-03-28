@@ -11,7 +11,7 @@ define wordpress::instance(
     $db_pw, 
     $template, 
     $priority = '00',
-    $backup = true,
+    $backup = true
   ) {
 
   include wordpress

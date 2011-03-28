@@ -192,6 +192,16 @@ class virtual::users {
     tag     => allstaff,
  }
  
+ @account::user {'adrien':
+    comment => 'Adrien Thebo',
+    uid     => '1026',
+    group   => allstaff,
+    groups  => ["interns"],
+    shell   => '/bin/bash',
+    key     => "AAAAB3NzaC1yc2EAAAABIwAAAQEAuwdsSsBLcLlfyjJlJUKzvMQF42ez4BiFWK7pau4wC3dabbay0k/3UR5Gmg8XpmtfclhpNoOydDPrvghj2LIWXT7BrxLNPARIAGAK0pSGls8kpYpl53FsEv/aVegEWz0Mass4ChdUIBNMDfauqfB33KGwzyGIegsV4vGP5ndPX4RiD+AfYOdfTE6D821krFR5WSM/YAf6EBdwFT0eDv1uOMmMyoKoCYHfCoAHtIj5orp0l8RakO/8jklbMSu6n5H20G6nHwXrHSulvVenPrabvxmGCyyDi8y/UywzOkNNwcH1QupbxfdeIunOgSG2T5WejtdDTAEgJ1Mzn7cuhLFPLQ==",
+    keytype => "ssh-rsa",
+    tag     => allstaff,
+ }
 
 #
 # Service accounts

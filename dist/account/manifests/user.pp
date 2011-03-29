@@ -98,7 +98,7 @@ define account::user (
       managehome => false,
       password   => $password,
       shell      => $shell,
-      expiry     => $expire,
+      expiry     => $expiry,
   }
 
   # Only if we are ensuring a user is present

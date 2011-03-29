@@ -1,6 +1,7 @@
 class virtual::users {
   include virtual::groups
-  include virtual::customers
+  include virtual::users::customers
+  include virtual::users::external
 
  @account::user {'luke':
     comment => 'Luke Kanies',

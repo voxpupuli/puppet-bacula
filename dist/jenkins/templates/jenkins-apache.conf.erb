@@ -1,0 +1,18 @@
+<VirtualHost *:<%= port %>>
+   ServerName <%= name %>
+   ServerAlias <%= jenkins_alias %>i
+
+   ProxyRequests Off
+   <Proxy *>
+     Order deny,allow
+     Allow from all
+   </Proxy>
+   ProxyPass        / http://localhost:8080/
+   ProxyPassReverse / http://localhost:8080/
+   ProxyPreserveHost On 
+
+   ErrorLog /var/log/apache2/<%= name %>_error.log
+   LogLevel warn
+   CustomLog /var/log/apache2/<%= name %>_access.log combined
+
+</VirtualHost>

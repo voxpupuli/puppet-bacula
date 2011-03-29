@@ -73,22 +73,32 @@ define account::user (
     $userid = undef
   }
 
+  if $setpass {
+    $setpass = setpass($name)
+    $password = $setpass
+  } else {
+    $password = undef
+  }
 
-  $setpass = setpass($name)
+  if $expire {
+    $expiry = $expire
+  } else {
+    $expiry = undef
+  }
 
-  user { $name: # do stuff
-    gid        => $groupname,
-    uid        => $userid,
-    home       => $homedir,
-    ensure     => $ensure,
-    groups     => $groups,
-    comment    => $comment,
-    managehome => false,
-    password => $setpass ? {
-      ''      => undef,
-      default => $setpass,
-    },
-    shell => $shell,
+
+  user { 
+    $name: # do stuff
+      gid        => $groupname,
+      uid        => $userid,
+      home       => $homedir,
+      ensure     => $ensure,
+      groups     => $groups,
+      comment    => $comment,
+      managehome => false,
+      password   => $password,
+      shell      => $shell,
+      expiry     => $expire,
   }
 
   # Only if we are ensuring a user is present

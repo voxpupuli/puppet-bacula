@@ -17,7 +17,9 @@ define wordpress::instance(
 
   include wordpress
   $dbname = regsubst($name, '\.', '', 'G')
+  $db_user = $dbname
   $vhost_dir = "${dir}/${name}"
+
   file{[$dir, $vhost_dir]:
     ensure => directory,
   }

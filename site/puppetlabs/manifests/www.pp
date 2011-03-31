@@ -47,8 +47,9 @@ class puppetlabs::www {
       port => '80',
       dest => 'http://www.puppetlabs.com/blog';
     'puppetcamp.org':
-      port => '80',
-      dest => 'http://www.puppetlabs.com/community/puppet-camp';
+      serveraliases => "www.puppetcamp.org",
+      port          => '80',
+      dest          => 'http://www.puppetlabs.com/community/puppet-camp';
   }
 
   wordpress::instance {
@@ -69,3 +70,4 @@ class puppetlabs::www {
   realize(A2mod['headers'])
   realize(A2mod['expires'])
 }
+

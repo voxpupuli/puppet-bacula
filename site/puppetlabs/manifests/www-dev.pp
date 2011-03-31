@@ -8,7 +8,7 @@ class puppetlabs::www-dev {
   include puppetlabs_ssl
 
   wordpress::instance {
-    'dev':
+    'www-dev.puppetlabs.com':
       auth_key        => 'PE{TEN%T).U~V6Cl;b_?0mcrvhoUVIP#+0R|e-LB>00:o*((b%[8pve/1Y+H}P(o',
       secure_auth_key => 'PDqD)bN|B22D.hxk@Uvy;nkT0#9QVB8=~J^r3@9f:7gRn9PmNGBth(t2+hLt|=Ne',
       logged_in_key   => '#_Y3SS3oBj(<ja{dW+#fE!{=YhoiP<0@m~e)Gp[d0j5x1OxGAAFjl|3yHzmH{srZ',
@@ -16,6 +16,7 @@ class puppetlabs::www-dev {
       db_pw           => 'gosh-if-no-hull',
       template        => 'puppetlabs/dev_vhost.conf.erb',
       backup          => false,
+      development     => true,
   }
 
   package {'php5-curl': ensure => present, notify => Service[httpd] }  

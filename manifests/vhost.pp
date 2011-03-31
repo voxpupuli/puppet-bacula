@@ -33,7 +33,7 @@ define apache::vhost(
     $serveraliases = '',
     $auth          = false,
     $redirect_ssl  = false
-    ) {
+  ) {
 
   include apache
 
@@ -57,13 +57,14 @@ define apache::vhost(
     }
   }
 
-  file {"${apache::params::vdir}/${priority}-${name}":
-    content => template($template),
-    owner => 'root',
-    group => 'root',
-    mode => '755',
-    require => Package['httpd'],
-    notify => Service['httpd'],
+  file {
+    "${apache::params::vdir}/${priority}-${name}":
+      content => template($template),
+      owner   => 'root',
+      group   => 'root',
+      mode    => '755',
+      require => Package['httpd'],
+      notify  => Service['httpd'],
   }
 
 }

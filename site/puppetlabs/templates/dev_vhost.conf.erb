@@ -9,7 +9,7 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
     AllowOverride ALL
     AuthType Digest
   </Directory>
-  <Directory /var/www/dev>
+  <Directory <%= vhost_dir %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Order allow,deny

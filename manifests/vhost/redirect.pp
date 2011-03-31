@@ -22,7 +22,7 @@ define apache::vhost::redirect (
     $port,
     $dest,
     $priority = '10',
-    $serveraliases,
+    $serveraliases='',
     $template = "apache/vhost-redirect.conf.erb"
     ) {
 

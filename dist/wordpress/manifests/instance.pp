@@ -11,7 +11,8 @@ define wordpress::instance(
     $db_pw, 
     $template, 
     $priority = '00',
-    $backup = true
+    $backup = true,
+    $development = false
   ) {
 
   include wordpress
@@ -19,6 +20,12 @@ define wordpress::instance(
   $vhost_dir = "${dir}/${name}"
   file{[$dir, $vhost_dir]:
     ensure => directory,
+  }
+
+  file { 
+    "$vhost_dir/wp-config.php":
+      mode => 644,
+      content => template("wordpress/wp-config.php.erb");
   }
 
   mysql::db{$dbname:

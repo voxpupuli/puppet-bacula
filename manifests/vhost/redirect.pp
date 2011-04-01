@@ -40,3 +40,4 @@ define apache::vhost::redirect (
   }
 
 }
+

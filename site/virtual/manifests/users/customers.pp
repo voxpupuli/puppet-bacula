@@ -33,5 +33,15 @@ class virtual::users::customers {
     keytype => "ssh-dss",
   }
 
+  @account::user {'byronpezan':
+    comment => 'Byron Pezan',
+    group   => secureworks,
+    tag     => customer,
+    key     => "AAAAB3NzaC1yc2EAAAABIwAAAIEAvuEP2fui7dtSrCjNVBtlPh6p3dYmiz/Jmrn/MxtPNYizBAVvPCjTOuK9m9LIX4mZ9x9wMlYNfv4IQbbVYIQb6z/wAUe2lw6+YpHt+DC4MCbLS1vHsJM2+8MQE8IGEOMrkivZ1n0C/tuQshJ/mauYS39KQEX81ShzJ9OMKd9Xa4k=",
+    keytype => "ssh-rsa",
+    expire  => "2011-05-01",
+  }
+
+
 }
 

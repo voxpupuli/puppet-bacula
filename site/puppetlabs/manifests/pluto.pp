@@ -1,10 +1,10 @@
 class puppetlabs::pluto {
   include puppetlabs::lan	
 
-	ssh::allowgroup { "developers": }
-	ssh::allowgroup { "prosvc": }
+  ssh::allowgroup { "developers": }
+  ssh::allowgroup { "prosvc": }
 
-	# Customer Groups
+  # Customer Groups
   Account::User <| group == vmware |>
   Group <| title == vmware |>
   ssh::allowgroup { "vmware": chroot => true; }
@@ -12,15 +12,19 @@ class puppetlabs::pluto {
   Account::User <| group == motorola |>
   Group <| title == motorola |>
   ssh::allowgroup { "motorola": chroot => true; }
-  
+
   Account::User <| group == nokia |>
   Group <| title == nokia |>
   ssh::allowgroup { "nokia": chroot => true; }
-  
+
   Account::User <| group == blackrock |>
   Group <| title == blackrock |>
   ssh::allowgroup { "blackrock": chroot => true; }
-	
+
+  Account::User <| group == secureworks |>
+  Group <| title == secureworks |>
+  ssh::allowgroup { "secureworks": chroot => true; }
+
 	package { "cryptsetup": ensure => installed; }
 
 	exec { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4":

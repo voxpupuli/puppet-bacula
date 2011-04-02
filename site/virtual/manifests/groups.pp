@@ -56,20 +56,25 @@ class virtual::groups {
     ensure => present,
     gid    => 1050,
   }
-  
+
   @group {'motorola':
     ensure => present,
     gid    => 1051,
   }
-  
+
   @group {'nokia':
     ensure => present,
     gid    => 1052,
   }
-  
+
   @group {'blackrock':
     ensure => present,
     gid    => 1053,
+  }
+
+  @group {'secureworks':
+    ensure => present,
+    gid    => 1054,
   }
 
 #

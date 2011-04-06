@@ -99,7 +99,7 @@ define redmine::instance (
       #recurse => true,
       owner   => $user,
       group   => $group,
-      mode    => '0777',
+      mode    => '0755',
       require => Exec["${name}-migrate"],
   }
 

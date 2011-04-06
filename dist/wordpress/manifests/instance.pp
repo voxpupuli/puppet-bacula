@@ -8,6 +8,7 @@ define wordpress::instance(
     $nonce_key, 
     $dir='/var/www/', 
     $port='80', 
+    $db_user, 
     $db_pw, 
     $template, 
     $priority = '00',
@@ -17,7 +18,9 @@ define wordpress::instance(
 
   include wordpress
   $dbname = regsubst($name, '\.', '', 'G')
-  $db_user = $dbname
+  if $db_user = '' {
+    $db_user = $dbname
+  }
   $vhost_dir = "${dir}/${name}"
 
   file{[$dir, $vhost_dir]:

@@ -13,6 +13,7 @@ class puppetlabs::www-dev {
       secure_auth_key => 'PDqD)bN|B22D.hxk@Uvy;nkT0#9QVB8=~J^r3@9f:7gRn9PmNGBth(t2+hLt|=Ne',
       logged_in_key   => '#_Y3SS3oBj(<ja{dW+#fE!{=YhoiP<0@m~e)Gp[d0j5x1OxGAAFjl|3yHzmH{srZ',
       nonce_key       => 'P,>pH-J+OTw#z2qn`M[lt||`[Nf|w#I:J %z>-MRY@Yt_Egyj84znb2H*s;0J||3',
+      db_user         => 'wwwdev',
       db_pw           => 'gosh-if-no-hull',
       template        => 'puppetlabs/dev_vhost.conf.erb',
       backup          => false,

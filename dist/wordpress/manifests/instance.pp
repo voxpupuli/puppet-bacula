@@ -18,7 +18,7 @@ define wordpress::instance(
 
   include wordpress
   $dbname = regsubst($name, '\.', '', 'G')
-  if $db_user = '' {
+  if $db_user == '' {
     $db_user = $dbname
   }
   $vhost_dir = "${dir}/${name}"

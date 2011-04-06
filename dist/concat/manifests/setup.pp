@@ -9,6 +9,7 @@ class concat::setup {
     $sortpath = $operatingsystem ? {
         Darwin => "/usr/bin/sort",
         Ubuntu => "/usr/bin/sort",
+        Debian => "/usr/bin/sort",
         default => "/bin/sort",
     }
 

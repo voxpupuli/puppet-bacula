@@ -3,7 +3,7 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   ServerName <%= srvname %>
 <% if serveraliases.is_a? Array %>
 <% serveraliases.each do |name| %><%= "  ServerAlias #{name}\n" %><% end %>
-<% elsif has_variable?("serveraliases") %>
+<% elsif serveraliases != '' %>
 <%= "  ServerAlias #{serveraliases}" %>
 <% end %>
   Redirect / <%= dest %>/

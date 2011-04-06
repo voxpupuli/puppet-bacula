@@ -17,7 +17,7 @@ define wordpress::instance(
   ) {
 
   include wordpress
-  $dbname = regsubst($name, '\.', '', 'G')
+  $dbname = regsubst($name, '\.\-', '', 'G')
   if $db_user == '' {
     $dbuser = $dbname
   } else {

@@ -6,7 +6,7 @@ define wordpress::instance(
     $secure_auth_key, 
     $logged_in_key, 
     $nonce_key, 
-    $dir='/var/www/', 
+    $dir='/var/www', 
     $port='80', 
     $db_user='', 
     $db_pw, 
@@ -17,11 +17,11 @@ define wordpress::instance(
   ) {
 
   include wordpress
-  $dbname = regsubst($name, '\.\-', '', 'G')
-  if $db_user == '' {
-    $dbuser = $dbname
-  } else {
+  $dbname = regsubst($name, '\.|\-', '', 'G')
+  if $db_user {
     $dbuser = $db_user
+  } else {
+    $dbuser = $dbname
   }
   $vhost_dir = "${dir}/${name}"
 

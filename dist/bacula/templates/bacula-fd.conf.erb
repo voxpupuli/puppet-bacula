@@ -17,9 +17,9 @@ Director {
 }
 
 FileDaemon {
-  Name = <%= hostname  %>-fd
+  Name = <%= hostname %>-fd
   FDAddress = <%= ipaddress %>
-  FDport = 9102
+  FDport = <%= port %>
   WorkingDirectory = /var/lib/bacula
   Pid Directory = /var/run
   Maximum Concurrent Jobs = 20

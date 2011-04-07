@@ -45,7 +45,7 @@ class puppetlabs::legba {
   }
 
   file { "/opt/prosvc": ensure => directory, owner => root, group => prosvc, mode => 664, recurse => true, checksum => none; }
-  file { "/opt/prosvc/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/legba_htaccess"; }
+  file { "/opt/prosvc/.htaccess": ensure => absent; }
 
   apache::vhost {
     'pm.puppetlabs.com':

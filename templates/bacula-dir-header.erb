@@ -1,0 +1,12 @@
+Director {                # define myself
+  Name                    = <%= fqdn %>-dir
+  DIRport                 = <%= port %>  # where we listen for UA connections
+  QueryFile               = "/etc/bacula/scripts/query.sql"
+  WorkingDirectory        = "/var/lib/bacula"
+  PidDirectory            = "/var/run/bacula"
+  Maximum Concurrent Jobs = 1
+  Password                = "<%= password %>"  # Console password
+  Messages                = Daemon
+  DirAddress              = 127.0.0.1
+}
+

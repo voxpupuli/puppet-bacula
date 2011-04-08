@@ -6,6 +6,7 @@ class puppetlabs::www-dev {
   ssh::allowgroup { "www-dev": }
   Account::User <| title == 'dansupinski' |>
   Group <| title == 'www-data' |>
+  Group <| title == 'contractors' |>
 
   # Base
   include puppetlabs::lan

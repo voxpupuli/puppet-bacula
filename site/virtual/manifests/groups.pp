@@ -95,6 +95,10 @@ class virtual::groups {
     gid    => 678,
   }
 
+  @group {'contractors':
+    ensure => present,
+    gid    => 679,
+  }
 
 
 

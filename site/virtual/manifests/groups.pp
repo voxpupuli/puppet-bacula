@@ -86,6 +86,17 @@ class virtual::groups {
   }
 
 
+#
+# Functional
+#
+
+  @group {'www-dev':
+    ensure => present,
+    gid    => 678,
+  }
+
+
+
 
 }
 

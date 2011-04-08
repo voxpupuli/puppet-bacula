@@ -3,6 +3,10 @@ class puppetlabs::www-dev {
   $mysql_root_pw = 'n0tInpr0duct1on'
   include mysql::server
 
+  ssh::allowgroup { "www-dev": }
+  Account::User <| title == 'dansupinski' |>
+  Group <| title == 'www-data' |>
+
   # Base
   include puppetlabs::lan
   include puppetlabs_ssl

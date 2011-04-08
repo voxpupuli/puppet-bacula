@@ -24,11 +24,11 @@ class puppetlabs {
   include virtual::packages
   include sudo
   include packages
-  
+
   ssh::allowgroup { "sysadmin": }
   sudo::allowgroup { "sysadmin": }
 
-	Account::User <| tag == 'allstaff' |>
-	Group <| tag == 'allstaff' |>
+  Account::User <| tag == 'allstaff' |>
+  Group <| tag == 'allstaff' |>
 
 }

@@ -47,5 +47,6 @@ class bacula {
     require => Package[$bacula::params::bacula_client_packages],
   }
 
-  Firewall <<| dport == "9102" |>>
+  if defined (Class["firewall"]) { Firewall <<| dport == "9102" |>> }
+
 }

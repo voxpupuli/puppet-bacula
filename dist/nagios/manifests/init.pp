@@ -172,7 +172,7 @@ class nagios {
     '0120-INPUT ACCEPT 5666':
       jump   => 'ACCEPT',
       dport  => '5666',
-      proto  => 'tcp'
+      proto  => 'tcp',
       source => "$nrpe_server"
   }
 

@@ -23,9 +23,9 @@ class collectd::client {
     require => Package['collectd'],
   }
 
-  @@firewall { '0160-INPUT allow 25826 udp $ipaddress':
+  @@firewall { "0160-INPUT allow 25826 udp $ipaddress":
     proto  => 'udp',
-    dport  => '25826'
+    dport  => '25826',
     source => "$ipaddress",
     jump   => 'ACCEPT',
   }

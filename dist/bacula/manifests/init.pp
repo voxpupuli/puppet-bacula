@@ -15,7 +15,7 @@
 class bacula {
 
   include bacula::params
-	include bacula::nagios
+  include bacula::nagios
 
   package { 'bacula-common':
     ensure => present,
@@ -46,4 +46,7 @@ class bacula {
     ensure => directory,
     require => Package[$bacula::params::bacula_client_packages],
   }
+
+  if defined (Class["firewall"]) { Firewall <<| dport == "9102" |>> }
+
 }

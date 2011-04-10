@@ -41,7 +41,7 @@ class bacula::director {
   @@firewall {
     '0170-INPUT allow tcp 9102':
       proto  => 'tcp',
-      dport  => '9102'
+      dport  => '9102',
       source => "$ipaddress",
       jump   => 'ACCEPT',
   }

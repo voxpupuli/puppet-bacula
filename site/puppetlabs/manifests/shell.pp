@@ -21,6 +21,7 @@ class puppetlabs::shell {
   # Base
   include puppetlabs
   include account::master
+  include firewall
 
   include pkgs::admin
   include apache

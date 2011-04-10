@@ -31,4 +31,6 @@ class puppetlabs {
   Account::User <| tag == 'allstaff' |>
   Group <| tag == 'allstaff' |>
 
+  if defined(Class["firewall"]) { Firewall <||> }
+
 }

@@ -1,5 +1,4 @@
-#require 'puppet/provider/firewall'
-require '/vagrant/modules/dist/firewall/lib/puppet/provider/firewall'
+require 'puppet/provider/firewall'
 
 begin
     require 'socket'

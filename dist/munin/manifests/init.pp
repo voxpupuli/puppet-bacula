@@ -45,7 +45,7 @@ class munin {
     '0150-INPUT ACCEPT 4949':
       jump   => 'ACCEPT',
       dport  => "4949",
-      source => "$munin_server",
+      source => "$munin_server_clean",
       proto  => 'tcp'
   }
 

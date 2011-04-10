@@ -167,4 +167,13 @@ class nagios {
     mode => 0755,
     ensure => present,
   }
+
+  @firewall { 
+    '0120-INPUT ACCEPT 5666':
+      jump   => 'ACCEPT',
+      dport  => '5666',
+      proto  => 'tcp'
+      source => "$nrpe_server"
+  }
+
 }

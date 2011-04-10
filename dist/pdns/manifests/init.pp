@@ -23,10 +23,10 @@ class pdns {
   }
 
   service { $pdns::params::service_list:
-    ensure => running,
+    ensure     => running,
     enable     => true,
     hasrestart => true,
-    require => Package[$pdns::params::package_list],
+    require    => Package[$pdns::params::package_list],
   }
 
   File { owner => "$pdns::params::user", group => "$pdns::params::group" }
@@ -37,26 +37,40 @@ class pdns {
   }
 
   file { "$pdns::params::conf_dir/pdns-ruby-backend.cfg":
-    source => 'puppet:///modules/pdns/pdns-ruby-backend.cfg',
-    ensure => present,
+    source  => 'puppet:///modules/pdns/pdns-ruby-backend.cfg',
+    ensure  => present,
     require => Package[$pdns::params::package_list],
   }
 
   file { "$pdns::params::conf_dir/pdns.d/pipe.conf":
     content => template('pdns/pipe.conf.erb'),
-    ensure => present,
+    ensure  => present,
     require => Package[$pdns::params::package_list],
   }
 
   file { "$pdns::params::conf_dir/records/docs.prb":
     content => template('pdns/docs.prb.erb'),
-    ensure => present,
+    ensure  => present,
     require => Package[$pdns::params::package_list],
   }
 
   file { [ "$pdns::params::log_dir", "$pdns::params::stats_dir", "$pdns::params::conf_dir/records" ]:
-    ensure => directory,
+    ensure  => directory,
     require => Package[$pdns::params::package_list],
+  }
+
+  @firewall { 
+    '0053-INPUT ACCEPT 53 udp':
+      jump  => 'ACCEPT',
+      dport => "53",
+      proto => 'udp',
+  }
+
+  @firewall { 
+    '0053-INPUT ACCEPT 53 tcp':
+      jump  => 'ACCEPT',
+      dport => "53",
+      proto => 'tcp',
   }
 
 }

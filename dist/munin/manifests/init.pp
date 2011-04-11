@@ -15,6 +15,7 @@ class munin {
   include munin::params
 
   $munin_server = $munin::params::munin_server
+  $munin_server_clean = $munin::params::munin_server_clean
 
   package { 
     $munin::params::munin_base_packages:
@@ -45,8 +46,8 @@ class munin {
     '0150-INPUT ACCEPT 4949':
       jump   => 'ACCEPT',
       dport  => "4949",
+      proto  => 'tcp',
       source => "$munin_server_clean",
-      proto  => 'tcp'
   }
 
 }

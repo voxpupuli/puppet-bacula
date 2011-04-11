@@ -24,6 +24,10 @@ class puppetlabs::pluto {
   Account::User <| group == secureworks |>
   Group <| title == secureworks |>
   ssh::allowgroup { "secureworks": chroot => true; }
+  
+  Account::User <| group == bioware |>
+  Group <| title == bioware |>
+  ssh::allowgroup { "bioware": chroot => true; }
 
 	package { "cryptsetup": ensure => installed; }
 

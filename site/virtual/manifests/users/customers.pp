@@ -42,6 +42,13 @@ class virtual::users::customers {
     expire  => "2011-05-01",
   }
 
+  @account::user {'joerizzo':
+    comment => 'Joe Rizzo',
+    usekey  => false,
+    group   => bioware,
+    tag     => customer,
+    expire  => "2011-05-01",
+  }
 
 }
 

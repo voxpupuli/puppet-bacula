@@ -77,6 +77,11 @@ class virtual::groups {
     gid    => 1054,
   }
 
+  @group {'bioware':
+    ensure => present,
+    gid    => 1055,
+  }
+
 #
 # Interns
 # 

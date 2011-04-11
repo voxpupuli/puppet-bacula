@@ -87,6 +87,10 @@ class puppetlabs::baal {
       command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune upto=1 unit=wk)',
       minute => '20',
       hour => '2';
+    "git reset --hard origin/master":
+      user => root,
+      command => '(cd /etc/puppet/modules; git fetch --all; git reset --hard origin/master)',
+      minute => '*/10';
   }
 
 }

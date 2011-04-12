@@ -24,7 +24,7 @@ class puppetlabs::shell {
   include firewall
 
   include pkgs::admin
-  include apache
+  #include apache
 
   include munin
   include munin::puppet

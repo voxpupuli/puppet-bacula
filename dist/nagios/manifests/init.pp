@@ -17,13 +17,12 @@ class nagios {
   include nagios::params
 
   $nrpe_server = $nagios::params::nrpe_server
-  $nrpe_pid = $nagios::params::nrpe_pid
-  $nrpe_user = $nagios::params::nrpe_user
-  $nrpe_group = $nagios::params::nrpe_group
+  $nrpe_pid    = $nagios::params::nrpe_pid
+  $nrpe_user   = $nagios::params::nrpe_user
+  $nrpe_group  = $nagios::params::nrpe_group
 
-  package { [ $nagios::params::nagios_plugin_packages, $nagios::params::nrpe_packages ]:
-    ensure => installed,
-  }
+  package { $nagios::params::nagios_plugin_packages: ensure => installed; }
+  package { $nagios::params::nrpe_packages: ensure => installed; }
 
   file { '/etc/nagios': 
     ensure => present,

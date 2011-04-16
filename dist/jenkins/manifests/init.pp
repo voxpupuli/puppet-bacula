@@ -34,7 +34,7 @@ class jenkins ($alias) {
 
   file { "/etc/apt/sources.list.d/jenkins-ci.list": content => "deb http://pkg.jenkins-ci.org/debian binary/"; } 
 
-  package { "jenkins": ensure => instaled, require => File["/etc/apt/sources.list.d/jenkins-ci.list"];
+  package { "jenkins": ensure => instaled, require => File["/etc/apt/sources.list.d/jenkins-ci.list"]; }
 
 #  package { $jenkins::params::jetty_packages: 
 #    ensure => installed,

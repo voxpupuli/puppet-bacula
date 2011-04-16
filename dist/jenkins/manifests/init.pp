@@ -18,7 +18,7 @@
 # Test for distro, currently only apt based 
 
 
-class jenkins ($alias) {
+class jenkins ($site_alias) {
   include jenkins::params
   #include apache
   include git
@@ -77,14 +77,14 @@ class jenkins ($alias) {
 #  }
 
   apache::vhost::redirect {
-    "${alias}":
+    "${site_alias}":
       port => '80',
-      dest => "https://${alias}",
+      dest => "https://${site_alias}",
   }
 
   apache::vhost::proxy {
-    "${alias}_ssl":
-      serveraliases => "${alias}",
+    "${site_alias}_ssl":
+      serveraliases => "${site_alias}",
       port          => '443',
       dest          => 'http://localhost:8080',
   }

@@ -1,0 +1,23 @@
+NameVirtualHost <%= ipaddress %>:<%= port %>
+<VirtualHost <%= ipaddress %>:<%= port %>>
+  ServerName <%= srvname %>
+<% if serveraliases.is_a? Array %>
+<% serveraliases.each do |name| %><%= "  ServerAlias #{name}\n" %><% end %>
+<% elsif serveraliases != '' %>
+<%= "  ServerAlias #{serveraliases}" %>
+<% end %>
+   ProxyRequests Off
+   <Proxy *>
+     Order deny,allow
+     Allow from all
+   </Proxy>
+   ProxyPass        / http://localhost:8080/
+   ProxyPassReverse / http://localhost:8080/
+   ProxyPreserveHost On 
+
+   ErrorLog /var/log/apache2/<%= name %>_error.log
+   LogLevel warn
+   CustomLog /var/log/apache2/<%= name %>_access.log combined
+
+</VirtualHost>
+

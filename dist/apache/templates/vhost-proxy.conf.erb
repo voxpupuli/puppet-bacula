@@ -1,7 +1,11 @@
-<VirtualHost *:<%= port %>>
-   ServerName <%= name %>
-   ServerAlias <%= jenkins_alias %>
-
+NameVirtualHost <%= ipaddress %>:<%= port %>
+<VirtualHost <%= ipaddress %>:<%= port %>>
+  ServerName <%= srvname %>
+<% if serveraliases.is_a? Array %>
+<% serveraliases.each do |name| %><%= "  ServerAlias #{name}\n" %><% end %>
+<% elsif serveraliases != '' %>
+<%= "  ServerAlias #{serveraliases}" %>
+<% end %>
    ProxyRequests Off
    <Proxy *>
      Order deny,allow
@@ -16,3 +20,4 @@
    CustomLog /var/log/apache2/<%= name %>_access.log combined
 
 </VirtualHost>
+

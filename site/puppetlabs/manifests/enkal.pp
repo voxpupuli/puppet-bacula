@@ -21,7 +21,7 @@ class puppetlabs::enkal {
   $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'
   $bacula_director = 'baal.puppetlabs.com'
   include bacula
-  
+
   nagios::website { 'hudson.puppetlabs.com': }
 
   # Munin
@@ -31,13 +31,19 @@ class puppetlabs::enkal {
   include collectd::client
 
   # Hudson
-  include hudson
-	cron { "restart jetty": hour => 1, minute => 0,
-		command => "/etc/init.d/jetty stop; sleep 5; /etc/init.d/jetty start; /etc/init.d/apache2 restart";
-	}
+  #include hudson
 
-	Account::User <| tag == 'developers' |>
-	Group <| tag == 'developers' |>
+  # Jenkins
+  class { "jenkins":
+    alias => 'jenkins.puppetlabs.com',
+  }
+
+#  cron { "restart jetty": hour => 1, minute => 0,
+#    command => "/etc/init.d/jetty stop; sleep 5; /etc/init.d/jetty start; /etc/init.d/apache2 restart";
+#  }
+
+  Account::User <| tag == 'developers' |>
+  Group <| tag == 'developers' |>
 
 }
 

@@ -86,6 +86,7 @@ class jenkins ($site_alias) {
     "${site_alias}_ssl":
       serveraliases => "${site_alias}",
       port          => '443',
+      ssl           => true,
       dest          => 'http://localhost:8080',
   }
 

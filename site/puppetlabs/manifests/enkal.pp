@@ -15,6 +15,7 @@ class puppetlabs::enkal {
 
   # Base
   include puppetlabs
+  include puppetlabs_ssl
   include account::master
 
   # Backup

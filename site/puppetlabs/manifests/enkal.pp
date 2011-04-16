@@ -35,7 +35,7 @@ class puppetlabs::enkal {
 
   # Jenkins
   class { "jenkins":
-    alias => 'jenkins.puppetlabs.com',
+    site_alias => 'jenkins.puppetlabs.com',
   }
 
 #  cron { "restart jetty": hour => 1, minute => 0,

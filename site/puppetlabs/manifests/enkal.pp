@@ -17,6 +17,7 @@ class puppetlabs::enkal {
   include puppetlabs
   include puppetlabs_ssl
   include account::master
+  $ssl_path = $puppetlabs_ssl::params::ssl_path
 
   # Backup
   $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'

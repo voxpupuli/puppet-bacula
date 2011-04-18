@@ -52,7 +52,7 @@ class puppetlabs::www {
       dest          => 'http://www.puppetlabs.com/community/puppet-camp';
     'www.reductivelabs.com':
       port => '80',
-      dest => 'http://www.puppetlabs.com'
+      dest => 'http://www.puppetlabs.com';
   }
 
   wordpress::instance {

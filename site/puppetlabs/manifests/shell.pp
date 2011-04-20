@@ -23,7 +23,6 @@ class puppetlabs::shell {
   include account::master
   include firewall
 
-  include pkgs::admin
   #include apache
 
   include munin

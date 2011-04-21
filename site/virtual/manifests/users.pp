@@ -173,6 +173,22 @@ class virtual::users {
     tag     => allstaff,
  }
 
+ @account::user {'josh':
+    comment => 'Josh Cooper',
+    uid     => '1146',
+    group   => allstaff,
+    groups  => ["developers"],
+    tag     => allstaff,
+ }
+ 
+ @account::user {'stahma':
+    comment => 'Michael Stahnke',
+    uid     => '1147',
+    group   => allstaff,
+    groups  => ["developers"],
+    tag     => allstaff,
+ }
+ 
  @account::user {'ben':
     comment => 'Ben Hughes',
     uid     => '1025',

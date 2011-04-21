@@ -22,7 +22,7 @@ define account::user (
     $uid ='', 
     $usekey=true, 
     $key='',
-    $keytype='',
+    $keytype='ssh-rsa',
     $email='',
     $expire=''
     ){

@@ -1,0 +1,12 @@
+resource approx {
+    device    <%= device %>;
+    meta-disk internal;
+    disk      <%= disk %>;
+  on <%= localname %> {
+    address   <%= local_ip %>:<%= local_port %>;
+  }
+  on <%= peername %> {
+    address   <%= peer_ip %>:<%= peer_port %>;
+  }
+}
+

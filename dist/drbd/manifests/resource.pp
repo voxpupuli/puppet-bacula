@@ -15,7 +15,14 @@ define drbd::resource (
       group => root,
       mode => 640,
       content => template("drbd/resource.res.erb"),
-      notify => Service["drbd"];
+      notify => [Service["drbd"],Exec["drbdadm create-md"]];
+  }
+
+  exec {
+    "drbdadm create-md":
+      command => "/sbin/drbdadm create-md ${name}",
+      refreshonly => true,
+      onlyif => "/sbin/drbdadm dstate ${name} | awk -F/ '{ print \$1 }' | grep -qi diskless",
   }
 
 }

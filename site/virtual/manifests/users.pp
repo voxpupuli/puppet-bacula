@@ -182,7 +182,7 @@ class virtual::users {
     tag     => allstaff,
  }
  
- @account::user {'stahma':
+ @account::user {'stahnma':
     comment => 'Michael Stahnke',
     uid     => '1147',
     group   => allstaff,

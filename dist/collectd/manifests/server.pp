@@ -22,6 +22,7 @@ class collectd::server {
   $passenger_version = $passenger::params::version
   $gem_path          = $passenger::params::gem_path
   $collectd_server   = $collectd::params::collectd_server
+  $site_alias        = $collectd::params::site_alias
 
   package { 
     [ 'librrd-dev', 'librrd-ruby' ]:
@@ -44,7 +45,7 @@ class collectd::server {
   }
 
   apache::vhost { 
-    'visage.puppetlabs.com':
+    "${site_alias}"
       port     => '80',
       priority => '55',
       docroot  => '/var/lib/gems/1.8/gems/visage-app-0.2.5/lib/visage/public',

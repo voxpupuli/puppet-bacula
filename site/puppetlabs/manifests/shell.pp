@@ -23,8 +23,9 @@ class puppetlabs::shell {
   include munin
   include munin::puppet
 	
-	# Collectd
-	include collectd::client
+  # Collectd
+  include puppetlabs::server
+  include collectd::client
 
 }
 

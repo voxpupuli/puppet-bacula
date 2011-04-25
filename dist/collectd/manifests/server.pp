@@ -7,9 +7,18 @@
 # Actions:
 #
 # Requires:
-#   - The collectd::params class
+#   - collectd::params
+#   - apache
+#   - passenger
+#   - rack
 #
 # Sample Usage:
+#
+# class { "collectd::params":
+#   collectd_server => "collectd.example.com",
+#   site_alias      => "visage.example.com",
+# }
+# include collectd::server
 #
 class collectd::server {
   include collectd::params

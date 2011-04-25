@@ -3,6 +3,8 @@
 # This class contains the parameter for the collectd module
 #
 # Parameters:
+#  collectd_server: the server to send collectd information to
+#  site_alias: The hostname to provide the collectd visage
 #
 # Actions:
 #
@@ -10,6 +12,10 @@
 #
 # Sample Usage:
 #
+# class { "collectd::params":
+#   collectd_server => "collectd.example.com",
+#   site_alias      => "visage.example.com",
+# }
 class collectd::params(collectd_server, site_alias) {
 
   case $operatingsystem {

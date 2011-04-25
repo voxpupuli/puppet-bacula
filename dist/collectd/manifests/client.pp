@@ -7,12 +7,19 @@
 # Actions:
 #
 # Requires:
+#   - collectd::params
 #
 # Sample Usage:
+
+# class { "collectd::params":
+#   collectd_server => "collectd.example.com",
+#   site_alias      => "visage.example.com",
+# }
+# include collectd::client
 #
 class collectd::client {
   include collectd::params
-  require collectd
+  include collectd
 
   $collectd_server = $collectd::params::collectd_server
 

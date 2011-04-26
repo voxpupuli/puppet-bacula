@@ -28,7 +28,7 @@ class sudo {
     refreshonly => true,
   }
 
-  file{"/etc/sudoers": 
+  file{ "/etc/sudoers": 
     owner => "root", 
     group => "root", 
     mode => "440",

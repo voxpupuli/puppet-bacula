@@ -39,4 +39,9 @@ class munin::passenger {
   munin::plugin { [ 'passenger_status', 'passenger_memory_status' ]:
     require => [ File['/usr/share/munin/plugins/passenger_status'], File['/usr/share/munin/plugins/passenger_memory_status'], File['/etc/munin/plugin-conf.d/passenger'] ],
   }
+
+  if defined(Class['sudo']) { 
+    sudo::entry { "munin ALL=(ALL) NOPASSWD:/usr/bin/passenger-status, /usr/bin/passenger-memory-stats": }
+  }
+
 }

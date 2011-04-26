@@ -1,5 +1,6 @@
-class puppetlabs::os::linux::debian {
+class puppetlabs::os::linux::ubuntu {
 
   package { "lsb-release": ensure => installed; }
 
 }
+

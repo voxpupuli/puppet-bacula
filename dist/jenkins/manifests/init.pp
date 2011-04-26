@@ -18,7 +18,6 @@
 # Apt-get update should be triggered
 # Apache modules should be moved to apache class and realized when needed
 # Test for distro, currently only apt based 
-
 class jenkins ($site_alias) {
   include jenkins::params
   include git

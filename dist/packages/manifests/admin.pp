@@ -7,8 +7,6 @@ class packages::admin {
     "keychain",
   ]
 
-  package {
-    "$admin_pacakges": ensure => installed;
-  }
+  package { $admin_packages: ensure => installed; }
 
 }

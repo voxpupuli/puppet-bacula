@@ -2,6 +2,7 @@
 
 class packages::shells {
 
-	@package { "zsh": ensure => installed; }
+  @package { "zsh":  ensure => installed; }
+  @package { "bash": ensure => installed; }
 
 }

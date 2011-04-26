@@ -29,9 +29,9 @@ class munin::passenger {
   }
 
   file { '/usr/share/munin/plugins/passenger_memory_status':
-    owner => 'root',
-    group => 'root',
-    mode => '0755',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
     source => 'puppet:///modules/munin/passenger_memory_status',
     ensure => present,
   }
@@ -41,7 +41,9 @@ class munin::passenger {
   }
 
   if defined(Class['sudo']) { 
-    sudo::entry { "munin ALL=(ALL) NOPASSWD:/usr/bin/passenger-status, /usr/bin/passenger-memory-stats": }
+    sudo::entry { "munin-sudo":
+      entry => "munin ALL=(ALL) NOPASSWD:/usr/bin/passenger-status, /usr/bin/passenger-memory-stats";
+    }
   }
 
 }

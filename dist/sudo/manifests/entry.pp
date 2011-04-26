@@ -1,4 +1,6 @@
-define sudo::entry ($content) {
+define sudo::entry ($entry) {
+
+  $content = "# ${name}\n${entry}\n"
 
   concat::fragment { 
     "sudoers-entry-$name":

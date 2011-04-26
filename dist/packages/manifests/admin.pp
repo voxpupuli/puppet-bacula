@@ -4,6 +4,7 @@ class packages::admin {
     "rsync",
     "htop",
     "screen",
+    "keychain",
   ]
 
   package {

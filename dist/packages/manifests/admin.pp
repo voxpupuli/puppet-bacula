@@ -8,7 +8,7 @@ class packages::admin {
   ]
 
   package {
-    $admin_pacakges: ensure => installed;
+    "$admin_pacakges": ensure => installed;
   }
 
 }

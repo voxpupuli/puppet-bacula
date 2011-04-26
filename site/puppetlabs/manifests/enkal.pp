@@ -24,7 +24,6 @@ class puppetlabs::enkal {
   $bacula_director = 'baal.puppetlabs.com'
   include bacula
 
-  nagios::website { 'hudson.puppetlabs.com': }
 
   # Munin
   include munin

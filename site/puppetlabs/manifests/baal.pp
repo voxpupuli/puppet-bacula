@@ -27,7 +27,7 @@ class puppetlabs::baal {
   include puppet::dashboard
 
   # Package management
-  include aptrepo
+  class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
   include yumrepo
 
   # Backup

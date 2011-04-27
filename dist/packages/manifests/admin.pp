@@ -4,7 +4,6 @@ class packages::admin {
     "rsync",
     "htop",
     "screen",
-    "keychain",
   ]
 
   package { $admin_packages: ensure => installed; }

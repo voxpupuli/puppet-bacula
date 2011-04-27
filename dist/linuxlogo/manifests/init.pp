@@ -3,5 +3,4 @@ class linuxlogo {
 
   package { "$linuxlogo::params::linuxlogo_package": ensure => installed; }
 
-
 }

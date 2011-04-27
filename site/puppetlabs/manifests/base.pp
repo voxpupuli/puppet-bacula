@@ -1,3 +1,16 @@
+# Class: puppetlabs::base
+#
+# This class is meant to be the root clase from which all other calsses are called.
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#   include puppetlabs::base
+#
 class puppetlabs::base {
 
   $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
@@ -29,7 +42,7 @@ class puppetlabs::base {
   }
 
   case $fqdn {
-#    # Production
+    # Known
 #    "apu.puppetlabs.com",
 #    "baal.puppetlabs.com",
 #    "dxul.puppetlabs.com",
@@ -38,7 +51,7 @@ class puppetlabs::base {
 #    "legba.puppetlabs.com",
 #    "shell.puppetlabs.com",
 #    "app01.puppetlabs.com"
-#      : { include "puppetlabs::prod::$hostname" }
+#      : { include "puppetlabs::$hostname" }
 #
 #    # Dev
 #    "agent01.puppetlabs.lan",
@@ -46,8 +59,7 @@ class puppetlabs::base {
 #    "agent03.puppetlabs.lan"
 #      : { include "puppetlabs::dev::$hostname" }
 #
-#    # Unknown -- Assume Production
-#    default: { include "puppetlabs::prod::$hostname" }
+    # Unknown
     default: { include "puppetlabs::$hostname" }
 
   }

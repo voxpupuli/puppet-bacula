@@ -11,6 +11,8 @@ class puppetlabs::base {
 # Domain/Location Specific Configurations
   case $domain { 
     "puppetlabs.lan": {
+      include puppetlabs::lan
+
       case $operatingsystem {
         debian: {
           class { "apt::settings": proxy => "$lan_apt_proxy" }

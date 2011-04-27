@@ -10,7 +10,6 @@ class puppetlabs::www-dev {
   Group <| title == 'contractors' |>
 
   # Base
-  include puppetlabs::lan
   include puppetlabs_ssl
 
   wordpress::instance {

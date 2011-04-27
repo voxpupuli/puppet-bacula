@@ -1,5 +1,4 @@
 class puppetlabs::pluto {
-  include puppetlabs::lan	
 
   ssh::allowgroup { "developers": }
   ssh::allowgroup { "prosvc": }

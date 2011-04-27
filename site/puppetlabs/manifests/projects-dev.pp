@@ -3,7 +3,6 @@ class puppetlabs::projects-dev {
   $mysql_root_pw = 'n0tInpr0duct1on'
 
   # Base
-  include puppetlabs::lan
   include puppetlabs_ssl
 
   include mysql::server

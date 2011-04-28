@@ -72,6 +72,14 @@ class puppetlabs::baal {
     template => 'puppetlabs/baal.conf.erb'
   }
 
+  file {
+    "/usr/local/bin/puppet_deploy.sh":
+      owner => root,
+      group => root,
+      mode  => 0750,
+      source => "puppet:///modules/puppetlabs/deploy_puppet.sh";
+  }
+
   cron {
     "compress_reports":
       user => root,
@@ -88,9 +96,15 @@ class puppetlabs::baal {
       minute => '20',
       hour => '2';
     "git reset --hard origin/master":
+      ensure => absent,
       user => root,
       command => '(cd /etc/puppet/modules; git fetch --all; git reset --hard origin/master)',
       minute => '*/10';
+    "Puppet: deploy_puppet.sh":
+      user    => root,
+      command => '/usr/local/bin/deploy_puppet.sh',
+      minute  => '*/8',
+      require => File["/usr/local/bin/deploy_puppet.sh"];
   }
 
 }

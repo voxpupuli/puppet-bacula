@@ -55,7 +55,7 @@ class puppetlabs::baal {
   include munin::passenger
   include munin::puppet
   include munin::puppetmaster
- 
+
   # Collectd
   include collectd::server
 
@@ -77,7 +77,7 @@ class puppetlabs::baal {
       owner => root,
       group => root,
       mode  => 0750,
-      source => "puppet:///modules/puppetlabs/deploy_puppet.sh";
+      source => "puppet:///modules/puppetlabs/puppet_deploy.sh";
   }
 
   cron {
@@ -100,11 +100,11 @@ class puppetlabs::baal {
       user => root,
       command => '(cd /etc/puppet/modules; git fetch --all; git reset --hard origin/master)',
       minute => '*/10';
-    "Puppet: deploy_puppet.sh":
+    "Puppet: puppet_deploy.sh":
       user    => root,
       command => '/usr/local/bin/deploy_puppet.sh',
       minute  => '*/8',
-      require => File["/usr/local/bin/deploy_puppet.sh"];
+      require => File["/usr/local/bin/puppet_deploy.sh"];
   }
 
 }

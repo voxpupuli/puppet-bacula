@@ -109,7 +109,7 @@ define redmine::instance (
       owner => root,
       group => root,
       mode  => 0750,
-      content => template("modules/redmine/permission_keeper.sh");
+      content => template("redmine/permission_keeper.sh");
   }
 
   cron {

@@ -3,14 +3,16 @@
 # This class contains the parameter for the Munin module
 #
 # Parameters:
-#
+#   site_alias: the alias of the munin apache vhost
 # Actions:
 #
 # Requires:
 #
 # Sample Usage:
 #
-class munin::params {
+class munin::params (
+  site_alias
+) {
 
   $munin_server = '^74\.207\.240\.137$'
   $munin_server_clean = '74.207.240.137'

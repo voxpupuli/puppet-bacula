@@ -13,6 +13,8 @@
 #
 class puppetlabs::base {
 
+  include puppetlabs
+
   $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
 
   # Kernel/Operatingsystem Specific Configurations

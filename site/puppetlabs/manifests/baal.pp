@@ -97,7 +97,7 @@ class puppetlabs::baal {
       hour => '2';
     "Puppet: puppet_deploy.sh":
       user    => root,
-      command => '/usr/local/bin/deploy_puppet.sh',
+      command => '/usr/local/bin/puppet_deploy.sh',
       minute  => '*/8',
       require => File["/usr/local/bin/puppet_deploy.sh"];
   }

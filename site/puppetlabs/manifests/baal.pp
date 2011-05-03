@@ -27,7 +27,7 @@ class puppetlabs::baal {
   include puppet::dashboard
 
   # Package management
-  include aptrepo
+  class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
   include yumrepo
 
   # Backup
@@ -55,7 +55,7 @@ class puppetlabs::baal {
   include munin::passenger
   include munin::puppet
   include munin::puppetmaster
- 
+
   # Collectd
   include collectd::server
 
@@ -70,6 +70,14 @@ class puppetlabs::baal {
     port => '80',
     docroot => '/var/www',
     template => 'puppetlabs/baal.conf.erb'
+  }
+
+  file {
+    "/usr/local/bin/puppet_deploy.sh":
+      owner => root,
+      group => root,
+      mode  => 0750,
+      source => "puppet:///modules/puppetlabs/puppet_deploy.sh";
   }
 
   cron {
@@ -87,10 +95,11 @@ class puppetlabs::baal {
       command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune upto=1 unit=wk)',
       minute => '20',
       hour => '2';
-    "git reset --hard origin/master":
-      user => root,
-      command => '(cd /etc/puppet/modules; git fetch --all; git reset --hard origin/master)',
-      minute => '*/10';
+    "Puppet: puppet_deploy.sh":
+      user    => root,
+      command => '/usr/local/bin/deploy_puppet.sh',
+      minute  => '*/8',
+      require => File["/usr/local/bin/puppet_deploy.sh"];
   }
 
 }

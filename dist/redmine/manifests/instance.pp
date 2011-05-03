@@ -5,23 +5,23 @@
 #
 
 define redmine::instance (
-    $db, 
-    $db_user, 
-    $db_pw, 
-    $user, 
-    $group, 
-    $dir, 
+    $db,
+    $db_user,
+    $db_pw,
+    $user,
+    $group,
+    $dir,
     $backup = true
     ) {
 
-  require redmine  
+  require redmine
   $version = $redmine::params::version
   $source  = $redmine::params::source
-  
+
   vcsrepo{
     "${dir}/${name}":
       source   => $source,
-      revision => $version, 
+      revision => $version,
       #require => File[$dir],
       #path => $dir,
   }
@@ -44,7 +44,7 @@ define redmine::instance (
   #
   if $backup == true {
     bacula::mysql { $db: }
-  } 
+  }
 
   # now, lets fire up this database
   #
@@ -73,7 +73,7 @@ define redmine::instance (
     }
   }
 
-  file{ 
+  file{
     [ "${dir}/${name}/public", "${dir}/${name}/public/plugin_assets" ]:
       ensure  => directory,
       #recurse => true,
@@ -83,7 +83,7 @@ define redmine::instance (
       require => Exec["${name}-migrate"],
   }
 
-  file{ 
+  file{
     "${dir}/${name}/log":
       ensure  => directory,
       #recurse => true,
@@ -93,7 +93,7 @@ define redmine::instance (
       require => Exec["${name}-migrate"],
   }
 
-  file{ 
+  file{
     [ "${dir}/${name}/files", "${dir}/${name}/tmp" ]:
       ensure  => directory,
       #recurse => true,
@@ -103,17 +103,33 @@ define redmine::instance (
       require => Exec["${name}-migrate"],
   }
 
-  cron { 
+
+  file {
+    "/usr/local/bin/redmine_permission_keeper.sh":
+      owner => root,
+      group => root,
+      mode  => 0750,
+      content => template("redmine/permission_keeper.sh");
+  }
+
+  cron {
+    "Redmine: permission_keeper.sh":
+      command => "/usr/local/bin/redmine_permission_keeper.sh",
+      user    => root,
+      minute  => "*/15",
+      require => File["/usr/local/bin/redmine_permission_keeper.sh"];
     # recursion file type makes for huge reports + checksumming when we just care about perms
-    "redmine_files_and_tmp_permissions": 
-      command => "/usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chown $user:$group {} \; ; /usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chmod 777 {} \;",
-      user   => root,
-      minute => "*/15";
+    "redmine_files_and_tmp_permissions":
+      command => "/usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chown $user:$group {} \; ; /usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chmod 755 {} \;",
+      user    => root,
+      ensure  => absent,
+      minute  => "*/15";
     # recursion file type makes for huge reports
-    "redmine_public_and_log_permissions": 
+    "redmine_public_and_log_permissions":
       command => "/usr/bin/find ${dir}/${name}/public ${dir}/${name}/log -exec chown $user:$group {} \; ; /usr/bin/find ${dir}/${name}/public ${dir}/${name}/log -exec chmod 755 {} \;",
-      user   => root,
-      minute => "*/15";
+      user    => root,
+      ensure  => absent,
+      minute  => "*/15";
   }
 
 }

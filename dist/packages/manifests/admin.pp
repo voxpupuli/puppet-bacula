@@ -6,8 +6,6 @@ class packages::admin {
     "screen",
   ]
 
-  package {
-    $admin_pacakges: ensure => installed;
-  }
+  package { $admin_packages: ensure => installed; }
 
 }

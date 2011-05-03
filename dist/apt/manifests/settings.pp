@@ -5,7 +5,7 @@ class apt::settings (
   if $proxy { 
     file { 
       "/etc/apt/apt.conf.d/01proxy": 
-        content => "Acquire::http::Proxy \"$proxy\";",
+        content => "Acquire::http::Proxy \"$proxy\";\n",
     }
   }
 

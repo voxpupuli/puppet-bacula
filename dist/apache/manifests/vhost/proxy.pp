@@ -1,3 +1,20 @@
+# Define: apache::vhost::proxy
+#
+# Configures an apache vhost that will only proxy requests
+#
+# Parameters:
+# * $port: 
+#     The port on which the vhost will respond
+# * $dest: 
+#     URI that the requests will be proxied for
+#
+# Actions:
+# * Install Apache Virtual Host
+#
+# Requires:
+#
+# Sample Usage:
+#
 define apache::vhost::proxy (
     $port,
     $dest,

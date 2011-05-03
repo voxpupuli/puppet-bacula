@@ -13,11 +13,8 @@
 #
 # Requires:
 #
-#
 # Sample Usage:
 #
-#
-
 define apache::vhost::redirect (
     $port,
     $dest,

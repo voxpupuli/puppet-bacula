@@ -22,16 +22,20 @@ class ntp (
     include ntp::nagios
   }
 
-  package { 'ntp':
-    ensure => present,
+  if $kernel == "Linux" {
+    package { 'ntp':
+      ensure => present,
+    }
   }
-
   service { 'ntp':
     name       => "$ntp::params::ntpd_service",
     ensure     => running,
     enable     => true,
     hasrestart => true,
-    require => Package['ntp'],
+    require => $kernel ? {
+      linux => Package['ntp'],
+      default => undef,
+    }
   }
 
 }

@@ -3,8 +3,6 @@ class puppetlabs::qa {
   $mysql_root_pw = 'c@11-53-m1st3r-pttya1'
   include mysql::server
 
-  include puppetlabs::lan
-
   # move this shit into a module
   $packages_list = [
     "python",

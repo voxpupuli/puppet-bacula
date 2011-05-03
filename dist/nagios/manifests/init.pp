@@ -3,8 +3,6 @@
 # This class installs and configures Nagios
 #
 # Parameters:
-#   $nrpe_server:
-#     IP address of the NRPE monitoring server
 #
 # Actions:
 #

@@ -13,7 +13,6 @@
 #
 class puppetlabs::base {
 
-  $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
 
   # Kernel/Operatingsystem Specific Configurations
   case $kernel {
@@ -22,8 +21,10 @@ class puppetlabs::base {
   }
 
 # Domain/Location Specific Configurations
-  case $domain { 
+  case $domain {
     "puppetlabs.lan": {
+      $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
+
       include puppetlabs::lan
 
       case $operatingsystem {

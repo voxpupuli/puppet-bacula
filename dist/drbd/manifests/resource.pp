@@ -54,10 +54,12 @@ define drbd::resource (
   ){
 
   # Set the variables used in the template
-  $remote     = $peer
-  $remote_ip  = $peer_ip
-  $local_ip   = $ip
-  $local_port = $port
+  $remote       = $peer
+  $remote_ip    = $peer_ip
+  $local_ip     = $ip
+  $local_port   = $port
+  $local_disk   = $disk
+  $local_device = $device
 
   if ! $peer_disk { # use $disk if no $peer_disk is given
     $remote_disk = $disk

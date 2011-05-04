@@ -22,10 +22,12 @@ class collectd::client (
 
   $collectd_server = $server
 
-  file { 'collectd-client':
-    path => $collectd::params::collectd_configuration,
-    content => template('collectd/collectd-client.conf.erb'),
-    ensure => present,
+  file { "$collectd::params::collectd_configuration":
+    content => $fqdn ? {
+      $collectd_server => template('collectd/collectd-server.conf.erb'),
+      default          => template('collectd/collectd-client.conf.erb'),
+    },
+    ensure  => present,
     require => Package['collectd'],
   }
 

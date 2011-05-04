@@ -14,13 +14,14 @@
 #
 # Sample Usage:
 #
-# class { "collectd::params":
-#   collectd_server => "collectd.example.com",
+# class { "collectd::server":
 #   site_alias      => "visage.example.com",
 # }
-# include collectd::server
 #
-class collectd::server {
+class collectd::server (
+  $site_alias = "$fqdn"
+  ) {
+
   include collectd::params
   include collectd
   include apache
@@ -30,8 +31,6 @@ class collectd::server {
 
   $passenger_version = $passenger::params::version
   $gem_path          = $passenger::params::gem_path
-  $collectd_server   = $collectd::params::collectd_server
-  $site_alias        = $collectd::params::site_alias
 
   package {
     [ 'librrd-dev', 'librrd-ruby' ]:

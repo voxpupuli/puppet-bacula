@@ -12,8 +12,10 @@
 #
 class puppetlabs {
   #
-  # This is our base install for all of our servers. 
-  #  
+  # This is our base install for all of our servers.
+  #
+
+  class { "collectd::client": server => "baal.puppetlabs.com"; }
 
   class { "nagios::params":
     nrpe_server       => '74.207.240.137',
@@ -28,7 +30,7 @@ class puppetlabs {
   include ntp
   include puppet
   include ssh::server
-  include virtual::users 
+  include virtual::users
   include virtual::packages
   include virtual::nagioscontacts
   include sudo

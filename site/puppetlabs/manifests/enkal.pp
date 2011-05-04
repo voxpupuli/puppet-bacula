@@ -28,13 +28,6 @@ class puppetlabs::enkal {
   # Munin
   include munin
 
-  # Collectd
-  include puppetlabs::server
-  include collectd::client
-
-  # Hudson
-  #include hudson
-
   # Jenkins
   class { "jenkins":
     site_alias => 'jenkins.puppetlabs.com',

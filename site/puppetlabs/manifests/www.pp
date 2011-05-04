@@ -13,10 +13,6 @@ class puppetlabs::www {
   include munin::dbservices
   include munin::puppet
 
-  # Collectd
-  include puppetlabs::server
-  include collectd::client
-
   # Bacula
   $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = 'MQI/vywQq5pSlAYaEUJKrmt24Wu8FOIPfT7tFoaOc5X6'

@@ -10,18 +10,17 @@
 #   - collectd::params
 #
 # Sample Usage:
-
-# class { "collectd::params":
-#   collectd_server => "collectd.example.com",
-#   site_alias      => "visage.example.com",
-# }
-# include collectd::client
 #
-class collectd::client {
+# class { "collectd::client": server => "collectd.example.com"; }
+#
+class collectd::client (
+  $server
+  ) {
+
   include collectd::params
   include collectd
 
-  $collectd_server = $collectd::params::collectd_server
+  $collectd_server = $server
 
   file { 'collectd-client':
     path => $collectd::params::collectd_configuration,

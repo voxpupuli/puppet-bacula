@@ -45,7 +45,7 @@ class nagios::server (
     hasstatus  => true,
   }
 
-  apache::redirect {
+  apache::vhost::redirect {
     "$site_alias":
       port => 80,
       dest => "https://${site_alias}",

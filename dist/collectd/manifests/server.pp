@@ -20,7 +20,7 @@
 #
 class collectd::server (
     $site_alias = "$fqdn",
-    $collectd_server = "$fqdn"
+    $listen_address = "$ipaddress"
   ) {
 
   include collectd::params

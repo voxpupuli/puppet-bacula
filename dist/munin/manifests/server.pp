@@ -11,11 +11,11 @@
 #
 # Sample Usage:
 #
-class munin::server {
+class munin::server (
+    $site_alias = $fqdn
+  ) {
   include apache
   include munin::params
-
-  $site_alias = $munin::params::site_alias
 
   package { 'munin':
     ensure => present,

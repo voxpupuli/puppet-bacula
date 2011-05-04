@@ -17,15 +17,15 @@ class puppetlabs {
 
   class { "collectd::client": server => "baal.puppetlabs.com"; }
 
-  class { "nagios::params":
-    nrpe_server       => '74.207.240.137',
-    nagios_site_alias => 'nagios.puppetlabs.com',
-  }
-  include nagios
+  class { "nagios": nrpe_server => '74.207.240.137'; }
+
+  class { "munin": munin_server => '74.207.240.137'; }
+
   class { "munin::params":
     munin_server  => "74.207.240.137",
     site_alias  => "munin.puppetlabs.com",
   }
+
   include munin
   include ntp
   include puppet
@@ -45,3 +45,4 @@ class puppetlabs {
   if defined(Class["firewall"]) { Firewall <||> }
 
 }
+

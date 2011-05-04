@@ -15,6 +15,8 @@ class munin::server {
   include apache
   include munin::params
 
+  $site_alias = $munin::params::site_alias
+
   package { 'munin':
     ensure => present,
   }
@@ -23,7 +25,7 @@ class munin::server {
     ensure => absent,
   }
 
-  apache::vhost { 'munin.puppetlabs.com':
+  apache::vhost { "$site_alias":
     port => '80',
     priority => '40',
     docroot => '/var/cache/munin/www',

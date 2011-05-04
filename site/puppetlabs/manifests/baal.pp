@@ -49,6 +49,9 @@ class puppetlabs::baal {
   nagios::website { 'visage.puppetlabs.com': auth => 'monit:5kUg8uha', }
 
   # Munin
+  class { "munin::params":
+    site_alias  => "munin.puppetlabs.com",
+  }
   include munin
   include munin::server
   include munin::dbservices
@@ -57,6 +60,7 @@ class puppetlabs::baal {
   include munin::puppetmaster
 
   # Collectd
+  include puppetlabs::server
   include collectd::server
 
   # pDNS

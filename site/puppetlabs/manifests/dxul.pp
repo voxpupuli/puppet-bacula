@@ -45,6 +45,7 @@ class puppetlabs::dxul {
   include munin::puppet
 
   # Collectd
+  include puppetlabs::server
   include collectd::client
 
   include mysql::server

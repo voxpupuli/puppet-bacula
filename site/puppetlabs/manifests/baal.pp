@@ -57,6 +57,7 @@ class puppetlabs::baal {
   include munin::puppetmaster
 
   # Collectd
+  include puppetlabs::server
   include collectd::server
 
   # pDNS

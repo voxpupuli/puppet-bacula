@@ -29,6 +29,7 @@ class puppetlabs::enkal {
   include munin
 
   # Collectd
+  include puppetlabs::server
   include collectd::client
 
   # Hudson

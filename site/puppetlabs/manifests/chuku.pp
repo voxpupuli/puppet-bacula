@@ -14,6 +14,7 @@ class puppetlabs::chuku {
   include munin::puppet
 
   # Collectd
+  include puppetlabs::server
   include collectd::client
 
   # Bacula

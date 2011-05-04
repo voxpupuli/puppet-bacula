@@ -53,7 +53,7 @@ class nagios::server (
 
   apache::vhost { "${site_alias}_ssl":
     port          => '443',
-    serveraliases => "$site_alias"
+    serveraliases => "$site_alias",
     priority      => '30',
     #ssl          => 'false',
     docroot       => '/usr/share/nagios3/htdocs',

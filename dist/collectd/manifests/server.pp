@@ -45,14 +45,6 @@ class collectd::server (
       require  => Package['librrd-dev'],
   }
 
-  file {
-    'collectd-server':
-      path    => '/etc/collectd/collectd.conf',
-      content => template('collectd/collectd-server.conf.erb'),
-      ensure  => present,
-      require => Package['collectd'],
-  }
-
   apache::vhost {
     "${site_alias}":
       port     => '80',

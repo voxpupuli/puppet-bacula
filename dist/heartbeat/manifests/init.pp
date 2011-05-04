@@ -7,15 +7,12 @@
 
 
 class heartbeat (
-    use_logd = "no",
-    keepalive = "2",
-    deadtime = "10",
-    warntime = "5",
-
-
-    logfacility   = "local0",
-    auto_failback = "off"
-
+    $keepalive = "2",
+    $deadtime = "10",
+    $warntime = "5",
+    $auto_failback = "off",
+    $nodes,
+    $network
   ) {
 
   package {
@@ -31,13 +28,13 @@ class heartbeat (
   concat { "/etc/heartbeat/authkeys":
     mode    => '0600',
     require => Package["heartbeat"],
-    notify  => Service["heartbeat"].
+    notify  => Service["heartbeat"];
   }
 
   concat { "/etc/heartbeat/haresources":
     mode    => '0640',
     require => Package["heartbeat"],
-    notify  => Service["heartbeat"].
+    notify  => Service["heartbeat"];
   }
 
   file {
@@ -55,9 +52,10 @@ class heartbeat (
 #    source => "puppet:///modules/heartbeat/haresources",
 #    notify => Service["heartbeat"];
     "/etc/heartbeat/ha.cf":
-      owner  => root,
-      group  => root,
-      mode   => 640,
+      owner   => root,
+      group   => root,
+      mode    => 640,
+      content => template("heartbeat/ha.cf.erb");
       #source => ["puppet:///modules/heartbeat/ha.cf_${hostname}", "$files/etc/heartbeat/ha.cf"], notify => Service["heartbeat"];
   }
 

@@ -15,18 +15,6 @@ class puppetlabs {
   # This is our base install for all of our servers.
   #
 
-  class { "collectd::client": server => "baal.puppetlabs.com"; }
-
-  class { "nagios": nrpe_server => '74.207.240.137'; }
-
-  class { "munin": munin_server => '74.207.240.137'; }
-
-  class { "munin::params":
-    munin_server  => "74.207.240.137",
-    site_alias  => "munin.puppetlabs.com",
-  }
-
-  include munin
   include ntp
   include puppet
   include ssh::server
@@ -36,7 +24,11 @@ class puppetlabs {
   include sudo
   include packages
 
-  ssh::allowgroup { "sysadmin": }
+  class { "collectd::client": server       => "baal.puppetlabs.com"; }
+  class { "nagios":           nrpe_server  => '74.207.240.137'; }
+  class { "munin":            munin_server => '74.207.240.137'; }
+
+  ssh::allowgroup  { "sysadmin": }
   sudo::allowgroup { "sysadmin": }
 
   Account::User <| tag == 'allstaff' |>

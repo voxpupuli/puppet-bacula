@@ -7,6 +7,8 @@
 # Actions:
 #
 # Requires:
+#   puppetlabs-apache
+#   nagios::params
 #
 # Sample Usage:
 #
@@ -16,6 +18,8 @@ class nagios::server {
   include nagios::commands
   include nagios::contacts
   include nagios::params
+
+  $nagios_site_alias = $nagios::params::site_alias
 
   file { [ '/etc/nagios/conf.d/nagios_host.cfg', '/etc/nagios/conf.d/nagios_service.cfg'  ]:
     mode   => 0644,
@@ -38,7 +42,7 @@ class nagios::server {
     hasstatus  => true,
   }
 
-  apache::vhost { 'nagios.puppetlabs.com':
+  apache::vhost { "$nagios_site_alias":
     port     => '80',
     priority => '30',
     #ssl      => 'false',

@@ -3,18 +3,14 @@
 # This class installs and configures parameters for Nagios
 #
 # Parameters:
-#   nrpe_server: the address of the nrpe server
-#   nagios_site_alias: the apache alias for the nagios web server
+#
 # Actions:
 #
 # Requires:
 #
 # Sample Usage:
 #
-class nagios::params (
-  nrpe_server,
-  nagios_site_alias
-) {
+class nagios::params {
 
   case $operatingsystem {
     "ubuntu": {

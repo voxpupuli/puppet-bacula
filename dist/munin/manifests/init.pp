@@ -11,18 +11,17 @@
 #
 # Sample Usage:
 #
-class munin {
+class munin (
+    $munin_server
+  ) {
   include munin::params
 
-  $munin_server = $munin::params::munin_server
-  $munin_server_clean = $munin::params::munin_server_clean
-
-  package { 
+  package {
     $munin::params::munin_base_packages:
       ensure => present,
   }
 
-  file { 
+  file {
     '/etc/munin/munin-node.conf':
       content => template('munin/munin-node.conf.erb'),
       ensure  => present,
@@ -42,12 +41,12 @@ class munin {
     tag     => 'munin_host',
   }
 
-  @firewall { 
+  @firewall {
     '0150-INPUT ACCEPT 4949':
       jump   => 'ACCEPT',
       dport  => "4949",
       proto  => 'tcp',
-      source => "$munin_server_clean",
+      source => "$munin_server",
   }
 
 }

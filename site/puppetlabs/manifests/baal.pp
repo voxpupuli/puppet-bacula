@@ -37,7 +37,7 @@ class puppetlabs::baal {
   include bacula::director
 
   # Monitoring
-  include nagios::server
+  class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }
   include nagios::webservices
   include nagios::dbservices
   include nagios::bacula
@@ -49,8 +49,7 @@ class puppetlabs::baal {
   nagios::website { 'visage.puppetlabs.com': auth => 'monit:5kUg8uha', }
 
   # Munin
-  include munin
-  include munin::server
+  class { "munin::server": site_alias => "munin.puppetlabs.com"; }
   include munin::dbservices
   include munin::passenger
   include munin::puppet

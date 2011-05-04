@@ -11,7 +11,10 @@
 #
 # Sample Usage:
 #
-class nagios {
+class nagios (
+    $nrpe_server
+  ) {
+
   include nagios::params
 
   $nrpe_server = $nagios::params::nrpe_server

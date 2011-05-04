@@ -19,7 +19,8 @@
 # }
 #
 class collectd::server (
-  $site_alias = "$fqdn"
+    $site_alias = "$fqdn",
+    $collectd_server = "$fqdn"
   ) {
 
   include collectd::params

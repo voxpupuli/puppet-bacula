@@ -33,19 +33,19 @@ class collectd::server {
   $collectd_server   = $collectd::params::collectd_server
   $site_alias        = $collectd::params::site_alias
 
-  package { 
+  package {
     [ 'librrd-dev', 'librrd-ruby' ]:
       ensure => present,
   }
 
-  package { 
+  package {
     [ 'sinatra' , 'haml', 'errand', 'yajl-ruby', 'tilt', 'visage-app' ]:
       provider => gem,
       ensure   => present,
       require  => Package['librrd-dev'],
   }
 
-  file { 
+  file {
     'collectd-server':
       path    => '/etc/collectd/collectd.conf',
       content => template('collectd/collectd-server.conf.erb'),
@@ -53,8 +53,8 @@ class collectd::server {
       require => Package['collectd'],
   }
 
-  apache::vhost { 
-    "${site_alias}"
+  apache::vhost {
+    "${site_alias}":
       port     => '80',
       priority => '55',
       docroot  => '/var/lib/gems/1.8/gems/visage-app-0.2.5/lib/visage/public',

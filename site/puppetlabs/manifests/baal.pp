@@ -55,8 +55,6 @@ class puppetlabs::baal {
   include munin::puppet
   include munin::puppetmaster
 
-  # Collectd
-  class { "collectd::server": site_alias => "visage.puppetlabs.com"; }
 
   # pDNS
   include pdns

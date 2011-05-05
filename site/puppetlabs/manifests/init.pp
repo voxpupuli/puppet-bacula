@@ -24,7 +24,15 @@ class puppetlabs {
   include sudo
   include packages
 
-  class { "collectd::client": server       => "baal.puppetlabs.com"; }
+  $collectd_server = "baal.puppetlabs.com"
+
+  # Collectd
+  if $fqdn == $collectd_server {
+    class { "collectd::server": server => "baal.puppetlabs.com"; }
+  else {
+    class { "collectd::client": server => "baal.puppetlabs.com"; }
+  }
+
   class { "nagios":           nrpe_server  => '74.207.240.137'; }
   class { "munin":            munin_server => '74.207.240.137'; }
 

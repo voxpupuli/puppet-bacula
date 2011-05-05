@@ -27,5 +27,19 @@ class puppetlabs::wyrd {
       resource => "wyrd IPaddr::192.168.100.15/24/eth0:0";
   }
 
+  class { "drbd": }
+
+  drbd::resource {
+    "apt-cache":
+      peer_ip   => '192.168.50.6',
+      peer      => 'vanir',
+      peer_disk => '/dev/vanir/_apt-cache',
+      device    => '/dev/drbd0',
+      disk      => '/dev/data/_apt-cache',
+      port      => '7790'
+  }
+
+
+
 }
 

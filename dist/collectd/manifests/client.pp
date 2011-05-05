@@ -14,20 +14,16 @@
 # class { "collectd::client": server => "collectd.example.com"; }
 #
 class collectd::client (
-  $server
+  $collectd_server
   ) {
 
   include collectd::params
   include collectd
 
-  $collectd_server = $server
-
-  if ! defined(Class["collectd::server"]) { 
-    file { "$collectd::params::collectd_configuration":
-      content => template('collectd/collectd-client.conf.erb'),
-      ensure  => present,
-      require => Package['collectd'],
-    }
+  file { "$collectd::params::collectd_configuration":
+    content => template('collectd/collectd-client.conf.erb'),
+    ensure  => present,
+    require => Package['collectd'],
   }
 
   @@firewall { "0160-INPUT allow 25826 udp $ipaddress":

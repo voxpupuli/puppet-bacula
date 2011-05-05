@@ -55,7 +55,7 @@ class nagios::server (
     port          => '443',
     serveraliases => "$site_alias",
     priority      => '30',
-    #ssl          => 'false',
+    ssl          => 'true',
     docroot       => '/usr/share/nagios3/htdocs',
     template      => 'nagios/nagios-apache.conf.erb',
     require       => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 

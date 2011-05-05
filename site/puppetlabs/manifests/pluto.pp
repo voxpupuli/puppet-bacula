@@ -37,17 +37,25 @@ class puppetlabs::pluto {
   exec { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4":
     creates => '/var/chroot.key';
   }
-  
-  file { 
+
+  file {
     "/var/chroot.key": mode => 0400, require => Exec["/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4"];
   }
 
   file {
-    "/opt/enterprise": 
+    "/opt/enterprise":
       owner   => root,
       group   => developers,
       mode    => 0664,
       recurse => true;
+    "/opt/puppet":
+      ensure  => directory,
+      owner   => root,
+      group   => www-data,
+      mode    => 0664,
+      recurse => true;
+    "/opt/puppet/nightly":
+      ensure  => directory;
   }
 
 }

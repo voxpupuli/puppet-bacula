@@ -55,7 +55,10 @@ class puppetlabs::pluto {
       mode    => 0664,
       recurse => true;
     "/opt/puppet/nightly":
-      ensure  => directory;
+      ensure  => directory,
+      owner   => root,
+      group   => www-data,
+      mode    => 0664;
   }
 
 }

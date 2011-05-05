@@ -61,17 +61,12 @@ define drbd::resource (
   $local_disk   = $disk
   $local_device = $device
 
-  if ! $peer_disk { # use $disk if no $peer_disk is given
-    $remote_disk = $disk
-  }
-
-  if ! $peer_device { # use $device if no $peer_device is given
-    $remote_device = $device
-  }
-
-  if ! $peer_port { # use $port if no $port is given
-    $remote_port = $port
-  }
+  # use $disk if no $peer_disk is given
+  if ! $peer_disk { $remote_disk = $disk } else { $remote_disk = $peer_disk }
+  # use $device if no $peer_device is given
+  if ! $peer_device { $remote_device = $device } else { $remote_device = $peer_device }
+  # use $port if no $port is given
+  if ! $peer_port { $remote_port = $port } else { $remote_port = $peer_port }
 
   file {
     "/etc/drbd.d/${name}.res":

@@ -22,13 +22,12 @@ class collectd::client (
 
   $collectd_server = $server
 
-  file { "$collectd::params::collectd_configuration":
-    content => $fqdn ? {
-      $collectd_server => template('collectd/collectd-server.conf.erb'),
-      default          => template('collectd/collectd-client.conf.erb'),
-    },
-    ensure  => present,
-    require => Package['collectd'],
+  if ! defined(Class["collectd::server"]) { 
+    file { "$collectd::params::collectd_configuration":
+      content => template('collectd/collectd-client.conf.erb'),
+      ensure  => present,
+      require => Package['collectd'],
+    }
   }
 
   @@firewall { "0160-INPUT allow 25826 udp $ipaddress":

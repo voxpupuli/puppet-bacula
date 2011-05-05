@@ -26,12 +26,13 @@ class puppetlabs {
 
   $collectd_server = "baal.puppetlabs.com"
 
-  # Collectd
+  # Collectd -- The collectd module should probably handle this will paramters
   if $fqdn == $collectd_server {
-    class { "collectd::server": server => "baal.puppetlabs.com"; }
-  else {
-    class { "collectd::client": server => "baal.puppetlabs.com"; }
+    class { "collectd::server": site_alias => "visage.puppetlabs.com"; }
+  } else {
+    class { "collectd::client": collectd_server => "baal.puppetlabs.com"; }
   }
+
 
   class { "nagios":           nrpe_server  => '74.207.240.137'; }
   class { "munin":            munin_server => '74.207.240.137'; }

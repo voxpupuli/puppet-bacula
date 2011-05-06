@@ -21,6 +21,7 @@ class puppetlabs::vanir {
       peer_ip   => '192.168.50.5',
       peer      => 'wyrd',
       peer_disk => '/dev/data/_apt-cache',
+      ip        => '192.168.50.6',
       device    => '/dev/drbd0',
       disk      => '/dev/vanir/_apt-cache',
       port      => '7790'

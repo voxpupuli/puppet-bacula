@@ -34,12 +34,11 @@ class puppetlabs::wyrd {
       peer_ip   => '192.168.50.6',
       peer      => 'vanir',
       peer_disk => '/dev/vanir/_apt-cache',
+      ip        => '192.168.50.5',
       device    => '/dev/drbd0',
       disk      => '/dev/data/_apt-cache',
       port      => '7790'
   }
-
-
 
 }
 

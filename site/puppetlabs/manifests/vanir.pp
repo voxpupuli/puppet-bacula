@@ -11,7 +11,7 @@ class puppetlabs::vanir {
 
   heartbeat::resource {
     "server01":
-      resource => "wyrd IPaddr::192.168.100.15/24/eth0:0";
+      resource => "wyrd IPaddr::192.168.100.15/24/eth2:0";
   }
 
   class { "drbd": }

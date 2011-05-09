@@ -1,0 +1,13 @@
+[main]
+srcdir = <%= scope.lookupvar('mrepo::settings::srcroot') %>
+wwwdir = <%= scope.lookupvar('mrepo::settings::wwwroot') %>
+confdir = /etc/mrepo.conf.d
+arch = i386 x86_64
+mailto = root@localhost
+smtp-server = localhost
+
+<% if not scope.lookupvar('mrepo::settings::rhn_username').empty? and not scope.lookupvar('mrepo::settings::rhn_password').empty? -%>
+rhnlogin = <%= scope.lookupvar('mrepo::settings::rhn_username') %>:<%= scope.lookupvar('mrepo::settings::rhn_password') %>
+<% elsif not scope.lookupvar('mrepo::settings::rhn_username').empty? -%>
+rhnlogin = <%= scope.lookupvar('mrepo::settings::rhn_username') %>
+<% end -%>

@@ -1,0 +1,4 @@
+name 'puppet-mrepo'
+version '0.0.1'
+dependency 'puppetlabs-apache' '0.0.3'
+depencency 'puppetlabs/vcsrepo' '0.0.1'

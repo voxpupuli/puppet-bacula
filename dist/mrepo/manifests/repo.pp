@@ -55,9 +55,10 @@ define mrepo::repo (
 
       if $rhn {
         exec { "Generate systemid $name":
-          path  => "/bin:/usr/bin",
+          path    => "/bin:/usr/bin",
           command => "gensystemid -u ${mrepo::settings::rhn_username} -p ${mrepo::settings::rhn_password} --release $release --arch $arch ${mrepo::settings::srcroot}/$name",
           creates => "${mrepo::settings::srcroot}/$name/systemid",
+          require => File["${mrepo::settings::srcroot}/$name"],
         }
       }
     }

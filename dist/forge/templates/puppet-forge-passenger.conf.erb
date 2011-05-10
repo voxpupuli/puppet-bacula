@@ -1,21 +1,25 @@
 NameVirtualHost <%= ipaddress %>:<%= port %>
 <VirtualHost <%= ipaddress %>:<%= port %>>
-        #ServerName <%= name %>
-        ServerName forge.puppetlabs.com
-        DocumentRoot <%= docroot %>
+  #ServerName <%= name %>
+  ServerName forge.puppetlabs.com
+  DocumentRoot <%= docroot %>
 
-	<% if ssl == true %>
-	SSLEngine on
-	SSLCertificateFile /etc/ssl/certs/pl.cert
-	SSLCertificateKeyFile /etc/ssl/private/pl.key
-	<% end %>
+  <% if ssl == true %>
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/certs/pl.cert
+  SSLCertificateKeyFile /etc/ssl/private/pl.key
+  <% end %>
 
-        <Directory <%= docroot %>>
-                Options None
-                AllowOverride AuthConfig
-                Order allow,deny
-                allow from all
-        </Directory>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^/users/(.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+  <Directory <%= docroot %>>
+    Options None
+    AllowOverride AuthConfig
+    Order allow,deny
+    allow from all
+  </Directory>
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
   CustomLog /var/log/apache2/<%= name %>_access.log combined

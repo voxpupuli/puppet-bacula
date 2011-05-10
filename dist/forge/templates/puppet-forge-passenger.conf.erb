@@ -12,7 +12,7 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
 
   RewriteEngine On
   RewriteCond %{HTTPS} off
-  RewriteRule ^/users/(.*) https://%{HTTP_HOST}%{REQUEST_URI}
+  RewriteRule ^/users(.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
   <Directory <%= docroot %>>
     Options None

@@ -69,7 +69,7 @@ class mrepo {
     minute  => "0",
   }
 
-  apache::vhost { "mrepo":
+  apache::vhost { "mrepo.conf":
     priority  => "10",
     port      => "80",
     docroot   => "/var/www/mrepo",

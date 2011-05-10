@@ -1,5 +1,5 @@
 define mrepo::repo (
-  $ensure,
+  $ensure = "present",
   $repotitle,
   $release,
   $arch,

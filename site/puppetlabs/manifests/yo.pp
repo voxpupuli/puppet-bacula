@@ -18,4 +18,13 @@ class puppetlabs::yo {
     iso       => 'rhel-server-6.0-$arch-dvd.iso',
     updates   => 'rhns:///rhel-$arch-server-6',
   }
+  mrepo::repo { "6server-i386":
+    ensure    => present,
+    rhn       => true,
+    repotitle => "RHEL server 6 32 bit",
+    arch      => "i386",
+    release   => "6Server",
+    iso       => 'rhel-server-6.0-$arch-dvd.iso',
+    updates   => 'rhns:///rhel-$arch-server-6',
+  }
 }

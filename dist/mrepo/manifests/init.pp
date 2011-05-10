@@ -21,12 +21,14 @@ class mrepo {
   package { "pyOpenSSL":
     ensure  => present,
   }
-  
+
   file { "/etc/mrepo.conf.d":
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
-    mode    => '0755',
+    mode    => '0644',
+    purge   => true,
+    recurse => true,
   }
 
   file { 

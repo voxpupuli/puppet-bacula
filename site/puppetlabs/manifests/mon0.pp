@@ -4,13 +4,13 @@ class puppetlabs::mon0 {
 
   include graphite
 
-  apache::vhost {'mon0.puppetlabs.lan':
-    port => 80,
-    docroot => '/var/www',
-    ssl => false,
-    priority => 10,
-    template => 'ganglia/apache.conf.erb',
-  }
+#  apache::vhost {'mon0.puppetlabs.lan':
+#    port => 80,
+#    docroot => '/var/www',
+#    ssl => false,
+#    priority => 10,
+#    template => 'ganglia/apache.conf.erb',
+#  }
 
   file {
     "/usr/local/bin/redmine_gmetric.pl":

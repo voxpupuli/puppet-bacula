@@ -28,7 +28,6 @@ class graphite::install {
     command     => '/usr/bin/python manage.py syncdb',
     cwd         => '/opt/graphite/webapp/graphite',
     environment => "PYTHONPATH=/opt/graphite/webapp",
-    subscribe   => Exec["install-webapp"],
     refreshonly => true,
     user        => $graphite::params::web_user,
   }

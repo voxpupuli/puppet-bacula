@@ -4,6 +4,11 @@ class puppetlabs::mon0 {
 
   include graphite
 
+  # gather project
+  package { "libxml-simple-perl": ensure => installed; }
+
+
+
 #  apache::vhost {'mon0.puppetlabs.lan':
 #    port => 80,
 #    docroot => '/var/www',

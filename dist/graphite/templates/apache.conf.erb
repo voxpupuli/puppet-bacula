@@ -9,7 +9,7 @@
 # in this file to your chosen install location.
 
 <VirtualHost *:80>
-        ServerName <%= fqdn %>
+        ServerName <%= site_alias %>
         DocumentRoot "/opt/graphite/webapp"
         ErrorLog /opt/graphite/storage/log/webapp/error.log
         CustomLog /opt/graphite/storage/log/webapp/access.log common

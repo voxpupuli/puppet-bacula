@@ -14,12 +14,15 @@
  * @package WordPress
  */
 
+<% if development == false %>//<% end %>define('WP_HOME','http://<%= name %>');
+<% if development == false %>//<% end %>define('WP_SITEURL','http://<%= name %>');
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', '<%= db %>');
+define('DB_NAME', '<%= dbname %>');
 
 /** MySQL database username */
-define('DB_USER', '<%= db_user %>');
+define('DB_USER', '<%= dbuser %>');
 
 /** MySQL database password */
 define('DB_PASSWORD', '<%= db_pw %>');
@@ -65,6 +68,8 @@ $table_prefix  = 'wp_';
  * language support.
  */
 define ('WPLANG', '');
+
+define('WP_CACHE', true);
 
 /* That's all, stop editing! Happy blogging. */
 

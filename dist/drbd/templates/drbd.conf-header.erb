@@ -1,0 +1,20 @@
+global { usage-count <%= usage_count %>; }
+common {
+  protocol <%= protocol %>;
+  syncer { rate <%= rate %>; }
+  handlers {
+    split-brain "/usr/lib/drbd/notify-split-brain.sh root";
+    #fence-peer "/usr/lib/drbd/crm-fence-peer.sh";
+    #after-resync-target "/usr/lib/drbd/crm-unfence-peer.sh";
+  }
+  net {
+    cram-hmac-alg sha1;
+    shared-secret "<%= shared_secret %>";
+    after-sb-0pri discard-zero-changes;
+    after-sb-1pri discard-secondary;
+    after-sb-2pri disconnect;
+  }
+
+}
+
+

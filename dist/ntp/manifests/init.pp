@@ -11,20 +11,31 @@
 #
 # Sample Usage:
 #
-class ntp {
-  include ntp::params
-  include ntp::nagios
+class ntp (
+    $nagios = false,
+    $server = '0.pool.ntp.org'
+  ) {
 
-  package { 'ntp':
-    ensure => present,
+  include ntp::params
+
+  if $nagios == true {
+    include ntp::nagios
   }
 
+  if $kernel == "Linux" {
+    package { 'ntp':
+      ensure => present,
+    }
+  }
   service { 'ntp':
     name       => "$ntp::params::ntpd_service",
     ensure     => running,
     enable     => true,
     hasrestart => true,
-    require => Package['ntp'],
+    require => $kernel ? {
+      linux => Package['ntp'],
+      default => undef,
+    }
   }
 
 }

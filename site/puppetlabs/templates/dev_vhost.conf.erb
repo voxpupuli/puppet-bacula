@@ -1,16 +1,15 @@
-NameVirtualHost <%= ipaddress %>:80
-<VirtualHost <%= ipaddress %>:80>
-  servername dev.puppetlabs.com
-  serveralias dev
+NameVirtualHost <%= ipaddress %>:<%= port %>
+<VirtualHost <%= ipaddress %>:<%= port %>>
+  servername <%= name %>
   ServerAdmin webmaster@puppetlabs.com
-  DocumentRoot /var/www/dev
+  DocumentRoot <%= vhost_dir %>
   UseCanonicalName On
   <Directory />
    Options FollowSymLinks
     AllowOverride ALL
     AuthType Digest
   </Directory>
-  <Directory /var/www/dev>
+  <Directory <%= vhost_dir %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Order allow,deny

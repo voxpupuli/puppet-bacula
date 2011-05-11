@@ -1,0 +1,14 @@
+resource <%= name %> {
+    meta-disk internal;
+  on <%= local %> {
+    address   <%= local_ip %>:<%= local_port %>;
+    device    <%= local_device %>;
+    disk      <%= local_disk %>;
+  }
+  on <%= remote %> {
+    address   <%= remote_ip %>:<%= remote_port %>;
+    device    <%= remote_device %>;
+    disk      <%= remote_disk %>;
+  }
+}
+

@@ -23,20 +23,20 @@ class puppetlabs::legba {
   ssh::allowgroup { "enterprise": }
   ssh::allowgroup { "developers": }
 
+  Package <| title == 'mlocate' |>
+
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 
-  apache::vhost {
+  apache::vhost::redirect {
     'ps.puppetlabs.com':
-      serveraliases => "ps.puppetlabs.com",
-      port          => 80,
-      docroot       => '/opt/prosvc',
-      ssl           => false,
-      redirect_ssl  => true,
-      priority      => 10,
-      template      => 'puppetlabs/legba.conf.erb';
+      port => '80',
+      dest => 'https://ps.puppetlabs.com',
+  }
+
+  apache::vhost {
     'ps.puppetlabs.com_ssl':
       serveraliases => "ps.puppetlabs.com",
-      port          => 443,
+      port          => '443',
       docroot       => '/opt/prosvc',
       ssl           => true,
       auth          => true,
@@ -45,7 +45,7 @@ class puppetlabs::legba {
   }
 
   file { "/opt/prosvc": ensure => directory, owner => root, group => prosvc, mode => 664, recurse => true, checksum => none; }
-  file { "/opt/prosvc/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/legba_htaccess"; }
+  file { "/opt/prosvc/.htaccess": ensure => absent; }
 
   apache::vhost {
     'pm.puppetlabs.com':

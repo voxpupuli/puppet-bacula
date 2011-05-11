@@ -1,0 +1,108 @@
+Suite: unstable
+Codename: unstable
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: oneriric
+Version: 11.10
+Codename: oneriric
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: natty
+Version: 11.04
+Codename: natty
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: maverick
+Version: 10.10
+Codename: meerkat
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: lucid
+Version: 10.04
+Codename: lucid
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: karmic
+Version: 9.10
+Codename: karmic
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: jaunty
+Version: 9.04
+Codename: jaunty
+Architectures: i386 amd64 source
+Components: main
+Description: Local Jaunty
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: intrepid
+Version: 8.10
+Codename: intrepid
+Architectures: i386 amd64 source
+Components: main
+Description: Local Intrepid
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: hardy
+Version: 8.04
+Codename: hardy
+Architectures: i386 amd64 source
+Components: main
+Description: Local Hardy
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+

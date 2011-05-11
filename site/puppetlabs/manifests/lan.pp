@@ -14,17 +14,26 @@ class puppetlabs::lan {
   #
   # This is our base install for all of our servers. 
   #  
-	ssh::allowgroup { "sysadmin": }
-	sudo::allowgroup { "sysadmin": }
+  ssh::allowgroup { "sysadmin": }
+  sudo::allowgroup { "sysadmin": }
 
   #include ntp
-  include puppet
   #include mailx
   #include postfix
+  include puppet
   include ssh::server
   include virtual::users 
   include sudo
-	Account::User <| tag == 'allstaff' |>
-	Group <| tag == 'allstaff' |>
+  Account::User <| tag == 'allstaff' |>
+  Group <| tag == 'allstaff' |>
+
+#  case $operatingsystem {
+#    "debian","ubuntu":  { 
+#      class { "apt::settings": proxy => "http://vanir.puppetlabs.lan:3142" } 
+#    }
+#    default: { }
+#  }
+
+  
 
 }

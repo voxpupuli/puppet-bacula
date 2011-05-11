@@ -31,10 +31,19 @@ class bacula::director {
   }
 
   file { 
-		"/bacula": ensure => directory;
-		"/etc/bacula/bacula-dir.conf": owner => root, group => bacula, mode => 640,
-			content => template("bacula/bacula-dir.conf.erb");
+    "/bacula": ensure => directory;
+    "/etc/bacula/bacula-dir.conf": owner => root, group => bacula, mode => 640,
+      content => template("bacula/bacula-dir.conf.erb");
   }
 
   bacula::mysql { 'bacula': }
+
+  @@firewall {
+    '0170-INPUT allow tcp 9102':
+      proto  => 'tcp',
+      dport  => '9102',
+      source => "$ipaddress",
+      jump   => 'ACCEPT',
+  }
+
 }

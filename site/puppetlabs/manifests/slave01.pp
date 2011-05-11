@@ -1,4 +1,6 @@
 class puppetlabs::slave01 {
-	include hudson::slave
+  $mysql_root_pw = 'T3sting@'
+  include mysql::server
+  include hudson::slave
 }
 

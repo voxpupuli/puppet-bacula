@@ -15,18 +15,22 @@ class puppetlabs {
   # This is our base install for all of our servers. 
   #  
 
-  ssh::allowgroup { "sysadmin": }
-  sudo::allowgroup { "sysadmin": }
-
   include nagios
   include munin
   include ntp
   include puppet
   include ssh::server
   include virtual::users 
+  include virtual::packages
   include sudo
   include packages
 
-	Account::User <| tag == 'allstaff' |>
-	Group <| tag == 'allstaff' |>
+  ssh::allowgroup { "sysadmin": }
+  sudo::allowgroup { "sysadmin": }
+
+  Account::User <| tag == 'allstaff' |>
+  Group <| tag == 'allstaff' |>
+
+  if defined(Class["firewall"]) { Firewall <||> }
+
 }

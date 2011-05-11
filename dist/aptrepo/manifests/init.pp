@@ -1,5 +1,6 @@
 # Class: aptrepo
 #
+# DEPRECATED: use apt::server::repo
 # This class installs and configures a local APT repo
 #
 # Parameters:

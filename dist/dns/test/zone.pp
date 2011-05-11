@@ -2,11 +2,11 @@ dns::zone {
     "zlan": # will be $ORIGIN
         zonetype => "master",
         soa => "operator.zlan", # this will also be NS
-        reverse => 'false', # default?
+        reverse => 'false'; # default?
     "18.210.10.in-addr.arpa": # 18.210.10.in-addr.arpa
         zonetype => "master",
         soa => "operator.zlan", # this will also be NS
-        reverse => 'true',
+        reverse => 'true';
 }
 
 dns::host {
@@ -17,10 +17,8 @@ dns::host {
 }
 
 dns::zonefile {
-    "$name"
+    "$name":
         contact => 'root@zlan.',
-        soa => 'carbon.zlan.'',
-        serial => 
-
+        soa => 'carbon.zlan.',
+        serial => "123";
 }
-

@@ -26,39 +26,54 @@
 define apache::vhost( 
     $port,
     $docroot,
-    $ssl = true,
-    $template = 'apache/vhost-default.conf.erb',
-    $priority,
+    $ssl           = true,
+    $template      = 'apache/vhost-default.conf.erb',
+    $priority      = '25',
+    $servername    = '',
     $serveraliases = '',
-    $servername = '',
-    $auth = false,
-    $redirect_ssl = false
-    ) {
+    $auth          = false,
+    $redirect_ssl  = false
+  ) {
 
   include apache
 
-	if $servername == '' {
-		$srvname = "$name"
-	} else {
-		$srvname = "$servername"
-	}
+  if $servername == '' {
+    $srvname = $name
+  } else {
+    $srvname = $servername
+  }
 
   if $ssl == true {
     include apache::ssl
   }
 
-  if $redirect_ssl == true { # Since the template will use auth, redirect to https requires mod_rewrite
-    A2mod <| title == 'rewrite' |>
+  # Since the template will use auth, redirect to https requires mod_rewrite
+  if $redirect_ssl == true {
+    case $operatingsystem {
+      'debian','ubuntu': {
+        A2mod <| title == 'rewrite' |>
+      }
+      default: { }
+    }
   }
 
-  file {"${apache::params::vdir}/${priority}-${name}":
-    content => template($template),
-    owner => 'root',
-    group => 'root',
-    mode => '777',
-    require => Package['httpd'],
-    notify => Service['httpd'],
+  file {
+    "${apache::params::vdir}/${priority}-${name}":
+      content => template($template),
+      owner   => 'root',
+      group   => 'root',
+      mode    => '755',
+      require => Package['httpd'],
+      notify  => Service['httpd'],
   }
 
+  if ! defined(Firewall["0100-INPUT ACCEPT $port"]) {
+    @firewall {
+      "0100-INPUT ACCEPT $port":
+        jump  => 'ACCEPT',
+        dport => "$port",
+        proto => 'tcp'
+    }
+  }
 }
 

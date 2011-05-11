@@ -13,7 +13,7 @@
 class puppetlabs::dxul {
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
 
-	include dropbox
+  include dropbox
 
   # Base
   include puppetlabs
@@ -49,35 +49,41 @@ class puppetlabs::dxul {
 
   include mysql::server
   redmine::unicorn { 'projects.puppetlabs.com':
-    dir => '/opt',
-    db => 'projectspuppetlabscom',
+    dir     => '/opt',
+    db      => 'projectspuppetlabscom',
     db_user => 'redmine',
-    db_pw => 'c@11-m3-m1st3r-p1t4ul',
-    port => '80',
+    db_pw   => 'c@11-m3-m1st3r-p1t4ul',
+    port    => '80',
+  }
+
+  apache::vhost::redirect {
+    'projects.reductivelabs.com':
+      port => '80',
+      dest => 'http://projects.puppetlabs.com'
   }
 
   # pDNS
   include pdns
 
-	cron {
-		"redmine issue dump":
-			user => root,
-			minute => 10,
-			hour => 1,
-			command => "(cd /opt/projects.puppetlabs.com; ./script/console production < console-csv.rb; cp issues_dump.csv ~james/Dropbox/Redmine\ Data/)";
-		"dropbox hourly sync":
-			user => james,
-			minute => 20,
-			command => "/home/james/bin/dropbox.py start";
-		"redmine_infras_email":
-			user => www-data,
-			minute => "*/10",
-			command => 'rake -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppetlabs-infras allow_override=project folder=infras';
-		"redmine_tickets_email":
-			user => www-data,
-			minute => "*/10",
-			command => 'rake -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppet allow_override=project folder=tickets';
-	}
+  cron {
+    "redmine issue dump":
+      user    => root,
+      minute  => 10,
+      hour    => 1,
+      command => "(cd /opt/projects.puppetlabs.com; ./script/console production < console-csv.rb; cp issues_dump.csv ~james/Dropbox/Redmine\ Data/)";
+    "dropbox hourly sync":
+      user    => james,
+      minute  => 20,
+      command => "/home/james/bin/dropbox.py start";
+    "redmine_infras_email":
+      user    => www-data,
+      minute  => "*/10",
+      command => 'rake -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppetlabs-infras allow_override=project folder=infras';
+    "redmine_tickets_email":
+      user    => www-data,
+      minute  => "*/10",
+      command => 'rake -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppet allow_override=project folder=tickets';
+  }
 
 	#vcsrepo {
 	#	"/opt/git/puppetmaster-training.git":

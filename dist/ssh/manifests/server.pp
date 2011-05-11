@@ -12,10 +12,10 @@
 #
 class ssh::server {
   include ssh
-	include ssh::params
-	include concat::setup
-	$ssh_service = $ssh::params::ssh_service
-	$sshclient_package = $ssh::params::sshclient_package
+  include ssh::params
+  include concat::setup
+  $ssh_service = $ssh::params::ssh_service
+  $sshclient_package = $ssh::params::sshclient_package
 
   package { 'openssh-server':
     ensure => latest, 
@@ -39,4 +39,12 @@ class ssh::server {
     hasstatus => true,
     hasrestart => true,
   }
+
+  @firewall { 
+    "0100-INPUT ACCEPT 22":
+      jump  => 'ACCEPT',
+      dport => "22",
+      proto => 'tcp'
+  }
+
 }

@@ -2,13 +2,9 @@ class graphite {
 
 
 # TODO:
-  /opt/graphite/conf/carbon.conf
-  /opt/graphite/conf/storage-schemas.conf
-  /etc/apache2/sites-available/graphite.conf
-
-
-
-
+#  /opt/graphite/conf/carbon.conf
+#  /opt/graphite/conf/storage-schemas.conf
+#  /etc/apache2/sites-available/graphite.conf
 
   package { "apache2": ensure => installed; }
   package { "libapache2-mod-wsgi": ensure => installed; }

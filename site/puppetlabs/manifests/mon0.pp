@@ -54,7 +54,7 @@ class puppetlabs::mon0 {
       user => zach,
       minute => "*/10";
     "gather.rb"
-      command => "(cd ~/gather; ./gather.rb)";
+      command => "(cd ~/gather; ./gather.rb)",
       user => zach,
       minute => "*/5";
   }

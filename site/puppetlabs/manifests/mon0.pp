@@ -53,7 +53,7 @@ class puppetlabs::mon0 {
       command => '~/bin/gd_irc_csv.sh >> ~/projects/irc/irc_users.csv',
       user => zach,
       minute => "*/10";
-    "gather.rb"
+    "gather.rb":
       command => "(cd ~/gather; ./gather.rb)",
       user => zach,
       minute => "*/5";

@@ -7,14 +7,12 @@ class graphite {
 #  /etc/apache2/sites-available/graphite.conf
 
   include apache::mod::wsgi
-  package { "python": ensure => installed; }
-  package { "python-django": ensure => installed; }
+  include apache::mod::python
+  include django
   package { "python-cairo": ensure => installed; }
-  package { "libapache2-mod-python": ensure => installed; }
   package { "python-memcache": ensure => installed; }
   package { "python-sqlite": ensure => installed; }
   package { "memcached": ensure => installed; }
-  package { "libapache2-mod-wsgi": ensure => installed; }
 
   # gather project
   package { "libxml-simple-perl": ensure => installed; }

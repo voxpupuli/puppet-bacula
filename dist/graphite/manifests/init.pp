@@ -6,6 +6,7 @@ class graphite (
 #  /opt/graphite/conf/carbon.conf
 #  /opt/graphite/conf/storage-schemas.conf
 #  /opt/graphite/conf/dashboard.conf
+#  /opt/graphite/webapp/graphite/local_settings.py
 
   include graphite::install
 
@@ -31,11 +32,11 @@ class graphite (
     subscribe => Exec["install graphite"],
   }
 
-#  file { "/opt/graphite/storage":
-#    owner     => $graphite::params::web_user,
-#    subscribe => Exec["install-webapp"],
-#    recurse   => inf
-#  }
+  file { "/opt/graphite/storage":
+    owner     => $graphite::params::web_user,
+    subscribe => Exec["install graphite"],
+    recurse   => true
+  }
 
 }
 

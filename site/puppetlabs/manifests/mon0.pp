@@ -2,6 +2,8 @@ class puppetlabs::mon0 {
 
   include ganglia::server
 
+  include graphite
+
   apache::vhost {'mon0.puppetlabs.lan':
     port => 80,
     docroot => '/var/www',

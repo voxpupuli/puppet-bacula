@@ -17,6 +17,14 @@ class graphite {
   # gather project
   package { "libxml-simple-perl": ensure => installed; }
 
+  apache::vhost {"$fqdn":
+    port     => '80',
+    docroot  => '/var/www',
+    ssl      => false,
+    priority => 10,
+    template => 'graphite/apache.conf.erb',
+  }
+
   #
   # Graphite Install
 

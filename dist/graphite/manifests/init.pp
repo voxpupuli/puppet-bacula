@@ -6,8 +6,7 @@ class graphite {
 #  /opt/graphite/conf/storage-schemas.conf
 #  /etc/apache2/sites-available/graphite.conf
 
-  package { "apache2": ensure => installed; }
-  package { "libapache2-mod-wsgi": ensure => installed; }
+  include apache::mod::wsgi
   package { "python": ensure => installed; }
   package { "python-django": ensure => installed; }
   package { "python-cairo": ensure => installed; }

@@ -43,7 +43,7 @@ class graphite {
 
   exec { "install graphite":
     command => '/usr/bin/python setup.py install',
-    cwd     => '/usr/local/src/graphite-0.9.8',
+    cwd     => '/usr/local/src/graphite-web-0.9.8',
     creates => '/opt/graphite/webapp',
   }
 

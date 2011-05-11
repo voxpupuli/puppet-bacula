@@ -9,6 +9,7 @@ class apache::mod::python {
     ensure  => installed,
     require => Package["httpd"];
   }
+
   a2mod { "python": ensure => present; }
 
 }

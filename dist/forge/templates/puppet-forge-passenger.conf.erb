@@ -10,9 +10,9 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   SSLCertificateKeyFile /etc/ssl/private/pl.key
   <% end %>
 
-  RewriteEngine On
-  RewriteCond %{HTTPS} off
-  RewriteRule ^/users(.*) https://%{HTTP_HOST}%{REQUEST_URI}
+#  RewriteEngine On
+#  RewriteCond %{HTTPS} off
+#  RewriteRule ^/users(.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
   <Directory <%= docroot %>>
     Options None

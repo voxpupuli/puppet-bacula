@@ -25,7 +25,7 @@ class puppetlabs::mon0 {
   }
 
   file {
-    "/opt/graphite/conf/dashboad.conf":
+    "/opt/graphite/conf/dashboard.conf":
       owner => root,
       group => root,
       mode => 644,

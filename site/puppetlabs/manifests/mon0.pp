@@ -50,13 +50,14 @@ class puppetlabs::mon0 {
       user => zach,
       minute => "*/10";
     "gd_irc.sh":
+      ensure => absent,
       command => '~/bin/gd_irc_csv.sh >> ~/projects/irc/irc_users.csv',
       user => zach,
       minute => "*/10";
     "gather.rb":
       command => "(cd ~/gather; ./gather.rb)",
       user => zach,
-      minute => "*/5";
+      minute => "*";
   }
 
 }

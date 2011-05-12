@@ -24,6 +24,14 @@ class puppetlabs::mon0 {
       mode => 755;
   }
 
+  file {
+    "/opt/graphite/conf/dashboad.conf":
+      owner => root,
+      group => root,
+      mode => 644,
+      source => "puppet:///modules/puppetlabs/graphite_dashboard.conf";
+  }
+
   cron { # need to source some files here and run under not zach user
     "redmine_gmetrics.pl": 
       ensure => absent,

@@ -57,7 +57,7 @@ class puppetlabs::baal {
 
 
   file { "/usr/share/puppet-dashboard/public/.htaccess":
-    user => root,
+    owner => root,
     group => root,
     mode => 0640,
     source => "puppet:///modules/puppetlabs/webauth";

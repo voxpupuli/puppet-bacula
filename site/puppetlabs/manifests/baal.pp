@@ -56,6 +56,13 @@ class puppetlabs::baal {
   include munin::puppetmaster
 
 
+  file { "/usr/share/puppet-dashboard/public/.htaccess":
+    user => root,
+    group => root,
+    mode => 0640,
+    source => "puppet:///modules/puppetlabs/webauth";
+  }
+
   # pDNS
   include pdns
 

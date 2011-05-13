@@ -56,7 +56,7 @@ class collectd::server (
     "${site_alias}":
       port     => '80',
       priority => '55',
-      docroot  => '/var/lib/gems/1.8/gems/visage-app-0.2.5/lib/visage/public',
+      docroot  => '/var/lib/gems/1.8/gems/visage-app-0.9.6/lib/visage/public',
       template => 'collectd/collectd-apache.conf.erb',
   }
 

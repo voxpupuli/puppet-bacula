@@ -32,4 +32,6 @@ class puppetlabs::docs {
       group  => root, 
       before => Apache::Vhost['docs.puppetlabs.com'] 
   }
+
+  realize(A2mod['rewrite'])
 }

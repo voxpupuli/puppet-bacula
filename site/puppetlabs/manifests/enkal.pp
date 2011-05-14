@@ -16,6 +16,7 @@ class puppetlabs::enkal {
   # Base
   include puppetlabs
   include puppetlabs_ssl
+  include puppetlabs::docs
   include account::master
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 

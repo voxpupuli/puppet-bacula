@@ -10,7 +10,7 @@ class puppetlabs::os::linux {
 
   cron {
     "clean /tmp":
-      command => "/usr/bin/find /tmp -mtime +3 -exec rm {} \;",
+      command => "/usr/bin/find /tmp -mtime +3 | xargs rm",
       user => root,  minute => 10,  hour => 20, weekday => 0;
   }
 

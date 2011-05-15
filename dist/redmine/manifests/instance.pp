@@ -120,13 +120,13 @@ define redmine::instance (
       require => File["/usr/local/bin/redmine_permission_keeper.sh"];
     # recursion file type makes for huge reports + checksumming when we just care about perms
     "redmine_files_and_tmp_permissions":
-      command => "/usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chown $user:$group {} \; ; /usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chmod 755 {} \;",
+      command => "/usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chown $user:$group {} ; /usr/bin/find ${dir}/${name}/files ${dir}/${name}/tmp -exec chmod 755 {};",
       user    => root,
       ensure  => absent,
       minute  => "*/15";
     # recursion file type makes for huge reports
     "redmine_public_and_log_permissions":
-      command => "/usr/bin/find ${dir}/${name}/public ${dir}/${name}/log -exec chown $user:$group {} \; ; /usr/bin/find ${dir}/${name}/public ${dir}/${name}/log -exec chmod 755 {} \;",
+      command => "/usr/bin/find ${dir}/${name}/public ${dir}/${name}/log -exec chown $user:$group {} ; /usr/bin/find ${dir}/${name}/public ${dir}/${name}/log -exec chmod 755 {}",
       user    => root,
       ensure  => absent,
       minute  => "*/15";

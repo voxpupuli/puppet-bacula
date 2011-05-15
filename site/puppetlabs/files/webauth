@@ -2,8 +2,4 @@ AuthType Basic
 AuthName "Password Required"
 AuthUserFile /etc/apache2/plauth.htpasswd
 Require valid-user
-Satisfy any
-Allow from baal.puppetlabs.com
-Allow from localhost
-Allow from dashboard.puppetlabs.com
 

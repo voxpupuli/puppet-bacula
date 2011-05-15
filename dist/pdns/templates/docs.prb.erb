@@ -1,5 +1,5 @@
 module Pdns
-  newrecord("geo.puppetlabs.com") do |query, answer|
+  newrecord("docs.puppetlabs.com") do |query, answer|
     case country(query[:remoteip])
       when "US", "CA"
         answer.content "<%= mirror0 %>"

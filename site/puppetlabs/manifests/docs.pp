@@ -33,5 +33,7 @@ class puppetlabs::docs {
       before => Apache::Vhost['docs.puppetlabs.com'] 
   }
 
+  ssh::allowgroup { "www-data": }
+
   realize(A2mod['rewrite'])
 }

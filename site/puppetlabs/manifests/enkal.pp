@@ -40,6 +40,6 @@ class puppetlabs::enkal {
 
   Account::User <| tag == 'developers' |>
   Group <| tag == 'developers' |>
-
+  ssh::allowgroup { "www-data": }
 }
 

@@ -9,7 +9,7 @@ Puppet::Type.type(:database).provide(:mysql) do
   commands :mysqlshow  => 'mysqlshow'
 	
   def create
-    mysqladmin("'--default-character-set=#{resource[:charset]}'", 'create', @resource[:name])
+    mysqladmin("--default-character-set=#{resource[:charset]}", 'create', @resource[:name])
   end
 
   def destroy
@@ -18,7 +18,7 @@ Puppet::Type.type(:database).provide(:mysql) do
 
   def exists?
     begin
-      mysql('-NBe', "'show databases'").match(/^#{@resource[:name]}$/)
+      mysql('-NBe', "show databases").match(/^#{@resource[:name]}$/)
     rescue => e
       debug(e.message)
       return nil
@@ -26,11 +26,11 @@ Puppet::Type.type(:database).provide(:mysql) do
   end
  
   def charset
-    mysql('-NBe', "'show create database #{resource[:name]}'").match(/.*?(\S+)\s\*\//)[1]
+    mysql('-NBe', "show create database #{resource[:name]}").match(/.*?(\S+)\s\*\//)[1]
   end
 
   def charset=(value)
-    mysql('-NBe', 'alter database #{resource[:name]} CHARACTER SET #{value}')
+    mysql('-NBe', "alter database #{resource[:name]} CHARACTER SET #{value}")
   end
   # retrieve the current set of mysql databases
 end

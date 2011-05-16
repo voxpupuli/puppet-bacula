@@ -173,6 +173,15 @@ class virtual::users {
     tag     => allstaff,
  }
 
+ @account::user {'pvande':
+    comment => 'Pieter van de Bruggen',
+    uid     => '1143',
+    group   => allstaff,
+    shell   => '/bin/bash',
+    groups  => ["developers"],
+    tag     => allstaff,
+ }
+
  @account::user {'josh':
     comment => 'Josh Cooper',
     uid     => '1146',
@@ -210,7 +219,7 @@ class virtual::users {
     keytype => "ssh-rsa",
     tag     => allstaff,
  }
- 
+
  @account::user {'adrien':
     comment => 'Adrien Thebo',
     uid     => '1026',

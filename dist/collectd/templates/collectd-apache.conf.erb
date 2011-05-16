@@ -15,6 +15,9 @@ RailsAutoDetect Off
 <VirtualHost *:<%= port %>>
   ServerName <%= name %>
 
+#  SetEnv CONFIG_PATH /var/lib/visage
+#  SetEnv RRDDIR /opt/collectd/var/lib/collectd
+
   DocumentRoot <%= docroot %>
   RackBaseURI /
   <Directory "<%= docroot %>">

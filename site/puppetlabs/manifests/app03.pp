@@ -1,5 +1,4 @@
 class puppetlabs::app03 {
-	include pkgs::admin
 	include apache
   
 	$bacula_director = 'baal.puppetlabs.com'

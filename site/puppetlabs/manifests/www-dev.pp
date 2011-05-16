@@ -5,11 +5,11 @@ class puppetlabs::www-dev {
 
   ssh::allowgroup { "www-dev": }
   Account::User <| title == 'dansupinski' |>
-  Group <| title == 'www-data' |>
+  Account::User <| title == 'maxlynch' |>
+  Group <| title == 'www-dev' |>
   Group <| title == 'contractors' |>
 
   # Base
-  include puppetlabs::lan
   include puppetlabs_ssl
 
   wordpress::instance {

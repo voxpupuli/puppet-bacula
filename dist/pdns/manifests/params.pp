@@ -16,7 +16,8 @@ class pdns::params {
   $pdns1_server = 'dxul.puppetlabs.com'
   $mirror0 = '74.207.250.144'
   $mirror1 = '82.113.151.205'
- 
+  $mirror2 = '74.207.228.223'
+
   $user = 'pdns'
   $group = 'pdns'
  

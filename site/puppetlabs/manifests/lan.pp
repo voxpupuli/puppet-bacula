@@ -27,11 +27,13 @@ class puppetlabs::lan {
   Account::User <| tag == 'allstaff' |>
   Group <| tag == 'allstaff' |>
 
-  case $operatingsystem {
-    "debian","ubuntu":  { 
-      class { "apt::settings": proxy => "http://vanir.puppetlabs.lan:3142" } 
-    }
-    default: { }
-  }
+#  case $operatingsystem {
+#    "debian","ubuntu":  { 
+#      class { "apt::settings": proxy => "http://vanir.puppetlabs.lan:3142" } 
+#    }
+#    default: { }
+#  }
+
+  
 
 }

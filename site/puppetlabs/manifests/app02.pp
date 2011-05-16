@@ -1,6 +1,5 @@
 class puppetlabs::app02 {
-	include pkgs::admin
-	include apache
+  include apache
   
 	$bacula_director = 'baal.puppetlabs.com'
 	$bacula_password = 'aNXF2C1LFdptETvihkk/z'

@@ -12,8 +12,6 @@
 #
 class nagios::params {
 
-  $nrpe_server = '74.207.240.137'
-
   case $operatingsystem {
     "ubuntu": {
       $nagios_plugin_packages = [ 'nagios-plugins-standard', 'nagios-plugins-basic', 'nagios-plugins', 'nagios-plugins-extra', 'nagios-nrpe-plugin' ]

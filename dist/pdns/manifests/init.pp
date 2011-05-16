@@ -17,6 +17,7 @@ class pdns {
 
   $mirror0 = $pdns::params::mirror0
   $mirror1 = $pdns::params::mirror1
+  $mirror2 = $pdns::params::mirror2
 
   package { $pdns::params::package_list:
     ensure => present,

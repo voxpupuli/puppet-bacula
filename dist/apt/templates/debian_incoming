@@ -1,0 +1,6 @@
+Name: default
+IncomingDir: incoming
+Tempdir: tmp
+Allow: unstable>sid
+Multiple: Yes
+Cleanup: on_deny on_error

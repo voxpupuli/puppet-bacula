@@ -2,10 +2,16 @@
         ServerName <%= name %>
         DocumentRoot <%= docroot %>
 
+        <% if serveraliases.is_a? Array %>
+        <% serveraliases.each do |name| %><%= "ServerAlias #{name}\n" %><% end %>
+        <% elsif serveraliases != '' %>
+        <%= "ServerAlias #{serveraliases}" %>
+        <% end %>
+
         #<% if ssl == true %>
-        #SSLEngine on
-        #SSLCertificateFile /etc/ssl/certs/pl.cert
-        #SSLCertificateKeyFile /etc/ssl/private/pl.key
+        SSLEngine on
+        SSLCertificateFile /etc/ssl/certs/pl.cert
+        SSLCertificateKeyFile /etc/ssl/private/pl.key
         #<% end %>
 
         ScriptAlias /cgi-bin/nagios3 /usr/lib/cgi-bin/nagios3
@@ -18,7 +24,7 @@
                 AllowOverride AuthConfig
                 Order allow,deny
                 allow from all
-        
+
                 AuthName "Nagios Access"
                 AuthType Basic
                 AuthUserFile /etc/nagios3/htpasswd.users

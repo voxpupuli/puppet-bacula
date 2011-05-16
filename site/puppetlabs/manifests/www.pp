@@ -13,9 +13,6 @@ class puppetlabs::www {
   include munin::dbservices
   include munin::puppet
 
-  # Collectd
-  include collectd::client
-
   # Bacula
   $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = 'MQI/vywQq5pSlAYaEUJKrmt24Wu8FOIPfT7tFoaOc5X6'
@@ -50,6 +47,9 @@ class puppetlabs::www {
       serveraliases => "www.puppetcamp.org",
       port          => '80',
       dest          => 'http://www.puppetlabs.com/community/puppet-camp';
+    'www.reductivelabs.com':
+      port => '80',
+      dest => 'http://www.puppetlabs.com';
   }
 
   wordpress::instance {

@@ -18,7 +18,7 @@ class ruby::params {
       $ruby_dev="ruby-devel"
     }
     "ubuntu": {
-      $ruby_dev= [ "ruby-dev", "rake", "irb" ]
+      $ruby_dev= [ "ruby-dev", "rake" ]
     }
  }
 

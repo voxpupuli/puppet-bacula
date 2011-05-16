@@ -5,3 +5,4 @@ class puppetlabs::apu {
   ssh::allowgroup { "release": }
 
 }
+

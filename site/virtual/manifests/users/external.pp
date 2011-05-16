@@ -9,6 +9,16 @@ class virtual::users::external {
       keytype => "ssh-rsa",
       expire  => "2011-10-01",
   }
+  
+  @account::user {
+    'maxlynch':
+      comment => 'Max Lynch',
+      group   => contractors,
+      groups  => ["www-dev"],
+      key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA9FGaGvZoXdwPhtK/AGmYhlDf6tP2Oqwd2cRUi5ntpHgib7lonOIqq5swuBYhwL8Mxhe5hZrhqDoP7aZhHqKyIggkMrTXtq6RTSVSAMxXS9EjHfMSoy9wvNtFcr4ArTh3eqWRCAPIFRb+i7qmqTlPb0dqnDrjJF2NJteutkKLe31w3uQ0G+3mvHjkioj1HIVGeylypgEgp54yqF0CSqxL5yLzpPtJ8fdfdpfRSp/fiWgJS3r98u+6dMDE2iyuGn5HpPNsHbQJ/jmtPXX7uehCQcWusomBz4/3uS9Dp+FOA3MgLf6O2/HiOdV2erV0F3Tugdmx81xQEU2+J1hx9vjhxQ==',
+      keytype => "ssh-rsa",
+      expire  => "2011-10-01",
+  }
 
 }
 

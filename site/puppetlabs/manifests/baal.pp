@@ -27,7 +27,7 @@ class puppetlabs::baal {
   include puppet::dashboard
 
   # Package management
-  include aptrepo
+  class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
   include yumrepo
 
   # Backup
@@ -37,7 +37,7 @@ class puppetlabs::baal {
   include bacula::director
 
   # Monitoring
-  include nagios::server
+  class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }
   include nagios::webservices
   include nagios::dbservices
   include nagios::bacula
@@ -49,15 +49,19 @@ class puppetlabs::baal {
   nagios::website { 'visage.puppetlabs.com': auth => 'monit:5kUg8uha', }
 
   # Munin
-  include munin
-  include munin::server
+  class { "munin::server": site_alias => "munin.puppetlabs.com"; }
   include munin::dbservices
   include munin::passenger
   include munin::puppet
   include munin::puppetmaster
- 
-  # Collectd
-  include collectd::server
+
+
+  #file { "/usr/share/puppet-dashboard/public/.htaccess":
+  #  owner => root,
+  #  group => www-data,
+  #  mode => 0640,
+  #  source => "puppet:///modules/puppetlabs/webauth";
+  #}
 
   # pDNS
   include pdns
@@ -70,6 +74,14 @@ class puppetlabs::baal {
     port => '80',
     docroot => '/var/www',
     template => 'puppetlabs/baal.conf.erb'
+  }
+
+  file {
+    "/usr/local/bin/puppet_deploy.sh":
+      owner => root,
+      group => root,
+      mode  => 0750,
+      source => "puppet:///modules/puppetlabs/puppet_deploy.sh";
   }
 
   cron {
@@ -87,6 +99,11 @@ class puppetlabs::baal {
       command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune upto=1 unit=wk)',
       minute => '20',
       hour => '2';
+    "Puppet: puppet_deploy.sh":
+      user    => root,
+      command => '/usr/local/bin/puppet_deploy.sh',
+      minute  => '*/8',
+      require => File["/usr/local/bin/puppet_deploy.sh"];
   }
 
 }

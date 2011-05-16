@@ -1,57 +1,63 @@
-#!/bin/sh
+#! /bin/sh
+
 set -u
 set -e
-# Example init script, this can be used with nginx, too,
-# since nginx and unicorn accept the same signals
 
-# Feel free to change any of the following variables for your app:
 APP_ROOT=<%=dir%>/<%=name%>
 PID=$APP_ROOT/tmp/pids/unicorn.pid
 ENV=production
-CMD="/usr/bin/unicorn_rails -D -E $ENV -c config/unicorn.config.rb"
+NAME=unicorn_rails
+DESC=unicorn_rails
+DAEMON=/usr/bin/unicorn_rails
+DAEMON_OPTS="-c config/unicorn.config.rb -E $ENV -D"
 
-old_pid="$PID.oldbin"
+
+OLDPID="$PID.oldbin"
 
 cd $APP_ROOT || exit 1
 
 sig () {
-	test -s "$PID" && kill -$1 `cat $PID`
+  test -s "$PID" && kill -$1 `cat $PID`
 }
 
 oldsig () {
-	test -s $old_pid && kill -$1 `cat $old_pid`
+  test -s $OLDPID && kill -$1 `cat $OLDPID`
 }
 
-case $1 in
-start)
-	sig 0 && echo >&2 "Already running" && exit 0
-	$CMD
-	;;
-stop)
-	sig QUIT && exit 0
-	echo >&2 "Not running"
-	;;
-force-stop)
-	sig TERM && exit 0
-	echo >&2 "Not running"
-	;;
-restart|reload)
-	sig HUP && echo reloaded OK && exit 0
-	echo >&2 "Couldn't reload, starting '$CMD' instead"
-	$CMD
-	;;
-upgrade)
-	sig USR2 && exit 0
-	echo >&2 "Couldn't upgrade, starting '$CMD' instead"
-	$CMD
-	;;
-rotate)
-        sig USR1 && echo rotated logs OK && exit 0
-        echo >&2 "Couldn't rotate logs" && exit 1
+case "$1" in
+  start)
+    echo -n "Starting $DESC: "
+    $DAEMON $DAEMON_OPTS
+    echo "$NAME."
+    ;;
+  stop)
+    echo -n "Stopping $DESC: "
+    sig QUIT
+    echo "$NAME."
+    ;;
+  restart)
+    echo -n "Restarting $DESC: "
+    sig QUIT
+    sleep 1
+    $DAEMON $DAEMON_OPTS
+    echo "$NAME."
+    ;;
+  reload)
+        echo -n "Reloading $DESC code: "
+        sig USR2
+        echo "$NAME."
         ;;
-*)
-	echo >&2 "Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
-	exit 1
-	;;
+  reopen-logs)
+        echo -n "Reopening $DESC logs: "
+        sig USR1
+        echo "$NAME."
+        ;;
+
+  *)
+    echo "Usage: $NAME {start|stop|restart|reload|reopen-logs}" >&2
+    exit 1
+    ;;
 esac
+
+exit 0
 

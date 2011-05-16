@@ -44,9 +44,6 @@ class puppetlabs::dxul {
   include munin::passenger
   include munin::puppet
 
-  # Collectd
-  include collectd::client
-
   include mysql::server
   redmine::unicorn { 'projects.puppetlabs.com':
     dir     => '/opt',

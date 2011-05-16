@@ -31,16 +31,19 @@ class puppetlabs::pluto {
   Account::User <| tag == deploy |>
   ssh::allowgroup { "www-data": }
 
+  #enterprise 
+  package { "lsyncd": ensure => installed; }
+  package { "daemontools": ensure => installed; }
+  cron { "sync /opt/enterprise to tbdriver": 
+    minute  => '*/30',
+    user    => root,
+    command => '/usr/bin/setlock -nx /var/run/lsyncd.lock lsyncd --nodaemon -rsyncssh /opt/enterprise/ tb-driver.puppetlabs.lan /opt/enterprise/'; 
+  }
 
+  # Crypt filesystem
   package { "cryptsetup": ensure => installed; }
-
-  exec { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4":
-    creates => '/var/chroot.key';
-  }
-
-  file {
-    "/var/chroot.key": mode => 0400, require => Exec["/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4"];
-  }
+  exec    { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4": creates => '/var/chroot.key'; }
+  file    { "/var/chroot.key": mode => 0400, require => Exec["/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4"]; }
 
   file {
     "/opt/enterprise":

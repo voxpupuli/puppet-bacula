@@ -27,13 +27,14 @@ class puppetlabs::yo {
     iso       => 'rhel-server-6.0-$arch-dvd.iso',
     updates   => 'rhns:///rhel-$arch-server-6',
   }
+
   mrepo::repo { "rhel5server-x86_64":
     ensure    => present,
     rhn       => true,
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
     arch      => "x86_64",
     release   => "5Server",
-    iso       => 'rhel-server-5.6-$arch-dvd.iso',
+    iso       => 'rhel-5-server-$arch-disc1.iso',
     updates   => 'rhns:///rhel-$arch-server-5',
   }
   mrepo::repo { "rhel5server-i386":
@@ -42,7 +43,42 @@ class puppetlabs::yo {
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
     arch      => "i386",
     release   => "5Server",
-    iso       => 'rhel-server-5.6-$arch-dvd.iso',
+    iso       => 'rhel-5-server-$arch-disc1.iso',
     updates   => 'rhns:///rhel-$arch-server-5',
   }
+
+  mrepo::repo { "cent5server-x86_64":
+    ensure    => present,
+    repotitle => 'CentOS Enterprise Linux $release ($arch)',
+    arch      => "x86_64",
+    release   => "5Server",
+    iso       => 'rhel-server-5.0-$arch-dvd.iso',
+    updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+  }
+  mrepo::repo { "cent5server-i386":
+    ensure    => present,
+    repotitle => 'CentOS Enterprise Linux $release ($arch)',
+    arch      => "i386",
+    release   => "5Server",
+    iso       => 'rhel-server-5.0-$arch-dvd.iso',
+    updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+  }
+
+  mrepo::repo { "cent4server-x86_64":
+    ensure    => present,
+    repotitle => 'CentOS Enterprise Linux $release ($arch)',
+    arch      => "i386",
+    release   => "5Server",
+    iso       => "CentOS-4.0-$arch-bin?of4.iso",
+    updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+  }
+  mrepo::repo { "cent4server-i386":
+    ensure    => present,
+    repotitle => 'CentOS Enterprise Linux $release ($arch)',
+    arch      => "i386",
+    release   => "5Server",
+    iso       => "CentOS-4.0-$arch-bin?of4.iso",
+    updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+  }
+
 }

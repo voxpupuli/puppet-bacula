@@ -26,10 +26,10 @@ class virtual::users::customers {
   }
 
   @account::user {'johnwarburton':
-    comment => 'John Warburton',
+    comment => 'john.warburton@blackrock.com',
     group   => blackrock,
     tag     => customer,
-    key     => "AAAAB3NzaC1kc3MAAACBAMckTwxqGtCxHxlMnWUG188kjqchMPo53N+9jDzqxrNEuDo+AVqoMgparLWs5jqKc32MxlW1iKVu+XHH9pgwF8inNsApwPuXxqFjlMm1P/dan3Z7mY0nI7Z51xYue3HVyjVJWTNsgfLpf70MuKl3sQlCPCJ5vdPGEEcRNWvmq9MRAAAAFQDvBtMrya5K8QDdfxEBHPkCUKl6lQAAAIAVYPfUj4GnSkbW73aovldfW6usmffuefW4E6xnjgymi8GkNkW8nyUyhQZYLtWMj/RYU1aB4rZvtTtTALAW9HKbMkaf1naXaPhN7CE/tBWU7QjZkhKghIPUaWGLWguGoHS6Iofe9JtpJLpG1uyhXpeZfti/jyvmgxuyiof63+jH7wAAAIEAuUHePZVYd+KcRP7IQ1Zl+z2xqCuT1jx6CAmbZjgiMoeOLyPBAKzamDfhN+dIlXl55mHBANC8PoRX4BVWHUdLmJtN//JicZK3XVrjgp94bI3bYkC3gtGpefJ4j1eveQyHcVh1fq20/DcnXm6Wh7PEHtduJGz54GwaR84h0=",
+    key     => "AAAAB3NzaC1kc3MAAACBALN2FRuRnOX0IAYSQzbWYLlgdQ9Fyl/ns4Y5nQGtgTI8GZVPjfJ9yQ6DXMNRfM6fG1dDYZJ4oBqXGe0Xm/fBPK9Vup1LryiDsG8AroKPYgmNaOBI+aTKlO8mjpJ0G6fcddSiiTU9QShTqw+KzIXjO3RIzdyQnCKZP1x78cQ+8rabAAAAFQD/n+1l8hgDBMTzwjJwcBrjmR0h0wAAAIBHgTdRHpva0o8HMlgaANP05fwgKayPTfGTeRJKQ2oBehP8zEmourlCjsydSQaws/L4qaDREJ6YE51F5pqBry9mwvXuBsr5wkzUkQIdL9Wr1YQF+xVSMD5TU/yLBOtVLG5ipVUtSMxAXCzv0Wm9h6Hp3q8HFCSiYSmpnWcTNiCFywAAAH8J2pQGpyDVY7LOhnpDbANdIrW7MQJzFG/HyZt/ZcFTKxdECjb+oRQifd6uJKoxAnyNAjKqjqhRHlzDeiZ8tps8VX9sZJBN1Dqh+2aJLcFz+B4Zb5WGhSCFAkjFgB+dzS64voxCvGK6Yd151pp1c4o35QeMJlBw8SgijGCb2JbJ",
     keytype => "ssh-dss",
   }
 

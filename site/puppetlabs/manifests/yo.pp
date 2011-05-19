@@ -34,7 +34,7 @@ class puppetlabs::yo {
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
     arch      => "x86_64",
     release   => "5.0",
-    iso       => 'rhel-5-server-$arch-disc1.iso',
+    iso       => 'rhel-5-server-$arch-disc?.iso',
     updates   => 'rhns:///rhel-$arch-server-5',
   }
   mrepo::repo { "rhel5server-i386":
@@ -43,7 +43,7 @@ class puppetlabs::yo {
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
     arch      => "i386",
     release   => "5.0",
-    iso       => 'rhel-5-server-$arch-disc1.iso',
+    iso       => 'rhel-5-server-$arch-disc?.iso',
     updates   => 'rhns:///rhel-$arch-server-5',
   }
 
@@ -51,7 +51,7 @@ class puppetlabs::yo {
     ensure    => present,
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "x86_64",
-    release   => "5.0",
+    release   => "5",
     iso       => 'rhel-server-5.0-$arch-dvd.iso',
     updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
   }
@@ -59,7 +59,7 @@ class puppetlabs::yo {
     ensure    => present,
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "i386",
-    release   => "5.0",
+    release   => "5",
     iso       => 'rhel-server-5.0-$arch-dvd.iso',
     updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
   }
@@ -68,7 +68,7 @@ class puppetlabs::yo {
     ensure    => present,
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "x86_64",
-    release   => "4.0",
+    release   => "4",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
   }
@@ -76,7 +76,7 @@ class puppetlabs::yo {
     ensure    => present,
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "i386",
-    release   => "4.0",
+    release   => "4",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
   }

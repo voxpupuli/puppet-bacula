@@ -14,7 +14,9 @@
 #
 # Sample Usage:
 #
-class forge {
+class forge(
+    $vhost = 'forge.puppetlabs.com'
+) {
   include ::passenger
   include passenger::params
   include ruby::dev
@@ -153,7 +155,7 @@ class forge {
     require => Vcsrepo['/opt/forge'],
   }
 
-  apache::vhost { 'forge.puppetlabs.com':
+  apache::vhost { $vhost:
     port => '80',
     priority => '60',
     ssl => false,
@@ -162,7 +164,7 @@ class forge {
     require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
   }
   
-  apache::vhost { 'forge.puppetlabs.com_ssl':
+  apache::vhost { "${vhost}_ssl":
     port => 443,
     priority => 61,
     docroot => '/opt/forge/public/',

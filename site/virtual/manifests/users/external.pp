@@ -20,5 +20,13 @@ class virtual::users::external {
       expire  => "2011-10-01",
   }
 
+  @account::user {
+    'donaldseigler':
+      comment => 'Donald Seigler',
+      group   => contractors,
+      groups  => ["www-dev"],
+      expire  => "2011-10-01",
+  }
+
 }
 

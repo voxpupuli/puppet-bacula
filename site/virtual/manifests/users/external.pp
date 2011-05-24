@@ -1,7 +1,6 @@
 class virtual::users::external {
 
-  # UID range 20000-21000
-
+  # UID range 20000-20999
 
   @account::user {
     'dansupinski':

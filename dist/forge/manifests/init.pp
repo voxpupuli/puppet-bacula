@@ -15,8 +15,9 @@
 # Sample Usage:
 #
 class forge(
-    $vhost  = 'forge.puppetlabs.com',
-    $ssl    = true
+    $vhost     = 'forge.puppetlabs.com',
+    $ssl       = true,
+    $newrelic  = true
 ) {
   include ::passenger
   include passenger::params
@@ -98,12 +99,14 @@ class forge(
     require => Vcsrepo['/opt/forge'],
   }
 
-  file { '/opt/forge/config/newrelic.yml':
-    owner => 'www-data',
-    group => 'www-data',
-    ensure => present,
-    source => 'puppet:///modules/forge/newrelic.yml',
-    require => Vcsrepo['/opt/forge'],
+  if $newrelic == true {
+      file { '/opt/forge/config/newrelic.yml':
+        owner => 'www-data',
+        group => 'www-data',
+        ensure => present,
+        source => 'puppet:///modules/forge/newrelic.yml',
+        require => Vcsrepo['/opt/forge'],
+      }
   }
 
   file { [ '/opt/forge/tmp', '/opt/forge/log' ]:

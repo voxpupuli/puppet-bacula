@@ -103,10 +103,10 @@ class forge(
 
   if $newrelic == true {
       file { '/opt/forge/config/newrelic.yml':
-        owner => 'www-data',
-        group => 'www-data',
-        ensure => present,
-        source => 'puppet:///modules/forge/newrelic.yml',
+        owner   => 'www-data',
+        group   => 'www-data',
+        ensure  => present,
+        source  => 'puppet:///modules/forge/newrelic.yml',
         require => [ Vcsrepo['/opt/forge'], Package['newrelic_rpm'] ],
       }
 

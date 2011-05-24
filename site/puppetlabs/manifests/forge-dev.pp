@@ -1,5 +1,5 @@
 class puppetlabs::forge-dev {
 
-    class { 'forge': vhost => 'forge-dev.puppetlabs.com' }
+    class { 'forge': vhost => 'forge-dev.puppetlabs.com' , ssl => false }
 
 }

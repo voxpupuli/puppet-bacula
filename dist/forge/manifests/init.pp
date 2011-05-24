@@ -15,7 +15,8 @@
 # Sample Usage:
 #
 class forge(
-    $vhost = 'forge.puppetlabs.com'
+    $vhost  = 'forge.puppetlabs.com',
+    $ssl    = true
 ) {
   include ::passenger
   include passenger::params
@@ -163,14 +164,16 @@ class forge(
     template => 'forge/puppet-forge-passenger.conf.erb',
     require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
   }
-  
-  apache::vhost { "${vhost}_ssl":
-    port => 443,
-    priority => 61,
-    docroot => '/opt/forge/public/',
-    ssl => true,
-    template => 'forge/puppet-forge-passenger.conf.erb',
-    require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
+
+  if $ssl == true {
+      apache::vhost { "${vhost}_ssl":
+        port => 443,
+        priority => 61,
+        docroot => '/opt/forge/public/',
+        ssl => true,
+        template => 'forge/puppet-forge-passenger.conf.erb',
+        require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
+      }
   }
 
 }

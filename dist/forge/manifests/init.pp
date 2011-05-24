@@ -113,7 +113,7 @@ class forge(
       package{ 'newrelic_rpm':
         ensure   => present,
         provider => gem,
-        require  => Vcsrepo['/opt/forge']
+        require  => Vcsrepo['/opt/forge',
       }
   }
 

@@ -107,13 +107,13 @@ class forge(
         group => 'www-data',
         ensure => present,
         source => 'puppet:///modules/forge/newrelic.yml',
-        require => Vcsrepo['/opt/forge'],
+        require => [ Vcsrepo['/opt/forge'], Package['newrelic_rpm] ],
       }
 
       package{ 'newrelic_rpm':
         ensure   => present,
         provider => gem,
-        require => [ Vcsrepo['/opt/forge'], Package['newrelic_rpm'] ]
+        require  => Vcsrepo['/opt/forge']
       }
   }
 

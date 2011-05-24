@@ -45,6 +45,8 @@ class forge(
       minute => "*/30";
 	}
 
+  # so this doesn't work. As it needs a password as it's a private
+  # repo.
   vcsrepo { '/opt/forge':
     source => 'http://github.com/puppetlabs/puppet-module-site.git',
     provider => git,
@@ -82,14 +84,14 @@ class forge(
     provider => gem,
     require => Vcsrepo['/opt/forge'],
   }
-  
+
   file { '/opt/forge/config/database.yml':
     ensure => present,
     content => template('forge/database.yml.erb'),
     owner => 'www-data',
     group => 'www-data',
     require => Vcsrepo['/opt/forge'],
-  }  
+  }
 
   file { '/opt/forge/config/secrets.yml':
     owner => 'www-data',
@@ -106,6 +108,12 @@ class forge(
         ensure => present,
         source => 'puppet:///modules/forge/newrelic.yml',
         require => Vcsrepo['/opt/forge'],
+      }
+
+      package{ 'newrelic_rpm':
+        ensure   => present,
+        provider => gem,
+        require => [ Vcsrepo['/opt/forge'], Package['newrelic_rpm'] ]
       }
   }
 

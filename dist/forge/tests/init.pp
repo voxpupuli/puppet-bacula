@@ -1,1 +1,1 @@
-include forge
+class { 'forge': }

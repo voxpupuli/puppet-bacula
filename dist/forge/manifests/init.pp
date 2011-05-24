@@ -14,7 +14,11 @@
 #
 # Sample Usage:
 #
-class forge {
+class forge(
+    $vhost     = 'forge.puppetlabs.com',
+    $ssl       = true,
+    $newrelic  = true
+) {
   include ::passenger
   include passenger::params
   include ruby::dev
@@ -41,6 +45,8 @@ class forge {
       minute => "*/30";
 	}
 
+  # so this doesn't work. As it needs a password as it's a private
+  # repo.
   vcsrepo { '/opt/forge':
     source => 'http://github.com/puppetlabs/puppet-module-site.git',
     provider => git,
@@ -78,14 +84,14 @@ class forge {
     provider => gem,
     require => Vcsrepo['/opt/forge'],
   }
-  
+
   file { '/opt/forge/config/database.yml':
     ensure => present,
     content => template('forge/database.yml.erb'),
     owner => 'www-data',
     group => 'www-data',
     require => Vcsrepo['/opt/forge'],
-  }  
+  }
 
   file { '/opt/forge/config/secrets.yml':
     owner => 'www-data',
@@ -95,12 +101,20 @@ class forge {
     require => Vcsrepo['/opt/forge'],
   }
 
-  file { '/opt/forge/config/newrelic.yml':
-    owner => 'www-data',
-    group => 'www-data',
-    ensure => present,
-    source => 'puppet:///modules/forge/newrelic.yml',
-    require => Vcsrepo['/opt/forge'],
+  if $newrelic == true {
+      file { '/opt/forge/config/newrelic.yml':
+        owner => 'www-data',
+        group => 'www-data',
+        ensure => present,
+        source => 'puppet:///modules/forge/newrelic.yml',
+        require => Vcsrepo['/opt/forge'],
+      }
+
+      package{ 'newrelic_rpm':
+        ensure   => present,
+        provider => gem,
+        require => [ Vcsrepo['/opt/forge'], Package['newrelic_rpm'] ]
+      }
   }
 
   file { [ '/opt/forge/tmp', '/opt/forge/log' ]:
@@ -153,7 +167,7 @@ class forge {
     require => Vcsrepo['/opt/forge'],
   }
 
-  apache::vhost { 'forge.puppetlabs.com':
+  apache::vhost { $vhost:
     port => '80',
     priority => '60',
     ssl => false,
@@ -161,14 +175,16 @@ class forge {
     template => 'forge/puppet-forge-passenger.conf.erb',
     require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
   }
-  
-  apache::vhost { 'forge.puppetlabs.com_ssl':
-    port => 443,
-    priority => 61,
-    docroot => '/opt/forge/public/',
-    ssl => true,
-    template => 'forge/puppet-forge-passenger.conf.erb',
-    require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
+
+  if $ssl == true {
+      apache::vhost { "${vhost}_ssl":
+        port => 443,
+        priority => 61,
+        docroot => '/opt/forge/public/',
+        ssl => true,
+        template => 'forge/puppet-forge-passenger.conf.erb',
+        require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
+      }
   }
 
 }

@@ -1,5 +1,7 @@
 class puppetlabs::forge-dev {
 
+    include postfix
+
     class { 'forge':
         vhost       => 'forge-dev.puppetlabs.com',
         ssl         => false,

@@ -1,6 +1,7 @@
 class puppetlabs::forge-dev {
 
     include postfix
+    include vim
 
     class { 'forge':
         vhost       => 'forge-dev.puppetlabs.com',

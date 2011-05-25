@@ -15,15 +15,20 @@
 # Sample Usage:
 #
 class forge(
-    $vhost     = 'forge.puppetlabs.com',
-    $ssl       = true,
-    $newrelic  = true
+    $vhost         = 'forge.puppetlabs.com',
+    $ssl           = true,
+    $newrelic      = true,
+    $do_ssh_keys   = false
 ) {
   include ::passenger
   include passenger::params
   include ruby::dev
   include vcsrepo
   include apache::ssl
+
+  if $do_ssh_keys == true {
+      include forge::sshkeys
+  }
 
   $rails_version='2.3.5'
   require rails

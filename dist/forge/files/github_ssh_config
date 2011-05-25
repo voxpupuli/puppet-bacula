@@ -1,0 +1,8 @@
+## MANAGED BY PUPPET
+## XXX
+## Changes will get eaten by a Grue.
+
+# So we can pull down the forge module from github
+host github.com
+	User git
+	IdentityFile /root/.ssh/github_puppet-module-site

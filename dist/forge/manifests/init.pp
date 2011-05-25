@@ -27,7 +27,7 @@ class forge(
   include apache::ssl
 
   if $do_ssh_keys == true {
-      include forge::sshkeys
+      include forge::sshkey
   }
 
   $rails_version='2.3.5'

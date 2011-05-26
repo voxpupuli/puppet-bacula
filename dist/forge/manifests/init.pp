@@ -15,15 +15,22 @@
 # Sample Usage:
 #
 class forge(
-    $vhost     = 'forge.puppetlabs.com',
-    $ssl       = true,
-    $newrelic  = true
+    $vhost         = 'forge.puppetlabs.com',
+    $ssl           = true,
+    $newrelic      = true,
+    $do_ssh_keys   = false,
+    $git_revision  = 'r0.1.16',
+    $github_url    = 'http://github.com/puppetlabs/puppet-module-site.git'
 ) {
   include ::passenger
   include passenger::params
   include ruby::dev
   include vcsrepo
   include apache::ssl
+
+  if $do_ssh_keys == true {
+      include forge::sshkey
+  }
 
   $rails_version='2.3.5'
   require rails
@@ -45,16 +52,15 @@ class forge(
       minute => "*/30";
 	}
 
-  # so this doesn't work. As it needs a password as it's a private
   # repo.
   vcsrepo { '/opt/forge':
-    source => 'http://github.com/puppetlabs/puppet-module-site.git',
+    source   => $github_url,
     provider => git,
-    revision => 'r0.1.16',
-    ensure => present,
-    require => File['/opt/forge'],
+    revision => $git_revision,
+    ensure   => present,
+    require  => File['/opt/forge'],
   }
- 
+
   package { [ 'json', 'less', 'archive-tar-minitar', 'bcrypt-ruby', 'diff-lcs', 'haml', 'maruku', 'paperclip', 'versionomy', 'warden', 'will_paginate', 'sqlite3-ruby', 'hpricot', 'factory_girl', 'remarkable_activerecord', 'remarkable_rails', 'rspec', 'rspec-rails', 'vlad', 'vlad-git' ]:
     ensure => present,
     provider => gem,
@@ -69,6 +75,12 @@ class forge(
 
   package { 'bitmask-attribute':
     ensure => '1.1.0',
+    provider => gem,
+    require => Vcsrepo['/opt/forge'],
+  }
+
+  package { 'i18n':
+    ensure => '0.4.2',
     provider => gem,
     require => Vcsrepo['/opt/forge'],
   }

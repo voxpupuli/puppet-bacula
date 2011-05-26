@@ -32,7 +32,7 @@ class puppetlabs::baal {
     modulepath => inline_template("<%= modulepath.join(':') %>"),
     dbadapter  => "mysql",
     dbuser     => "puppet",
-    dbpassword => "password"
+    dbpassword => "password",
     dbsocket   => "/var/run/mysqld/mysqld.sock",
     reporturl  => "http://dashboard.puppetlabs.com/reports";
   }

@@ -16,6 +16,7 @@ class puppetlabs::enkal {
   # Base
   include puppetlabs
   include puppetlabs_ssl
+  include puppetlabs::docs
   include account::master
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 
@@ -28,12 +29,6 @@ class puppetlabs::enkal {
   # Munin
   include munin
 
-  # Collectd
-  include collectd::client
-
-  # Hudson
-  #include hudson
-
   # Jenkins
   class { "jenkins":
     site_alias => 'jenkins.puppetlabs.com',
@@ -45,6 +40,6 @@ class puppetlabs::enkal {
 
   Account::User <| tag == 'developers' |>
   Group <| tag == 'developers' |>
-
+  ssh::allowgroup { "www-data": }
 }
 

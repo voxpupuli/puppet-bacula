@@ -11,24 +11,24 @@ class drbd (
 
   file {
     "/etc/drbd.conf":
-      owner => root,
-      group => root,
-      mode  => 644,
-      source => "puppet:///modules/drbd/drbd.conf";
+      owner   => root,
+      group   => root,
+      mode    => 644,
+      source  => "puppet:///modules/drbd/drbd.conf";
     "/etc/drbd.d":
-      ensure => directory,
-      owner  => root,
-      group  => root,
-      mode   => 755,
+      ensure  => directory,
+      owner   => root,
+      group   => root,
+      mode    => 755,
       recurse => true,
-      purge  => true,
-      notify => Service['drbd'];
+      purge   => true,
+      notify  => Service['drbd'];
     "/etc/drbd.d/global_common.conf":
-      owner => root,
-      group => root,
-      mode  => 644,
+      owner   => root,
+      group   => root,
+      mode    => 644,
       content => template("drbd/global_common.conf.erb"),
-      notify => Service['drbd'];
+      notify  => Service['drbd'];
   }
 
   service {

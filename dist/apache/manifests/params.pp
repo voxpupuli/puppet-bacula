@@ -32,7 +32,6 @@ class apache::params {
     'ubuntu', 'debian': {
        $apache_name = 'apache2'
        $php_package = 'libapache2-mod-php5'
-       $python_package = 'libapache2-mod-python'
        $ssl_package = 'apache-ssl'
        $apache_dev  = [ 'libaprutil1-dev', 'libapr1-dev', 'apache2-prefork-dev' ]
        $vdir = '/etc/apache2/sites-enabled/'

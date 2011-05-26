@@ -7,11 +7,22 @@
 # Actions:
 #
 # Requires:
-#   - The collectd::params class
+#   - collectd::params
+#   - apache
+#   - passenger
+#   - rack
 #
 # Sample Usage:
 #
-class collectd::server {
+# class { "collectd::server":
+#   site_alias      => "visage.example.com",
+# }
+#
+class collectd::server (
+    $site_alias = "$fqdn",
+    $listen_address = "$ipaddress"
+  ) {
+
   include collectd::params
   include collectd
   include apache
@@ -21,33 +32,31 @@ class collectd::server {
 
   $passenger_version = $passenger::params::version
   $gem_path          = $passenger::params::gem_path
-  $collectd_server   = $collectd::params::collectd_server
 
-  package { 
+  package {
     [ 'librrd-dev', 'librrd-ruby' ]:
       ensure => present,
   }
 
-  package { 
+  package {
     [ 'sinatra' , 'haml', 'errand', 'yajl-ruby', 'tilt', 'visage-app' ]:
       provider => gem,
       ensure   => present,
       require  => Package['librrd-dev'],
   }
 
-  file { 
-    'collectd-server':
-      path    => '/etc/collectd/collectd.conf',
-      content => template('collectd/collectd-server.conf.erb'),
-      ensure  => present,
-      require => Package['collectd'],
+
+  file { "$collectd::params::collectd_configuration":
+    content => template('collectd/collectd-server.conf.erb'),
+    ensure  => present,
+    require => Package['collectd'],
   }
 
-  apache::vhost { 
-    'visage.puppetlabs.com':
+  apache::vhost {
+    "${site_alias}":
       port     => '80',
       priority => '55',
-      docroot  => '/var/lib/gems/1.8/gems/visage-app-0.2.5/lib/visage/public',
+      docroot  => '/var/lib/gems/1.8/gems/visage-app-0.9.6/lib/visage-app/public',
       template => 'collectd/collectd-apache.conf.erb',
   }
 

@@ -5,7 +5,7 @@
 
 NameVirtualHost *:<%= port %>
 <VirtualHost *:<%= port %>>
-  ServerName <%= name %>
+  ServerName <%= srvname %>
 <% if serveraliases.is_a? Array -%>
 <% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
 <% elsif serveraliases != '' -%>

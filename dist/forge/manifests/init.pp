@@ -14,12 +14,23 @@
 #
 # Sample Usage:
 #
-class forge {
+class forge(
+    $vhost         = 'forge.puppetlabs.com',
+    $ssl           = true,
+    $newrelic      = true,
+    $do_ssh_keys   = false,
+    $git_revision  = 'r0.1.16',
+    $github_url    = 'http://github.com/puppetlabs/puppet-module-site.git'
+) {
   include ::passenger
   include passenger::params
   include ruby::dev
   include vcsrepo
   include apache::ssl
+
+  if $do_ssh_keys == true {
+      include forge::sshkey
+  }
 
   $rails_version='2.3.5'
   require rails
@@ -41,14 +52,15 @@ class forge {
       minute => "*/30";
 	}
 
+  # repo.
   vcsrepo { '/opt/forge':
-    source => 'http://github.com/puppetlabs/puppet-module-site.git',
+    source   => $github_url,
     provider => git,
-    revision => 'r0.1.16',
-    ensure => present,
-    require => File['/opt/forge'],
+    revision => $git_revision,
+    ensure   => present,
+    require  => File['/opt/forge'],
   }
- 
+
   package { [ 'json', 'less', 'archive-tar-minitar', 'bcrypt-ruby', 'diff-lcs', 'haml', 'maruku', 'paperclip', 'versionomy', 'warden', 'will_paginate', 'sqlite3-ruby', 'hpricot', 'factory_girl', 'remarkable_activerecord', 'remarkable_rails', 'rspec', 'rspec-rails', 'vlad', 'vlad-git' ]:
     ensure => present,
     provider => gem,
@@ -66,6 +78,12 @@ class forge {
     provider => gem,
     require => Vcsrepo['/opt/forge'],
   }
+
+  package { 'i18n':
+    ensure => '0.4.2',
+    provider => gem,
+    require => Vcsrepo['/opt/forge'],
+  }
  
   package { 'devise':
     ensure => '1.0.7',
@@ -78,14 +96,14 @@ class forge {
     provider => gem,
     require => Vcsrepo['/opt/forge'],
   }
-  
+
   file { '/opt/forge/config/database.yml':
     ensure => present,
     content => template('forge/database.yml.erb'),
     owner => 'www-data',
     group => 'www-data',
     require => Vcsrepo['/opt/forge'],
-  }  
+  }
 
   file { '/opt/forge/config/secrets.yml':
     owner => 'www-data',
@@ -95,12 +113,20 @@ class forge {
     require => Vcsrepo['/opt/forge'],
   }
 
-  file { '/opt/forge/config/newrelic.yml':
-    owner => 'www-data',
-    group => 'www-data',
-    ensure => present,
-    source => 'puppet:///modules/forge/newrelic.yml',
-    require => Vcsrepo['/opt/forge'],
+  if $newrelic == true {
+      file { '/opt/forge/config/newrelic.yml':
+        owner   => 'www-data',
+        group   => 'www-data',
+        ensure  => present,
+        source  => 'puppet:///modules/forge/newrelic.yml',
+        require => [ Vcsrepo['/opt/forge'], Package['newrelic_rpm'] ],
+      }
+
+      package{ 'newrelic_rpm':
+        ensure   => present,
+        provider => gem,
+        require  => Vcsrepo['/opt/forge'],
+      }
   }
 
   file { [ '/opt/forge/tmp', '/opt/forge/log' ]:
@@ -153,7 +179,7 @@ class forge {
     require => Vcsrepo['/opt/forge'],
   }
 
-  apache::vhost { 'forge.puppetlabs.com':
+  apache::vhost { $vhost:
     port => '80',
     priority => '60',
     ssl => false,
@@ -161,14 +187,16 @@ class forge {
     template => 'forge/puppet-forge-passenger.conf.erb',
     require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
   }
-  
-  apache::vhost { 'forge.puppetlabs.com_ssl':
-    port => 443,
-    priority => 61,
-    docroot => '/opt/forge/public/',
-    ssl => true,
-    template => 'forge/puppet-forge-passenger.conf.erb',
-    require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
+
+  if $ssl == true {
+      apache::vhost { "${vhost}_ssl":
+        port => 443,
+        priority => 61,
+        docroot => '/opt/forge/public/',
+        ssl => true,
+        template => 'forge/puppet-forge-passenger.conf.erb',
+        require => [ Vcsrepo['/opt/forge'], File['/opt/forge/log'], File['/opt/forge/tmp'], Exec['rakeforgedb'], File['/opt/forge/config/database.yml'], File['/opt/forge/config/secrets.yml'] ],
+      }
   }
 
 }

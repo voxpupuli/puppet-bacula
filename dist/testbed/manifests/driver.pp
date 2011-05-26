@@ -9,6 +9,6 @@ class testbed::driver {
     owner => root,
     group => root,
     mode  => 640,
-    content => 'Puppetmaster!';
+    content => '4uU6WFnW';
   }
 }

@@ -3,6 +3,7 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   ServerName <%=srvname%>
   DocumentRoot <%= docroot %>
 
+  # Support SSL Redirection for authentication
   RewriteEngine On
   RewriteCond %{HTTPS} !=on
   RewriteRule ^/login(.*)$ https://%{SERVER_NAME}/login$1 [R,L]
@@ -24,6 +25,9 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
 
   ProxyPass / http://localhost:8080/
   ProxyPassReverse / http://localhost:8080/
+
+  # Redirects for locations that have been moved from the wiki into the docs site:
+  Redirect permanent /projects/puppet/wiki/Language_Tutorial http://docs.puppetlabs.com/guides/language_guide.html
 
   # Custom log file locations
   ErrorLog  /var/log/apache2/<%= name %>_error.log

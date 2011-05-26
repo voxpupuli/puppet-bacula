@@ -1,14 +1,16 @@
 module Pdns
-  newrecord("geo.puppetlabs.com") do |query, answer|
+  newrecord("docs.puppetlabs.com") do |query, answer|
     case country(query[:remoteip])
       when "US", "CA"
         answer.content "<%= mirror0 %>"
+        answer.content "<%= mirror2 %>"
 
       when "ZA", "ZW", "UK", "EU", "FR", "BE", "DE", "DK"
         answer.content "<%= mirror1 %>"
 
       else
         answer.content "<%= mirror0 %>"
+        answer.content "<%= mirror2 %>"
       end
   end
 end

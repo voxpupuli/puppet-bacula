@@ -13,7 +13,6 @@
 #
 class puppetlabs::base {
 
-
   # Kernel/Operatingsystem Specific Configurations
   case $kernel {
     linux:   { include puppetlabs::os::linux   }
@@ -39,7 +38,9 @@ class puppetlabs::base {
       }
     }
 
-    "puppetlabs.com": { }
+    "puppetlabs.com": {
+      include puppetlabs
+    }
     default: { }
   }
 

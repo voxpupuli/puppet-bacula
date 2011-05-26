@@ -119,7 +119,7 @@ define account::user (
         }
       } else {
         file {
-          "${homedir}/.ssh/": 
+          "${homedir}/.ssh": 
             mode    => 700, 
             ensure  => directory, 
             owner   => $name, 
@@ -131,7 +131,7 @@ define account::user (
             source  => "${userdir}/.ssh/authorized_keys", 
             owner   => $name, 
             group   => $groupname, 
-            require => User["$name"];
+            require => [File["$homedir/.ssh"], User["$name"]];
         }
       }
     }

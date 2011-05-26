@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 class puppetlabs::shell {
-	ssh::allowgroup { "allstaff": }
+  ssh::allowgroup { "allstaff": }
 
   # Base
   include puppetlabs
@@ -22,9 +22,6 @@ class puppetlabs::shell {
 
   include munin
   include munin::puppet
-	
-	# Collectd
-	include collectd::client
 
 }
 

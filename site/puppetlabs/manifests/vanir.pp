@@ -1,4 +1,6 @@
 class puppetlabs::vanir {
-  include apt-cacher
+
+  class { "apt-cacher": service => false; }
+
 
 }

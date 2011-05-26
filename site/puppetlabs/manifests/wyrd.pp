@@ -1,5 +1,7 @@
 class puppetlabs::wyrd {
 
+  class { "apt-cacher": service => false; }
+
   # keeps http://wyrd.puppetlabs.lan/puppetdoc/ up to date
   cron {
     "pull ~zach/src/puppetlabs-modules":
@@ -14,3 +16,4 @@ class puppetlabs::wyrd {
   }
 
 }
+

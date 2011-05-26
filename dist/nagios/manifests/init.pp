@@ -3,8 +3,6 @@
 # This class installs and configures Nagios
 #
 # Parameters:
-#   $nrpe_server:
-#     IP address of the NRPE monitoring server
 #
 # Actions:
 #
@@ -13,10 +11,12 @@
 #
 # Sample Usage:
 #
-class nagios {
+class nagios (
+    $nrpe_server
+  ) {
+
   include nagios::params
 
-  $nrpe_server = $nagios::params::nrpe_server
   $nrpe_pid    = $nagios::params::nrpe_pid
   $nrpe_user   = $nagios::params::nrpe_user
   $nrpe_group  = $nagios::params::nrpe_group

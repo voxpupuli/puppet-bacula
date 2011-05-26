@@ -25,7 +25,7 @@ class puppetlabs::dxul {
   #$puppet_storedconfig_password = 'password'
 
   # Puppet Forge
-  include forge
+  class { 'forge': vhost => 'forge.puppetlabs.com' }
 
   # Backup
   $bacula_director = 'baal.puppetlabs.com'
@@ -43,9 +43,6 @@ class puppetlabs::dxul {
   include munin::dbservices
   include munin::passenger
   include munin::puppet
-
-  # Collectd
-  include collectd::client
 
   include mysql::server
   redmine::unicorn { 'projects.puppetlabs.com':

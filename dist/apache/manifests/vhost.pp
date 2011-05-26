@@ -23,7 +23,7 @@
 #    docroot => '/path/to/docroot',
 #  }
 #
-define apache::vhost( 
+define apache::vhost(
     $port,
     $docroot,
     $ssl           = true,

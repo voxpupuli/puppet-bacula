@@ -1,11 +1,16 @@
 class puppetlabs::os::linux::debian {
 
-  package { 
+  class { "useradd::settings":
+    last_uid => '1099',
+    last_gid => '1099',
+  }
+
+  package {
     "lsb-release": ensure => installed; 
     "keychain":    ensure => installed; 
   }
 
-  exec { 
+  exec {
     "import puppet labs apt key":
       user    => root,
       command => "/usr/bin/wget -q -O - http://apt.puppetlabs.com/ops/4BD6EC30.asc | apt-key add -",

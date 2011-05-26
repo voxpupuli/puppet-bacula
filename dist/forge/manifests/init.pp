@@ -78,6 +78,12 @@ class forge(
     provider => gem,
     require => Vcsrepo['/opt/forge'],
   }
+
+  package { 'i18n':
+    ensure => '0.4.2',
+    provider => gem,
+    require => Vcsrepo['/opt/forge'],
+  }
  
   package { 'devise':
     ensure => '1.0.7',

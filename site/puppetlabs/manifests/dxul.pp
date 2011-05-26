@@ -16,7 +16,6 @@ class puppetlabs::dxul {
   include dropbox
 
   # Base
-  include puppetlabs
   include puppetlabs_ssl
   include account::master
  

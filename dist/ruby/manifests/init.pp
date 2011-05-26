@@ -15,11 +15,14 @@
 class ruby {
   include ruby::params
 
-  package{'ruby': 
+  package{'ruby':
      ensure => installed,
   }
-  package{'rubygems': 
-     ensure => installed, 
-     require => Package['ruby'],
+
+  if $operatingsystem == "Linux" { # added to support non-linux
+    package{'rubygems':
+      ensure  => installed,
+      require => Package['ruby'],
+    }
   }
 }

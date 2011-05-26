@@ -15,8 +15,11 @@ class puppetlabs {
   # This is our base install for all of our servers.
   #
 
+#  $puppet_server = "baal.puppetlabs.com"
+
   include ntp
-  include puppet
+  #include puppet
+#  class { "puppet": server => "$puppet_server"; }
   include ssh::server
   include virtual::users
   include virtual::packages

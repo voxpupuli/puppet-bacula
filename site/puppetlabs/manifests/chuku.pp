@@ -1,8 +1,5 @@
 class puppetlabs::chuku {
 
-  # Base
-  require puppetlabs
-
   # Nagios
   include nagios::webservices
   include nagios::dbservices

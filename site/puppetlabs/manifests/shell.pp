@@ -14,7 +14,6 @@ class puppetlabs::shell {
   ssh::allowgroup { "allstaff": }
 
   # Base
-  include puppetlabs
   include account::master
   include firewall
 

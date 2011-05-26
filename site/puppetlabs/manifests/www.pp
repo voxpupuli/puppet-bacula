@@ -1,8 +1,5 @@
 class puppetlabs::www {
 
-  # Base
-  include puppetlabs
-
   # Nagios
   include nagios::webservices
   include nagios::dbservices

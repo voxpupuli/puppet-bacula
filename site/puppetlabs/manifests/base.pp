@@ -13,13 +13,23 @@
 #
 class puppetlabs::base {
 
-  # Kernel/Operatingsystem Specific Configurations
+#
+## Common Variables
+  $puppet_server = "baal.puppetlabs.com"
+
+#
+## Common classes
+  class { "puppet": server => "$puppet_server"; }
+
+#
+## Kernel/Operatingsystem Specific Configurations
   case $kernel {
     linux:   { include puppetlabs::os::linux   }
     default: { }
   }
 
-# Domain/Location Specific Configurations
+#
+## Domain/Location Specific Configurations
   case $domain {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"

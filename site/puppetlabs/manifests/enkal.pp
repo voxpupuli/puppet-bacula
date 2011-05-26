@@ -14,7 +14,6 @@ class puppetlabs::enkal {
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
 
   # Base
-  include puppetlabs
   include puppetlabs_ssl
   include puppetlabs::docs
   include account::master

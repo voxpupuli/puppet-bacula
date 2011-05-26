@@ -10,7 +10,7 @@ class useradd::settings (
           owner   => root,
           group   => root,
           mode    => 644,
-          content => template("adduser/adduser.conf.erb"),
+          content => template("useradd/useradd.conf.erb"),
       }
     }
     default: {

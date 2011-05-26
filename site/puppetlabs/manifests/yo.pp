@@ -9,11 +9,11 @@ class puppetlabs::yo {
     isoroot       => '/var/mrepo/iso',
   }
 
-  mrepo::repo { "rhel6server":
+  mrepo::repo { "rhel6server-x86_64":
     ensure    => present,
     rhn       => true,
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
-    arch      => "x86_64 i386",
+    arch      => "x86_64",
     release   => "6",
     iso       => 'rhel-server-6.0-$arch-dvd.iso',
     updates   => 'rhns:///rhel-$arch-server-$release',
@@ -24,9 +24,9 @@ class puppetlabs::yo {
     rhn       => true,
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
     arch      => "i386",
-    release   => "6Server",
+    release   => "6",
     iso       => 'rhel-server-6.0-$arch-dvd.iso',
-    updates   => 'rhns:///rhel-$arch-server-6',
+    updates   => 'rhns:///rhel-$arch-server-$release',
   }
 
   mrepo::repo { "rhel5server-x86_64":
@@ -34,16 +34,17 @@ class puppetlabs::yo {
     rhn       => true,
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
     arch      => "x86_64",
-    release   => "5.0",
+    release   => "5",
     iso       => 'rhel-5-server-$arch-disc?.iso',
     updates   => 'rhns:///rhel-$arch-server-5',
   }
+
   mrepo::repo { "rhel5server-i386":
     ensure    => present,
     rhn       => true,
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
     arch      => "i386",
-    release   => "5.0",
+    release   => "5",
     iso       => 'rhel-5-server-$arch-disc?.iso',
     updates   => 'rhns:///rhel-$arch-server-5',
   }

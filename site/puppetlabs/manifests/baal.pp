@@ -23,7 +23,22 @@ class puppetlabs::baal {
 
   # Puppet modules
   $dashboard_site = 'dashboard.puppetlabs.com'
-  include puppet::server
+
+  $modulepath = [
+    "/etc/puppet/modules/site",
+    "/etc/puppet/modules/dist",
+  ]
+
+  class { "puppet::server":
+    modulepath => inline_template("<%= modulepath.join(':') %>"),
+    dbadapter  => "mysql",
+    dbuser     => "puppet",
+    dbpassword => "password"
+    dbsocket   => "/var/run/mysqld/mysqld.sock",
+    reporturl  => "http://dashboard.puppetlabs.com/reports";
+  }
+
+  #include puppet::server
   include puppet::dashboard
 
   # Package management

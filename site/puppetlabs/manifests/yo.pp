@@ -9,15 +9,16 @@ class puppetlabs::yo {
     isoroot       => '/var/mrepo/iso',
   }
 
-  mrepo::repo { "rhel6server-x86_64":
+  mrepo::repo { "rhel6server":
     ensure    => present,
     rhn       => true,
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
-    arch      => "x86_64",
-    release   => "6Server",
+    arch      => "x86_64 i386",
+    release   => "6",
     iso       => 'rhel-server-6.0-$arch-dvd.iso',
-    updates   => 'rhns:///rhel-$arch-server-6',
+    updates   => 'rhns:///rhel-$arch-server-$release',
   }
+
   mrepo::repo { "rhel6server-i386":
     ensure    => present,
     rhn       => true,

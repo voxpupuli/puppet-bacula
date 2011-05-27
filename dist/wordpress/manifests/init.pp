@@ -3,4 +3,20 @@ class wordpress {
   include php::mysql
   include apache::php
   realize(A2mod['rewrite'])
+
+  Exec["wp_download"] -> Exec["wp_unzip"]
+
+  exec { "wp_download":
+    cwd     => "/usr/local/src",
+    creates => "/usr/local/src/latest.zip",
+    command => "/usr/bin/wget http://wordpress.org/latest.zip";
+  }
+
+  exec { "wp_unzip":
+    cwd     => "/usr/local/src",
+    creates => "/usr/local/src/wordpress",
+    command => "/usr/bin/unzip latest.zip";
+  }
+
+
 }

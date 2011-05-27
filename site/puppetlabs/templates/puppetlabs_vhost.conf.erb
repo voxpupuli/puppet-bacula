@@ -1,27 +1,35 @@
 NameVirtualHost <%= ipaddress %>:<%= port %>
 <VirtualHost <%= ipaddress %>:<%= port %>>
-  servername www.puppetlabs.com
-  serveralias puppetlabs.com
+  ServerName <%= srvname %>
+<% if serveraliases.is_a? Array -%>
+<% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+<% elsif serveraliases != '' -%>
+<%= "  ServerAlias #{serveraliases}" -%>
+<% end -%>
+
   ServerAdmin webmaster@puppetlabs.com
-  DocumentRoot /var/www/puppetlabs.com
+  DocumentRoot <%= docroot %>
   UseCanonicalName On
+
   <Directory />
    Options FollowSymLinks
-    AllowOverride ALL
+    AllowOverride None
     AuthType Digest
   </Directory>
-  <Directory /var/www/puppetlabs.com>
+
+  <Directory <%= docroot %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Order allow,deny
     HeaderName IndexHeader.html
     allow from all
   </Directory>
-  ErrorLog /var/log/apache2/puppetlabs.com-error.log
-  # Possible values include: debug, info, notice, warn, error, crit,
-  # alert, emerg.
-  LogLevel debug
-  CustomLog /var/log/apache2/puppetlabs.com.access.log combined
+
+  LogLevel info
+  ErrorLog /var/log/apache2/puppetlabs.com_error.log
+  CustomLog /var/log/apache2/puppetlabs.com_access.log combined
+
+  # Enter redirect hell
   RewriteEngine On
   RewriteCond %{HTTP_HOST} ^reductivelabs\.com$
   RewriteRule ^(.*)$ http://www.puppetlabs.com%{REQUEST_URI} [R=permanent,L]
@@ -294,8 +302,8 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   Redirect permanent /trac/puppet http://projects.puppetlabs.com/projects/puppet
   Redirect permanent /trac/puppet/wiki http://projects.puppetlabs.com/projects/puppet/wiki
   Redirect permanent /trac http://projects.puppetlabs.com
-   <Location /server-status/>
-     SetHandler server-status
-	     Allow from all
-   </Location>
+  <Location /server-status/>
+    SetHandler server-status
+    Allow from all
+  </Location>
 </VirtualHost>

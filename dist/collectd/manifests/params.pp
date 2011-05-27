@@ -15,7 +15,7 @@
 class collectd::params {
 
   case $operatingsystem {
-    'ubuntu': {
+    'ubuntu','debian': {
       $collectd_configuration = '/etc/collectd/collectd.conf'
       $collectd_packages = 'collectd'
     }

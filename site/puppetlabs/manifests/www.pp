@@ -44,9 +44,10 @@ class puppetlabs::www {
       serveraliases => "www.puppetcamp.org",
       port          => '80',
       dest          => 'http://www.puppetlabs.com/community/puppet-camp';
-    'www.reductivelabs.com':
-      port => '80',
-      dest => 'http://www.puppetlabs.com';
+    'reductivelabs.com':
+      serveraliases => "www.reductivelabs.com",
+      port          => '80',
+      dest          => 'http://www.puppetlabs.com';
   }
 
   wordpress::instance {

@@ -10,3 +10,122 @@ Director {                # define myself
   DirAddress              = 127.0.0.1
 }
 
+# Only one restore job?
+Job {
+  Name = "RestoreFiles"
+  Type = Restore
+  Client = baal.puppetlabs.com-fd
+  FileSet = "PuppetLabsOps"
+  Storage = File
+  Where = /tmp/bacula-restores
+  Messages = Standard
+  Pool = Default
+}
+
+JobDefs {
+  Name = "PuppetLabsOps"
+  Type = Backup
+  Schedule = "WeeklyCycle"
+  Messages = Standard
+  Priority = 10
+}
+
+FileSet {
+  Name = PuppetLabsOps
+  Include {
+    Options {
+      signature = MD5
+      compression=gzip
+  }
+    File = /etc
+    File = /opt
+    File = /var/www
+    File = /var/lib/bacula/mysql
+  }
+  Exclude {
+    File = /var/www/puppetlabs.com/downloads
+  }
+}
+
+Schedule {
+  Name = "WeeklyCycle"
+  Run = Level=Full sun at 2:05
+  Run = Level=Incremental mon-sat at 2:05
+}
+
+Pool {
+  Name            = Default
+  Pool Type       = Backup
+  Action On Purge = Truncate
+}
+
+Pool {
+  Name                 = PuppetLabsPool-Full
+  Pool Type            = Backup
+  Recycle              = Yes
+  AutoPrune            = Yes
+  Volume Retention     = 4 months
+  Maximum Volume Jobs  = 1
+  Maximum Volume Bytes = 1000000000
+  Label Format         = Full-
+  #Maximum Volumes     = 30
+}
+
+Pool {
+  Name                 = PuppetLabsPool-Inc
+  Pool Type            = Backup
+  Recycle              = yes           # automatically recycle Volumes
+  AutoPrune            = yes         # Prune expired volumes
+  Volume Retention     = 21 days
+  #Maximum Volume Jobs = 60
+  Maximum Volume Bytes = 4000000000
+  Label Format         = Inc-
+  #Maximum Volumes     = 7
+}
+
+# Definition of file storage device
+Storage {
+  Name = File
+  Address = baal.puppetlabs.com                # N.B. Use a fully qualified name here
+  SDPort = 9103
+  Password = "kIw4ISyjT8PlbMrPgZB_WBsBb5ckS5hND"
+  Device = PuppetLabsFileStorage
+  Media Type = File
+}
+
+# Generic catalog service
+Catalog {
+  Name = MyCatalog
+  dbname = "bacula"; dbuser = "bacula"; dbpassword = ""
+}
+
+# Reasonable message delivery -- send most everything to email address
+#  and to the console
+Messages {
+  Name = Standard
+  mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \r\>\" -s \"Bacula: %t %e of %c %l\" %r"
+  operatorcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: Intervention needed for %j\" %r"
+  mail = root@localhost = all, !skipped
+  operator = root@localhost = mount
+  console = all, !skipped, !saved
+  append = "/var/lib/bacula/log" = all, !skipped
+  catalog = all
+}
+
+Messages {
+  Name = Daemon
+  mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula daemon message\" %r"
+  mail = root@localhost = all, !skipped
+  console = all, !skipped, !saved
+  append = "/var/lib/bacula/log" = all, !skipped
+}
+
+#
+# Restricted console used by tray-monitor to get the status of the director
+#
+Console {
+  Name = baal.puppetlabs.com-mon
+  Password = "EWDjRkucylqjSjwtX_y2UKlS-Ihr4E01V"
+  CommandACL = status, .status
+}
+

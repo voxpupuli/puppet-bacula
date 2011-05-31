@@ -1,5 +1,4 @@
 class puppetlabs::pluto {
-  include puppetlabs::lan	
 
   ssh::allowgroup { "developers": }
   ssh::allowgroup { "prosvc": }
@@ -25,22 +24,45 @@ class puppetlabs::pluto {
   Group <| title == secureworks |>
   ssh::allowgroup { "secureworks": chroot => true; }
 
-	package { "cryptsetup": ensure => installed; }
+  Account::User <| group == bioware |>
+  Group <| title == bioware |>
+  ssh::allowgroup { "bioware": chroot => true; }
 
-	exec { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4":
-		creates => '/var/chroot.key';
-	}
-	
-	file { 
-		"/var/chroot.key": mode => 0400, require => Exec["/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4"];
-	}
+  Account::User <| tag == deploy |>
+  ssh::allowgroup { "www-data": }
 
-	file {
-		"/opt/enterprise": 
-		  owner => root,
-			group => developers,
-			mode => 775,
-			recurse => true;
-	}
+  #enterprise 
+  package { "lsyncd": ensure => installed; }
+  package { "daemontools": ensure => installed; }
+  cron { "sync /opt/enterprise to tbdriver": 
+    minute  => '*/30',
+    user    => root,
+    command => '/usr/bin/setlock -nx /var/run/lsyncd.lock lsyncd --nodaemon -rsyncssh /opt/enterprise/ tb-driver.puppetlabs.lan /opt/enterprise/'; 
+  }
+
+  # Crypt filesystem
+  package { "cryptsetup": ensure => installed; }
+  exec    { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4": creates => '/var/chroot.key'; }
+  file    { "/var/chroot.key": mode => 0400, require => Exec["/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4"]; }
+
+  file {
+    "/opt/enterprise":
+      owner   => root,
+      group   => developers,
+      mode    => 0664,
+      recurse => true;
+    "/opt/puppet":
+      ensure  => directory,
+      owner   => root,
+      group   => www-data,
+      mode    => 0664,
+      recurse => true;
+    "/opt/puppet/nightly":
+      ensure  => directory,
+      owner   => root,
+      group   => www-data,
+      mode    => 0664;
+  }
 
 }
+

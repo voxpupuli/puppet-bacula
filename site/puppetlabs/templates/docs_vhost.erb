@@ -1,8 +1,7 @@
-NameVirtualHost 74.207.250.144:80
-<VirtualHost 74.207.250.144:80>
+NameVirtualHost <%= ipaddress %>:80
+<VirtualHost <%= ipaddress %>:80>
   ServerName docs.puppetlabs.com
-  #ServerAlias docs.reductivelabs.com docs.mirror0.puppetlabs.com 
-  ServerAlias docs.mirror0.puppetlabs.com 
+  #ServerAlias docs.mirror0.puppetlabs.com 
   DocumentRoot /var/www/docs.puppetlabs.com
   <Directory /var/www/docs.puppetlabs.com>        
     Options Indexes FollowSymLinks MultiViews

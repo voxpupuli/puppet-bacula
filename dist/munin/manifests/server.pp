@@ -11,7 +11,9 @@
 #
 # Sample Usage:
 #
-class munin::server {
+class munin::server (
+    $site_alias = $fqdn
+  ) {
   include apache
   include munin::params
 
@@ -23,7 +25,7 @@ class munin::server {
     ensure => absent,
   }
 
-  apache::vhost { 'munin.puppetlabs.com':
+  apache::vhost { "$site_alias":
     port => '80',
     priority => '40',
     docroot => '/var/cache/munin/www',

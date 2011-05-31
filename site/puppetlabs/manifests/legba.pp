@@ -12,10 +12,8 @@
 #
 class puppetlabs::legba {
 
-  include puppetlabs
   include puppetlabs_ssl
   include account::master
-  include collectd::client
 
   #Acount::User <| tag == 'developers' |>
   #Group <| tag == 'developers' |>

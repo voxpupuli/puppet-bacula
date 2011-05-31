@@ -1,5 +1,4 @@
 class puppetlabs::docs {
-  include puppetlabs
   #
   # This is temp so as to not purge the puppetlabs.com vhost.
   #
@@ -32,4 +31,6 @@ class puppetlabs::docs {
       group  => root, 
       before => Apache::Vhost['docs.puppetlabs.com'] 
   }
+
+  realize(A2mod['rewrite'])
 }

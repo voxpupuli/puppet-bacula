@@ -19,10 +19,10 @@ class collectd {
   }
 
   service { 'collectd':
-    ensure => running,
+    ensure     => running,
     enable     => true,
     hasrestart => true,
-    require => Package['collectd'],
+    require    => Package['collectd'],
   }
 
 }

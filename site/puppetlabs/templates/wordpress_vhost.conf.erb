@@ -1,0 +1,26 @@
+NameVirtualHost <%= ipaddress %>:<%= port %>
+<VirtualHost <%= ipaddress %>:<%= port %>>
+  ServerName <%= srvname %>
+<% if serveraliases.is_a? Array -%>
+<% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+<% elsif serveraliases != '' -%>
+<%= "  ServerAlias #{serveraliases}" -%>
+<% end -%>
+
+  ServerAdmin webmaster@puppetlabs.com
+  DocumentRoot <%= docroot %>
+  UseCanonicalName On
+
+  <Directory <%= docroot %>>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  LogLevel info
+  ErrorLog /var/log/apache2/<%= srvname %>_error.log
+  CustomLog /var/log/apache2/<%= srvname %>_access.log combined
+
+</VirtualHost>
+

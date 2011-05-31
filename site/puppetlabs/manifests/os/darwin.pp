@@ -1,0 +1,4 @@
+class puppetlabs::os::darwin {
+
+
+}

@@ -18,7 +18,7 @@ class puppet::storedconfiguration {
    require puppet::server
 
    $puppet_storedconfig_password = $puppet::params::puppet_storedconfig_password
- 
+
    package { $puppet::params::puppet_storedconfig_packages:
      ensure => installed,
    }

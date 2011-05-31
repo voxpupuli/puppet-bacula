@@ -1,5 +1,7 @@
 class django {
-  include apache::python
-	package { "python-django": ensure => installed; }
-} 
+
+  include apache::mod::python
+  package { "python-django": ensure => installed; }
+
+}
 

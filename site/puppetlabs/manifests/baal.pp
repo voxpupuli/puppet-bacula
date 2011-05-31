@@ -14,18 +14,41 @@ class puppetlabs::baal {
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
 
   # Base
-  include puppetlabs
-	include puppetlabs_ssl
+  include puppetlabs_ssl
   include account::master
   include vim
 
+  ssh::allowgroup { "release": }
+
   # Puppet modules
   $dashboard_site = 'dashboard.puppetlabs.com'
-  include puppet::server
-  include puppet::dashboard
+
+  $modulepath = [
+    "/etc/puppet/modules/site",
+    "/etc/puppet/modules/dist",
+  ]
+
+  class { "puppet::server":
+    modulepath => inline_template("<%= modulepath.join(':') %>"),
+    dbadapter  => "mysql",
+    dbuser     => "puppet",
+    dbpassword => "password",
+    dbsocket   => "/var/run/mysqld/mysqld.sock",
+    reporturl  => "http://dashboard.puppetlabs.com/reports";
+  }
+
+  class { "puppet::dashboard":
+    db_user => "dashboard",
+    db_pw   => "Og7iSwrA2sjx",
+    site    => "dashboard.puppetlabs.com";
+  }
+
+  # commented in favor of above paramaterized classes
+  #zleslie: include puppet::server
+  #zleslie: include puppet::dashboard
 
   # Package management
-  include aptrepo
+  class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
   include yumrepo
 
   # Backup
@@ -33,9 +56,9 @@ class puppetlabs::baal {
   $bacula_director = 'baal.puppetlabs.com'
   include bacula
   include bacula::director
-  
+
   # Monitoring
-  include nagios::server
+  class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }
   include nagios::webservices
   include nagios::dbservices
   include nagios::bacula
@@ -47,19 +70,23 @@ class puppetlabs::baal {
   nagios::website { 'visage.puppetlabs.com': auth => 'monit:5kUg8uha', }
 
   # Munin
-  include munin
-  include munin::server
+  class { "munin::server": site_alias => "munin.puppetlabs.com"; }
   include munin::dbservices
   include munin::passenger
   include munin::puppet
   include munin::puppetmaster
- 
-  # Collectd
-  include collectd::server
+
+
+  #file { "/usr/share/puppet-dashboard/public/.htaccess":
+  #  owner => root,
+  #  group => www-data,
+  #  mode => 0640,
+  #  source => "puppet:///modules/puppetlabs/webauth";
+  #}
 
   # pDNS
   include pdns
-  
+
   # Gitolite
   Account::User <| tag == 'git' |>
 
@@ -70,22 +97,35 @@ class puppetlabs::baal {
     template => 'puppetlabs/baal.conf.erb'
   }
 
-	cron {
-		"compress_reports":
-		  user => root,
-			command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml" -mtime +1 -exec gzip {} \;',
-			minute => '9';
-		"clean_old_reports":
-		  user => root,
-			command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml.gz" -mtime +30 -exec rm {} \;',
-			minute => '0',
-			hour => '2';
+  file {
+    "/usr/local/bin/puppet_deploy.sh":
+      owner => root,
+      group => root,
+      mode  => 0750,
+      source => "puppet:///modules/puppetlabs/puppet_deploy.sh";
+  }
+
+  cron {
+    "compress_reports":
+      user => root,
+      command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml" -mtime +1 -exec gzip {} \;',
+      minute => '9';
+    "clean_old_reports":
+      user => root,
+      command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml.gz" -mtime +30 -exec rm {} \;',
+      minute => '0',
+      hour => '2';
     "clean_dashboard_reports":
       user => root,
       command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune upto=1 unit=wk)',
       minute => '20',
       hour => '2';
-	}
+    "Puppet: puppet_deploy.sh":
+      user    => root,
+      command => '/usr/local/bin/puppet_deploy.sh',
+      minute  => '*/8',
+      require => File["/usr/local/bin/puppet_deploy.sh"];
+  }
 
 }
 

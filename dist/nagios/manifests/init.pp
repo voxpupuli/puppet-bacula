@@ -3,8 +3,6 @@
 # This class installs and configures Nagios
 #
 # Parameters:
-#   $nrpe_server:
-#     IP address of the NRPE monitoring server
 #
 # Actions:
 #
@@ -13,17 +11,18 @@
 #
 # Sample Usage:
 #
-class nagios {
+class nagios (
+    $nrpe_server
+  ) {
+
   include nagios::params
 
-  $nrpe_server = $nagios::params::nrpe_server
-  $nrpe_pid = $nagios::params::nrpe_pid
-  $nrpe_user = $nagios::params::nrpe_user
-  $nrpe_group = $nagios::params::nrpe_group
+  $nrpe_pid    = $nagios::params::nrpe_pid
+  $nrpe_user   = $nagios::params::nrpe_user
+  $nrpe_group  = $nagios::params::nrpe_group
 
-  package { [ $nagios::params::nagios_plugin_packages, $nagios::params::nrpe_packages ]:
-    ensure => installed,
-  }
+  package { $nagios::params::nagios_plugin_packages: ensure => installed; }
+  package { $nagios::params::nrpe_packages: ensure => installed; }
 
   file { '/etc/nagios': 
     ensure => present,
@@ -167,4 +166,13 @@ class nagios {
     mode => 0755,
     ensure => present,
   }
+
+  @firewall { 
+    '0120-INPUT ACCEPT 5666':
+      jump   => 'ACCEPT',
+      dport  => '5666',
+      proto  => 'tcp',
+      source => "$nrpe_server"
+  }
+
 }

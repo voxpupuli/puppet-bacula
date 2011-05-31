@@ -1,0 +1,17 @@
+[<%= name %>]
+name = <%= repotitle %>
+release = <%= release %>
+arch = <%= arch %>
+metadata = <%= metadata %>
+<% unless iso.empty? -%>
+iso = <%= scope.lookupvar('mrepo::settings::isoroot') %>/<%= iso %>
+<% end -%>
+<% unless updates.empty? -%>
+updates = <%= updates %>
+<% end -%>
+<% unless extras.empty? -%>
+extras = <%= extras %>
+<% end -%>
+<% unless fasttrack.empty? -%>
+fastrack = <%= fasttrack %>
+<% end -%>

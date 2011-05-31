@@ -32,17 +32,9 @@ class bacula::director (
     require    => Package[$bacula::params::bacula_director_packages],
   }
 
-  file { 
-    "/bacula": 
-      ensure  => directory;
-#    "/etc/bacula/bacula-dir.conf": 
-#      owner   => root, 
-#      group   => bacula, 
-#      mode    => 640,
-#      content => template("bacula/bacula-dir.conf.erb");
-  }
+  file { "/bacula": ensure  => directory; }
 
-  @@concat::fragment {
+  concat::fragment {
     "bacula-director-header":
       order   => '00',
       target  => '/etc/bacula/bacula-dir.conf',
@@ -59,5 +51,13 @@ class bacula::director (
   }
 
   bacula::mysql { 'bacula': }
+
+  @@firewall {
+    '0170-INPUT allow tcp 9102':
+      proto  => 'tcp',
+      dport  => '9102',
+      source => "$ipaddress",
+      jump   => 'ACCEPT',
+  }
 
 }

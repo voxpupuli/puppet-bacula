@@ -21,11 +21,14 @@ class sudo {
   }
 
   exec { "check-sudoers":
-    command => "/usr/sbin/visudo -cf /tmp/sudoers && cp /tmp/sudoers /etc/sudoers",
+    command => $operatingsystem ? {
+      freebsd => "/usr/local/sbin/visudo -cf /tmp/sudoers && cp /tmp/sudoers /usr/local/etc/sudoers",
+      default => "/usr/sbin/visudo -cf /tmp/sudoers && cp /tmp/sudoers /etc/sudoers",
+    },
     refreshonly => true,
   }
 
-  file{"/etc/sudoers": 
+  file{ "/etc/sudoers": 
     owner => "root", 
     group => "root", 
     mode => "440",

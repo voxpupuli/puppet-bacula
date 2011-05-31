@@ -7,20 +7,30 @@
 # Actions:
 #
 # Requires:
+#   - collectd::params
 #
 # Sample Usage:
 #
-class collectd::client {
+# class { "collectd::client": server => "collectd.example.com"; }
+#
+class collectd::client (
+  $collectd_server
+  ) {
+
   include collectd::params
-  require collectd
+  include collectd
 
-  $collectd_server = $collectd::params::collectd_server
-
-  file { 'collectd-client':
-    path => $collectd::params::collectd_configuration,
+  file { "$collectd::params::collectd_configuration":
     content => template('collectd/collectd-client.conf.erb'),
-    ensure => present,
+    ensure  => present,
     require => Package['collectd'],
+  }
+
+  @@firewall { "0160-INPUT allow 25826 udp $ipaddress":
+    proto  => 'udp',
+    dport  => '25826',
+    source => "$ipaddress",
+    jump   => 'ACCEPT',
   }
 
 }

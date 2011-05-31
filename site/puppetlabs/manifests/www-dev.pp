@@ -3,8 +3,14 @@ class puppetlabs::www-dev {
   $mysql_root_pw = 'n0tInpr0duct1on'
   include mysql::server
 
+  ssh::allowgroup { "www-dev": }
+  Account::User <| title == 'dansupinski' |>
+  Account::User <| title == 'maxlynch' |>
+  Account::User <| title == 'donaldseigler' |>
+  Group <| title == 'www-dev' |>
+  Group <| title == 'contractors' |>
+
   # Base
-  include puppetlabs::lan
   include puppetlabs_ssl
 
   wordpress::instance {

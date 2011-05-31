@@ -173,6 +173,33 @@ class virtual::users {
     tag     => allstaff,
  }
 
+ @account::user {'pvande':
+    comment => 'Pieter van de Bruggen',
+    uid     => '1143',
+    group   => allstaff,
+    shell   => '/bin/bash',
+    groups  => ["developers"],
+    tag     => allstaff,
+ }
+
+ @account::user {'josh':
+    comment => 'Josh Cooper',
+    uid     => '1146',
+    group   => allstaff,
+    groups  => ["developers"],
+    key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAvzpmN2hQEscKJZjef6fDpuYpDGJLVY9UX9yNDpvBEJNVK2kfocnxCfsA7dIqkNTW6ly7VQwKpZR0tjt62sBPaYSXdrd5du0CV9EqBab+AMQ3khxbq5XdID3BlQySzkGjnjISGicEqfL9KbQSSc1DAduWahXt2isRqpCpID1NzE1H0c6HLstWuSQv+iPFkwi4PUpzyuOieJHK3UVA7/6iZrbMavol+xjVimtQLTy8vlfS3zY+gFNf6olNZ4UgQXtNFUhCpc7XugiqvLG8k+5CdF02E1kH3Pc4GdNm1QsrgxAtK9WUOfZsyhmSk5dnDubJJW+Dbv74mLe4bcFBAUH2Dw==',
+    tag     => allstaff,
+ }
+
+ @account::user {'stahnma':
+    comment => 'Michael Stahnke',
+    uid     => '1147',
+    group   => allstaff,
+    groups  => ["developers","release"],
+    key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA6viS8/Dpm60UgXz43DBh6OdhY3hGylhewlVsllOJEOBJagLn6OG0VPGUKSCfVT86Qi7qz8wzvtR9BsmzQkd4mxgW0YcRD8AO4o65m8F6jfbTnMHWDw593cK6CLWXErNApRDZJ+cApfRZegUi/B0V984OFDBZqO4V90IEa4LNYSrwFV8nkTMBjvh0h/9SNB1tk1zJj0wzV5w4JPCGr0pFWIYLnaX2C7wDPAD/Ti5lUBaNlyUi2v4WUf5F7wA8rzuV+8lEUrUiYKzUeA2PY9kCRhMgXJhBeerztS12j0w0Gt7AxfFNtIwjByxc17Av0lF5X+Nb3NeO/wJ85sD87VVRxQ==',
+    tag     => allstaff,
+ }
+ 
  @account::user {'ben':
     comment => 'Ben Hughes',
     uid     => '1025',
@@ -192,7 +219,7 @@ class virtual::users {
     keytype => "ssh-rsa",
     tag     => allstaff,
  }
- 
+
  @account::user {'adrien':
     comment => 'Adrien Thebo',
     uid     => '1026',
@@ -203,6 +230,14 @@ class virtual::users {
     keytype => "ssh-rsa",
     tag     => allstaff,
  }
+
+  @account::user {'gary':
+    comment => 'Garry Larizza',
+    uid     => '1148',
+    group   => allstaff,
+    groups  => ["prosvc"],
+    tag     => allstaff,
+  }
 
 #
 # Service accounts

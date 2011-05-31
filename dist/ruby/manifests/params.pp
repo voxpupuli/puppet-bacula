@@ -17,8 +17,8 @@ class ruby::params {
     "centos": {
       $ruby_dev="ruby-devel"
     }
-    "ubuntu": {
-      $ruby_dev= [ "ruby-dev", "rake", "irb" ]
+    "ubuntu","debian": {
+      $ruby_dev= [ "ruby-dev", "rake" ]
     }
  }
 

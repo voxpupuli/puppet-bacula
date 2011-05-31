@@ -23,7 +23,7 @@
 #    docroot => '/path/to/docroot',
 #  }
 #
-define apache::vhost( 
+define apache::vhost(
     $port,
     $docroot,
     $ssl           = true,
@@ -67,5 +67,13 @@ define apache::vhost(
       notify  => Service['httpd'],
   }
 
+  if ! defined(Firewall["0100-INPUT ACCEPT $port"]) {
+    @firewall {
+      "0100-INPUT ACCEPT $port":
+        jump  => 'ACCEPT',
+        dport => "$port",
+        proto => 'tcp'
+    }
+  }
 }
 

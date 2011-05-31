@@ -96,7 +96,7 @@ Storage {
 # Generic catalog service
 Catalog {
   Name = MyCatalog
-  dbname = "bacula"; dbuser = "bacula"; dbpassword = ""
+  dbname = "bacula"; dbuser = "<%= db_user %>"; dbpassword = "<%= db_pw %>"
 }
 
 # Reasonable message delivery -- send most everything to email address

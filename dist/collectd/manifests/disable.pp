@@ -16,7 +16,6 @@ class collectd::disable {
 
   package { $collectd::params::collectd_packages:
     ensure  => absent,
-    require => Service['collectd'],
   }
 
   service { 'collectd':

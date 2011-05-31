@@ -15,6 +15,14 @@ class nagios::params {
   case $operatingsystem {
     "ubuntu": {
       $nagios_plugin_packages = [ 'nagios-plugins-standard', 'nagios-plugins-basic', 'nagios-plugins', 'nagios-plugins-extra', 'nagios-nrpe-plugin' ]
+    }
+    "debian": {
+      $nagios_plugin_packages = [ 'nagios-plugins-standard', 'nagios-plugins-basic', 'nagios-plugins', 'nagios-nrpe-plugin' ]
+    }
+  }
+
+  case $operatingsystem {
+    "ubuntu","debian": {
       $nrpe_packages = 'nagios-nrpe-server'
       $nrpe_service = 'nagios-nrpe-server'
       $nrpe_configuration = '/etc/nagios/nrpe.cfg'

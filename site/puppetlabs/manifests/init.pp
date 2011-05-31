@@ -27,14 +27,16 @@ class puppetlabs {
   include sudo
   include packages
 
-  $collectd_server = "baal.puppetlabs.com"
+# remove collectd in favor of munin Tue May 31 2011 10:23:55
+# zleslie:  $collectd_server = "baal.puppetlabs.com"
+# zleslie:  # Collectd -- The collectd module should probably handle this will paramters
+# zleslie:  if $fqdn == $collectd_server {
+# zleslie:    class { "collectd::server": site_alias => "visage.puppetlabs.com"; }
+# zleslie:  } else {
+# zleslie:    class { "collectd::client": collectd_server => "baal.puppetlabs.com"; }
+# zleslie:  }
 
-  # Collectd -- The collectd module should probably handle this will paramters
-  if $fqdn == $collectd_server {
-    class { "collectd::server": site_alias => "visage.puppetlabs.com"; }
-  } else {
-    class { "collectd::client": collectd_server => "baal.puppetlabs.com"; }
-  }
+  include collectd::disable
 
 
   class { "nagios":           nrpe_server  => '74.207.240.137'; }

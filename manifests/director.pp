@@ -16,7 +16,9 @@
 # Sample Usage:
 #
 class bacula::director (
-    $port = 9101
+    $db_user = 'bacula',
+    $db_pw   = 'ch@ng3me',
+    $port    = 9101
   ) {
   require mysql::server
   require bacula
@@ -60,6 +62,11 @@ class bacula::director (
       dport  => '9102',
       source => "$ipaddress",
       jump   => 'ACCEPT',
+  }
+
+  mysql::db { "bacula":
+    db_user => $db_user,
+    db_pw   => $db_pw,
   }
 
 }

@@ -60,7 +60,7 @@ class puppetlabs::baal {
   }
 
   class { "bacula::director":
-    db_user => 'bacula'
+    db_user => 'bacula',
     db_pw   => 'qhF4M6TADEkl',
   }
 

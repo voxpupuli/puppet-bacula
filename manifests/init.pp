@@ -23,9 +23,12 @@ class bacula (
 
   include bacula::params
   include bacula::nagios
+<<<<<<< HEAD
 
   $bacula_director = $director
   $bacula_password = $password
+=======
+>>>>>>> 5538870ed354157917572471197099d7bb151ddb
 
   package { 'bacula-common':
     ensure => present,
@@ -57,10 +60,14 @@ class bacula (
     require => Package[$bacula::params::bacula_client_packages],
   }
 
+<<<<<<< HEAD
   @@concat::fragment {
     "bacula-client-$hostname":
       target  => '/etc/bacula/bacula-dir.conf',
       content => template("bacula/bacula-dir-client.erb")
   }
+=======
+  if defined (Class["firewall"]) { Firewall <<| dport == "9102" |>> }
+>>>>>>> 5538870ed354157917572471197099d7bb151ddb
 
 }

@@ -50,8 +50,10 @@ class bacula::director (
       mode  => 640,
   }
 
+  # backup the bacula database
   bacula::mysql { 'bacula': }
 
+  # export firewall rules for client realization
   @@firewall {
     '0170-INPUT allow tcp 9102':
       proto  => 'tcp',

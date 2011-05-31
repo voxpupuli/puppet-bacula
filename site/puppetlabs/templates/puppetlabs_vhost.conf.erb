@@ -31,23 +31,40 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
 
   # Enter redirect hell
   RewriteEngine On
-  RewriteCond %{HTTP_HOST} ^reductivelabs\.com$
-  RewriteRule ^(.*)$ http://www.puppetlabs.com%{REQUEST_URI} [R=permanent,L]
+
+# zleslie:  # Moved to puppetlabs::www class using apache::vhost::redirect
+# zleslie:  RewriteCond %{HTTP_HOST} ^reductivelabs\.com$
+# zleslie:  RewriteRule ^(.*)$ http://www.puppetlabs.com%{REQUEST_URI} [R=permanent,L]
+  
+
+  # Blog Categories
   Redirect permanent /category/news http://puppetlabs.com/category/blog/general-news/
   Redirect permanent /category/puppet http://puppetlabs.com/category/blog
-  RedirectMatch permanent ^/category/downloads$ http://puppetlabs.com/resources/downloads
+  #RedirectMatch permanent ^/category/downloads$ http://puppetlabs.com/resources/downloads
+
+
+  # info.puppetlabs.com
+  Redirect permanent /category/downloads http://info.puppetlabs.com/download
   Redirect permanent /download http://info.puppetlabs.com/download
+
   Redirect permanent /home/about/puppet-mailing-list http://puppetlabs.com/company/#contact
+
   Redirect permanent /home/about http://puppetlabs.com/company
-  Redirect permanent /home/irc http://www.puppetlabs.com/blog 
   Redirect permanent /jobs http://www.puppetlabs.com/company/jobs
-  Redirect permanent /3rd-party-licenses http://www.puppetlabs.com/puppet-enterprise-components-licenses
+
+
+  # Blog
   RedirectMatch permanent ^/podcast(.*)$ http://puppetlabs.com/blog
   Redirect permanent /products/feed http://www.puppetlabs.com/blog
   Redirect permanent /products/home/users http://www.puppetlabs.com/blog
+
+
+  Redirect permanent /3rd-party-licenses http://www.puppetlabs.com/puppet-enterprise-components-licenses
   Redirect permanent /products/home http://www.puppetlabs.com
+
   Redirect permanent /products/facter http://www.puppetlabs.com/puppet/related-projects/facter/
   Redirect permanent /products/puppet http://www.puppetlabs.com
+
   Redirect permanent /products http://www.puppetlabs.com/puppet
   Redirect permanent /services/feed http://www.puppetlabs.com/blog
   Redirect permanent /services/subscription-support http://www.puppetlabs.com/services/support
@@ -59,7 +76,8 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   #  http://puppetlabs.com/wp-content/themes/reductive/favicon.ico
   #  http://puppetlabs.com/wp-content/themes/reductive/scripts/mainimage.js
   #  http://puppetlabs.com/puppet.ico
-  #
+
+
   # Legacy Redirects
   #
   Redirect permanent /projects                      http://puppetlabs.com/products

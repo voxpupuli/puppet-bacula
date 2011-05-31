@@ -3,6 +3,14 @@ class puppetlabs::web01 {
   $mysql_root_pw = 'K7DkG9TVfGke'
   include mysql::server
 
+
+  $bacula_director = 'baal.puppetlabs.com'
+  $bacula_password = '4tc39KValGRv4xqhXhn5X4MsrHB5pQZbMfnzDt'
+  class { "bacula":
+    director => $bacula_director,
+    password => $bacula_password,
+  }
+
   wordpress::instance {
     'madstop.com':
       site_alias      => "www.madstop.com",
@@ -41,6 +49,5 @@ class puppetlabs::web01 {
       db_user    => 'pcon',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
   }
-
 
 }

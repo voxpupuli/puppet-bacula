@@ -22,7 +22,11 @@ class puppetlabs::enkal {
   # Backup
   $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'
   $bacula_director = 'baal.puppetlabs.com'
-  include bacula
+  class { "bacula":
+    director => $bacula_director,
+    password => $bacula_password,
+  }
+
 
 
   # Munin

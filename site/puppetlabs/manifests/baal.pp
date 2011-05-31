@@ -54,8 +54,20 @@ class puppetlabs::baal {
   # Backup
   $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'
   $bacula_director = 'baal.puppetlabs.com'
-  include bacula
-  include bacula::director
+  class { "bacula":
+    director => $bacula_director,
+    password => $bacula_password,
+  }
+
+  class { "bacula::director":
+    db_user => 'bacula'
+    db_pw   => 'qhF4M6TADEkl',
+  }
+
+  # commented in favor of above paramaterized classes
+  #zleslie: include bacula
+  #zleslie: include bacula::director
+
 
   # Monitoring
   class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }

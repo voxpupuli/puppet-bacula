@@ -1,5 +1,5 @@
 Client {
-  Name           = <%= hostname %>-fd
+  Name           = <%= fqdn %>-fd
   Address        = <%= fqdn %>
   FDPort         = <%= port %>
   Catalog        = MyCatalog
@@ -9,17 +9,17 @@ Client {
   AutoPrune      = <%= autoprune %>
 }
 
-#Job {
-#  Name = "baal"
-#  Type = Backup
-#  Client = baal.puppetlabs.com-fd
-#  FileSet = "PuppetLabsOps"
-#  Storage = File
-#  Pool = Default
-#  Full Backup Pool = PuppetLabsPool-Full
-#  Incremental Backup Pool = PuppetLabsPool-Inc
-#  Messages = Standard
-#  Where = /tmp/bacula-restores
-#  JobDefs = "PuppetLabsOps"
-#}
+Job {
+  Name = "<%= hostname %>"
+  Type = Backup
+  Client = <%= fqdn %>-fd
+  FileSet = "PuppetLabsOps"
+  Storage = File
+  Pool = Default
+  Full Backup Pool = PuppetLabsPool-Full
+  Incremental Backup Pool = PuppetLabsPool-Inc
+  Messages = Standard
+  Where = /tmp/bacula-restores
+  JobDefs = "PuppetLabsOps"
+}
 

@@ -37,8 +37,15 @@ class puppetlabs::baal {
     reporturl  => "http://dashboard.puppetlabs.com/reports";
   }
 
-  #include puppet::server
-  include puppet::dashboard
+  class { "puppet::dashboard":
+    db_user => "dashboard",
+    db_pw   => "Og7iSwrA2sjx",
+    site    => "dashboard.puppetlabs.com";
+  }
+
+  # commented in favor of above paramaterized classes
+  #zleslie: include puppet::server
+  #zleslie: include puppet::dashboard
 
   # Package management
   class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }

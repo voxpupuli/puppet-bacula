@@ -6,22 +6,22 @@
 #
 
 Director {
-  Name = <%= bacula_director %>-dir
+  Name     = <%= bacula_director %>-dir
   Password = "<%= bacula_password %>"
 }
 
 Director {
-  Name = <%= bacula_director %>-mon
+  Name     = <%= bacula_director %>-mon
   Password = "<%= bacula_password %>"
-  Monitor = yes
+  Monitor  = yes
 }
 
 FileDaemon {
-  Name = <%= hostname  %>-fd
-  FDAddress = <%= ipaddress %>
-  FDport = 9102
-  WorkingDirectory = /var/lib/bacula
-  Pid Directory = /var/run
+  Name                    = <%= hostname %>-fd
+  FDAddress               = <%= ipaddress %>
+  FDport                  = <%= port %>
+  WorkingDirectory        = /var/lib/bacula
+  Pid Directory           = /var/run
   Maximum Concurrent Jobs = 20
 }
 

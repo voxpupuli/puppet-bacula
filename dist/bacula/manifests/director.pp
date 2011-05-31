@@ -15,7 +15,9 @@
 #
 # Sample Usage:
 #
-class bacula::director {
+class bacula::director (
+    $port = 9101
+  ) {
   require mysql::server
   require bacula
 
@@ -24,20 +26,34 @@ class bacula::director {
   }
 
   service { $bacula::params::bacula_director_services:
-    ensure => running,
-    enable => true,
+    ensure     => running,
+    enable     => true,
     hasrestart => true,
-    require => Package[$bacula::params::bacula_director_packages],
+    require    => Package[$bacula::params::bacula_director_packages],
   }
 
-  file { 
-    "/bacula": ensure => directory;
-    "/etc/bacula/bacula-dir.conf": owner => root, group => bacula, mode => 640,
-      content => template("bacula/bacula-dir.conf.erb");
+  file { "/bacula": ensure  => directory; }
+
+  concat::fragment {
+    "bacula-director-header":
+      order   => '00',
+      target  => '/etc/bacula/bacula-dir.conf',
+      content => template("bacula/bacula-dir-header.erb")
   }
 
+  Concat::Fragment <<| target == '/etc/bacula/bacula-dir.conf' |>>
+
+  concat {
+    '/etc/bacula/bacula-dir.conf':
+      owner => root,
+      group => bacula,
+      mode  => 640,
+  }
+
+  # backup the bacula database
   bacula::mysql { 'bacula': }
 
+  # export firewall rules for client realization
   @@firewall {
     '0170-INPUT allow tcp 9102':
       proto  => 'tcp',

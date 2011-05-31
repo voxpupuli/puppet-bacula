@@ -1,0 +1,25 @@
+Client {
+  Name           = <%= fqdn %>-fd
+  Address        = <%= fqdn %>
+  FDPort         = <%= port %>
+  Catalog        = MyCatalog
+  Password       = "<%= bacula_password %>"
+  File Retention = <%= file_retention %>
+  Job Retention  = <%= job_retention %>
+  AutoPrune      = <%= autoprune %>
+}
+
+Job {
+  Name = "<%= hostname %>"
+  Type = Backup
+  Client = <%= fqdn %>-fd
+  FileSet = "PuppetLabsOps"
+  Storage = File
+  Pool = Default
+  Full Backup Pool = PuppetLabsPool-Full
+  Incremental Backup Pool = PuppetLabsPool-Inc
+  Messages = Standard
+  Where = /tmp/bacula-restores
+  JobDefs = "PuppetLabsOps"
+}
+

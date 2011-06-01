@@ -13,7 +13,7 @@
 class bacula::params {
   
   case $operatingsystem {
-     "ubuntu": {
+     "ubuntu","debian": {
         $bacula_director_packages = [ "bacula-director-common", "bacula-director-mysql", "bacula-sd-mysql", "bacula-console" ]
         $bacula_director_services = [ "bacula-dir", "bacula-sd" ]
         $bacula_client_packages = "bacula-client"

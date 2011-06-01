@@ -32,7 +32,8 @@ define apache::vhost(
     $servername    = '',
     $serveraliases = '',
     $auth          = false,
-    $redirect_ssl  = false
+    $redirect_ssl  = false,
+    $options       = "Indexes FollowSymLinks MultiViews"
   ) {
 
   include apache

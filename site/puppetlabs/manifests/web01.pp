@@ -16,7 +16,7 @@ class puppetlabs::web01 {
   apache::vhost {'web01.puppetlabs.com':
     port    => 80,
     docroot => '/var/www',
-    optiosn => "None";
+    options => "None";
   }
 
   wordpress::instance {

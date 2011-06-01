@@ -9,6 +9,8 @@
 # - The $template option specifies whether to use the default template or override
 # - The $priority of the site
 # - The $serveraliases of the site
+# - The $options for the given vhost
+# - The $vhost_name for name based virtualhosting, defaulting to *
 #
 # Actions:
 # - Install Apache Virtual Hosts
@@ -33,7 +35,8 @@ define apache::vhost(
     $serveraliases = '',
     $auth          = false,
     $redirect_ssl  = false,
-    $options       = "Indexes FollowSymLinks MultiViews"
+    $options       = "Indexes FollowSymLinks MultiViews",
+    $vhost_name    = '*'
   ) {
 
   include apache

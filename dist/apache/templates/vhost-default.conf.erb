@@ -3,8 +3,8 @@
 # Managed by Puppet
 # ************************************
 
-NameVirtualHost *:<%= port %>
-<VirtualHost *:<%= port %>>
+NameVirtualHost <%= vhost_name %>:<%= port %>
+<VirtualHost <%= vhost_name %>:<%= port %>>
   ServerName <%= srvname %>
 <% if serveraliases.is_a? Array -%>
 <% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>

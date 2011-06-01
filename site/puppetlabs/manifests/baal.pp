@@ -12,6 +12,7 @@
 #
 class puppetlabs::baal {
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
+  include mysql::server
 
   # Base
   include puppetlabs_ssl

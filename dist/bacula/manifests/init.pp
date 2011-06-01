@@ -44,16 +44,16 @@ class bacula (
   file { '/etc/bacula/bacula-fd.conf':
     require => Package[$bacula::params::bacula_client_packages],
     content => template('bacula/bacula-fd.conf.erb'),
-    notify => Service[$bacula::params::bacula_client_services],
+    notify  => Service[$bacula::params::bacula_client_services],
   }
 
   file { '/var/lib/bacula':
-    ensure => directory,
+    ensure  => directory,
     require => Package[$bacula::params::bacula_client_packages],
   }
 
   file { '/var/lib/bacula/mysql':
-    ensure => directory,
+    ensure  => directory,
     require => Package[$bacula::params::bacula_client_packages],
   }
 

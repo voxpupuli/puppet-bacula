@@ -104,10 +104,10 @@ class puppetlabs::baal {
   Account::User <| tag == 'git' |>
 
   apache::vhost { 'baal.puppetlabs.com': # vhost supporting plapt repo
+    options  => "None",
     priority => '08',
-    port => '80',
-    docroot => '/var/www',
-    template => 'puppetlabs/baal.conf.erb'
+    port     => '80',
+    docroot  => '/var/www',
   }
 
   file {

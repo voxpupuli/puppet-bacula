@@ -161,11 +161,12 @@ class nagios (
     notify => Service[$nagios::params::nagios_service],
   }
 
-  file { "/usr/lib/nagios/plugins/check_bacula.pl":
-    source => "puppet:///modules/nagios/check_bacula.pl",
-    mode => 0755,
-    ensure => present,
-  }
+# moved to bacula::director Tue May 31 2011 05:45:03
+#zleslie:  file { "/usr/lib/nagios/plugins/check_bacula.pl":
+#zleslie:    source => "puppet:///modules/nagios/check_bacula.pl",
+#zleslie:    mode => 0755,
+#zleslie:    ensure => present,
+#zleslie:  }
 
   @firewall { 
     '0120-INPUT ACCEPT 5666':

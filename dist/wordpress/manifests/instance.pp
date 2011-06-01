@@ -31,7 +31,7 @@ define wordpress::instance(
 #  File[$vhost_dir] -> Exec["wp_install_$vhost_dir"] -> File["$vhost_dir/wp-config.php"]
 #  Exec["wp_unzip"] -> Exec["wp_install_$vhost_dir"]
 #
-#  file { $vhost_dir: ensure => directory; }
+  file { $vhost_dir: ensure => directory; }
 #
 #  exec {
 #    "wp_install_$vhost_dir":

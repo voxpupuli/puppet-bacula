@@ -13,7 +13,10 @@ class puppetlabs::chuku {
   # Bacula
   $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = 'MQI/vywQq5pSlAYaEUJKrmt24Wu8FOIPfT7tFoaOc5X6'
-  include bacula
+  class { "bacula":
+    director => $bacula_director,
+    password => $bacula_password,
+  }
 
   # Mysql
   $mysql_root_pw = 'f85jsh2c9s3'

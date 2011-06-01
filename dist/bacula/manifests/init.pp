@@ -12,10 +12,20 @@
 #
 # Sample Usage:
 #
-class bacula {
+class bacula (
+    $port           = '9102',
+    $file_retention = "60 days",
+    $job_retention  = "6 months",
+    $autoprune      = "yes",
+    $director,
+    $password
+  ){
 
   include bacula::params
   include bacula::nagios
+
+  $bacula_director = $director
+  $bacula_password = $password
 
   package { 'bacula-common':
     ensure => present,
@@ -34,19 +44,26 @@ class bacula {
   file { '/etc/bacula/bacula-fd.conf':
     require => Package[$bacula::params::bacula_client_packages],
     content => template('bacula/bacula-fd.conf.erb'),
-    notify => Service[$bacula::params::bacula_client_services],
+    notify  => Service[$bacula::params::bacula_client_services],
   }
 
   file { '/var/lib/bacula':
-    ensure => directory,
+    ensure  => directory,
     require => Package[$bacula::params::bacula_client_packages],
   }
 
   file { '/var/lib/bacula/mysql':
-    ensure => directory,
+    ensure  => directory,
     require => Package[$bacula::params::bacula_client_packages],
   }
 
+  @@concat::fragment {
+    "bacula-client-$hostname":
+      target  => '/etc/bacula/bacula-dir.conf',
+      content => template("bacula/bacula-dir-client.erb")
+  }
+
+  # realize the firewall rules exported from the director
   if defined (Class["firewall"]) { Firewall <<| dport == "9102" |>> }
 
 }

@@ -15,29 +15,47 @@
 #
 # Sample Usage:
 #
-class bacula::director {
-  require mysql::server
-  require bacula
+class bacula::director (
+    $db_user = 'bacula',
+    $db_pw   = 'ch@ng3me',
+    $port    = 9101
+  ) {
+#  require mysql::server
+#  require bacula
 
   package { $bacula::params::bacula_director_packages:
     ensure => present,
   }
 
   service { $bacula::params::bacula_director_services:
-    ensure => running,
-    enable => true,
+    ensure     => running,
+    enable     => true,
     hasrestart => true,
-    require => Package[$bacula::params::bacula_director_packages],
+    require    => Package[$bacula::params::bacula_director_packages],
   }
 
-  file { 
-    "/bacula": ensure => directory;
-    "/etc/bacula/bacula-dir.conf": owner => root, group => bacula, mode => 640,
-      content => template("bacula/bacula-dir.conf.erb");
+  file { "/bacula": ensure  => directory; }
+
+  concat::fragment {
+    "bacula-director-header":
+      order   => '00',
+      target  => '/etc/bacula/bacula-dir.conf',
+      content => template("bacula/bacula-dir-header.erb")
   }
 
+  Concat::Fragment <<| target == '/etc/bacula/bacula-dir.conf' |>>
+
+  concat {
+    '/etc/bacula/bacula-dir.conf':
+      owner => root,
+      group => bacula,
+      mode  => 640,
+  }
+
+  # backup the bacula database
   bacula::mysql { 'bacula': }
 
+  # export firewall rules for client realization
   @@firewall {
     '0170-INPUT allow tcp 9102':
       proto  => 'tcp',
@@ -45,5 +63,20 @@ class bacula::director {
       source => "$ipaddress",
       jump   => 'ACCEPT',
   }
+
+  mysql::db { "bacula":
+    db_user => $db_user,
+    db_pw   => $db_pw,
+  }
+
+  # put here because it needs the database password from the 
+  file { "/usr/lib/nagios/plugins/check_bacula.pl":
+    #source  => "puppet:///modules/nagios/check_bacula.pl",
+    content => template("nagios/check_bacula.pl.erb"),
+    mode    => 0755,
+    ensure  => present,
+  }
+
+
 
 }

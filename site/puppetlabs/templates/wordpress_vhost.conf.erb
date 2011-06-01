@@ -1,8 +1,3 @@
-# ************************************
-# Default template in module puppetlabs-apache
-# Managed by Puppet
-# ************************************
-
 NameVirtualHost <%= ipaddress %>:<%= port %>
 <VirtualHost <%= ipaddress %>:<%= port %>>
   ServerName <%= srvname %>
@@ -11,16 +6,21 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
 <% elsif serveraliases != '' -%>
 <%= "  ServerAlias #{serveraliases}" -%>
 <% end -%>
+
+  ServerAdmin webmaster@puppetlabs.com
   DocumentRoot <%= docroot %>
+  UseCanonicalName On
+
   <Directory <%= docroot %>>
-    Options <%= options %>
-    AllowOverride None
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
     Order allow,deny
-    allow from all
+    Allow from all
   </Directory>
-  ErrorLog /var/log/apache2/<%= name %>_error.log
-  LogLevel warn
-  CustomLog /var/log/apache2/<%= name %>_access.log combined
-  ServerSignature Off
+
+  LogLevel info
+  ErrorLog /var/log/apache2/<%= srvname %>_error.log
+  CustomLog /var/log/apache2/<%= srvname %>_access.log combined
+
 </VirtualHost>
 

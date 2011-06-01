@@ -14,9 +14,10 @@ class puppetlabs::web01 {
 
   # site for server itself
   apache::vhost {'web01.puppetlabs.com':
-    port    => 80,
-    docroot => '/var/www',
-    options => "None";
+    port     => 80,
+    docroot  => '/var/www',
+    options  => "None",
+    priority => '00';
   }
 
   wordpress::instance {
@@ -28,6 +29,7 @@ class puppetlabs::web01 {
       nonce_key       => 'P,>pH-J+OTw#z2qn`M[lt||`[Nf|w#I:J %z>-MRY@Yt_Egyj84znb2H*s;0J||3',
       db_pw           => 'illYZbw108Ckle8Q',
       template        => 'puppetlabs/madstop_vhost.conf.erb',
+      priority        => '05',
   }
 
   wordpress::instance {
@@ -40,6 +42,7 @@ class puppetlabs::web01 {
       db_pw           => '5NuTnEFV9Hvp',
       db_user         => 'plabs',
       template        => 'puppetlabs/puppetlabs_vhost.conf.erb',
+      priority        => '05',
   }
 
   wordpress::instance {
@@ -48,6 +51,7 @@ class puppetlabs::web01 {
       db_pw      => 'az62VHwUbtCi',
       db_user    => 'pdchallange',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
+      priority   => '05',
   }
 
   wordpress::instance {
@@ -56,6 +60,7 @@ class puppetlabs::web01 {
       db_pw      => 'TiR6znV9EmGj',
       db_user    => 'pcon',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
+      priority   => '05',
   }
 
 }

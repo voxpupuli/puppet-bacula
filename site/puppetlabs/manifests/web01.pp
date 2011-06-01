@@ -11,6 +11,14 @@ class puppetlabs::web01 {
     password => $bacula_password,
   }
 
+
+  # site for server itself
+  apache::vhost {'web01.puppetlabs.com':
+    port    => 80,
+    docroot => '/var/www',
+    optiosn => "None";
+  }
+
   wordpress::instance {
     'madstop.com':
       site_alias      => "www.madstop.com",

@@ -66,7 +66,7 @@ class mysql::server {
     notify    => Service['mysqld-restart'],
   }
 
-  file{['/root/.my.cnf', '/etc/mycnf']:
+  file{['/root/.my.cnf', '/etc/my.cnf']:
     owner   => 'root',
     group   => 'root',
     mode    => '0400',

@@ -1,4 +1,4 @@
-# Define: nginx::server::cache-vhost
+# Parameterised Class: nginx::server::cache-vhost
 #
 #   Ngninx standard cache for offloading connections. Saves the
 #   backend app server having to do it.
@@ -21,7 +21,9 @@
 #
 # Sample Usage:
 #
-define nginx::cache (
+#  class { 'nginx::cache': port => 80 , upstream_port 8080 }
+#
+class nginx::cache (
   $port            = '82',
   $priority        = '10',
   $template        = 'nginx/vhost-caching.conf.erb',

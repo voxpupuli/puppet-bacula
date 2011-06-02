@@ -16,7 +16,7 @@ class puppetlabs::web01 {
 
   # Add an nginx bouncer to speed up the apache sites on here.
   include nginx::server
-  nginx::cache{ 'cache_local':
+  class { 'nginx::cache':
     port            => 85,
     upstream_server => '96.126.112.51',
     upstream_port   => 80,

@@ -2,7 +2,7 @@
 # will happen.
 #
 
-upstream appservers {
+upstream appservers_<%= name %> {
   server <%=upstream_server%>:<%=upstream_port%> max_fails=2 fail_timeout=10;
 }
 
@@ -27,7 +27,7 @@ server {
     access_log  /var/log/nginx/cache.log cache;
 
     location / {
-        proxy_pass                  http://appservers;
+        proxy_pass                  http://appservers_<%= name %>;
         proxy_redirect              off;
         proxy_set_header            X-Real-IP   $remote_addr;
         proxy_set_header            X-Forwarded-For  $proxy_add_x_forwarded_for;

@@ -9,8 +9,8 @@ upstream appservers {
 server {
     listen  <%= port %>  default;
 
-    index                   index.html;
-    try_files               $uri $uri/ /index.html;
+    # index                   index.html;
+    # try_files               $uri $uri/ /index.html;
 
     # keep error pages local?
     # error_page              500 502 503 504 /50x.html;

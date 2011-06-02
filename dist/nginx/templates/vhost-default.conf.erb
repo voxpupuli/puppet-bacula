@@ -1,0 +1,21 @@
+# This vhost is managed by puppet, do not mess with it, terrible terrible things
+# will happen.
+#
+
+server {
+
+  listen   <%= port %>; ## listen for ipv4, sorry no IPv6 for now.
+
+  server_name <%= srvname %> ;
+
+  access_log  /var/log/nginx/<%= srvname %>.access.log;
+
+	location / {
+    root   /var/www/<%= srvname %>;
+		index  index.html index.htm;
+	}
+
+  # Anything here is added by use of "magic" so is pretty jazzy.
+  <%= magic %>
+}
+

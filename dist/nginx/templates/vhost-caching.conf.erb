@@ -1,0 +1,37 @@
+# This vhost is managed by puppet, do not mess with it, terrible terrible things
+# will happen.
+#
+
+upstream appservers {
+  server <%=upstream_server%>:<%=upstream_port%> max_fails=2 fail_timeout=10;
+}
+
+server {
+    listen  <%= port %>  default;
+
+    index                   index.html;
+    try_files               $uri $uri/ /index.html;
+
+    # keep error pages local?
+    # error_page              500 502 503 504 /50x.html;
+
+    access_log              /var/log/nginx/cache_access.log;
+    error_log               /var/log/nginx/cache_error.log;
+    open_log_file_cache     max=1000 inactive=20s min_uses=2 valid=1m;
+    log_format cache '***$time_local '
+                     '$upstream_cache_status '
+                     'Cache-Control: $upstream_http_cache_control '
+                     'Expires: $upstream_http_expires '
+                     '"$request" ($status) '
+                     '"$http_user_agent" ';
+    access_log  /var/log/nginx/cache.log cache;
+
+    location / {
+        proxy_pass                  http://appservers;
+        proxy_set_header            X-Real-IP   $remote_addr;
+        proxy_set_header            Host $host;
+    }
+
+    # Any other spurious options can go here via the medium of magic
+    <%= magic %>
+}

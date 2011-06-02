@@ -17,7 +17,7 @@ class apt::server::repo (
 
   package { 'reprepro': ensure => present; }
 
-  File { owner => 'root', group => 'release', mode => 664; }
+  File { owner => 'root', group => 'release', mode => 664 }
 
   file { $base_location: ensure => directory; }
 

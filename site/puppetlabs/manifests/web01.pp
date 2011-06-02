@@ -19,7 +19,7 @@ class puppetlabs::web01 {
   nginx::cache{ 'cache_local':
     port            => 85,
     upstream_server => localhost,
-    upsteam_port    => 80,
+    upstream_port   => 80,
     priority        => 1,
   }
 

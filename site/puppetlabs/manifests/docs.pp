@@ -6,14 +6,12 @@ class puppetlabs::docs {
 
   apache::vhost::redirect {
     'docs.reductivelabs.com':
-      vhost_name => $ipaddress,
       port       => '80',
       dest       => 'http://docs.puppetlabs.com'
   }
 
   apache::vhost {
     'docs.puppetlabs.com':
-      vhost_name    => $ipaddress,
       port          => 80,
       docroot       => $docroot,
       ssl           => false,

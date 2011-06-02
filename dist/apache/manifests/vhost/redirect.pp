@@ -7,6 +7,7 @@
 #       Which port to list on
 #   $dest:
 #       Where to redirect to
+# - $vhost_name
 #
 # Actions:
 #   Installs apache and creates a vhost
@@ -18,10 +19,11 @@
 define apache::vhost::redirect (
     $port,
     $dest,
-    $priority = '10',
-    $serveraliases='',
-    $template = "apache/vhost-redirect.conf.erb"
-    ) {
+    $priority      = '10',
+    $serveraliases = '',
+    $template      = "apache/vhost-redirect.conf.erb",
+    $vhost_name    = '*'
+  ) {
 
   include apache
 

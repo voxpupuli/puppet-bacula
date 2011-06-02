@@ -7,6 +7,9 @@
 #     The port on which the vhost will respond
 # * $dest: 
 #     URI that the requests will be proxied for
+# - $priority
+# - $template -- the template to use for the vhost
+# - $vhost_name - the name to use for the vhost, defaults to '*'
 #
 # Actions:
 # * Install Apache Virtual Host
@@ -18,12 +21,13 @@
 define apache::vhost::proxy (
     $port,
     $dest,
-    $priority = '10',
-    $template = "apache/vhost-proxy.conf.erb",
+    $priority      = '10',
+    $template      = "apache/vhost-proxy.conf.erb",
     $servername    = '',
     $serveraliases = '',
-    $ssl = false
-    ) {
+    $ssl           = false,
+    $vhost_name    = '*'
+  ) {
 
   include apache
 

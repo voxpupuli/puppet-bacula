@@ -41,13 +41,16 @@ class puppetlabs::www {
 
   apache::vhost::redirect {
     'blog.puppetlabs.com':
-      port => '80',
-      dest => 'http://www.puppetlabs.com/blog';
+      vhost_name => $ipaddress,
+      port       => '80',
+      dest       => 'http://www.puppetlabs.com/blog';
     'puppetcamp.org':
+      vhost_name    => $ipaddress,
       serveraliases => "www.puppetcamp.org",
       port          => '80',
       dest          => 'http://www.puppetlabs.com/community/puppet-camp';
     'reductivelabs.com':
+      vhost_name    => $ipaddress,
       serveraliases => "www.reductivelabs.com",
       port          => '80',
       dest          => 'http://www.puppetlabs.com';

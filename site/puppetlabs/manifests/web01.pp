@@ -1,9 +1,12 @@
 class puppetlabs::web01 {
 
+  include postfix
+
+# MySQL
   $mysql_root_pw = 'K7DkG9TVfGke'
   include mysql::server
 
-
+# Bacula
   $bacula_director = 'baal.puppetlabs.com'
   $bacula_password = '4tc39KValGRv4xqhXhn5X4MsrHB5pQZbMfnzDt'
   class { "bacula":
@@ -12,6 +15,7 @@ class puppetlabs::web01 {
   }
 
 
+# WWW stuff
   # site for server itself
   apache::vhost {'web01.puppetlabs.com':
     port     => 80,

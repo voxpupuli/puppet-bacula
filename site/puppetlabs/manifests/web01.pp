@@ -14,8 +14,16 @@ class puppetlabs::web01 {
     password => $bacula_password,
   }
 
+  # Add an nginx bouncer to speed up the apache sites on here.
+  include nginx::server
+  nginx::cache{ 'cache_local':
+    port            => 85,
+    upstream_server => localhost,
+    upsteam_port    => 80,
+    priority        => 1,
+  }
 
-# WWW stuff
+  # WWW stuff
   # site for server itself
   apache::vhost {'web01.puppetlabs.com':
     port     => 80,

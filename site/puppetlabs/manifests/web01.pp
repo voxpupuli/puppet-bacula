@@ -22,12 +22,6 @@ class puppetlabs::web01 {
     upstream_port   => 80,
     priority        => 1,
   }
-  nginx::cache{ 'cache_local_test':
-    port            => 86,
-    upstream_server => '127.0.0.1',
-    upstream_port   => 80,
-    priority        => 2,
-  }
 
   # WWW stuff
   # site for server itself

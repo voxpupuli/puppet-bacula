@@ -1,5 +1,5 @@
-NameVirtualHost <%= ipaddress %>:<%= port %>
-<VirtualHost <%= ipaddress %>:<%= port %>>
+NameVirtualHost <%= vhost_name %>:<%= port %>
+<VirtualHost <%= vhost_name %>:<%= port %>>
   ServerName <%= srvname %>
 <% if serveraliases.is_a? Array -%>
 <% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>

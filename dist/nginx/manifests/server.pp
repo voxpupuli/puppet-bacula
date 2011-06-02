@@ -31,6 +31,7 @@ class nginx::server {
     recurse => true,
     purge   => true,
     notify  => Service['nginx'],
+    require => Package['nginx'],
   }
 
 }

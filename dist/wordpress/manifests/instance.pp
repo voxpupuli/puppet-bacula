@@ -11,7 +11,7 @@ define wordpress::instance(
     $db_user = '',
     $db_pw,
     $template,
-    $priority = '00',
+    $priority = '10',
     $backup = true,
     $development = false,
     $site_alias = ''

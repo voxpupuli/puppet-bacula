@@ -6,18 +6,18 @@ class puppetlabs::docs {
 
   apache::vhost::redirect {
     'docs.reductivelabs.com':
-      port => '80',
-      dest => 'http://docs.puppetlabs.com'
+      vhost_name => $ipaddress,
+      port       => '80',
+      dest       => 'http://docs.puppetlabs.com'
   }
 
   apache::vhost {
     'docs.puppetlabs.com':
+      vhost_name    => $ipaddress,
       port          => 80,
       docroot       => $docroot,
       ssl           => false,
       priority      => 20,
-      template      => 'puppetlabs/docs_vhost.erb',
-      serveraliases => 'docs.reductivelabs.com', 
   }
   #
   # Since this sourced from git we should probably use VCS repo and a variable for the tag to make up date these files.

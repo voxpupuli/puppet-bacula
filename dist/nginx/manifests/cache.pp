@@ -36,7 +36,7 @@ class nginx::cache (
   include nginx
 
   file {
-    "${nginx::params::vdir}/${priority}-${name}":
+    "${nginx::params::vdir}/${priority}-${upstream_server}_caching":
       content => template($template),
       owner   => 'root',
       group   => 'root',

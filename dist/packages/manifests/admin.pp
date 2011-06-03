@@ -10,12 +10,20 @@ class packages::admin {
   package { $admin_packages: ensure => installed; }
 
 
-  # debian/ubuntu named specific packages.
+  # OS specific/named specific packages.
   case $operatingsystem {
-    'ubuntu', 'debian': {
+    'ubuntu': {
+      package { [ 'ack-grep' ]:
+        ensure => installed
+      }
+    }
+    'debian': {
       package { [ 'locales-all' , 'ack-grep' ]:
         ensure => installed
       }
+    }
+    'centos': {
+      # package{ debian : ensure => reboot_and_install }
     }
   }
 

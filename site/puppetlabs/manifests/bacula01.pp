@@ -1,0 +1,4 @@
+class puppetlabs::bacula01 {
+
+
+}

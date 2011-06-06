@@ -1,4 +1,5 @@
 class bacula::nagios {
+  include bacula::params
 
   @@nagios_service { "check_bacula_${hostname}":
     use                 => 'generic-service',

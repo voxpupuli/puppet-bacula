@@ -39,7 +39,6 @@ class puppetlabs::base {
       case $operatingsystem {
         debian: {
           class { "apt::settings": proxy => "$lan_apt_proxy" }
-          include firewall
         }
         ubuntu: {
           class { "apt::settings": proxy => "$lan_apt_proxy" }

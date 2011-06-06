@@ -1,8 +1,8 @@
 define bacula::director::pool (
-    $type        = "Backup',
-    $recycle     = "Yes",
-    $autoprune   = "Yes",
-    $volret      = "4 months", # Volume Retention
+    $type        = 'Backup',
+    $recycle     = 'Yes',
+    $autoprune   = 'Yes',
+    $volret      = '4 months', # Volume Retention
     $maxvoljobs  = '1',
     $maxvolbytes = '1000000000',
     $maxvols     = '30',

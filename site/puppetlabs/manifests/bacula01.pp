@@ -8,5 +8,14 @@ class puppetlabs::bacula01 {
     db_pw   => 'ijdhx8jsd2KJshd',
   }
 
+  # Backup
+  $bacula_password = 'YgBDlDIYfOAYC6UYRX28QD3Q7S3UYLBuGUBW9'
+  $bacula_director = 'bacula01.puppetlabs.lan'
+  class { "bacula":
+    director => $bacula_director,
+    password => $bacula_password,
+  }
+
+
 }
 

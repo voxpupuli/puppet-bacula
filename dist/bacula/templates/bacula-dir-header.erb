@@ -12,14 +12,14 @@ Director {                # define myself
 
 # Only one restore job?
 Job {
-  Name = "RestoreFiles"
-  Type = Restore
-  Client = baal.puppetlabs.com-fd
-  FileSet = "PuppetLabsOps"
-  Storage = File
-  Where = /tmp/bacula-restores
+  Name     = "RestoreFiles"
+  Type     = Restore
+  Client   = baal.puppetlabs.com-fd
+  FileSet  = "PuppetLabsOps"
+  Storage  = File
+  Where    = /tmp/bacula-restores
   Messages = Standard
-  Pool = Default
+  Pool     = Default
 }
 
 JobDefs {
@@ -49,8 +49,8 @@ FileSet {
 
 Schedule {
   Name = "WeeklyCycle"
-  Run = Level=Full sun at 2:05
-  Run = Level=Incremental mon-sat at 2:05
+  Run  = Level=Full sun at 2:05
+  Run  = Level=Incremental mon-sat at 2:05
 }
 
 Pool {
@@ -59,29 +59,30 @@ Pool {
   Action On Purge = Truncate
 }
 
-Pool {
-  Name                 = PuppetLabsPool-Full
-  Pool Type            = Backup
-  Recycle              = Yes
-  AutoPrune            = Yes
-  Volume Retention     = 4 months
-  Maximum Volume Jobs  = 1
-  Maximum Volume Bytes = 1000000000
-  Label Format         = Full-
-  #Maximum Volumes     = 30
-}
-
-Pool {
-  Name                 = PuppetLabsPool-Inc
-  Pool Type            = Backup
-  Recycle              = yes           # automatically recycle Volumes
-  AutoPrune            = yes         # Prune expired volumes
-  Volume Retention     = 21 days
-  #Maximum Volume Jobs = 60
-  Maximum Volume Bytes = 4000000000
-  Label Format         = Inc-
-  #Maximum Volumes     = 7
-}
+# moved to bacula::director::pool
+# zleslie: Pool {
+# zleslie:   Name                 = PuppetLabsPool-Full
+# zleslie:   Pool Type            = Backup
+# zleslie:   Recycle              = Yes
+# zleslie:   AutoPrune            = Yes
+# zleslie:   Volume Retention     = 4 months
+# zleslie:   Maximum Volume Jobs  = 1
+# zleslie:   Maximum Volume Bytes = 1000000000
+# zleslie:   Label Format         = Full-
+# zleslie:   #Maximum Volumes     = 30
+# zleslie: }
+# zleslie: 
+# zleslie: Pool {
+# zleslie:   Name                 = PuppetLabsPool-Inc
+# zleslie:   Pool Type            = Backup
+# zleslie:   Recycle              = yes           # automatically recycle Volumes
+# zleslie:   AutoPrune            = yes         # Prune expired volumes
+# zleslie:   Volume Retention     = 21 days
+# zleslie:   #Maximum Volume Jobs = 60
+# zleslie:   Maximum Volume Bytes = 4000000000
+# zleslie:   Label Format         = Inc-
+# zleslie:   #Maximum Volumes     = 7
+# zleslie: }
 
 # Definition of file storage device
 Storage {
@@ -124,8 +125,11 @@ Messages {
 # Restricted console used by tray-monitor to get the status of the director
 #
 Console {
-  Name = baal.puppetlabs.com-mon
-  Password = "EWDjRkucylqjSjwtX_y2UKlS-Ihr4E01V"
+  Name       = baal.puppetlabs.com-mon
+  Password   = "EWDjRkucylqjSjwtX_y2UKlS-Ihr4E01V"
   CommandACL = status, .status
 }
+
+@/etc/bacula/conf.d/pools.conf
+
 

@@ -14,11 +14,15 @@
 # bacula::mysql { database_name: }
 #
 define bacula::mysql {
-    cron { "bacula_mysql_$name":
+
+  include bacula::mysql::resources
+
+  cron { 
+    "bacula_mysql_$name":
       command => "/usr/bin/mysqldump -p$mysql_root_pw $name > /var/lib/bacula/mysql/$name.sql",
       user    => root,
       hour    => 0,
       minute  => 15,
       require => File['/var/lib/bacula/mysql'],
-    }
+  }
 }

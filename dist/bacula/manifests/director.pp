@@ -78,5 +78,5 @@ class bacula::director (
   }
 
 
-
 }
+

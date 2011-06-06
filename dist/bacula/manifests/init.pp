@@ -14,7 +14,7 @@
 #
 class bacula (
     $port           = '9102',
-    $file_retention = "60 days",
+    $file_retention = "45 days",
     $job_retention  = "6 months",
     $autoprune      = "yes",
     $director,
@@ -36,8 +36,8 @@ class bacula (
   }
 
   service { $bacula::params::bacula_client_services:
-    ensure => running,
-    enable => true,
+    ensure  => running,
+    enable  => true,
     require => Package[$bacula::params::bacula_client_packages],
   }
 
@@ -67,3 +67,4 @@ class bacula (
   if defined (Class["firewall"]) { Firewall <<| dport == "9102" |>> }
 
 }
+

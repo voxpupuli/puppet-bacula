@@ -20,6 +20,8 @@ class bacula::director (
     $db_pw   = 'ch@ng3me',
     $port    = 9101
   ) {
+
+  include bacula::params
 #  require mysql::server
 #  require bacula
 

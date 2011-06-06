@@ -4,3 +4,4 @@ class bacula::mysql::resources {
     require => Package[$bacula::params::bacula_client_packages],
   }
 }
+

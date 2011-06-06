@@ -10,12 +10,12 @@ Client {
 }
 
 Job {
-  Name = "<%= hostname %>"
-  Type = Backup
-  Client = <%= fqdn %>-fd
-  FileSet = "PuppetLabsOps"
-  Storage = File
-  Pool = Default
+  Name             = "<%= hostname %>"
+  Type             = Backup
+  Client           = <%= fqdn %>-fd
+  FileSet          = "PuppetLabsOps"
+  Storage          = File
+  Pool             = Default
   Full Backup Pool = PuppetLabsPool-Full
   Incremental Backup Pool = PuppetLabsPool-Inc
   Messages = Standard

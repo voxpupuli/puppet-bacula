@@ -18,26 +18,26 @@
 # - installs our config files
 # - makes sure the service is running and will start upon boot
 class nrpe {
-    case $operatingsystem {
-		centos, redhat: { include nrpe::redhat }
-		debian, ubuntu: { include nrpe::debian }
-        default: { fail("nrpe is not defined for this operating system.") }
-	}
-	# track nrpe.local.cfg changes 
-	# for command for that specific machine (not required)
-	file { "nrpe.local.cfg":
-		name       => "/etc/nagios/nrpe.local.cfg",
-		checksum   => md5,
-		ensure     => present,
-		replace    => true,
-		owner      => 'nagios',
-		group      => 'nagios',
-		mode       => '0400',
-		source     => [
-			"puppet:///nrpe/hosts/nrpe.local.${fqdn}.cfg",
-			"puppet:///nrpe/hosts/nrpe.local.${hostname}.cfg",
-			"puppet:///nrpe/nrpe.local.cfg"
-		],
-		notify     => Service["nrpe"],
-	}
+  case $operatingsystem {
+    centos, redhat: { include nrpe::redhat }
+    debian, ubuntu: { include nrpe::debian }
+    default:        { fail("nrpe is not defined for this operating system.") }
+  }
+  # track nrpe.local.cfg changes 
+  # for command for that specific machine (not required)
+  file { "nrpe.local.cfg":
+    name       => "/etc/nagios/nrpe.local.cfg",
+    checksum   => md5,
+    ensure     => present,
+    replace    => true,
+    owner      => 'nagios',
+    group      => 'nagios',
+    mode       => '0400',
+    source     => [
+      "puppet:///nrpe/hosts/nrpe.local.${fqdn}.cfg",
+      "puppet:///nrpe/hosts/nrpe.local.${hostname}.cfg",
+      "puppet:///nrpe/nrpe.local.cfg"
+    ],
+    notify     => Service["nrpe"],
+  }
 }

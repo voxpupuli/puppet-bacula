@@ -37,6 +37,7 @@ class bacula::director (
   }
 
   file { "/bacula": ensure  => directory; }
+  file { "/etc/bacula/conf.d": ensure  => directory; }
 
   concat::fragment {
     "bacula-director-header":
@@ -49,9 +50,18 @@ class bacula::director (
 
   concat {
     '/etc/bacula/bacula-dir.conf':
-      owner => root,
-      group => bacula,
-      mode  => 640,
+      owner  => root,
+      group  => bacula,
+      mode   => 640,
+      notify => Service[$bacula::params::bacula_director_services];
+  }
+
+  concat {
+    '/etc/bacula/conf.d/pools.conf':
+      owner  => root,
+      group  => bacula,
+      mode   => 640,
+      notify => Service[$bacula::params::bacula_director_services];
   }
 
   # backup the bacula database

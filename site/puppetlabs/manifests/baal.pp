@@ -91,8 +91,9 @@ class puppetlabs::baal {
   #zleslie: include bacula
   #zleslie: include bacula::director
 
-
+  ###
   # Monitoring
+  #
   class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }
   include nagios::webservices
   include nagios::dbservices

@@ -13,7 +13,7 @@ define bacula::director::pool (
   concat::fragment {
     "bacula-director-pool-$name":
       target => '/etc/bacula/conf.d/pools.conf',
-      concat => tempalte("bacula/pool.conf.erb");
+      concat => template("bacula/pool.conf.erb");
   }
 
 }

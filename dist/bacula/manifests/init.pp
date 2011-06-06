@@ -52,11 +52,6 @@ class bacula (
     require => Package[$bacula::params::bacula_client_packages],
   }
 
-  file { '/var/lib/bacula/mysql':
-    ensure  => directory,
-    require => Package[$bacula::params::bacula_client_packages],
-  }
-
   @@concat::fragment {
     "bacula-client-$hostname":
       target  => '/etc/bacula/bacula-dir.conf',

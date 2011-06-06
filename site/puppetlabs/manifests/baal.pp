@@ -11,10 +11,16 @@
 # Sample Usage:
 #
 class puppetlabs::baal {
+
+  ###
+  # Mysql
+  #
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
   include mysql::server
 
+  ###
   # Base
+  #
   include puppetlabs_ssl
   include account::master
   include vim
@@ -45,14 +51,17 @@ class puppetlabs::baal {
   }
 
   # commented in favor of above paramaterized classes
-  #zleslie: include puppet::server
-  #zleslie: include puppet::dashboard
+  # zleslie: include puppet::server
+  # zleslie: include puppet::dashboard
 
   # Package management
   class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
   include yumrepo
 
-  # Backup
+
+  ###
+  # Bacula
+  #
   $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'
   $bacula_director = 'baal.puppetlabs.com'
   class { "bacula":
@@ -63,6 +72,19 @@ class puppetlabs::baal {
   class { "bacula::director":
     db_user => 'bacula',
     db_pw   => 'qhF4M6TADEkl',
+  }
+
+  bacula::director::pool {
+    "PuppetLabsPool-Full":
+      volret      => "3 months",
+      maxvolbytes => '2000000000',
+      maxvoljobs  => '2',
+      label       => "Full-";
+    "PuppetLabsPool-Inc":
+      volret      => "21 days",
+      maxvolbytes => '4000000000',
+      maxvoljobs  => '50',
+      label       => "Inc-";
   }
 
   # commented in favor of above paramaterized classes

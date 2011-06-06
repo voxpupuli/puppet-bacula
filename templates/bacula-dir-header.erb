@@ -102,6 +102,7 @@ Catalog {
 
 # Reasonable message delivery -- send most everything to email address
 #  and to the console
+
 Messages {
   Name = Standard
   mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \r\>\" -s \"Bacula: %t %e of %c %l\" %r"

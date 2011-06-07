@@ -17,12 +17,14 @@ class bacula (
     $file_retention = "45 days",
     $job_retention  = "6 months",
     $autoprune      = "yes",
+    $monitor        = true,
     $director,
     $password
   ){
 
   include bacula::params
-  include bacula::nagios
+  if $monitor == true { include bacula::nagios }
+
 
   $bacula_director = $director
   $bacula_password = $password

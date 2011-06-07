@@ -96,7 +96,7 @@ Storage {
 
 # Generic catalog service
 Catalog {
-  Name = MyCatalog
+  Name   = MyCatalog
   dbname = "bacula"; dbuser = "<%= db_user %>"; dbpassword = "<%= db_pw %>"
 }
 
@@ -104,19 +104,19 @@ Catalog {
 #  and to the console
 
 Messages {
-  Name = Standard
-  mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \r\>\" -s \"Bacula: %t %e of %c %l\" %r"
-  operatorcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula: Intervention needed for %j\" %r"
-  mail = root@localhost = all, !skipped
-  operator = root@localhost = mount
-  console = all, !skipped, !saved
-  append = "/var/lib/bacula/log" = all, !skipped
-  catalog = all
+  Name            = Standard
+  mailcommand     = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \%r\" -s \"Bacula: %t %e of %c %l\" %r"
+  operatorcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \%r\" -s \"Bacula: Intervention needed for %j\" %r"
+  mail            = root@localhost = all, !skipped
+  operator        = root@localhost = mount
+  console         = all, !skipped, !saved
+  append          = "/var/lib/bacula/log" = all, !skipped
+  catalog         = all
 }
 
 Messages {
   Name = Daemon
-  mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s \"Bacula daemon message\" %r"
+  mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) %r\" -s \"Bacula daemon message\" %r"
   mail = root@localhost = all, !skipped
   console = all, !skipped, !saved
   append = "/var/lib/bacula/log" = all, !skipped
@@ -126,7 +126,7 @@ Messages {
 # Restricted console used by tray-monitor to get the status of the director
 #
 Console {
-Name       = <%= fqdn %>-mon
+  Name       = <%= fqdn %>-mon
   Password   = "EWDjRkucylqjSjwtX_y2UKlS-Ihr4E01V"
   CommandACL = status, .status
 }

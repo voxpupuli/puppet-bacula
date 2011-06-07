@@ -87,7 +87,7 @@ Pool {
 # Definition of file storage device
 Storage {
   Name = File
-  Address = baal.puppetlabs.com                # N.B. Use a fully qualified name here
+  Address = <%= fqdn %>                # N.B. Use a fully qualified name here
   SDPort = 9103
   Password = "kIw4ISyjT8PlbMrPgZB_WBsBb5ckS5hND"
   Device = PuppetLabsFileStorage
@@ -126,7 +126,7 @@ Messages {
 # Restricted console used by tray-monitor to get the status of the director
 #
 Console {
-  Name       = baal.puppetlabs.com-mon
+Name       = <%= fqdn %>-mon
   Password   = "EWDjRkucylqjSjwtX_y2UKlS-Ihr4E01V"
   CommandACL = status, .status
 }

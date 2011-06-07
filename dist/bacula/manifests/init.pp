@@ -60,7 +60,15 @@ class bacula (
   }
 
   # realize the firewall rules exported from the director
-  if defined (Class["firewall"]) { Firewall <<| dport == "9102" |>> }
+  if defined (Class["firewall"]) { 
+    firewall {
+      '0175-INPUT allow tcp 9102':
+        proto  => 'tcp',
+        dport  => '9102',
+        source => "$director",
+        jump   => 'ACCEPT',
+    }
+  }
 
 }
 

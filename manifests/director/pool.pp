@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 define bacula::director::pool (
-    $type        = 'Backup',
+    $pooltype    = 'Backup',
     $recycle     = 'Yes',
     $autoprune   = 'Yes',
     $volret      = '4 months', # Volume Retention

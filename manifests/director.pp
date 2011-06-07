@@ -83,13 +83,6 @@ class bacula::director (
     db_pw   => $db_pw,
   }
 
-  # put here because it needs the database password from the 
-  file { "/usr/lib/nagios/plugins/check_bacula.pl":
-    #source  => "puppet:///modules/nagios/check_bacula.pl",
-    content => template("nagios/check_bacula.pl.erb"),
-    mode    => 0755,
-    ensure  => present,
-  }
 
 
 }

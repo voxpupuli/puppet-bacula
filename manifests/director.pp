@@ -72,15 +72,6 @@ class bacula::director (
   # backup the bacula database
   bacula::mysql { 'bacula': }
 
-  # export firewall rules for client realization
-  @@firewall {
-    '0170-INPUT allow tcp 9102':
-      proto  => 'tcp',
-      dport  => '9102',
-      source => "$ipaddress",
-      jump   => 'ACCEPT',
-  }
-
   mysql::db { "bacula":
     db_user => $db_user,
     db_pw   => $db_pw,

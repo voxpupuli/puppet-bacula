@@ -17,16 +17,16 @@ class puppetlabs::web01 {
   # Add an nginx bouncer to speed up the apache sites on here.
   include nginx::server
   class { 'nginx::cache':
-    port            => 85,
+    port            => '80',
     upstream_server => 'localhost',
-    upstream_port   => 80,
-    priority        => 1,
+    upstream_port   => '82',
+    priority        => '01',
   }
 
   # WWW stuff
   # site for server itself
   apache::vhost {'web01.puppetlabs.com':
-    port     => 80,
+    port     => 82,
     docroot  => '/var/www',
     options  => "None",
     priority => '00';
@@ -42,6 +42,7 @@ class puppetlabs::web01 {
       db_pw           => 'illYZbw108Ckle8Q',
       template        => 'puppetlabs/madstop_vhost.conf.erb',
       priority        => '05',
+      port            => '82',
   }
 
   wordpress::instance {
@@ -55,6 +56,7 @@ class puppetlabs::web01 {
       db_user         => 'plabs',
       template        => 'puppetlabs/puppetlabs_vhost.conf.erb',
       priority        => '05',
+      port            => '82',
   }
 
   wordpress::instance {
@@ -64,6 +66,7 @@ class puppetlabs::web01 {
       db_user    => 'pdchallange',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
       priority   => '05',
+      port       => '82',
   }
 
   wordpress::instance {
@@ -73,6 +76,7 @@ class puppetlabs::web01 {
       db_user    => 'pcon',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
       priority   => '05',
+      port       => '82',
   }
 
 }

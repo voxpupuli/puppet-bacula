@@ -55,7 +55,8 @@ class bacula (
   @@concat::fragment {
     "bacula-client-$hostname":
       target  => '/etc/bacula/bacula-dir.conf',
-      content => template("bacula/bacula-dir-client.erb")
+      content => template("bacula/bacula-dir-client.erb"),
+      tag     => "bacula-$director";
   }
 
   # realize the firewall rules exported from the director

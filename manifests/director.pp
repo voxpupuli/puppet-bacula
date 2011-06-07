@@ -48,7 +48,10 @@ class bacula::director (
       content => template("bacula/bacula-dir-header.erb")
   }
 
-  Concat::Fragment <<| target == '/etc/bacula/bacula-dir.conf' |>>
+# Realize all fragments that are targetd at me
+  Concat::Fragment <<| tag == 'bacula-$fqdn' |>>
+  #was
+  #zleslie: Concat::Fragment <<| tag == '/etc/bacula/bacula-dir.conf' |>>
 
   concat {
     '/etc/bacula/bacula-dir.conf':

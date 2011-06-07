@@ -14,7 +14,7 @@ Director {                # define myself
 Job {
   Name     = "RestoreFiles"
   Type     = Restore
-  Client   = baal.puppetlabs.com-fd
+  Client   = <%= fqdn %>-fd
   FileSet  = "PuppetLabsOps"
   Storage  = File
   Where    = /tmp/bacula-restores

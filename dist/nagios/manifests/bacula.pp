@@ -1,6 +1,6 @@
 # Class: nagios::bacula
 #
-# This class installs and configures the Nagios hosts and services
+# This class installs and configures the Nagios hosts and services for monitoring bacula director
 #
 # Parameters:
 #
@@ -48,5 +48,5 @@ class nagios::bacula {
     notify              => Service[$nagios::params::nagios_service],
   }
 
-
 }
+

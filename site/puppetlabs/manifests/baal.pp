@@ -27,7 +27,9 @@ class puppetlabs::baal {
 
   ssh::allowgroup { "release": }
 
-  # Puppet modules
+  ###
+  # Puppet
+  #
   $dashboard_site = 'dashboard.puppetlabs.com'
 
   $modulepath = [

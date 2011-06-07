@@ -50,11 +50,9 @@ class puppetlabs::baal {
     site    => "dashboard.puppetlabs.com";
   }
 
-  # commented in favor of above paramaterized classes
-  # zleslie: include puppet::server
-  # zleslie: include puppet::dashboard
-
-  # Package management
+  ###
+  # Package repositories
+  #
   class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
   include yumrepo
 
@@ -97,7 +95,7 @@ class puppetlabs::baal {
   class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }
   include nagios::webservices
   include nagios::dbservices
-  include nagios::bacula
+  # zleslie: include nagios::bacula
   nagios::website { 'apt.puppetlabs.com': }
   nagios::website { 'yum.puppetlabs.com': }
   nagios::website { 'nagios.puppetlabs.com': auth => 'monit:5kUg8uha', }

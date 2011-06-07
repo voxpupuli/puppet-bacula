@@ -1,3 +1,15 @@
+# Class: bacula::nagios
+#
+# This class shoves a resource for monitoring the state of backups for the given host into stored configs for later consumption on the nagios monitoring system
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
 class bacula::nagios {
   include bacula::params
 

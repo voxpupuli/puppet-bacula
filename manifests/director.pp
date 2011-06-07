@@ -49,7 +49,7 @@ class bacula::director (
   }
 
 # Realize all fragments that are targetd at me
-  Concat::Fragment <<| tag == 'bacula-$fqdn' |>>
+  Concat::Fragment <<| tag == "bacula-$fqdn" |>>
   #was
   #zleslie: Concat::Fragment <<| tag == '/etc/bacula/bacula-dir.conf' |>>
 

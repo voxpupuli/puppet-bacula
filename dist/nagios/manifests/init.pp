@@ -24,7 +24,7 @@ class nagios (
   package { $nagios::params::nagios_plugin_packages: ensure => installed; }
   package { $nagios::params::nrpe_packages: ensure => installed; }
 
-  file { '/etc/nagios': 
+  file { '/etc/nagios':
     ensure => present,
     require => Package[$nagios::params::nrpe_packages],
   }
@@ -74,7 +74,7 @@ class nagios (
   }
 
   @@nagios_service { "check_dns_${hostname}":
-	  ensure => absent,
+    ensure => absent,
     use => 'generic-service',
     host_name => "$fqdn",
     check_command => 'check_dns',
@@ -118,17 +118,17 @@ class nagios (
     target => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify => Service[$nagios::params::nagios_service],
   }
-  
+
   @@nagios_service { "check_puppetd_${hostname}":
     use => 'generic-service',
     host_name => "$fqdn",
     check_command => $puppetversion ? {
-			'0.25.4' => 'check_nrpe!check_proc!1:1 puppetd',
-			default => $operatingsystem ? {
-				CentOS  => 'check_nrpe!check_proc!1:1 puppetd',
-				default => 'check_nrpe!check_proc!1:1 puppet',
-			},
-		},
+      '0.25.4' => 'check_nrpe!check_proc!1:1 puppetd',
+      default => $operatingsystem ? {
+        CentOS  => 'check_nrpe!check_proc!1:1 puppetd',
+        default => 'check_nrpe!check_proc!1:1 puppet',
+      },
+    },
     service_description => "check_puppetd_${hostname}",
     target => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify => Service[$nagios::params::nagios_service],
@@ -143,23 +143,24 @@ class nagios (
     notify => Service[$nagios::params::nagios_service],
   }
 
-  @@nagios_service { "check_collectd_${hostname}":
-    use => 'generic-service',
-    host_name => "$fqdn",
-    check_command => 'check_nrpe!check_proc!1:1 collectd',
-    service_description => "check_collectd_${hostname}",
-    target => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify => Service[$nagios::params::nagios_service],
-  }
-
-  @@nagios_service { "check_collectdmon_${hostname}":
-    use => 'generic-service',
-    host_name => "$fqdn",
-    check_command => 'check_nrpe!check_proc!1:1 collectdmon',
-    service_description => "check_collectdmon_${hostname}",
-    target => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify => Service[$nagios::params::nagios_service],
-  }
+# no longer using collectd, plus this should be moved to collectd::monitor
+#zleslie:  @@nagios_service { "check_collectd_${hostname}":
+#zleslie:    use => 'generic-service',
+#zleslie:    host_name => "$fqdn",
+#zleslie:    check_command => 'check_nrpe!check_proc!1:1 collectd',
+#zleslie:    service_description => "check_collectd_${hostname}",
+#zleslie:    target => '/etc/nagios3/conf.d/nagios_service.cfg',
+#zleslie:    notify => Service[$nagios::params::nagios_service],
+#zleslie:  }
+#zleslie:
+#zleslie:  @@nagios_service { "check_collectdmon_${hostname}":
+#zleslie:    use => 'generic-service',
+#zleslie:    host_name => "$fqdn",
+#zleslie:    check_command => 'check_nrpe!check_proc!1:1 collectdmon',
+#zleslie:    service_description => "check_collectdmon_${hostname}",
+#zleslie:    target => '/etc/nagios3/conf.d/nagios_service.cfg',
+#zleslie:    notify => Service[$nagios::params::nagios_service],
+#zleslie:  }
 
 # moved to bacula::director Tue May 31 2011 05:45:03
 #zleslie:  file { "/usr/lib/nagios/plugins/check_bacula.pl":

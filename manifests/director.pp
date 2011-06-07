@@ -18,12 +18,13 @@
 class bacula::director (
     $db_user = 'bacula',
     $db_pw   = 'ch@ng3me',
-    $port    = 9101
+    $port    = 9101,
+    $monitor = true
   ) {
 
   include bacula::params
-#  require mysql::server
-#  require bacula
+
+  if $monitor == true { include bacula::director::nagios }
 
   package { $bacula::params::bacula_director_packages:
     ensure => present,
@@ -33,6 +34,7 @@ class bacula::director (
     ensure     => running,
     enable     => true,
     hasrestart => true,
+    hasstatus  => true,
     require    => Package[$bacula::params::bacula_director_packages],
   }
 

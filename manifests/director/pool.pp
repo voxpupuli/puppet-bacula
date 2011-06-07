@@ -1,3 +1,15 @@
+# Define: bacula::director::pool
+#
+# This define adds a pool to the bacula director configuration
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage:
+#
 define bacula::director::pool (
     $type        = 'Backup',
     $recycle     = 'Yes',

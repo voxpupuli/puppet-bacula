@@ -139,6 +139,11 @@ class puppetlabs::baal {
       group => root,
       mode  => 0750,
       source => "puppet:///modules/puppetlabs/puppet_deploy.sh";
+    "/usr/local/bin/puppet_deploy.rb":
+      owner => root,
+      group => root,
+      mode  => 0750,
+      source => "puppet:///modules/puppetlabs/puppet_deploy.rb";
   }
 
   cron {
@@ -166,7 +171,7 @@ class puppetlabs::baal {
       user    => root,
       command => '/usr/local/bin/puppet_deploy.rb',
       minute  => '*/8',
-      # require => File["/usr/local/bin/puppet_deploy.sh"];
+      require => File["/usr/local/bin/puppet_deploy.rb"];
   }
 
 }

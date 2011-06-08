@@ -33,8 +33,8 @@ class puppetlabs::baal {
   $dashboard_site = 'dashboard.puppetlabs.com'
 
   $modulepath = [
-    "/etc/puppet/modules/site",
-    "/etc/puppet/modules/dist",
+    '$confdir/environments/$environment/site',
+    '$confdir/environments/$environment/dist',
   ]
 
   class { "puppet::server":

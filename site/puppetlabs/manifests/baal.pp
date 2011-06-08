@@ -160,7 +160,13 @@ class puppetlabs::baal {
       user    => root,
       command => '/usr/local/bin/puppet_deploy.sh',
       minute  => '*/8',
+      ensure  => absent,
       require => File["/usr/local/bin/puppet_deploy.sh"];
+    "Puppet: puppet_deploy.rb":
+      user    => root,
+      command => '/usr/local/bin/puppet_deploy.rb',
+      minute  => '*/8',
+      # require => File["/usr/local/bin/puppet_deploy.sh"];
   }
 
 }

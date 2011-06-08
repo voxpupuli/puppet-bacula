@@ -14,7 +14,7 @@ require 'pp'
 require 'fileutils'
 
 # $modulepath=`puppet master --configprint modulepath`
-env_base_dir  = '/etc/poopey/environments'
+env_base_dir  = '/etc/puppet/environments'
 $debug = false
 
 if ARGV.include? "-d" or ARGV.include? "--debug"

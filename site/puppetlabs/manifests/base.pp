@@ -13,23 +13,29 @@
 #
 class puppetlabs::base {
 
-#
-## Common Variables
+  #
+  ## Common Variables
   $puppet_server = "baal.puppetlabs.com"
 
-#
-## Common classes
+  #
+  ## Common classes
   class { "puppet": server => "$puppet_server"; }
 
-#
-## Kernel/Operatingsystem Specific Configurations
+  class { "munin":  munin_server => '74.207.240.137'; }
+
+  ssh::allowgroup  { "sysadmin": }
+  sudo::allowgroup { "sysadmin": }
+
+
+  #
+  ## Kernel/Operatingsystem Specific Configurations
   case $kernel {
     linux:   { include puppetlabs::os::linux   }
     default: { }
   }
 
-#
-## Domain/Location Specific Configurations
+  #
+  ## Domain/Location Specific Configurations
   case $domain {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"

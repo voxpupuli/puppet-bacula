@@ -52,7 +52,6 @@ class virtual::users::customers {
 
   @account::user {'eishaysmith':
     comment => 'Eishay Smith',
-    usekey  => false,
     group   => wealthfront,
     tag     => customer,
     expire  => "2011-07-01",

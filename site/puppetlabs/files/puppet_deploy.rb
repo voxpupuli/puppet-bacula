@@ -13,8 +13,10 @@
 require 'pp'
 require 'fileutils'
 
+$github_repo_url = "git@github.com:puppetlabs/puppetlabs-modules.git"
+
 # $modulepath=`puppet master --configprint modulepath`
-env_base_dir  = '/etc/poopey/environments'
+env_base_dir  = '/etc/puppet/environments'
 $debug = false
 
 if ARGV.include? "-d" or ARGV.include? "--debug"
@@ -126,7 +128,7 @@ class GitRepo
   def checkout_master
     # just assume it's checked out, for now.
     Dir.chdir @mirrordir
-    pp_and_system( "LANG='C' git fetch #{$gitnoise} --all" )
+    pp_and_system( "LANG='C' git fetch #{$gitnoise} --all --prune" )
   end
 
   def mirror_repo
@@ -134,7 +136,7 @@ class GitRepo
       self.checkout_master
     else
       dputs "Making clone of remote repo locally to #{@mirrordir}"
-      pp_and_system( "LANG='C' git clone #{$gitnoise} --mirror git@github.com:puppetlabs/puppetlabs-modules.git #{@mirrordir}" )
+      pp_and_system( "LANG='C' git clone #{$gitnoise} --mirror #{$github_repo_url} #{@mirrordir}" )
     end
   end
 

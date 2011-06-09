@@ -28,6 +28,11 @@ class puppetlabs::pluto {
   Group <| title == bioware |>
   ssh::allowgroup { "bioware": chroot => true; }
 
+  Account::User <| group == wealthfront |>
+  Group <| title == wealthfront |>
+  ssh::allowgroup { "wealthfront": chroot => true; }
+
+  Account::User <| tag == deploy |>
   Account::User <| tag == deploy |>
   ssh::allowgroup { "www-data": }
 

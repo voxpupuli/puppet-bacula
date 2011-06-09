@@ -84,6 +84,11 @@ class virtual::groups {
     gid    => 1055,
   }
 
+  @group {'wealthfront':
+    ensure => present,
+    gid    => 1056,
+  }
+
 #
 # Interns
 # 

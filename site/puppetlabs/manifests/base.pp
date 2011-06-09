@@ -13,18 +13,10 @@
 #
 class puppetlabs::base {
 
+
+  ###
+  # Stages
   #
-  ## Common Variables
-  $puppet_server = "baal.puppetlabs.com"
-
-  #
-  ## Common classes
-  class { "puppet": server => "$puppet_server"; }
-
-  class { "munin":  munin_server => '74.207.240.137'; }
-
-  ssh::allowgroup  { "sysadmin": }
-  sudo::allowgroup { "sysadmin": }
 
 
   #
@@ -40,13 +32,10 @@ class puppetlabs::base {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
 
-      include puppetlabs::lan
+      include puppetlabs
 
       case $operatingsystem {
-        debian: {
-          class { "apt::settings": proxy => "$lan_apt_proxy" }
-        }
-        ubuntu: {
+        'debian','ubuntu': {
           class { "apt::settings": proxy => "$lan_apt_proxy" }
         }
         default: { }
@@ -55,6 +44,12 @@ class puppetlabs::base {
 
     "puppetlabs.com": {
       include puppetlabs
+      # zleslie: Nagios should be moved at a higher level, but need to work out nrpe through the firewall
+      class { "nagios": nrpe_server => '74.207.240.137'; }
+      # zleslie: need to check ntp to make sure that it is completely seperated from all other things and can be included on lan
+      include ntp
+
+
     }
     default: { }
   }
@@ -70,13 +65,6 @@ class puppetlabs::base {
 #    "shell.puppetlabs.com",
 #    "app01.puppetlabs.com"
 #      : { include "puppetlabs::$hostname" }
-#
-#    # Dev
-#    "agent01.puppetlabs.lan",
-#    "agent02.puppetlabs.lan",
-#    "agent03.puppetlabs.lan"
-#      : { include "puppetlabs::dev::$hostname" }
-#
     # Unknown
     default: { include "puppetlabs::$hostname" }
 

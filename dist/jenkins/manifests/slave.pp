@@ -1,11 +1,14 @@
 class jenkins::slave {
-	include jenkins::params
+  include jenkins::params
 
-	Account::User <| tag == 'jenkins' |>
-	Group <| tag == 'jenkins' |>
+  ssh::allowgroup { "hudson": }
+  sudo::allowgroup { "hudson": }
 
-	package { $jenkins::params::slave_packages: 
-		ensure => installed,
-	}
+  Account::User <| tag == 'hudson' |>
+  Group <| tag == 'hudson' |>
+
+  package { $jenkins::params::slave_packages: 
+    ensure => installed,
+  }
 
 }

@@ -13,6 +13,20 @@ class puppetlabs::www-dev {
   # Base
   include puppetlabs_ssl
 
+  cron {
+    'www dir perms':
+      command => "/usr/bin/find /var/www/www-dev.puppetlabs.com/ -type d -print0 | xargs -o -I {} chmod 2775 {}",
+      user    => root,
+      minute  => '*/5';
+    'www file perms':
+      command => "/usr/bin/find /var/www/www-dev.puppetlabs.com/ -type f -print0 | xargs -o -I {} chmod 0664 {}",
+      user    => root,
+      minute  => '*/5';
+    'www ownership':
+      command => "/bin/chown -R www-data:www-dev /var/www/",
+      user    => root,
+  }
+
   wordpress::instance {
     'www-dev.puppetlabs.com':
       auth_key        => 'PE{TEN%T).U~V6Cl;b_?0mcrvhoUVIP#+0R|e-LB>00:o*((b%[8pve/1Y+H}P(o',
@@ -29,3 +43,4 @@ class puppetlabs::www-dev {
   package {'php5-curl': ensure => present, notify => Service[httpd] }  
 
 }
+

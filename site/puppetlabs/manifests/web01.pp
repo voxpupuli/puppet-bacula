@@ -32,6 +32,20 @@ class puppetlabs::web01 {
     priority => '00';
   }
 
+  # Hacked up apache configuration for nginx support
+  file { "/etc/apache2/ports.conf":
+    owner => root,
+    group => root,
+    mode  => 644,
+    source => "puppet:///modules/puppetlabs/web01_ports.conf";
+  }
+  file { "/etc/apache2/apache2.conf":
+    owner => root,
+    group => root,
+    mode  => 644,
+    source => "puppet:///modules/puppetlabs/web01_apache2.conf";
+  }
+
   wordpress::instance {
     'madstop.com':
       site_alias      => "www.madstop.com",

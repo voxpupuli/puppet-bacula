@@ -46,6 +46,17 @@ class puppetlabs::web01 {
     source => "puppet:///modules/puppetlabs/web01_apache2.conf";
   }
 
+
+  # Some apache redirects, cause we love them
+  apache::vhost::redirect {
+    'puppetcon.com':
+      serveraliases => "www.puppetcon.com",
+      port          => '80',
+      dest          => 'http://www.puppetconf.com';
+
+  }
+
+
   wordpress::instance {
     'madstop.com':
       site_alias      => "www.madstop.com",
@@ -84,13 +95,14 @@ class puppetlabs::web01 {
   }
 
   wordpress::instance {
-    'puppetcon.com':
-      site_alias => "www.puppetcon.com",
+    'puppetconf.com':
+      site_alias => "www.puppetconf.com",
       db_pw      => 'TiR6znV9EmGj',
-      db_user    => 'pcon',
+      db_user    => 'pconf',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
       priority   => '05',
       port       => '82',
   }
 
 }
+

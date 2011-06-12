@@ -6,15 +6,15 @@ define wordpress::instance(
     $secure_auth_key = 'Py7qoZiAY4P7kYERSMKmX7bnN1g7aO6gprRhcFmH4bHuv3FkLUcCS8NJvGDv0xH',
     $logged_in_key   = 'eW9kxY7lw2dgHf68NADWE34awypYnoJbSW84icE6319t5DkMFtZ9wIY1ti34ylD',
     $nonce_key       = '3vQabQDY67MIr3sZsPtYbsQehdNSFyEead3X825JwBzRhEL1clGOQ4eJCKdtst0',
-    $dir = '/var/www',
-    $port = '80',
-    $db_user = '',
+    $dir             = '/var/www',
+    $port            = '80',
+    $db_user         = '',
     $db_pw,
     $template,
-    $priority = '10',
-    $backup = true,
-    $development = false,
-    $site_alias = ''
+    $priority        = '10',
+    $backup          = true,
+    $seturl          = false,
+    $site_alias      = ''
   ) {
 
   include wordpress

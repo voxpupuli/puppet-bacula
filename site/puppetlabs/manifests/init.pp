@@ -31,7 +31,6 @@ class puppetlabs {
   ###
   # Monitoring
   #
-  class { "munin":  munin_server => '74.207.240.137'; }
   include collectd::disable
 
   ssh::allowgroup  { "sysadmin": }

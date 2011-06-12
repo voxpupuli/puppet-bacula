@@ -13,7 +13,6 @@
 #
 class puppetlabs::base {
 
-
   ###
   # Stages
   #
@@ -44,6 +43,8 @@ class puppetlabs::base {
 
     "puppetlabs.com": {
       include puppetlabs
+      # zleslie: same issue as nagios below, a vpn would solve this
+      class { "munin":  munin_server => '74.207.240.137'; }
       # zleslie: Nagios should be moved at a higher level, but need to work out nrpe through the firewall
       class { "nagios": nrpe_server => '74.207.240.137'; }
       # zleslie: need to check ntp to make sure that it is completely seperated from all other things and can be included on lan

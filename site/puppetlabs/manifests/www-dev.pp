@@ -37,7 +37,7 @@ class puppetlabs::www-dev {
       db_pw           => 'gosh-if-no-hull',
       template        => 'puppetlabs/dev_vhost.conf.erb',
       backup          => false,
-      development     => true,
+      seturl          => true,
   }
 
   package {'php5-curl': ensure => present, notify => Service[httpd] }  

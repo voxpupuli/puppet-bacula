@@ -12,14 +12,15 @@
 #
 class puppetlabs {
   #
-  # This is our base install for all of our servers.
+  # This is our base install for all of Puppet Labs servers.
   #
 
-#  $puppet_server = "baal.puppetlabs.com"
+  ###
+  # Puppet
+  $puppet_server = "baal.puppetlabs.com"
+  class { "puppet": server => "$puppet_server"; }
 
-  include ntp
-  #include puppet
-#  class { "puppet": server => "$puppet_server"; }
+  # some shit
   include ssh::server
   include virtual::users
   include virtual::packages
@@ -27,26 +28,16 @@ class puppetlabs {
   include sudo
   include packages
 
-# remove collectd in favor of munin Tue May 31 2011 10:23:55
-# zleslie:  $collectd_server = "baal.puppetlabs.com"
-# zleslie:  # Collectd -- The collectd module should probably handle this will paramters
-# zleslie:  if $fqdn == $collectd_server {
-# zleslie:    class { "collectd::server": site_alias => "visage.puppetlabs.com"; }
-# zleslie:  } else {
-# zleslie:    class { "collectd::client": collectd_server => "baal.puppetlabs.com"; }
-# zleslie:  }
-
+  ###
+  # Monitoring
+  #
   include collectd::disable
-
-
-  class { "nagios":           nrpe_server  => '74.207.240.137'; }
-  class { "munin":            munin_server => '74.207.240.137'; }
 
   ssh::allowgroup  { "sysadmin": }
   sudo::allowgroup { "sysadmin": }
 
   Account::User <| tag == 'allstaff' |>
-  Group <| tag == 'allstaff' |>
+  Group         <| tag == 'allstaff' |>
 
   if defined(Class["firewall"]) { Firewall <||> }
 

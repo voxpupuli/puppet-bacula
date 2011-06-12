@@ -33,29 +33,26 @@ class puppetlabs::web01 {
   }
 
   # Hacked up apache configuration for nginx support
-  file { "/etc/apache2/ports.conf":
-    owner => root,
-    group => root,
-    mode  => 644,
-    source => "puppet:///modules/puppetlabs/web01_ports.conf";
+  file {
+    "/etc/apache2/ports.conf":
+      owner  => root,
+      group  => root,
+      mode   => 644,
+      source => "puppet:///modules/puppetlabs/web01_ports.conf";
+    "/etc/apache2/apache2.conf":
+      owner  => root,
+      group  => root,
+      mode   => 644,
+      source => "puppet:///modules/puppetlabs/web01_apache2.conf";
   }
-  file { "/etc/apache2/apache2.conf":
-    owner => root,
-    group => root,
-    mode  => 644,
-    source => "puppet:///modules/puppetlabs/web01_apache2.conf";
-  }
-
 
   # Some apache redirects, cause we love them
   apache::vhost::redirect {
     'puppetcon.com':
       serveraliases => "www.puppetcon.com",
-      port          => '80',
+      port          => '82',
       dest          => 'http://www.puppetconf.com';
-
   }
-
 
   wordpress::instance {
     'madstop.com':
@@ -92,6 +89,7 @@ class puppetlabs::web01 {
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
       priority   => '05',
       port       => '82',
+      seturl     => true,
   }
 
   wordpress::instance {
@@ -102,6 +100,7 @@ class puppetlabs::web01 {
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
       priority   => '05',
       port       => '82',
+      seturl     => true,
   }
 
 }

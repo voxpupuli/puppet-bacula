@@ -30,7 +30,6 @@ class puppetlabs::base {
   case $domain {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
-
       include puppetlabs
 
       case $operatingsystem {
@@ -50,7 +49,6 @@ class puppetlabs::base {
       class { "nagios": nrpe_server => '74.207.240.137'; }
       # zleslie: need to check ntp to make sure that it is completely seperated from all other things and can be included on lan
       include ntp
-
 
     }
     default: { }

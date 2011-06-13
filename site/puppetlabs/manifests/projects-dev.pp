@@ -10,12 +10,6 @@ class puppetlabs::projects-dev {
     'rack': provider => 'gem', ensure => '1.1.0';
   }
 
-  # I HATE YOU RUBYGEMS
-  exec{ 'gem cleanup rack':
-    path   => "/usr/bin:/usr/sbin:/bin",
-    onlyif => "gem list '^rack$' | grep -q ','"
-  }
-
   include mysql::server
   redmine::unicorn { 'projects-dev.puppetlabs.com':
     dir     => '/opt',

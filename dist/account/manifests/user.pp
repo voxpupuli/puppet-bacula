@@ -126,7 +126,7 @@ define account::user (
             group   => $groupname, 
             require => User["$name"];
           "${homedir}/.ssh/authorized_keys": 
-            mode    => 644, 
+            mode    => 0600, 
             recurse => true, 
             source  => "${userdir}/.ssh/authorized_keys", 
             owner   => $name, 

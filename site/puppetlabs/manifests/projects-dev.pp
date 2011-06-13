@@ -5,6 +5,11 @@ class puppetlabs::projects-dev {
   # Base
   include puppetlabs_ssl
 
+  # Requirements for redmine is it needs >1.1.0 for DB migrations
+  package{
+    'rack': provider => 'gem', ensure => '1.2.0';
+  }
+
   include mysql::server
   redmine::unicorn { 'projects-dev.puppetlabs.com':
     dir     => '/opt',

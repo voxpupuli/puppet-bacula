@@ -7,7 +7,7 @@ class puppetlabs::projects-dev {
 
   # Requirements for redmine is it needs >1.1.0 for DB migrations
   package{
-    'rack': provider => 'gem', ensure => '1.2.0';
+    'rack': provider => 'gem', ensure => '1.1.0';
   }
 
   # I HATE YOU RUBYGEMS

@@ -12,6 +12,7 @@ class puppetlabs::projects-dev {
 
   # I HATE YOU RUBYGEMS
   exec{ 'gem cleanup rack':
+    path   => "/usr/bin:/usr/sbin:/bin",
     onlyif => "gem list '^rack$' | grep -q ','"
   }
 

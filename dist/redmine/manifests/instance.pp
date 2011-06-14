@@ -3,6 +3,9 @@
 # or url can be set to some inernal location
 # redmine server
 #
+# Can override version to install from, only on a revision level at
+# present though.
+#
 
 define redmine::instance (
     $db,
@@ -11,17 +14,24 @@ define redmine::instance (
     $user,
     $group,
     $dir,
-    $backup = true
+    $backup = true,
+    $version = 'UNSET'
     ) {
 
   require redmine
-  $version = $redmine::params::version
+
+  if $version == 'UNSET' {
+    $version_to_grab = $redmine::params::version
+  } else {
+    $version_to_grab = $version
+  }
+
   $source  = $redmine::params::source
 
   vcsrepo{
     "${dir}/${name}":
       source   => $source,
-      revision => $version,
+      revision => $version_to_grab,
       #require => File[$dir],
       #path => $dir,
   }

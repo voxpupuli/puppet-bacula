@@ -4,7 +4,8 @@ define redmine::unicorn (
     $db_pw, 
     $dir, 
     $port='80', 
-    $backup='true'
+    $backup='true',
+    $version = 'UNSET'
     ) {
   include apache::params
 
@@ -12,12 +13,14 @@ define redmine::unicorn (
 
   a2mod { [ 'proxy', 'proxy_balancer', 'proxy_http' ]: ensure => present, }
 
-  $unicorn_packages = [ "libmysql-ruby", 'unicorn', 'i18n' ]
+  $unicorn_packages = [ 'libmysql-ruby', 'unicorn', 'i18n' ]
 
   package {
     "libmysql-ruby": ensure => installed;
     'unicorn':       ensure => installed, provider => gem;
     'i18n':          ensure => '0.4.2',   provider => gem;
+    # 'rack':          ensure => '1.1.0',   provider => gem;
+    # uncomment the above ONCE we migrate redmine past 1.1.x
   }
 
   service { 
@@ -38,6 +41,7 @@ define redmine::unicorn (
       group   => $apache::params::group, 
       dir     => $dir,
       backup  => $backup,
+      version => $version,
   }
 
   apache::vhost { $name:

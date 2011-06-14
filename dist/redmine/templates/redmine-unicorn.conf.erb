@@ -23,11 +23,11 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
      Allow from all
   </Proxy>
 
-  ProxyPass / http://localhost:8080/
-  ProxyPassReverse / http://localhost:8080/
-
   # Redirects for locations that have been moved from the wiki into the docs site:
   Redirect permanent /projects/puppet/wiki/Language_Tutorial http://docs.puppetlabs.com/guides/language_guide.html
+
+  ProxyPass / http://localhost:8080/
+  ProxyPassReverse / http://localhost:8080/
 
   # Custom log file locations
   ErrorLog  /var/log/apache2/<%= name %>_error.log

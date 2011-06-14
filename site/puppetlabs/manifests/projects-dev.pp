@@ -1,5 +1,9 @@
 class puppetlabs::projects-dev {
 
+  # SHA1 stolen from, pick a tag.
+  # https://github.com/edavis10/redmine/commit/1faf02c9f5ce22ce676e7a3ae710dd0c52a21d45#
+  $redmine_version_du_jour = '1faf02c9f5ce22ce676e7a3ae710dd0c52a21d45'
+
   $mysql_root_pw = 'n0tInpr0duct1on'
 
   # Base
@@ -17,6 +21,7 @@ class puppetlabs::projects-dev {
     db_user => 'redmine',
     db_pw   => 'notproductI0N',
     port    => '80',
+    version => '1faf02c9f5ce22ce676e7a3ae710dd0c52a21d45',
   }
 
 }

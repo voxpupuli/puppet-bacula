@@ -238,6 +238,14 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'ccaum':
+    comment => 'Carl Caum',
+    uid     => '1149',
+    group   => allstaff,
+    groups  => ["prosvc"],
+    tag     => allstaff,
+  }
+
 #
 # Service accounts
 #

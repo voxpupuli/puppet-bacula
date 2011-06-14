@@ -35,6 +35,7 @@ class puppetlabs::baal {
   $modulepath = [
     '$confdir/environments/$environment/site',
     '$confdir/environments/$environment/dist',
+    '$confdir/environments/$environment/forge',
   ]
 
   class { "puppet::server":
@@ -57,7 +58,6 @@ class puppetlabs::baal {
   #
   class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
   include yumrepo
-
 
   ###
   # Bacula

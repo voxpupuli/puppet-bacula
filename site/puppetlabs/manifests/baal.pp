@@ -173,5 +173,12 @@ class puppetlabs::baal {
       require => File["/usr/local/bin/puppet_deploy.rb"];
   }
 
+
+  #
+  # Mcollective
+  #
+
+  class { 'mcollective': }
+
 }
 

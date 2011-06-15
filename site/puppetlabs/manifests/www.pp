@@ -29,9 +29,15 @@ class puppetlabs::www {
     "/var/www/puppetlabs.com/downloads/training/current-pm-vm.tar.gz":
       ensure   => link,
       target   => "centos-5.5-pe-1.0.tar.gz";
+    "/var/www/puppetlabs.com/downloads/training/current-pm-vm.tar.gz.md5":
+      ensure   => link,
+      target   => "centos-5.5-pe-1.0.tar.gz.md5";
     "/var/www/puppetlabs.com/downloads/training/current-pm-vm-ovf.tar.gz":
       ensure   => link,
       target   => "centos-5.5-pe-1.0-ovf.tar.gz";
+    "/var/www/puppetlabs.com/downloads/training/current-pm-vm-ovf.tar.gz.md5":
+      ensure   => link,
+      target   => "centos-5.5-pe-1.0-ovf.tar.gz.md5";
   }
 
   # Mysql

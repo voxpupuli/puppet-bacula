@@ -6,7 +6,6 @@ class puppetlabs::os::linux::centos {
       purge => true;
   }
 
-
   yumrepo { 'epel':
     descr      => "Extra Packages for Enterprise Linux ${lsbmajdistrelease} - \$basearch",
     mirrorlist => "http://mirrors.fedoraproject.org/mirrorlist?repo=epel-${lsbmajdistrelease}&arch=\$basearch",
@@ -32,7 +31,6 @@ class puppetlabs::os::linux::centos {
         gpgcheck   => 1,
         keepalive  => 1,
       }
-    }
     }
     default: {}
   }

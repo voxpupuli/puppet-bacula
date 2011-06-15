@@ -18,6 +18,7 @@ class puppetlabs::os::linux::centos {
         gpgcheck   => 1,
         keepalive  => 1,
       }
+    }
     default: {}
     }
   }

@@ -19,6 +19,7 @@ class puppetlabs::os::linux::centos {
         keepalive  => 1,
       }
     default: {}
+    }
   }
 }
 

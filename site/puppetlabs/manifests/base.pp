@@ -37,9 +37,6 @@ class puppetlabs::base {
           # Setup apt settings specific to the lan
           class { "apt::settings": proxy => "$lan_apt_proxy" }
         }
-        'centos': {
-          include puppetlabs::lan::yum
-        }
         default: { }
       }
     }

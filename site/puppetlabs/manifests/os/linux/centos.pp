@@ -12,7 +12,7 @@ class puppetlabs::os::linux::centos {
   case $domain {
     "puppetlabs.lan": {
       yumrepo { 'puppetlabs_os':
-        descr      => "Puppetlabs Internal OS Mirror Linux ${lsbdismajrelease} - \$basearch",
+        descr      => "Puppetlabs Internal OS Mirror Linux ${lsbmajdistrelease} - \$basearch",
         baseurl    => "http://yo.puppetlabs.lan/cent${lsbmajdistrelease}server-$architecture/RPMS.os",
         enabled    => 1,
         gpgcheck   => 1,
@@ -20,7 +20,6 @@ class puppetlabs::os::linux::centos {
       }
     }
     default: {}
-    }
   }
 }
 

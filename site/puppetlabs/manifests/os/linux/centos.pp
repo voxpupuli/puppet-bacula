@@ -1,10 +1,10 @@
 class puppetlabs::os::linux::centos {
 
 
-  resources {
-    "yumrepo":
-      purge => true;
-  }
+#  resources {
+#    "yumrepo":
+#      purge => true;
+#  }
 
   yumrepo { 'epel':
     descr      => "Extra Packages for Enterprise Linux ${lsbmajdistrelease} - \$basearch",

@@ -23,9 +23,28 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
      Allow from all
   </Proxy>
 
-  # Redirects for locations that have been moved from the wiki into the docs site:
-  Redirect permanent /projects/puppet/wiki/Language_Tutorial http://docs.puppetlabs.com/guides/language_guide.html
+  # This is a big ugly hardcoded section. So thus rendering it pointless in many
+  # ways to manage so freely with puppet as we are. But what can you do?
+  # See http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxypass for why.
+  ProxyPass /projects/puppet/wiki/External_Nodes !
+  Redirect permanent	/projects/puppet/wiki/External_Nodes                    http://docs.puppetlabs.com/guides/external_nodes.html
+  ProxyPass /projects/puppet/wiki/Frequently_Asked_Questions !
+  Redirect permanent	/projects/puppet/wiki/Frequently_Asked_Questions        http://docs.puppetlabs.com/guides/faq.html
+  ProxyPass /projects/puppet/wiki/Plugins_In_Modules !
+  Redirect permanent	/projects/puppet/wiki/Plugins_In_Modules                http://docs.puppetlabs.com/guides/plugins_in_modules.html
+  ProxyPass /projects/puppet/wiki/Development_Creating_Custom_Types !
+  Redirect permanent	/projects/puppet/wiki/Development_Creating_Custom_Types http://docs.puppetlabs.com/guides/custom_types.html
+  ProxyPass /projects/puppet/wiki/Puppet_Executables !
+  Redirect permanent	/projects/puppet/wiki/Puppet_Executables                http://docs.puppetlabs.com/guides/tools.html
+  ProxyPass /projects/puppet/wiki/Module_Organisation !
+  Redirect permanent	/projects/puppet/wiki/Module_Organisation               http://docs.puppetlabs.com/guides/modules.html
+  ProxyPass /projects/puppet/wiki/Language_Tutorial !
+  Redirect permanent	/projects/puppet/wiki/Language_Tutorial                 http://docs.puppetlabs.com/guides/language_guide.html
+  ProxyPass /projects/puppet/wiki/Getting_Started !
+  Redirect permanent	/projects/puppet/wiki/Getting_Started                   http://docs.puppetlabs.com/#getting_started
 
+
+  # Now anything that is left, lets proxy this to localhost.
   ProxyPass / http://localhost:8080/
   ProxyPassReverse / http://localhost:8080/
 

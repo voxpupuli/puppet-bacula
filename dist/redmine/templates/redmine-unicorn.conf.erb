@@ -43,6 +43,23 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   ProxyPass /projects/puppet/wiki/Getting_Started !
   Redirect permanent	/projects/puppet/wiki/Getting_Started                   http://docs.puppetlabs.com/#getting_started
 
+  ProxyPass /projects/1/wiki/External_Nodes !
+  Redirect permanent	/projects/1/wiki/External_Nodes                    http://docs.puppetlabs.com/guides/external_nodes.html
+  ProxyPass /projects/1/wiki/Frequently_Asked_Questions !
+  Redirect permanent	/projects/1/wiki/Frequently_Asked_Questions        http://docs.puppetlabs.com/guides/faq.html
+  ProxyPass /projects/1/wiki/Plugins_In_Modules !
+  Redirect permanent	/projects/1/wiki/Plugins_In_Modules                http://docs.puppetlabs.com/guides/plugins_in_modules.html
+  ProxyPass /projects/1/wiki/Development_Creating_Custom_Types !
+  Redirect permanent	/projects/1/wiki/Development_Creating_Custom_Types http://docs.puppetlabs.com/guides/custom_types.html
+  ProxyPass /projects/1/wiki/Puppet_Executables !
+  Redirect permanent	/projects/1/wiki/Puppet_Executables                http://docs.puppetlabs.com/guides/tools.html
+  ProxyPass /projects/1/wiki/Module_Organisation !
+  Redirect permanent	/projects/1/wiki/Module_Organisation               http://docs.puppetlabs.com/guides/modules.html
+  ProxyPass /projects/1/wiki/Language_Tutorial !
+  Redirect permanent	/projects/1/wiki/Language_Tutorial                 http://docs.puppetlabs.com/guides/language_guide.html
+  ProxyPass /projects/1/wiki/Getting_Started !
+  Redirect permanent	/projects/1/wiki/Getting_Started                   http://docs.puppetlabs.com/#getting_started
+
 
   # Now anything that is left, lets proxy this to localhost.
   ProxyPass / http://localhost:8080/

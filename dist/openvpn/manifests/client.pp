@@ -15,5 +15,7 @@ define openvpn::client (
     content => template("openvpn/client.conf.erb");
   }
 
+  service { "openvpn": enable => true, ensure => running; }
+
 }
 

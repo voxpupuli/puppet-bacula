@@ -1,0 +1,15 @@
+client
+dev tun
+proto udp
+remote office.puppetlabs.com 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca plca.crt
+cert client_gary.crt
+key client_gary.key
+ns-cert-type server
+cipher AES-192-CBC
+comp-lzo
+verb 3

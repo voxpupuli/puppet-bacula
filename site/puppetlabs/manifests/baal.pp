@@ -178,7 +178,7 @@ class puppetlabs::baal {
   # Mcollective
   #
 
-  class { 'mcollective': }
+  #class { 'mcollective': }
 
 }
 

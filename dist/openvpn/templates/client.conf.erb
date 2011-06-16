@@ -1,0 +1,15 @@
+client
+dev <%= dev %>
+proto <%= proto %>
+remote <%= server %> <%= port %>
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ca.crt
+cert <%= name %>.crt
+key <%= name %>.key
+ns-cert-type server
+cipher AES-192-CBC
+comp-lzo
+verb 3

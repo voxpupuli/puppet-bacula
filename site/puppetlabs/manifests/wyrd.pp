@@ -15,10 +15,5 @@ class puppetlabs::wyrd {
       docroot => '/opt/www'
   }
 
-  # zleslie: same issue as nagios below, a vpn would solve this
-  # zleslie: using baal's vpn ip as the server to allow connections from
-  class { "munin":  munin_server => '192.168.101.9'; }
-
-
 }
 

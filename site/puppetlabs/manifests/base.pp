@@ -36,6 +36,7 @@ class puppetlabs::base {
         'debian','ubuntu': {
           # Setup apt settings specific to the lan
           class { "apt::settings": proxy => "$lan_apt_proxy" }
+          class { "munin":  munin_server => '192.168.101.9'; }
         }
         default: { }
       }
@@ -43,7 +44,6 @@ class puppetlabs::base {
 
     "puppetlabs.com": {
       include puppetlabs
-      # zleslie: same issue as nagios below, a vpn would solve this
       class { "munin":  munin_server => '74.207.240.137'; }
       # zleslie: Nagios should be moved at a higher level, but need to work out nrpe through the firewall
       class { "nagios": nrpe_server => '74.207.240.137'; }

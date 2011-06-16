@@ -66,6 +66,8 @@ class puppetlabs::web01 {
       priority        => '05',
       port            => '82',
   }
+  file { "/var/www/madstop.com/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/madstop_htaccess"; }
+
 
   wordpress::instance {
     'puppetlabs.com':

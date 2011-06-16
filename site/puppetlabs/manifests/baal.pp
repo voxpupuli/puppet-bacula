@@ -56,8 +56,7 @@ class puppetlabs::baal {
   ###
   # Package repositories
   #
-  class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
-  include yumrepo
+  include puppetlabs::service::pkgrepo
 
   ###
   # Bacula
@@ -172,7 +171,6 @@ class puppetlabs::baal {
       minute  => '*/8',
       require => File["/usr/local/bin/puppet_deploy.rb"];
   }
-
 
   #
   # Mcollective

@@ -12,7 +12,8 @@ define openvpn::client (
     owner => root,
     group => root,
     mode  => 640,
-    content => template("openvpn/client.conf.erb")
+    content => template("openvpn/client.conf.erb");
+  }
 
 }
 

@@ -5,4 +5,14 @@ class puppetlabs::burji {
 
   include puppetlabs::service::pkgrepo
 
+
+  file { "/var/www/index.html": ensure => absent; }
+
+  apache::vhost {
+    "$fqdn":
+      port    => 80,
+      docroot => '/var/www'
+  }
+
 }
+

@@ -35,7 +35,7 @@ class puppetlabs::baal {
   $modulepath = [
     '$confdir/environments/$environment/site',
     '$confdir/environments/$environment/dist',
-    '$confdir/environments/$environment/forge',
+    #'$confdir/environments/$environment/forge',
   ]
 
   class { "puppet::server":

@@ -180,5 +180,11 @@ class puppetlabs::baal {
 
   #class { 'mcollective': }
 
+  openvpn::client {
+    "node_$hostname":
+      server => "office.puppetlabs.com",
+  }
+
+
 }
 

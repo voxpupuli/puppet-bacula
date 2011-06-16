@@ -11,6 +11,7 @@ class puppetlabs::burji {
   apache::vhost {
     "$fqdn":
       port    => 80,
+      options => "None",
       docroot => '/var/www'
   }
 

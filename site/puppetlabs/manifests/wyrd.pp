@@ -16,7 +16,8 @@ class puppetlabs::wyrd {
   }
 
   # zleslie: same issue as nagios below, a vpn would solve this
-  class { "munin":  munin_server => '74.207.240.137'; }
+  # zleslie: using baal's vpn ip as the server to allow connections from
+  class { "munin":  munin_server => '192.168.101.9'; }
 
 
 }

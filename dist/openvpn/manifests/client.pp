@@ -8,5 +8,11 @@ define openvpn::client (
 
   package { "openvpn": ensure => installed; }
 
+  file { "/etc/openvpn/$server.conf":
+    owner => root,
+    group => root,
+    mode  => 640,
+    content => template("openvpn/client.conf.erb")
+
 }
 

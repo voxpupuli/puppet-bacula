@@ -30,13 +30,13 @@ class puppetlabs::base {
   case $domain {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
+      class { "munin":  munin_server => '192.168.101.9'; }
       include puppetlabs
 
       case $operatingsystem {
         'debian','ubuntu': {
           # Setup apt settings specific to the lan
           class { "apt::settings": proxy => "$lan_apt_proxy" }
-          class { "munin":  munin_server => '192.168.101.9'; }
         }
         default: { }
       }

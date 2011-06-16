@@ -15,5 +15,9 @@ class puppetlabs::wyrd {
       docroot => '/opt/www'
   }
 
+  # zleslie: same issue as nagios below, a vpn would solve this
+  class { "munin":  munin_server => '74.207.240.137'; }
+
+
 }
 

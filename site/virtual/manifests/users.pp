@@ -39,7 +39,7 @@ class virtual::users {
     comment => 'Jeff McCune',
     uid     => '1112',
     group   => allstaff,
-    groups  => ["prosvc"],
+    groups  => ["prosvc","release"],
     tag     => allstaff,
  }
 

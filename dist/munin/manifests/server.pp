@@ -22,7 +22,7 @@ class munin::server (
     ensure => present,
   }
 
-  file { '/etc/munin/munin.conf'
+  file { '/etc/munin/munin.conf':
     owner   => root,
     group   => root,
     mode    => 644,

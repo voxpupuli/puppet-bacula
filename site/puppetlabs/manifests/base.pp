@@ -30,6 +30,7 @@ class puppetlabs::base {
   case $domain {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
+      class { "munin":  munin_server => '192.168.101.9'; }
       include puppetlabs
 
       case $operatingsystem {
@@ -43,7 +44,6 @@ class puppetlabs::base {
 
     "puppetlabs.com": {
       include puppetlabs
-      # zleslie: same issue as nagios below, a vpn would solve this
       class { "munin":  munin_server => '74.207.240.137'; }
       # zleslie: Nagios should be moved at a higher level, but need to work out nrpe through the firewall
       class { "nagios": nrpe_server => '74.207.240.137'; }

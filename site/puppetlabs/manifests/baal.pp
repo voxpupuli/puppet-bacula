@@ -55,12 +55,6 @@ class puppetlabs::baal {
   }
 
   ###
-  # Package repositories
-  #
-  class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
-  include yumrepo
-
-  ###
   # Bacula
   #
   $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'
@@ -77,12 +71,12 @@ class puppetlabs::baal {
 
   bacula::director::pool {
     "PuppetLabsPool-Full":
-      volret      => "3 months",
+      volret      => "2 months",
       maxvolbytes => '2000000000',
       maxvoljobs  => '2',
       label       => "Full-";
     "PuppetLabsPool-Inc":
-      volret      => "21 days",
+      volret      => "14 days",
       maxvolbytes => '4000000000',
       maxvoljobs  => '50',
       label       => "Inc-";
@@ -99,8 +93,6 @@ class puppetlabs::baal {
   include nagios::webservices
   include nagios::dbservices
   # zleslie: include nagios::bacula
-  nagios::website { 'apt.puppetlabs.com': }
-  nagios::website { 'yum.puppetlabs.com': }
   nagios::website { 'nagios.puppetlabs.com': auth => 'monit:5kUg8uha', }
   nagios::website { 'dashboard.puppetlabs.com': auth => 'monit:5kUg8uha', }
   nagios::website { 'munin.puppetlabs.com': auth => 'monit:5kUg8uha', }
@@ -135,6 +127,7 @@ class puppetlabs::baal {
 
   file {
     "/usr/local/bin/puppet_deploy.sh":
+      ensure => absent,
       owner => root,
       group => root,
       mode  => 0750,
@@ -179,7 +172,6 @@ class puppetlabs::baal {
       minute  => '*/8',
       require => File["/usr/local/bin/puppet_deploy.rb"];
   }
-
 
   #
   # Mcollective

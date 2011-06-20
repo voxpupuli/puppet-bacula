@@ -14,6 +14,7 @@
 class munin::server (
     $site_alias = $fqdn
   ) {
+
   include apache
   include munin::params
 
@@ -21,18 +22,26 @@ class munin::server (
     ensure => present,
   }
 
+  file { '/etc/munin/munin.conf':
+    owner   => root,
+    group   => root,
+    mode    => 644,
+    content => template("munin/munin.conf.erb");
+  }
+
   file { '/etc/apache2/conf.d/munin':
     ensure => absent,
   }
 
   apache::vhost { "$site_alias":
-    port => '80',
+    port     => '80',
     priority => '40',
-    docroot => '/var/cache/munin/www',
+    docroot  => '/var/cache/munin/www',
     template => 'munin/munin-apache.conf.erb',
-    require => [ Package['munin'], File['/etc/apache2/conf.d/munin'] ]
+    require  => [ Package['munin'], File['/etc/apache2/conf.d/munin'] ]
   }
 
   File <<| tag == 'munin_host' |>>
-  
+
 }
+

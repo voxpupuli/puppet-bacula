@@ -137,7 +137,7 @@ class puppetlabs::baal {
       group => root,
       mode  => 0750,
       source => "puppet:///modules/puppetlabs/puppet_deploy.rb";
-    '/etc/puppet/global/imported':
+    ['/etc/puppet/global', '/etc/puppet/global/imported']:
       ensure => directory,
       mode   => 0755,
       owner  => 'root',

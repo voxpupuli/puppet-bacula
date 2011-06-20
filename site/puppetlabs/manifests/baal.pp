@@ -54,6 +54,25 @@ class puppetlabs::baal {
     site    => "dashboard.puppetlabs.com";
   }
 
+  # global modules to add
+  vcsrepo { '/etc/puppet/global/imported/xmpp':
+    source   => 'git://github.com/barn/puppet-xmpp.git',
+    provider => git,
+    revision => 'c28dc2068d30cd17bacebd9780649b82894a0623',
+    ensure   => present,
+    require => File['/etc/puppet/global/imported'],
+  }
+
+  file { '/etc/puppet/global/imported/xmpp/xmpp.yaml':
+    ensure   => file,
+    owner    => root,
+    group    => root,
+    content  => "---\n:xmpp_jid: 'ben+jabberbotj@puppetlabs.com'\n:xmpp_password: 'MiShiUmlur'\n:xmpp_target: 'ben@puppetlabs.com,zach@puppetlabs.com'\n",
+    require  => Vcsrepo['/etc/puppet/global/imported/xmpp'],
+  }
+
+
+
   ###
   # Bacula
   #

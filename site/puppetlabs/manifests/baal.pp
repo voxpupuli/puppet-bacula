@@ -63,7 +63,7 @@ class puppetlabs::baal {
     require => File['/etc/puppet/global/imported'],
   }
 
-  file { '/etc/puppet/global/imported/xmpp/xmpp.yaml':
+  file { '/etc/puppet/xmpp.yaml':
     ensure   => file,
     owner    => root,
     group    => root,

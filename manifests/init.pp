@@ -54,15 +54,31 @@ class bacula (
     require => Package[$bacula::params::bacula_client_packages],
   }
 
+# using seperate configuration for client and job now
+# zeslie:  @@concat::fragment {
+# zeslie:    "bacula-client-$hostname":
+# zeslie:      target  => '/etc/bacula/bacula-dir.conf',
+# zeslie:      content => template("bacula/bacula-dir-client.erb"),
+# zeslie:      tag     => "bacula-$director";
+# zeslie:  }
+
   @@concat::fragment {
     "bacula-client-$hostname":
-      target  => '/etc/bacula/bacula-dir.conf',
-      content => template("bacula/bacula-dir-client.erb"),
+      target  => '/etc/bacula/conf.d/client.conf',
+      content => template("bacula/client.conf.erb"),
       tag     => "bacula-$director";
   }
 
+  @@concat::fragment {
+    "bacula-job-$hostname":
+      target  => '/etc/bacula/conf.d/job.conf',
+      content => template("bacula/job.conf.erb"),
+      tag     => "bacula-$director";
+  }
+
+
   # realize the firewall rules exported from the director
-  if defined (Class["firewall"]) { 
+  if defined (Class["firewall"]) {
     firewall {
       '0175-INPUT allow tcp 9102':
         proto  => 'tcp',

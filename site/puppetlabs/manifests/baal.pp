@@ -67,7 +67,7 @@ class puppetlabs::baal {
     ensure   => file,
     owner    => root,
     group    => root,
-    content  => "---\n:xmpp_jid: 'ben+jabberbotj@puppetlabs.com'\n:xmpp_password: 'MiShiUmlur'\n:xmpp_target: 'ben@puppetlabs.com,zach@puppetlabs.com'\n",
+    content  => "---\n:xmpp_jid: 'puppetlabsjabberbot@mumble.org.uk'\n:xmpp_password: 'MiShiUmlur'\n:xmpp_target: 'ben@puppetlabs.com,zach@puppetlabs.com'\n",
     require  => Vcsrepo['/etc/puppet/global/imported/xmpp'],
   }
 

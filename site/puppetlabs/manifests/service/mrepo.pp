@@ -51,7 +51,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "x86_64",
     release   => "5",
-    iso       => 'rhel-server-5.0-$arch-dvd.iso',
+    iso       => 'CentOS-5.5-$arch-bin-DVD-?of2.iso',
     updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
   }
   mrepo::repo { "cent5server-i386":
@@ -59,7 +59,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "i386",
     release   => "5",
-    iso       => 'rhel-server-5.0-$arch-dvd.iso',
+    iso       => 'CentOS-5.5-$arch-bin-DVD-?of2.iso',
     updates   => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
   }
 

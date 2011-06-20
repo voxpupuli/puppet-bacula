@@ -54,11 +54,6 @@ class puppetlabs::baal {
   }
 
   ###
-  # Package repositories
-  #
-  include puppetlabs::service::pkgrepo
-
-  ###
   # Bacula
   #
   $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'

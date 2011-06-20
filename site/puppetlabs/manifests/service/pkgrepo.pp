@@ -13,7 +13,7 @@ class puppetlabs::service::pkgrepo {
       owner  => root,
       group  => root,
       mode   => 0755,
-      source => "puppet:///modules/puppetlabs/repo_wrapper.sh";
+      source => "puppet:///modules/puppetlabs/repo_wrapper.rb";
   }
 
   cron {

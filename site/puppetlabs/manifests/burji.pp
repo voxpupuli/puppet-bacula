@@ -22,6 +22,5 @@ class puppetlabs::burji {
       docroot => '/var/www'
   }
 
-
 }
 

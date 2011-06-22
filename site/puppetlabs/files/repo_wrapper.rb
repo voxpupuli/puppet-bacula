@@ -3,11 +3,9 @@
 require 'pp'
 
 apt_base = '/opt/repository/apt'
-keychain_cmd = "keychain -q --agents gpg 4BD6EC30"
-
 # Start Keychain
-puts "Starting keychain..."
-`#{keychain_cmd}`
+puts "Starting agent..."
+`#{eval $(keychain -q --eval --agents gpg 4BD6EC30)}`
 
 repos = [
   '/opt/repository/apt/ubuntu',
@@ -36,4 +34,5 @@ repos.each do |repo|
     end
   end
 end
+
 

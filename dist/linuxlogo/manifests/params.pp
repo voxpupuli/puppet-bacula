@@ -2,6 +2,8 @@ class linuxlogo::params {
 
   $linuxlogo_package = $operatingsystem ? {
     centos  => "linux_logo",
+    redhat  => "linux_logo",
+    fedora  => "linux_logo",
     default => "linuxlogo",
   }
 

@@ -1,0 +1,5 @@
+class puppetlabs::rpm-builder {
+
+
+}
+

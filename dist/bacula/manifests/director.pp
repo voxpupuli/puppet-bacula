@@ -69,6 +69,23 @@ class bacula::director (
       notify => Service[$bacula::params::bacula_director_services];
   }
 
+  concat {
+    '/etc/bacula/conf.d/job.conf':
+      owner  => root,
+      group  => bacula,
+      mode   => 640,
+      notify => Service[$bacula::params::bacula_director_services];
+  }
+
+  concat {
+    '/etc/bacula/conf.d/client.conf':
+      owner  => root,
+      group  => bacula,
+      mode   => 640,
+      notify => Service[$bacula::params::bacula_director_services];
+  }
+
+
   # backup the bacula database
   bacula::mysql { 'bacula': }
 

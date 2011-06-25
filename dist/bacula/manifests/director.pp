@@ -20,7 +20,7 @@ class bacula::director (
     $db_pw    = 'ch@ng3me',
     $port     = 9101,
     $monitor  = true,
-    $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
+    $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI'
   ) {
 
   include bacula::params

@@ -98,5 +98,18 @@ class bacula::director (
     db_pw   => $db_pw,
   }
 
+  bacula::director::storage {
+    "File01":
+      device => ""
+
+  bacula::storage {
+    "${fqdn}File":
+      password => 'z11JGN2YLKIdP5BpD7yHWhsNKq8IUGLmzsdKr5JORAYFSZvi9EYsrE2qSDNnRWM',
+
+  }
+
+
+
+
 }
 

@@ -5,7 +5,7 @@ Director {                # define myself
   WorkingDirectory        = "/var/lib/bacula"
   PidDirectory            = "/var/run/bacula"
   Maximum Concurrent Jobs = 1
-  Password                = "sOjW+LLjaJYm/a6e7F2v0OTVpXGCsQOHPj5bY68D/v8l"  # Console password
+  Password                = "<%= password %>"  # Console password
   Messages                = Daemon
   DirAddress              = 127.0.0.1
 }
@@ -58,31 +58,6 @@ Pool {
   Pool Type       = Backup
   Action On Purge = Truncate
 }
-
-# moved to bacula::director::pool
-# zleslie: Pool {
-# zleslie:   Name                 = PuppetLabsPool-Full
-# zleslie:   Pool Type            = Backup
-# zleslie:   Recycle              = Yes
-# zleslie:   AutoPrune            = Yes
-# zleslie:   Volume Retention     = 4 months
-# zleslie:   Maximum Volume Jobs  = 1
-# zleslie:   Maximum Volume Bytes = 1000000000
-# zleslie:   Label Format         = Full-
-# zleslie:   #Maximum Volumes     = 30
-# zleslie: }
-# zleslie: 
-# zleslie: Pool {
-# zleslie:   Name                 = PuppetLabsPool-Inc
-# zleslie:   Pool Type            = Backup
-# zleslie:   Recycle              = yes           # automatically recycle Volumes
-# zleslie:   AutoPrune            = yes         # Prune expired volumes
-# zleslie:   Volume Retention     = 21 days
-# zleslie:   #Maximum Volume Jobs = 60
-# zleslie:   Maximum Volume Bytes = 4000000000
-# zleslie:   Label Format         = Inc-
-# zleslie:   #Maximum Volumes     = 7
-# zleslie: }
 
 # Definition of file storage device
 Storage {

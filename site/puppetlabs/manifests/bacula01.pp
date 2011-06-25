@@ -10,10 +10,10 @@ class puppetlabs::bacula01 {
   # Bacula
   #
   class { "bacula::director":
-    db_user => 'bacula',
-    db_pw   => 'ijdhx8jsd2KJshd',
-    monitor => false,
-    passowrd => 'lVLthzlHuSWVgmCDXQpWw8sUIeInjXmD7DS3XGA7CkHszfKWVtmimLt27D6yV4R',
+    db_user  => 'bacula',
+    db_pw    => 'ijdhx8jsd2KJshd',
+    monitor  => false,
+    password => 'lVLthzlHuSWVgmCDXQpWw8sUIeInjXmD7DS3XGA7CkHszfKWVtmimLt27D6yV4R',
   }
 
   bacula::director::pool {

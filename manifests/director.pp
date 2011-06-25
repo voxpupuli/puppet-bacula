@@ -45,7 +45,7 @@ class bacula::director (
     "/etc/bacula/bconsole.conf":
       owner   => root,
       group   => bacula,
-      mode    => 640
+      mode    => 640,
       content => template("bacula/bconsole.conf.erb");
   }
 

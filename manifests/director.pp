@@ -24,7 +24,7 @@
 class bacula::director (
     $db_user  = 'bacula',
     $db_pw    = 'ch@ng3me',
-    $port     = 9101,
+    $port     = '9101',
     $monitor  = true,
     $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
     $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ'
@@ -113,7 +113,6 @@ class bacula::director (
       notify  => Service[$bacula::params::bacula_director_services],
       content => template("bacula/bacula-sd.conf.erb"),
   }
-
 
 }
 

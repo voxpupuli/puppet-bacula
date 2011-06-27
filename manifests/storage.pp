@@ -12,8 +12,10 @@
 # Sample Usage:
 #
 class bacula::storage (
-    $password
+    $password,
+    $device = '/bacula'
   ) {
+
 
   bacula::storage::device {
     "${fqdn}FileStorage":

@@ -3,6 +3,12 @@
 # This class installs and configures the Bacula Backup Director
 #
 # Parameters:
+# * db_user: the database user
+# * db_pw: the database user's password
+# * port: the port to connect to the director on
+# * monitor: should nagios be checking bacula backups, and I should hope so
+# * password: password to connect to the director
+# * sd_pass: the password to connect to the storage daemon
 #
 #
 # Actions:
@@ -20,7 +26,8 @@ class bacula::director (
     $db_pw    = 'ch@ng3me',
     $port     = 9101,
     $monitor  = true,
-    $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI'
+    $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
+    $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ'
   ) {
 
   include bacula::params
@@ -98,17 +105,14 @@ class bacula::director (
     db_pw   => $db_pw,
   }
 
-  bacula::director::storage {
-    "File01":
-      device => ""
-
-  bacula::storage {
-    "${fqdn}File":
-      password => 'z11JGN2YLKIdP5BpD7yHWhsNKq8IUGLmzsdKr5JORAYFSZvi9EYsrE2qSDNnRWM',
-
+  file {
+    "/etc/bacula/bacula-sd.conf":
+      owner   => root,
+      group   => bacula,
+      mode    => 640,
+      notify  => Service[$bacula::params::bacula_director_services],
+      content => template("bacula/bacula-sd.conf.erb"),
   }
-
-
 
 
 }

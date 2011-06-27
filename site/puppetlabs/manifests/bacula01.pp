@@ -38,5 +38,10 @@ class puppetlabs::bacula01 {
     monitor  => false,
   }
 
+  bacula::fileset {
+    "Common":
+      files => ["/etc"],
+  }
+
 }
 

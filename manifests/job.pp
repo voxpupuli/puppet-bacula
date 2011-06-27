@@ -1,4 +1,4 @@
-class bacula::job (
+define bacula::job (
     $files,
     $excludes = ''
   ) {
@@ -9,7 +9,6 @@ class bacula::job (
       content => template("bacula/fileset.conf.erb"),
       tag     => "bacula-$director";
   }
-
 
 }
 

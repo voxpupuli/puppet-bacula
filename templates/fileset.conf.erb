@@ -4,7 +4,7 @@ FileSet {
     Options {
       signature = MD5
       compression=gzip
-  }
+    }
 <% if files.is_a? Array %>
 <% files.each do |file| %><%= "    File = #{file}\n" %><% end %>
 <% elsif files != '' %>

@@ -17,7 +17,9 @@ class apt::server::repo (
 
   package { 'reprepro': ensure => present; }
 
-  File { owner => 'root', group => 'release', mode => 664 }
+  # This was causing issues with teh apt repo cronjob permission setter
+  # always changing it to 775 instead of 2775
+  #zleslie: File { owner => 'root', group => 'release', mode => 664 }
 
   file { $base_location: ensure => directory; }
 

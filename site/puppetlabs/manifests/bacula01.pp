@@ -10,19 +10,21 @@ class puppetlabs::bacula01 {
   # Bacula
   #
   class { "bacula::director":
-    db_user => 'bacula',
-    db_pw   => 'ijdhx8jsd2KJshd',
-    monitor => false,
+    db_user  => 'bacula',
+    db_pw    => 'ijdhx8jsd2KJshd',
+    monitor  => false,
+    password => 'lVLthzlHuSWVgmCDXQpWw8sUIeInjXmD7DS3XGA7CkHszfKWVtmimLt27D6yV4R',
+    sd_pass  => 'Z86VoTNrZEmGZxJ8rK7RenUeHvyUVeWZJK7ZHnYDE9Vhery0M2fW7Q8ZesbcXHk',
   }
 
   bacula::director::pool {
     "PuppetLabsPool-Full":
-      volret      => "3 months",
+      volret      => "2 months",
       maxvolbytes => '2000000000',
-      maxvoljobs  => '2',
+      maxvoljobs  => '3',
       label       => "Full-";
     "PuppetLabsPool-Inc":
-      volret      => "21 days",
+      volret      => "14 days",
       maxvolbytes => '4000000000',
       maxvoljobs  => '50',
       label       => "Inc-";
@@ -35,7 +37,6 @@ class puppetlabs::bacula01 {
     password => $bacula_password,
     monitor  => false,
   }
-
 
 }
 

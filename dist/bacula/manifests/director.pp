@@ -3,6 +3,12 @@
 # This class installs and configures the Bacula Backup Director
 #
 # Parameters:
+# * db_user: the database user
+# * db_pw: the database user's password
+# * port: the port to connect to the director on
+# * monitor: should nagios be checking bacula backups, and I should hope so
+# * password: password to connect to the director
+# * sd_pass: the password to connect to the storage daemon
 #
 #
 # Actions:
@@ -16,10 +22,12 @@
 # Sample Usage:
 #
 class bacula::director (
-    $db_user = 'bacula',
-    $db_pw   = 'ch@ng3me',
-    $port    = 9101,
-    $monitor = true
+    $db_user  = 'bacula',
+    $db_pw    = 'ch@ng3me',
+    $port     = '9101',
+    $monitor  = true,
+    $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
+    $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ'
   ) {
 
   include bacula::params
@@ -40,6 +48,13 @@ class bacula::director (
 
   file { "/bacula": ensure  => directory; }
   file { "/etc/bacula/conf.d": ensure  => directory; }
+  file {
+    "/etc/bacula/bconsole.conf":
+      owner   => root,
+      group   => bacula,
+      mode    => 640,
+      content => template("bacula/bconsole.conf.erb");
+  }
 
   concat::fragment {
     "bacula-director-header":
@@ -48,10 +63,7 @@ class bacula::director (
       content => template("bacula/bacula-dir-header.erb")
   }
 
-# Realize all fragments that are targetd at me
   Concat::Fragment <<| tag == "bacula-$fqdn" |>>
-  #was
-  #zleslie: Concat::Fragment <<| tag == '/etc/bacula/bacula-dir.conf' |>>
 
   concat {
     '/etc/bacula/bacula-dir.conf':
@@ -85,7 +97,6 @@ class bacula::director (
       notify => Service[$bacula::params::bacula_director_services];
   }
 
-
   # backup the bacula database
   bacula::mysql { 'bacula': }
 
@@ -94,7 +105,14 @@ class bacula::director (
     db_pw   => $db_pw,
   }
 
-
+  file {
+    "/etc/bacula/bacula-sd.conf":
+      owner   => root,
+      group   => bacula,
+      mode    => 640,
+      notify  => Service[$bacula::params::bacula_director_services],
+      content => template("bacula/bacula-sd.conf.erb"),
+  }
 
 }
 

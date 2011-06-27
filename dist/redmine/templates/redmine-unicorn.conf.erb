@@ -44,6 +44,8 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   RedirectMatch permanent	/projects/puppet/wiki/Getting_Started/?                   http://docs.puppetlabs.com/#getting_started
   ProxyPass /projects/puppet/wiki/Style_Guide !
   RedirectMatch permanent	/projects/puppet/wiki/Style_Guide/?                       http://docs.puppetlabs.com/guides/style_guide
+  ProxyPass /projects/puppet/wiki/Puppet_Templating !
+  RedirectMatch permanent /projects/puppet/wiki/Puppet_Templating                   http://docs.puppetlabs.com/guides/templating.html
 
   ProxyPass /projects/1/wiki/External_Nodes !
   RedirectMatch permanent	/projects/1/wiki/External_Nodes/?                    http://docs.puppetlabs.com/guides/external_nodes.html
@@ -63,6 +65,8 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   RedirectMatch permanent	/projects/1/wiki/Getting_Started/?                   http://docs.puppetlabs.com/#getting_started
   ProxyPass /projects/1/wiki/Style_Guide !
   RedirectMatch permanent	/projects/1/wiki/Style_Guide/?                       http://docs.puppetlabs.com/guides/style_guide
+  ProxyPass /projects/1/wiki/Puppet_Templating !
+  RedirectMatch permanent /projects/1/wiki/Puppet_Templating                   http://docs.puppetlabs.com/guides/templating.html
 
   # Now anything that is left, lets proxy this to localhost.
   ProxyPass / http://localhost:8080/

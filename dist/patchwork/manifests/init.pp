@@ -17,7 +17,6 @@ class patchwork {
       group => root,
       mode  => 644,
       content => template("patchwork/local_settings.py.erb");
-    "/var/lib/bacula": ensure => directory;
     "/var/lib/bacula/pgsql": ensure => directory;
     "/home/patchwork/.pwclientrc":
         owner  => patchwork,
@@ -64,7 +63,7 @@ class patchwork {
 
   bacula::job {
     "${fqdn}-patchwork":
-      files => ["/srv"],
+      files => ["/srv","/var/lib/bacula/pgsql"],
   }
 
 }

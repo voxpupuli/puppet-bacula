@@ -14,6 +14,7 @@ class puppetlabs::bacula01 {
     db_pw    => 'ijdhx8jsd2KJshd',
     monitor  => false,
     password => 'lVLthzlHuSWVgmCDXQpWw8sUIeInjXmD7DS3XGA7CkHszfKWVtmimLt27D6yV4R',
+    sd_pass  => 'Z86VoTNrZEmGZxJ8rK7RenUeHvyUVeWZJK7ZHnYDE9Vhery0M2fW7Q8ZesbcXHk',
   }
 
   bacula::director::pool {

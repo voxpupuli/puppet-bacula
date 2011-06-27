@@ -12,7 +12,7 @@
 
 Storage {                             # definition of myself
   Name = <%= fqdn %>-sd
-  SDPort = 9103                  # Director's port      
+  SDPort = 9103                  # Director's port
   WorkingDirectory = "/var/lib/bacula"
   Pid Directory = "/var/run/bacula"
   Maximum Concurrent Jobs = 20
@@ -22,19 +22,19 @@ Storage {                             # definition of myself
 # List Directors who are permitted to contact Storage daemon
 #
 Director {
-  Name = baal.puppetlabs.com-dir
-  Password = "kIw4ISyjT8PlbMrPgZB_WBsBb5ckS5hND"
+  Name = <%= fqdn %>-dir
+  Password = "<%= sd_pass %>"
 }
 
 #
 # Restricted Director, used by tray-monitor to get the
 #   status of the storage daemon
 #
-Director {
-  Name = baal.puppetlabs.com-mon
-  Password = "OR1bM5eje_E_wsR3tvjvO2_ktKHpAjGY7"
-  Monitor = yes
-}
+#Director {
+#  Name = <%=fqdn %>-mon
+#  Password = "sneaky password here"
+#  Monitor = yes
+#}
 
 #
 # Note, for a list of additional Device templates please
@@ -50,7 +50,7 @@ Director {
 #
 
 Device {
-  Name           = PuppetLabsFileStorage
+  Name           = FileStorage
   Media Type     = File
   Archive Device = /bacula
   LabelMedia     = yes;                   # lets Bacula label unlabeled media
@@ -66,6 +66,6 @@ Device {
 #
 Messages {
   Name = Standard
-  director = baal.puppetlabs.com-dir = all
+  director = <%= fqdn %>-dir = all
 }
 

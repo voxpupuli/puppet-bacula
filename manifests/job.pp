@@ -1,6 +1,7 @@
 define bacula::job (
-    $files,
-    $excludes = ''
+    $files    = '',
+    $excludes = '',
+    $fileset  = ''
   ) {
 
   if ! defined(Class["bacula"]) {
@@ -8,11 +9,17 @@ define bacula::job (
   }
   $director = $bacula::bacula_director
 
-  @@concat::fragment {
-    "bacula-fileset-$name":
-      target  => '/etc/bacula/conf.d/fileset.conf',
-      content => template("bacula/fileset.conf.erb"),
-      tag     => "bacula-$director";
+  # so if the fileset is not defined, we fall back to one called Common
+  if $fileset {
+    $fileset_real = "bacula-fileset-$name"
+    @@concat::fragment {
+      "bacula-fileset-$name":
+        target  => '/etc/bacula/conf.d/fileset.conf',
+        content => template("bacula/fileset.conf.erb"),
+        tag     => "bacula-$director";
+    }
+  } else {
+    $fileset_real = "Common"
   }
 
   @@concat::fragment {

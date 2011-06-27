@@ -15,5 +15,12 @@ define bacula::job (
       tag     => "bacula-$director";
   }
 
+  @@concat::fragment {
+    "bacula-job-$hostname":
+      target  => '/etc/bacula/conf.d/job.conf',
+      content => template("bacula/job.conf.erb"),
+      tag     => "bacula-$director";
+  }
+
 }
 

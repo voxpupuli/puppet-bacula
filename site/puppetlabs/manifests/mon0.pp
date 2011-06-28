@@ -7,7 +7,6 @@ class puppetlabs::mon0 {
   # gather project
   package { "libxml-simple-perl": ensure => installed; }
 
-
 #  apache::vhost {'mon0.puppetlabs.lan':
 #    port => 80,
 #    docroot => '/var/www',
@@ -68,4 +67,20 @@ class puppetlabs::mon0 {
       minute => "*";
   }
 
+  ####
+  # Bacula
+  #
+  $bacula_director = 'bacula01.puppetlabs.lan'
+  $bacula_password = '6o2lw26JbwPvJxteWw3gc440p06SnUPOkmwis47bCMZzhvMOraNSVT0JelLK2tX'
+  class { "bacula":
+    director => $bacula_director,
+    password => $bacula_password,
+  }
+
+  bacula::job {
+    "${fqdn}-graphite":
+      files => ["/opt/graphite","/home/zach"],
+  }
+
 }
+

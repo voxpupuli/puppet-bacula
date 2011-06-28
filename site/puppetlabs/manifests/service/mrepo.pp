@@ -1,9 +1,9 @@
 class puppetlabs::service::mrepo {
 
-  class { 'mrepo::settings':
+  class { 'mrepo::params':
+    rhn           => true,
     rhn_username  => 'puppetlabs',
     rhn_password  => 'yXgBdtwfEs',
-    isoroot       => '/var/mrepo/iso',
   }
 
   mrepo::repo { "rhel6server-x86_64":

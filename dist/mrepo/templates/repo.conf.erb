@@ -1,17 +1,13 @@
+# This file is managed by puppet. Any changes to this file will be
+# overwritten the next time puppet runs. Update with caution!
 [<%= name %>]
 name = <%= repotitle %>
 release = <%= release %>
 arch = <%= arch %>
-metadata = <%= metadata %>
+metadata = <%= if metadata.is_a? Array; then metadata.join(' '); else metadata; end %>
 <% unless iso.empty? -%>
-iso = <%= scope.lookupvar('mrepo::settings::isoroot') %>/<%= iso %>
+iso = <%= iso %>
 <% end -%>
-<% unless updates.empty? -%>
-updates = <%= updates %>
-<% end -%>
-<% unless extras.empty? -%>
-extras = <%= extras %>
-<% end -%>
-<% unless fasttrack.empty? -%>
-fastrack = <%= fasttrack %>
+<% urls.each_pair do | name, url | -%>
+<%= name %> = <%= url %>
 <% end -%>

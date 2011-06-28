@@ -77,10 +77,5 @@ class puppetlabs::mon0 {
     password => $bacula_password,
   }
 
-  bacula::job {
-    "${fqdn}-graphite":
-      files => ["/opt/graphite","/home/zach"],
-  }
-
 }
 

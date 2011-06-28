@@ -38,5 +38,10 @@ class graphite (
     recurse   => true
   }
 
+  bacula::job {
+    "${fqdn}-graphite":
+      files => ["/opt/graphite","/home/zach"],
+  }
+
 }
 

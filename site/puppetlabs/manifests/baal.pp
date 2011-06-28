@@ -60,7 +60,7 @@ class puppetlabs::baal {
     provider => git,
     revision => 'c28dc2068d30cd17bacebd9780649b82894a0623',
     ensure   => present,
-    require => File['/etc/puppet/global/imported'],
+    require  => File['/etc/puppet/global/imported'],
   }
 
   file { '/etc/puppet/xmpp.yaml':
@@ -70,8 +70,6 @@ class puppetlabs::baal {
     content  => "---\n:xmpp_jid: 'puppetlabsjabberbot@mumble.org.uk'\n:xmpp_password: 'MiShiUmlur'\n:xmpp_target: 'ben@puppetlabs.com,zach@puppetlabs.com'\n",
     require  => Vcsrepo['/etc/puppet/global/imported/xmpp'],
   }
-
-
 
   ###
   # Bacula
@@ -101,9 +99,10 @@ class puppetlabs::baal {
       label       => "Inc-";
   }
 
-  # commented in favor of above paramaterized classes
-  #zleslie: include bacula
-  #zleslie: include bacula::director
+  bacula::job {
+    "${fqdn}":
+      files    => ["/var/lib/bacula/mysql"],
+  }
 
   ###
   # Monitoring

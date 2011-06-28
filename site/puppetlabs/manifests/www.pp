@@ -1,5 +1,11 @@
 class puppetlabs::www {
 
+  #
+  # THIS CLASS SHOULD BE DEPRECATED ONCE APU IS REMOVED
+  # MOVE THINGS STILL NEEDED TO Class["puppetlabs::service::www"]
+  # REMOVE CAREFULLY!
+  #
+
   # Nagios
   include nagios::webservices
   include nagios::dbservices
@@ -16,6 +22,13 @@ class puppetlabs::www {
   class { "bacula":
     director => $bacula_director,
     password => $bacula_password,
+  }
+
+  # added for temporary measure for transition away from apu
+  bacula::job {
+    "${fqdn}-www":
+      files    => ["/var/lib/bacula/mysql","/var/www"],
+      excludes => ["/var/www/puppetlabs.com/downloads"],
   }
 
   # Training downloads

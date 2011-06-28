@@ -99,6 +99,11 @@ class puppetlabs::baal {
       label       => "Inc-";
   }
 
+  bacula::fileset {
+    "Common":
+      files => ["/etc"],
+  }
+
   bacula::job {
     "${fqdn}":
       files    => ["/var/lib/bacula/mysql"],

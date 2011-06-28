@@ -75,6 +75,7 @@ class puppetlabs::mon0 {
   class { "bacula":
     director => $bacula_director,
     password => $bacula_password,
+    monitor  => false,
   }
 
 }

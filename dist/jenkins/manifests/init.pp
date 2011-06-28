@@ -1,26 +1,34 @@
 # Class: jenkins
 #
-# This class installs and configures jenkins
+# This class installs and configures the Jenkins CI system.
 #
 # Parameters:
-# * $site_alias
-#   The hostname that the site will be reachable by
+# - site_alias - The hostname that the site will be reachable by
+# - backup - weather to schedule a backup job for jenkins
 #
 # Actions:
 #
 # Requires:
-#   - The jenkins::params class
+# - The jenkins::params class
 #
 # Sample Usage:
+# include jenkins
 #
 # TODO: Move apt-key import into defined type
 # Apt repo creattion should be a defined type
 # Apt-get update should be triggered
 # Apache modules should be moved to apache class and realized when needed
 # Test for distro, currently only apt based 
-class jenkins ($site_alias) {
+class jenkins (
+  $site_alias,
+  $backup = true
+  ) {
   include jenkins::params
   include git
+
+  if $backup == true {
+    include jenkins::backup
+  }
 
   nagios::website { "$site_alias": }
 

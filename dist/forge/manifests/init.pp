@@ -37,6 +37,11 @@ class forge(
   $passenger_version=$passenger::params::version
   $gem_path=$passenger::params::gem_path
 
+  bacula::job {
+    "${fqdn}-forge":
+      files    => ["/opt/forge"],
+  }
+
   file { '/opt/forge':
     owner => 'www-data',
     group => 'www-data',
@@ -50,7 +55,7 @@ class forge(
       command => "/usr/bin/find /opt/forge -print | grep -v \.git | xargs -I {} chown www-data:www-data {}",
       user => root,
       minute => "*/30";
-	}
+  }
 
   # repo.
   vcsrepo { '/opt/forge':

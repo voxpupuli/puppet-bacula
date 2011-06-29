@@ -1,0 +1,21 @@
+FileSet {
+  Name = <%= name %>
+  Include {
+    Options {
+      signature = MD5
+      compression=gzip
+    }
+<% if files.is_a? Array %>
+<% files.each do |file| %><%= "    File = #{file}\n" %><% end %>
+<% elsif files != '' %>
+<%= "    File = #{file}" %>
+<% end %>
+  }
+  Exclude {
+<% if files.is_a? Array %>
+<% excludes.each do |exclude| %><%= "    File = #{exclude}\n" %><% end %>
+<% elsif excludes != '' %>
+<%= "    File = #{exclude}" %>
+<% end %>
+  }
+}

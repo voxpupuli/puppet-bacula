@@ -21,7 +21,7 @@ class puppetlabs::bacula01 {
     "PuppetLabsPool-Full":
       volret      => "2 months",
       maxvolbytes => '2000000000',
-      maxvoljobs  => '3',
+      maxvoljobs  => '10',
       label       => "Full-";
     "PuppetLabsPool-Inc":
       volret      => "14 days",
@@ -36,6 +36,11 @@ class puppetlabs::bacula01 {
     director => $bacula_director,
     password => $bacula_password,
     monitor  => false,
+  }
+
+  bacula::fileset {
+    "Common":
+      files => ["/etc"],
   }
 
 }

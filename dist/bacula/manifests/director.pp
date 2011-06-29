@@ -46,7 +46,11 @@ class bacula::director (
     require    => Package[$bacula::params::bacula_director_packages],
   }
 
-  file { "/bacula": ensure  => directory; }
+  file { "/bacula":
+    owner   => bacula,
+    group   => bacula,
+    ensure  => directory,
+  }
   file { "/etc/bacula/conf.d": ensure  => directory; }
   file {
     "/etc/bacula/bconsole.conf":
@@ -91,6 +95,14 @@ class bacula::director (
 
   concat {
     '/etc/bacula/conf.d/client.conf':
+      owner  => root,
+      group  => bacula,
+      mode   => 640,
+      notify => Service[$bacula::params::bacula_director_services];
+  }
+
+  concat {
+    '/etc/bacula/conf.d/fileset.conf':
       owner  => root,
       group  => bacula,
       mode   => 640,

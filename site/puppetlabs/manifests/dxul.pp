@@ -18,7 +18,7 @@ class puppetlabs::dxul {
   # Base
   include puppetlabs_ssl
   include account::master
- 
+
   # Puppet
   #$dashboard_site = 'demo.puppetlabs.com'
   #$puppet_storedconfig_password = 'password'
@@ -33,7 +33,6 @@ class puppetlabs::dxul {
     director => $bacula_director,
     password => $bacula_password,
   }
-  
 
   # Nagios
   include nagios::webservices
@@ -54,6 +53,11 @@ class puppetlabs::dxul {
     db_user => 'redmine',
     db_pw   => 'c@11-m3-m1st3r-p1t4ul',
     port    => '80',
+  }
+
+  bacula::job {
+    "${fqdn}-redmine":
+      files    => ["/var/lib/bacula/mysql","/opt/projects.puppetlabs.com"],
   }
 
   apache::vhost::redirect {
@@ -85,11 +89,11 @@ class puppetlabs::dxul {
       command => 'rake -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppet allow_override=project folder=tickets';
   }
 
-	#vcsrepo {
-	#	"/opt/git/puppetmaster-training.git":
-	#		ensure => bare,
-	#		provider => git,
-	#		source => "git@github.com:puppetlabs/puppetmaster-training.git";
-	#}
+  #vcsrepo {
+  #  "/opt/git/puppetmaster-training.git":
+  #    ensure => bare,
+  #    provider => git,
+  #    source => "git@github.com:puppetlabs/puppetmaster-training.git";
+  #}
 
 }

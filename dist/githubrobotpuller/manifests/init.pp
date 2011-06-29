@@ -23,16 +23,11 @@ class githubrobotpuller (
     system => true
   }
 
-  # file{ $githubrobotpuller::path:
-  #   ensure  => directory,
-  #   owner   => $githubrobotpuller::user,
-  #   require => User[ $githubrobotpuller::user ],
-  # }
-
+  # We don't have a file{ .. } here as vcsrepo complains.
   vcsrepo{ $githubrobotpuller::path:
     source   => 'git://github.com/jhelwig/Ruby-GitHub-Pull-Request-Email-Bot.git',
     provider => 'git',
-    owner    => $githubrobotpuller::user,
+    owner    => $githubrobotpuller::user, # only in recent vcsrepo.
     revision => $githubrobotpuller::revision,
     ensure   => present,
     require  => User[ $githubrobotpuller::user ],
@@ -52,11 +47,11 @@ class githubrobotpuller (
     before   => Vcsrepo[ $githubrobotpuller::path ],
   }
 
-  #cron{ "runrobotrun":
-  #  command => "( cd githubrobotpuller::path && env PATH=$PATH:/usr/sbin RUBYLIB=\$(pwd)/lib bin/pull-request-bot )",
-  #  minutes => '*/15',
-  #  require => File[ "$githubrobotpuller::path/config.yaml" ],
-  #}
-
+  cron{ "runrobotrun":
+    command => "( cd $githubrobotpuller::path && env PATH=$PATH:/usr/sbin RUBYLIB=\$(pwd)/lib bin/pull-request-bot )",
+    minute  => '*/15',
+    user    => $githubrobotpuller::user,
+    require => File[ "$githubrobotpuller::path/config.yaml" ],
+  }
 
 }

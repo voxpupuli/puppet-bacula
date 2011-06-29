@@ -3,21 +3,20 @@ class patchwork {
   $patchwork_db_user="patchwork"
   $patchwork_db_pass="Xeexoh5E"
 
-  package { 
-    "postgresql":                  ensure => installed; 
-    "python-psycopg2":            ensure => installed; 
-    "python-django-registration": ensure => installed; 
-    "libapache2-mod-wsgi": ensure => installed; 
-    "postfix": ensure => installed; 
+  package {
+    "postgresql":                  ensure => installed;
+    "python-psycopg2":            ensure => installed;
+    "python-django-registration": ensure => installed;
+    "libapache2-mod-wsgi": ensure => installed;
+    "postfix": ensure => installed;
   }
 
-  file { 
+  file {
     "/srv/patchwork/apps/local_settings.py":
       owner => root,
       group => root,
       mode  => 644,
       content => template("patchwork/local_settings.py.erb");
-    "/var/lib/bacula": ensure => directory;
     "/var/lib/bacula/pgsql": ensure => directory;
     "/home/patchwork/.pwclientrc":
         owner  => patchwork,
@@ -42,7 +41,6 @@ class patchwork {
       port => '80',
       dest => 'https://patchwork.puppetlabs.com'
   }
-  
 
   cron {
     "patchwork_sql_dump":
@@ -62,5 +60,10 @@ class patchwork {
 
   Account::User <| tag == 'patchwork' |>
   Group <| tag == 'patchwork' |>
+
+  bacula::job {
+    "${fqdn}-patchwork":
+      files => ["/srv","/var/lib/bacula/pgsql"],
+  }
 
 }

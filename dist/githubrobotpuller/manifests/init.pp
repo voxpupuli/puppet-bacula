@@ -9,7 +9,7 @@
 #
 
 class githubrobotpuller (
-  $version = undef
+  $version = 'HEAD'
 ) {
 
   # Requirements
@@ -17,12 +17,6 @@ class githubrobotpuller (
 
   $user = 'deckard'
   $path = '/opt/robopuller'
-
-  if $version == undef {
-    $revision = 'HEAD'
-  } else {
-    $revision = $version
-  }
 
   user{ $githubrobotpuller::user:
     ensure => present,
@@ -38,9 +32,10 @@ class githubrobotpuller (
   vcsrepo{ $githubrobotpuller::path:
     source   => 'git://github.com/jhelwig/Ruby-GitHub-Pull-Request-Email-Bot.git',
     provider => 'git',
+    owner    => $githubrobotpuller::user,
     revision => $githubrobotpuller::revision,
     ensure   => present,
-    require  => File[ $githubrobotpuller::path ],
+    require  => [ File[ $githubrobotpuller::path ], User[ $githubrobotpuller::user ] ],
   }
 
   file{ "$githubrobotpuller::path/config.yaml":

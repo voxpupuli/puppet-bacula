@@ -9,7 +9,7 @@
 #
 
 class githubrobotpuller (
-  $version
+  $version = undef
 ) {
 
   # Requirements

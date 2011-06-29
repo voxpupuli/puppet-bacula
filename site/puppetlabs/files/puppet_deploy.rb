@@ -14,11 +14,12 @@ require 'pp'
 require 'fileutils'
 
 github_repo_urls = { :default => 'git@github.com:puppetlabs/puppetlabs-modules.git',
-#                     :adrient => 'git@github.com:adrient/puppetlabs-modules.git' } 
-                     :zach => 'git@github.com:xaque208/puppetlabs-modules.git' } 
+                     :adrient => 'git@github.com:adrienthebo/puppetlabs-modules.git',
+                     :zach    => 'git@github.com:xaque208/puppetlabs-modules.git'
+}
 
 # Identifer for individual repos.
-$NSIDENT = 'nonPL-'
+$NSIDENT = 'nonPL'
 
 # $modulepath=`puppet master --configprint modulepath`
 env_base_dir  = '/etc/puppet/environments'
@@ -50,7 +51,7 @@ class GitRepo
   def initialize( base_dir , git_name , git_repo_url )
 
     @git_repo_url = git_repo_url
-    @namespace    = git_name == :default ?  '' : "#{$NSIDENT}#{git_name}-" # :default doesn't have a namespace, but everything else should.
+    @namespace    = git_name == :default ?  '' : "#{$NSIDENT}#{git_name}" # :default doesn't have a namespace, but everything else should.
 
     check_env_dir base_dir
 

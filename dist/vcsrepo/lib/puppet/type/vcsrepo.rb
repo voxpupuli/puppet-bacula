@@ -17,8 +17,24 @@ Puppet::Type.newtype(:vcsrepo) do
   feature :reference_tracking,
           "The provider supports tracking revision references that can change
            over time (eg, some VCS tags and branch names)"
-  
+
   ensurable do
+    attr_accessor :latest
+
+    def insync?(is)
+      @should ||= []
+
+      case should
+        when :present
+          return true unless [:absent, :purged, :held].include?(is)
+        when :latest
+          if is == :latest
+            return true
+          else
+            return false
+          end
+      end
+    end
 
     newvalue :present do
       provider.create
@@ -37,7 +53,11 @@ Puppet::Type.newtype(:vcsrepo) do
         if provider.respond_to?(:update_references)
           provider.update_references
         end
-        reference = resource.value(:revision) || provider.revision
+        if provider.respond_to?(:latest?)
+            reference = provider.latest || provider.revision
+        else
+          reference = resource.value(:revision) || provider.revision
+        end
         notice "Updating to latest '#{reference}' revision"
         provider.revision = reference
       else
@@ -48,16 +68,12 @@ Puppet::Type.newtype(:vcsrepo) do
     def retrieve
       prov = @resource.provider
       if prov
-        if prov.class.feature?(:bare_repositories)
-          if prov.working_copy_exists?
-            :present
-          elsif prov.bare_exists?
-            :bare
-          else
-            :absent
-          end
+        if prov.working_copy_exists?
+          prov.latest? ? :latest : :present
+        elsif prov.class.feature?(:bare_repositories) and prov.bare_exists?
+          :bare
         else
-          prov.exists? ? :present : :absent
+          :absent
         end
       else
         raise Puppet::Error, "Could not find provider"
@@ -88,6 +104,24 @@ Puppet::Type.newtype(:vcsrepo) do
   newproperty(:revision) do
     desc "The revision of the repository"
     newvalue(/^\S+$/)
+  end
+
+  newparam(:owner) do
+    desc "The user/uid that owns the repository files"
+  end
+
+  newparam(:group) do
+    desc "The group/gid that owns the repository files"
+  end
+
+  newparam(:excludes) do
+    desc "Files to be excluded from the repository"
+  end
+
+  newparam(:force) do
+    desc "Force repository creation, destroying any files on the path in the process."
+    newvalues(:true, :false)
+    defaultto false
   end
 
   newparam :compression, :required_features => [:gzip_compression] do

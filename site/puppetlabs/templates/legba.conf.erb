@@ -1,5 +1,5 @@
-NameVirtualHost <%=ipaddress%>:<%= port %>
-<VirtualHost <%=ipaddress%>:<%= port %>>
+NameVirtualHost *:<%= port %>
+<VirtualHost *:<%= port %>>
   <% if ssl == true %>
   SSLEngine on
   SSLCertificateFile <%=ssl_path%>/certs/pl.cert

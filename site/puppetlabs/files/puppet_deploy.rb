@@ -13,10 +13,16 @@
 require 'pp'
 require 'fileutils'
 
-$github_repo_url = "git@github.com:puppetlabs/puppetlabs-modules.git"
+github_repo_urls = { :default => 'git@github.com:puppetlabs/puppetlabs-modules.git',
+#                     :adrient => 'git@github.com:adrient/puppetlabs-modules.git' } 
+                     :zach => 'git@github.com:xaque208/puppetlabs-modules.git' } 
+
+# Identifer for individual repos.
+$NSIDENT = 'nonPL-'
 
 # $modulepath=`puppet master --configprint modulepath`
 env_base_dir  = '/etc/puppet/environments'
+
 $debug = false
 
 if ARGV.include? "-d" or ARGV.include? "--debug"
@@ -41,11 +47,15 @@ class GitRepo
 
   attr_accessor :repo , :branches , :branchcount
 
-  def initialize( base_dir )
+  def initialize( base_dir , git_name , git_repo_url )
+
+    @git_repo_url = git_repo_url
+    @namespace    = git_name == :default ?  '' : "#{$NSIDENT}#{git_name}-" # :default doesn't have a namespace, but everything else should.
+
     check_env_dir base_dir
 
     @env_base_dir = base_dir
-    @mirrordir = "#{@env_base_dir}/.github_pl_modules_repo"
+    @mirrordir = "#{@env_base_dir}/.github_pl_#{@namespace}modules_repo"
     # We need to mirror the repo before we can get the list of branches!
     self.mirror_repo
 
@@ -69,20 +79,22 @@ class GitRepo
   public
 
   def get_branches
-    Dir.chdir @mirrordir
+    dputs "CDing to #{@mirrordir} from #{Dir.getwd}"
+    Dir.chdir @mirrordir do 
 
-    branches_wot_we_have = []
+      branches_wot_we_have = []
 
-    `LANG="C" git branch -a`.split("\n").each do |branch|
-      branch = branch.split( / +/ )[1]
-      next if branch == "master"
-      next if branch =~ /remotes\/origin\/(HEAD|master)/
-      next if branch =~ /\// # Zach safe code.
+      `LANG="C" git branch -a`.split("\n").each do |branch|
+        branch = branch.split( / +/ )[1]
+        next if branch == "master"
+        next if branch =~ /remotes\/origin\/(HEAD|master)/
+        next if branch =~ /\// # Zach safe code.
 
-      branches_wot_we_have << branch
+        branches_wot_we_have << branch
+      end
+
+      branches_wot_we_have
     end
-
-    branches_wot_we_have
   end
 
 
@@ -99,9 +111,9 @@ class GitRepo
     branch_checkout_dirname = branch_to_make.split( '/' ).last
 
     if make_as != nil
-      checkout_as = make_as
+      checkout_as = @namespace + make_as
     else
-      checkout_as = branch_checkout_dirname
+      checkout_as = @namespace + branch_checkout_dirname
     end
 
     dputs "Making ol' #{branch_to_make}"
@@ -127,8 +139,9 @@ class GitRepo
 
   def checkout_master
     # just assume it's checked out, for now.
-    Dir.chdir @mirrordir
-    pp_and_system( "LANG='C' git fetch #{$gitnoise} --all --prune" )
+    Dir.chdir @mirrordir do
+      pp_and_system( "LANG='C' git fetch #{$gitnoise} --all --prune" )
+    end
   end
 
   def mirror_repo
@@ -136,16 +149,27 @@ class GitRepo
       self.checkout_master
     else
       dputs "Making clone of remote repo locally to #{@mirrordir}"
-      pp_and_system( "LANG='C' git clone #{$gitnoise} --mirror #{$github_repo_url} #{@mirrordir}" )
+      pp_and_system( "LANG='C' git clone #{$gitnoise} --mirror #{@git_repo_url} #{@mirrordir}" )
     end
   end
 
   def delete_extraneous_branches
     Dir.chdir @env_base_dir do
       Dir.glob( '*' ) do |dir|
-        next if dir == "production" # Hardcode DON'T RM PROD!
+        next if dir == "#{@namespace}production" # Hardcode DON'T RM PROD!
+                                                 # :default will namespace to ''
         next unless File.directory? dir
         next if @branches.include? dir
+
+        # Remove things, but base it on namespaces.
+        if @namespace.empty? 
+          next if dir =~ /^#{$NSIDENT}/
+        else
+          next if dir !~ /^#{@namespace}/
+
+          # It is our name space, but which branches?
+          next if @branches.collect { |b| @namespace + b }.include? dir
+        end
 
         # if we're here, it's not prod, it is a directory and it isn't a branch
         # we have.
@@ -157,17 +181,27 @@ class GitRepo
 end
 
 
-g = GitRepo.new env_base_dir
+startdir = Dir.getwd
 
-# Do all the wee bonnie branches other than main. This will clone them from the
-# repo we just checked out, so it's a local only operation.
-g.populate_branchi
+github_repo_urls.each do |nom,repo|
 
-# By default it ignores master, this throws it in to production.
-g.make_subbranch( "master" , "production" )
+  dputs "Working on #{nom}'s repo from #{repo}"
 
-# Finally, tidy up other branches/envs
-g.delete_extraneous_branches
+  Dir.chdir startdir
+
+  g = GitRepo.new( env_base_dir, nom, repo )
+
+  # Do all the wee bonnie branches other than main. This will clone them from the
+  # repo we just checked out, so it's a local only operation.
+  g.populate_branchi
+
+  # By default it ignores master, this throws it in to production.
+  g.make_subbranch( "master" , "production" )
+
+  # Finally, tidy up other branches/envs
+  g.delete_extraneous_branches
+
+end
 
 exit
 

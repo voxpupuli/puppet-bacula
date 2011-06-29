@@ -1,0 +1,23 @@
+---
+default:
+  template_dir: ./templates
+  state_dir: ./state
+  to_email_address: ben+pullcrap@puppetlabs.com
+  from_email_address: noreply@puppetlabs.com
+  reply_to_email_address: noreply@puppetlabs.com
+  html_email: true
+  group_pull_request_updates: false
+  alert_on_close: true
+  # Both opened_subject, and closed_subject are rendered using
+  # Mustache and provided all of the same information as the body
+  # template, along with the repository's name as 'repository_name'.
+  open_subject: "({{repository_name}}) New pull request: {{title}}"
+  closed_subject: "({{repository_name}}) Closed pull request: {{title}}"
+
+puppetlabs/puppet: {}
+puppetlabs/facter: {}
+puppetlabs/puppet-dashboard: {}
+puppetlabs/puppet-module-tool: {}
+puppetlabs/puppet-docs: {}
+puppetlabs/puppet-acceptance: {}
+puppetlabs/puppetlabs-mount-providers: {}

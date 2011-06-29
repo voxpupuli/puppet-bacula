@@ -2,7 +2,7 @@
 default:
   template_dir: ./templates
   state_dir: ./state
-  to_email_address: ben+pullcrap@puppetlabs.com
+  to_email_address: puppet-dev@googlegroups.com
   from_email_address: noreply@puppetlabs.com
   reply_to_email_address: noreply@puppetlabs.com
   html_email: true

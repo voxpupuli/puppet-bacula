@@ -66,15 +66,13 @@ class puppetlabs::burji {
 
   # http://pm.puppetlabs.com
   #
-  apache::vhost {
+  apache::vhost::redirect {
     'pm.puppetlabs.com':
-      serveraliases => "pm.puppetlabs.com",
-      port          => 80,
-      docroot       => '/opt/pm',
-      ssl           => false,
-      redirect_ssl  => true,
-      priority      => 15,
-      template      => 'puppetlabs/legba.conf.erb';
+      port => '80',
+      dest => 'https://pm.puppetlabs.com',
+  }
+
+  apache::vhost {
     'pm.puppetlabs.com_ssl':
       serveraliases => "pm.puppetlabs.com",
       port          => 443,

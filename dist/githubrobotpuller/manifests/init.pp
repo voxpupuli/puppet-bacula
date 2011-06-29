@@ -23,11 +23,11 @@ class githubrobotpuller (
     system => true
   }
 
-  file{ $githubrobotpuller::path:
-    ensure  => directory,
-    owner   => $githubrobotpuller::user,
-    require => User[ $githubrobotpuller::user ],
-  }
+  # file{ $githubrobotpuller::path:
+  #   ensure  => directory,
+  #   owner   => $githubrobotpuller::user,
+  #   require => User[ $githubrobotpuller::user ],
+  # }
 
   vcsrepo{ $githubrobotpuller::path:
     source   => 'git://github.com/jhelwig/Ruby-GitHub-Pull-Request-Email-Bot.git',
@@ -35,7 +35,7 @@ class githubrobotpuller (
     owner    => $githubrobotpuller::user,
     revision => $githubrobotpuller::revision,
     ensure   => present,
-    require  => [ File[ $githubrobotpuller::path ], User[ $githubrobotpuller::user ] ],
+    require  => User[ $githubrobotpuller::user ],
   }
 
   file{ "$githubrobotpuller::path/config.yaml":

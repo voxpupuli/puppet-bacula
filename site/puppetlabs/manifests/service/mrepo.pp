@@ -2,6 +2,8 @@ class puppetlabs::service::mrepo {
 
   class { 'mrepo::params':
     rhn           => true,
+    user          => "root",
+    group         => "root",
     rhn_username  => 'puppetlabs',
     rhn_password  => 'yXgBdtwfEs',
   }

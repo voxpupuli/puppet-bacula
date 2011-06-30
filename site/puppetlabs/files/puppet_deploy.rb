@@ -14,7 +14,7 @@ require 'pp'
 require 'fileutils'
 
 github_repo_urls = { :default => 'git@github.com:puppetlabs/puppetlabs-modules.git',
-                     #:adrient => 'git@github.com:adrienthebo/puppetlabs-modules.git',
+                     :adrient => 'git@github.com:adrienthebo/puppetlabs-modules.git',
                      #:zach    => 'git@github.com:xaque208/puppetlabs-modules.git'
 }
 

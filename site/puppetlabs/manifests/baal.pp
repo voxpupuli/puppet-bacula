@@ -25,8 +25,6 @@ class puppetlabs::baal {
   include account::master
   include vim
 
-  ssh::allowgroup { "release": }
-
   ###
   # Puppet
   #

@@ -31,5 +31,9 @@ NameVirtualHost *:<%= port %>
     RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
   <% end %>
   </Directory>
+  ErrorLog /var/log/apache2/<%= name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  ServerSignature Off
 </VirtualHost>
 

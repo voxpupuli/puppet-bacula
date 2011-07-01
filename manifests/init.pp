@@ -18,6 +18,12 @@
 # Requires:
 #
 # Sample Usage:
+#  $bacula_director = 'bacula01.example.net'
+#  $bacula_password = 'mySUPERaw3s0m3p@ssw0rd!'
+#  class { "bacula":
+#    director => $bacula_director,
+#    password => $bacula_password,
+#  }
 #
 class bacula (
     $port           = '9102',
@@ -60,14 +66,6 @@ class bacula (
     require => Package[$bacula::params::bacula_client_packages],
   }
 
-# using seperate configuration for client and job now
-# zeslie:  @@concat::fragment {
-# zeslie:    "bacula-client-$hostname":
-# zeslie:      target  => '/etc/bacula/bacula-dir.conf',
-# zeslie:      content => template("bacula/bacula-dir-client.erb"),
-# zeslie:      tag     => "bacula-$director";
-# zeslie:  }
-
   @@concat::fragment {
     "bacula-client-$hostname":
       target  => '/etc/bacula/conf.d/client.conf',
@@ -79,7 +77,6 @@ class bacula (
     "${fqdn}-common":
       fileset => "Common",
   }
-
 
   # realize the firewall rules exported from the director
   if defined (Class["firewall"]) {

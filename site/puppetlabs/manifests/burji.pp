@@ -26,6 +26,10 @@ class puppetlabs::burji {
     password => $bacula_password,
   }
 
+  # Sites
+  nagios::website { 'pm.puppetlabs.com': }
+  nagios::website { 'ps.puppetlabs.com': }
+
   file { "/var/www/index.html": ensure => absent; }
 
   apache::vhost {

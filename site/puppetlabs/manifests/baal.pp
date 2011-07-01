@@ -124,7 +124,6 @@ class puppetlabs::baal {
   include munin::puppet
   include munin::puppetmaster
 
-
   #file { "/usr/share/puppet-dashboard/public/.htaccess":
   #  owner => root,
   #  group => www-data,
@@ -138,7 +137,7 @@ class puppetlabs::baal {
   # Gitolite
   Account::User <| tag == 'git' |>
 
-  apache::vhost { 'baal.puppetlabs.com': # vhost supporting plapt repo
+  apache::vhost { 'baal.puppetlabs.com':
     options  => "None",
     priority => '08',
     port     => '80',

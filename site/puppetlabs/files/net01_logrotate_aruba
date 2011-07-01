@@ -1,0 +1,14 @@
+/var/log/arbua.log
+{
+	rotate 7
+	weekly
+	missingok
+	notifempty
+	compress
+	delaycompress
+	dateext
+	sharedscripts
+	postrotate
+		invoke-rc.d rsyslog reload > /dev/null
+	endscript
+}

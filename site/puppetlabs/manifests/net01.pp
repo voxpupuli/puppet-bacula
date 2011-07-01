@@ -21,6 +21,15 @@ class puppetlabs::net01 {
     source => 'puppet:///modules/puppetlabs/net01_rsyslog.conf',
   }
 
+  file{ '/etc/logrotate.d/aruba':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/puppetlabs/net01_logrotate_aruba',
+  }
+
+
   service{ 'rsyslog':
     hasstatus  => true,
     hasrestart => true,
@@ -29,6 +38,5 @@ class puppetlabs::net01 {
     subscribe  => [ File['/etc/rsyslog.conf'],
                     File['/etc/rsyslog.d/aruba.conf'] ],
   }
-
 
 }

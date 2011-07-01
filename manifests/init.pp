@@ -1,12 +1,19 @@
 # Class: bacula
 #
-# This class installs and configures the Bacula Backup tool
+# A class to configured a Bacula File Daemon for use with the Bacula backup system.  SEE: http://www.bacula.org/
 #
 # Parameters:
+#   * port - the port that this daemon will listen on
+#   * file_retention - how long to keep files information around
+#   * job_retention - how long to keep information about jobs around
+#   * autoprune - weather to auto-truncate old volumes
+#   * director - the director that will be connecting to this file daemon
+#   * password - the password used to connect to this file daemone
 #
 #
 # Actions:
-#   Installs the bacula-common package
+#   * Installs packages for the bacula-fd
+#   * Configures the file daemon to accept connections from the director
 #
 # Requires:
 #
@@ -24,7 +31,6 @@ class bacula (
 
   include bacula::params
   if $monitor == true { include bacula::nagios }
-
 
   $bacula_director = $director
   $bacula_password = $password

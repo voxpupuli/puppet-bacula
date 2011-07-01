@@ -1,3 +1,22 @@
+# Class: bacula
+#
+# This class installs a bacula job on the director.  This can be used for specific applications as well as general host backups
+#
+# Parameters:
+#   * files - An array of files that you wish to get backed up on this job for this host.  ie: ["/etc","/usr/local"]
+#   * excludes - An array of files to skip for the given job.  ie: ["/usr/local/src"]
+#   * fileset - If set to true, a fileset will be genereated based on the files and exclides paramaters specified above.  Of set to anything but true, the job will attempt to use the fileset named "Common".  NOTE:  the fileset common must be declared elsewhere for this to work.  See class bacula::fileset for details.
+#
+#
+# Actions:
+#   * Exports job fragment for consuption on the director
+#   * Exports nagios service for consumption on nagios server
+#
+# Requires:
+#   * Class::Bacula {}
+#
+# Sample Usage:
+#
 define bacula::job (
     $files    = '',
     $excludes = '',

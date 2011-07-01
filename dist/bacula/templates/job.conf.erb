@@ -1,8 +1,8 @@
 Job {
-  Name             = "<%= name %>"
+  Name             = <%= name %>
   Type             = Backup
   Client           = <%= fqdn %>-fd
-  FileSet          = "<%= fileset_real %>"
+  FileSet          = <%= fileset_real %>
   Storage          = File
   Pool             = Default
   Full Backup Pool = PuppetLabsPool-Full

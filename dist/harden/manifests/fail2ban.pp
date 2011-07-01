@@ -1,4 +1,4 @@
-class fail2ban {
+class harden::fail2ban {
 
   package { "fail2ban": ensure => installed; }
 

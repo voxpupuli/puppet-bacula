@@ -12,14 +12,14 @@ class harden::fail2ban {
     "fail2ban-jail-header":
       order   => 1,
       target  => '/etc/fail2ban/jail.local',
-      content => "[DEFAULT]";
+      content => "[DEFAULT]\n";
   }
 
   @@concat::fragment {
     "fail2ban-jail-host-$fqdn":
       order   => 2,
       target  => '/etc/fail2ban/jail.local',
-      content => "ignoreip = $ipaddress",
+      content => "ignoreip = $ipaddress\n",
       tag     => "fail2ban-ignoreip";
   }
 

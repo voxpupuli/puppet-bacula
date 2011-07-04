@@ -31,7 +31,10 @@ class ntp (
     name       => "$ntp::params::ntpd_service",
     ensure     => running,
     enable     => true,
-    hasrestart => true,
+    hasrestart => $operatingsystem ? {
+      linux => true,
+      default => undef 
+    },
     require => $kernel ? {
       linux => Package['ntp'],
       default => undef,

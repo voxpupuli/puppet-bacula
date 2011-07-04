@@ -15,8 +15,10 @@
 class ruby {
   include ruby::params
 
-  package{'ruby':
-     ensure => installed,
+  if ! $kernel == "Darwin" {
+    package{'ruby':
+      ensure => installed,
+    }
   }
 
   if $operatingsystem == "Linux" { # added to support non-linux

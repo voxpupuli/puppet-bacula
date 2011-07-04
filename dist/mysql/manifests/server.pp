@@ -28,7 +28,7 @@ class mysql::server {
       ensure => installed,
       notify => Service['mysqld'],
   }
-  service { 
+  service {
     'mysqld':
       name   => $mysql_service_name,
       ensure => running,
@@ -66,7 +66,12 @@ class mysql::server {
     notify    => Service['mysqld-restart'],
   }
 
-  file{['/root/.my.cnf', '/etc/my.cnf']:
+  $confs = $operatingsystem ? {
+    default => ['/root/.my.cnf', '/etc/my.cnf'],
+    darwin  => '/root/.my.cnf',
+  }
+
+  file{$confs:
     owner   => 'root',
     group   => 'root',
     mode    => '0400',

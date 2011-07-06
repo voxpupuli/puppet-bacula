@@ -34,6 +34,26 @@ class puppetlabs::service::mrepo {
     },
   }
 
+#  mrepo::repo { "rhel5server-x86_64":
+#    ensure    => present,
+#    rhn       => true,
+#    repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
+#    arch      => "x86_64",
+#    release   => "5",
+#    iso       => 'rhel-5-server-$arch-disc?.iso',
+#    updates   => 'rhns:///rhel-$arch-server-5',
+#  }
+#
+#  mrepo::repo { "rhel5server-i386":
+#    ensure    => present,
+#    rhn       => true,
+#    repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
+#    arch      => "i386",
+#    release   => "5",
+#    iso       => 'rhel-5-server-$arch-disc?.iso',
+#    updates   => 'rhns:///rhel-$arch-server-5',
+#  }
+
   mrepo::repo { "cent5server-x86_64":
     ensure    => present,
     repotitle => 'CentOS Linux $release ($arch)',

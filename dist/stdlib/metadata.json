@@ -1,0 +1,49 @@
+{
+  "license": "Apache 2.0",
+  "summary": "Puppet Module Standard Library",
+  "source": "git://github.com/puppetlabs/puppetlabs-stdlib",
+  "checksums": {
+    "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
+    "lib/puppet/parser/functions/validate_re.rb": "b47784856ff536e058b8cf5a46775406",
+    "lib/puppet/parser/functions/validate_bool.rb": "580f272ec5949c8779dfa4e374156cd4",
+    "CHANGELOG": "039d84563ec9b0d2d211ae5c54293db5",
+    "spec/unit/puppet/parser/functions/validate_bool_spec.rb": "7de673f1da799e5cf4ce4203eac18a93",
+    "spec/unit/puppet/parser/functions/getvar_spec.rb": "99880c2d16b329c872d22fe15bb05293",
+    "LICENSE": "2a944942e1496af1886903d274dedb13",
+    "lib/puppet/parser/functions/validate_hash.rb": "c2e96fae77ba2e3aff14342b772859e0",
+    "manifests/stages.pp": "8ed6fde27cfe2760395579a0536ec0a4",
+    "RELEASE_PROCESS.markdown": "30d0e531977f799f33e584548ecd8607",
+    "lib/puppet/parser/functions/getvar.rb": "aa039497b118e0b404ca2e256b3af199",
+    "tests/init.pp": "1d98070412c76824e66db4b7eb74d433",
+    "spec/unit/puppet/parser/functions/validate_hash_spec.rb": "9d04db99b341c8e8a96a2e3594e15e09",
+    "lib/puppet/type/anchor.rb": "655f17627ee8c259f536d8426627b2c5",
+    "README.markdown": "345076db7ca6bf1438f79d82dc7b792a",
+    "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "spec/unit/puppet/type/anchor_spec.rb": "a5478a72a7fab2d215f39982a9230c18",
+    "Modulefile": "0b0706bba6d67a5a85585e323bce2474",
+    "manifests/init.pp": "3e441c929ebcb711b2544dd5b90f5baa"
+  },
+  "types": [
+    {
+      "doc": "  A simple resource type intended to be used as an anchor in a composite class.\n\n      class ntp {\n        class { 'ntp::package': }\n        -> class { 'ntp::config': }\n        -> class { 'ntp::service': }\n\n        # These two resources \"anchor\" the composed classes\n        # such that the end user may use \"require\" and \"before\"\n        # relationships with Class['ntp']\n        anchor { 'ntp::begin': }   -> class  { 'ntp::package': }\n        class  { 'ntp::service': } -> anchor { 'ntp::end': }\n      }\n\n  This resource allows all of the classes in the ntp module to be contained\n  within the ntp class from a dependency management point of view.\n\n  This allows the end user of the ntp module to establish require and before\n  relationships easily:\n\n      class { 'ntp': } -> class { 'mcollective': }\n      class { 'mcollective': } -> class { 'ntp': }\n\n",
+      "properties": [
+
+      ],
+      "name": "anchor",
+      "parameters": [
+        {
+          "doc": "The name of the anchor resource.",
+          "name": "name"
+        }
+      ]
+    }
+  ],
+  "author": "puppetlabs",
+  "name": "puppetlabs-stdlib",
+  "version": "0.1.7",
+  "dependencies": [
+
+  ],
+  "project_page": "https://github.com/puppetlabs/puppetlabs-stdlib",
+  "description": "Standard Library for Puppet Modules"
+}

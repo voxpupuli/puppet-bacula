@@ -4,6 +4,7 @@ class mysql::params{
   $mysql_service_name = $operatingsystem ? {
     ubuntu  => 'mysql',
     debian  => 'mysql',
+    darwin  => 'org.mysql.mysqld',
     default => 'mysqld',
   }
 

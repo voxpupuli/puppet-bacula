@@ -15,6 +15,7 @@ class ntp::params {
   $ntpd_service = $operatingsystem ? {
     centos  => "ntpd",
     freebsd => "ntpd",
+    darwin  => "org.ntp.ntpd",
     default => "ntp",
   }
 

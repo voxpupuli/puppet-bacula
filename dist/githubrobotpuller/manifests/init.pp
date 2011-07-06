@@ -48,7 +48,7 @@ class githubrobotpuller (
   }
 
   cron{ "runrobotrun":
-    command => "( cd $githubrobotpuller::path && env PATH=$PATH:/usr/sbin RUBYLIB=\$(pwd)/lib bin/pull-request-bot )",
+    command => "( cd $githubrobotpuller::path && env PATH=\$PATH:/usr/sbin RUBYLIB=\$(pwd)/lib bin/pull-request-bot )",
     minute  => '*/15',
     user    => $githubrobotpuller::user,
     require => File[ "$githubrobotpuller::path/config.yaml" ],

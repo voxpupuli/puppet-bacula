@@ -126,7 +126,7 @@ define mrepo::repo (
           cron {
             "Nightly synchronize repo $name":
               ensure  => present,
-              command => "/usr/bin/mrepo -u",
+              command => "/usr/bin/mrepo -gu $name",
               hour    => "0",
               minute  => "0",
               user    => $user;
@@ -138,7 +138,7 @@ define mrepo::repo (
           cron {
             "Weekly synchronize repo $name":
               ensure  => present,
-              command => "/usr/bin/mrepo -u",
+              command => "/usr/bin/mrepo -gu $name",
               day     => "0",
               hour    => "0",
               minute  => "0",

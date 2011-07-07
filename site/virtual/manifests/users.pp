@@ -38,6 +38,7 @@ class virtual::users {
  @account::user {'jeff':
     comment => 'Jeff McCune',
     uid     => '1112',
+    shell   => '/bin/zsh',
     group   => allstaff,
     groups  => ["prosvc","release"],
     tag     => allstaff,
@@ -152,6 +153,7 @@ class virtual::users {
  @account::user {'hunter':
     comment => 'Hunter Haugen',
     uid     => '1131',
+    shell   => "/bin/zsh",
     group   => allstaff,
     groups  => ["prosvc"],
     tag     => allstaff,

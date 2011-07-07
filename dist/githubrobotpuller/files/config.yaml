@@ -3,8 +3,8 @@ default:
   template_dir: ./templates
   state_dir: ./state
   to_email_address: puppet-dev@googlegroups.com
-  from_email_address: noreply@puppetlabs.com
-  reply_to_email_address: noreply@puppetlabs.com
+  from_email_address: wearetherobots@puppetlabs.com
+  reply_to_email_address: wearetherobots@puppetlabs.com
   html_email: true
   group_pull_request_updates: false
   alert_on_close: true

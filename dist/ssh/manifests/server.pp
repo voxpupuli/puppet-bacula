@@ -33,7 +33,10 @@ class ssh::server {
   }
   concat { "$sshd_config":
     mode    => '0640',
-    require => Package['openssh-server'],
+    require => $kernel ? {
+      "Darwin" => undef,
+      default  => Package['openssh-server'],
+    },
     notify  => Service['sshd'],
   }
   service { 'sshd':

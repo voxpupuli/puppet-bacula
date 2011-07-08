@@ -13,6 +13,7 @@ class ssh::params {
     'darwin': {
       $ssh_service = 'com.openssh.sshd'
       $sshd_config = '/etc/sshd_config'
+    }
  }
 
 }

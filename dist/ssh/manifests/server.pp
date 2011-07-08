@@ -16,35 +16,39 @@ class ssh::server {
   include concat::setup
   $ssh_service = $ssh::params::ssh_service
   $sshclient_package = $ssh::params::sshclient_package
+  $sshd_config = $ssh::params::sshd_config
 
-  package { 'openssh-server':
-    ensure => latest, 
-    require => Package["${sshclient_package}"],
-    notify => Service['sshd'],
-  }  
+  if $kernel == "Linux" {
+    package { 'openssh-server':
+      ensure  => latest, 
+      require => Package["${sshclient_package}"],
+      notify  => Service['sshd'],
+    }
+  }
+
   concat::fragment { 'sshd_config-header':
-    order => '00',
-    target => '/etc/ssh/sshd_config',
+    order   => '00',
+    target  => "$sshd_config",
     content => template("ssh/sshd_config.erb"),
   }
-  concat { '/etc/ssh/sshd_config':
-    mode => '0640',
+  concat { "$sshd_config":
+    mode    => '0640',
     require => Package['openssh-server'],
-    notify => Service['sshd'],
+    notify  => Service['sshd'],
   }
   service { 'sshd':
-    name => "${ssh_service}",
-    ensure => running,
-    enable => true,
-    hasstatus => true,
+    name       => "$ssh_service",
+    ensure     => running,
+    enable     => true,
+    hasstatus  => true,
     hasrestart => true,
   }
 
-  @firewall { 
-    "0100-INPUT ACCEPT 22":
-      jump  => 'ACCEPT',
-      dport => "22",
-      proto => 'tcp'
-  }
+#  @firewall {
+#    "0100-INPUT ACCEPT 22":
+#      jump  => 'ACCEPT',
+#      dport => "22",
+#      proto => 'tcp'
+#  }
 
 }

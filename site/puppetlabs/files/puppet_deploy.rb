@@ -129,11 +129,13 @@ class GitRepo
       dputs "doing a pull on an existing branch"
       Dir.chdir branch_dir do
         pp_and_system "LANG='C' git fetch #{$gitnoise} --all && git reset #{$gitnoise} --hard origin/#{branch_to_make}" # origin #{branch_to_make}"
+        pp_and_system "LANG='C' git submodule update --init" unless %x{ git submodule status }.empty?
       end
     else
       dputs "doing a clone on a new branch"
       Dir.chdir @env_base_dir do
         pp_and_system "LANG='C' git clone #{$gitnoise} -b #{branch_checkout_dirname} #{@mirrordir} #{checkout_as}" 
+        pp_and_system "LANG='C' cd #{checkout_as} && git submodule update --init" unless %x< cd #{checkout_as} && git submodule status >.empty?
       end
     end
   end

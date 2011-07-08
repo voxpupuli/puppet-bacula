@@ -27,11 +27,6 @@ class puppetlabs::enkal {
     password => $bacula_password,
   }
 
-
-
-  # Munin
-  include munin
-
   # Jenkins
   class { "jenkins":
     site_alias => 'jenkins.puppetlabs.com',

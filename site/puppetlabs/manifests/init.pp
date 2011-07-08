@@ -31,7 +31,9 @@ class puppetlabs {
   ###
   # Monitoring
   #
-  include collectd::disable
+  if $kernel == "Linux" {
+    include collectd::disable
+  }
 
   ssh::allowgroup  { "sysadmin": }
   sudo::allowgroup { "sysadmin": }

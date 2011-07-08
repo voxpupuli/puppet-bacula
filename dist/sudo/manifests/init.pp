@@ -28,10 +28,10 @@ class sudo {
     refreshonly => true,
   }
 
-  file{ "/etc/sudoers": 
-    owner => "root", 
-    group => "0", 
-    mode => "440",
+  file{ "/etc/sudoers":
+    owner => "root",
+    group => "0",
+    mode  => "440",
   }
 
 }

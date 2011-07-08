@@ -46,6 +46,7 @@ class puppetlabs::enkal {
   }
 
   include unbound
+  unbound::stub { "puppetlabs.lan": address => '192.168.100.1' }
 
 }
 

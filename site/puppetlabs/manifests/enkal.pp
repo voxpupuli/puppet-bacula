@@ -45,6 +45,7 @@ class puppetlabs::enkal {
       server => "office.puppetlabs.com",
   }
 
+  include unbound
 
 }
 

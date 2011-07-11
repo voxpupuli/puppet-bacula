@@ -103,6 +103,11 @@ class puppetlabs::burji {
     source => "puppet:///modules/puppetlabs/legba_htaccess";
   }
 
+  apache::vhost {
+    "downloads.puppetlabs.com":
+      port    => 80,
+      docroot => '/opt/www'
+  }
 
 }
 

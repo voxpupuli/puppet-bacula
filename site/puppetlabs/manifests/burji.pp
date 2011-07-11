@@ -106,7 +106,7 @@ class puppetlabs::burji {
   apache::vhost {
     "downloads.puppetlabs.com":
       port    => 80,
-      docroot => '/opt/www'
+      docroot => '/opt/downloads'
   }
 
 }

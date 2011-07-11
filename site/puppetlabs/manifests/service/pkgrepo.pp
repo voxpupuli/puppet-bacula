@@ -31,5 +31,7 @@ class puppetlabs::service::pkgrepo {
   class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
   include yumrepo
 
+  Package <| title == "gnupg-agent" |>
+
 }
 

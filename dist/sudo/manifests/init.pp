@@ -7,7 +7,7 @@ class sudo {
     package { "sudo": ensure => installed }
   }
 
-  concat::fragment { 
+  concat::fragment {
     'sudoers-header':
       order   => '00',
       mode    => '0440',
@@ -28,10 +28,11 @@ class sudo {
     refreshonly => true,
   }
 
-  file{ "/etc/sudoers": 
-    owner => "root", 
-    group => "root", 
-    mode => "440",
+  file{ "/etc/sudoers":
+    owner => "root",
+    group => "0",
+    mode  => "440",
   }
 
 }
+

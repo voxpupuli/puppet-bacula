@@ -26,6 +26,8 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   # This is a big ugly hardcoded section. So thus rendering it pointless in many
   # ways to manage so freely with puppet as we are. But what can you do?
   # See/? http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#proxypass for why.
+  ProxyPass /projects/puppet/wiki/Exported_Resources !
+  RedirectMatch permanent	/projects/puppet/wiki/Exported_Resources?                 http://docs.puppetlabs.com/guides/exported_resources.html
   ProxyPass /projects/puppet/wiki/External_Nodes !
   RedirectMatch permanent	/projects/puppet/wiki/External_Nodes/?                    http://docs.puppetlabs.com/guides/external_nodes.html
   ProxyPass /projects/puppet/wiki/Frequently_Asked_Questions !
@@ -53,6 +55,8 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   ProxyPass /projects/puppet/wiki/Using_Multiple_Environments !
   RedirectMatch permanent /projects/puppet/wiki/Using_Multiple_Environments         http://docs.puppetlabs.com/guides/environment.html
 
+  ProxyPass /projects/1/wiki/Exported_Resources !
+  RedirectMatch permanent	/projects/1/wiki/Exported_Resources?                 http://docs.puppetlabs.com/guides/exported_resources.html
   ProxyPass /projects/1/wiki/External_Nodes !
   RedirectMatch permanent	/projects/1/wiki/External_Nodes/?                    http://docs.puppetlabs.com/guides/external_nodes.html
   ProxyPass /projects/1/wiki/Frequently_Asked_Questions !

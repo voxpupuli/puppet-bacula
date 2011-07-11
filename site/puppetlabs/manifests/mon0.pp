@@ -4,6 +4,8 @@ class puppetlabs::mon0 {
 
   include graphite
 
+  include harden
+
   # gather project
   package { "libxml-simple-perl": ensure => installed; }
 

@@ -23,15 +23,14 @@ class puppetlabs {
   # some shit
   include ssh::server
   include virtual::users
-  include virtual::packages
   include virtual::nagioscontacts
   include sudo
-  include packages
+  if $kernel == "Linux" {
+    include virtual::packages
+    include collectd::disable
+    include packages
+  }
 
-  ###
-  # Monitoring
-  #
-  include collectd::disable
 
   ssh::allowgroup  { "sysadmin": }
   sudo::allowgroup { "sysadmin": }

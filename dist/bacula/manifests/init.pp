@@ -1,16 +1,29 @@
 # Class: bacula
 #
-# This class installs and configures the Bacula Backup tool
+# A class to configured a Bacula File Daemon for use with the Bacula backup system.  SEE: http://www.bacula.org/
 #
 # Parameters:
+#   * port - the port that this daemon will listen on
+#   * file_retention - how long to keep files information around
+#   * job_retention - how long to keep information about jobs around
+#   * autoprune - weather to auto-truncate old volumes
+#   * director - the director that will be connecting to this file daemon
+#   * password - the password used to connect to this file daemone
 #
 #
 # Actions:
-#   Installs the bacula-common package
+#   * Installs packages for the bacula-fd
+#   * Configures the file daemon to accept connections from the director
 #
 # Requires:
 #
 # Sample Usage:
+#  $bacula_director = 'bacula01.example.net'
+#  $bacula_password = 'mySUPERaw3s0m3p@ssw0rd!'
+#  class { "bacula":
+#    director => $bacula_director,
+#    password => $bacula_password,
+#  }
 #
 class bacula (
     $port           = '9102',
@@ -24,7 +37,6 @@ class bacula (
 
   include bacula::params
   if $monitor == true { include bacula::nagios }
-
 
   $bacula_director = $director
   $bacula_password = $password
@@ -54,14 +66,6 @@ class bacula (
     require => Package[$bacula::params::bacula_client_packages],
   }
 
-# using seperate configuration for client and job now
-# zeslie:  @@concat::fragment {
-# zeslie:    "bacula-client-$hostname":
-# zeslie:      target  => '/etc/bacula/bacula-dir.conf',
-# zeslie:      content => template("bacula/bacula-dir-client.erb"),
-# zeslie:      tag     => "bacula-$director";
-# zeslie:  }
-
   @@concat::fragment {
     "bacula-client-$hostname":
       target  => '/etc/bacula/conf.d/client.conf',
@@ -73,7 +77,6 @@ class bacula (
     "${fqdn}-common":
       fileset => "Common",
   }
-
 
   # realize the firewall rules exported from the director
   if defined (Class["firewall"]) {

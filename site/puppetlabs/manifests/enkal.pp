@@ -27,11 +27,6 @@ class puppetlabs::enkal {
     password => $bacula_password,
   }
 
-
-
-  # Munin
-  include munin
-
   # Jenkins
   class { "jenkins":
     site_alias => 'jenkins.puppetlabs.com',
@@ -44,5 +39,14 @@ class puppetlabs::enkal {
   Account::User <| tag == 'developers' |>
   Group <| tag == 'developers' |>
   ssh::allowgroup { "www-data": }
+
+  openvpn::client {
+    "node_$hostname":
+      server => "office.puppetlabs.com",
+  }
+
+  include unbound
+  unbound::stub { "puppetlabs.lan": address => '192.168.100.1' }
+
 }
 

@@ -1,4 +1,4 @@
-# Class: bacula::nagios
+# Class: bacula::director::nagios
 #
 # This class installs and configures the Nagios hosts and services for monitoring bacula director
 #

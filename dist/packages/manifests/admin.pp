@@ -9,6 +9,7 @@ class packages::admin {
 
   package { $admin_packages: ensure => installed; }
 
+  @package { "gnupg-agent": ensure => installed; }
 
   # OS specific/named specific packages.
   case $operatingsystem {

@@ -48,5 +48,13 @@ class puppetlabs::enkal {
   include unbound
   unbound::stub { "puppetlabs.lan": address => '192.168.100.1' }
 
+  # zleslie: stop dhclient from updating resolve.conf
+  file { "/etc/dhcp3/dhclient-enter-hooks.d/nodnsupdate":
+    owner   => root,
+    group   => root,
+    mode    => 755,
+    content => "#!/bin/sh\nmake_resolv_conf(){\n:\n}",
+  }
+
 }
 

@@ -1,0 +1,3 @@
+class puppetlabs::lukedev01 {
+
+}

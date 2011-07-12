@@ -7,6 +7,7 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   RewriteEngine On
   RewriteCond %{HTTPS} !=on
   RewriteRule ^/login(.*)$ https://%{SERVER_NAME}/login$1 [R,L]
+  RewriteRule ^/my(.*)$ https://%{SERVER_NAME}/my$1 [R,L]
 
   RewriteCond %{HTTPS} !=on
   RewriteRule ^/account/register$ https://%{SERVER_NAME}/account/register [R,L]

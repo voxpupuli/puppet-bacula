@@ -11,9 +11,9 @@ ssh www.puppetlabs.com "sudo tar -cz --exclude downloads --exclude ps -C /var/ww
 
 # Populate the new box
 sudo -i zcat ~/tmp/puppetlabscom.sql.gz | mysql -pgosh-if-no-hull -u wwwdev wwwdevpuppetlabscom
-sudo -i rm -Rf /tmp/puppetlabs.com
-sudo -i tar -xzf ~/tmp/puppetlabscom.tar.gz -C /tmp
-sudo -i rsync -a --del /var/www/puppetlabs.com/ /var/www/www-dev.puppetlabs.com/
+sudo -i rm -Rf ~/tmp/puppetlabs.com
+sudo -i tar -xzf ~/tmp/puppetlabscom.tar.gz -C ~/tmp
+sudo -i rsync -a --del ~/tmp/puppetlabs.com/wp-content/ /var/www/www-dev.puppetlabs.com/wp-content/
 sudo -i puppet agent -tv
 
 sudo -i chown -R www-data:www-dev /var/www/www-dev.puppetlabs.com

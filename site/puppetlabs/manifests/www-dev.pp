@@ -30,7 +30,7 @@ class puppetlabs::www-dev {
   file { "/usr/local/bin/www-sync.sh":
     owner  => root,
     group  => 0,
-    source => "puppet:///modules/www-sync.sh";
+    source => "puppet:///modules/puppetlabs/www-sync.sh";
   }
 
 

@@ -79,6 +79,8 @@ class puppetlabs::service::www {
       port            => '82',
   }
 
+  file { "/var/www/puppetlabs.com/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/puppetlabscom_htaccess"; }
+
   wordpress::instance {
     'puppetdevchallenge.com':
       site_alias => "www.puppetdevchallenge.com",

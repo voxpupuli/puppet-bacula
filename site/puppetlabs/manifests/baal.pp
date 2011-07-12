@@ -12,6 +12,8 @@
 #
 class puppetlabs::baal {
 
+  class { "puppetlabs::service::pkgrepo": ensure => absent; }
+
   ###
   # Mysql
   #
@@ -34,7 +36,6 @@ class puppetlabs::baal {
     '$confdir/environments/$environment/site',
     '$confdir/environments/$environment/dist',
     '$confdir/global/imported',
-    #'$confdir/environments/$environment/forge',
   ]
 
   class { "puppet::server":
@@ -202,7 +203,6 @@ class puppetlabs::baal {
     "node_$hostname":
       server => "office.puppetlabs.com",
   }
-
 
 }
 

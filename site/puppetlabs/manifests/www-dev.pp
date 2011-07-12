@@ -34,6 +34,12 @@ class puppetlabs::www-dev {
     source => "puppet:///modules/puppetlabs/www-sync.sh";
   }
 
+  file { "/usr/local/bin/wp-upgrade.sh":
+    owner  => root,
+    group  => 0,
+    mode   => 755,
+    source => "puppet:///modules/puppetlabs/wp-upgrade.sh";
+  }
 
   wordpress::instance {
     'www-dev.puppetlabs.com':

@@ -47,6 +47,9 @@ class puppetlabs::www-dev {
       seturl          => true,
   }
 
+  file { "/var/www/www-dev.puppetlabs.com/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/puppetlabscom_htaccess"; }
+  
+
   package {'php5-curl': ensure => present, notify => Service[httpd] }  
 
 }

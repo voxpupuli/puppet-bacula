@@ -1,5 +1,5 @@
 class puppetlabs::service::pkgrepo (
-  $ensure => present
+  $ensure = present
 ) {
   ###
   # Package repositories

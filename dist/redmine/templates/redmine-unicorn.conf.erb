@@ -10,6 +10,7 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
 
   RewriteCond %{HTTPS} !=on
   RewriteRule ^/account/register$ https://%{SERVER_NAME}/account/register [R,L]
+  RewriteCond %{HTTPS} !=on
   RewriteRule ^/my(.*) https://%{SERVER_NAME}/my$1 [R,L]
 <% if ssl == true %>
   RequestHeader set X_FORWARDED_PROTO 'https'

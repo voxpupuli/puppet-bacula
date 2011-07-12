@@ -12,6 +12,8 @@
 #
 class puppetlabs::baal {
 
+  class { "puppetlabs::service::pkgrepo": ensure => absent; }
+
   ###
   # Mysql
   #

@@ -54,8 +54,13 @@ class puppetlabs::www-dev {
       seturl          => true,
   }
 
-  file { "/var/www/www-dev.puppetlabs.com/.htaccess": owner => www-data, group => www-dev, mode => 644, source => "puppet:///modules/puppetlabs/puppetlabscom_htaccess"; }
-  
+  file { "/var/www/www-dev.puppetlabs.com/.htaccess":
+    owner  => www-data,
+    group  => www-dev,
+    mode   => 644,
+    source => "puppet:///modules/puppetlabs/puppetlabscom_htaccess";
+  }
+
 
   package {'php5-curl': ensure => present, notify => Service[httpd] }  
 

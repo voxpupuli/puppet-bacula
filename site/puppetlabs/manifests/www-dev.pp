@@ -27,6 +27,13 @@ class puppetlabs::www-dev {
       user    => root,
   }
 
+  file { "/usr/local/bin/www-sync.sh":
+    owner  => root,
+    group  => 0,
+    source => "puppet:///modules/www-sync.sh";
+  }
+
+
   wordpress::instance {
     'www-dev.puppetlabs.com':
       auth_key        => 'PE{TEN%T).U~V6Cl;b_?0mcrvhoUVIP#+0R|e-LB>00:o*((b%[8pve/1Y+H}P(o',

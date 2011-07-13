@@ -4,9 +4,11 @@ class puppetlabs::burji {
 
   # User Stuff
   #
+  Account::User <| tag == deploy |>
   ssh::allowgroup  { "release":    }
   ssh::allowgroup  { "prosvc":     }
   ssh::allowgroup  { "enterprise": }
+  ssh::allowgroup  { "www-data": }
 
   sudo::allowgroup { "release":    }
 

@@ -111,6 +111,14 @@ class puppetlabs::burji {
       docroot => '/opt/downloads'
   }
 
+  file { "/opt/downloads":
+    owner   => deploy,
+    group   => release,
+    mode    => 644,
+    recurse => true,
+    checksum => none,
+  }
+
   file {
     "/opt/downloads/training/current-pm-vm.tar.gz":
       ensure   => link,
@@ -127,4 +135,10 @@ class puppetlabs::burji {
   }
 
 }
+
+
+
+
+
+
 

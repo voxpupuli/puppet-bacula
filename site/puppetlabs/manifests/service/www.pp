@@ -8,7 +8,6 @@ class puppetlabs::service::www {
   bacula::job {
     "${fqdn}-www":
       files    => ["/var/lib/bacula/mysql","/var/www"],
-      excludes => ["/var/www/puppetlabs.com/downloads"],
   }
 
   # Add an nginx bouncer to speed up the apache sites on here.

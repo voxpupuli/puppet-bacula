@@ -8,7 +8,6 @@ class puppetlabs::service::www {
   bacula::job {
     "${fqdn}-www":
       files    => ["/var/lib/bacula/mysql","/var/www"],
-      excludes => ["/var/www/puppetlabs.com/downloads"],
   }
 
   # Add an nginx bouncer to speed up the apache sites on here.
@@ -78,6 +77,8 @@ class puppetlabs::service::www {
       priority        => '05',
       port            => '82',
   }
+
+  file { "/var/www/puppetlabs.com/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/puppetlabscom_htaccess"; }
 
   wordpress::instance {
     'puppetdevchallenge.com':

@@ -27,6 +27,20 @@ class puppetlabs::www-dev {
       user    => root,
   }
 
+  file { "/usr/local/bin/www-sync.sh":
+    owner  => root,
+    group  => 0,
+    mode   => 755,
+    source => "puppet:///modules/puppetlabs/www-sync.sh";
+  }
+
+  file { "/usr/local/bin/wp-upgrade.sh":
+    owner  => root,
+    group  => 0,
+    mode   => 755,
+    source => "puppet:///modules/puppetlabs/wp-upgrade.sh";
+  }
+
   wordpress::instance {
     'www-dev.puppetlabs.com':
       auth_key        => 'PE{TEN%T).U~V6Cl;b_?0mcrvhoUVIP#+0R|e-LB>00:o*((b%[8pve/1Y+H}P(o',
@@ -39,6 +53,14 @@ class puppetlabs::www-dev {
       backup          => false,
       seturl          => true,
   }
+
+  file { "/var/www/www-dev.puppetlabs.com/.htaccess":
+    owner  => www-data,
+    group  => www-dev,
+    mode   => 644,
+    source => "puppet:///modules/puppetlabs/puppetlabscom_htaccess";
+  }
+
 
   package {'php5-curl': ensure => present, notify => Service[httpd] }  
 

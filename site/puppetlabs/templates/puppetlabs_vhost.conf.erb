@@ -32,10 +32,8 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   # Enter redirect hell
   RewriteEngine On
 
-# zleslie:  # Moved to puppetlabs::www class using apache::vhost::redirect
-# zleslie:  RewriteCond %{HTTP_HOST} ^reductivelabs\.com$
-# zleslie:  RewriteRule ^(.*)$ http://www.puppetlabs.com%{REQUEST_URI} [R=permanent,L]
-  
+  # Downloads
+  Redirect 301 /downloads http://downloads.puppetlabs.com
 
   # Blog Categories
   Redirect permanent /category/news http://puppetlabs.com/category/blog/general-news/

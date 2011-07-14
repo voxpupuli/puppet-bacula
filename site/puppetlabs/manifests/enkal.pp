@@ -56,5 +56,13 @@ class puppetlabs::enkal {
     content => "#!/bin/sh\nmake_resolv_conf(){\n:\n}",
   }
 
+  # Use unbound
+  file { "/etc/resolv.conf":
+    owner  => root,
+    group  => root,
+    mode   => 644,
+    source => "puppet:///modules/puppetlabs/local_resolv.conf";
+  }
+
 }
 

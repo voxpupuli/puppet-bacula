@@ -248,6 +248,14 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'cameron':
+    comment => 'Cameron Thomas',
+    uid     => '1150',
+    group   => allstaff,
+    groups  => ["developers"],
+    tag     => allstaff,
+  }
+
 #
 # Service accounts
 #

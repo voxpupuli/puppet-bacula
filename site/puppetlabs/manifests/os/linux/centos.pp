@@ -1,5 +1,6 @@
 class puppetlabs::os::linux::centos {
 
+  include cron
 
 #  resources {
 #    "yumrepo":

@@ -6,7 +6,7 @@
 
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
-MAILTO=sysadmin@reductivelabs.com
+MAILTO=sysadmin@puppetlabs.com
 HOME=/
 
 # run-parts

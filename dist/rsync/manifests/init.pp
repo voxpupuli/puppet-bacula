@@ -25,7 +25,9 @@ class rsync (
     content => template("rsync/rsyncd.conf.erb"),
   }
 
-  concat { "/etc/rsyncd.conf": }
+  concat { "/etc/rsyncd.conf": 
+    notify => Service["rsyncd"],
+  }
 
 }
 

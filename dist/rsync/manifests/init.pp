@@ -10,7 +10,7 @@ class rsync (
     content => template("rsync/default.erb");
   }
 
-  service { "rsyncd":
+  service { "rsync":
     ensure => $enable ? {
       "true"  => running,
       default => stopped, },
@@ -26,7 +26,7 @@ class rsync (
   }
 
   concat { "/etc/rsyncd.conf": 
-    notify => Service["rsyncd"],
+    notify => Service["rsync"],
   }
 
 }

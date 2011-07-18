@@ -22,14 +22,14 @@ class yumrepo {
   }
 
   file { '/opt/repository/yum/base':
-    ensure => directory,
-    require => File['/opt/repository/apt'],
+    ensure  => directory,
+    require => File['/opt/repository/yum'],
   }
 
-  apache::vhost { 'yum.puppetlabs.com': 
+  apache::vhost { 'yum.puppetlabs.com':
     priority => '20',
-    port => '80',
-    docroot => '/opt/repository/yum',
+    port     => '80',
+    docroot  => '/opt/repository/yum',
   }
 }
 

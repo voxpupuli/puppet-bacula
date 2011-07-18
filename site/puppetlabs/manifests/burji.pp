@@ -114,7 +114,7 @@ class puppetlabs::burji {
   file { "/opt/downloads":
     owner   => deploy,
     group   => release,
-    mode    => 644,
+    mode    => 664,
     recurse => true,
     checksum => none,
   }

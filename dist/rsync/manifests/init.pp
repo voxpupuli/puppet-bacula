@@ -1,6 +1,5 @@
 class rsync (
-    $enable = "true",
-    $template = 
+    $enable = "true"
   ) {
   #package { "rsync": ensure => installed; }
 

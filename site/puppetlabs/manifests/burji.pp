@@ -138,7 +138,3 @@ class puppetlabs::burji {
 
 
 
-
-
-
-

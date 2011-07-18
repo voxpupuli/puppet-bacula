@@ -1,7 +1,10 @@
 class virtual::users {
   include virtual::groups
+  include virtual::users::service
   include virtual::users::customers
   include virtual::users::external
+
+ # use 1100+ for accounts
 
  @account::user {'luke':
     comment => 'Luke Kanies',
@@ -59,7 +62,7 @@ class virtual::users {
     groups  => ["developers"],
     tag     => allstaff,
  }
- 
+
  @account::user {'nan':
     comment => 'Nan Liu',
     uid     => '1117',
@@ -256,39 +259,5 @@ class virtual::users {
     tag     => allstaff,
   }
 
-#
-# Service accounts
-#
- @account::user { 'deploy':
-    comment => 'Deployment User',
-    group   => www-data,
-    tag     => deploy,
- }
-
- @account::user { 'git':
-    comment => 'Git User',
-    group   => git,
-    tag     => git,
- }
-
- @account::user { 'hudson':
-    comment => 'Hudson User',
-    group   => hudson,
-    tag     => hudson,
- }
-
- @account::user { 'patchwork':
-    comment => 'Patchwork User',
-    usekey  => false,
-    group   => patchwork,
-    tag     => patchwork,
- }
-
- @account::user { 'osqa':
-    comment => 'OSQA User',
-    usekey  => false,
-    group   => osqa,
-    tag     => osqa,
- }
-
 }
+

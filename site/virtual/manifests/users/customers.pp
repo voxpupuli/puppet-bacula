@@ -1,6 +1,12 @@
 class virtual::users::customers {
   include virtual::groups
+
+  ### Customer Accounts ###
+  # UID range 21000-21999
+  #
+
   @account::user {'menglund':
+    ensure  => absent,
     comment => 'Martin Englund',
     usekey  => false,
     group   => vmware,
@@ -9,6 +15,7 @@ class virtual::users::customers {
   }
 
   @account::user {'davepark':
+    ensure  => absent,
     comment => 'Dave Park',
     group   => motorola,
     tag     => customer,
@@ -17,6 +24,7 @@ class virtual::users::customers {
     #expire  => "2010-04-01",
   }
   @account::user {'oliverhookins':
+    ensure  => absent,
     comment => 'Oliver Hookins',
     group   => nokia,
     tag     => customer,
@@ -26,6 +34,7 @@ class virtual::users::customers {
   }
 
   @account::user {'johnwarburton':
+    ensure  => absent,
     comment => 'john.warburton@blackrock.com',
     group   => blackrock,
     tag     => customer,
@@ -34,6 +43,7 @@ class virtual::users::customers {
   }
 
   @account::user {'byronpezan':
+    ensure  => absent,
     comment => 'Byron Pezan',
     group   => secureworks,
     tag     => customer,
@@ -43,6 +53,7 @@ class virtual::users::customers {
   }
 
   @account::user {'joerizzo':
+    ensure  => absent,
     comment => 'Joe Rizzo',
     usekey  => false,
     group   => bioware,
@@ -51,6 +62,7 @@ class virtual::users::customers {
   }
 
   @account::user {'eishaysmith':
+    ensure  => absent,
     comment => 'Eishay Smith',
     group   => wealthfront,
     tag     => customer,

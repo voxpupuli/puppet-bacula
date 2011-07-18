@@ -39,5 +39,14 @@ class puppetlabs::service::pkgrepo (
     Package <| title == "gnupg-agent" |>
   }
 
+  rsync::server {
+    "packages":
+      comment => "Puppet Labs Package Repository",
+      path    => "/opt/repository",
+      exclude => "apt/*/logs/*** apt/*/conf/*** apt/*/db/***",
+
+  }
+
+
 }
 

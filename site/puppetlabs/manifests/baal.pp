@@ -87,7 +87,8 @@ class puppetlabs::baal {
 
   bacula::director::pool {
     "PuppetLabsPool-Full":
-      volret      => "2 months",
+      #volret      => "1 months",
+      volret      => "30 days",
       maxvolbytes => '2000000000',
       maxvoljobs  => '2',
       label       => "Full-";

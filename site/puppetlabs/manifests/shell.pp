@@ -1,4 +1,4 @@
-# Class: puppetlabs::enkal
+# Class: puppetlabs::shell
 #
 # This class installs and configures Shell
 #
@@ -12,15 +12,6 @@
 #
 class puppetlabs::shell {
   ssh::allowgroup { "allstaff": }
-
-  # Base
   include account::master
-  include firewall
-
-  #include apache
-
-  include munin
-  include munin::puppet
-
 }
 

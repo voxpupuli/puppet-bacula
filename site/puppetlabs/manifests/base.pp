@@ -38,6 +38,7 @@ class puppetlabs::base {
                                           # security wise, safer.
       }
     }
+    include munin::puppet
   }
 
   # 

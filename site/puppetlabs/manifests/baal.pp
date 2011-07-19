@@ -173,12 +173,12 @@ class puppetlabs::baal {
       minute => '9';
     "clean_old_reports":
       user => root,
-      command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml.gz" -mtime +30 -exec rm {} \;',
+      command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml.gz" -mtime +14 -exec rm {} \;',
       minute => '0',
       hour => '2';
     "clean_dashboard_reports":
       user => root,
-      command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune upto=1 unit=wk)',
+      command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune upto=3 unit=day)',
       minute => '20',
       hour => '2';
     "Puppet: puppet_deploy.sh":

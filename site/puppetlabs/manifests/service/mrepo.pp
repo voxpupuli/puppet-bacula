@@ -64,11 +64,11 @@ class puppetlabs::service::mrepo {
       updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
     },
   }
+
   mrepo::repo { "cent5server-i386":
     ensure    => present,
     repotitle => 'CentOS Linux $release ($arch)',
     arch      => "i386",
-    release   => "5",
     iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
     urls      => {
       updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
@@ -79,20 +79,31 @@ class puppetlabs::service::mrepo {
     ensure    => present,
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "x86_64",
-    release   => "4",
+    release   => "4.0",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
       updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
     },
   }
+
   mrepo::repo { "cent4server-i386":
     ensure    => present,
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "i386",
-    release   => "4",
+    release   => "4.0",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
       updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
     },
   }
+
+  mrepo::repo { "sles-11-sp1-i586":
+    ensure    => present,
+    update    => "never",
+    repotitle => "SuSE Linux Enterprise Server SP1 i586",
+    arch      => "i386",
+    release   => "11",
+    iso       => "SLE-11-SP1-SDK-DVD-i586-GM-DVD1.iso SLES-11-SP1-DVD-i586-GM-DVD?.iso",
+  }
 }
+

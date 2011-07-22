@@ -46,7 +46,7 @@ define mrepo::repo (
   $ensure,
   $release,
   $arch,
-  $urls,
+  $urls       = {},
   $metadata   = 'repomd',
   $update     = 'nightly',
   $iso        = '',
@@ -151,8 +151,8 @@ define mrepo::repo (
       if $rhn == true {
         exec { "Generate systemid $name - $arch":
           command => "gensystemid -u ${mrepo::params::rhn_username} -p ${mrepo::params::rhn_password} --release $release --arch $arch ${mrepo::params::src_root}/$name",
-          path   => [ "/bin", "/usr/bin" ],
-          user   => $user,
+          path    => [ "/bin", "/usr/bin" ],
+          user    => $user,
           group   => $group,
           creates => "${mrepo::params::src_root}/$name/systemid",
           require => File["${mrepo::params::src_root}/$name"],

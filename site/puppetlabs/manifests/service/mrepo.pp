@@ -82,7 +82,7 @@ class puppetlabs::service::mrepo {
     release   => "4.0",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
-      updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+      updates => 'http://vault.centos.org/$release/$repo/$arch',
     },
   }
 
@@ -93,11 +93,11 @@ class puppetlabs::service::mrepo {
     release   => "4.0",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
-      updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+      updates => 'http://vault.centos.org/$release/$repo/$arch',
     },
   }
 
-  mrepo::repo { "sles-11-sp1-i586":
+  mrepo::repo { "sles-11-sp1-i386":
     ensure    => present,
     update    => "never",
     repotitle => "SuSE Linux Enterprise Server SP1 i586",

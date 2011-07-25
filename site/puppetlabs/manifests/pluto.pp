@@ -37,12 +37,13 @@ class puppetlabs::pluto {
   ssh::allowgroup { "www-data": }
 
   #enterprise 
-  package { "lsyncd": ensure => installed; }
+  package { "lsyncd": ensure => removed; }
   package { "daemontools": ensure => installed; }
   cron { "sync /opt/enterprise to tbdriver": 
-    minute  => '*/30',
+    ensure  => absent,
+    minute  => '*/10',
     user    => root,
-    command => '/usr/bin/setlock -nx /var/run/lsyncd.lock lsyncd --nodaemon -rsyncssh /opt/enterprise/ tb-driver.puppetlabs.lan /opt/enterprise/'; 
+    command => '/usr/bin/rsync -a /opt/enterprise/ tb-driver.puppetlabs.lan:/opt/enterprise/';
   }
 
   # Crypt filesystem

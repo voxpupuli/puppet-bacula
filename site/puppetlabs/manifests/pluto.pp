@@ -37,7 +37,7 @@ class puppetlabs::pluto {
   ssh::allowgroup { "www-data": }
 
   #enterprise 
-  package { "lsyncd": ensure => removed; }
+  package { "lsyncd": ensure => absent; }
   package { "daemontools": ensure => installed; }
   cron { "sync /opt/enterprise to tbdriver": 
     ensure  => absent,

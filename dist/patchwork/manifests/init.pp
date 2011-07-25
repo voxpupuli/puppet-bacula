@@ -61,21 +61,26 @@ class patchwork {
   exec {
     "clone puppet":
       command => '/usr/bin/git clone --bare git://github.com/puppetlabs/puppet.git',
-      cwd     => '/home/patchwork/repos'
+      cwd     => '/home/patchwork/repos',
       creates => '/home/patchwork/repos/puppet.git',
       user    => 'patchwork';
     "clone dashboard":
       command => '/usr/bin/git clone --bare git://github.com/puppetlabs/puppet-dashboard.git',
-      cwd     => '/home/patchwork/repos'
+      cwd     => '/home/patchwork/repos',
       creates => '/home/patchwork/repos/puppet-dashboard.git',
       user    => 'patchwork';
     "clone facter":
       command => '/usr/bin/git clone --bare git://github.com/puppetlabs/facter.git',
-      cwd     => '/home/patchwork/repos'
+      cwd     => '/home/patchwork/repos',
       creates => '/home/patchwork/repos/facter.git',
       user    => 'patchwork';
   }
 
+  file {
+    "/home/patchwork/repos/facter.git/config": owner => patchwork, source => "puppet:///modules/patchwork/facter.config";
+    "/home/patchwork/repos/puppet.git/config": owner => patchwork, source => "puppet:///modules/patchwork/puppet.config";
+    "/home/patchwork/repos/puppet-dashboard.git/config": owner => patchwork, source => "puppet:///modules/patchwork/puppet-dashboard.config";
+  }
 
   Account::User <| tag == 'patchwork' |>
   Group <| tag == 'patchwork' |>

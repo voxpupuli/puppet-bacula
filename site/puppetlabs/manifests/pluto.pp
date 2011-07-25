@@ -39,10 +39,17 @@ class puppetlabs::pluto {
   #enterprise 
   package { "lsyncd": ensure => absent; }
   package { "daemontools": ensure => installed; }
-  cron { "sync /opt/enterprise to tbdriver": 
+  cron { "sync /opt/enterprise to tbdriver":
     minute  => '*/10',
     user    => root,
-    command => '/usr/bin/rsync -a /opt/enterprise/ tb-driver.puppetlabs.lan:/opt/enterprise/';
+    command => '/usr/bin/setlock -nx /var/run/_opt_enterprise_sync.lock /usr/local/bin/_opt_enterprise_sync.sh';
+  }
+
+  file { "/usr/local/bin/_opt_enterprise_sync.sh":
+    owner  => root,
+    group  => root,
+    mode   => 750,
+    source => "puppet:///modules/puppetlabs/_opt_enterprise_sync.sh";
   }
 
   # Crypt filesystem

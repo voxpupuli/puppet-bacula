@@ -60,19 +60,19 @@ class patchwork {
 
   exec {
     "clone puppet":
-      command => '/usr/bin/git clone git://github.com/puppetlabs/puppet.git',
+      command => '/usr/bin/git clone --bare git://github.com/puppetlabs/puppet.git',
       cwd     => '/home/patchwork/repos'
-      creates => '/home/patchwork/repos/puppet',
+      creates => '/home/patchwork/repos/puppet.git',
       user    => 'patchwork';
     "clone dashboard":
-      command => '/usr/bin/git clone git://github.com/puppetlabs/puppet-dashboard.git',
+      command => '/usr/bin/git clone --bare git://github.com/puppetlabs/puppet-dashboard.git',
       cwd     => '/home/patchwork/repos'
-      creates => '/home/patchwork/repos/puppet-dashboard',
+      creates => '/home/patchwork/repos/puppet-dashboard.git',
       user    => 'patchwork';
     "clone facter":
-      command => '/usr/bin/git clone git://github.com/puppetlabs/puppet-facter.git',
+      command => '/usr/bin/git clone --bare git://github.com/puppetlabs/facter.git',
       cwd     => '/home/patchwork/repos'
-      creates => '/home/patchwork/repos/facter',
+      creates => '/home/patchwork/repos/facter.git',
       user    => 'patchwork';
   }
 

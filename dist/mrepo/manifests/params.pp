@@ -9,7 +9,8 @@
 #   [*user*]          - The account to use for mirroring the files. Defaults to apache.
 #   [*group*]         - The group to use for mirroring the files. Defaults to apache.
 #   [*source*]        - The package source. Defaults to git. (git|package)
-#   [*selinux*]       - Whether to update the selinux for the mrepo document root. Defaults to false.
+#   [*selinux*]       - Whether to update the selinux context for the mrepo document root.
+#                       Defaults to the selinux fact.
 #   [*rhn*]           - Whether to install redhat dependencies or not. Defaults to false.
 #   [*rhn_username*]  - The Redhat Network username. Must be set if the param rhn is true.
 #   [*rhn_password*]  - The Redhat Network password. Must be set if the param rhn is true.
@@ -38,7 +39,7 @@ class mrepo::params (
   $user         = "apache",
   $group        = "apache",
   $source       = "git",
-  $selinux      = false,
+  $selinux      = undef,
   $rhn          = false,
   $rhn_username = undef,
   $rhn_password = undef
@@ -49,5 +50,25 @@ class mrepo::params (
   if $rhn {
     validate_re($rhn_username, ".+")
     validate_re($rhn_password, ".+")
+  }
+
+  
+  # Validate selinux usage. If manually set, validate as a bool and use that value.
+  # If undefined and selinux is present and not disabled, use selinux.
+  case $mrepo::params::selinux {
+    undef: {
+      case $::selinux {
+        'enforcing', 'permissive': {
+          $use_selinux = true
+        }
+        'disabled', default: {
+          $use_selinux = false
+        }
+      }
+    }
+    default: {
+      validate_bool($selinux)
+      $use_selinux = $selinux
+    }
   }
 }

@@ -46,7 +46,7 @@ define mrepo::repo (
   $ensure,
   $release,
   $arch,
-  $urls,
+  $urls       = {},
   $metadata   = 'repomd',
   $update     = 'nightly',
   $iso        = '',
@@ -54,10 +54,19 @@ define mrepo::repo (
   $repotitle  = undef
 ) {
   include mrepo
+  include mrepo::params
 
   validate_re($ensure, "^present$|^absent$")
   validate_re($update, "^now$|^nightly$|^weekly$|^never$")
   validate_bool($rhn)
+
+  # mrepo tries to be clever, and if the arch is the suffix of the name will
+  # fold the two, but if the name isn't x86_64 or i386, no folding occurs.
+  # This manages the inconsistent behavior.
+  $www_root_subdir = $name ? {
+    /(?i-mx:i386|x86_64)$/ => "${mrepo::params::www_root}/${name}",
+    default                => "${mrepo::params::www_root}/${name}-${arch}",
+  }
 
   case $ensure {
     present: {
@@ -73,7 +82,7 @@ define mrepo::repo (
         owner   => $user,
         group   => $group,
         content => template("mrepo/repo.conf.erb"),
-        require => File['/etc/mrepo.conf.d'],
+        require => Class['mrepo'],
       }
 
       file { "${mrepo::params::src_root}/$name":
@@ -91,11 +100,8 @@ define mrepo::repo (
         path      => [ "/usr/bin", "/bin" ],
         user      => $user,
         group     => $group,
-        creates   => "${mrepo::params::www_root}/${name}",
-        require   => [
-          File["/etc/mrepo.conf.d/$name.conf"],
-          File["${mrepo::params::www_root}"],
-        ],
+        creates   => $www_root_subdir,
+        require   => Class['mrepo'],
         subscribe => File["/etc/mrepo.conf.d/$name.conf"],
         logoutput => on_failure,
       }
@@ -103,16 +109,13 @@ define mrepo::repo (
       case $update {
         now: {
           exec { "Synchronize repo $name":
-            command => "/usr/bin/mrepo -gu $name",
-            cwd     => $src_root,
-            path    => [ "/usr/bin", "/bin" ],
-            user    => $user,
-            group   => $group,
-            timeout => 0,
-            require => [
-              File["/etc/mrepo.conf.d/$name.conf"],
-              File["${mrepo::params::www_root}"],
-            ],
+            command   => "/usr/bin/mrepo -gu $name",
+            cwd       => $src_root,
+            path      => [ "/usr/bin", "/bin" ],
+            user      => $user,
+            group     => $group,
+            timeout   => 0,
+            require   => Class['mrepo'],
             logoutput => on_failure,
           }
           cron {
@@ -129,7 +132,8 @@ define mrepo::repo (
               command => "/usr/bin/mrepo -gu $name",
               hour    => "0",
               minute  => "0",
-              user    => $user;
+              user    => $user,
+              require => Class['mrepo'];
             "Weekly synchronize repo $name":
               ensure  => absent;
           }
@@ -142,7 +146,8 @@ define mrepo::repo (
               day     => "0",
               hour    => "0",
               minute  => "0",
-              user    => $user;
+              user    => $user,
+              require => Class['mrepo'];
             "Nightly synchronize repo $name":
               ensure  => absent;
           }
@@ -150,12 +155,12 @@ define mrepo::repo (
       }
       if $rhn == true {
         exec { "Generate systemid $name - $arch":
-          command => "gensystemid -u ${mrepo::params::rhn_username} -p ${mrepo::params::rhn_password} --release $release --arch $arch ${mrepo::params::src_root}/$name",
-          path   => [ "/bin", "/usr/bin" ],
-          user   => $user,
-          group   => $group,
-          creates => "${mrepo::params::src_root}/$name/systemid",
-          require => File["${mrepo::params::src_root}/$name"],
+          command   => "gensystemid -u ${mrepo::params::rhn_username} -p ${mrepo::params::rhn_password} --release $release --arch $arch ${mrepo::params::src_root}/$name",
+          path      => [ "/bin", "/usr/bin" ],
+          user      => $user,
+          group     => $group,
+          creates   => "${mrepo::params::src_root}/$name/systemid",
+          require   => Class['mrepo'],
           logoutput => on_failure,
         }
       }

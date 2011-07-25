@@ -40,7 +40,6 @@ class puppetlabs::pluto {
   package { "lsyncd": ensure => absent; }
   package { "daemontools": ensure => installed; }
   cron { "sync /opt/enterprise to tbdriver": 
-    ensure  => absent,
     minute  => '*/10',
     user    => root,
     command => '/usr/bin/rsync -a /opt/enterprise/ tb-driver.puppetlabs.lan:/opt/enterprise/';

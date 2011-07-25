@@ -259,5 +259,13 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'deepak':
+    comment => 'Deepak Giridharagopal',
+    uid     => '1151',
+    group   => allstaff,
+    groups  => ["developers"],
+    tag     => allstaff,
+  }
+
 }
 

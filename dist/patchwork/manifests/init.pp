@@ -4,18 +4,18 @@ class patchwork {
   $patchwork_db_pass="Xeexoh5E"
 
   package {
-    "postgresql":                  ensure => installed;
+    "postgresql":                 ensure => installed;
     "python-psycopg2":            ensure => installed;
     "python-django-registration": ensure => installed;
-    "libapache2-mod-wsgi": ensure => installed;
-    "postfix": ensure => installed;
+    "libapache2-mod-wsgi":        ensure => installed;
+    "postfix":                    ensure => installed;
   }
 
   file {
     "/srv/patchwork/apps/local_settings.py":
-      owner => root,
-      group => root,
-      mode  => 644,
+      owner   => root,
+      group   => root,
+      mode    => 644,
       content => template("patchwork/local_settings.py.erb");
     "/var/lib/bacula/pgsql": ensure => directory;
     "/home/patchwork/.pwclientrc":
@@ -58,12 +58,31 @@ class patchwork {
       minute => '*/15';
   }
 
+  exec {
+    "clone puppet":
+      command => '/usr/bin/git clone git://github.com/puppetlabs/puppet.git',
+      cwd     => '/home/patchwork/repos'
+      creates => '/home/patchwork/repos/puppet',
+      user    => 'patchwork';
+    "clone dashboard":
+      command => '/usr/bin/git clone git://github.com/puppetlabs/puppet-dashboard.git',
+      cwd     => '/home/patchwork/repos'
+      creates => '/home/patchwork/repos/puppet-dashboard',
+      user    => 'patchwork';
+    "clone facter":
+      command => '/usr/bin/git clone git://github.com/puppetlabs/puppet-facter.git',
+      cwd     => '/home/patchwork/repos'
+      creates => '/home/patchwork/repos/facter',
+      user    => 'patchwork';
+  }
+
+
   Account::User <| tag == 'patchwork' |>
   Group <| tag == 'patchwork' |>
 
   bacula::job {
     "${fqdn}-patchwork":
-      files => ["/srv","/var/lib/bacula/pgsql"],
+      files => ["/srv","/var/lib/bacula/pgsql","/home/patchwork"],
   }
 
 }

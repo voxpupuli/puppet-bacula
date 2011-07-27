@@ -79,6 +79,15 @@ class puppetlabs::service::www {
   }
 
   file { "/var/www/puppetlabs.com/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/puppetlabscom_htaccess"; }
+  # 8631
+  file { "/var/www/puppetlabs.com/google297ed9803f18b575.html":
+    owner   => root,
+    group   => root,
+    mode    => 644,
+    content => "google-site-verification: google297ed9803f18b575.html";
+  }
+
+
 
   wordpress::instance {
     'puppetdevchallenge.com':

@@ -224,7 +224,7 @@ class virtual::users {
     tag     => allstaff,
  }
 
- @account::user {'adrien':
+  @account::user {'adrien':
     comment => 'Adrien Thebo',
     uid     => '1026',
     group   => allstaff,
@@ -233,7 +233,18 @@ class virtual::users {
     key     => "AAAAB3NzaC1yc2EAAAABIwAAAQEAr/PYSBs0degY8/NxTZAsidGG+9Wnqb6RQxqm+HRK+Jc4toetKOvXVfwCKQczTwpuKlS3bT0MREv2Ur4boFm7jWGy01y0cJBLjBQEsefWjb3jlQIuYZcaYBlzSq1PlzeuTHcc86k34gvL0uKojYmc43kX/ao3o3yIp4/7SlKJVpYikWNB0NDOokeGEr440GwAGUzybgur/Vfm+aYa9k0wigCC386S1/l4MQ3dDI8D83fOZnyHVOmyjBFL/Nz2Q3Xy4P/Sey8g40SoO4UjNtGmZRmwmdUaF1p1i1BDW7wqsFBYwKeLKv8ZjNo+zy0Mflm2KFnrHBd1FOzymYV3g1biyw==",
     keytype => "ssh-rsa",
     tag     => allstaff,
- }
+  }
+
+  @account::user {'spencer':
+    comment => 'Spencer Krum',
+    uid     => '1027',
+    group   => allstaff,
+    groups  => ["interns"],
+    shell   => '/bin/bash',
+    key     => "AAAAB3NzaC1yc2EAAAADAQABAAABAQC1zHBVqpVX4JonuACfvUWVaQlOsemAUAhI+4dXgH6/ac/BMAG0ghywLjmwPiOk8gO5Fjt38xQOuNC0/BNFRUAyTdhyDcFuX/0/a8PYPlckI01TUxPXp0yJX5XbNSpx19/doeOzBZ2mcZUsr1bSH8cIi8KVZgCziZrGnfEMSkMvU7GkjxIpNH4sta7N52r8bcz47lJvQ9ssHMKu59MoDq1GW5V0MnhgannYdrIM4OZQ7X6KlNvT0M5AcscFuwk4riFaKav3coCQVG0p37WniOXzR/KSfv9TUElqN1dYEzHesbjBYNPgaEq2qci7kicd+OntebsIL+XKq4jFbXeG73Up",
+    keytype => "ssh-rsa",
+    tag     => allstaff,
+  }
 
   @account::user {'gary':
     comment => 'Garry Larizza',

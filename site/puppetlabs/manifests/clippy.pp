@@ -17,7 +17,6 @@ class puppetlabs::clippy {
     basedir    => "/home/git/repositories",
     vhost_name => "clippy.puppetlabs.lan",
     require    => File["/var/www/git"],
-    verbose    => true,
   }
 
   github::mirror {

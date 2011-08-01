@@ -13,6 +13,7 @@ define github::mirror (
 
   $github_user = regsubst($name, '^(.*?)/.*$', '\1')
   $repo_name   = regsubst($name, '^.*/(.*$)', '\1')
+  $fragment_name = regsubst($name, '/', '_', 'G')
 
   # The location of the repository on the disk
   $repo_path = "${basedir}/${github_user}-${repo_name}.git"
@@ -33,7 +34,7 @@ define github::mirror (
         logoutput => on_failure,
       }
 
-      concat::fragment { $name:
+      concat::fragment { $fragment_name:
         ensure  => present,
         content => "${name}\n",
         target  => "${basedir}/.github-allowed",
@@ -47,7 +48,7 @@ define github::mirror (
         backup  => false,
       }
 
-      concat::fragment { $name:
+      concat::fragment { $fragment_name:
         ensure  => absent,
         content => "${name}\n",
         target  => "${basedir}/.github-allowed",

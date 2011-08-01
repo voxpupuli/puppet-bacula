@@ -2,8 +2,8 @@
 #
 # deploys the rack app that responds to the github post-receive hook
 #
-# TODO doc
 class github::listener {
+  include concat::setup
   include apache
 
   $user       = $github::params::user

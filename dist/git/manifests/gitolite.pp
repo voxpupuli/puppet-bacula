@@ -11,15 +11,11 @@ class git::gitolite {
   include git
 
   # Resources for gitolite user
-  ssh::allowgroup { "git": }
-  Account::User <| title == 'git' |>
-  Group         <| title == 'git' |>
-
   # Gitolite keys are self contained - adding keys here will break key
   # management within gitolite itself.
-  Account::User["git"] {
-    usekey => false,
-  }
+  Account::User <| title == 'git' |> { usekey => false, }
+  Group         <| title == 'git' |>
+  ssh::allowgroup { "git": }
 
   package { "gitolite":
     ensure => present,

@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'sinatra'
+require 'listener'
+
+Listener.set :run, false
+Listener.set :env, ENV['RACK_ENV']
+Listener.set :port, 4567
+Listener.set :basedir, "<%= basedir %>"
+Listener.set :verbose, <%= verbose %>
+
+run Listener

@@ -15,7 +15,7 @@ class puppetlabs::clippy {
   class { 'github::params':
     wwwroot    => "/var/www/git",
     basedir    => "/home/git/repositories",
-    vhost_name => "git.puppetlabs.lan",
+    vhost_name => "clippy.puppetlabs.lan",
     require    => File["/var/www/git"],
     verbose    => true,
   }

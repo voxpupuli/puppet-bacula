@@ -15,6 +15,12 @@ class git::gitolite {
   Account::User <| title == 'git' |>
   Group         <| title == 'git' |>
 
+  # Gitolite keys are self contained - adding keys here will break key
+  # management within gitolite itself.
+  Account::User["git"] {
+    usekey => false,
+  }
+
   package { "gitolite":
     ensure => present,
   }

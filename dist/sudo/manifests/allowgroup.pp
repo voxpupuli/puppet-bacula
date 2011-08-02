@@ -1,4 +1,5 @@
 define sudo::allowgroup {
+  include sudo
 
   concat::fragment { 
     "sudoers-group-$name":

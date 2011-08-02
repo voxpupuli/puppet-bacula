@@ -1,5 +1,7 @@
 class puppetlabs::deb-builder {
   ssh::allowgroup  { "release": }
-  sudo::allowgroup { "release": }
-}
+  ssh::allowgroup  { "builder": }
 
+  sudo::allowgroup { "release": }
+  sudo::allowgroup { "builder": }
+}

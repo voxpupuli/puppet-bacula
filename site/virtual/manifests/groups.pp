@@ -41,6 +41,12 @@ class virtual::groups {
   @group { 'interns':
     ensure => present,
     gid    => 677,
+  }
+  @group { 'builder': # Package Builders
+    ensure => present,
+    gid    => 678,
+  }
+
 
 #
 # Service Groups
@@ -97,8 +103,6 @@ class virtual::groups {
   @group { 'wealthfront':
     ensure => present,
     gid    => 1056,
-  }
-
   }
 
 

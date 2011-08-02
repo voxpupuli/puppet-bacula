@@ -12,7 +12,6 @@
 #
 class okra::passenger {
   include okra
-  include okra::params
   include apache
 
   package { "libapache2-mod-passenger":

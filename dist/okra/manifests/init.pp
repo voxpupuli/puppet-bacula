@@ -10,4 +10,5 @@
 #
 class okra {
   include okra::package
+  include okra::params
 }

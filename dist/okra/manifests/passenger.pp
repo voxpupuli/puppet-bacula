@@ -12,7 +12,11 @@
 #
 class okra::passenger {
   include okra
+  include okra::params
   include apache
+
+  $user  = $okra::params::user
+  $group = $okra::params::group
 
   package { "libapache2-mod-passenger":
     ensure => present, 

@@ -12,6 +12,13 @@
 #
 class okra::package {
   include git
+  include okra::params
+
+  user { "okra":
+    ensure     => present,
+    managehome => true,
+    home       => $okra::params::basedir,
+  }
 
   # Required for nokogiri. Debian specific.
   package { [ "libxslt1-dev", "libxml2-dev" ]:

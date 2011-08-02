@@ -25,7 +25,7 @@ class githubrobotpuller (
 
   # We don't have a file{ .. } here as vcsrepo complains.
   vcsrepo{ $githubrobotpuller::path:
-    source   => 'git://github.com/jhelwig/Ruby-GitHub-Pull-Request-Email-Bot.git',
+    source   => 'git://github.com/puppetlabs/Ruby-GitHub-Pull-Request-Email-Bot.git',
     provider => 'git',
     owner    => $githubrobotpuller::user, # only in recent vcsrepo.
     revision => $githubrobotpuller::version,

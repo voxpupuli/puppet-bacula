@@ -6,4 +6,5 @@ class puppetlabs::xaman {
   include apache
   include passenger
   include git
+  include okra
 }

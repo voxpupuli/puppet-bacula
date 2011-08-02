@@ -238,14 +238,14 @@ class virtual::users {
     comment => 'Spencer Krum',
     uid     => '1027',
     group   => allstaff,
-    groups  => ["interns"],
+    groups  => ["interns","builder"],
     tag     => allstaff,
   }
   @account::user {'matthaus':
     comment => 'Matthaus Litteken',
     uid     => '1028',
     group   => allstaff,
-    groups  => ["interns"],
+    groups  => ["interns","builder"],
     tag     => allstaff,
   }
 

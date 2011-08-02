@@ -3,6 +3,7 @@
 # Creates the okra database
 class okra::database {
   include okra::params
+
   $user     = $okra::params::user
   $group    = $okra::params::group
   $password = 'f3kh7b21'
@@ -15,6 +16,7 @@ class okra::database {
     ensure => running,
     enable => true,
   }
+
   file { "${okra::params::basedir}/config/database.yml":
     ensure => present,
     owner  => $okra::params::user,

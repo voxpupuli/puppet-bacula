@@ -3,7 +3,7 @@ class puppetlabs::urd {
   include pxe
   include jumpstart
 
-  ssh::allowgroup   { "interns": }
-  sudo::allowgroup  { "interns": }
+  ssh::allowgroup   { "techops": }
+  sudo::allowgroup  { "techops": }
 
 }

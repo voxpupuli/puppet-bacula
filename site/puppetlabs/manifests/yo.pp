@@ -1,7 +1,7 @@
 class puppetlabs::yo {
 
-  ssh::allowgroup { "interns": }
-  sudo::allowgroup { "interns": }
+  ssh::allowgroup  { "techops": }
+  sudo::allowgroup { "techops": }
 
   # stahnma needs root to work on some repo things.
   sudo::entry{ "stahnma":

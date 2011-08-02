@@ -1,7 +1,7 @@
 class puppetlabs::clippy {
 
-  sudo::allowgroup  { "interns": }
-  ssh::allowgroup   { "interns": }
+  sudo::allowgroup  { "techops": }
+  ssh::allowgroup   { "techops": }
 
   include git::gitolite
 

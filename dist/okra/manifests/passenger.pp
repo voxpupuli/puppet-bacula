@@ -12,8 +12,12 @@
 #
 class okra::passenger {
   include okra
+  include okra::params
   include apache
-  include passenger
+
+  package { "libapache2-mod-passenger":
+    ensure => present, 
+  }
 
   apache::vhost { "okra.puppetlabs.lan":
     port => 443,

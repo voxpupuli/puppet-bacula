@@ -200,7 +200,7 @@ class virtual::users {
     comment => 'Michael Stahnke',
     uid     => '1147',
     group   => allstaff,
-    groups  => ["developers","release","enterprise"],
+    groups  => ["developers","release","enterprise","builder"],
     tag     => allstaff,
  }
 

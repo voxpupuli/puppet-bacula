@@ -234,15 +234,18 @@ class virtual::users {
     keytype => "ssh-rsa",
     tag     => allstaff,
   }
-
   @account::user {'spencer':
     comment => 'Spencer Krum',
     uid     => '1027',
     group   => allstaff,
     groups  => ["interns"],
-    shell   => '/bin/bash',
-    key     => "AAAAB3NzaC1yc2EAAAADAQABAAABAQC1zHBVqpVX4JonuACfvUWVaQlOsemAUAhI+4dXgH6/ac/BMAG0ghywLjmwPiOk8gO5Fjt38xQOuNC0/BNFRUAyTdhyDcFuX/0/a8PYPlckI01TUxPXp0yJX5XbNSpx19/doeOzBZ2mcZUsr1bSH8cIi8KVZgCziZrGnfEMSkMvU7GkjxIpNH4sta7N52r8bcz47lJvQ9ssHMKu59MoDq1GW5V0MnhgannYdrIM4OZQ7X6KlNvT0M5AcscFuwk4riFaKav3coCQVG0p37WniOXzR/KSfv9TUElqN1dYEzHesbjBYNPgaEq2qci7kicd+OntebsIL+XKq4jFbXeG73Up",
-    keytype => "ssh-rsa",
+    tag     => allstaff,
+  }
+  @account::user {'matthaus':
+    comment => 'Matthaus Litteken',
+    uid     => '1028',
+    group   => allstaff,
+    groups  => ["interns"],
     tag     => allstaff,
   }
 

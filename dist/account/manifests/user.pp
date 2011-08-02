@@ -12,20 +12,20 @@
 #
 
 define account::user (
-    $ensure='present', 
-    $comment, 
-    $shell='/bin/bash', 
-    $home='' , 
-    $group='', 
-    $groups='', 
-    $test='false', 
-    $uid ='', 
-    $usekey=true, 
+    $ensure='present',
+    $comment,
+    $shell='/bin/bash',
+    $home='' ,
+    $group='',
+    $groups='',
+    $test='false',
+    $uid ='',
+    $usekey=true,
     $key='',
     $keytype='ssh-rsa',
     $email='',
     $expire=''
-    ){
+    ) {
 
   include packages::shells
 

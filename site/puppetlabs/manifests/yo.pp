@@ -11,3 +11,4 @@ class puppetlabs::yo {
   include puppetlabs::service::mrepo
   include puppetlabs::service::repoclosure
 }
+

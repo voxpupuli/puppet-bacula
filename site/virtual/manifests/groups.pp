@@ -1,100 +1,104 @@
 class virtual::groups {
-  @group {'allstaff':
+
+ # use 600 - 999 for groups
+
+  @group { 'allstaff':
     ensure => present,
     gid    => 600,
   }
-  @group {'sysadmin':
+  @group { 'techops':
+    ensure => present,
+    gid    => 601,
+  }
+  @group { 'sysadmin':
     ensure => present,
     gid    => 666,
   }
-  @group {'developers':
+  @group { 'developers':
     ensure => present,
     gid    => 667,
   }
-  @group {'prosvc':
+  @group { 'prosvc':
     ensure => present,
     gid    => 668,
   }
-  @group {'operations':
+  @group { 'operations':
     ensure => present,
     gid    => 673,
   }
-  @group {'git':
+  @group { 'git':
     ensure => present,
     gid    => 674,
   }
-  @group {'enterprise':
+  @group { 'enterprise':
     ensure => present,
     gid    => 675,
   }
-  @group {'release':
+  @group { 'release':
     ensure => present,
     gid    => 676,
   }
+  @group { 'interns':
+    ensure => present,
+    gid    => 677,
 
 #
 # Service Groups
 #
-  @group {'hudson':
+  @group { 'hudson':
     ensure => present,
     gid    => 620,
   }
 
-  @group {'osqa':
+  @group { 'osqa':
     ensure => present,
     gid    => 621,
   }
 
-  @group {'patchwork':
+  @group { 'patchwork':
     ensure => present,
     gid    => 622,
   }
 
 #
 # Customers
-#
+# 1050 - 2000
 
-  @group {'vmware':
+  @group { 'vmware':
     ensure => present,
     gid    => 1050,
   }
 
-  @group {'motorola':
+  @group { 'motorola':
     ensure => present,
     gid    => 1051,
   }
 
-  @group {'nokia':
+  @group { 'nokia':
     ensure => present,
     gid    => 1052,
   }
 
-  @group {'blackrock':
+  @group { 'blackrock':
     ensure => present,
     gid    => 1053,
   }
 
-  @group {'secureworks':
+  @group { 'secureworks':
     ensure => present,
     gid    => 1054,
   }
 
-  @group {'bioware':
+  @group { 'bioware':
     ensure => present,
     gid    => 1055,
   }
 
-  @group {'wealthfront':
+  @group { 'wealthfront':
     ensure => present,
     gid    => 1056,
   }
 
-#
-# Interns
-# 
-  @group {'interns':
-    ensure => present,
-    gid    => 677,
   }
 
 
@@ -102,16 +106,15 @@ class virtual::groups {
 # Functional
 #
 
-  @group {'www-dev':
+  @group { 'www-dev':
     ensure => present,
     gid    => 678,
   }
 
-  @group {'contractors':
+  @group { 'contractors':
     ensure => present,
     gid    => 679,
   }
-
 
 
 }

@@ -75,7 +75,7 @@ class virtual::users {
     comment => 'James Turnbull',
     uid     => '1118',
     group   => allstaff,
-    groups  => ["sysadmin","operations"],
+    groups  => ["sysadmin","operations","techops"],
     tag     => allstaff,
  }
 
@@ -108,7 +108,7 @@ class virtual::users {
     uid     => '1123',
     shell   => '/bin/zsh',
     group   => allstaff,
-    groups  => ["sysadmin","operations"],
+    groups  => ["sysadmin","operations","techops"],
     tag     => allstaff,
  }
 
@@ -209,7 +209,7 @@ class virtual::users {
     uid     => '1025',
     group   => allstaff,
     shell   => '/bin/zsh',
-    groups  => ["sysadmin","operations"],
+    groups  => ["sysadmin","operations","techops"],
     tag     => allstaff,
  }
  
@@ -228,7 +228,7 @@ class virtual::users {
     comment => 'Adrien Thebo',
     uid     => '1026',
     group   => allstaff,
-    groups  => ["interns"],
+    groups  => ["interns","techops"],
     shell   => '/bin/bash',
     key     => "AAAAB3NzaC1yc2EAAAABIwAAAQEAr/PYSBs0degY8/NxTZAsidGG+9Wnqb6RQxqm+HRK+Jc4toetKOvXVfwCKQczTwpuKlS3bT0MREv2Ur4boFm7jWGy01y0cJBLjBQEsefWjb3jlQIuYZcaYBlzSq1PlzeuTHcc86k34gvL0uKojYmc43kX/ao3o3yIp4/7SlKJVpYikWNB0NDOokeGEr440GwAGUzybgur/Vfm+aYa9k0wigCC386S1/l4MQ3dDI8D83fOZnyHVOmyjBFL/Nz2Q3Xy4P/Sey8g40SoO4UjNtGmZRmwmdUaF1p1i1BDW7wqsFBYwKeLKv8ZjNo+zy0Mflm2KFnrHBd1FOzymYV3g1biyw==",
     keytype => "ssh-rsa",

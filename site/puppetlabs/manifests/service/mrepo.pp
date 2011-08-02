@@ -69,6 +69,7 @@ class puppetlabs::service::mrepo {
     ensure    => present,
     repotitle => 'CentOS Linux $release ($arch)',
     arch      => "i386",
+    release   => "5",
     iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
     urls      => {
       updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',

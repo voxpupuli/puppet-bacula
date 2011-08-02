@@ -36,8 +36,8 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: okra_production
+  database: okra
   pool: 5
-  username: <%= 
-  password:
-  socket: /tmp/mysql.sock
+  username: <%= user %>
+  password: <%= group %>
+  socket: /var/run/mysqld/mysqld.sock

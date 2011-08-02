@@ -203,16 +203,16 @@ class virtual::users {
     groups  => ["developers","release","enterprise"],
     tag     => allstaff,
  }
- 
- @account::user {'ben':
+
+  @account::user {'ben':
     comment => 'Ben Hughes',
     uid     => '1025',
     group   => allstaff,
     shell   => '/bin/zsh',
     groups  => ["sysadmin","operations","techops"],
     tag     => allstaff,
- }
- 
+  }
+
  @account::user {'ken':
     comment => 'Ken Barber',
     uid     => '1142',

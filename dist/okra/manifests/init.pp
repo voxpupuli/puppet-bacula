@@ -9,6 +9,7 @@
 # Sample Usage:
 #
 class okra {
-  include okra::package
   include okra::params
+  include okra::database
+  include okra::package
 }

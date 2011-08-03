@@ -281,5 +281,13 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'eric':
+    comment => 'Eric Shamow',
+    uid     => '1152',
+    group   => allstaff,
+    groups  => ["prosvc"],
+    tag     => allstaff,
+  }
+
 }
 

@@ -2,7 +2,7 @@ class puppetlabs::pluto {
 
   ssh::allowgroup { "developers": }
   ssh::allowgroup { "prosvc": }
-  ssh::allowgroup { "interns": }
+  ssh::allowgroup { "builders": }
 
   # Customer Groups
   Account::User <| group == vmware |>

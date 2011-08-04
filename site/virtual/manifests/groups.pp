@@ -42,10 +42,19 @@ class virtual::groups {
     ensure => present,
     gid    => 677,
   }
-  @group { 'builder': # Package Builders
+  @group { 'www-dev': # web developers
     ensure => present,
     gid    => 678,
   }
+  @group { 'contractors':
+    ensure => present,
+    gid    => 679,
+  }
+  @group { 'builder': # Package Builders
+    ensure => present,
+    gid    => 680,
+  }
+
 
 
 #
@@ -109,16 +118,6 @@ class virtual::groups {
 #
 # Functional
 #
-
-  @group { 'www-dev':
-    ensure => present,
-    gid    => 678,
-  }
-
-  @group { 'contractors':
-    ensure => present,
-    gid    => 679,
-  }
 
 
 }

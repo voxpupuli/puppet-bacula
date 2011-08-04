@@ -2,6 +2,8 @@ class puppetlabs::app01 {
   include patchwork
 
   ssh::allowgroup { "developers": }
+  ssh::allowgroup { "techops": }
+  sudo::allowgroup { "techops": }
 
   ####
   # Bacula

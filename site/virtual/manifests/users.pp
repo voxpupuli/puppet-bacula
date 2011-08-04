@@ -289,5 +289,13 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'lifton':
+    comment => 'Josh Lifton',
+    uid     => '1153',
+    group   => allstaff,
+    groups  => ["developers"],
+    tag     => allstaff,
+  }
+
 }
 

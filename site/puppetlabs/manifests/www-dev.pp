@@ -61,6 +61,12 @@ class puppetlabs::www-dev {
     source => "puppet:///modules/puppetlabs/puppetlabscom_htaccess";
   }
 
+  file { "/var/www/www-dev.puppetlabs.com/.htpasswd":
+    ensure => present,
+    owner  => www-data,
+    group  => www-dev,
+    mode   => 644,
+  }
 
   package {'php5-curl': ensure => present, notify => Service[httpd] }  
 

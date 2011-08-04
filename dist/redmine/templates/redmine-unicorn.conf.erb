@@ -86,6 +86,14 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   ProxyPass /projects/1/wiki/Using_Multiple_Environments !
   RedirectMatch permanent /projects/1/wiki/Using_Multiple_Environments         http://docs.puppetlabs.com/guides/environment.html
 
+
+  # Whoever named forge needs "schooling"
+  ProxyPass /projects/forge                 !
+  RedirectMatch permanent /projects/forge               https://projects.puppetlabs.com/projects/module-site
+  ProxyPass /projects/puppet-forge          !
+  RedirectMatch permanent /projects/puppet-forge        https://projects.puppetlabs.com/projects/module-site
+
+
   # Now anything that is left, lets proxy this to localhost.
   ProxyPass / http://localhost:8080/
   ProxyPassReverse / http://localhost:8080/

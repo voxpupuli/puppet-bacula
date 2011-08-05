@@ -68,5 +68,16 @@ class virtual::users::customers {
     tag     => customer,
     expire  => "2011-07-01",
   }
+
+  # tlinkin@advance.net
+  @account::user {'tomlinkin':
+    comment => 'Tom Linkin',
+    group   => advancedotcom,
+    tag     => customer,
+    key     => "AAAAB3NzaC1yc2EAAAABIwAAAQEAwE4+j2WIqTcIhci2qFlTlNF3Hf+DwHgPwfsAu2tp/xG9yxQuY8nt8w8JZr/eIPHq2SPhCM7KoXurO9k0TpVGDd4fqHY6FG6izt4keE0Itaclhn4mbW1UecFutPjKuMcyfWczwnalCyyCkHuNahuMPH9RDv9IP+9SDU2XTFKdNO5QtRtkD7lTAaMrOlCPntFglX3WnTYkpuTm1k7zzLrKclMalXS16C2KIItIhyUo1p0zQ7wrVPxGyOilPrTpfcmnfNH82DLhsIlSqoESgsbVAr6fO4/l1p5Q/fwmmPSm9tEngaeKJcaWcjtmOg6fFnMV1i5zTOZAcOk8eKS84O8sgw==",
+    keytype => "ssh-rsa",
+    expire  => "2011-08-19",
+  }
+
 }
 

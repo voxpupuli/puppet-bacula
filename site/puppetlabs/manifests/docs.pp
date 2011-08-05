@@ -1,4 +1,6 @@
-class puppetlabs::docs {
+class puppetlabs::docs (
+  $port
+  ) {
   #
   # This is temp so as to not purge the puppetlabs.com vhost.
   #
@@ -6,13 +8,14 @@ class puppetlabs::docs {
 
   apache::vhost::redirect {
     'docs.reductivelabs.com':
-      port       => '80',
+      port       => $port,
       dest       => 'http://docs.puppetlabs.com'
   }
 
+  # This should be port 82 when running on web01
   apache::vhost {
     'docs.puppetlabs.com':
-      port          => 80,
+      port          => $port,
       docroot       => $docroot,
       ssl           => false,
       priority      => 20,
@@ -21,15 +24,15 @@ class puppetlabs::docs {
   # Since this sourced from git we should probably use VCS repo and a variable for the tag to make up date these files.
   #
   Account::User <| tag == 'deploy' |>
-  ssh::allowgroup { "www-data": }
   file {
-    $docroot: 
-      ensure => directory, 
-      mode   => '0755', 
-      owner  => deploy, 
-      group  => root, 
-      before => Apache::Vhost['docs.puppetlabs.com'] 
+    $docroot:
+      ensure => directory,
+      mode   => '0755',
+      owner  => deploy,
+      group  => root,
+      before => Apache::Vhost['docs.puppetlabs.com']
   }
 
   realize(A2mod['rewrite'])
+
 }

@@ -2,7 +2,7 @@ class puppetlabs::web01 {
 
   include postfix
   include puppetlabs::service::www
-  include puppetlabs::docs
+  class { "puppetlabs::docs": port => 82; }
 
   # Bacula
   $bacula_director = 'baal.puppetlabs.com'

@@ -114,6 +114,11 @@ class virtual::groups {
     gid    => 1056,
   }
 
+  @group { 'advance':
+    ensure => present,
+    gid    => 1057,
+  }
+
 
 #
 # Functional

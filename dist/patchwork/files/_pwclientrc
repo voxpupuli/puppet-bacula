@@ -1,5 +1,5 @@
 [base]
-url: https://app01.puppetlabs.lan/xmlrpc/
+url: https://projects.puppetlabs.com/xmlrpc/
 project: puppet
 
 # Adding authentication parameters will allow you to use the 'update'

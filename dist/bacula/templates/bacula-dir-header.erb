@@ -78,25 +78,26 @@ Catalog {
 # Reasonable message delivery -- send most everything to email address
 #  and to the console
 
-Messages {
-  Name            = Standard
-  mailcommand     = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \%r\" -s \"Bacula: %t %e of %c %l\" %r"
-  operatorcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \%r\" -s \"Bacula: Intervention needed for %j\" %r"
-  mail            = root@localhost = all, !skipped
-  operator        = root@localhost = mount
-  console         = all, !skipped, !saved
-  append          = "/var/lib/bacula/log" = all, !skipped
-  catalog         = all
-}
-
-Messages {
-  Name = Daemon
-  mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) %r\" -s \"Bacula daemon message\" %r"
-  mail = root@localhost = all, !skipped
-  console = all, !skipped, !saved
-  append = "/var/lib/bacula/log" = all, !skipped
-}
-
+# zleslie: We are monitoring everything with nagios, who cares about reading email.
+# zleslie: Messages {
+# zleslie:   Name            = Standard
+# zleslie:   mailcommand     = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \%r\" -s \"Bacula: %t %e of %c %l\" %r"
+# zleslie:   operatorcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \%r\" -s \"Bacula: Intervention needed for %j\" %r"
+# zleslie:   mail            = root@localhost = all, !skipped
+# zleslie:   operator        = root@localhost = mount
+# zleslie:   console         = all, !skipped, !saved
+# zleslie:   append          = "/var/lib/bacula/log" = all, !skipped
+# zleslie:   catalog         = all
+# zleslie: }
+# zleslie: 
+# zleslie: Messages {
+# zleslie:   Name = Daemon
+# zleslie:   mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) %r\" -s \"Bacula daemon message\" %r"
+# zleslie:   mail = root@localhost = all, !skipped
+# zleslie:   console = all, !skipped, !saved
+# zleslie:   append = "/var/lib/bacula/log" = all, !skipped
+# zleslie: }
+# zleslie: 
 #
 # Restricted console used by tray-monitor to get the status of the director
 #

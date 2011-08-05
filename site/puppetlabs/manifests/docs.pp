@@ -21,6 +21,7 @@ class puppetlabs::docs {
   # Since this sourced from git we should probably use VCS repo and a variable for the tag to make up date these files.
   #
   Account::User <| tag == 'deploy' |>
+  ssh::allowgroup { "www-data": }
   file {
     $docroot: 
       ensure => directory, 

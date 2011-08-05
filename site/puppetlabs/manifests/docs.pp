@@ -1,5 +1,5 @@
 class puppetlabs::docs (
-  $port
+  $port='80'
   ) {
   #
   # This is temp so as to not purge the puppetlabs.com vhost.

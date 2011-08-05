@@ -178,7 +178,7 @@ class puppetlabs::baal {
       hour => '2';
     "clean_dashboard_reports":
       user => root,
-      command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune upto=3 unit=day)',
+      command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune -s upto=3 unit=day > /dev/null)',
       minute => '20',
       hour => '2';
     "Puppet: puppet_deploy.sh":

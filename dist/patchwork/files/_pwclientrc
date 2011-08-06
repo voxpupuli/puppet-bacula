@@ -1,5 +1,5 @@
 [base]
-url: https://projects.puppetlabs.com/xmlrpc/
+url: https://patchwork.puppetlabs.com/xmlrpc/
 project: puppet
 
 # Adding authentication parameters will allow you to use the 'update'

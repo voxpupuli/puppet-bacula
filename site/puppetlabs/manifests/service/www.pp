@@ -50,6 +50,7 @@ class puppetlabs::service::www {
       dest          => 'http://www.puppetconf.com';
   }
 
+  nagios::website { 'madstop.com': }
   wordpress::instance {
     'madstop.com':
       site_alias      => "www.madstop.com",
@@ -64,6 +65,7 @@ class puppetlabs::service::www {
   }
   file { "/var/www/madstop.com/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/madstop_htaccess"; }
 
+  nagios::website { 'www.puppetlabs.com': }
   wordpress::instance {
     'puppetlabs.com':
       site_alias      => "www.puppetlabs.com",
@@ -87,8 +89,7 @@ class puppetlabs::service::www {
     content => "google-site-verification: google297ed9803f18b575.html";
   }
 
-
-
+  nagios::website { 'puppetdevchallenge.com': }
   wordpress::instance {
     'puppetdevchallenge.com':
       site_alias => "www.puppetdevchallenge.com",
@@ -100,6 +101,7 @@ class puppetlabs::service::www {
       seturl     => true,
   }
 
+  nagios::website { 'puppetconf.com': }
   wordpress::instance {
     'puppetconf.com':
       site_alias => "www.puppetconf.com",

@@ -14,13 +14,13 @@ class pdns::params {
 
   $pdns0_server = 'baal.puppetlabs.com'
   $pdns1_server = 'dxul.puppetlabs.com'
-  $mirror0 = '74.207.250.144'
+  $mirror0 = '96.126.112.51'
   $mirror1 = '82.113.151.205'
   $mirror2 = '74.207.228.223'
 
   $user = 'pdns'
   $group = 'pdns'
- 
+
   case $operatingsystem {
     'centos', 'redhat', 'fedora': {
        $package_list = '' 

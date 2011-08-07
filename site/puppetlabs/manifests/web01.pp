@@ -6,7 +6,7 @@ class puppetlabs::web01 {
 
   apache::vhost::redirect {
     "docs.mirror0.puppetlabs.com":
-      port => '80',
+      port => '82',
       dest => 'http://docs.puppetlabs.com';
   }
 

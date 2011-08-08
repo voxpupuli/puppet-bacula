@@ -1,7 +1,7 @@
 define unicorn::app (
     $approot,
     $config='config/unicorn.config.rb',
-    $initscript = "unicorn/initscript.erb" #default demplate location
+    $initscript = "unicorn/initscript.erb" #default template location
   ) {
 
   # get the common stuff, like package(s)

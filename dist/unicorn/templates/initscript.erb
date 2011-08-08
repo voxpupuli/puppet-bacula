@@ -1,0 +1,62 @@
+#! /bin/sh
+
+set -u
+set -e
+
+APP_ROOT=<%=approot%>
+PID=$APP_ROOT/tmp/pids/unicorn.pid
+ENV=production
+NAME=unicorn_rails
+DESC=unicorn_rails
+DAEMON=/usr/bin/unicorn_rails
+DAEMON_OPTS="-c config/unicorn.config.rb -E $ENV -D"
+
+
+OLDPID="$PID.oldbin"
+
+cd $APP_ROOT || exit 1
+
+sig () {
+  test -s "$PID" && kill -$1 `cat $PID`
+}
+
+oldsig () {
+  test -s $OLDPID && kill -$1 `cat $OLDPID`
+}
+
+case "$1" in
+  start)
+    echo -n "Starting $DESC: "
+    $DAEMON $DAEMON_OPTS
+    echo "$NAME."
+    ;;
+  stop)
+    echo -n "Stopping $DESC: "
+    sig QUIT
+    echo "$NAME."
+    ;;
+  restart)
+    echo -n "Restarting $DESC: "
+    sig QUIT
+    sleep 1
+    $DAEMON $DAEMON_OPTS
+    echo "$NAME."
+    ;;
+  reload)
+        echo -n "Reloading $DESC code: "
+        sig USR2
+        echo "$NAME."
+        ;;
+  reopen-logs)
+        echo -n "Reopening $DESC logs: "
+        sig USR1
+        echo "$NAME."
+        ;;
+
+  *)
+    echo "Usage: $NAME {start|stop|restart|reload|reopen-logs}" >&2
+    exit 1
+    ;;
+esac
+
+exit 0

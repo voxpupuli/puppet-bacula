@@ -15,6 +15,9 @@ define unicorn::app (
 
   file {
     "/etc/init.d/unicorn_$name":
+      owner   => root,
+      group   => root,
+      mode    => 755,
       content => template("unicorn/initscript.erb");
   }
 

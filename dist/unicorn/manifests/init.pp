@@ -1,6 +1,6 @@
 class unicorn {
 
-  include ruby
+  require ruby
 
   package {
     'unicorn': ensure => installed, provider => gem;

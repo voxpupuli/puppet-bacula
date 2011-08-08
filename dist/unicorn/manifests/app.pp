@@ -10,11 +10,13 @@ define unicorn::app (
     "unicorn_$name":
       ensure  => running,
       enable  => true,
-      require => [
-        Package['unicorn'],
-        File["/etc/init.d/unicorn_$name"],
-      ]
+      require => File["/etc/init.d/unicorn_$name"],
   }
 
+  file {
+    "/etc/init.d/unicorn_$name":
+      ensure => present;
+  }
 
 }
+

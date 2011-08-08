@@ -1,8 +1,8 @@
 class puppetlabs::wyrd {
 
-  class {
-    "puppet::master::unicorn":
-  }
+#  class {
+#    "puppet::master::unicorn":
+#  }
 
   unicorn::app {
     "puppetmaster":
@@ -18,7 +18,6 @@ class puppetlabs::wyrd {
       mode   => 644,
       source => "puppet:///modules/puppet/unicorn.conf";
   }
-
 
 }
 

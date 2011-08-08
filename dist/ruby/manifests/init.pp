@@ -21,7 +21,7 @@ class ruby {
     }
   }
 
-  if $operatingsystem == "Linux" { # added to support non-linux
+  if $kernel == "Linux" { # added to support non-linux
     package{'rubygems':
       ensure  => installed,
       require => Package['ruby'],

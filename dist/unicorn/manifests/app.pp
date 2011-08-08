@@ -1,6 +1,6 @@
 define unicorn::app (
     $approot,
-    $config='config/unicorn.config.rb'
+    $config='config/unicorn.config.rb',
     $initscript = "unicorn/initscript.erb" #default demplate location
   ) {
 

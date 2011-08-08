@@ -9,7 +9,7 @@ ENV=production
 NAME=unicorn_rails
 DESC=unicorn_rails
 DAEMON=/usr/bin/unicorn_rails
-DAEMON_OPTS="-c config/unicorn.config.rb -E $ENV -D"
+DAEMON_OPTS="-c <%= config %> -E $ENV -D"
 
 
 OLDPID="$PID.oldbin"

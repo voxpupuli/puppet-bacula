@@ -9,6 +9,7 @@ class puppetlabs::wyrd {
       approot => "/etc/puppet",
       config  => "/etc/puppet/unicorn.conf",
       require => File["/etc/puppet/unicorn.conf"],
+      initscript => "puppet/unicorn_puppetmaster",
   }
 
   file {

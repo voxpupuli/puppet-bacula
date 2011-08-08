@@ -82,41 +82,49 @@ class virtual::groups {
   @group { 'vmware':
     ensure => present,
     gid    => 1050,
+    tag    => customer,
   }
 
   @group { 'motorola':
     ensure => present,
     gid    => 1051,
+    tag    => customer,
   }
 
   @group { 'nokia':
     ensure => present,
     gid    => 1052,
+    tag    => customer,
   }
 
   @group { 'blackrock':
     ensure => present,
     gid    => 1053,
+    tag    => customer,
   }
 
   @group { 'secureworks':
     ensure => present,
     gid    => 1054,
+    tag    => customer,
   }
 
   @group { 'bioware':
     ensure => present,
     gid    => 1055,
+    tag    => customer,
   }
 
   @group { 'wealthfront':
     ensure => present,
     gid    => 1056,
+    tag    => customer,
   }
 
   @group { 'advance':
     ensure => present,
     gid    => 1057,
+    tag    => customer,
   }
 
 

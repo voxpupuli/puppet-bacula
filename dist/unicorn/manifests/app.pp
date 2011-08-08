@@ -15,7 +15,7 @@ define unicorn::app (
 
   file {
     "/etc/init.d/unicorn_$name":
-      content => tempalte("unicorn/initscript.erb");
+      content => template("unicorn/initscript.erb");
   }
 
 }

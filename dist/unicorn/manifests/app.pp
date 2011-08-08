@@ -1,6 +1,6 @@
 define unicorn::app (
     $approot,
-    $config='config/unicorn.config.rb"
+    $config='config/unicorn.config.rb'
   ) {
 
   # get the common stuff, like package(s)

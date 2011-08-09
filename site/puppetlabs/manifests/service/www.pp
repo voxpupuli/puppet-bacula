@@ -48,6 +48,17 @@ class puppetlabs::service::www {
       serveraliases => "www.puppetcon.com",
       port          => '82',
       dest          => 'http://www.puppetconf.com';
+    'blog.puppetlabs.com':
+      port          => '82',
+      dest          => 'http://www.puppetlabs.com/blog';
+    'puppetcamp.org':
+      serveraliases => "www.puppetcamp.org",
+      port          => '82',
+      dest          => 'http://www.puppetlabs.com/community/puppet-camp';
+    'reductivelabs.com':
+      serveraliases => "www.reductivelabs.com",
+      port          => '82',
+      dest          => 'http://www.puppetlabs.com';
   }
 
   nagios::website { 'madstop.com': }

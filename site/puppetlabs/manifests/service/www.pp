@@ -90,13 +90,7 @@ class puppetlabs::service::www {
       priority        => '05',
       port            => '82',
   }
-  file { "/var/www/puppetlabs.com/.htaccess":
-    ensure => present,
-    owner => root,
-    group => root,
-    mode  => 777,
-    #source => "puppet:///modules/puppetlabs/puppetlabscom_htaccess";
-  }
+
   # 8631
   file { "/var/www/puppetlabs.com/google297ed9803f18b575.html":
     owner   => root,
@@ -106,11 +100,26 @@ class puppetlabs::service::www {
   }
 
   file { "/var/www/puppetlabs.com/sitemap.xml":
-    ensure => present,
-    owner  => root,
-    group  => root,
-    mode   => 777,
-    #source => "puppet:///modules/puppetlabs/www/puppetlabs.com/sitemap.xml";
+      ensure  => present,
+      replace => no,
+      owner   => root,
+      group   => root,
+      mode    => 777,
+      source  => "puppet:///modules/puppetlabs/www/puppetlabs.com/sitemap.xml";
+    "/var/www/puppetlabs.com/.htaccess":
+      ensure  => present,
+      replace => no,
+      owner   => root,
+      group   => root,
+      mode    => 777,
+      source  => "puppet:///modules/puppetlabs/puppetlabscom_htaccess";
+    "/var/www/puppetlabs.com/robots.txt":
+      ensure  => present,
+      replace => no,
+      owner   => root,
+      group   => root,
+      mode    => 777,
+      source  => "puppet:///modules/puppetlabs/www/puppetlabs.com/robots.txt";
   }
 
   nagios::website { 'puppetdevchallenge.com': }

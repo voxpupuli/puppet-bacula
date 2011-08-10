@@ -101,9 +101,9 @@ class puppetlabs::service::www {
 
   file { "/var/www/puppetlabs.com/sitemap.xml":
     owner  => root,
-    group  => root
+    group  => root,
     mode   => 644,
-    source => "puppet:///modules/puppetlabs/www/puppetlabs.com/sitemap.xml"
+    source => "puppet:///modules/puppetlabs/www/puppetlabs.com/sitemap.xml";
   }
 
   nagios::website { 'puppetdevchallenge.com': }

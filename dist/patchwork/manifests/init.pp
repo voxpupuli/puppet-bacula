@@ -77,9 +77,24 @@ class patchwork {
   }
 
   file {
-    "/home/patchwork/repos/facter.git/config": owner => patchwork, source => "puppet:///modules/patchwork/facter.config";
-    "/home/patchwork/repos/puppet.git/config": owner => patchwork, source => "puppet:///modules/patchwork/puppet.config";
-    "/home/patchwork/repos/puppet-dashboard.git/config": owner => patchwork, source => "puppet:///modules/patchwork/puppet-dashboard.config";
+    "/home/patchwork/repos/facter.git/config":
+      owner => patchwork,
+      source => "puppet:///modules/patchwork/facter.config";
+    "/home/patchwork/repos/puppet.git/config":
+      owner => patchwork,
+      source => "puppet:///modules/patchwork/puppet.config";
+    "/home/patchwork/repos/puppet-dashboard.git/config":
+      owner => patchwork,
+      source => "puppet:///modules/patchwork/puppet-dashboard.config";
+    "/home/patchwork/repos/puppetlabs-stdlib.git/config":
+      owner => patchwork,
+      source => "puppet:///modules/patchwork/puppetlabs-stdlib.config";
+    "/home/patchwork/repos/puppetlabs-cloud-provisioner.git/config":
+      owner => patchwork,
+      source => "puppet:///modules/patchwork/puppetlabs-cloud-provisioner.config";
+    "/home/patchwork/repos/marionette-collective.git/config":
+      owner => patchwork,
+      source => "puppet:///modules/patchwork/marionette-collective.config";
   }
 
   Account::User <| tag == 'patchwork' |>

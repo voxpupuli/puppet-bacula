@@ -41,7 +41,7 @@ class githubrobotpuller (
     require => Vcsrepo[ $githubrobotpuller::path ],
   }
 
-  package{ [ 'httparty', 'mustache', 'pony']:
+  package{ [ 'mustache', 'pony', 'octocat_herder']:
     ensure   => present,
     provider => 'gem',
     before   => Vcsrepo[ $githubrobotpuller::path ],

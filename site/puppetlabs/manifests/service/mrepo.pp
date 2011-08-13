@@ -41,7 +41,9 @@ class puppetlabs::service::mrepo {
     arch      => "x86_64",
     release   => "5",
     iso       => 'rhel-5-server-$arch-disc?.iso',
-    updates   => 'rhns:///rhel-$arch-server-5',
+    urls      => {
+      updates  => 'rhns:///rhel-$arch-server-5',
+    },
   }
 
   mrepo::repo { "rhel5server-i386":
@@ -51,7 +53,9 @@ class puppetlabs::service::mrepo {
     arch      => "i386",
     release   => "5",
     iso       => 'rhel-5-server-$arch-disc?.iso',
-    updates   => 'rhns:///rhel-$arch-server-5',
+    urls      => {
+      updates  => 'rhns:///rhel-$arch-server-5',
+    },
   }
 
   mrepo::repo { "cent5server-x86_64":

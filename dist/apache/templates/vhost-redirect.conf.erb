@@ -6,6 +6,6 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
 <% elsif serveraliases != '' %>
 <%= "  ServerAlias #{serveraliases}" %>
 <% end %>
-  Redirect / <%= dest %>/
+  Redirect <%= status %> / <%= dest %>/
 </VirtualHost>
 

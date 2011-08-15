@@ -61,7 +61,8 @@ class puppetlabs::service::www {
     'reductivelabs.com':
       serveraliases => "www.reductivelabs.com",
       port          => '82',
-      dest          => 'http://www.puppetlabs.com';
+      dest          => 'http://www.puppetlabs.com',
+      status        => '301';
   }
 
   nagios::website { 'madstop.com': }

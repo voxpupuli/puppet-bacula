@@ -9,7 +9,8 @@ class puppetlabs::docs (
   apache::vhost::redirect {
     'docs.reductivelabs.com':
       port       => $port,
-      dest       => 'http://docs.puppetlabs.com'
+      dest       => 'http://docs.puppetlabs.com',
+      status     => '301'
   }
 
   # This should be port 82 when running on web01

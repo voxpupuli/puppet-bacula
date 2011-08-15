@@ -28,7 +28,7 @@ class puppetlabs::service::www {
     port     => 82,
     docroot  => '/var/www',
     options  => "None",
-    priority => '00';
+    priority => '99';
   }
 
   # Hacked up apache configuration for nginx support

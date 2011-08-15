@@ -20,7 +20,7 @@ class forge(
     $newrelic      = true,
     $do_ssh_keys   = false,
     $git_revision  = 'r0.1.16',
-    $github_url    = 'http://github.com/puppetlabs/puppet-module-site.git'
+    $github_url    = 'http://github.com/puppetlabs/puppet-forge.git'
 ) {
   include ::passenger
   include passenger::params
@@ -32,7 +32,7 @@ class forge(
       include forge::sshkey
   }
 
-  $rails_version='2.3.5'
+  $rails_version='2.3.11'
   require rails
   $passenger_version=$passenger::params::version
   $gem_path=$passenger::params::gem_path
@@ -52,7 +52,7 @@ class forge(
 
   cron {
     "/opt/forge_permissions": # recursion file type makes for huge reports
-      command => "/usr/bin/find /opt/forge -print | grep -v \.git | xargs -I {} chown www-data:www-data {}",
+      command => "/usr/bin/find /opt/forge -print | grep --fixed-strings -v '.git' | xargs -I {} chown www-data:www-data {}",
       user => root,
       minute => "*/30";
   }

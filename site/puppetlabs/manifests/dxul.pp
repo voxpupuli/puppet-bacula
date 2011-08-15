@@ -80,11 +80,4 @@ class puppetlabs::dxul {
       command => 'rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppet allow_override=project folder=tickets';
   }
 
-  #vcsrepo {
-  #  "/opt/git/puppetmaster-training.git":
-  #    ensure => bare,
-  #    provider => git,
-  #    source => "git@github.com:puppetlabs/puppetmaster-training.git";
-  #}
-
 }

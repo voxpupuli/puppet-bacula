@@ -1,19 +1,25 @@
-NameVirtualHost <%= ipaddress %>:80
-<VirtualHost <%= ipaddress %>:80>
-  ServerName docs.puppetlabs.com
-  #ServerAlias docs.mirror0.puppetlabs.com 
-  DocumentRoot /var/www/docs.puppetlabs.com
-  <Directory /var/www/docs.puppetlabs.com>        
-    Options Indexes FollowSymLinks MultiViews
+NameVirtualHost <%= vhost_name %>:<%= port %>
+<VirtualHost <%= vhost_name %>:<%= port %>>
+  ServerName <%= srvname %>
+<% if serveraliases.is_a? Array -%>
+<% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+<% elsif serveraliases != '' -%>
+<%= "  ServerAlias #{serveraliases}" -%>
+<% end -%>
+  DocumentRoot <%= docroot %>
+  <Directory <%= docroot %>>
+    Options <%= options %>
     AllowOverride None
     Order allow,deny
     allow from all
   </Directory>
-  ErrorLog /var/log/apache2/docs.puppetlabs.com_error.log
   LogLevel warn
-  CustomLog /var/log/apache2/docs.puppetlabs.com_access.log combined
-  ServerSignature On
+  ErrorLog /var/log/apache2/<%= name %>_error.log
+  CustomLog /var/log/apache2/<%= name %>_access.log combined
+  ServerSignature Off
+
   RewriteCond %{HTTP_HOST} docs\.reductivelabs\.com$
   RewriteRule ^(.*)$ http://docs.puppetlabs.com%{REQUEST_URI} [R=permanent,L]
   Redirect permanent /guides/language_tutorial.html http://docs.puppetlabs.com/guides/language_guide.html
+
 </VirtualHost>

@@ -18,6 +18,7 @@ class puppetlabs::docs (
     'docs.puppetlabs.com':
       port          => $port,
       docroot       => $docroot,
+      template      => 'puppetlabs/docs_vhost',
       ssl           => false,
       priority      => 20,
   }

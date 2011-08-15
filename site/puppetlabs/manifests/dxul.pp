@@ -70,11 +70,6 @@ class puppetlabs::dxul {
   include pdns
 
   cron {
-    "redmine issue dump":
-      user    => root,
-      minute  => 10,
-      hour    => 1,
-      command => "(cd /opt/projects.puppetlabs.com; ./script/console production < console-csv.rb; cp issues_dump.csv ~james/Dropbox/Redmine\ Data/)";
     "redmine_infras_email":
       user    => www-data,
       minute  => "*/10",

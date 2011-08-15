@@ -20,7 +20,7 @@ class forge(
     $newrelic      = true,
     $do_ssh_keys   = false,
     $git_revision  = 'r0.1.16',
-    $github_url    = 'http://github.com/puppetlabs/puppet-module-site.git'
+    $github_url    = 'http://github.com/puppetlabs/puppet-forge.git'
 ) {
   include ::passenger
   include passenger::params

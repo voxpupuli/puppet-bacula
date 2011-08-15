@@ -32,7 +32,7 @@ class forge(
       include forge::sshkey
   }
 
-  $rails_version='2.3.5'
+  $rails_version='2.3.11'
   require rails
   $passenger_version=$passenger::params::version
   $gem_path=$passenger::params::gem_path

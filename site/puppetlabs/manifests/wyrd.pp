@@ -1,23 +1,29 @@
 class puppetlabs::wyrd {
 
-#  class {
-#    "puppet::master::unicorn":
-#  }
+  ###
+  # Mysql
+  #
+  $mysql_root_pw = 'W,^?PI5~O?)\A:~Gs08'
+  include mysql::server
 
-  unicorn::app {
-    "puppetmaster":
-      approot => "/etc/puppet",
-      config  => "/etc/puppet/unicorn.conf",
-      require => File["/etc/puppet/unicorn.conf"],
-      initscript => "puppet/unicorn_puppetmaster",
-  }
+  ###
+  # Puppet
+  #
+  $dashboard_site = 'dashboard.puppetlabs.com'
 
-  file {
-    "/etc/puppet/unicorn.conf":
-      owner  => root,
-      group  => root,
-      mode   => 644,
-      source => "puppet:///modules/puppet/unicorn.conf";
+  $modulepath = [
+    '$confdir/environments/$environment/site',
+    '$confdir/environments/$environment/dist',
+    '$confdir/global/imported',
+  ]
+
+  class { "puppet::server":
+    modulepath => inline_template("<%= modulepath.join(':') %>"),
+    dbadapter  => "mysql",
+    dbuser     => "puppet",
+    dbpassword => "M@gickF$ck!ngP@$$w0rddd!",
+    dbsocket   => "/var/run/mysqld/mysqld.sock",
+    reporturl  => "http://dashboard.puppetlabs.com/reports";
   }
 
 }

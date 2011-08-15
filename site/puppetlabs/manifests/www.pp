@@ -7,7 +7,7 @@ class puppetlabs::www {
   #
 
   # Nagios
-  nagios::website { 'www.puppetlabs.com': }
+#nagios::website { 'www.puppetlabs.com': }
 
   # Munin
   include munin

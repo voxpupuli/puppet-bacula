@@ -1,3 +1,8 @@
+Puppetlabs Modules
+====
+
+The is the repo that PuppetLabs uses to manage all infrastructure servers.
+
   *Accounts
     - adds the sysadmin users
     - add sysadmin group (why does this require sudo?)

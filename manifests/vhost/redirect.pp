@@ -22,7 +22,8 @@ define apache::vhost::redirect (
     $priority      = '10',
     $serveraliases = '',
     $template      = "apache/vhost-redirect.conf.erb",
-    $vhost_name    = '*'
+    $vhost_name    = '*',
+    $status        = '302'
   ) {
 
   include apache

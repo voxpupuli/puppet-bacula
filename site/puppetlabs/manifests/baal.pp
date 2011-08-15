@@ -118,6 +118,7 @@ class puppetlabs::baal {
   nagios::website { 'nagios.puppetlabs.com': auth => 'monit:5kUg8uha', }
   nagios::website { 'dashboard.puppetlabs.com': auth => 'monit:5kUg8uha', }
   nagios::website { 'munin.puppetlabs.com': auth => 'monit:5kUg8uha', }
+  nagios::website { 'docs.puppetlabs.com': } # monitored here to avoid resource collision
 
   # Munin
   class { "munin::server": site_alias => "munin.puppetlabs.com"; }

@@ -12,8 +12,6 @@ class puppetlabs::docs (
       dest       => 'http://docs.puppetlabs.com'
   }
 
-  nagios::website { 'docs.puppetlabs.com': }
-
   # This should be port 82 when running on web01
   apache::vhost {
     'docs.puppetlabs.com':

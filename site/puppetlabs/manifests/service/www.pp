@@ -5,6 +5,9 @@ class puppetlabs::service::www {
   $mysql_root_pw = 'K7DkG9TVfGke'
   include mysql::server
 
+  package {'php5-curl': ensure => present, notify => Service[httpd] }
+
+
   bacula::job {
     "${fqdn}-www":
       files    => ["/var/lib/bacula/mysql","/var/www"],
@@ -71,7 +74,7 @@ class puppetlabs::service::www {
       nonce_key       => 'P,>pH-J+OTw#z2qn`M[lt||`[Nf|w#I:J %z>-MRY@Yt_Egyj84znb2H*s;0J||3',
       db_pw           => 'illYZbw108Ckle8Q',
       template        => 'puppetlabs/madstop_vhost.conf.erb',
-      priority        => '05',
+      priority        => '07',
       port            => '82',
   }
   file { "/var/www/madstop.com/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/madstop_htaccess"; }
@@ -87,7 +90,7 @@ class puppetlabs::service::www {
       db_pw           => '5NuTnEFV9Hvp',
       db_user         => 'plabs',
       template        => 'puppetlabs/puppetlabs_vhost.conf.erb',
-      priority        => '05',
+      priority        => '02',
       port            => '82',
   }
 
@@ -129,7 +132,7 @@ class puppetlabs::service::www {
       db_pw      => 'az62VHwUbtCi',
       db_user    => 'pdchallange',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
-      priority   => '05',
+      priority   => '06',
       port       => '82',
       seturl     => true,
   }
@@ -141,7 +144,7 @@ class puppetlabs::service::www {
       db_pw      => 'TiR6znV9EmGj',
       db_user    => 'pconf',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
-      priority   => '05',
+      priority   => '06',
       port       => '82',
       seturl     => true,
   }

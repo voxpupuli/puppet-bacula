@@ -67,7 +67,8 @@ class puppetlabs::www {
     'reductivelabs.com':
       serveraliases => "www.reductivelabs.com",
       port          => '80',
-      dest          => 'http://www.puppetlabs.com';
+      dest          => 'http://www.puppetlabs.com',
+      status        => '301';
   }
 
   wordpress::instance {

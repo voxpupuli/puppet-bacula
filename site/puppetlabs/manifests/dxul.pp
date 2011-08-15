@@ -75,10 +75,6 @@ class puppetlabs::dxul {
       minute  => 10,
       hour    => 1,
       command => "(cd /opt/projects.puppetlabs.com; ./script/console production < console-csv.rb; cp issues_dump.csv ~james/Dropbox/Redmine\ Data/)";
-    "dropbox hourly sync":
-      user    => james,
-      minute  => 20,
-      command => "/home/james/bin/dropbox.py start";
     "redmine_infras_email":
       user    => www-data,
       minute  => "*/10",

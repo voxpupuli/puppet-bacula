@@ -52,7 +52,7 @@ class forge(
 
   cron {
     "/opt/forge_permissions": # recursion file type makes for huge reports
-      command => "/usr/bin/find /opt/forge -print | grep -v \.git | xargs -I {} chown www-data:www-data {}",
+      command => "/usr/bin/find /opt/forge -print | grep --fixed-strings -v '.git' | xargs -I {} chown www-data:www-data {}",
       user => root,
       minute => "*/30";
   }

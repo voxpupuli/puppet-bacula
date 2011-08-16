@@ -63,6 +63,12 @@ class puppetlabs::pluto {
       owner   => root,
       group   => www-data,
       mode    => 0664;
+    "/opt/tools":
+      ensure  => directory,
+      owner   => root,
+      group   => developers,
+      mode    => 664,
+      recurse => true;
   }
 
 }

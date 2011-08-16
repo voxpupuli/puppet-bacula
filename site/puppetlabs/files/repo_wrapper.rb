@@ -5,7 +5,7 @@ require 'pp'
 apt_base = '/opt/repository/apt'
 # Start Keychain
 puts "Starting agent..."
-`#{eval $(keychain -q --eval --agents gpg 4BD6EC30)}`
+%x{bash -c "eval $(keychain -q --eval --agents gpg 4BD6EC30 --timeout 5)"}
 
 repos = [
   '/opt/repository/apt/ubuntu',

@@ -18,7 +18,8 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   </Directory>
 
   <Directory <%= docroot %>>
-    Options Indexes FollowSymLinks MultiViews
+    # Note: 20110817 - removed 'Indexes' from here for security. - ben
+    Options FollowSymLinks MultiViews
     AllowOverride All
     Order allow,deny
     HeaderName IndexHeader.html

@@ -22,11 +22,13 @@ class puppetlabs::bacula01 {
       volret      => "2 months",
       maxvolbytes => '2000000000',
       maxvoljobs  => '10',
+      maxvols     => "20",
       label       => "Full-";
     "PuppetLabsPool-Inc":
       volret      => "14 days",
       maxvolbytes => '4000000000',
       maxvoljobs  => '50',
+      maxvols     => "10",
       label       => "Inc-";
   }
 

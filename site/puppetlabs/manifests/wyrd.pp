@@ -23,7 +23,8 @@ class puppetlabs::wyrd {
     dbuser     => "puppet",
     dbpassword => "M@gickF$ck!ngP@$$w0rddd!",
     dbsocket   => "/var/run/mysqld/mysqld.sock",
-    reporturl  => "http://dashboard.puppetlabs.com/reports";
+    reporturl  => "http://dashboard.puppetlabs.com/reports",
+    servertype => "unicorn",
   }
 
 }

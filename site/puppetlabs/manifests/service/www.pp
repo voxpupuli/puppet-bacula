@@ -74,7 +74,7 @@ class puppetlabs::service::www {
       logged_in_key   => '#_Y3SS3oBj(<ja{dW+#fE!{=YhoiP<0@m~e)Gp[d0j5x1OxGAAFjl|3yHzmH{srZ',
       nonce_key       => 'P,>pH-J+OTw#z2qn`M[lt||`[Nf|w#I:J %z>-MRY@Yt_Egyj84znb2H*s;0J||3',
       db_pw           => 'illYZbw108Ckle8Q',
-      template        => 'puppetlabs/madstop_vhost.conf.erb',
+      template        => 'puppetlabs/wordpress_vhost.conf.erb',
       priority        => '07',
       port            => '82',
   }

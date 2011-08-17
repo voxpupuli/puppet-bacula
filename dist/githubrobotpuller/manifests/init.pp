@@ -29,7 +29,6 @@ class githubrobotpuller (
     provider => 'git',
     owner    => $githubrobotpuller::user, # only in recent vcsrepo.
     revision => $githubrobotpuller::version,
-    ensure   => present,
     require  => User[ $githubrobotpuller::user ],
   }
 

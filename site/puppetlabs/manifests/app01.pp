@@ -18,6 +18,8 @@ class puppetlabs::app01 {
 
   # https://projects.puppetlabs.com/issues/7849
   # github pull request robot
-  class{ 'githubrobotpuller': }
+  class{ 'githubrobotpuller':
+    revision => 'ab2f4d7621a963f648c028cc4ed2f281f62a2311',
+  }
 
 }

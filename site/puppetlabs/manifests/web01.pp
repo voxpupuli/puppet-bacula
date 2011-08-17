@@ -38,6 +38,7 @@ class puppetlabs::web01 {
       priority      => 10,
       docroot       => '/tmp/maint/',
       ssl           => true,
+      template      => 'puppetlabs/ssl_vhost.conf.erb',
       require       => File['/tmp/maint/index.html'],
   }
 

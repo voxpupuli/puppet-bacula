@@ -28,8 +28,7 @@ class githubrobotpuller (
     source   => 'git://github.com/puppetlabs/Ruby-GitHub-Pull-Request-Email-Bot.git',
     provider => 'git',
     owner    => $githubrobotpuller::user, # only in recent vcsrepo.
-    revision => $githubrobotpuller::version,
-    ensure   => present,
+    ensure   => latest,
     require  => User[ $githubrobotpuller::user ],
   }
 

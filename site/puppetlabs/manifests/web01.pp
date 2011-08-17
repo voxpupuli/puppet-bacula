@@ -25,7 +25,7 @@ class puppetlabs::web01 {
     mode   => '0755',
   }
   file{ '/tmp/maint/index.html':
-    content => "<html><head><title>PuppetLabs</title></head><body>We're sorry, but we're currently migrating this machine to another host to make it better. Yeah!</body></html>",
+    content => "<html><head><title>PuppetLabs</title></head><body>We're sorry, but we're currently migrating this machine to another host to make it better. Yeah!<br><center><img src='http://jimhillmedia.com/mb/images/upload/Bunsen-Beaker-web.jpg'></center></body></html>",
     owner   => 'www-data',
     mode    => '0644',
     require => File['/tmp/maint/'],

@@ -22,5 +22,9 @@ define unicorn::app (
       content => template("$initscript");
   }
 
+  if $operatingsystem == "Debian" {
+
+  }
+
 }
 

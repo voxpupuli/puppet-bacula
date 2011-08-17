@@ -3,7 +3,7 @@ class puppetlabs::wyrd {
   ###
   # Mysql
   #
-  $mysql_root_pw = 'W,^?PI5~O?)\A:~Gs08'
+  $mysql_root_pw = 'Vrs4ZnacNhr41v'
   include mysql::server
 
   ###

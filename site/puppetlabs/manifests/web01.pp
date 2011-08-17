@@ -45,6 +45,7 @@ class puppetlabs::web01 {
   apache::vhost::redirect {
     'maint.puppetlabs.com':
       port => 82,
+      serveraliases => [ 'forge.puppetlabs.com', 'projects.puppetlabs.com' ],
       dest => 'https://projects.puppetlabs.com',
   }
 

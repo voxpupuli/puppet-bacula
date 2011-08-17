@@ -18,8 +18,6 @@ class puppetlabs::app01 {
 
   # https://projects.puppetlabs.com/issues/7849
   # github pull request robot
-  class{ 'githubrobotpuller':
-    version => 'origin/master',
-  }
+  class{ 'githubrobotpuller': }
 
 }

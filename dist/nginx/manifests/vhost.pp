@@ -9,7 +9,7 @@
 #
 define nginx::vhost(
   $port,
-  $dest,
+  #$dest,
   $priority   = '10',
   $template   = 'nginx/vhost-default.conf.erb',
   $servername = '',

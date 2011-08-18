@@ -16,7 +16,6 @@ define nginx::vhost(
   $magic      = ''
   ) {
 
-
   include nginx
 
   if $servername == '' {
@@ -34,7 +33,6 @@ define nginx::vhost(
       require => Package['nginx'],
       notify  => Service['nginx'],
   }
-
 
   # liberally borrowed from apache module.
   if ! defined(Firewall["0100-INPUT ACCEPT $port"]) {

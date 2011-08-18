@@ -28,7 +28,7 @@ class puppetlabs::web01 {
   apache::vhost::redirect {
     'learningpuppet.com':
       port => $apache_port,
-      dest => 'http://docs.puppetlabs.com/learning/'
+      dest => 'http://docs.puppetlabs.com/learning'
   }
 
 }

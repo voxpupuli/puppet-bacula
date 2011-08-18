@@ -24,5 +24,11 @@ class puppetlabs::web01 {
     password => $bacula_password,
   }
 
+  apache::vhost::redirect {
+    'learningpuppet.com':
+      port => $apache_port,
+      dest => 'http://docs.puppetlabs.com/learning/'
+  }
+
 }
 

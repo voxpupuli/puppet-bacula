@@ -15,7 +15,7 @@ define nginx::conf (
   include nginx::params
 
   file {
-    "${nginx::params::confd}/${name}":
+    "${nginx::params::confd}/${name}.conf":
       content => template($template),
       owner   => 'root',
       group   => 'root',

@@ -8,7 +8,7 @@
 #   include nginx::server
 #
 define nginx::conf (
-  $template,
+  $template
   ) {
 
   include nginx

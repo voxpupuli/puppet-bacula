@@ -3,16 +3,17 @@ class puppetlabs::web01 {
   ##################################################################
   # NOTE: Apache runs on port 82, nginx runs on port 80.
   # Get it right, or things break!
+  $apache_port = '82'
 
   include postfix
   include puppetlabs_ssl
   include puppetlabs::service::www  # Contains wordpresses for this
                                     # host. (madstop, www.pl.com, &c)
-  class { "puppetlabs::docs": port => 82; }
+  class { "puppetlabs::docs": port => $apache_port; }
 
   apache::vhost::redirect {
     "docs.mirror0.puppetlabs.com":
-      port => '82',
+      port => $apache_port,
       dest => 'http://docs.puppetlabs.com';
   }
 

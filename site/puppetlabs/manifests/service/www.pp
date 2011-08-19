@@ -126,7 +126,8 @@ class puppetlabs::service::www {
       source  => "puppet:///modules/puppetlabs/www/puppetlabs.com/robots.txt";
   }
 
-  nagios::website { 'puppetdevchallenge.com': }
+  # Disable nagios for this, as it's not up yet.
+  # nagios::website { 'puppetdevchallenge.com': }
   wordpress::instance {
     'puppetdevchallenge.com':
       site_alias => "www.puppetdevchallenge.com",

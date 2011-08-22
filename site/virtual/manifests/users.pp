@@ -297,5 +297,13 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'dhogland':
+    comment => 'Dan Hogland',
+    uid     => '1154',
+    group   => allstaff,
+    groups  => ["prosvc"],
+    tag     => allstaff,
+  }
+
 }
 

@@ -3,7 +3,7 @@ class virtual::nagioscontacts {
   @nagios_contactgroup { 'admins':
     alias => 'admins',
     #members => [ 'jamtur01', 'zach' ],
-    members => 'jamtur01,zach,ben',
+    members => 'jamtur01,zach,ben,pagerduty',
     ensure => present,
     target => '/etc/nagios3/conf.d/nagios_contactgroup.cfg',
   }

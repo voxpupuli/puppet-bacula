@@ -14,6 +14,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
     arch      => "x86_64",
     release   => "6",
+    rhnrelease => "6Server",
     iso       => 'rhel-server-6.0-$arch-dvd.iso',
     urls      => {
       updates   => 'rhns:///rhel-$arch-server-$release',
@@ -22,38 +23,41 @@ class puppetlabs::service::mrepo {
   }
 
   mrepo::repo { "rhel6server-i386":
-    ensure    => present,
-    rhn       => true,
-    repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
-    arch      => "i386",
-    release   => "6",
-    iso       => 'rhel-server-6.0-$arch-dvd.iso',
-    urls      => {
+    ensure     => present,
+    rhn        => true,
+    repotitle  => 'Red Hat Enterprise Linux Server $release ($arch)',
+    arch       => "i386",
+    release    => "6",
+    rhnrelease => "6Server",
+    iso        => 'rhel-server-6.0-$arch-dvd.iso',
+    urls       => {
       updates   => 'rhns:///rhel-$arch-server-$release',
       optional  => 'rhns:///rhel-$arch-server-optional-$release',
     },
   }
 
   mrepo::repo { "rhel5server-x86_64":
-    ensure    => present,
-    rhn       => true,
-    repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
-    arch      => "x86_64",
-    release   => "5",
-    iso       => 'rhel-5-server-$arch-disc?.iso',
-    urls      => {
+    ensure     => present,
+    rhn        => true,
+    repotitle  => 'Red Hat Enterprise Linux Server $release ($arch)',
+    arch       => "x86_64",
+    release    => "5",
+    rhnrelease => "5Server",
+    iso        => 'rhel-5-server-$arch-disc?.iso',
+    urls       => {
       updates  => 'rhns:///rhel-$arch-server-5',
     },
   }
 
   mrepo::repo { "rhel5server-i386":
-    ensure    => present,
-    rhn       => true,
-    repotitle => 'Red Hat Enterprise Linux Server $release ($arch)',
-    arch      => "i386",
-    release   => "5",
-    iso       => 'rhel-5-server-$arch-disc?.iso',
-    urls      => {
+    ensure     => present,
+    rhn        => true,
+    repotitle  => 'Red Hat Enterprise Linux Server $release ($arch)',
+    arch       => "i386",
+    release    => "5",
+    rhnrelease => "5Server",
+    iso        => 'rhel-5-server-$arch-disc?.iso',
+    urls       => {
       updates  => 'rhns:///rhel-$arch-server-5',
     },
   }

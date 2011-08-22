@@ -45,6 +45,6 @@ class nagios::pagerduty {
 
   cron { "pagerduty cron":
     command => "/usr/local/bin/pagerduty_nagios.pl flush",
-    require => File["/usr/local/bin/pagerdity_nagios.pl"],
+    require => File["/usr/local/bin/pagerduty_nagios.pl"],
   }
 }

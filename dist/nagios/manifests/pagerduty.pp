@@ -24,7 +24,7 @@ class nagios::pagerduty {
     service_notification_options  => "w,u,c,r",
     host_notification_options     => "d,r",
     service_notification_commands => "notify-service-by-pagerduty",
-    host_notification_commands    => "notify-host-by-pagerduty",
+    host_notification_commands    => "notify-service-by-pagerduty",
     target                        => '/etc/nagios3/conf.d/nagios_contact.cfg',
     pager                         => $service_key,
   }

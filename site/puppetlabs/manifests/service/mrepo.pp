@@ -102,6 +102,28 @@ class puppetlabs::service::mrepo {
     },
   }
 
+  mrepo::repo { "cent6server-i386":
+    ensure    => present,
+    repotitle => 'CentOS Linux $release ($arch)',
+    arch      => "i386",
+    release   => "6",
+    iso       => 'CentOS-6.0-$arch-bin-DVD.iso',
+    urls      => {
+      updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+    },
+  }
+
+  mrepo::repo { "cent6server-x86_64":
+    ensure    => present,
+    repotitle => 'CentOS Linux $release ($arch)',
+    arch      => "x86_64",
+    release   => "6",
+    iso       => 'CentOS-6.0-$arch-bin-DVD?.iso',
+    urls      => {
+      updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+    },
+  }
+
   mrepo::repo { "sles-11-sp1-i386":
     ensure    => present,
     update    => "never",

@@ -29,4 +29,9 @@ class okra::passenger {
     template => 'okra/okra-passenger.conf.erb',
     require  => Class["okra::package"],
   }
+
+  apache::vhost::redirect { "okra.puppetlabs.lan":
+    port => 80,
+    dest => "https://okra.puppetlabs.lan",
+  }
 }

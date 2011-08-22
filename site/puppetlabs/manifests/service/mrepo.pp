@@ -136,5 +136,14 @@ class puppetlabs::service::mrepo {
     release   => "11",
     iso       => "SLE-11-SP1-SDK-DVD-i586-GM-DVD1.iso SLES-11-SP1-DVD-i586-GM-DVD?.iso",
   }
+
+  mrepo::repo { "sles-11-sp1-x86_64":
+    ensure    => present,
+    update    => "never",
+    repotitle => "SuSE Linux Enterprise Server SP1 x86_64",
+    arch      => "x86_64",
+    release   => "11",
+    iso       => "SLE-11-SP1-SDK-DVD-x86_64-GM-DVD1.iso SLES-11-SP1-DVD-x86_64-GM-DVD1.iso",
+  }
 }
 

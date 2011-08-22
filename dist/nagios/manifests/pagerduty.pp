@@ -31,7 +31,7 @@ class nagios::pagerduty {
 
   nagios_command { "notify-service-by-pagerduty":
     ensure       => present,
-    command_name => "notify-service-by-pagerduty":
+    command_name => "notify-service-by-pagerduty",
     command_line => "/usr/local/bin/pagerduty_nagios.pl enqueue -f pd_nagios_object=service",
     target       => '/etc/nagios/conf.d/nagios_commands.cfg',
     notify       => Service[$nagios::params::nagios_service],

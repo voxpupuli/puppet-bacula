@@ -1,29 +1,51 @@
-# Define: mrepo::repo
+# This define creates and manages an mrepo repository. It generates an mrepo
+# repository file definition and will generate the initial repository. If the
+# update parameter is set to "now", the repository will be immediately
+# synchronized.
 #
-# This define creates and manages an mrepo repository.
+# == Parameters
 #
-# Parameters:
-#   [*ensure*]      - Creates or destroys the given repository (present|absent)
-#   [*release*]     - The distribution release to mirror
-#   [*arch*]        - The architecture of the release to mirror. (i386|x86_64)
-#   [*urls*]        - A hash of repository names and URLs.
-#   [*metadata*]    - The metadata type for the repository. Defaults to repomd.
-#                     More than one value can be used in an array. (yum|apt|repomd)
-#   [*update*]      - The schedule for updating. (now|nightly|weekly|never)
-#                     Now will update the repo on every run of puppet. Be warned
-#                     That this could be a very lengthy process.
-#   [*iso*]         - The pattern of the ISO to mirror. Optional.
-#   [*rhn*]         - Whether to generate rhn metadata for these repos. Defaults to false. Optional.
-#   [*repotitle*]   - The human readable title of the repository. Optional.
+# [*ensure*]
+# Creates or destroys the given repository
+# Values: present,absent
 #
-# Actions:
-#   Generates an mrepo repository file and will generate the initial repository.
-#   If the update parameter is set to "now", the repository will be immediately
-#   synchronized.
+# [*release*]
+# The distribution release to mirror
 #
-# Requires:
+# [*arch*]
+# The architecture of the release to mirror.
+# Values: i386, x86_64, ppc, s390, s390x, ia64
 #
-# Sample Usage:
+#
+# [*urls*]
+# A hash of repository names and URLs.
+#
+# [*metadata*]
+# The metadata type for the repository. More than one value can be used in
+# an array.
+# Default: repomd
+# Values: yum,apt,repomd
+#
+# [*update*]
+# The schedule for updating.The 'now' will update the repo on every run of 
+# puppet. Be warned that this could be a very lengthy process on the first run.
+# Default: nightly
+# Values: now, nightly, weekly, never
+#
+# [*iso*]
+# The pattern of the ISO to mirror. Optional.
+#
+# [*rhn*]
+# Whether to generate rhn metadata for these repos.
+# Default: false
+#
+# [*rhnrelease*]
+# The name of the RHN release as understood by mrepo. Optional.
+#
+# [*repotitle*]
+# The human readable title of the repository. Optional.
+#
+# == Examples
 #
 # mrepo::repo { "centos5-x86_64":
 #   ensure    => present,
@@ -40,8 +62,22 @@
 #   }
 # }
 #
-# See Also:
-#   mrepo usage: https://github.com/dagwieers/mrepo/blob/master/docs/usage.txt
+# Further examples can be found in the module README.
+#
+# == See Also
+#
+# mrepo usage: https://github.com/dagwieers/mrepo/blob/master/docs/usage.txt
+#
+# For rhn mirroring, see README.redhat.markdown
+#
+# == Author
+#
+# Adrien Thebo <adrien@puppetlabs.com>
+#
+# == Copyright
+#
+# Copyright 2011 Puppet Labs, unless otherwise noted
+#
 define mrepo::repo (
   $ensure,
   $release,
@@ -51,12 +87,14 @@ define mrepo::repo (
   $update     = 'nightly',
   $iso        = '',
   $rhn        = false,
-  $repotitle  = undef
+  $rhnrelease = $release,
+  $repotitle  = $name
 ) {
   include mrepo
   include mrepo::params
 
   validate_re($ensure, "^present$|^absent$")
+  validate_re($arch, "^i386$|^x86_64$|^ppc$|^s390$|^s390x$|^ia64$")
   validate_re($update, "^now$|^nightly$|^weekly$|^never$")
   validate_bool($rhn)
 
@@ -64,18 +102,15 @@ define mrepo::repo (
   # fold the two, but if the name isn't x86_64 or i386, no folding occurs.
   # This manages the inconsistent behavior.
   $www_root_subdir = $name ? {
-    /(?i-mx:i386|x86_64)$/ => "${mrepo::params::www_root}/${name}",
-    default                => "${mrepo::params::www_root}/${name}-${arch}",
+    /(i386|x86_64|ppc|s390|s390x|ia64)$/ => "${mrepo::params::www_root}/${name}",
+    default                              => "${mrepo::params::www_root}/${name}-${arch}",
   }
 
   case $ensure {
     present: {
 
-      $user = $mrepo::params::user
+      $user  = $mrepo::params::user
       $group = $mrepo::params::group
-      if !$repotitle {
-        $repotitle = $name
-      }
 
       file { "/etc/mrepo.conf.d/$name.conf":
         ensure  => present,
@@ -101,6 +136,7 @@ define mrepo::repo (
         user      => $user,
         group     => $group,
         creates   => $www_root_subdir,
+        timeout   => 600,
         require   => Class['mrepo'],
         subscribe => File["/etc/mrepo.conf.d/$name.conf"],
         logoutput => on_failure,
@@ -109,12 +145,12 @@ define mrepo::repo (
       case $update {
         now: {
           exec { "Synchronize repo $name":
-            command   => "/usr/bin/mrepo -gqu $name",
+            command   => "/usr/bin/mrepo -qgu $name",
             cwd       => $src_root,
             path      => [ "/usr/bin", "/bin" ],
             user      => $user,
             group     => $group,
-            timeout   => 0,
+            timeout   => 3600,
             require   => Class['mrepo'],
             logoutput => on_failure,
           }
@@ -129,7 +165,7 @@ define mrepo::repo (
           cron {
             "Nightly synchronize repo $name":
               ensure  => present,
-              command => "/usr/bin/mrepo -gqu $name",
+              command   => "/usr/bin/mrepo -qgu $name",
               hour    => "0",
               minute  => "0",
               user    => $user,
@@ -142,7 +178,7 @@ define mrepo::repo (
           cron {
             "Weekly synchronize repo $name":
               ensure  => present,
-              command => "/usr/bin/mrepo -gqu $name",
+              command   => "/usr/bin/mrepo -qgu $name",
               day     => "0",
               hour    => "0",
               minute  => "0",
@@ -155,28 +191,48 @@ define mrepo::repo (
       }
       if $rhn == true {
         exec { "Generate systemid $name - $arch":
-          command   => "gensystemid -u ${mrepo::params::rhn_username} -p ${mrepo::params::rhn_password} --release $release --arch $arch ${mrepo::params::src_root}/$name",
+          command   => "gensystemid -u ${mrepo::params::rhn_username} -p ${mrepo::params::rhn_password} --release ${rhnrelease} --arch ${arch} ${mrepo::params::src_root}/${name}",
           path      => [ "/bin", "/usr/bin" ],
           user      => $user,
           group     => $group,
-          creates   => "${mrepo::params::src_root}/$name/systemid",
-          require   => Class['mrepo'],
+          creates   => "${mrepo::params::src_root}/${name}/systemid",
+          require   => [
+            Class['mrepo::package'],
+            Class['mrepo::rhn'],
+          ],
+          before    => Exec["Generate mrepo repo ${name}"],
           logoutput => on_failure,
         }
       }
     }
     absent: {
+      exec { "Unmount any mirrored ISOs":
+        command   => "umount ${www_root_subdir}/disc*",
+        path      => ["/usr/bin", "/bin", "/usr/sbin", "/sbin"],
+        onlyif    => "mount | grep ${www_root_subdir}/disk",
+        provider  => shell,
+        logoutput => true,
+        before    => [
+          File[$www_root_subdir],
+          File["${mrepo::params::src_root}/${name}"],
+        ],
+      }
       file {
-        "/etc/mrepo.conf.d/$name":
+        $www_root_subdir:
+          ensure  => absent,
           backup  => false,
           recurse => false,
           force   => true,
-          ensure  => absent;
+          before  => File["${mrepo::params::src_root}/$name"];
         "${mrepo::params::src_root}/$name":
+          ensure  => absent,
           backup  => false,
           recurse => false,
-          force   => true,
-          ensure  => absent;
+          force   => true;
+        "/etc/mrepo.conf.d/$name":
+          ensure  => absent,
+          backup  => false,
+          force   => true;
       }
       cron {
         "Nightly synchronize repo $name":

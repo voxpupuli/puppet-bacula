@@ -8,10 +8,11 @@ class puppetlabs::os::linux {
     "/etc/localtime": owner => root, group => root, mode => 644, source  => "/usr/share/zoneinfo/America/Vancouver";
   }
 
-  cron {
-    "clean /tmp":
-      command => "/usr/bin/find /tmp -mtime +3 | xargs rm",
-      user => root,  minute => 10,  hour => 20, weekday => 0;
+  tidy{ '/tmp/':
+    age     => '3d',
+    recurse => true,
+    rmdirs  => true,
+    type    => mtime,
   }
 
   case $operatingsystem {

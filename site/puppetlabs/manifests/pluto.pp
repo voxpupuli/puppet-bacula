@@ -46,6 +46,12 @@ class puppetlabs::pluto {
   exec    { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4": creates => '/var/chroot.key'; }
   file    { "/var/chroot.key": mode => 0400, require => Exec["/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4"]; }
 
+  apache::vhost {
+    "$fqdn":
+      port    => 80,
+      docroot => '/opt/enterprise'
+  }
+
   file {
     "/opt/enterprise":
       owner   => root,

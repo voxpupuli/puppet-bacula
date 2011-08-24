@@ -91,7 +91,7 @@ class puppetlabs::service::mrepo {
     release   => "4",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
-      updates => 'rsync://centos.mirror.nexicom.net/$release/$repo/$arch',
+      updates => 'rsync://centos.mirror.nexicom.net/CentOS/$release/$repo/$arch',
     },
   }
 
@@ -102,7 +102,7 @@ class puppetlabs::service::mrepo {
     release   => "4",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
-      updates => 'rsync://centos.mirror.nexicom.net/$release/$repo/$arch',
+      updates => 'rsync://centos.mirror.nexicom.net/CentOS/$release/$repo/$arch',
     },
   }
 

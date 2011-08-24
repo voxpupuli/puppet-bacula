@@ -19,7 +19,7 @@ class puppetlabs::service::repoclosure {
 
   cron { "repoclosure rhel6server-x86_64":
     ensure      => present,
-    command     => "repoclosure -q -n -t -r repoclosure-rhel6server-x86_64-os -r repoclosure-rhel6server-x86_64-updates",
+    command     => "repoclosure -a x86_64 -q -n -t -r repoclosure-rhel6server-x86_64-os -r repoclosure-rhel6server-x86_64-updates",
     hour        => 2,
     minute      => 0,
     environment => "MAILTO=$mailto",
@@ -59,7 +59,7 @@ class puppetlabs::service::repoclosure {
 
   cron { "repoclosure cent5server-x86_64":
     ensure      => present,
-    command     => "repoclosure -q -n -t -r repoclosure-cent5server-x86_64-os -r repoclosure-cent5server-x86_64-updates",
+    command     => "repoclosure -a x86_64 -q -n -t -r repoclosure-cent5server-x86_64-os -r repoclosure-cent5server-x86_64-updates",
     hour        => 2,
     minute      => 0,
     environment => "MAILTO=$mailto",
@@ -99,7 +99,7 @@ class puppetlabs::service::repoclosure {
 
   cron { "repoclosure cent4server-x86_64":
     ensure      => present,
-    command     => "repoclosure -q -n -t -r repoclosure-cent4server-x86_64-os -r repoclosure-cent4server-x86_64-updates",
+    command     => "repoclosure -a x86_64 -q -n -t -r repoclosure-cent4server-x86_64-os -r repoclosure-cent4server-x86_64-updates",
     hour        => 2,
     minute      => 0,
     environment => "MAILTO=$mailto",

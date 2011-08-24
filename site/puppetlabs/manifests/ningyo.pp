@@ -27,5 +27,48 @@ class puppetlabs::ningyo {
     servertype => "unicorn",
   }
 
+  class { "puppet::dashboard":
+    db_user => "dashboard",
+    db_pw   => "8ksKjhds7yakjs",
+    site    => "$dashboard_site";
+  }
+
+  file {
+    "/usr/local/bin/puppet_deploy.rb":
+      owner => root,
+      group => root,
+      mode  => 0750,
+      source => "puppet:///modules/puppetlabs/puppet_deploy.rb";
+    ['/etc/puppet/global', '/etc/puppet/global/imported']:
+      ensure => directory,
+      mode   => 0755,
+      owner  => 'root',
+      group  => 'root',
+      before => Class['puppet::server'];
+  }
+
+  cron {
+    "compress_reports":
+      user    => root,
+      command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml" -mtime +1 -exec gzip {} \;',
+      minute => '9';
+    "clean_old_reports":
+      user => root,
+      command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml.gz" -mtime +14 -exec rm {} \;',
+      minute => '0',
+      hour => '2';
+    "clean_dashboard_reports":
+      user => root,
+      command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune -s upto=1 unit=mon > /dev/null)',
+      minute => '20',
+      hour => '2';
+    "Puppet: puppet_deploy.rb":
+      user    => root,
+      command => '/usr/local/bin/puppet_deploy.rb',
+      minute  => '*/8',
+      require => File["/usr/local/bin/puppet_deploy.rb"];
+  }
+
+
 }
 

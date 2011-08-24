@@ -88,10 +88,10 @@ class puppetlabs::service::mrepo {
     ensure    => present,
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "x86_64",
-    release   => "4.0",
+    release   => "4",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
-      updates => 'http://vault.centos.org/$release/$repo/$arch',
+      updates => 'rsync://centos.mirror.nexicom.net/$release/$repo/$arch',
     },
   }
 
@@ -99,10 +99,10 @@ class puppetlabs::service::mrepo {
     ensure    => present,
     repotitle => 'CentOS Enterprise Linux $release ($arch)',
     arch      => "i386",
-    release   => "4.0",
+    release   => "4",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
-      updates => 'http://vault.centos.org/$release/$repo/$arch',
+      updates => 'rsync://centos.mirror.nexicom.net/$release/$repo/$arch',
     },
   }
 

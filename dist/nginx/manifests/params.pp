@@ -24,6 +24,7 @@ class nginx::params {
         $hasstatus  = true
         $etcdir     = '/etc/nginx'
         $vdir       = "${etcdir}/sites-enabled"
+        $confd      = "${etcdir}/conf.d"
       }
     default: {
         warning( "Sorry, nginx module isn't built for ${operatingsystem} yet." )

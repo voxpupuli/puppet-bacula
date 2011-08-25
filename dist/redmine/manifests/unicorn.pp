@@ -9,7 +9,7 @@ define redmine::unicorn (
     ) {
   include apache::params
 
-	# more modules: ssl
+  # more modules: ssl
 
   a2mod { [ 'proxy', 'proxy_balancer', 'proxy_http' ]: ensure => present, }
 

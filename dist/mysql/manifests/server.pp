@@ -22,7 +22,7 @@ class mysql::server {
 
   $mysql_service_name = $mysql::params::mysql_service_name
 
-  package{
+  package {
     'mysql-server':
       name   => 'mysql-server',
       ensure => installed,
@@ -38,9 +38,12 @@ class mysql::server {
   # this kind of sucks, that I have to specify a difference resource for restart.
   # the reason is that I need the service to be started before mods to the config
   # file which can cause a refresh
-  service{
+  # zleslie: this doesn't make sense to me
+  # zleslie: turned this into an exec instead of a service so that it actually works.
+  exec {
     'mysqld-restart':
-      restart => "/usr/sbin/service ${mysql_service_name} restart"
+      refreshonly => true,
+      command     => "/usr/sbin/service ${mysql_service_name} restart",
   }
 
   File {
@@ -55,7 +58,7 @@ class mysql::server {
     default: {$old_pw="-p${mysql_old_pw}"}
   }
 
-  exec{ 'set_mysql_rootpw':
+  exec { 'set_mysql_rootpw':
     command   => "mysqladmin -u root ${old_pw} password ${mysql_root_pw}",
     #logoutput => on_failure,
     logoutput => true,
@@ -63,7 +66,7 @@ class mysql::server {
     path      => '/usr/local/sbin:/usr/bin',
     require   => [Package['mysql-server'], Service['mysqld']],
     before    => File['/root/.my.cnf'],
-    notify    => Service['mysqld-restart'],
+    notify    => Exec['mysqld-restart'],
   }
 
   $confs = $operatingsystem ? {
@@ -71,12 +74,12 @@ class mysql::server {
     darwin  => '/root/.my.cnf',
   }
 
-  file{$confs:
+  file { $confs:
     owner   => 'root',
     group   => 'root',
     mode    => '0400',
     content => template('mysql/my.cnf.erb'),
-    notify  => Service['mysqld-restart'],
+    notify  => Exec['mysqld-restart'],
   }
 
 }

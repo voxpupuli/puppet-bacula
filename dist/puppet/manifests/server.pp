@@ -11,6 +11,7 @@
 # * dbserver
 # * dbsocket
 # * certname
+# * servertype
 #
 # Actions:
 #
@@ -42,12 +43,25 @@ class puppet::server (
     $dbserver     = 'localhost',
     $dbsocket     = '/var/run/mysqld/mysqld.sock',
     $certname     = "$fqdn",
-    $reporturl    = "http://$fqdn/reports"
-
+    $reporturl    = "http://$fqdn/reports",
+    $servertype   = "passenger"
   ){
 
-  if $kernel != "Darwin" {
-    include puppet::passenger
+  case $servertype {
+    "passenger": {
+      include puppet::server::passenger
+      $ssl_client_header        = "SSL_CLIENT_S_DN"
+      $ssl_client_verify_header = "SSL_CLIENT_VERIFY"
+    }
+    "unicorn": {
+      include puppet::server::unicorn
+      $ssl_client_header        = "HTTP_X_CLIENT_DN"
+      $ssl_client_verify_header = "HTTP_X_CLIENT_VERIFY"
+    }
+    default: {
+      err("Only \"passenger\" and \"unicorn\" are valid options for servertype")
+      fail("Servertype \"$servertype\" not implemented")
+    }
   }
 
   if $storeconfigs == 'true' {
@@ -57,7 +71,7 @@ class puppet::server (
       dbuser     => $dbuser,
       dbpassword => $dbpassword,
       dbserver   => $dbserver,
-      dbsocket   => $socket
+      dbsocket   => $dbsocket
     }
   }
 
@@ -69,13 +83,6 @@ class puppet::server (
     }
   }
 
-#  file { '/etc/puppet/namespaceauth.conf':
-#    owner  => root,
-#    group  => root,
-#    mode   => 644,
-#    source => 'puppet:///modules/puppet/namespaceauth.conf';
-#  }
-
   concat::fragment { 'puppet.conf-header':
     order   => '05',
     target  => "/etc/puppet/puppet.conf",
@@ -86,9 +93,8 @@ class puppet::server (
     service {'puppetmaster':
       ensure    => stopped,
       enable    => false,
-      hasstatus => true,
-      require   => File['/etc/puppet/puppet.conf'],
-      before    => Service['httpd'];
+      hasstatus => false, # this is broken on debian if its disabled, since 0 is still returned when not running
+      require   => File['/etc/puppet/puppet.conf'];
     }
   }
 

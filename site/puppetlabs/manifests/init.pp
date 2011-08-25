@@ -27,7 +27,6 @@ class puppetlabs {
   include sudo
   if $kernel == "Linux" {
     include virtual::packages
-    include collectd::disable
     include packages
   }
 

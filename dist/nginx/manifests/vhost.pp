@@ -9,13 +9,12 @@
 #
 define nginx::vhost(
   $port,
-  $dest,
+  #$dest,
   $priority   = '10',
   $template   = 'nginx/vhost-default.conf.erb',
   $servername = '',
   $magic      = ''
   ) {
-
 
   include nginx
 
@@ -34,7 +33,6 @@ define nginx::vhost(
       require => Package['nginx'],
       notify  => Service['nginx'],
   }
-
 
   # liberally borrowed from apache module.
   if ! defined(Firewall["0100-INPUT ACCEPT $port"]) {

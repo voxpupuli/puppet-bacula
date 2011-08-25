@@ -17,7 +17,6 @@ class puppetlabs::base {
   # Stages
   #
 
-
   #
   ## Kernel/Operatingsystem Specific Configurations
   case $kernel {

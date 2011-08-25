@@ -17,7 +17,7 @@ class puppetlabs {
 
   ###
   # Puppet
-  $puppet_server = "baal.puppetlabs.com"
+  $puppet_server = "ningyo.puppetlabs.com"
   class { "puppet": server => "$puppet_server"; }
 
   # some shit

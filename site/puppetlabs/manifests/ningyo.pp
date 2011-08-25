@@ -1,5 +1,7 @@
 class puppetlabs::ningyo {
 
+  ssh::allowgroup { "techops": }
+
   ###
   # Mysql
   #

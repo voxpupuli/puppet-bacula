@@ -11,17 +11,24 @@
 # Sample Usage:
 #
 class ssh {
-	include ssh::params
-	$sshclient_package = $ssh::params::sshclient_package
+  include ssh::params
+
+  $sshclient_package = $ssh::params::sshclient_package
+  $sshd_config       = $ssh::params::sshd_config
+  $ssh_service       = $ssh::params::ssh_service
+
   package { "${sshclient_package}":
     ensure => latest,
   }
 
-  file { '/etc/ssh/ssh_config':
-    owner   => root,
-    group   => root,
-    mode    => 0644,
-    ensure  => file,
-    require => Package["${sshclient_package}"]
+  file { "$sshd_config":
+    owner     => root,
+    group     => root,
+    mode      => 0644,
+    ensure    => file,
+    require   => $kernel ? {
+      Darwin  => undef,
+      default => Package["$sshclient_package"]
+    }
   }
 }

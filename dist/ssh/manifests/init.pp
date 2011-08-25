@@ -18,8 +18,10 @@ class ssh {
   $sshd_config       = $ssh::params::sshd_config
   $ssh_service       = $ssh::params::ssh_service
 
-  package { "${sshclient_package}":
-    ensure => latest,
+  if $kernel == "Linux" {
+    package { "$sshclient_package":
+        ensure => latest,
+    }
   }
 
   file { "$ssh_config":

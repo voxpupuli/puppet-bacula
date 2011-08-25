@@ -31,49 +31,23 @@ class puppetlabs::baal {
   ###
   # Puppet
   #
-  sudo::entry{ "adrien":
-    entry => "adrien ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n",
-  }
 
-  $dashboard_site = 'dashboard.puppetlabs.com'
-
-  $modulepath = [
-    '$confdir/environments/$environment/site',
-    '$confdir/environments/$environment/dist',
-    '$confdir/global/imported',
-  ]
-
-  class { "puppet::server":
-    modulepath => inline_template("<%= modulepath.join(':') %>"),
-    dbadapter  => "mysql",
-    dbuser     => "puppet",
-    dbpassword => "password",
-    dbsocket   => "/var/run/mysqld/mysqld.sock",
-    reporturl  => "http://dashboard.puppetlabs.com/reports";
-  }
-
-  class { "puppet::dashboard":
-    db_user => "dashboard",
-    db_pw   => "Og7iSwrA2sjx",
-    site    => "dashboard.puppetlabs.com";
-  }
-
-  # global modules to add
-  vcsrepo { '/etc/puppet/global/imported/xmpp':
-    source   => 'git://github.com/barn/puppet-xmpp.git',
-    provider => git,
-    revision => 'c28dc2068d30cd17bacebd9780649b82894a0623',
-    ensure   => present,
-    require  => File['/etc/puppet/global/imported'],
-  }
-
-  file { '/etc/puppet/xmpp.yaml':
-    ensure   => file,
-    owner    => root,
-    group    => root,
-    content  => "---\n:xmpp_jid: 'puppetlabsjabberbot@mumble.org.uk'\n:xmpp_password: 'MiShiUmlur'\n:xmpp_target: 'ben@puppetlabs.com,zach@puppetlabs.com'\n",
-    require  => Vcsrepo['/etc/puppet/global/imported/xmpp'],
-  }
+#  # global modules to add
+#  vcsrepo { '/etc/puppet/global/imported/xmpp':
+#    source   => 'git://github.com/barn/puppet-xmpp.git',
+#    provider => git,
+#    revision => 'c28dc2068d30cd17bacebd9780649b82894a0623',
+#    ensure   => present,
+#    require  => File['/etc/puppet/global/imported'],
+#  }
+#
+#  file { '/etc/puppet/xmpp.yaml':
+#    ensure   => file,
+#    owner    => root,
+#    group    => root,
+#    content  => "---\n:xmpp_jid: 'puppetlabsjabberbot@mumble.org.uk'\n:xmpp_password: 'MiShiUmlur'\n:xmpp_target: 'ben@puppetlabs.com,zach@puppetlabs.com'\n",
+#    require  => Vcsrepo['/etc/puppet/global/imported/xmpp'],
+#  }
 
   ###
   # Bacula

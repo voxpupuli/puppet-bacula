@@ -9,10 +9,11 @@ class apt-cacher (
   if $service == true { 
     service {
       "apt-cacher-ng":
-        enable  => true,
-        ensure  => running,
-        pattern => "apt-cacher-ng",
-        require => Package['apt-cacher-ng'],
+        enable    => true,
+        ensure    => running,
+        hasstatus => false,
+        pattern   => "apt-cacher-ng",
+        require   => Package['apt-cacher-ng'],
     }
   }
 

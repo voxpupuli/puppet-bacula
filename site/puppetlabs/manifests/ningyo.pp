@@ -30,7 +30,8 @@ class puppetlabs::ningyo {
   class { "puppet::dashboard":
     db_user => "dashboard",
     db_pw   => "8ksKjhds7yakjs",
-    site    => "$dashboard_site";
+    site    => "$dashboard_site",
+    allowip => "173.255.196.32 96.126.118.85", # remove Nov 2011
   }
 
   file {

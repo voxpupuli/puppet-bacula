@@ -40,7 +40,7 @@ class puppetlabs::base {
     include munin::puppet
   }
 
-  # 
+  #
   case $domain {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
@@ -66,21 +66,41 @@ class puppetlabs::base {
     default: { }
   }
 
-
-
-  case $fqdn {
+  case $hostname {
     # Known
-#    "apu.puppetlabs.com",
-#    "baal.puppetlabs.com",
-#    "dxul.puppetlabs.com",
-#    "chuku.puppetlabs.com",
-#    "enkal.puppetlabs.com",
-#    "legba.puppetlabs.com",
-#    "shell.puppetlabs.com",
-#    "app01.puppetlabs.com"
-#      : { include "puppetlabs::$hostname" }
+    "app01",
+    "baal",
+    "bacula01",
+    "burji",
+    "clippy",
+    "deb-builder",
+    "dxul",
+    "enkal",
+    "faro",
+    "forge-dev",
+    "lukedev01",
+    "metrics",
+    "mon0",
+    "net01",
+    "ningyo",
+    "pluto",
+    "projects-dev",
+    "projects2-dev",
+    "qa",
+    "rpm-builder",
+    "shell",
+    "slave01",
+    "slave02",
+    "tb-driver",
+    "urd",
+    "vanir",
+    "web01",
+    "www-dev",
+    "wyrd",
+    "yo",
+      : { include "puppetlabs::$hostname" }
     # Unknown
-    default: { include "puppetlabs::$hostname" }
+    default: { }
 
   }
 

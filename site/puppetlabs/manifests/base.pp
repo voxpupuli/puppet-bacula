@@ -97,7 +97,7 @@ class puppetlabs::base {
     "web01",
     "www-dev",
     "wyrd",
-    "yo",
+    "yo"
       : { include "puppetlabs::$hostname" }
     # Unknown
     default: { }

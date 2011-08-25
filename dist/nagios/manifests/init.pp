@@ -39,10 +39,11 @@ class nagios (
   }
 
   service { $nagios::params::nrpe_service:
-    pattern => 'nrpe',
-    ensure => running,
+    pattern    => 'nrpe',
+    ensure     => running,
     enable     => true,
     hasrestart => true,
+    hasstatus  => false,
     require => [ File[$nagios::params::nrpe_configuration], Package[$nagios::params::nrpe_packages] ],
   }
 
@@ -82,15 +83,6 @@ class nagios (
     target => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify => Service[$nagios::params::nagios_service],
   }
-
-  #@@nagios_service { "check_bacula_${hostname}":
-  #  use => 'generic-service',
-  #  host_name => "$fqdn",
-  #  check_command => 'check_bacula',
-  #  service_description => "check_bacula_${hostname}",
-  #  target => '/etc/nagios3/conf.d/nagios_service.cfg',
-  #  notify => Service[$nagios::params::nagios_service],
-  #}
 
   @@nagios_service { "check_disk_${hostname}":
     use => 'generic-service',
@@ -142,32 +134,6 @@ class nagios (
     target => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify => Service[$nagios::params::nagios_service],
   }
-
-# no longer using collectd, plus this should be moved to collectd::monitor
-#zleslie:  @@nagios_service { "check_collectd_${hostname}":
-#zleslie:    use => 'generic-service',
-#zleslie:    host_name => "$fqdn",
-#zleslie:    check_command => 'check_nrpe!check_proc!1:1 collectd',
-#zleslie:    service_description => "check_collectd_${hostname}",
-#zleslie:    target => '/etc/nagios3/conf.d/nagios_service.cfg',
-#zleslie:    notify => Service[$nagios::params::nagios_service],
-#zleslie:  }
-#zleslie:
-#zleslie:  @@nagios_service { "check_collectdmon_${hostname}":
-#zleslie:    use => 'generic-service',
-#zleslie:    host_name => "$fqdn",
-#zleslie:    check_command => 'check_nrpe!check_proc!1:1 collectdmon',
-#zleslie:    service_description => "check_collectdmon_${hostname}",
-#zleslie:    target => '/etc/nagios3/conf.d/nagios_service.cfg',
-#zleslie:    notify => Service[$nagios::params::nagios_service],
-#zleslie:  }
-
-# moved to bacula::director Tue May 31 2011 05:45:03
-#zleslie:  file { "/usr/lib/nagios/plugins/check_bacula.pl":
-#zleslie:    source => "puppet:///modules/nagios/check_bacula.pl",
-#zleslie:    mode => 0755,
-#zleslie:    ensure => present,
-#zleslie:  }
 
   @firewall { 
     '0120-INPUT ACCEPT 5666':

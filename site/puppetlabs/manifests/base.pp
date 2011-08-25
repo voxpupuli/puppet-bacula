@@ -41,8 +41,8 @@ class puppetlabs::base {
 
   case $domain {
     "puppetlabs.lan": {
-      $proxy = hiera("proxy")
       case $operatingsystem {
+        $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
         'debian','ubuntu': {
           # Setup apt settings specific to the lan
           class { "apt::settings": proxy => hiera("proxy"); }

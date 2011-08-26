@@ -5,6 +5,7 @@ class puppetlabs::web01 {
   # Get it right, or things break!
   $apache_port = '82'
 
+  include pdns
   include postfix
   include puppetlabs_ssl
   include puppetlabs::service::www  # Contains wordpresses for this

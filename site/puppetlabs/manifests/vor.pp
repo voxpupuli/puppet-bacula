@@ -10,16 +10,16 @@ class puppetlabs::vor {
     '/etc/apt/sources.list.d/backports.list':
       ensure   => file,
       content  => 'deb http://backports.debian.org/debian-backports squeeze-backports main',
-      requires => File['/etc/preferences.d/postgresql9'];
+      require  => File['/etc/preferences.d/postgresql9'];
   }
 
   exec{
     'refresh_apts':
       command     => '/usr/bin/aptitude --quiet update',
       refreshonly => 'true',
-      requires    => File['/etc/apt/sources.list.d/backports.list'],
+      require     => File['/etc/apt/sources.list.d/backports.list'],
   }
 
-  package{ 'postgresql-9.0': ensure => present, requires => Exec['refresh_apts'] }
+  package{ 'postgresql-9.0': ensure => present, require => Exec['refresh_apts'] }
 
 }

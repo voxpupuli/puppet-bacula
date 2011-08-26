@@ -13,8 +13,6 @@
 class puppetlabs::baal {
   ssh::allowgroup { "techops": }
 
-  class { "puppetlabs::service::pkgrepo": ensure => absent; }
-
   ###
   # Mysql
   #

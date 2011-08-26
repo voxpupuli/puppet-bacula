@@ -151,26 +151,28 @@ class puppetlabs::baal {
 
   cron {
     "compress_reports":
-      user => root,
+      user    => root,
       command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml" -mtime +1 -exec gzip {} \;',
-      minute => '9';
+      minute  => '9';
     "clean_old_reports":
       user => root,
       command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml.gz" -mtime +14 -exec rm {} \;',
-      minute => '0',
-      hour => '2';
+      minute  => '0',
+      hour    => '2';
     "clean_dashboard_reports":
-      user => root,
+      ensure  => absent,
+      user    => root,
       command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune -s upto=7 unit=day > /dev/null)',
-      minute => '20',
-      hour => '2';
+      minute  => '20',
+      hour    => '2';
     "Puppet: puppet_deploy.sh":
+      ensure  => absent,
       user    => root,
       command => '/usr/local/bin/puppet_deploy.sh',
       minute  => '*/8',
-      ensure  => absent,
       require => File["/usr/local/bin/puppet_deploy.sh"];
     "Puppet: puppet_deploy.rb":
+      ensure  => absent,
       user    => root,
       command => '/usr/local/bin/puppet_deploy.rb',
       minute  => '*/8',

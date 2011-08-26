@@ -32,6 +32,21 @@ class pdns {
 
   File { owner => "$pdns::params::user", group => "$pdns::params::group" }
 
+  # Get the ruby-pdns gem
+  exec { "download ruby-pdns gem":
+    command => "/usr/bin/wget http://ruby-pdns.googlecode.com/files/ruby-pdns-0.5.1.gem",
+    cwd     => "/usr/local/src",
+    creates => "/usr/local/src/ruby-pdns-0.5.1.gem";
+  }
+
+  # Install the ruby-pdns gem from the local disk
+  package { "ruby-pdns":
+    ensure   => installed,
+    source   => "/usr/local/src/ruby-pdns-0.5.1.gem",
+    require  => Exec["download ruby-pdns gem"],
+    provider => gem,
+  }
+
   file { '/var/lib/GeoIP/GeoIP.dat':
     source => 'puppet:///modules/pdns/GeoIP.dat',
     ensure => present,

@@ -27,10 +27,10 @@ class puppetlabs::vor {
 
 }
 
-define aptpin( $package, $release, $priority) {
+define aptpin( $package, $release, $priority, $ensure ) {
   file{
     '/etc/apt/preferences.d/$package':
-      ensure   => file,
+      ensure   => $ensure,
       content  => "Package: $package\nPin: release a=$release\nPin-Priority: $priority\n",
       owner => 'root',
       group => 'root',

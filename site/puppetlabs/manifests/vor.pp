@@ -4,13 +4,13 @@ class puppetlabs::vor {
 
   # Install postgres from backports
   file{
-    '/etc/preferences.d/postgresql9':
+    '/etc/apt/preferences.d/postgresql9':
       ensure   => file,
       content  => "Package: postgresql\nPin: release a=squeeze-backports\nPin-Priority: 200\n";
     '/etc/apt/sources.list.d/backports.list':
       ensure   => file,
       content  => 'deb http://backports.debian.org/debian-backports squeeze-backports main',
-      require  => File['/etc/preferences.d/postgresql9'];
+      require  => File['/etc/apt/preferences.d/postgresql9'];
   }
 
   exec{

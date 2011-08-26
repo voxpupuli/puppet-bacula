@@ -22,8 +22,8 @@ class sudo {
 
   exec { "check-sudoers":
     command => $operatingsystem ? {
-      freebsd => "/usr/local/sbin/visudo -cf /tmp/sudoers && cp /tmp/sudoers /usr/local/etc/sudoers",
-      default => "/usr/sbin/visudo -cf /tmp/sudoers && cp /tmp/sudoers /etc/sudoers",
+      freebsd => "/usr/local/sbin/visudo -cf /tmp/sudoers && cp /tmp/sudoers /usr/local/etc/sudoers && rm /tmp/sudoers",
+      default => "/usr/sbin/visudo -cf /tmp/sudoers && cp /tmp/sudoers /etc/sudoers && rm /tmp/sudoers",
     },
     refreshonly => true,
   }

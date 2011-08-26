@@ -5,7 +5,8 @@ class puppetlabs::vor {
 
   # Install postgres from backports
   aptpin{
-    [ 'postgresql-9.0', 'postgresql-client-9.0', 'postgresql-common' , 'libpq5']:
+    [ 'postgresql-9.0', 'postgresql-client-9.0', 'postgresql-common' ,
+      'postgresql-client-common' , 'libpq5']:
       before => File['/etc/apt/sources.list.d/backports.list'],
   }
 

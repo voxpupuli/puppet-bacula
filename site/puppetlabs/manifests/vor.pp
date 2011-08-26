@@ -5,8 +5,7 @@ class puppetlabs::vor {
 
   # Install postgres from backports
   aptpin{
-    [ 'postgresql-9.0', 'postgresql-client-9.0', 'postgresql-common' ]:
-      ensure => present,
+    [ 'postgresql-9.0', 'postgresql-client-9.0', 'postgresql-common' , 'libpq5']:
       before => File['/etc/apt/sources.list.d/backports.list'],
   }
 
@@ -27,7 +26,7 @@ class puppetlabs::vor {
 
 }
 
-define aptpin( $release, $priority, $ensure ) {
+define aptpin( $release, $priority, $ensure = 'present' ) {
   $package = $name
   file{
     "/etc/apt/preferences.d/${package}.pref":

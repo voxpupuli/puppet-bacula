@@ -3,8 +3,6 @@ define ssh::allowgroup ($chroot=false) {
   include ssh::params
   include ssh::server
 
-  $ssh_service       = $ssh::params::ssh_service
-  $sshclient_package = $ssh::params::sshclient_package
   $sshd_config       = $ssh::params::sshd_config
 
   if $chroot == true {

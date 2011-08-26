@@ -6,10 +6,10 @@ class puppetlabs::vor {
   file{
     '/etc/preferences.d/postgresql9':
       ensure   => file,
-      contents => "Package: postgresql\nPin: release a=squeeze-backports\nPin-Priority: 200\n";
+      content  => "Package: postgresql\nPin: release a=squeeze-backports\nPin-Priority: 200\n";
     '/etc/apt/sources.list.d/backports.list':
       ensure   => file,
-      contents => 'deb http://backports.debian.org/debian-backports squeeze-backports main',
+      content  => 'deb http://backports.debian.org/debian-backports squeeze-backports main',
       requires => File['/etc/preferences.d/postgresql9'];
   }
 

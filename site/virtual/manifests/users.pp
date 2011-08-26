@@ -240,6 +240,7 @@ class virtual::users {
     group   => allstaff,
     groups  => ["interns","builder"],
     tag     => allstaff,
+    ensure  => absent,
   }
   @account::user {'matthaus':
     comment => 'Matthaus Litteken',

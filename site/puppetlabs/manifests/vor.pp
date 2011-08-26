@@ -17,7 +17,7 @@ class puppetlabs::vor {
     'refresh_apts':
       command     => '/usr/bin/aptitude --quiet update',
       refreshonly => 'true',
-      require     => File['/etc/apt/sources.list.d/backports.list'],
+      subscribe   => File['/etc/apt/sources.list.d/backports.list'],
   }
 
   package{ 'postgresql-9.0': ensure => present, require => Exec['refresh_apts'] }

@@ -47,6 +47,20 @@ class pdns {
     provider => gem,
   }
 
+  # needed on debian for net-geoip
+  package { "zlib1g-dev": ensure  => installed; }
+  # needed on debian, but not on ubuntu, no idea why
+  pacakge { "net-geoip": ensure => installed, provider => gem; }
+  # because: /var/lib/gems/1.8/gems/ruby-pdns-0.5.1/sbin/pdns-pipe-runner.rb
+  # contains conffile to /etc/pdns, when it doesn't exist, but the file
+  # needed is in /etc/powerdns
+  # MAY be debubntu specific
+  file { "/etc/pdns":
+    ensure => link,
+    target => "/etc/powerdns";
+  }
+
+  # This should be a package and not a file in the module
   file { '/var/lib/GeoIP/GeoIP.dat':
     source => 'puppet:///modules/pdns/GeoIP.dat',
     ensure => present,

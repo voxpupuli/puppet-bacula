@@ -15,10 +15,16 @@ class puppetlabs {
   # This is our base install for all of Puppet Labs servers.
   #
 
+  # variables
+  $puppet_server = "ningyo.puppetlabs.com"
+
   ###
   # Puppet
-  $puppet_server = "ningyo.puppetlabs.com"
-  class { "puppet": server => "$puppet_server"; }
+  class {
+    "puppet":
+      server => "$puppet_server",
+      agent  => false
+  }
 
   # some shit
   include ssh::server
@@ -29,7 +35,6 @@ class puppetlabs {
     include virtual::packages
     include packages
   }
-
 
   ssh::allowgroup  { "sysadmin": }
   sudo::allowgroup { "sysadmin": }

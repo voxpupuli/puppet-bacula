@@ -1,7 +1,7 @@
 class puppetlabs::vor {
 
   File{ owner => 'root', group => 'root', mode => '0644' }
-  Aptpin{ release  => 'squeeze-backports', priority => '200' }
+  Aptpin{ release  => 'squeeze-backports', priority => '1001' }
 
   # Install postgres from backports
   aptpin{

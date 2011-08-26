@@ -10,6 +10,14 @@ class puppetlabs::vor {
       before => File['/etc/apt/sources.list.d/backports.list'],
   }
 
+  # Do this, as per http://backports-master.debian.org/Instructions/
+  # so we get backports updates.
+  aptpin{ '*':
+    release  => 'lenny-backports',
+    priority => '200',
+    filename => 'star'
+  }
+
   file{
     '/etc/apt/sources.list.d/backports.list':
       ensure   => file,
@@ -27,12 +35,18 @@ class puppetlabs::vor {
 
 }
 
-define aptpin( $release, $priority, $ensure = 'present' ) {
-  $package = $name
+define aptpin( $release, $priority, $filename = '', $ensure = 'present' ) {
+  # get around naming things such as '*'
+  if $filename == undef {
+    $fname = $name
+  } else {
+    $fname = $filename
+  }
+
   file{
-    "/etc/apt/preferences.d/${package}.pref":
+    "/etc/apt/preferences.d/${fname}.pref":
       ensure   => $ensure,
-      content  => "Package: $package\nPin: release a=$release\nPin-Priority: $priority\n",
+      content  => "Package: $name\nPin: release a=$release\nPin-Priority: $priority\n",
       owner => 'root',
       group => 'root',
       mode => '0644'

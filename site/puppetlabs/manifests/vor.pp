@@ -27,7 +27,8 @@ class puppetlabs::vor {
 
 }
 
-define aptpin( $package, $release, $priority, $ensure ) {
+define aptpin( $release, $priority, $ensure ) {
+  $package = $name
   file{
     '/etc/apt/preferences.d/$package':
       ensure   => $ensure,

@@ -41,9 +41,10 @@ class pdns {
 
   # Install the ruby-pdns gem from the local disk
   package { "ruby-pdns":
-    ensure  => installed,
-    source  => "/usr/local/src/ruby-pdns-0.5.1.gem",
-    require => Exec["download ruby-pdns gem"],
+    ensure   => installed,
+    source   => "/usr/local/src/ruby-pdns-0.5.1.gem",
+    require  => Exec["download ruby-pdns gem"],
+    provider => gem,
   }
 
   file { '/var/lib/GeoIP/GeoIP.dat':

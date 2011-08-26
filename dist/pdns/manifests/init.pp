@@ -60,14 +60,14 @@ class pdns {
     require => Package[$pdns::params::package_list],
   }
 
-  @firewall { 
+  @firewall {
     '0053-INPUT ACCEPT 53 udp':
       jump  => 'ACCEPT',
       dport => "53",
       proto => 'udp',
   }
 
-  @firewall { 
+  @firewall {
     '0053-INPUT ACCEPT 53 tcp':
       jump  => 'ACCEPT',
       dport => "53",

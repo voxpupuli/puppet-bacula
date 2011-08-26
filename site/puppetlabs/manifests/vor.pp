@@ -35,7 +35,7 @@ class puppetlabs::vor {
 
 }
 
-define aptpin( $release, $priority, $filename = '', $ensure = 'present' ) {
+define aptpin( $release, $priority, $filename = undef, $ensure = 'present' ) {
   # get around naming things such as '*'
   if $filename == undef {
     $fname = $name

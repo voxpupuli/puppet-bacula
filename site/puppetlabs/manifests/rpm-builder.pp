@@ -4,5 +4,7 @@ class puppetlabs::rpm-builder {
 
   sudo::allowgroup { "release": }
   sudo::allowgroup { "builder": }
+
+  class { "nagios": nrpe_server => '173.255.196.32'; }
 }
 

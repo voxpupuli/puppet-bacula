@@ -1,13 +1,22 @@
 class puppetlabs::vor {
 
+  # Defaults for this class, because I'm lazy.
   File{ owner => 'root', group => 'root', mode => '0644' }
-  Aptpin{ release  => 'squeeze-backports', priority => '200' }
+  Apt::Pin{ release  => 'squeeze-backports', priority => '1001' }
 
   # Install postgres from backports
-  aptpin{
-    [ 'postgresql-9.0', 'postgresql-client-9.0', 'postgresql-common' ]:
-      ensure => present,
+  apt::pin{
+    [ 'postgresql-9.0', 'postgresql-client-9.0', 'postgresql-common' ,
+      'postgresql-client-common' , 'libpq5']:
       before => File['/etc/apt/sources.list.d/backports.list'],
+  }
+
+  # Do this, as per http://backports-master.debian.org/Instructions/
+  # so we get backports updates.
+  apt::pin{ '*':
+    release  => 'lenny-backports',
+    priority => '200',
+    filename => 'star'
   }
 
   file{
@@ -27,14 +36,3 @@ class puppetlabs::vor {
 
 }
 
-define aptpin( $release, $priority, $ensure ) {
-  $package = $name
-  file{
-    "/etc/apt/preferences.d/$package":
-      ensure   => $ensure,
-      content  => "Package: $package\nPin: release a=$release\nPin-Priority: $priority\n",
-      owner => 'root',
-      group => 'root',
-      mode => '0644'
-  }
-}

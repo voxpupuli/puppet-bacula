@@ -48,21 +48,21 @@ class nagios (
   }
 
   @@nagios_host { $fqdn:
-    ensure => present,
-    alias => $hostname,
+    ensure  => present,
+    alias   => $hostname,
     address => $ipaddress,
-    use => 'generic-host',
-    target => '/etc/nagios3/conf.d/nagios_host.cfg',
-    notify => Service[$nagios::params::nagios_service],
+    use     => 'generic-host',
+    target  => '/etc/nagios3/conf.d/nagios_host.cfg',
+    notify  => Service[$nagios::params::nagios_service],
   }
 
   @@nagios_service { "check_ping_${hostname}":
-    use => 'generic-service',
-    check_command => 'check_ping!100.0,20%!500.0,60%',
-    host_name => "$fqdn",
+    use                 => 'generic-service',
+    check_command       => 'check_ping!100.0,20%!500.0,60%',
+    host_name           => "$fqdn",
     service_description => "check_ping_${hostname}",
-    target => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify => Service[$nagios::params::nagios_service],
+    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify              => Service[$nagios::params::nagios_service],
   }
 
   @@nagios_service { "check_ssh_${hostname}":

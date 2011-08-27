@@ -32,7 +32,7 @@ class nagios::params {
       $nagios_packages = 'nagios3'
       $nagios_service = 'nagios3'
     }
-    "centos": {
+    "centos","fedora": {
       $nagios_packages = [ 'nagios', 'nagios-devel' ]
       $nrpe_packages = 'nrpe'
       $nrpe_configuration = '/etc/nagios/nrpe.cfg'

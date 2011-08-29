@@ -101,11 +101,13 @@ class puppetlabs::baal {
   nagios::website { 'docs.puppetlabs.com': } # monitored here to avoid resource collision
 
   # Munin
-  class { "munin::server": site_alias => "munin.puppetlabs.com"; }
-  include munin::dbservices
-  include munin::passenger
-  include munin::puppet
-  include munin::puppetmaster
+  if $environment == 'production' {
+    class { "munin::server": site_alias => "munin.puppetlabs.com"; }
+    include munin::dbservices
+    include munin::passenger
+    include munin::puppet
+    include munin::puppetmaster
+  }
 
   #file { "/usr/share/puppet-dashboard/public/.htaccess":
   #  owner => root,

@@ -219,7 +219,7 @@ class virtual::users {
     group   => allstaff,
     groups  => ["prosvc"],
     shell   => '/bin/bash',
-    key     => "AAAAB3NzaC1yc2EAAAABIwAAAQEA04dOEngfuA7phW/0yWH/gBV11udAGvuUhClyuuA3n6MRxYnSei8JBtTFeGNjgKRsxSqv5rTf9HnIHTC5ECMhnjV3bUYdRxs76RlFghYpldBgDEDurgZZgzZWsUALkLwMXH+CzQ7bY/UeYa8gOt/XfjewhL/BStmlJ2/DiFychKP+BoxrIxv3p7tdM9yvaUviLoomD9rEZzT+3bvSloVWo2lh9Q8LcexuZUnLTKA5C4gCk6mq8PutU/Non3NCZaOUntTN7qvk+NIMGxxXFzYIDDP3c61Cwq/z0PshHAcWVHganNxEdNFhfPt+E7SGVeGHAoHgXnTsX4bYKeClMnz8nQ==",
+    key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA04dOEngfuA7phW/0yWH/gBV11udAGvuUhClyuuA3n6MRxYnSei8JBtTFeGNjgKRsxSqv5rTf9HnIHTC5ECMhnjV3bUYdRxs76RlFghYpldBgDEDurgZZgzZWsUALkLwMXH+CzQ7bY/UeYa8gOt/XfjewhL/BStmlJ2/DiFychKP+BoxrIxv3p7tdM9yvaUviLoomD9rEZzT+3bvSloVWo2lh9Q8LcexuZUnLTKA5C4gCk6mq8PutU/Non3NCZaOUntTN7qvk+NIMGxxXFzYIDDP3c61Cwq/z0PshHAcWVHganNxEdNFhfPt+E7SGVeGHAoHgXnTsX4bYKeClMnz8nQ==',
     keytype => "ssh-rsa",
     tag     => allstaff,
  }
@@ -306,5 +306,14 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'randall':
+    comment => 'Randall Hansen',
+    uid     => '1155',
+    group   => allstaff,
+    groups  => ["developers"],
+    tag     => allstaff,
+    key     => "AAAAB3NzaC1yc2EAAAABIwAAAgEAqrj3WxcYmIU4IJVRjXNB9Ea97Fm76Y8KXl8T93Lm5VTS8WsWtz0vaZpqz8TsXoMFes595KgcNWIg+GPSAwT5gqZEKDmSS19rxy9S60TV6C6pe9BYiDsRVYPPlzSklFkzyPPVl1TUlIJhLsWRCLFY3b0kEulpwwDHS/pu0yRnP7Ht0r28KTCu88KKz1GN9HlcarjLPXQK2yo1GHFTNs6/1s/NAZadP1PkquhR8aOHvz4k4dmaRPt7eJK6aKiKaPQKt/CEPoG9bxPhEczweKNO4UZUKr7mhARiMtnhYcEoc59Q7wh6DgqYBUFr241H3m+CBo8Ft4hSxJuGv+vkyKftOM3g4ESqxSHEWZ7t8QsdFPsdb7PWuGsob5f4S4Pamgfw85exljN1sRcFT3kE7IsZpQaq8ikIoP+oMc+RrgVTDqhxMao9lSEomq6Qcq5RbrwhCjklzsA2uyvygHqwd7T57MMarQlxdMtI0vQPoGXvW6Xmuxq2tRd8pcAR7g9Ucy7q1R732kbCakwyR4HJvCNQL4smZ/dcRedPMg9/JFaUEu8om/dCvoUtVvITBRfqcoTvs/k/eqlgsnxN/DQ4OXhaOjDIic9Xn3NYJvxldhWYLQj75qx9H6qbhrEKZuJOGQm3ukaZZb+Hf0JjKuUukxi3DqzKsJwUUA+9/oGDcnNwoRE=",
+    keytype => "ssh-rsa",
+  }
 }
 

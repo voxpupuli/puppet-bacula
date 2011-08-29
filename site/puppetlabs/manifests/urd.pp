@@ -6,6 +6,4 @@ class puppetlabs::urd {
   ssh::allowgroup   { "techops": }
   sudo::allowgroup  { "techops": }
 
-  class { "nagios": nrpe_server => '173.255.196.32'; }
-
 }

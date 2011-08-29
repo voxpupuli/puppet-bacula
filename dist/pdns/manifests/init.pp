@@ -50,7 +50,7 @@ class pdns {
   # needed on debian for net-geoip
   package { "zlib1g-dev": ensure  => installed; }
   # needed on debian, but not on ubuntu, no idea why
-  package { "net-geoip": ensure => installed, provider => gem; }
+  pacakge { "net-geoip": ensure => installed, provider => gem; }
   # because: /var/lib/gems/1.8/gems/ruby-pdns-0.5.1/sbin/pdns-pipe-runner.rb
   # contains conffile to /etc/pdns, when it doesn't exist, but the file
   # needed is in /etc/powerdns

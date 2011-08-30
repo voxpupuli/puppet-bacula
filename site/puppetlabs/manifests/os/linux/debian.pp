@@ -29,7 +29,7 @@ class puppetlabs::os::linux::debian {
   }
 
   cron { "apt-get update":
-    command => "apt-get -qq update",
+    command => "/usr/bin/apt-get -qq update",
     user    => root,
     minute  => 20,
     hour    => 1,

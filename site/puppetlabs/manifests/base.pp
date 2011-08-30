@@ -45,6 +45,7 @@ class puppetlabs::base {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
       include puppetlabs
+      class { "nagios": nrpe_server => '192.168.101.9'; }
 
       case $operatingsystem {
         'debian','ubuntu': {

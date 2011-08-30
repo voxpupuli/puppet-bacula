@@ -1,7 +1,7 @@
 class puppetlabs::xaman {
 
   sudo::allowgroup  { "interns": }
-  sudo::allowgroup  { "developers": }
+  ssh::allowgroup  { "developers": }
   ssh::allowgroup   { "interns": }
 
   sudo::entry {

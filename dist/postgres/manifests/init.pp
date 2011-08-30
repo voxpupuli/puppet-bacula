@@ -66,7 +66,7 @@ define postgres::enable {
     ensure => running,
     enable => true,
     hasstatus => true,
-    require => Exec["InitDB"],
+    # require => Exec["InitDB"],
   }
 }
 
@@ -79,7 +79,7 @@ define postgres::hba ($postgres_password="",$allowedrules){
     group  => "root",
     notify => Service["postgresql"],
  #   require => File["/var/lib/pgsql/.order"],
-    require => Exec["InitDB"],
+ # require => Exec["InitDB"],
   }
 }
 
@@ -90,7 +90,7 @@ define postgres::config ($listen="localhost")  {
     group => postgres,
     notify => Service["postgresql"],
   #  require => File["/var/lib/pgsql/.order"],
-    require => Exec["InitDB"],
+  # require => Exec["InitDB"],
   }
 }
 

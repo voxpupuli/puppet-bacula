@@ -69,10 +69,6 @@ class puppetlabs::baal {
   ###
   # Monitoring
   #
-  file { "/etc/nagios":
-    ensure => link,
-    target => "/etc/nagios3",
-  }
   class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }
   include nagios::webservices
   include nagios::dbservices

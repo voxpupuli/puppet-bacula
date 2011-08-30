@@ -306,5 +306,12 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'mhiggins':
+    comment => 'Michael Higgins',
+    uid     => '1155',
+    group   => allstaff,
+    tag     => allstaff,
+  }
+
 }
 

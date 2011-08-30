@@ -53,7 +53,7 @@ define postgres::user(
 # TYPE  DATABASE        USER            CIDR-ADDRESS            METHOD
 define postgres::hba(
   $type = 'user',
-  $db = 'all',
+  $database = 'all',
   $user,
   $cidr,
   $method
@@ -64,7 +64,7 @@ define postgres::hba(
   $pgver = "9.0"
   $pghbafile = "/etc/postgresql/${pgver}/main/pg_hba.conf"
 
-  $linetoadd = "$type\t$db\t$user\t$cidr\t$method"
+  $linetoadd = "$type\t$database\t$user\t$cidr\t$method"
 
   exec{
     'mod_pghba':

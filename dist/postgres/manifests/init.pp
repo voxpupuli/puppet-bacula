@@ -44,7 +44,7 @@ define postgres::user(
     $cdb = "-D"
   }
 
-  exec{ "createuser ${cdb} ${su} ${username}":
+  exec{ "/usr/bin/createuser ${cdb} ${su} ${username}":
     user => 'postgres', # run as postgres user.
   }
 
@@ -67,8 +67,8 @@ define postgres::hba(
 
   exec{
     'mod_pghba':
-      command => "printf \"$linetoadd\" >>$pghbafile && /usr/sbin/invoke-rc.d postgres reload",
-      unless  => "grep -q \"$linetoadd\" $pghbafile",
+      command => "/usr/bin/printf \"$linetoadd\" >>$pghbafile && /usr/sbin/invoke-rc.d postgres reload",
+      unless  => "/bin/grep -q \"$linetoadd\" $pghbafile",
   }
 
 }

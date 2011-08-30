@@ -11,7 +11,6 @@
 # Sample Usage:
 #
 class puppetlabs::baal {
-  ssh::allowgroup { "techops": }
 
   ###
   # Mysql
@@ -22,30 +21,9 @@ class puppetlabs::baal {
   ###
   # Base
   #
-  include puppetlabs_ssl
-  include account::master
-  include vim
-
-  ###
-  # Puppet
-  #
-
-#  # global modules to add
-#  vcsrepo { '/etc/puppet/global/imported/xmpp':
-#    source   => 'git://github.com/barn/puppet-xmpp.git',
-#    provider => git,
-#    revision => 'c28dc2068d30cd17bacebd9780649b82894a0623',
-#    ensure   => present,
-#    require  => File['/etc/puppet/global/imported'],
-#  }
-#
-#  file { '/etc/puppet/xmpp.yaml':
-#    ensure   => file,
-#    owner    => root,
-#    group    => root,
-#    content  => "---\n:xmpp_jid: 'puppetlabsjabberbot@mumble.org.uk'\n:xmpp_password: 'MiShiUmlur'\n:xmpp_target: 'ben@puppetlabs.com,zach@puppetlabs.com'\n",
-#    require  => Vcsrepo['/etc/puppet/global/imported/xmpp'],
-#  }
+  #include puppetlabs_ssl
+  #include account::master
+  #include vim
 
   ###
   # Bacula
@@ -91,6 +69,10 @@ class puppetlabs::baal {
   ###
   # Monitoring
   #
+  file { "/etc/nagios":
+    ensure => link,
+    target => "/etc/nagios3",
+  }
   class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }
   include nagios::webservices
   include nagios::dbservices
@@ -109,76 +91,12 @@ class puppetlabs::baal {
     include munin::puppetmaster
   }
 
-  #file { "/usr/share/puppet-dashboard/public/.htaccess":
-  #  owner => root,
-  #  group => www-data,
-  #  mode => 0640,
-  #  source => "puppet:///modules/puppetlabs/webauth";
-  #}
-
-  # pDNS
-  # include pdns
-
-  # Gitolite
-  Account::User <| tag == 'git' |>
-
-  apache::vhost { 'baal.puppetlabs.com':
+  apache::vhost { $fqdn:
     options  => "None",
     priority => '08',
     port     => '80',
     docroot  => '/var/www',
   }
-
-  file {
-    "/usr/local/bin/puppet_deploy.sh":
-      ensure => absent,
-      owner => root,
-      group => root,
-      mode  => 0750,
-      source => "puppet:///modules/puppetlabs/puppet_deploy.sh";
-    "/usr/local/bin/puppet_deploy.rb":
-      owner => root,
-      group => root,
-      mode  => 0750,
-      source => "puppet:///modules/puppetlabs/puppet_deploy.rb";
-#    ['/etc/puppet/global', '/etc/puppet/global/imported']:
-#      ensure => directory,
-#      mode   => 0755,
-#      owner  => 'root',
-#      group  => 'root',
-#      before => Class['puppet::server'];
-  }
-
-  cron {
-    "compress_reports":
-      user    => root,
-      command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml" -mtime +1 -exec gzip {} \;',
-      minute  => '9';
-    "clean_old_reports":
-      user => root,
-      command => '/usr/bin/find /var/lib/puppet/reports -type f -name "*.yaml.gz" -mtime +14 -exec rm {} \;',
-      minute  => '0',
-      hour    => '2';
-    "clean_dashboard_reports":
-      ensure  => absent,
-      user    => root,
-      command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune -s upto=7 unit=day > /dev/null)',
-      minute  => '20',
-      hour    => '2';
-    "Puppet: puppet_deploy.sh":
-      ensure  => absent,
-      user    => root,
-      command => '/usr/local/bin/puppet_deploy.sh',
-      minute  => '*/8',
-      require => File["/usr/local/bin/puppet_deploy.sh"];
-    "Puppet: puppet_deploy.rb":
-      ensure  => absent,
-      user    => root,
-      command => '/usr/local/bin/puppet_deploy.rb',
-      minute  => '*/8',
-      require => File["/usr/local/bin/puppet_deploy.rb"];
-  }
-
 
   # VPN for internal monitoring and DNS Resolution
   openvpn::client {
@@ -205,7 +123,6 @@ class puppetlabs::baal {
     mode   => 644,
     source => "puppet:///modules/puppetlabs/local_resolv.conf";
   }
-
 
 }
 

@@ -6,7 +6,7 @@ class puppetlabs::vor {
 
   postgres::config{ "host": listen => "*", }
   postgres::hba { "host": allowedrules => [ "host    DATABASE all    192.168.100.0/24  md5", ], }
-  # postgres::enable{ "host": }
+  postgres::enable{ "host": }
 
   # class{ 'postgres':
   #   require => Package['postgresql-9.0']

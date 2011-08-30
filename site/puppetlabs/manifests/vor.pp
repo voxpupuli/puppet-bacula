@@ -34,5 +34,11 @@ class puppetlabs::vor {
 
   package{ 'postgresql-9.0': ensure => present, require => Exec['refresh_apts'] }
 
+  # This is dirty and a lot of the above should be moved to this
+  # class.
+  class{ 'postgres':
+    require => Package['postgresql-9.0']
+  }
+
 }
 

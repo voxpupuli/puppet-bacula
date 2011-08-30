@@ -117,7 +117,7 @@ class puppetlabs::baal {
   #}
 
   # pDNS
-  include pdns
+  # include pdns
 
   # Gitolite
   Account::User <| tag == 'git' |>
@@ -179,16 +179,33 @@ class puppetlabs::baal {
       require => File["/usr/local/bin/puppet_deploy.rb"];
   }
 
-  #
-  # Mcollective
-  #
 
-  #class { 'mcollective': }
-
+  # VPN for internal monitoring and DNS Resolution
   openvpn::client {
     "node_$hostname":
       server => "office.puppetlabs.com",
   }
+
+  # DNS resolution to internal hosts
+  include unbound
+  unbound::stub { "puppetlabs.lan": address => '192.168.100.1' }
+
+  # zleslie: stop dhclient from updating resolve.conf
+  file { "/etc/dhcp3/dhclient-enter-hooks.d/nodnsupdate":
+    owner   => root,
+    group   => root,
+    mode    => 755,
+    content => "#!/bin/sh\nmake_resolv_conf(){\n:\n}",
+  }
+
+  # Use unbound
+  file { "/etc/resolv.conf":
+    owner  => root,
+    group  => root,
+    mode   => 644,
+    source => "puppet:///modules/puppetlabs/local_resolv.conf";
+  }
+
 
 }
 

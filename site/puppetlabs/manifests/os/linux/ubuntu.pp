@@ -30,7 +30,7 @@ class puppetlabs::os::linux::ubuntu {
 
   cron { "apt-get update":
     command => "apt-get -qq update",
-    owner   => root,
+    user    => root,
     minute  => 20,
     hour    => 1,
   }

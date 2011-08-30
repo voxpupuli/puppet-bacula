@@ -63,11 +63,11 @@ define postgres::hba(
   $pgver = "9.0"
   $pghbafile = "/etc/postgresql/${pgver}/main/pg_hba.conf"
 
-  $linetoadd = "$type\t$database\t$user\t$cidr\t$method"
+  $linetoadd = "$type\t$database\t$user\t$cidr\t$method\n"
 
   exec{
     'mod_pghba':
-      command => "/usr/bin/printf \"$linetoadd\" >>$pghbafile && /usr/sbin/invoke-rc.d postgres reload",
+      command => "/usr/bin/printf \"$linetoadd\" >>$pghbafile && /usr/sbin/invoke-rc.d postgresql reload",
       unless  => "/bin/grep -q \"$linetoadd\" $pghbafile",
   }
 

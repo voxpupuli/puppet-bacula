@@ -11,7 +11,6 @@ class puppetlabs::xaman {
       entry => "pvande  ALL = (okra) NOPASSWD: ALL";
   }
 
-  # yank cert installation while this is in a branch
-  #include puppetlabs_ssl
+  include puppetlabs_ssl
   include okra::passenger
 }

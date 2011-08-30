@@ -54,7 +54,6 @@ define postgres::user(
 define postgres::hba(
   $type = 'user',
   $database = 'all',
-  $user,
   $cidr,
   $method
 ) {

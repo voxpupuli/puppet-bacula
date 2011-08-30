@@ -82,9 +82,9 @@ class puppetlabs::baal {
   if $environment == 'production' {
     class { "munin::server": site_alias => "munin.puppetlabs.com"; }
     include munin::dbservices
-    include munin::passenger
-    include munin::puppet
-    include munin::puppetmaster
+    #include munin::passenger
+    #include munin::puppet
+    #include munin::puppetmaster
   }
 
   apache::vhost { $fqdn:

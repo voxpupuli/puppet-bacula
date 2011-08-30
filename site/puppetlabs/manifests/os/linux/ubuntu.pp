@@ -28,5 +28,12 @@ class puppetlabs::os::linux::ubuntu {
       notify => Exec["apt-get update"];
   }
 
+  cron {
+    command => "apt-get -qq update",
+    owner   => root,
+    minute  => 20,
+    hour    => 1,
+  }
+
 }
 

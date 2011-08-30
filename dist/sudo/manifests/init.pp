@@ -2,6 +2,10 @@
 class sudo {
 
   include concat::setup
+  include sudo::params
+  $visudo_cmd   = $::sudo::params::visudo_cmd
+  $sudoers_file = $::sudo::params::sudoers_file
+  $sudoers_tmp  = $::sudo::params::sudoers_tmp
 
   if $operatingsystem != "Darwin" {
     package { "sudo": ensure => installed }
@@ -11,24 +15,21 @@ class sudo {
     'sudoers-header':
       order   => '00',
       mode    => '0440',
-      target  => '/tmp/sudoers',
+      target  => $sudoers_tmp,
       content => template("sudo/sudoers.erb"),
   }
 
-  concat { '/tmp/sudoers':
+  concat { $sudoers_tmp:
     mode   => '0440',
     notify => Exec["check-sudoers"],
   }
 
   exec { "check-sudoers":
-    command => $operatingsystem ? {
-      freebsd => "/usr/local/sbin/visudo -cf /tmp/sudoers && cp /tmp/sudoers /usr/local/etc/sudoers && rm /tmp/sudoers",
-      default => "/usr/sbin/visudo -cf /tmp/sudoers && cp /tmp/sudoers /etc/sudoers && rm /tmp/sudoers",
-    },
+    command     => "$::sudo::params::visudo_cmd -cf $sudoers_tmp && cp $sudoers_tmp $sudoers_file",
     refreshonly => true,
   }
 
-  file{ "/etc/sudoers":
+  file{ "$sudoers_file":
     owner => "root",
     group => "0",
     mode  => "440",

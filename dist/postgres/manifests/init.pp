@@ -20,11 +20,17 @@ class postgres {
 }
 
 define postgres::user(
-  $user ,
+  $user = undef,
   $password = undef ,
   $createdb = false,
   $superuser = false
 ) {
+
+  if $user == undef {
+    $username = $name
+  } else {
+    $username = $user
+  }
 
   if $superuser == true {
     $su = "-s"
@@ -38,8 +44,8 @@ define postgres::user(
     $cdb = "-D"
   }
 
-  exec{ "createuser ${cdb} ${su} ${user}":
-    user => 'postgres',
+  exec{ "createuser ${cdb} ${su} ${username}":
+    user => 'postgres', # run as postgres user.
   }
 
 }

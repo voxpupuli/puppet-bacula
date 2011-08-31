@@ -4,31 +4,15 @@ class puppetlabs::vor {
   # class.
   include postgres::install::debian
 
-  postgres::config{ "host": listen => "*", }
-  postgres::hba { "host": allowedrules => [ "host    all all    192.168.100.0/24  md5", ], }
   postgres::enable{ "host": }
+  postgres::config{ "host": listen => "*", }
+  # Allow postgres access from the office LAN.
+  postgres::hba { "host": allowedrules => [ "host    all all    192.168.100.0/24  md5", ], }
 
   postgres::createuser{
     'superduperuser':
       createdb  => true,
       superuser => true,
-      passwd    => 'footest7',
+      passwd    => 'bethChivva',
   }
-
-  # class{ 'postgres':
-  #   require => Package['postgresql-9.0']
-  # }
-  #   postgres::user{ 'superduperuser':
-  #     createdb  => true,
-  #     superuser => true,
-  #   }
-  # 
-  #   postgres::hba{ 'superduperuser':
-  #     type     => 'user',
-  #     database => 'ALL',
-  #     cidr     => '192.168.100.0/24',
-  #     method   => 'MD5',
-  #   }
-  # 
-  # }
 }

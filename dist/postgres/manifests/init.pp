@@ -1,75 +1,153 @@
-# This is hack, and just to get something off the ground. I need to
-# move this around, make it check for debian, as that's all it will
-# work on. Probably map some things.
-
+# Class: postgres
+#
+# This module manages postgres
+#
+# Parameters:
+#
+# Actions:
+#
+# Requires:
+#
+# Sample Usage: see postgres/README.markdown
+#
+# [Remember: No empty lines between comments and class definition]
 class postgres {
+  # Common stuff, like ensuring postgres_password defined in site.pp
+  include postgres::common
 
-  postgres::user{ 'superuser':
-    createdb  => true,
-    superuser => true,
+  # Handle version specified in site.pp (or default to postgresql) 
+  $postgres_client = "postgresql${postgres_version}"
+  $postgres_server = "postgresql${postgres_version}-server"
+
+  package { [$postgres_client, $postgres_server]: 
+    ensure => installed,
   }
 
-  postgres::hba{ 'superuser':
-    type     => 'user',
-    database => 'ALL',
-    cidr     => '192.168.100.0/24',
-    method   => 'MD5',
+  user { 'postgres':
+    shell => '/bin/bash',
+    ensure => 'present',
+    comment => 'PostgreSQL Server',
+    uid => '26',
+    gid => '26',
+    home => '/var/lib/pgsql',
+    managehome => true,
+    password => '!!',
   }
 
+  group { 'postgres':
+    ensure => 'present',
+    gid => '26'
+  }
 
 }
 
-define postgres::user(
-  $user = undef,
-  $password = undef ,
-  $createdb = false,
-  $superuser = false
-) {
-
-  if $user == undef {
-    $username = $name
+# Initialize the database with the postgres_password password.
+define postgres::initdb() {
+  if $postgres_password == "" {
+    exec {
+        "InitDB":
+          command => "/bin/chown postgres.postgres /var/lib/pgsql && /bin/su  postgres -c \"/usr/bin/initdb /var/lib/pgsql/data -E UTF8\"",
+          require =>  [User['postgres'],Package["postgresql${postgres_version}-server"]],
+          unless => "/usr/bin/test -e /var/lib/pgsql/data/PG_VERSION",
+    }
   } else {
-    $username = $user
+    exec {
+        "InitDB":
+          command => "/bin/chown postgres.postgres /var/lib/pgsql && echo \"${postgres_password}\" > /tmp/ps && /bin/su  postgres -c \"/usr/bin/initdb /var/lib/pgsql/data --auth='password' --pwfile=/tmp/ps -E UTF8 \" && rm -rf /tmp/ps",
+          require =>  [User['postgres'],Package["postgresql${postgres_version}-server"]],
+          unless => "/usr/bin/test -e /var/lib/pgsql/data/PG_VERSION ",
+    }
   }
+}
+
+# Start the service if not running
+define postgres::enable {
+  service { postgresql:
+    ensure => running,
+    enable => true,
+    hasstatus => true,
+    # require => Exec["InitDB"],
+  }
+}
+
+
+# Postgres host based authentication 
+define postgres::hba ($postgres_password="",$allowedrules){
+  file { "/etc/postgresql/9.0/main/pg_hba.conf":
+    content => template("postgres/pg_hba.conf.erb"),	
+    owner  => "root",
+    group  => "root",
+    notify => Service["postgresql"],
+ #   require => File["/var/lib/pgsql/.order"],
+ # require => Exec["InitDB"],
+  }
+}
+
+define postgres::config ($listen="localhost")  {
+  file {"/etc/postgresql/9.0/main/postgresql.conf":
+    content => template("postgres/postgresql.conf.erb"),
+    owner => postgres,
+    group => postgres,
+    notify => Service["postgresql"],
+  #  require => File["/var/lib/pgsql/.order"],
+  # require => Exec["InitDB"],
+  }
+}
+
+# Base SQL exec
+define sqlexec($username, $database, $sql, $sqlcheck) {
+  if $postgres_password == "" {
+    exec{ "psql -h localhost --username=${username} $database -c \"${sql}\" >> /var/lib/puppet/log/postgresql.sql.log 2>&1 && /bin/sleep 5":
+      path        => $path,
+      timeout     => 600,
+      # user        => 'postgres',
+      unless      => "psql -U $username $database -c $sqlcheck",
+      require =>  Service[postgresql],
+    }
+  } else {
+    exec{ "psql -h localhost --username=${username} $database -c \"${sql}\" >> /var/lib/puppet/log/postgresql.sql.log 2>&1 && /bin/sleep 5":
+      environment => "PGPASSWORD=${postgres_password}",
+      path        => $path,
+      timeout     => 600,
+      # user        => 'postgres',
+      unless      => "psql -U $username $database -c $sqlcheck",
+      require     =>  Service[postgresql],
+    }
+  }
+}
+
+# Create a Postgres user
+define postgres::createuser($passwd, $superuser=false, $createdb=false ) {
 
   if $superuser == true {
-    $su = "-s"
+    $super = " SUPERUSER "
   } else {
-    $su = "-S"
+    $super = ""
   }
-
   if $createdb == true {
-    $cdb = "-d"
+    $creator = " CREATEDB "
   } else {
-    $cdb = "-D"
+    $creator = ""
   }
 
-  exec{ "createuser ${cdb} ${su} ${username}":
-    user => 'postgres', # run as postgres user.
+  sqlexec{ createuser:
+    # password => $postgres_password,
+    username => "postgres",
+    database => "postgres",
+    sql      => "CREATE ROLE ${name} WITH ${super} ${creator} LOGIN PASSWORD '${passwd}';",
+    sqlcheck => "\"SELECT usename FROM pg_user WHERE usename = '${name}'\" | grep ${name}",
+    require  =>  Service[postgresql],
   }
-
 }
 
-# TYPE  DATABASE        USER            CIDR-ADDRESS            METHOD
-define postgres::hba(
-  $type = 'user',
-  $database = 'all',
-  $user,
-  $cidr,
-  $method
-) {
-
-  $user = $name
-
-  $pgver = "9.0"
-  $pghbafile = "/etc/postgresql/${pgver}/main/pg_hba.conf"
-
-  $linetoadd = "$type\t$database\t$user\t$cidr\t$method"
-
-  exec{
-    'mod_pghba':
-      command => "printf \"$linetoadd\" >>$pghbafile && /usr/sbin/invoke-rc.d postgres reload",
-      unless  => "grep -q \"$linetoadd\" $pghbafile",
+# Create a Postgres db
+define postgres::createdb($owner) {
+  sqlexec{ $name:
+    password => $postgres_password, 
+    username => "postgres",
+    database => "postgres",
+    sql => "CREATE DATABASE $name WITH OWNER = $owner ENCODING = 'UTF8';",
+    sqlcheck => "\"SELECT datname FROM pg_database WHERE datname ='$name'\" | grep $name",
+    require => Service[postgresql],
   }
-
 }

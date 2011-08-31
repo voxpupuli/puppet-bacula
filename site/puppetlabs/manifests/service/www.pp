@@ -93,6 +93,7 @@ class puppetlabs::service::www {
       template        => 'puppetlabs/puppetlabs_vhost.conf.erb',
       priority        => '02',
       port            => '82',
+      seturl          => true,
   }
 
   # 8631

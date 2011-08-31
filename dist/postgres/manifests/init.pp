@@ -100,7 +100,7 @@ define sqlexec($username, $database, $sql, $sqlcheck) {
     exec{ "psql -h localhost --username=${username} $database -c \"${sql}\" >> /var/lib/puppet/log/postgresql.sql.log 2>&1 && /bin/sleep 5":
       path        => $path,
       timeout     => 600,
-      user        => 'postgres',
+      # user        => 'postgres',
       unless      => "psql -U $username $database -c $sqlcheck",
       require =>  Service[postgresql],
     }
@@ -109,7 +109,7 @@ define sqlexec($username, $database, $sql, $sqlcheck) {
       environment => "PGPASSWORD=${postgres_password}",
       path        => $path,
       timeout     => 600,
-      user        => 'postgres',
+      # user        => 'postgres',
       unless      => "psql -U $username $database -c $sqlcheck",
       require     =>  Service[postgresql],
     }

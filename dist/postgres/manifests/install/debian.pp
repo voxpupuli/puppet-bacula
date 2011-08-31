@@ -6,7 +6,7 @@
 
 class postgres::install::debian {
 
-  $default_pgversion = '9.0' # if you wish, this could move to it's
+  $pgversion = '9.0' # if you wish, this could move to it's
                              # own params class.
 
   if $operatingsystem != 'debian' {

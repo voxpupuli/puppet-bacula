@@ -12,6 +12,7 @@ class puppetlabs::vor {
     'superduperuser':
       createdb  => true,
       superuser => true,
+      passwd    => 'footest7',
   }
 
   # class{ 'postgres':

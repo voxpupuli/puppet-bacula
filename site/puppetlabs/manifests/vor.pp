@@ -8,6 +8,12 @@ class puppetlabs::vor {
   postgres::hba { "host": allowedrules => [ "host    all all    192.168.100.0/24  md5", ], }
   postgres::enable{ "host": }
 
+  postgres::createuser{
+    'superduperuser':
+      createdb  => true,
+      superuser => true,
+  }
+
   # class{ 'postgres':
   #   require => Package['postgresql-9.0']
   # }

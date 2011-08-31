@@ -115,12 +115,24 @@ define sqlexec($username, $password, $database, $sql, $sqlcheck) {
 }
 
 # Create a Postgres user
-define postgres::createuser($passwd) {
+define postgres::createuser($passwd, $superuser=false, $createdb=false ) {
+
+  if $superuser == true {
+    $super = " SUPERUSER "
+  } else {
+    $super = ""
+  }
+  if $createdb == true {
+    $creator = " CREATEDB "
+  } else {
+    $creator = ""
+  }
+
   sqlexec{ createuser:
-    password => $postgres_password, 
+    password => $postgres_password,
     username => "postgres",
     database => "postgres",
-    sql      => "CREATE ROLE ${name} WITH LOGIN PASSWORD '${passwd}';",
+    sql      => "CREATE ROLE ${name} WITH ${super} ${creator} LOGIN PASSWORD '${passwd}';",
     sqlcheck => "\"SELECT usename FROM pg_user WHERE usename = '${name}'\" | grep ${name}",
     require  =>  Service[postgresql],
   }

@@ -131,7 +131,7 @@ define postgres::createuser($passwd, $superuser=false, $createdb=false ) {
   }
 
   sqlexec{ createuser:
-    password => $postgres_password,
+    # password => $postgres_password,
     username => "postgres",
     database => "postgres",
     sql      => "CREATE ROLE ${name} WITH ${super} ${creator} LOGIN PASSWORD '${passwd}';",

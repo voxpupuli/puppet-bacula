@@ -23,6 +23,12 @@ class puppetlabs::ningyo {
     '$confdir/global/imported',
   ]
 
+  # Hiera configuration file
+  file {
+    "/etc/puppet/hiera.yaml":
+      source => "puppet:///modules/puppetlabs/hiera.yaml";
+  }
+
   class { "puppet::server":
     modulepath => inline_template("<%= modulepath.join(':') %>"),
     dbadapter  => "mysql",

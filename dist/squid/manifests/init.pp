@@ -25,4 +25,16 @@ class squid {
     content => template("squid/squid_header.conf.erb"),
     order   => 0,
   }
+
+  concat::fragment { "access_header.conf":
+    target  => "/etc/squid/squid.conf",
+    content => template("squid/squid_header.conf.erb"),
+    order   => 100,
+  }
+
+  concat::fragment { "access_footer.conf":
+    target  => "/etc/squid/squid.conf",
+    content => template("squid/squid_header.conf.erb"),
+    order   => 100,
+  }
 }

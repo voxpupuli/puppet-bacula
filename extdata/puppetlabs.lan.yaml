@@ -1,2 +1,4 @@
 ---
+nrpe_server: 192.168.101.94
 nagios_check_ping_delay: "200"
+

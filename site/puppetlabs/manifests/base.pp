@@ -13,9 +13,7 @@
 #
 class puppetlabs::base {
 
-  $nagcheckpingdelay = hiera("nagios_check_ping_delay")
-
-  notice ( $nagcheckpingdelay )
+  $nrpe_server = hiera("nrpe_server")
 
   ###
   # Stages
@@ -27,6 +25,8 @@ class puppetlabs::base {
     linux:   { include puppetlabs::os::linux   }
     default: { }
   }
+
+  class { "nagios": nrpe_server => $nrpe_server; }
 
   #
   ## Domain/Location Specific Configurations
@@ -49,7 +49,7 @@ class puppetlabs::base {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
       include puppetlabs
-      class { "nagios": nrpe_server => '192.168.101.9'; }
+      #class { "nagios": nrpe_server => '192.168.101.9'; }
 
       case $operatingsystem {
         'debian','ubuntu': {
@@ -63,7 +63,7 @@ class puppetlabs::base {
     "puppetlabs.com": {
       include puppetlabs
       # zleslie: Nagios should be moved at a higher level, but need to work out nrpe through the firewall
-      class { "nagios": nrpe_server => '173.255.196.32'; }
+      #class { "nagios": nrpe_server => '173.255.196.32'; }
       # zleslie: need to check ntp to make sure that it is completely seperated from all other things and can be included on lan
       include ntp
 

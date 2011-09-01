@@ -7,6 +7,3 @@
 [submodule "dist/inetd"]
 	path = dist/inetd
 	url = git@github.com:puppetlabs/puppet-inetd.git
-[submodule "dist/hiera"]
-	path = dist/hiera
-	url = git://github.com/ripienaar/hiera.git

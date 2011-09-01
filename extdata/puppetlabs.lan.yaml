@@ -1,0 +1,2 @@
+---
+nagios_check_ping_delay: 200

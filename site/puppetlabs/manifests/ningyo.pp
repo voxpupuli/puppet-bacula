@@ -23,7 +23,9 @@ class puppetlabs::ningyo {
     '$confdir/global/imported',
   ]
 
-  # Hiera configuration file
+  # Hiera configuration
+  package { "hiera": ensure => installed, provider => gem; }
+  package { "hiera-puppet": ensure => installed, provider => gem; }
   file {
     "/etc/puppet/hiera.yaml":
       source => "puppet:///modules/puppetlabs/hiera.yaml";

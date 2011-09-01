@@ -13,6 +13,8 @@
 #
 class puppetlabs::base {
 
+  notice (hiera("nagios_check_ping_delay"))
+
   ###
   # Stages
   #

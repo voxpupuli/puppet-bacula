@@ -35,6 +35,6 @@ class squid {
   concat::fragment { "access_footer.conf":
     target  => "/etc/squid/squid.conf",
     source  => "puppet:///modules/squid/access_footer.conf",
-    order   => 100,
+    order   => 200,
   }
 }

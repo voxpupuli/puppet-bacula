@@ -28,7 +28,7 @@ class puppetlabs::base {
   ## Domain/Location Specific Configurations
 
   # We only want munin in production environments
-  if $environment == 'production' {
+  #if $environment == 'production' {
     class { 'munin':
       munin_server => $domain ? {
         'puppetlabs.lan' => '192.168.101.9',
@@ -38,7 +38,7 @@ class puppetlabs::base {
       }
     }
     include munin::puppet
-  }
+    #}
 
   #
   case $domain {

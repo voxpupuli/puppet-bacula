@@ -13,6 +13,7 @@
 #
 class puppetlabs::base {
 
+  # gather hiera variables
   $nrpe_server = hiera("nrpe_server")
 
   ###

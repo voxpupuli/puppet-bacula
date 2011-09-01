@@ -1,0 +1,5 @@
+---
+nrpe_server: 127.0.0.1
+nagios_check_ping_delay: "100"
+munin_server: 127.0.0.1
+

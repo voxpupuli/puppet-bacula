@@ -1,0 +1,5 @@
+visible_hostname  <%= scope.lookupvar('squid::params::hostname') %>
+cache_mgr         root@localhost
+
+http_port         127.0.0.1:8080
+http_port         <%= scope.lookupvar('squid::params::listen') %>:8080

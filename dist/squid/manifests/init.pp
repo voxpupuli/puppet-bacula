@@ -28,13 +28,13 @@ class squid {
 
   concat::fragment { "access_header.conf":
     target  => "/etc/squid/squid.conf",
-    content => template("squid/squid_header.conf.erb"),
+    source  => "puppet:///modules/squid/access_header.conf",
     order   => 100,
   }
 
   concat::fragment { "access_footer.conf":
     target  => "/etc/squid/squid.conf",
-    content => template("squid/squid_header.conf.erb"),
+    source  => "puppet:///modules/squid/access_footer.conf",
     order   => 100,
   }
 }

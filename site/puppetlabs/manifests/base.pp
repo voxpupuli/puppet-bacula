@@ -27,6 +27,7 @@ class puppetlabs::base {
     default: { }
   }
 
+  include puppetlabs
   class { "nagios": nrpe_server => $nrpe_server; }
 
   #
@@ -34,14 +35,7 @@ class puppetlabs::base {
 
   # We only want munin in production environments
   #if $environment == 'production' {
-    class { 'munin':
-      munin_server => $domain ? {
-        'puppetlabs.lan' => '192.168.101.9',
-        'puppetlabs.com' => '173.255.196.32',
-        default          => '127.0.0.1',  # A crap default, but
-                                          # security wise, safer.
-      }
-    }
+    class { 'munin': munin_server => $munin_server; }
     include munin::puppet
     #}
 
@@ -49,8 +43,6 @@ class puppetlabs::base {
   case $domain {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
-      include puppetlabs
-      #class { "nagios": nrpe_server => '192.168.101.9'; }
 
       case $operatingsystem {
         'debian','ubuntu': {
@@ -62,10 +54,6 @@ class puppetlabs::base {
     }
 
     "puppetlabs.com": {
-      include puppetlabs
-      # zleslie: Nagios should be moved at a higher level, but need to work out nrpe through the firewall
-      #class { "nagios": nrpe_server => '173.255.196.32'; }
-      # zleslie: need to check ntp to make sure that it is completely seperated from all other things and can be included on lan
       include ntp
 
     }

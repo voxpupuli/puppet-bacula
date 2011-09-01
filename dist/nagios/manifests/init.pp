@@ -45,7 +45,7 @@ class nagios (
     enable     => true,
     hasrestart => true,
     hasstatus  => false,
-    require => [ File[$nagios::params::nrpe_configuration], Package[$nagios::params::nrpe_packages] ],
+    require    => [ File[$nagios::params::nrpe_configuration], Package[$nagios::params::nrpe_packages] ],
   }
 
   @@nagios_host { $fqdn:

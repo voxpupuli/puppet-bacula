@@ -14,7 +14,8 @@
 class puppetlabs::base {
 
   # gather hiera variables
-  $nrpe_server = hiera("nrpe_server")
+  $nrpe_server  = hiera("nrpe_server")
+  $munin_server = hiera("munin_server")
 
   ###
   # Stages

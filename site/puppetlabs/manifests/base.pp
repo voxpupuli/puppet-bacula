@@ -13,7 +13,9 @@
 #
 class puppetlabs::base {
 
-  notice (hiera("nagios_check_ping_delay"))
+  $nagcheckpingdelay = hiera("nagios_check_ping_delay")
+
+  notice ( $nagcheckpingdelay )
 
   ###
   # Stages

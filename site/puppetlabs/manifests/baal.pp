@@ -69,6 +69,8 @@ class puppetlabs::baal {
   ###
   # Monitoring
   #
+  include puppetlabs::baal::gearman
+
   class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }
   include nagios::webservices
   include nagios::dbservices

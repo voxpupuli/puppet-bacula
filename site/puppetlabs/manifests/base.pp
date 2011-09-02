@@ -39,7 +39,7 @@ class puppetlabs::base {
 
   case $domain {
     "puppetlabs.lan": {
-      $lan_apt_proxy = "http://modi.puppetlabs.lan:3142"
+      $lan_apt_proxy = "http://modi.puppetlabs.lan:3128"
 
       case $operatingsystem {
         'debian','ubuntu': {

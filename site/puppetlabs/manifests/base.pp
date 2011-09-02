@@ -17,6 +17,7 @@ class puppetlabs::base {
   # Hiera data
   $nrpe_server  = hiera("nrpe_server")
   $munin_server = hiera("munin_server")
+  $ntpserver    = hiera("ntpserver")
 
   #
   ## Kernel/Operatingsystem Specific Configurations
@@ -28,17 +29,10 @@ class puppetlabs::base {
 
   include puppetlabs
   #include munin::puppet # this should be in puppet::monitor
-  class { "nagios": nrpe_server => $nrpe_server; }
-  class { 'munin': munin_server => $munin_server; }
+  class { "nagios": nrpe_server  => $nrpe_server;  }
+  class { 'munin':  munin_server => $munin_server; }
+  class { "ntp":    server       => $ntp_server;   }
 
-  #
-  ## Domain/Location Specific Configurations
-
-  # We only want munin in production environments
-  #if $environment == 'production' {
-    #}
-
-  #
   case $domain {
     "puppetlabs.lan": {
       $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
@@ -53,8 +47,6 @@ class puppetlabs::base {
     }
 
     "puppetlabs.com": {
-      include ntp
-
     }
     default: { }
   }

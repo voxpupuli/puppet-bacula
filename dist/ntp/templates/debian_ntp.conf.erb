@@ -1,0 +1,15 @@
+driftfile /var/lib/ntp/ntp.drift
+statistics loopstats peerstats clockstats
+filegen loopstats file loopstats type day enable
+filegen peerstats file peerstats type day enable
+filegen clockstats file clockstats type day enable
+<% if ntpserver.is_a? Array -%>
+<% ntpserver.each do |server| -%><%= "server #{server} iburst\n" %><% end -%>
+<% elsif ntpserver != '' -%>
+<%= "server #{ntpserver} iburst" -%>
+<% end -%>
+restrict -4 default kod notrap nomodify nopeer noquery
+restrict -6 default kod notrap nomodify nopeer noquery
+restrict 127.0.0.1
+restrict ::1
+

@@ -20,10 +20,14 @@ class puppetlabs::base {
   $ntpserver    = hiera("ntpserver")
 
   #
-  ## Kernel/Operatingsystem Specific Configurations
-  case $kernel {
-    linux:   { include puppetlabs::os::linux   }
+  ## Operatingsystem Specific Configurations
+
+  case $operatingsystem {
+    debian:  { include puppetlabs::os::linux::debian }
+    ubuntu:  { include puppetlabs::os::linux::ubuntu }
+    centos:  { include puppetlabs::os::linux::centos }
     darwin:  { include puppetlabs::os::darwin  }
+    freebsd: { include puppetlabs::os::freebsd }
     default: { }
   }
 
@@ -35,7 +39,7 @@ class puppetlabs::base {
 
   case $domain {
     "puppetlabs.lan": {
-      $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
+      $lan_apt_proxy = "http://modi.puppetlabs.lan:3142"
 
       case $operatingsystem {
         'debian','ubuntu': {

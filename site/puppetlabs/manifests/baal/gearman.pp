@@ -1,6 +1,6 @@
 class puppetlabs::baal::gearman {
 
-  packages = [
+  $packages = [
     "autoconf",
     "automake",
     "make",

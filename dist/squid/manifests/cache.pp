@@ -4,6 +4,6 @@ class squid::cache {
   concat::fragment { "cache.conf":
     target => "/etc/squid/squid.conf",
     source => "puppet:///modules/squid/cache.conf",
-    order  => 550,
+    order  => 500,
   }
 }

@@ -1,3 +1,13 @@
+#
+#
+# squid.conf layout
+#
+# 0         header
+# 100       access header
+# 200       access footer
+# 500 - 600 caching settings
+# 1000+     default for user defined settings
+
 class squid {
   include concat::setup
   include squid::params

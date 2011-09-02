@@ -21,7 +21,7 @@ class puppetlabs::baal::gearman {
     "uuid-dev",
     "libltdl-dev",
     "libncurses5-dev",
-    "libevent-dev"
+    "libevent-dev",
     "gearman"
   ]
 

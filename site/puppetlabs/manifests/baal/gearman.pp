@@ -11,7 +11,7 @@ class puppetlabs::baal::gearman {
     "file",
     "netcat",
     "uuid-dev",
-    "libltdl3-dev",
+    "libltdl-dev",
     "libncurses5-dev",
     "libevent-dev"
   ]

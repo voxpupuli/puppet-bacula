@@ -19,6 +19,7 @@ class squid {
   service { "squid":
     ensure  => running,
     enable  => true,
+    restart => "/etc/init.d/squid reload",
     require => Package['squid'],
   }
 

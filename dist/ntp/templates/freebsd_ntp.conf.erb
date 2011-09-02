@@ -1,0 +1,6 @@
+<% if ntpserver.is_a? Array -%>
+<% ntpserver.each do |server| -%><%= "server #{server} iburst maxpoll 9\n" %><% end -%>
+<% elsif ntpserver != '' -%>
+<%= "server #{ntpserver} iburst maxpoll 9" -%>
+<% end -%>
+

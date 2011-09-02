@@ -1,0 +1,13 @@
+restrict default kod nomodify notrap nopeer noquery
+restrict -6 default kod nomodify notrap nopeer noquery
+restrict 127.0.0.1
+restrict -6 ::1
+<% if ntpserver.is_a? Array -%>
+<% ntpserver.each do |server| -%><%= "server #{server} iburst\n" %><% end -%>
+<% elsif ntpserver != '' -%>
+<%= "server #{ntpserver} iburst" -%>
+<% end -%>
+fudge 127.127.1.0 stratum 10
+driftfile /var/lib/ntp/drift
+keys /etc/ntp/keys
+

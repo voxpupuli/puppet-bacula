@@ -13,37 +13,33 @@
 #
 class puppetlabs::base {
 
-  # gather hiera variables
+  #
+  # Hiera data
   $nrpe_server  = hiera("nrpe_server")
   $munin_server = hiera("munin_server")
-
-  ###
-  # Stages
-  #
+  $ntpserver    = hiera("ntpserver")
 
   #
-  ## Kernel/Operatingsystem Specific Configurations
-  case $kernel {
-    linux:   { include puppetlabs::os::linux   }
+  ## Operatingsystem Specific Configurations
+
+  case $operatingsystem {
+    debian:  { include puppetlabs::os::linux::debian }
+    ubuntu:  { include puppetlabs::os::linux::ubuntu }
+    centos:  { include puppetlabs::os::linux::centos }
+    darwin:  { include puppetlabs::os::darwin  }
+    freebsd: { include puppetlabs::os::freebsd }
     default: { }
   }
 
   include puppetlabs
-  class { "nagios": nrpe_server => $nrpe_server; }
+  #include munin::puppet # this should be in puppet::monitor
+  class { "nagios": nrpe_server  => $nrpe_server;  }
+  class { 'munin':  munin_server => $munin_server; }
+  class { "ntp":    server       => $ntp_server;   }
 
-  #
-  ## Domain/Location Specific Configurations
-
-  # We only want munin in production environments
-  #if $environment == 'production' {
-    class { 'munin': munin_server => $munin_server; }
-    include munin::puppet
-    #}
-
-  #
   case $domain {
     "puppetlabs.lan": {
-      $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
+      $lan_apt_proxy = "http://modi.puppetlabs.lan:3128"
 
       case $operatingsystem {
         'debian','ubuntu': {
@@ -55,8 +51,6 @@ class puppetlabs::base {
     }
 
     "puppetlabs.com": {
-      include ntp
-
     }
     default: { }
   }

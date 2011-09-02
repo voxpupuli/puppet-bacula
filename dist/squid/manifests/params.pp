@@ -1,6 +1,7 @@
 class squid::params (
   $listen,
-  $hostname
+  $hostname,
+  $transparent = false
 ) {
 
 }

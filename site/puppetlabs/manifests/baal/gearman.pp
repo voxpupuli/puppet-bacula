@@ -1,6 +1,6 @@
 class puppetlabs::baal::gearman {
 
-  # This should get replaced with the mod-gearman pacakges that are in wheezy
+  # This class should get replaced with the mod-gearman pacakges that are in wheezy
 
   $packages = [
     "autoconf",
@@ -33,7 +33,7 @@ class puppetlabs::baal::gearman {
   }
 
   exec { "wget mod_gearman":
-    command => "wget http://labs.consol.de/wp-content/uploads/2010/09/mod_gearman-1.0.10.tar.gz",
+    command => "/usr/bin/wget http://labs.consol.de/wp-content/uploads/2010/09/mod_gearman-1.0.10.tar.gz",
     user    => root,
     cwd     => "/usr/local/src",
     creates => "/usr/local/src/mod_gearman-1.0.10.tar.gz",

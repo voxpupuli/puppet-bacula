@@ -13,7 +13,7 @@ class puppetlabs::baal::gearman {
     "uuid-dev",
     "libltdl3-dev",
     "libncurses5-dev",
-    "libevent-dev",
+    "libevent-dev"
   ]
 
   package { $packages: ensure => installed; }

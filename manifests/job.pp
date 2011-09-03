@@ -60,6 +60,7 @@ define bacula::job (
       @@nagios_service { "check_bacula_${name}":
         use                 => 'generic-service',
         host_name           => "$fqdn",
+        hostgroup_name      => $location,
         check_command       => "check_bacula!26!${name}",
         service_description => "check_bacula_${name}",
         target              => '/etc/nagios3/conf.d/nagios_service.cfg',

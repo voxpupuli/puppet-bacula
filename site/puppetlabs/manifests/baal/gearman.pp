@@ -18,18 +18,5 @@ class puppetlabs::baal::gearman {
 
   package { $packages: ensure => installed; }
 
-  file { "/etc/ld.so.conf.d/opt_lib.conf":
-    ensure  => absent,
-    content => "/opt/lib",
-    replace => false,
-    notify  => Exec["ldconfig"],
-  }
-
-  exec { "ldconfig":
-    command     => "/sbin/ldconfig",
-    user        => root,
-    refreshonly => true,
-  }
-
 }
 

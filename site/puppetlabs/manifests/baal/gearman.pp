@@ -18,5 +18,25 @@ class puppetlabs::baal::gearman {
 
   package { $packages: ensure => installed; }
 
+  user { "nagios":
+    shell => "/bin/bash",
+  }
+
+  service { "gearman-job-server":
+    ensure    => running,
+    enable    => true,
+    hasstatus => false,
+    pattern   => "gearmand",
+  }
+
+  service { "mod-gearman-worker":
+    ensure => running,
+    enable => true,
+  }
+
+  file { "/etc/mod-gearman/worker.conf":
+    content => tempalte("nagios/worker.conf.erb",
+  }
+
 }
 

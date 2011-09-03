@@ -9,11 +9,11 @@ class puppetlabs::baal::gearman {
   }
 
   $packages = [
-    "gearman",
-    "mod-gearman-doc",
-    "mod-gearman-module",
-    "mod-gearman-tools",
-    "mod-gearman-worker"
+    "gearman/testing",
+    "mod-gearman-doc/testing",
+    "mod-gearman-module/testing",
+    "mod-gearman-tools/testing",
+    "mod-gearman-worker/testing"
   ]
 
   package { $packages: ensure => installed; }
@@ -34,7 +34,7 @@ class puppetlabs::baal::gearman {
     enable => true,
   }
 
-  $key = 'W61N1HHCaLkgJXoUmv3tIoYJ1G8156THFpIHcrKjZrZy2DYzhEMog9OLwAD4KuV'
+  $key = 'FpIHcrKjZrZy2DYzhEMog9OLwAD4KuV'
   file { "/etc/mod-gearman/worker.conf":
     content => template("nagios/worker.conf.erb"),
   }

@@ -21,10 +21,21 @@ class nagios::hostgroups {
   }
 
   nagios_hostgroup {
+    "office":
+      target => '/etc/nagios3/conf.d/nagios_service.cfg',
+      notify => Service[$::nagios::params::nagios_service],
+  }
+
+  nagios_hostgroup {
+    "cloaked":
+      target => '/etc/nagios3/conf.d/nagios_service.cfg',
+      notify => Service[$::nagios::params::nagios_service],
+  }
+
+  nagios_hostgroup {
     "world":
       target => '/etc/nagios3/conf.d/nagios_service.cfg',
       notify => Service[$::nagios::params::nagios_service],
-
   }
 
   #Nagios_hostgroup <| |>

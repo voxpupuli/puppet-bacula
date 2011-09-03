@@ -62,6 +62,7 @@ class nagios (
     use                 => 'generic-service',
     check_command       => 'check_ping!150.0,20%!500.0,60%',
     host_name           => "$fqdn",
+    hostgroup_name      => $location,
     service_description => "check_ping_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify              => Service[$nagios::params::nagios_service],

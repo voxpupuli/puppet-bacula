@@ -10,7 +10,7 @@ class puppetlabs::baal::gearman {
 
   $packages = [
     "gearman",
-    "mod-gearman-doc"
+    "mod-gearman-doc",
     "mod-gearman-module",
     "mod-gearman-tools",
     "mod-gearman-worker"

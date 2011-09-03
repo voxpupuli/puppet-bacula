@@ -17,9 +17,16 @@ class nagios::hostgroups {
   file {
     '/etc/nagios3/conf.d/hostgroups_nagios2.cfg':
       mode   => '0644',
-      before => Service[$nagios::params::nagios_service],
+      before => Service[$::nagios::params::nagios_service],
   }
 
-  Nagios_hostgroup <| |>
+  nagios_hostgroup {
+    "world":
+      target => '/etc/nagios3/conf.d/nagios_service.cfg',
+      notify => Service[$::nagios::params::nagios_service],
+
+  }
+
+  #Nagios_hostgroup <| |>
 
 }

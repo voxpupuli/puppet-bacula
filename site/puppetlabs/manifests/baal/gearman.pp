@@ -9,12 +9,12 @@ class puppetlabs::baal::gearman {
   }
 
   $packages = [
-    "gearman/testing",
-    "gearman-tools/testing",
-    "mod-gearman-doc/testing",
-    "mod-gearman-module/testing",
-    "mod-gearman-tools/testing",
-    "mod-gearman-worker/testing"
+    "gearman",
+    "gearman-tools",
+    "mod-gearman-doc",
+    "mod-gearman-module",
+    "mod-gearman-tools",
+    "mod-gearman-worker"
   ]
 
   package { $packages: ensure => installed; }

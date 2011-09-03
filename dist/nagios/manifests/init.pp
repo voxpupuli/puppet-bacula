@@ -71,6 +71,7 @@ class nagios (
   @@nagios_service { "check_ssh_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
+    hostgroup_name      => $location,
     check_command       => 'check_ssh',
     service_description => "check_ssh_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
@@ -90,6 +91,7 @@ class nagios (
   @@nagios_service { "check_disk_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
+    hostgroup_name      => $location,
     check_command       => 'check_nrpe_1arg!check_alldisks',
     service_description => "check_alldisks_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
@@ -99,6 +101,7 @@ class nagios (
   @@nagios_service { "check_load_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
+    hostgroup_name      => $location,
     check_command       => 'check_nrpe_1arg!check_load',
     service_description => "check_load_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
@@ -108,6 +111,7 @@ class nagios (
   @@nagios_service { "check_zombie_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
+    hostgroup_name      => $location,
     check_command       => 'check_nrpe_1arg!check_zombie_procs',
     service_description => "check_zombie_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
@@ -117,6 +121,7 @@ class nagios (
   @@nagios_service { "check_munin-node_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
+    hostgroup_name      => $location,
     check_command       => 'check_nrpe!check_proc!1:1 munin-node',
     service_description => "check_munin-node_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',

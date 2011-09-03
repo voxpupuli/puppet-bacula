@@ -35,7 +35,7 @@ class puppetlabs::baal::gearman {
   }
 
   file { "/etc/mod-gearman/worker.conf":
-    content => tempalte("nagios/worker.conf.erb",
+    content => tempalte("nagios/worker.conf.erb"),
   }
 
 }

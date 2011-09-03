@@ -9,20 +9,11 @@ class puppetlabs::baal::gearman {
   }
 
   $packages = [
-    "autoconf",
-    "automake",
-    "make",
-    "gcc",
-    "g++",
-    "wget",
-    "tar",
-    "file",
-    "netcat",
-    "uuid-dev",
-    "libltdl-dev",
-    "libncurses5-dev",
-    "libevent-dev",
-    "gearman"
+    "gearman",
+    "mod-gearman-doc"
+    "mod-gearman-module",
+    "mod-gearman-tools",
+    "mod-gearman-worker"
   ]
 
   package { $packages: ensure => installed; }

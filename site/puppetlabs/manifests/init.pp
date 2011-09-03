@@ -39,7 +39,7 @@ class puppetlabs {
   include ssh::server
   ssh::allowgroup  { "sysadmin": }
 
-  #sudo
+  # Sudo
   include sudo
   sudo::allowgroup { "sysadmin": }
 
@@ -49,6 +49,7 @@ class puppetlabs {
   Account::User <| tag == 'allstaff' |>
   Group         <| tag == 'allstaff' |>
 
+  # Firewall
   if defined(Class["firewall"]) { Firewall <||> }
 
 }

@@ -18,6 +18,7 @@ class puppetlabs::base {
   $nrpe_server  = hiera("nrpe_server")
   $munin_server = hiera("munin_server")
   $ntpserver    = hiera("ntpserver")
+  $location     = hiera("location")
 
   #
   ## Operatingsystem Specific Configurations

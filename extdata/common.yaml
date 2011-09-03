@@ -5,3 +5,4 @@ munin_server: 127.0.0.1
 ntpserver:  - 0.us.pool.ntp.org
             - 1.us.pool.ntp.org
 puppet_server: ningyo.puppetlabs.com
+location: cloaked

@@ -33,6 +33,7 @@ class puppetlabs::baal::gearman {
   service { "mod-gearman-worker":
     ensure => running,
     enable => true,
+    hasstatus => true,
   }
 
   $key = 'FpIHcrKjZrZy2DYzhEMog9OLwAD4KuV'

@@ -30,6 +30,12 @@ class puppetlabs::ningyo {
     "/etc/puppet/hiera.yaml":
       source => "puppet:///modules/puppetlabs/hiera.yaml";
   }
+  file {
+    "/etc/hiera.yaml":
+      ensure  => link,
+      target  => "/etc/puppet/hiera.yaml",
+      require => File["/etc/puppet/hiera.yaml"]
+  }
 
   class { "puppet::server":
     modulepath => inline_template("<%= modulepath.join(':') %>"),

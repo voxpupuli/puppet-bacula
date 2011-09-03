@@ -34,6 +34,7 @@ class puppetlabs::baal::gearman {
     enable => true,
   }
 
+  $key = 'W61N1HHCaLkgJXoUmv3tIoYJ1G8156THFpIHcrKjZrZy2DYzhEMog9OLwAD4KuV'
   file { "/etc/mod-gearman/worker.conf":
     content => template("nagios/worker.conf.erb"),
   }

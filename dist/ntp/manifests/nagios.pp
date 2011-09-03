@@ -15,6 +15,7 @@ class ntp::nagios {
   @@nagios_service { "check_ntpd_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
+    hostgroup_name      => $location,
     check_command       => 'check_nrpe!check_proc!1:1 ntpd',
     service_description => "check_ntpd_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',

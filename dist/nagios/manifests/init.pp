@@ -82,6 +82,7 @@ class nagios (
     ensure              => absent,
     use                 => 'generic-service',
     host_name           => "$fqdn",
+    hostgroup_name      => $location,
     check_command       => 'check_dns',
     service_description => "check_dns_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',

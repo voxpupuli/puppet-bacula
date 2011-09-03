@@ -7,11 +7,6 @@ class puppetlabs::wyrd::gearman {
   }
 
   $packages = [
-    "gearman",
-    "gearman-tools",
-    "mod-gearman-doc",
-    "mod-gearman-module",
-    "mod-gearman-tools",
     "mod-gearman-worker"
   ]
 

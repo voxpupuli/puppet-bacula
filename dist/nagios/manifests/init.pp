@@ -49,18 +49,20 @@ class nagios (
   }
 
   @@nagios_host { $fqdn:
-    ensure  => present,
-    alias   => $hostname,
-    address => $ipaddress,
-    use     => 'generic-host',
-    target  => '/etc/nagios3/conf.d/nagios_host.cfg',
-    notify  => Service[$nagios::params::nagios_service],
+    ensure     => present,
+    alias      => $hostname,
+    address    => $ipaddress,
+    hostgroups => $location,
+    use        => 'generic-host',
+    target     => '/etc/nagios3/conf.d/nagios_host.cfg',
+    notify     => Service[$nagios::params::nagios_service],
   }
 
   @@nagios_service { "check_ping_${hostname}":
     use                 => 'generic-service',
     check_command       => 'check_ping!150.0,20%!500.0,60%',
     host_name           => "$fqdn",
+    hostgroup_name      => $location,
     service_description => "check_ping_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify              => Service[$nagios::params::nagios_service],

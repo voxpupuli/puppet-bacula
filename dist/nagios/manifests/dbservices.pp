@@ -24,7 +24,6 @@ class nagios::dbservices {
   @@nagios_service { "check_mysqld_${hostname}":
     use => 'generic-service',
     host_name => "$fqdn",
-    hostgroup_name      => $location,
     check_command => 'check_nrpe!check_proc!1:1 mysqld',
     service_description => "check_mysqld_${hostname}",
     target => '/etc/nagios3/conf.d/nagios_service.cfg',

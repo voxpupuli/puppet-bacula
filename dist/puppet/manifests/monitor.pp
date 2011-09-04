@@ -15,7 +15,6 @@ class puppet::monitor (
       ensure         => $ensure,
       use            => 'generic-service',
       host_name      => "$fqdn",
-      hostgroup_name => $location,
       check_command => $puppetversion ? {
         '0.25.4' => 'check_nrpe!check_proc!1:1 puppetd',
         default  => $operatingsystem ? {

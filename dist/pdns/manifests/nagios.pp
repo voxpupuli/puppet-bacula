@@ -15,7 +15,6 @@ class pdns::nagios {
   @@nagios_service { "check_pdns_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
-    hostgroup_name      => $location,
     check_command       => 'check_nrpe!check_proc!1:5 pdns_server',
     service_description => "check_pdns_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',

@@ -40,12 +40,11 @@ class puppetlabs::base {
 
   case $domain {
     "puppetlabs.lan": {
-      $lan_apt_proxy = "http://modi.puppetlabs.lan:3128"
-
+      $proxy = hiera("proxy")
       case $operatingsystem {
         'debian','ubuntu': {
           # Setup apt settings specific to the lan
-          class { "apt::settings": proxy => "$lan_apt_proxy" }
+          class { "apt::settings": proxy => hiera("proxy"); }
         }
         default: { }
       }
@@ -56,43 +55,7 @@ class puppetlabs::base {
     default: { }
   }
 
-  case $hostname {
-    #    # Known
-    #    "app01",
-    #    "baal",
-    #    "bacula01",
-    #    "burji",
-    #    "clippy",
-    #    "deb-builder",
-    #    "dxul",
-    #    "enkal",
-    #    "faro",
-    #    "forge-dev",
-    #    "lukedev01",
-    #    "metrics",
-    #    "mon0",
-    #    "net01",
-    #    "ningyo",
-    #    "pluto",
-    #    "projects-dev",
-    #    "projects2-dev",
-    #    "qa",
-    #    "rpm-builder",
-    #    "shell",
-    #    "slave01",
-    #    "slave02",
-    #    "tb-driver",
-    #    "urd",
-    #    "vanir",
-    #    "web01",
-    #    "www-dev",
-    #    "wyrd",
-    #    "yo"
-    #      : { include "puppetlabs::$hostname" }
-    # Unknown
-    default: { include "puppetlabs::$hostname" }
-
-  }
+  include "puppetlabs::$hostname"
 
 }
 

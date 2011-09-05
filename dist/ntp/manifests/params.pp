@@ -12,11 +12,28 @@
 #
 class ntp::params {
 
-  $ntpd_service = $operatingsystem ? {
-    centos  => "ntpd",
-    freebsd => "ntpd",
-    darwin  => "org.ntp.ntpd",
-    default => "ntp",
+  case $operatingsystem {
+    centos,redhat,fedora: {
+      $ntpd_service = "ntpd"
+      $driftfile    = "/var/lib/ntp/drift"
+      $template     = "ntp/centos_ntp.conf.erb"
+    }
+    freebsd: {
+      $ntpd_service = "ntpd"
+      $driftfile    = "/var/db/ntpd.drift"
+      $template     = "ntp/freebsd_ntp.conf.erb"
+    }
+    darwin: {
+      $ntpd_service = "org.ntp.ntpd"
+      $driftfile    = "/var/db/ntp.drift"
+      $template     = "ntp/darwin_ntp.conf.erb"
+    }
+    debian,ubuntu: {
+      $ntpd_service = "ntp"
+      $driftfile    = "/var/lib/ntp/ntp.drift"
+      $template     = "ntp/debian_ntp.conf.erb"
+    }
   }
 
 }
+

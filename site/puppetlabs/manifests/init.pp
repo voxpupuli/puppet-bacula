@@ -16,7 +16,7 @@ class puppetlabs {
   #
 
   # variables
-  $puppet_server = "ningyo.puppetlabs.com"
+  $puppet_server = hiera("puppet_server")
 
   ###
   # Puppet
@@ -26,22 +26,30 @@ class puppetlabs {
       agent  => false
   }
 
-  # some shit
-  include ssh::server
-  include virtual::users
+  # Nagios -- not sure why this is here, instead of only for the server
   include virtual::nagioscontacts
-  include sudo
+
+  # Packages
   if $kernel == "Linux" {
     include virtual::packages
     include packages
   }
 
+  # SSH
+  include ssh::server
   ssh::allowgroup  { "sysadmin": }
+
+  # Sudo
+  include sudo
   sudo::allowgroup { "sysadmin": }
 
+  # Accounts
+  # This should probably be more selective on certain hosts/distros/oses
+  include virtual::users
   Account::User <| tag == 'allstaff' |>
   Group         <| tag == 'allstaff' |>
 
+  # Firewall
   if defined(Class["firewall"]) { Firewall <||> }
 
 }

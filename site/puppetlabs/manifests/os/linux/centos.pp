@@ -1,4 +1,4 @@
-class puppetlabs::os::linux::centos {
+class puppetlabs::os::linux::centos inherits puppetlabs::os::linux {
 
   include cron
 

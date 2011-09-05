@@ -1,0 +1,8 @@
+---
+:backends: - yaml
+:hierarchy: - %{fqdn}
+            - %{domain}
+            - common
+:yaml:
+  :datadir: /etc/puppet/environments/%{environment}/extdata
+

@@ -45,16 +45,17 @@ class nagios (
     enable     => true,
     hasrestart => true,
     hasstatus  => false,
-    require => [ File[$nagios::params::nrpe_configuration], Package[$nagios::params::nrpe_packages] ],
+    require    => [ File[$nagios::params::nrpe_configuration], Package[$nagios::params::nrpe_packages] ],
   }
 
   @@nagios_host { $fqdn:
-    ensure  => present,
-    alias   => $hostname,
-    address => $ipaddress,
-    use     => 'generic-host',
-    target  => '/etc/nagios3/conf.d/nagios_host.cfg',
-    notify  => Service[$nagios::params::nagios_service],
+    ensure     => present,
+    alias      => $hostname,
+    address    => $ipaddress,
+    hostgroups => $location,
+    use        => 'generic-host',
+    target     => '/etc/nagios3/conf.d/nagios_host.cfg',
+    notify     => Service[$nagios::params::nagios_service],
   }
 
   @@nagios_service { "check_ping_${hostname}":

@@ -1,4 +1,4 @@
-class puppetlabs::os::linux::debian {
+class puppetlabs::os::linux::debian inherits puppetlabs::os::linux {
 
   class { "useradd::settings":
     last_uid => '1099',

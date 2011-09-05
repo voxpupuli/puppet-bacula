@@ -13,10 +13,20 @@
 #
 class ntp (
     $nagios = false,
-    $server = '0.pool.ntp.org'
+    $server = ['0.pool.ntp.org','1.pool.ntp.org']
   ) {
 
   include ntp::params
+  $template      = $::ntp::params::template
+  $ntpd_service  = $::ntp::params::ntpd_service
+
+  file { "/etc/ntp.conf":
+    owner   => root,
+    group   => 0,
+    mode    => 640,
+    content => template("$template"),
+    notify  => Service['ntp'],
+  }
 
   if $nagios == true {
     include ntp::nagios
@@ -28,10 +38,10 @@ class ntp (
     }
   }
   service { 'ntp':
-    name       => "$ntp::params::ntpd_service",
+    name       => "$ntpd_service",
     ensure     => running,
     enable     => true,
-    hasrestart => $operatingsystem ? {
+    hasrestart => $kernel ? {
       linux => true,
       default => undef 
     },

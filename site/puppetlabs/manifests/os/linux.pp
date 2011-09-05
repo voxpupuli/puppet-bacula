@@ -15,11 +15,4 @@ class puppetlabs::os::linux {
     type    => mtime,
   }
 
-  case $operatingsystem {
-    debian:  { include puppetlabs::os::linux::debian }
-    ubuntu:  { include puppetlabs::os::linux::ubuntu }
-    centos:  { include puppetlabs::os::linux::centos }
-    default: { }
-  }
-
 }

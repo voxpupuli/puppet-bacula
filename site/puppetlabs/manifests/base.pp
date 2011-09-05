@@ -13,39 +13,34 @@
 #
 class puppetlabs::base {
 
-  ###
-  # Stages
   #
+  # Hiera data
+  $nrpe_server  = hiera("nrpe_server")
+  $munin_server = hiera("munin_server")
+  $ntpserver    = hiera("ntpserver")
+  $location     = hiera("location")
 
   #
-  ## Kernel/Operatingsystem Specific Configurations
-  case $kernel {
-    linux:   { include puppetlabs::os::linux   }
+  ## Operatingsystem Specific Configurations
+
+  case $operatingsystem {
+    debian:  { include puppetlabs::os::linux::debian }
+    ubuntu:  { include puppetlabs::os::linux::ubuntu }
+    centos:  { include puppetlabs::os::linux::centos }
+    darwin:  { include puppetlabs::os::darwin  }
+    freebsd: { include puppetlabs::os::freebsd }
     default: { }
   }
 
-  #
-  ## Domain/Location Specific Configurations
+  include puppetlabs
+  #include munin::puppet # this should be in puppet::monitor
+  class { "nagios": nrpe_server  => $nrpe_server;  }
+  class { 'munin':  munin_server => $munin_server; }
+  class { "ntp":    server       => $ntp_server;   }
 
-  # We only want munin in production environments
-  #if $environment == 'production' {
-    class { 'munin':
-      munin_server => $domain ? {
-        'puppetlabs.lan' => '192.168.101.9',
-        'puppetlabs.com' => '173.255.196.32',
-        default          => '127.0.0.1',  # A crap default, but
-                                          # security wise, safer.
-      }
-    }
-    include munin::puppet
-    #}
-
-  #
   case $domain {
     "puppetlabs.lan": {
-      $lan_apt_proxy = "http://vanir.puppetlabs.lan:3142"
-      include puppetlabs
-      class { "nagios": nrpe_server => '192.168.101.9'; }
+      $lan_apt_proxy = "http://modi.puppetlabs.lan:3128"
 
       case $operatingsystem {
         'debian','ubuntu': {
@@ -57,12 +52,6 @@ class puppetlabs::base {
     }
 
     "puppetlabs.com": {
-      include puppetlabs
-      # zleslie: Nagios should be moved at a higher level, but need to work out nrpe through the firewall
-      class { "nagios": nrpe_server => '173.255.196.32'; }
-      # zleslie: need to check ntp to make sure that it is completely seperated from all other things and can be included on lan
-      include ntp
-
     }
     default: { }
   }

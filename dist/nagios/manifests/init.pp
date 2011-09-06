@@ -22,10 +22,10 @@ class nagios (
   $nrpe_group  = $nagios::params::nrpe_group
 
   package { $::nagios::params::nagios_plugin_packages: ensure => installed; }
-  package { $::nagios::params::nrpe_packages: ensure => installed; }
+  package { $::nagios::params::nrpe_packages:          ensure => installed; }
 
   file { '/etc/nagios':
-    ensure => present,
+    ensure  => present,
     require => Package[$nagios::params::nrpe_packages],
   }
 

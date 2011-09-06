@@ -23,7 +23,7 @@ class puppetlabs::baal {
   #
   #include puppetlabs_ssl
   #include account::master
-  #include vim
+  include vim
 
   ###
   # Bacula

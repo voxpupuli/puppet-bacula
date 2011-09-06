@@ -1,0 +1,10 @@
+# gearman.conf
+# This file is the config used by nagios for the mod-gearman module
+# This is the server portion
+# the local worker configurtion is kept /etc/mod-gearman/worker.conf
+server=localhost
+key=<%= key %>
+hosts=yes
+services=yes
+eventhandler=yes
+hostgroups=office

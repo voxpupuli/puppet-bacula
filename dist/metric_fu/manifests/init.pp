@@ -36,7 +36,7 @@ class metric_fu {
   package { ["rake"]:
     ensure => present,
   }
-  package { ["metric_fu","rspec"]:
+  package { ["metric_fu","rspec","mocha"]:
     ensure => present,
     provider => gem,
     require => [Package["main"],Package["ruby_parser"]],

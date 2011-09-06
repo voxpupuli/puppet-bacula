@@ -48,7 +48,7 @@ define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
     subscribe => Vcsrepo[$repo_base],
     refreshonly => true,
     timeout => $timeout,
-    require => [Package["main"],Package["metric_fu","rspec"]]
+    require => [Package["main"],Package["metric_fu","rspec","mocha"]]
   }
 
   file { "$metric_fu::web_root/$repo_name":

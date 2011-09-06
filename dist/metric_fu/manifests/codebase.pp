@@ -18,7 +18,7 @@
 define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
   include metric_fu
   
-  $timeout = 1200
+  $timeout = 2400
   
   $repo_base = "$metric_fu::parent_dir/$repo_name"
   
@@ -29,7 +29,7 @@ define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
     provider => git,
     revision => $repo_rev,
     source => $repo_url,
-    require => [File[$metric_fu::parent_dir],Package["git-core"]],
+    require => [File[$metric_fu::parent_dir],Package["git-core"],Package["rake"]],
   }
 
 # No need for this: the subscribe will ensure that the metrics are run when (and only when) the codebase changes.
@@ -48,7 +48,7 @@ define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
     subscribe => Vcsrepo[$repo_base],
     refreshonly => true,
     timeout => $timeout,
-    require => [Package["metric_fu", "rspec", "mocha", "rake"]]
+    require => [Package["main"],Package["metric_fu","rspec"]]
   }
 
   file { "$metric_fu::web_root/$repo_name":

@@ -33,8 +33,20 @@ class metric_fu {
   package { ["git-core"]:
     ensure => present,
   }
-  package { ["metric_fu", "rspec", "mocha", "rake"]:
+  package { ["rake"]:
     ensure => present,
+  }
+  package { ["metric_fu","rspec"]:
+    ensure => present,
+    provider => gem,
+    require => [Package["main"],Package["ruby_parser"]],
+  }
+  package { ["main"]:
+    ensure => "4.7.1", # chronic dependency breaks starting in 4.7.2
+    provider => gem,
+  }
+  package { ["ruby_parser"]:
+    ensure => "2.0.4",
     provider => gem,
   }
 

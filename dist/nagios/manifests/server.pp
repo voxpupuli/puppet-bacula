@@ -35,6 +35,11 @@ class nagios::server (
     ensure => absent,
   }
 
+  file { "/usr/share/nagios3/htdocs/stylesheets":
+    ensure => link,
+    target => "/etc/nagios3/stylesheets",
+  }
+
   package { $nagios::params::nagios_packages:
     notify  => Service[$nagios::params::nagios_service],
   }
@@ -52,11 +57,11 @@ class nagios::server (
 #      dest => "https://${site_alias}",
 #  }
 
-  apache::vhost { "${site_alias}_ssl":
+  apache::vhost { "${site_alias}":
     port          => '80',
     serveraliases => "$site_alias",
     priority      => '30',
-    ssl          => false,
+    ssl           => false,
     docroot       => '/usr/share/nagios3/htdocs',
     template      => 'nagios/nagios-apache.conf.erb',
     require       => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 

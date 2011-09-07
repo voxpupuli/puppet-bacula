@@ -8,11 +8,11 @@
         <%= "ServerAlias #{serveraliases}" %>
         <% end %>
 
-        #<% if ssl == true %>
+        <% if ssl == true -%>
         SSLEngine on
         SSLCertificateFile /etc/ssl/certs/pl.cert
         SSLCertificateKeyFile /etc/ssl/private/pl.key
-        #<% end %>
+        <% end -%>
 
         ScriptAlias /cgi-bin/nagios3 /usr/lib/cgi-bin/nagios3
 
@@ -20,7 +20,7 @@
         Alias /nagios3 /usr/share/nagios3/htdocs
 
         <Directory <%= docroot %>>
-                Options None
+                Options FollowSymLinks
                 AllowOverride AuthConfig
                 Order allow,deny
                 allow from all

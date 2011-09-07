@@ -2,6 +2,8 @@ class puppetlabs::os::linux {
 
   include packages::admin
   include linuxlogo
+  include virtual::packages
+  include packages
 
   file {
     "/etc/timezone":  owner => root, group => root, mode => 644, content => "America/Vancouver";

@@ -26,15 +26,6 @@ class puppetlabs {
       agent  => false
   }
 
-  # Nagios -- not sure why this is here, instead of only for the server
-  include virtual::nagioscontacts
-
-  # Packages
-  if $kernel == "Linux" {
-    include virtual::packages
-    include packages
-  }
-
   # SSH
   include ssh::server
   ssh::allowgroup  { "sysadmin": }

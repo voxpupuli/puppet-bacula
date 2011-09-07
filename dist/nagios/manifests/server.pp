@@ -24,6 +24,7 @@ class nagios::server (
   include nagios::contacts
   include nagios::params
   include nagios::hostgroups
+  include virtual::nagioscontacts
 
   file { [ '/etc/nagios/conf.d/nagios_host.cfg', '/etc/nagios/conf.d/nagios_service.cfg'  ]:
     mode   => 0644,

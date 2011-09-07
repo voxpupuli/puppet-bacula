@@ -1,13 +1,14 @@
 class puppetlabs::os::linux::debian inherits puppetlabs::os::linux {
 
-  class { "useradd::settings":
-    last_uid => '1099',
-    last_gid => '1099',
-  }
+  # This doesn't help at all, since the provider is actually adduser, not useradd
+  #class { "useradd::settings":
+  #  last_uid => '1099',
+  #  last_gid => '1099',
+  #}
 
   package {
-    "lsb-release": ensure => installed; 
-    "keychain":    ensure => installed; 
+    "lsb-release": ensure => installed;
+    "keychain":    ensure => installed;
   }
 
   exec {
@@ -17,15 +18,15 @@ class puppetlabs::os::linux::debian inherits puppetlabs::os::linux {
       unless  => "/usr/bin/apt-key list | grep -q 4BD6EC30",
       before  => Exec["apt-get update"];
     "apt-get update":
-      user => root,
-      command => "/usr/bin/apt-get -qq update",
+      user        => root,
+      command     => "/usr/bin/apt-get -qq update",
       refreshonly => true;
   }
 
   file {
-    "/etc/apt/sources.list.d/ops.list": 
+    "/etc/apt/sources.list.d/ops.list":
       content => "deb http://apt.puppetlabs.com/ops sid main\n",
-      notify => Exec["apt-get update"];
+      notify  => Exec["apt-get update"],
   }
 
   cron { "apt-get update":

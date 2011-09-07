@@ -18,3 +18,4 @@ class puppetlabs::os::linux {
   }
 
 }
+

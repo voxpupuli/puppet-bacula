@@ -1,6 +1,7 @@
 class puppetlabs::os::linux::debian inherits puppetlabs::os::linux {
 
   # This doesn't help at all, since the provider is actually adduser, not useradd
+  # should be removed, class and module included
   #class { "useradd::settings":
   #  last_uid => '1099',
   #  last_gid => '1099',

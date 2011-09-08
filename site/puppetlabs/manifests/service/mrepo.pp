@@ -70,7 +70,7 @@ class puppetlabs::service::mrepo {
   # CentOS mirrors
   ##############################################################################
 
-  $centos_mirror = "http://mirrors.cat.pdx.edu/centos/"
+  $centos_mirror = "http://mirrors.cat.pdx.edu"
 
   mrepo::repo { "cent5server-x86_64":
     ensure    => present,
@@ -79,7 +79,7 @@ class puppetlabs::service::mrepo {
     release   => "5",
     iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
     urls      => {
-      updates => "$centos_mirror/\$release/updates/\$arch/",
+      updates => "$centos_mirror/centos/\$release/updates/\$arch/",
     },
   }
 
@@ -90,7 +90,7 @@ class puppetlabs::service::mrepo {
     release   => "5",
     iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
     urls      => {
-      updates => "$centos_mirror/\$release/updates/\$arch/",
+      updates => "$centos_mirror/centos/\$release/updates/\$arch/",
     },
   }
 
@@ -101,7 +101,7 @@ class puppetlabs::service::mrepo {
     release   => "4",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
-      updates => 'rsync://centos.mirror.nexicom.net/CentOS/$release/$repo/$arch',
+      updates => "$centos_mirror/centos/\$release/updates/\$arch/",
     },
   }
 
@@ -112,7 +112,7 @@ class puppetlabs::service::mrepo {
     release   => "4",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
-      updates => 'rsync://centos.mirror.nexicom.net/CentOS/$release/$repo/$arch',
+      updates => "$centos_mirror/centos/\$release/updates/\$arch/",
     },
   }
 
@@ -139,7 +139,9 @@ class puppetlabs::service::mrepo {
   }
 
   ##############################################################################
-  # static repos follow
+  # CentOS static mirrors
+  # These mirrors will need to be manually synced once after their generation
+  # since they only need to fetch upstream once.
   ##############################################################################
 
   $vault_mirror = "http://vault.centos.org"

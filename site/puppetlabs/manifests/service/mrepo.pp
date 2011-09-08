@@ -1,5 +1,7 @@
 class puppetlabs::service::mrepo {
 
+  $centos_mirror = "http://mirrors.cat.pdx.edu/centos/"
+
   class { 'mrepo::params':
     rhn           => true,
     user          => "root",
@@ -69,7 +71,7 @@ class puppetlabs::service::mrepo {
     release   => "5",
     iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
     urls      => {
-      updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+      updates => "rsync://$centos_server/\$release/updates/\$arch/",
     },
   }
 
@@ -80,7 +82,7 @@ class puppetlabs::service::mrepo {
     release   => "5",
     iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
     urls      => {
-      updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+      updates => "rsync://$centos_server/\$release/updates/\$arch/",
     },
   }
 
@@ -113,7 +115,7 @@ class puppetlabs::service::mrepo {
     release   => "6",
     iso       => 'CentOS-6.0-$arch-bin-DVD.iso',
     urls      => {
-      updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+      updates => "rsync://$centos_server/\$release/updates/\$arch/",
     },
   }
 
@@ -124,7 +126,7 @@ class puppetlabs::service::mrepo {
     release   => "6",
     iso       => 'CentOS-6.0-$arch-bin-DVD?.iso',
     urls      => {
-      updates => 'rsync://mirrors.kernel.org/centos/$release/updates/$arch/',
+      updates => "rsync://$centos_server/\$release/updates/\$arch/",
     },
   }
 

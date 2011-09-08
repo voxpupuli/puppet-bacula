@@ -1,5 +1,5 @@
 class php::curl {
-
-  package {'php5-curl': ensure => present, notify => Service[httpd] }
+  include php::params
+  package {"$php::params::curl_package": ensure => present, notify => Service[httpd] }
 
 }

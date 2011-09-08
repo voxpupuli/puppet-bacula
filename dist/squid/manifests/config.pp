@@ -1,7 +1,7 @@
 define squid::config(
-  source  = '',
-  content = '',
-  order   = 1000
+  $source  = '',
+  $content = '',
+  $order   = 1000
 ) {
 
   concat::fragment { "squid_config_${name}":

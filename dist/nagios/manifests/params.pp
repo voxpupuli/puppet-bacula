@@ -31,6 +31,7 @@ class nagios::params {
       $nrpe_group         = 'nagios'
       $nagios_packages    = 'nagios3'
       $nagios_service     = 'nagios3'
+      $nagios_plugins_path = "/usr/lib/nagios/plugins"
     }
     "centos","fedora": {
       $nagios_packages        = [ 'nagios', 'nagios-devel' ]
@@ -42,6 +43,14 @@ class nagios::params {
       $nrpe_service           = 'nrpe'
       $nagios_plugin_packages = [ 'nagios-plugins-nrpe', 'nagios-plugins', 'nagios-plugins-all' ]
       $nagios_service         = 'nagios3'
+      case $architecture {
+        "x86_64": {
+          $nagios_plugins_path = "/usr/lib64/nagios/plugins"
+        }
+        "i386": {
+          $nagios_plugins_path = "/usr/lib/nagios/plugins"
+        }
+      }
     }
   }
 

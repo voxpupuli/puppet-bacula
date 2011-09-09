@@ -8,7 +8,7 @@ class squid::monitor (
     ensure              => $ensure,
     use                 => 'generic-service',
     host_name           => $fqdn,
-    check_command       => 'check_nrpe!check_proc!1:3 squid',
+    check_command       => 'check_nrpe!check_proc!1:3!squid',
     service_description => "check_squid_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify              => Service[$::nagios::params::nagios_service],

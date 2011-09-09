@@ -44,6 +44,7 @@ class nagios::gearman (
     notify  => Service["mod-gearman-worker"],
   }
 
+  # Server only stuff, only need one per site
   if $server == true {
     service { "gearman-job-server":
       ensure    => running,

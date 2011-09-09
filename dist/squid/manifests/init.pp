@@ -8,9 +8,15 @@
 # 500 - 600 caching settings
 # 1000+     default for user defined settings
 
-class squid {
+class squid (
+    $monitor = true
+  ){
   include concat::setup
   include squid::params
+
+  if $monitor == true {
+    include squid::monitor
+  }
 
   package { "squid":
     ensure => present,

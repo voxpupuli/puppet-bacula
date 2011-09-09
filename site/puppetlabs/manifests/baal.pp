@@ -12,6 +12,8 @@
 #
 class puppetlabs::baal {
 
+  ssh::allowgroup { "techops": }
+
   ###
   # Mysql
   #

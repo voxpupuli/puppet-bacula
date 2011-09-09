@@ -42,7 +42,7 @@ class nagios::commands {
   }
 
   nagios_command { 'check_gearman':
-    command_line => "/usr/lib/nagios/plugins/check_gearman.pl -H '\$ARG1\$' -q worker_'\$ARG2\$' -t 10 -s check ",
+    command_line => "/usr/lib/nagios/plugins/check_gearman -H '\$ARG1\$' -q worker_'\$ARG2\$' -t 10 -s check ",
     command_name => 'check_gearman',
     ensure       => present,
     target       => '/etc/nagios/conf.d/nagios_commands.cfg',

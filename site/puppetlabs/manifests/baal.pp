@@ -80,6 +80,24 @@ class puppetlabs::baal {
   nagios::website { 'munin.puppetlabs.com':     auth => 'monit:5kUg8uha', }
   nagios::website { 'docs.puppetlabs.com': } # monitored here to avoid resource collision
 
+  @@nagios_service { "check_gearman_baal":
+    use                 => 'generic-service',
+    check_command       => 'check_gearman!localhost!worker_baal',
+    host_name           => "$fqdn",
+    service_description => "check_gearman_baal",
+    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify              => Service[$nagios::params::nagios_service],
+  }
+
+  @@nagios_service { "check_gearman_wyrd":
+    use                 => 'generic-service',
+    check_command       => 'check_gearman!localhost!worker_wyrd',
+    host_name           => "$fqdn",
+    service_description => "check_gearman_wyrd",
+    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify              => Service[$nagios::params::nagios_service],
+  }
+
   # Munin
   #if $environment == 'production' {
     class { "munin::server": site_alias => "munin.puppetlabs.com"; }

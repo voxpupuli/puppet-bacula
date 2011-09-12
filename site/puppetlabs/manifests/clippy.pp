@@ -24,5 +24,10 @@ class puppetlabs::clippy {
       ensure => present;
     "puppetlabs/puppet":
       ensure => present;
+    "puppetlabs/puppet-acceptance":
+      ensure => present;
+    "puppetlabs/pe_acceptance_tests":
+      ensure  => present,
+      private => true,
   }
 }

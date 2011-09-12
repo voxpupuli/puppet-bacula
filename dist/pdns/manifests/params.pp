@@ -12,8 +12,16 @@
 #
 class pdns::params {
 
-  $pdns0_server = 'baal.puppetlabs.com'
+  $pdns0_server = 'web01.puppetlabs.com'
   $pdns1_server = 'dxul.puppetlabs.com'
+
+  # A note to people who has the misfortune to come across this file
+  # themselves. You cannot merely add nor substract to this seeming
+  # list, for it nothing more than arbitary place holders as used by a
+  # template. You need to look in ../templates/docs.prb.erb to see
+  # what each of these does, which has the logic in, thus making these
+  # IPs pretty much futile in storing away from the rest of the
+  # information in the template. - benh
   $mirror0 = '96.126.112.51'
   $mirror1 = '82.113.151.205'
   $mirror2 = '74.207.228.223'

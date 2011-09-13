@@ -55,7 +55,7 @@ class puppetlabs::pluto {
   file {
     "/opt/enterprise":
       owner   => root,
-      group   => developers,
+      group   => enterprise,
       mode    => 0664,
       recurse => true;
     "/opt/puppet":

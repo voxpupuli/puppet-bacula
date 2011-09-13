@@ -1,5 +1,6 @@
 class vim::debian {
-  package{'vim':
+
+  package{ ['vim', 'vim-nox']:
     ensure => installed,
   }
 

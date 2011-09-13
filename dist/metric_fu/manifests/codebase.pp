@@ -18,7 +18,7 @@
 define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
   include metric_fu
   
-  $timeout = 2400
+  $timeout = 0
   
   $repo_base = "$metric_fu::parent_dir/$repo_name"
   

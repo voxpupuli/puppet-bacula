@@ -8,6 +8,9 @@ class puppetlabs::service::mrepo {
     rhn_password  => 'yXgBdtwfEs',
   }
 
+  $centos_mirror = "http://mirrors.cat.pdx.edu"
+  $vault_mirror = "http://vault.centos.org"
+
   ##############################################################################
   # RHEL mirrors
   ##############################################################################
@@ -67,10 +70,9 @@ class puppetlabs::service::mrepo {
   }
 
   ##############################################################################
-  # CentOS mirrors
+  # Broken CentOS mirrors
   ##############################################################################
 
-  $centos_mirror = "http://mirrors.cat.pdx.edu"
 
   mrepo::repo { "cent5server-x86_64":
     ensure    => present,
@@ -139,12 +141,82 @@ class puppetlabs::service::mrepo {
   }
 
   ##############################################################################
+  # Latest CentOS mirrors
+  ##############################################################################
+
+  mrepo::repo { "cent5latestserver-x86_64":
+    ensure    => present,
+    repotitle => 'CentOS Linux $release ($arch) LATEST',
+    arch      => "x86_64",
+    release   => "5",
+    urls      => {
+      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+    },
+  }
+
+  mrepo::repo { "cent5latestserver-i386":
+    ensure    => present,
+    repotitle => 'CentOS Linux $release ($arch) LATEST',
+    arch      => "i386",
+    release   => "5",
+    urls      => {
+      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+    },
+  }
+
+  mrepo::repo { "cent4latestserver-x86_64":
+    ensure    => present,
+    repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
+    arch      => "x86_64",
+    release   => "4",
+    urls      => {
+      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+    },
+  }
+
+  mrepo::repo { "cent4latestserver-i386":
+    ensure    => present,
+    repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
+    arch      => "i386",
+    release   => "4",
+    urls      => {
+      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+    },
+  }
+
+  mrepo::repo { "cent6latestserver-i386":
+    ensure    => present,
+    repotitle => 'CentOS Linux $release ($arch) LATEST',
+    arch      => "i386",
+    release   => "6",
+    iso       => 'CentOS-6.0-$arch-bin-DVD.iso',
+    urls      => {
+      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+    },
+  }
+
+  mrepo::repo { "cent6latestserver-x86_64":
+    ensure    => present,
+    repotitle => 'CentOS Linux $release ($arch) LATEST',
+    arch      => "x86_64",
+    release   => "6",
+    iso       => 'CentOS-6.0-$arch-bin-DVD?.iso',
+    urls      => {
+      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+    },
+  }
+
+  ##############################################################################
   # CentOS static mirrors
   # These mirrors will need to be manually synced once after their generation
   # since they only need to fetch upstream once.
   ##############################################################################
-
-  $vault_mirror = "http://vault.centos.org"
 
   mrepo::repo { "cent50server-x86_64":
     ensure    => present,

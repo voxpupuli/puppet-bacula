@@ -7,4 +7,4 @@ ntpserver:  - 0.us.pool.ntp.org
 puppet_server: ningyo.puppetlabs.com
 location: cloaked
 gearman_key: "FpIHcrKjZrZy2DYzhEMog9OLwAD4KuV"
-role: agent
+role_: agent

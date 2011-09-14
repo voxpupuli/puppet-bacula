@@ -73,10 +73,15 @@ class puppetlabs::baal {
   #
   include puppetlabs::baal::gearman
 
-  class { "nagios::server": site_alias => "nagios.puppetlabs.com"; }
+  class { 'nagios::server':
+    site_alias        => "nagios.puppetlabs.com",
+    external_commands => true,
+    brokers           => [ '/usr/lib/mod_gearman/mod_gearman.o config=/etc/nagios3/gearman.conf'],
+  }
   include nagios::webservices
   include nagios::dbservices
   include nagios::pagerduty
+
   nagios::website { 'nagios.puppetlabs.com':    auth => 'monit:5kUg8uha', }
   nagios::website { 'dashboard.puppetlabs.com': auth => 'monit:5kUg8uha', }
   nagios::website { 'munin.puppetlabs.com':     auth => 'monit:5kUg8uha', }

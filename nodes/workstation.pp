@@ -1,0 +1,2 @@
+node workstation inherits basenode {
+}

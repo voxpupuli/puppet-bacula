@@ -23,7 +23,7 @@
 # Copyright 2011 Puppet Labs Inc, unless otherwise noted.
 class apt::backports( $release=undef ) {
 
-  if release == undef {
+  if $release == undef {
     $releasename = $lsbdistcodename
   } else {
     $releasename = $release

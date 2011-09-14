@@ -21,7 +21,7 @@ class puppetlabs::base {
   $location     = hiera("location")
   $role         = hiera("role_${sp_platform_uuid}", "unknown", "roles")
 
-  notice ($role)
+  notify { $role: }
 
   #
   ## Operatingsystem Specific Configurations

@@ -19,7 +19,13 @@ class puppetlabs::base {
   $munin_server = hiera("munin_server")
   $ntpserver    = hiera("ntpserver")
   $location     = hiera("location")
-  $role         = hiera("role_${sp_platform_uuid}", "unknown", "roles")
+
+
+  if $sp_platform_uuid {
+    $role = hiera("role_${sp_platform_uuid}", "unknown", "roles")
+  } else {
+    $role = hiera("role_${hostname}", "unknown", "roles")
+  }
 
   notify { $role: }
 
@@ -32,6 +38,13 @@ class puppetlabs::base {
     centos:  { include puppetlabs::os::linux::centos }
     darwin:  { include puppetlabs::os::darwin        }
     freebsd: { include puppetlabs::os::freebsd       }
+    default: { }
+  }
+
+  case $role {
+    workstation: { }
+    server: { }
+    unknown: { }
     default: { }
   }
 

@@ -76,6 +76,7 @@ class puppetlabs::baal {
   class { 'nagios::server':
     site_alias        => "nagios.puppetlabs.com",
     external_commands => true,
+    external_users    => '*',
     brokers           => [ '/usr/lib/mod_gearman/mod_gearman.o config=/etc/nagios3/gearman.conf'],
   }
   include nagios::webservices

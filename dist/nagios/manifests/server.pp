@@ -16,7 +16,8 @@
 #
 class nagios::server (
     $site_alias = $fqdn,
-    $external_commands = false
+    $external_commands = false,
+    $brokers = undef
   ) {
 
   include apache
@@ -35,10 +36,23 @@ class nagios::server (
     $nagiosexternal = 0
   }
 
-  file { '/etc/nagios/conf.d/nagios_extcommand.cfg':
+  # do we have brokers defined? If we do, are they an array? Lets hope
+  # so, as that's what the template is after.
+  if $brokers != undef {
+    # If we're here, we need to set broker options and the right broker
+    # lines.
+
+    $nagios_event_broker_options = '-1'
+    $nagiosbrokers = $brokers
+  } else {
+    $nagios_event_broker_options = '0'
+  }
+
+
+  file { '/etc/nagios/nagios.cfg':
     mode    => 0644,
     ensure  => present,
-    content => template( 'nagios/nagios_extcommand.cfg.erb' ),
+    content => template( 'nagios/nagios.cfg.erb' ),
     before  => Service[$nagios::params::nagios_service],
   }
 

@@ -1,5 +1,6 @@
 class puppetlabs::vor {
 
+  include apt::backports
   # This is dirty and a lot of the above should be moved to this
   # class.
   include postgres::install::debian

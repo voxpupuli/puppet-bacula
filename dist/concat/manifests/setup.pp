@@ -14,14 +14,14 @@ class concat::setup {
         default => "/bin/sort",
     }
 
-    file{"/usr/local/bin/concatfragments.sh": 
+    file{"/usr/local/bin/concatfragments.sh":
             owner  => root,
             group  => 0,
             mode   => 755,
             #source => "puppet:///modules/concat/concatfragments.sh";
             content => template("concat/concatfragments.sh");
 
-         $concatdir: 
+         $concatdir:
             ensure => directory,
             owner  => root,
             group  => 0,

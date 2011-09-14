@@ -33,11 +33,11 @@ class puppetlabs::base {
     default: { }
   }
 
-  include puppetlabs
+  #include puppetlabs
   #include munin::puppet # this should be in puppet::monitor
-  class { "nagios": nrpe_server  => $nrpe_server;  }
-  class { 'munin':  munin_server => $munin_server; }
-  class { "ntp":    server       => $ntp_server;   }
+  #class { "nagios": nrpe_server  => hiera("nrpe_server");  }
+  # class { 'munin':  munin_server => hiera("munin_server"); }
+  class { "ntp":    server       => hiera("ntpserver");    }
 
   case $domain {
     "puppetlabs.lan": {
@@ -55,7 +55,7 @@ class puppetlabs::base {
     default: { }
   }
 
-  include "puppetlabs::$hostname"
+  #include "puppetlabs::$hostname"
 
 }
 

@@ -25,8 +25,7 @@ class puppetlabs::pluto {
   Account::User <| tag == deploy |>
   ssh::allowgroup { "www-data": }
 
-  #enterprise 
-  package { "lsyncd": ensure => absent; }
+  # Enterprise
   package { "daemontools": ensure => installed; }
   cron { "sync /opt/enterprise to tbdriver":
     minute  => '*/10',

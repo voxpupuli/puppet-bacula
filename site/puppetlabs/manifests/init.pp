@@ -16,15 +16,15 @@ class puppetlabs {
   #
 
   # variables
-  $puppet_server = hiera("puppet_server")
+  #$puppet_server = hiera("puppet_server")
 
   ###
   # Puppet
-  class {
-    "puppet":
-      server => "$puppet_server",
-      agent  => false
-  }
+  #  class {
+  #    "puppet":
+  #      server => hiera("puppet_server"),
+  #      agent  => false
+  #  }
 
   # SSH
   include ssh::server

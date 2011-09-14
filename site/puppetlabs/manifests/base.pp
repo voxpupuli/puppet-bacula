@@ -34,6 +34,12 @@ class puppetlabs::base {
   }
 
   #include puppetlabs
+  class {
+    "puppet":
+      server => hiera("puppet_server"),
+      agent  => false
+  }
+
   #include munin::puppet # this should be in puppet::monitor
   #class { "nagios": nrpe_server  => hiera("nrpe_server");  }
   # class { 'munin':  munin_server => hiera("munin_server"); }

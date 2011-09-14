@@ -76,5 +76,7 @@ class puppetlabs::pluto {
       recurse => true;
   }
 
+  include apt::backports
+
 }
 

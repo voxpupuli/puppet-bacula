@@ -53,7 +53,7 @@ class apt::backports( $release=undef ) {
 
   file { '/etc/apt/sources.list.d/backports.list':
     ensure   => file,
-    content  => "deb ${repourl} ${releasename}-backports ${repocomponent}",
+    content  => "#Added by Puppet\ndeb ${repourl} ${releasename}-backports ${repocomponent}\n",
     owner    => 'root',
     group    => 'root',
     mode     => '0644',

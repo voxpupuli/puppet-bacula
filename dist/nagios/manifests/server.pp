@@ -15,7 +15,8 @@
 # Sample Usage:
 #
 class nagios::server (
-    $site_alias = $fqdn
+    $site_alias = $fqdn,
+    $external_commands = false
   ) {
 
   include apache
@@ -25,6 +26,22 @@ class nagios::server (
   include nagios::params
   include nagios::hostgroups
   include virtual::nagioscontacts
+
+  # Do we want external commands?
+  # http://nagios.sourceforge.net/docs/3_0/extcommands.html
+  if $external_commands == true {
+    $nagiosexternal = 1
+  } else {
+    $nagiosexternal = 0
+  }
+
+  file { '/etc/nagios/conf.d/nagios_extcommand.cfg':
+    mode    => 0644,
+    ensure  => present,
+    content => template( 'nagios/nagios_extcommand.cfg.erb' ),
+    before  => Service[$nagios::params::nagios_service],
+  }
+
 
   file { [ '/etc/nagios/conf.d/nagios_host.cfg', '/etc/nagios/conf.d/nagios_service.cfg'  ]:
     mode   => 0644,

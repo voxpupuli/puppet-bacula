@@ -19,7 +19,7 @@ class puppetlabs::base {
   $munin_server = hiera("munin_server")
   $ntpserver    = hiera("ntpserver")
   $location     = hiera("location")
-  $role         = hiera("role")
+  $role         = hiera("role_${sp_platform_uuid}", "unknown", "roles")
 
   #
   ## Operatingsystem Specific Configurations
@@ -28,8 +28,8 @@ class puppetlabs::base {
     debian:  { include puppetlabs::os::linux::debian }
     ubuntu:  { include puppetlabs::os::linux::ubuntu }
     centos:  { include puppetlabs::os::linux::centos }
-    darwin:  { include puppetlabs::os::darwin  }
-    freebsd: { include puppetlabs::os::freebsd }
+    darwin:  { include puppetlabs::os::darwin        }
+    freebsd: { include puppetlabs::os::freebsd       }
     default: { }
   }
 
@@ -42,7 +42,7 @@ class puppetlabs::base {
 
   #include munin::puppet # this should be in puppet::monitor
   #class { "nagios": nrpe_server  => hiera("nrpe_server");  }
-  # class { 'munin':  munin_server => hiera("munin_server"); }
+  #class { 'munin':  munin_server => hiera("munin_server"); }
   class { "ntp":    server       => hiera("ntpserver");    }
 
   case $domain {

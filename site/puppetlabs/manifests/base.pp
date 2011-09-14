@@ -44,6 +44,9 @@ class puppetlabs::base {
   case $role {
     workstation: { }
     server: {
+      class { "nagios": nrpe_server  => hiera("nrpe_server");  }
+      class { 'munin':  munin_server => hiera("munin_server"); }
+
       # SSH
       include ssh::server
       ssh::allowgroup  { "sysadmin": }
@@ -60,6 +63,8 @@ class puppetlabs::base {
 
       # Firewall
       if defined(Class["firewall"]) { Firewall <||> }
+
+      include "puppetlabs::$hostname"
     }
     unknown: { }
     default: { }
@@ -73,8 +78,6 @@ class puppetlabs::base {
   }
 
   #include munin::puppet # this should be in puppet::monitor
-  #class { "nagios": nrpe_server  => hiera("nrpe_server");  }
-  #class { 'munin':  munin_server => hiera("munin_server"); }
   class { "ntp":    server       => hiera("ntpserver");    }
 
   case $domain {
@@ -93,7 +96,6 @@ class puppetlabs::base {
     default: { }
   }
 
-  #include "puppetlabs::$hostname"
 
 }
 

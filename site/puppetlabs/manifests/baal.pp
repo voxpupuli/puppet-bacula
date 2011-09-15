@@ -71,7 +71,18 @@ class puppetlabs::baal {
   ###
   # Monitoring
   #
-  include puppetlabs::baal::gearman
+
+  file {
+    "/etc/apt/sources.list.d/wheezy.list":
+      content => "deb http://ftp.us.debian.org/debian/ wheezy main",
+      notify  => Exec["apt-get update"]
+  }
+
+  class {
+    "nagios::gearman":
+      server => true,
+      key    => hiera("gearman_key")
+  }
 
   class { 'nagios::server':
     site_alias        => "nagios.puppetlabs.com",

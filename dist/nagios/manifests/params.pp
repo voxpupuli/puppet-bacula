@@ -33,6 +33,18 @@ class nagios::params {
       $nagios_service     = 'nagios3'
       $nagios_plugins_path = "/usr/lib/nagios/plugins"
     }
+    "sles": { # FIXME sles stub
+      $nagios_packages        = [ 'nagios', 'nagios-devel' ]
+      $nrpe_packages          = 'nagios-nrpe'
+      $nrpe_configuration     = '/etc/nagios/nrpe.cfg'
+      $nrpe_pid               = '/var/run/nrpe/nrpe.pid'
+      $nrpe_user              = 'nrpe'
+      $nrpe_group             = 'nrpe'
+      $nrpe_service           = 'nrpe'
+      $nagios_plugin_packages = 'nagios-plugins'
+      $nagios_service         = 'nagios3'
+      $nagios_plugins_path = "/usr/lib/nagios/plugins"
+    }
     "centos","fedora": {
       $nagios_packages        = [ 'nagios', 'nagios-devel' ]
       $nrpe_packages          = 'nrpe'
@@ -51,6 +63,9 @@ class nagios::params {
           $nagios_plugins_path = "/usr/lib/nagios/plugins"
         }
       }
+    }
+    default: {
+      fail("module nagios does not support operatingsystem $operatingsystem")
     }
   }
 

@@ -1,4 +1,6 @@
-node yo inherits server {
+node yo {
+
+  include role::server
 
   ssh::allowgroup  { "techops": }
   sudo::allowgroup { "techops": }

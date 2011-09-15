@@ -1,4 +1,6 @@
-node wyrd inherits server{
+node wyrd {
+
+  include role::server
 
   file {
     "/etc/apt/sources.list.d/wheezy.list":

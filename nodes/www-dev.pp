@@ -1,4 +1,6 @@
-node www-dev inherits server {
+node www-dev {
+
+  include role::server
 
   $mysql_root_pw = 'n0tInpr0duct1on'
   include mysql::server

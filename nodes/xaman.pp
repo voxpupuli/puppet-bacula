@@ -1,4 +1,6 @@
-node xaman inherits server {
+node xaman {
+
+  include role::server
 
   sudo::allowgroup  { "interns": }
   ssh::allowgroup   { "developers": }

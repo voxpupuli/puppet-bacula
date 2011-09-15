@@ -1,4 +1,0 @@
-class puppetlabs::wyrd::gearman {
-
-}
-

@@ -2,6 +2,7 @@ node server inherits basenode {
 
   class { "nagios": nrpe_server  => hiera("nrpe_server");  }
   class { 'munin':  munin_server => hiera("munin_server"); }
+  class { "ntp":    server       => hiera("ntpserver"); }
 
   # SSH
   include ssh::server

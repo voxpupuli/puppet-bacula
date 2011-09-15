@@ -15,8 +15,6 @@ class basenode {
       agent  => false
   }
 
-  class { "ntp": server => hiera("ntpserver"); }
-
   case $domain {
     "puppetlabs.lan": {
       case $operatingsystem {

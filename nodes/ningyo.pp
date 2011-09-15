@@ -1,4 +1,4 @@
-class puppetlabs::ningyo {
+node ningyo inherits server {
 
   ssh::allowgroup { "techops": }
 

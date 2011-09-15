@@ -1,4 +1,4 @@
-class base {
+class role::base {
 
   case $operatingsystem {
     debian:  { include puppetlabs::os::linux::debian }

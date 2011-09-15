@@ -11,8 +11,11 @@ class puppetlabs::ningyo {
   ###
   # Puppet
   #
-  sudo::entry{ "adrien":
-    entry => "adrien ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n",
+  sudo::entry{
+    "adrien":
+      entry => "adrien ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n";
+    'adrienpuppetcert':
+      entry => "adrien ALL=(ALL) NOPASSWD: /usr/bin/puppet cert -s [[\:alnum\:]]*.puppetlabs.lan\n";
   }
 
   $dashboard_site = 'dashboard.puppetlabs.com'

@@ -10,7 +10,9 @@
 # This flag needs to be off for ControlTier to work:
 #
 # Defaults    requiretty
+<% if visiblepw %>
 Defaults visiblepw
+<% end %>
 Defaults    env_reset
 Defaults    env_keep = "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR \
                         LS_COLORS MAIL PS1 PS2 QTDIR USERNAME HOME \

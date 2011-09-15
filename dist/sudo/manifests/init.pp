@@ -6,6 +6,7 @@ class sudo {
   $visudo_cmd   = $::sudo::params::visudo_cmd
   $sudoers_file = $::sudo::params::sudoers_file
   $sudoers_tmp  = $::sudo::params::sudoers_tmp
+  $visiblepw    = $::sudo::params::visiblepw
 
   if $operatingsystem != "Darwin" {
     package { "sudo": ensure => installed }

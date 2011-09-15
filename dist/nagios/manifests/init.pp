@@ -49,13 +49,6 @@ class nagios (
     require    => [ File[$nagios::params::nrpe_configuration], Package[$nagios::params::nrpe_packages] ],
   }
 
-  # As we're doing storeconfigs/external resources, we _really_ don't
-  # need localhost checking.
-  file{ '/etc/nagios3/conf.d/localhost_nagios2.cfg':
-    ensure => absent,
-    notify => Service[$nagios::params::nagios_service],
-  }
-
   @@nagios_host { $fqdn:
     ensure     => present,
     alias      => $hostname,

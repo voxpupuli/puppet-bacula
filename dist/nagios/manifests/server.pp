@@ -119,6 +119,13 @@ class nagios::server (
     hasstatus  => true,
   }
 
+  # As we're doing storeconfigs/external resources, we _really_ don't
+  # need localhost checking.
+  file{ '/etc/nagios3/conf.d/localhost_nagios2.cfg':
+    ensure => absent,
+    notify => Service[$nagios::params::nagios_service],
+  }
+
 #  apache::vhost::redirect {
 #    "$site_alias":
 #      port => 80,

@@ -16,32 +16,32 @@ class puppetlabs {
   #
 
   # variables
-  $puppet_server = hiera("puppet_server")
+  #$puppet_server = hiera("puppet_server")
 
   ###
   # Puppet
-  class {
-    "puppet":
-      server => "$puppet_server",
-      agent  => false
-  }
+  #  class {
+  #    "puppet":
+  #      server => hiera("puppet_server"),
+  #      agent  => false
+  #  }
 
-  # SSH
-  include ssh::server
-  ssh::allowgroup  { "sysadmin": }
-
-  # Sudo
-  include sudo
-  sudo::allowgroup { "sysadmin": }
-
-  # Accounts
-  # This should probably be more selective on certain hosts/distros/oses
-  include virtual::users
-  Account::User <| tag == 'allstaff' |>
-  Group         <| tag == 'allstaff' |>
-
-  # Firewall
-  if defined(Class["firewall"]) { Firewall <||> }
+  #  # SSH
+  #  include ssh::server
+  #  ssh::allowgroup  { "sysadmin": }
+  #
+  #  # Sudo
+  #  include sudo
+  #  sudo::allowgroup { "sysadmin": }
+  #
+  #  # Accounts
+  #  # This should probably be more selective on certain hosts/distros/oses
+  #  include virtual::users
+  #  Account::User <| tag == 'allstaff' |>
+  #  Group         <| tag == 'allstaff' |>
+  #
+  #  # Firewall
+  #  if defined(Class["firewall"]) { Firewall <||> }
 
 }
 

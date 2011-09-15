@@ -14,9 +14,9 @@ class ssh::server {
   include ssh
   include ssh::params
   include concat::setup
-  $ssh_service = $ssh::params::ssh_service
+  $ssh_service       = $ssh::params::ssh_service
   $sshclient_package = $ssh::params::sshclient_package
-  $sshd_config = $ssh::params::sshd_config
+  $sshd_config       = $ssh::params::sshd_config
 
   if $kernel == "Linux" {
     package { 'openssh-server':
@@ -47,11 +47,5 @@ class ssh::server {
     hasrestart => true,
   }
 
-#  @firewall {
-#    "0100-INPUT ACCEPT 22":
-#      jump  => 'ACCEPT',
-#      dport => "22",
-#      proto => 'tcp'
-#  }
-
 }
+

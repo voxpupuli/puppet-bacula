@@ -1,4 +1,4 @@
-class puppetlabs::www-dev {
+node www-dev inherits server {
 
   $mysql_root_pw = 'n0tInpr0duct1on'
   include mysql::server

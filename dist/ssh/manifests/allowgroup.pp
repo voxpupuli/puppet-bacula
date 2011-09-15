@@ -1,9 +1,9 @@
 define ssh::allowgroup ($chroot=false) {
 
-  #include virtual::users
-  #Account::User <| group == $name |>
-
+  include ssh::params
   include ssh::server
+
+  $sshd_config       = $ssh::params::sshd_config
 
   if $chroot == true {
   include ssh::chroot
@@ -12,13 +12,13 @@ define ssh::allowgroup ($chroot=false) {
       "/var/chroot/${name}/drop": ensure => directory, owner => root, group => $name, mode => 775;
     }
     concat::fragment { "sshd_config_chroot_group-${name}":
-      target => "/etc/ssh/sshd_config",
+      target => "$sshd_config",
       content => "Match group ${name}\n\t ChrootDirectory /var/chroot/${name}\n\t AllowTcpForwarding no\n\t ForceCommand internal-sftp\n";
     }
   }
 
   concat::fragment { "sshd_config_AllowGroups-${name}":
-    target => "/etc/ssh/sshd_config",
+    target => "$sshd_config",
     content => "AllowGroups ${name}\n",
   }
 

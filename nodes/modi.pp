@@ -1,4 +1,4 @@
-class puppetlabs::modi {
+class modi inherits server {
   ssh::allowgroup { "techops": }
   sudo::allowgroup { "techops": }
 

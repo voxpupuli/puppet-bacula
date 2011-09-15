@@ -1,4 +1,6 @@
-node server inherits basenode {
+node server {
+
+  include role::base
 
   class { "nagios": nrpe_server  => hiera("nrpe_server");  }
   class { 'munin':  munin_server => hiera("munin_server"); }

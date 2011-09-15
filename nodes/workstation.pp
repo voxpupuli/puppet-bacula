@@ -1,5 +1,2 @@
-node workstation inherits basenode {
-}
-
-node zbook inherits workstation { }
-node jay-z inherits workstation { }
+node zbook { include role::workstation }
+node jay-z { include role::workstation }

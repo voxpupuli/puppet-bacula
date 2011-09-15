@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class puppetlabs::baal {
+node baal inherits server {
 
   ssh::allowgroup { "techops": }
 

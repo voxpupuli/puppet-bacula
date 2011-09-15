@@ -1,4 +1,4 @@
-class puppetlabs::xaman {
+node xaman inherits server {
 
   sudo::allowgroup  { "interns": }
   ssh::allowgroup   { "developers": }

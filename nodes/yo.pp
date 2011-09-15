@@ -1,4 +1,4 @@
-class puppetlabs::yo {
+node yo inherits server {
 
   ssh::allowgroup  { "techops": }
   sudo::allowgroup { "techops": }

@@ -1,4 +1,4 @@
-class puppetlabs::wyrd {
+node wyrd inherits server{
 
   file {
     "/etc/apt/sources.list.d/wheezy.list":

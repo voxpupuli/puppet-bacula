@@ -7,6 +7,11 @@ class ssh::params {
       $ssh_config = '/etc/ssh/ssh_config'
       $sshd_config = '/etc/ssh/sshd_config'
     }
+    'sles': {
+      $sshclient_package='openssh'
+      $ssh_service='sshd'
+      $sshd_config = '/etc/ssh/sshd_config'
+    }
     'ubuntu', 'debian': {
       $sshclient_package='openssh-client'
       $ssh_service='ssh'

@@ -19,6 +19,7 @@ class ntp (
   include ntp::params
   $template      = $::ntp::params::template
   $ntpd_service  = $::ntp::params::ntpd_service
+  $ntpserver     = $server
 
   file { "/etc/ntp.conf":
     owner   => root,

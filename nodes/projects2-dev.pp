@@ -1,4 +1,4 @@
-node projects-dev2 {
+node projects2-dev {
   include role::server
 
   # SHA1 stolen from, pick a tag.

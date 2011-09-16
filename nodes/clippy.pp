@@ -1,4 +1,5 @@
-class puppetlabs::clippy {
+node clippy {
+  include role::server
 
   sudo::allowgroup  { "techops": }
   ssh::allowgroup   { "techops": }

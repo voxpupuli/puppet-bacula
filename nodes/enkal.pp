@@ -1,16 +1,6 @@
-# Class: puppetlabs::enkal
-#
-# This class installs and configures Baal
-#
-# Parameters:
-#
-# Actions:
-#
-# Requires:
-#
-# Sample Usage:
-#
-class puppetlabs::enkal {
+node enkal {
+  include role::server
+
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
 
   # Base

@@ -1,4 +1,5 @@
-class puppetlabs::app01 {
+node app01 {
+  include role::server
   include patchwork
 
   ssh::allowgroup { "developers": }

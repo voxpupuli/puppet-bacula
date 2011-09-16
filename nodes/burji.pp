@@ -1,5 +1,5 @@
-class puppetlabs::burji {
-
+node burji {
+  include role::server
   include puppetlabs_ssl
 
   # User Stuff

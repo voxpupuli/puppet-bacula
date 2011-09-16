@@ -5,10 +5,17 @@ class sudo::params {
       $sudoers_file = "/usr/local/etc/sudoers"
       $sudoers_tmp  = "/usr/local/etc/sudoers.tmp"
     }
+    'sles': {
+      $visudo_cmd   = "/usr/sbin/visudo"
+      $sudoers_file = "/etc/sudoers"
+      $sudoers_tmp  = "/etc/sudoers.tmp"
+      $visiblepw    = false # Because sles 11 sudo is dinosaurian
+    }
     default: {
       $visudo_cmd   = "/usr/sbin/visudo"
       $sudoers_file = "/etc/sudoers"
       $sudoers_tmp  = "/etc/sudoers.tmp"
+      $visiblepw    = true
     }
   }
 }

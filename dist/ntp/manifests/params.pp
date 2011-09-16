@@ -33,6 +33,14 @@ class ntp::params {
       $driftfile    = "/var/lib/ntp/ntp.drift"
       $template     = "ntp/debian_ntp.conf.erb"
     }
+    sles: {
+      $ntpd_service = "ntp"
+      $driftfile    = "/var/lib/ntp/drift/ntp.drift"
+      $template     = "ntp/sles_ntp.conf.erb"
+    }
+    default: {
+      fail("module ntp does not support operatingsystem $operatingsystem")
+    }
   }
 
 }

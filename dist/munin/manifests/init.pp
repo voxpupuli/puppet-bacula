@@ -21,18 +21,21 @@ class munin (
       ensure => present,
   }
 
-  file {
-    '/etc/munin/munin-node.conf':
-      content => template('munin/munin-node.conf.erb'),
-      ensure  => present,
-      notify  => Service['munin-node'],
+  file { '/etc/munin/munin-node.conf':
+    content => template('munin/munin-node.conf.erb'),
+    ensure  => present,
+    notify  => Service['munin-node'],
+    require => Package[$munin::params::munin_base_packages],
   }
 
   service { 'munin-node':
     ensure     => running,
     enable     => true,
     hasrestart => true,
-    require    => [ File['/etc/munin/munin-node.conf'], Package['munin-node'] ],
+    require    => [
+      File['/etc/munin/munin-node.conf'],
+      Package[$munin::params::munin_base_packages]
+    ],
   }
 
   @@file { "/etc/munin/munin-conf.d/$fqdn":
@@ -46,7 +49,6 @@ class munin (
       jump   => 'ACCEPT',
       dport  => "4949",
       proto  => 'tcp',
-      source => "$munin_server",
+      source => $munin_server,
   }
-
 }

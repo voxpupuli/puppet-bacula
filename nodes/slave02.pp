@@ -1,4 +1,5 @@
-class puppetlabs::slave02 {
+node slave02 {
+  include role::server
   include jenkins::slave
   include mock
 }

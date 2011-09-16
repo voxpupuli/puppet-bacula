@@ -1,4 +1,6 @@
-class puppetlabs::qa {
+node qa {
+  include role::server
+
   # Mysql
   $mysql_root_pw = 'c@11-53-m1st3r-pttya1'
   include mysql::server

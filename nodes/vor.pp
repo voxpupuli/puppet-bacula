@@ -1,5 +1,5 @@
-class puppetlabs::vor {
-
+node vor {
+  include role::serverv
   include apt::backports
   # This is dirty and a lot of the above should be moved to this
   # class.

@@ -1,4 +1,5 @@
-class puppetlabs::bacula01 {
+node bacula01 {
+  include role::server
 
   ####
   # MySQL

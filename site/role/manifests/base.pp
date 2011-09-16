@@ -1,4 +1,4 @@
-node basenode {
+class role::base {
 
   case $operatingsystem {
     debian:  { include puppetlabs::os::linux::debian }

@@ -1,4 +1,6 @@
-class modi inherits server {
+class modi {
+  include role::server
+
   ssh::allowgroup { "techops": }
   sudo::allowgroup { "techops": }
 

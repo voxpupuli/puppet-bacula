@@ -10,7 +10,8 @@
 #
 # Sample Usage:
 #
-node baal inherits server {
+node baal {
+  include role::server
 
   ssh::allowgroup { "techops": }
 

@@ -1,4 +1,5 @@
-node server inherits basenode {
+class role::server {
+  include role::base
 
   class { "nagios": nrpe_server  => hiera("nrpe_server");  }
   class { 'munin':  munin_server => hiera("munin_server"); }
@@ -20,5 +21,4 @@ node server inherits basenode {
 
   # Firewall
   if defined(Class["firewall"]) { Firewall <||> }
-
 }

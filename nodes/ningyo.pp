@@ -1,4 +1,6 @@
-node ningyo inherits server {
+node ningyo {
+
+  include role::server
 
   ssh::allowgroup { "techops": }
 

@@ -1,4 +1,4 @@
-class modi {
+node modi {
   include role::server
 
   ssh::allowgroup { "techops": }

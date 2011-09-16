@@ -92,6 +92,12 @@ class nagios::server (
     before  => Service[$nagios::params::nagios_service],
   }
 
+  file { '/etc/nagios3/commands.cfg':
+    mode   => 0644,
+    ensure => present,
+    source => 'puppet:///nagios/etcnagios3commands.cfg',
+    before => Service[$nagios::params::nagios_service],
+  }
 
   file { [ '/etc/nagios/conf.d/nagios_host.cfg', '/etc/nagios/conf.d/nagios_service.cfg'  ]:
     mode   => 0644,

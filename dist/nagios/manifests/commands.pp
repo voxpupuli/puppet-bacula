@@ -12,6 +12,8 @@
 #
 class nagios::commands {
 
+  include nagios::params
+
   file { '/etc/nagios/conf.d/nagios_commands.cfg':
     mode   => 0644,
     before => Service[$nagios::params::nagios_service],

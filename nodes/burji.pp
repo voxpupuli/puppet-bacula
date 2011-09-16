@@ -112,10 +112,18 @@ node burji {
   }
 
   file { "/opt/downloads":
-    owner   => deploy,
-    group   => release,
-    mode    => 664,
-    recurse => true,
+    owner    => deploy,
+    group    => release,
+    mode     => 664,
+    recurse  => true,
+    checksum => none,
+    ignore   => 'training',
+  }
+
+  file{ '/opt/downloads/training':
+    group    => 'prosvc',
+    mode     => 664,
+    recurse  => true,
     checksum => none,
   }
 

@@ -18,6 +18,8 @@
 #
 define nagios::website($auth=undef) {
 
+  include nagios::params
+
   if $auth {
     @@nagios_service { "$name":
       use => 'generic-service',

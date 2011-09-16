@@ -1,4 +1,6 @@
-class puppetlabs::rpm-builder {
+node rpm-builder {
+  include role::server
+
   ssh::allowgroup  { "release": }
   ssh::allowgroup  { "builder": }
 

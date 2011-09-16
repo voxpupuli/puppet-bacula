@@ -1,4 +1,5 @@
-class puppetlabs::tb-driver {
+node tb-driver {
+  include role::server
 
   include testbed::driver
 

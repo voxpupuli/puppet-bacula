@@ -1,4 +1,5 @@
-class puppetlabs::mon0 {
+node mon0 {
+  include role::server
 
   include ganglia::server
 

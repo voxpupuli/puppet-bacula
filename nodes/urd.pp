@@ -1,4 +1,5 @@
-class puppetlabs::urd {
+node urd {
+  include role::server
   include yum::mirror
   #include pxe
   include jumpstart

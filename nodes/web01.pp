@@ -1,4 +1,5 @@
-class puppetlabs::web01 {
+node web01 {
+  include role::server
 
   ##################################################################
   # NOTE: Apache runs on port 82, nginx runs on port 80.

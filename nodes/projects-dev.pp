@@ -1,4 +1,5 @@
-class puppetlabs::projects-dev {
+node projects-dev {
+  include role::server
 
   # SHA1 stolen from, pick a tag.
   # https://github.com/edavis10/redmine/commit/1faf02c9f5ce22ce676e7a3ae710dd0c52a21d45#

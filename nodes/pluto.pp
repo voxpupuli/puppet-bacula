@@ -1,4 +1,5 @@
-class puppetlabs::pluto {
+node pluto {
+  include role::server
 
   ssh::allowgroup { "developers": }
   ssh::allowgroup { "prosvc": }

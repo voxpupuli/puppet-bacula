@@ -99,7 +99,8 @@ class nagios::server (
     before => Service[$nagios::params::nagios_service],
   }
 
-  file { [ '/etc/nagios/apache2.conf', '/etc/apache2/conf.d/nagios3.conf' ]:
+  file { [ '/etc/nagios/apache2.conf', '/etc/apache2/conf.d/nagios3.conf' ,
+           '/etc/nagios3/conf.d/services_nagios2.cfg' , '/etc/nagios3/conf.d/extinfo_nagios2.cfg' ]:
     ensure => absent,
   }
 
@@ -150,6 +151,18 @@ class nagios::server (
   #  template => 'nagios/nagios-apache.conf.erb',
   #  require => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 
   #}
+
+
+  # Recreate some of debian's default config formats, namely
+  # services_nagios2.cfg and it's ssh group testing.
+  nagios_service{
+    'sshservicegroup':
+      hostgroup_name        => 'ssh-servers',
+      use                   => 'generic-service',
+      check_command         => 'check_ssh',
+      notification_interval => 0,
+      service_description   => 'SSH',
+  }
 
   Nagios_host <<||>>
   Nagios_service <<||>>

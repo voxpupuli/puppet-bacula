@@ -64,6 +64,18 @@ class nagios::params {
         }
       }
     }
+    "darwin": { 
+      $nrpe_packages      = 'nrpe'
+      $nrpe_service       = 'nrpe'
+      $nrpe_configuration = '/opt/local/etc/nagios/nrpe.cfg'
+      $nrpe_pid           = '/opt/local/var/run/nagios/nrpe.pid'
+      $nrpe_user          = 'nagios'
+      $nrpe_group         = 'nagios'
+      $nagios_packages    = 'nagios'
+      $nagios_service     = 'nagios3'
+      $nagios_plugins_path = "/usr/lib/nagios/plugins"
+      $nagios_plugin_packages = 'nagios-plugins'
+    }
     default: {
       fail("module nagios does not support operatingsystem $operatingsystem")
     }

@@ -5,7 +5,7 @@ class puppetlabs::os::darwin {
       command => "/opt/local/bin/port -q selfupdate",
       minute  => 0,
       hour    => 0,
-      day     => 1,
+      weekday => 1,
   }
 
 }

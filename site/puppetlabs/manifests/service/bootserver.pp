@@ -87,7 +87,7 @@ class puppetlabs::service::bootserver {
 
   $centos_kickstart_common = {
     options => {
-      url      => "http://yo.puppetlabs.lan/cent5latestserver-x86_64/",
+      url      => "http://yo.puppetlabs.lan/cent<%= ver %>latestserver-<%= arch %>",
       roothash => '$1$UlYyAJfh$CjQlsvxXWD/5UDnPJTMHm.',
     },
   }

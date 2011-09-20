@@ -1,12 +1,10 @@
 install 
 url --url <%= options["url"] %>
-url --url http://yo.puppetlabs.lan/cent5latestserver-x86_64/disc1/
 cdrom
 lang en_US.UTF-8
 keyboard us
 network --device eth0 --bootproto dhcp
 
-rootpw --iscrypted $1$UlYyAJfh$CjQlsvxXWD/5UDnPJTMHm.
 rootpw --iscrypted <%= options["roothash"] %>
 firewall --enabled --port=22:tcp
 authconfig --enableshadow --enablemd5

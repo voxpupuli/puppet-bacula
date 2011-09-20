@@ -13,7 +13,7 @@
 class munin::params {
 
   case $operatingsystem {
-    "darwin": { 
+    "darwin": {
       $munin_base_packages = 'munin'
       $plugin_source = '/opt/local/usr/share/munin/plugins'
       $plugin_dest = '/opt/local/etc/munin/plugins'
@@ -26,5 +26,5 @@ class munin::params {
       $plugin_source = '/usr/share/munin/plugins'
       $plugin_dest = '/etc/munin/plugins'
     }
-
+  }
 }

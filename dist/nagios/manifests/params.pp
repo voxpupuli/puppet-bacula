@@ -29,6 +29,7 @@ class nagios::params {
       $nrpe_pid           = '/var/run/nagios/nrpe.pid'
       $nrpe_user          = 'nagios'
       $nrpe_group         = 'nagios'
+      $nagios_confdir     = '/etc/nagios3'
       $nagios_packages    = 'nagios3'
       $nagios_service     = 'nagios3'
       $nagios_plugins_path = "/usr/lib/nagios/plugins"
@@ -41,9 +42,10 @@ class nagios::params {
       $nrpe_user              = 'nrpe'
       $nrpe_group             = 'nrpe'
       $nrpe_service           = 'nrpe'
+      $nagios_confdir         = '/etc/nagios3'
       $nagios_plugin_packages = 'nagios-plugins'
       $nagios_service         = 'nagios3'
-      $nagios_plugins_path = "/usr/lib/nagios/plugins"
+      $nagios_plugins_path    = "/usr/lib/nagios/plugins"
     }
     "centos","fedora": {
       $nagios_packages        = [ 'nagios', 'nagios-devel' ]
@@ -53,6 +55,7 @@ class nagios::params {
       $nrpe_user              = 'nrpe'
       $nrpe_group             = 'nrpe'
       $nrpe_service           = 'nrpe'
+      $nagios_confdir         = '/etc/nagios3'
       $nagios_plugin_packages = [ 'nagios-plugins-nrpe', 'nagios-plugins', 'nagios-plugins-all' ]
       $nagios_service         = 'nagios3'
       case $architecture {
@@ -65,15 +68,16 @@ class nagios::params {
       }
     }
     "darwin": { 
-      $nrpe_packages      = 'nrpe'
-      $nrpe_service       = 'org.macports.nrpe'
-      $nrpe_configuration = '/opt/local/etc/nrpe/nrpe.cfg'
-      $nrpe_pid           = '/var/run/nrpe.pid'
-      $nrpe_user          = 'nagios'
-      $nrpe_group         = 'nagios'
-      $nagios_packages    = 'nagios'
-      $nagios_service     = 'nagios3'
-      $nagios_plugins_path = "/usr/lib/nagios/plugins"
+      $nrpe_packages          = 'nrpe'
+      $nrpe_service           = 'org.macports.nrpe'
+      $nrpe_configuration     = '/opt/local/etc/nrpe/nrpe.cfg'
+      $nrpe_pid               = '/var/run/nrpe.pid'
+      $nrpe_user              = 'nagios'
+      $nrpe_group             = 'nagios'
+      $nagios_confdir         = '/etc/nagios3'
+      $nagios_packages        = 'nagios'
+      $nagios_service         = 'org.macports.nagios'
+      $nagios_plugins_path    = "/usr/lib/nagios/plugins"
       $nagios_plugin_packages = 'nagios-plugins'
     }
     default: {

@@ -29,7 +29,6 @@ class nagios::params {
       $nrpe_pid           = '/var/run/nagios/nrpe.pid'
       $nrpe_user          = 'nagios'
       $nrpe_group         = 'nagios'
-      $nagios_confdir     = '/etc/nagios3'
       $nagios_packages    = 'nagios3'
       $nagios_service     = 'nagios3'
       $nagios_plugins_path = "/usr/lib/nagios/plugins"
@@ -42,7 +41,6 @@ class nagios::params {
       $nrpe_user              = 'nrpe'
       $nrpe_group             = 'nrpe'
       $nrpe_service           = 'nrpe'
-      $nagios_confdir         = '/etc/nagios3'
       $nagios_plugin_packages = 'nagios-plugins'
       $nagios_service         = 'nagios3'
       $nagios_plugins_path    = "/usr/lib/nagios/plugins"
@@ -55,7 +53,6 @@ class nagios::params {
       $nrpe_user              = 'nrpe'
       $nrpe_group             = 'nrpe'
       $nrpe_service           = 'nrpe'
-      $nagios_confdir         = '/etc/nagios3'
       $nagios_plugin_packages = [ 'nagios-plugins-nrpe', 'nagios-plugins', 'nagios-plugins-all' ]
       $nagios_service         = 'nagios3'
       case $architecture {
@@ -74,9 +71,8 @@ class nagios::params {
       $nrpe_pid               = '/var/run/nrpe.pid'
       $nrpe_user              = 'nagios'
       $nrpe_group             = 'nagios'
-      $nagios_confdir         = '/etc/nagios3'
       $nagios_packages        = 'nagios'
-      $nagios_service         = 'org.macports.nagios'
+      $nagios_service         = 'nagios3' # <-- broken on osx agents because it actually needs to be the server's service
       $nagios_plugins_path    = "/usr/lib/nagios/plugins"
       $nagios_plugin_packages = 'nagios-plugins'
     }

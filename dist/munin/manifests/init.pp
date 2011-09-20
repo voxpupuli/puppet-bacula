@@ -18,7 +18,11 @@ class munin (
 
   package {
     $munin::params::munin_base_packages:
-      ensure => present,
+      ensure   => present,
+      provider => $kernel ? {
+        Darwin  => macports,
+        default => undef,
+      }
   }
 
   file { '/etc/munin/munin-node.conf':

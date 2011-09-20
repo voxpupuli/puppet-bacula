@@ -85,12 +85,18 @@ class puppetlabs::service::bootserver {
   resource_permute('pxe::bootstrap', $redhat, $redhat_common)
   resource_permute('pxe::bootstrap', $scientific, $scientific_common)
 
+  $centos_kickstart = {
+    "arch" => ["x86_64","i386"],
+    "ver"  => [4,5,6],
+  }
+
   $centos_kickstart_common = {
+    "os"    => "centos",
     options => {
       url      => "http://yo.puppetlabs.lan/cent<%= ver %>latestserver-<%= arch %>",
       roothash => '$1$UlYyAJfh$CjQlsvxXWD/5UDnPJTMHm.',
     },
   }
 
-  resource_permute('kickstart::entry', $centos, $centos_kickstart_common)
+  resource_permute('kickstart::entry', $centos_kickstart, $centos_kickstart_common)
 }

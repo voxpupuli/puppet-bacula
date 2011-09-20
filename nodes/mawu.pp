@@ -1,3 +1,3 @@
 node mawu {
-  include role::base
+  include role::server
 }

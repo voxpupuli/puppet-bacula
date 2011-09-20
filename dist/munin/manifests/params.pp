@@ -12,8 +12,19 @@
 #
 class munin::params {
 
-  $munin_base_packages = 'munin-node'
-  $plugin_source = '/usr/share/munin/plugins'
-  $plugin_dest = '/etc/munin/plugins'
+  case $operatingsystem {
+    "darwin": { 
+      $munin_base_packages = 'munin'
+      $plugin_source = '/opt/local/usr/share/munin/plugins'
+      $plugin_dest = '/opt/local/etc/munin/plugins'
+      $log_file = '/opt/local/var/log/munin/munin-node.log'
+      $pid_file = '/opt/local/var/run/munin/munin-node.pid'
+      $service = 'org.macports.munin-node.plist'
+    }
+    default: {
+      $munin_base_packages = 'munin-node'
+      $plugin_source = '/usr/share/munin/plugins'
+      $plugin_dest = '/etc/munin/plugins'
+    }
 
 }

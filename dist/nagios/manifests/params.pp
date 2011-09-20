@@ -73,7 +73,7 @@ class nagios::params {
       $nrpe_group             = 'nagios'
       $nagios_packages        = 'nagios'
       $nagios_service         = 'nagios3' # <-- broken on osx agents because it actually needs to be the server's service
-      $nagios_plugins_path    = "/usr/lib/nagios/plugins"
+      $nagios_plugins_path    = "/opt/local/libexec/nagios"
       $nagios_plugin_packages = 'nagios-plugins'
     }
     default: {

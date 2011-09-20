@@ -85,6 +85,7 @@ class puppetlabs::service::bootserver {
   resource_permute('pxe::bootstrap', $redhat, $redhat_common)
   resource_permute('pxe::bootstrap', $scientific, $scientific_common)
 
+  # Why does everything suck?
   $centos_kickstart = {
     "arch" => ["x86_64","i386"],
     "ver"  => [4,5,6],

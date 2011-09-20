@@ -3,6 +3,8 @@ class role::server {
 
   include postfix
 
+  $location = hiera("location")
+
   class { "nagios": nrpe_server  => hiera("nrpe_server");  }
   class { 'munin':  munin_server => hiera("munin_server"); }
   class { "ntp":    server       => hiera("ntpserver"); }

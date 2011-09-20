@@ -1,7 +1,5 @@
 class role::base {
 
-  $location = hiera("location")
-
   case $operatingsystem {
     debian:  { include puppetlabs::os::linux::debian }
     ubuntu:  { include puppetlabs::os::linux::ubuntu }

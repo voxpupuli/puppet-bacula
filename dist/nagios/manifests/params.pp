@@ -66,9 +66,9 @@ class nagios::params {
     }
     "darwin": { 
       $nrpe_packages      = 'nrpe'
-      $nrpe_service       = 'nrpe'
-      $nrpe_configuration = '/opt/local/etc/nagios/nrpe.cfg'
-      $nrpe_pid           = '/opt/local/var/run/nagios/nrpe.pid'
+      $nrpe_service       = 'org.macports.nrpe'
+      $nrpe_configuration = '/opt/local/etc/nrpe/nrpe.cfg'
+      $nrpe_pid           = '/var/run/nrpe.pid'
       $nrpe_user          = 'nagios'
       $nrpe_group         = 'nagios'
       $nagios_packages    = 'nagios'

@@ -12,16 +12,9 @@ class puppetlabs::os::linux {
 
   cron {
     "clean /tmp":
-      command => "/usr/bin/find /tmp -mtime +3 | xargs rm",
-      ensure  => absent,
-  }
-
-  tidy{ '/tmp/':
-    age     => '3d',
-    recurse => true,
-    rmdirs  => true,
-    type    => mtime,
+      command => "/usr/bin/find /tmp -mtime +3 -print0 | xargs --no-run-if-empty -0 rm",
+      ensure  => present,
+      user => root,  minute => 10,  hour => 20, weekday => 0;
   }
 
 }
-

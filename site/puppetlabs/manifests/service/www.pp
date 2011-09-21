@@ -83,7 +83,7 @@ class puppetlabs::service::www {
   nagios::website { 'www.puppetlabs.com': }
   wordpress::instance {
     'puppetlabs.com':
-      site_alias      => "www.puppetlabs.com",
+      site_alias      => ["www.puppetlabs.com","dev.puppetlabs.com"],
       auth_key        => 'rspk1YxmxcUDIqhjH1pUQq59WCTvISTXlflU7UZoUFw8faCzNy1VC8Uq9sl0gxg',
       secure_auth_key => 'MJQKXGrbtSs4toOG2JsqjrYopYU9Ij9wQYX5kttycvTwEfc9uGFDxo6leeLCITL',
       logged_in_key   => 't7O5y1MW41ZT4jETgJkdCUn35f8fzQgfnZ9sivR4k8M5kU6U17I6GhA73NtLVLd',

@@ -1,4 +1,6 @@
-node sles-builder inherits server {
+node sles-builder {
+
+  include role::server
 
   ssh::allowgroup { "builder": }
   ssh::allowgroup { "release": }

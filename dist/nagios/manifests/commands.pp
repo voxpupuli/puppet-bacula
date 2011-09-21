@@ -20,7 +20,7 @@ class nagios::commands {
   }
 
   nagios_command { 'check_bacula':
-    command_line => "/usr/lib/nagios/plugins/check_bacula.pl -H '\$ARG1\$' -w 1 -c 1 -j '\$ARG2\$'",
+    command_line => "/usr/lib/nagios/plugins/check_bacula.pl -H \$ARG1\$ -w 1 -c 1 -j \$ARG2\$",
     command_name => 'check_bacula',
     ensure       => present,
     target       => '/etc/nagios/conf.d/nagios_commands.cfg',

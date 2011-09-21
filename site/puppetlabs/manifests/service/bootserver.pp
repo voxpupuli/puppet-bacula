@@ -99,5 +99,7 @@ class puppetlabs::service::bootserver {
     },
   }
 
-  resource_permute('kickstart::entry', $centos_kickstart, $centos_kickstart_common)
+  # Resource permute does not recurse in the common hash, so templates are not applied.
+  # Uncomment when it's fixed.
+  #resource_permute('kickstart::entry', $centos_kickstart, $centos_kickstart_common)
 }

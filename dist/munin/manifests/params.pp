@@ -20,7 +20,7 @@ class munin::params {
       $group         = 'wheel'
       $log_file      = '/opt/local/var/log/munin/munin-node.log'
       $pid_file      = '/opt/local/var/run/munin/munin-node.pid'
-      $node_service  = 'org.macports.munin-node.plist'
+      $node_service  = 'org.macports.munin-node'
       $node_config   = '/opt/local/etc/munin/munin-node.conf'
     }
     default: {

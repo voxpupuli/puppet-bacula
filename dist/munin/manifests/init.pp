@@ -16,24 +16,32 @@ class munin (
   ) {
   include munin::params
 
+  $log_file = $munin::params::log_file
+  $pid_file = $munin::params::pid_file
+  $group    = $munin::params::group
+
   package {
     $munin::params::munin_base_packages:
-      ensure => present,
+      ensure   => present,
+      provider => $kernel ? {
+        Darwin  => macports,
+        default => undef,
+      }
   }
 
-  file { '/etc/munin/munin-node.conf':
+  file { $munin::params::node_config:
     content => template('munin/munin-node.conf.erb'),
     ensure  => present,
-    notify  => Service['munin-node'],
+    notify  => Service[$munin::params::node_service],
     require => Package[$munin::params::munin_base_packages],
   }
 
-  service { 'munin-node':
+  service { $munin::params::node_service:
     ensure     => running,
     enable     => true,
     hasrestart => true,
     require    => [
-      File['/etc/munin/munin-node.conf'],
+      File[$munin::params::node_config],
       Package[$munin::params::munin_base_packages]
     ],
   }

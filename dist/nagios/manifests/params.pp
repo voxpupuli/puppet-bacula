@@ -43,7 +43,7 @@ class nagios::params {
       $nrpe_service           = 'nrpe'
       $nagios_plugin_packages = 'nagios-plugins'
       $nagios_service         = 'nagios3'
-      $nagios_plugins_path = "/usr/lib/nagios/plugins"
+      $nagios_plugins_path    = "/usr/lib/nagios/plugins"
     }
     "centos","fedora": {
       $nagios_packages        = [ 'nagios', 'nagios-devel' ]
@@ -63,6 +63,18 @@ class nagios::params {
           $nagios_plugins_path = "/usr/lib/nagios/plugins"
         }
       }
+    }
+    "darwin": { 
+      $nrpe_packages          = 'nrpe'
+      $nrpe_service           = 'org.macports.nrpe'
+      $nrpe_configuration     = '/opt/local/etc/nrpe/nrpe.cfg'
+      $nrpe_pid               = '/var/run/nrpe.pid'
+      $nrpe_user              = 'nagios'
+      $nrpe_group             = 'nagios'
+      $nagios_packages        = 'nagios'
+      $nagios_service         = 'nagios3' # <-- broken on osx agents because it actually needs to be the server's service
+      $nagios_plugins_path    = "/opt/local/libexec/nagios"
+      $nagios_plugin_packages = 'nagios-plugins'
     }
     default: {
       fail("module nagios does not support operatingsystem $operatingsystem")

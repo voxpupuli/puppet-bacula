@@ -26,12 +26,12 @@ class ssh {
 
   file { $ssh_config:
     owner     => root,
-    group     => root,
+    group     => 0,
     mode      => 0644,
     ensure    => file,
     require   => $kernel ? {
-      "Darwin"  => undef,
-      default => Package[$client_package]
+      "Darwin" => undef,
+      default  => Package[$client_package],
     }
   }
 }

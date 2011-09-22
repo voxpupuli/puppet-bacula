@@ -22,8 +22,21 @@ class nagios (
   $nrpe_group  = $nagios::params::nrpe_group
   $nagios_plugins_path = $nagios::params::nagios_plugins_path
 
-  package { $::nagios::params::nagios_plugin_packages: ensure => installed; }
-  package { $::nagios::params::nrpe_packages:          ensure => installed; }
+  package { $::nagios::params::nagios_plugin_packages:
+    ensure   => installed,
+    provider => $kernel ? {
+      Darwin  => macports,
+      default => undef,
+    }
+  }
+
+  package { $::nagios::params::nrpe_packages:
+    ensure   => installed,
+    provider => $kernel ? {
+      Darwin  => macports,
+      default => undef,
+    }
+  }
 
   file { '/etc/nagios':
     ensure  => present,

@@ -16,6 +16,10 @@ class munin (
   ) {
   include munin::params
 
+  $log_file = $munin::params::log_file
+  $pid_file = $munin::params::pid_file
+  $group    = $munin::params::group
+
   package {
     $munin::params::munin_base_packages:
       ensure   => present,

@@ -17,12 +17,16 @@ class munin::params {
       $munin_base_packages = 'munin'
       $plugin_source = '/opt/local/usr/share/munin/plugins'
       $plugin_dest   = '/opt/local/etc/munin/plugins'
+      $group         = 'wheel'
       $log_file      = '/opt/local/var/log/munin/munin-node.log'
       $pid_file      = '/opt/local/var/run/munin/munin-node.pid'
       $node_service  = 'org.macports.munin-node.plist'
       $node_config   = '/opt/local/etc/munin/munin-node.conf'
     }
     default: {
+      $log_file            = '/var/log/munin/munin-node.log'
+      $pid_file            = '/var/run/munin/munin-node.pid'
+      $group               = 'root'
       $munin_base_packages = 'munin-node'
       $plugin_source       = '/usr/share/munin/plugins'
       $plugin_dest         = '/etc/munin/plugins'

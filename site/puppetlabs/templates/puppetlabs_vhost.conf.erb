@@ -75,6 +75,9 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   #  http://puppetlabs.com/wp-content/themes/reductive/favicon.ico
   #  http://puppetlabs.com/wp-content/themes/reductive/scripts/mainimage.js
   #  http://puppetlabs.com/puppet.ico
+  #
+
+  RedirectMatch permanent ^/puppet/$ http://puppetlabs.com/puppet/puppet-enterprise/
 
 
   # Legacy Redirects

@@ -25,14 +25,14 @@ class munin (
       }
   }
 
-  file { '/etc/munin/munin-node.conf':
+  file { $munin::params::node_config:
     content => template('munin/munin-node.conf.erb'),
     ensure  => present,
     notify  => Service['munin-node'],
     require => Package[$munin::params::munin_base_packages],
   }
 
-  service { 'munin-node':
+  service { $munin::params::node_config:
     ensure     => running,
     enable     => true,
     hasrestart => true,

@@ -1,4 +1,6 @@
 class patchwork {
+  include postfix
+
   $patchwork_db_name="patchwork"
   $patchwork_db_user="patchwork"
   $patchwork_db_pass="Xeexoh5E"
@@ -8,7 +10,6 @@ class patchwork {
     "python-psycopg2":            ensure => installed;
     "python-django-registration": ensure => installed;
     "libapache2-mod-wsgi":        ensure => installed;
-    "postfix":                    ensure => installed;
   }
 
   file {

@@ -3,6 +3,7 @@ node ningyo {
   include role::server
 
   ssh::allowgroup { "techops": }
+  sudo::allowgroup { "techops": }
 
   ###
   # Mysql

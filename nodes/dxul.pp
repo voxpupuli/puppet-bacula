@@ -13,7 +13,10 @@ node dxul {
   #$puppet_storedconfig_password = 'password'
 
   # Puppet Forge
-  class { 'forge': vhost => 'forge.puppetlabs.com' }
+  class { 'forge':
+    vhost        => 'forge.puppetlabs.com',
+    git_revision => '122ddab64eb263417ea973d45a7f39a20cb77d3d',
+  }
 
   # Backup
   $bacula_director = 'baal.puppetlabs.com'

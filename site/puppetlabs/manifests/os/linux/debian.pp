@@ -7,6 +7,17 @@ class puppetlabs::os::linux::debian inherits puppetlabs::os::linux {
   #  last_gid => '1099',
   #}
 
+  case $domain {
+    "puppetlabs.lan": {
+      # Setup apt settings specific to the lan
+      class { "apt::settings": proxy => hiera("proxy"); }
+    }
+    "puppetlabs.com": {
+    }
+    default: { }
+  }
+
+
   package {
     "lsb-release": ensure => installed;
     "keychain":    ensure => installed;

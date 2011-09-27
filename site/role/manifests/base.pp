@@ -12,22 +12,7 @@ class role::base {
   class {
     "puppet":
       server => hiera("puppet_server"),
-      agent  => false
-  }
-
-  case $domain {
-    "puppetlabs.lan": {
-      case $operatingsystem {
-        'debian','ubuntu': {
-          # Setup apt settings specific to the lan
-          class { "apt::settings": proxy => hiera("proxy"); }
-        }
-        default: { }
-      }
-    }
-    "puppetlabs.com": {
-    }
-    default: { }
+      agent  => false,
   }
 
 }

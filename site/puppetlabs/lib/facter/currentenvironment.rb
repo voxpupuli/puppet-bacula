@@ -1,5 +1,6 @@
 Facter.add("currentenvironment") do
+  path = '/usr/bin/puppet'
   setcode do
-    %x{grep environment /etc/puppet/puppet.conf}.split(" ").last.chomp
+    %x{#{path} /usr/bin/puppet --configprint environment}.chomp
   end
 end

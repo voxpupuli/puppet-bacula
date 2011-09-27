@@ -79,6 +79,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "x86_64",
     release   => "5",
+    update    => "never",
     iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
     urls      => {
       updates => "$centos_mirror/centos/\$release/updates/\$arch/",
@@ -90,6 +91,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "i386",
     release   => "5",
+    update    => "never",
     iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
     urls      => {
       updates => "$centos_mirror/centos/\$release/updates/\$arch/",
@@ -101,6 +103,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
     arch      => "x86_64",
     release   => "4",
+    update    => "never",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
       updates => "$centos_mirror/centos/\$release/updates/\$arch/",
@@ -112,6 +115,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
     arch      => "i386",
     release   => "4",
+    update    => "never",
     iso       => 'CentOS-4.0-$arch-bin?of4.iso',
     urls      => {
       updates => "$centos_mirror/centos/\$release/updates/\$arch/",
@@ -123,6 +127,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "i386",
     release   => "6",
+    update    => "never",
     iso       => 'CentOS-6.0-$arch-bin-DVD.iso',
     urls      => {
       updates => "$centos_mirror/\$release/updates/\$arch/",
@@ -134,6 +139,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "x86_64",
     release   => "6",
+    update    => "never",
     iso       => 'CentOS-6.0-$arch-bin-DVD?.iso',
     urls      => {
       updates => "$centos_mirror/\$release/updates/\$arch/",

@@ -17,7 +17,6 @@ class puppetlabs::os::linux::debian inherits puppetlabs::os::linux {
     default: { }
   }
 
-
   package {
     "lsb-release": ensure => installed;
     "keychain":    ensure => installed;

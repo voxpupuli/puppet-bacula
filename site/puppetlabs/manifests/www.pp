@@ -69,6 +69,14 @@ class puppetlabs::www {
       port          => '80',
       dest          => 'http://www.puppetlabs.com',
       status        => '301';
+    'http://marionette-collective.com':
+      serveraliases => 'www.marionette-collective.com',
+      port          => '80',
+      dest          => 'http://docs.puppetlabs.com/mcollective/',
+    'http://marionette-collective.org':
+      serveraliases => 'www.marionette-collective.org',
+      port          => '80',
+      dest          => 'http://docs.puppetlabs.com/mcollective/',
   }
 
   wordpress::instance {

@@ -25,13 +25,12 @@ class puppetlabs::service::www {
   # NOTE: Apache runs on port 82, nginx runs on port 80.
   # Get it right, or things break!
   $apache_port = '82'
-  Apache::Vhost { port => $apache_port }
+  Apache::Vhost           { port => $apache_port }
   Apache::Vhost::Redirect { port => $apache_port }
 
   # WWW stuff
   # site for server itself
   apache::vhost {"$fqdn":
-    port     => 82,
     docroot  => '/var/www',
     options  => "None",
     priority => '99';
@@ -55,32 +54,29 @@ class puppetlabs::service::www {
   apache::vhost::redirect {
     'puppetcon.com':
       serveraliases => "www.puppetcon.com",
-      port          => $apache_port,
       dest          => 'http://www.puppetconf.com';
     'blog.puppetlabs.com':
-      port          => $apache_port,
       dest          => 'http://www.puppetlabs.com/blog';
     'puppetcamp.org':
       serveraliases => "www.puppetcamp.org",
-      port          => $apache_port,
       dest          => 'http://www.puppetlabs.com/community/puppet-camp',
       status        => '301';
     'reductivelabs.com':
       serveraliases => "www.reductivelabs.com",
-      port          => $apache_port,
       dest          => 'http://www.puppetlabs.com',
       status        => '301';
     'marionette-collective.com':
       serveraliases => 'www.marionette-collective.com',
-      port          => $apache_port,
       dest          => 'http://docs.puppetlabs.com/mcollective',
       status        => '301';
     'marionette-collective.org':
       serveraliases => 'www.marionette-collective.org',
-      port          => $apache_port,
       dest          => 'http://docs.puppetlabs.com/mcollective',
       status        => '301';
   }
+
+  # Wordpress Sites
+  Wordpress::Instance { port => $apache_port }
 
   nagios::website { 'madstop.com': }
   wordpress::instance {
@@ -93,7 +89,6 @@ class puppetlabs::service::www {
       db_pw           => 'illYZbw108Ckle8Q',
       template        => 'puppetlabs/wordpress_vhost.conf.erb',
       priority        => '07',
-      port            => $apache_port,
   }
   file { "/var/www/madstop.com/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/madstop_htaccess"; }
 
@@ -109,7 +104,6 @@ class puppetlabs::service::www {
       db_user         => 'plabs',
       template        => 'puppetlabs/puppetlabs_vhost.conf.erb',
       priority        => '02',
-      port            => $apache_port,
       seturl          => true,
   }
 
@@ -153,7 +147,6 @@ class puppetlabs::service::www {
       db_user    => 'pdchallange',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
       priority   => '06',
-      port       => $apache_port,
       seturl     => true,
   }
 
@@ -165,7 +158,6 @@ class puppetlabs::service::www {
       db_user    => 'pconf',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
       priority   => '06',
-      port       => $apache_port,
       seturl     => true,
   }
 

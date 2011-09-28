@@ -5,6 +5,7 @@ node web01 {
   # NOTE: Apache runs on port 82, nginx runs on port 80.
   # Get it right, or things break!
   $apache_port = '82'
+  Apache::Vhost::Redirect { port => $apache_port }
 
   include pdns
   include postfix
@@ -15,7 +16,7 @@ node web01 {
 
   apache::vhost::redirect {
     "docs.mirror0.puppetlabs.com":
-      port => $apache_port,
+      #port => $apache_port,
       dest => 'http://docs.puppetlabs.com';
   }
 
@@ -29,7 +30,7 @@ node web01 {
 
   apache::vhost::redirect {
     'learningpuppet.com':
-      port => $apache_port,
+      #port => $apache_port,
       dest => 'http://docs.puppetlabs.com/learning'
   }
 

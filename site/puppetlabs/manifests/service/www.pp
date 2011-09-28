@@ -7,7 +7,6 @@ class puppetlabs::service::www {
 
   package {'php5-curl': ensure => present, notify => Service[httpd] }
 
-
   bacula::job {
     "${fqdn}-www":
       files    => ["/var/lib/bacula/mysql","/var/www"],
@@ -21,6 +20,15 @@ class puppetlabs::service::www {
     upstream_port   => '82',
     priority        => '01',
   }
+
+  $apache_port = '82'
+  Apache::Vhost { port => $apache_port }
+  Apache::Vhost::Redirect { port => $apache_port }
+  
+
+  Apache::Vhost { port => '82'
+  # MIND THE APACHE PORT!!
+  $apache_port = '82'
 
   # WWW stuff
   # site for server itself
@@ -44,9 +52,6 @@ class puppetlabs::service::www {
       mode   => 644,
       source => "puppet:///modules/puppetlabs/web01_apache2.conf";
   }
-
-  # MIND THE APACHE PORT!!
-  $apache_port = '82'
 
   # Some apache redirects, cause we love them
   apache::vhost::redirect {

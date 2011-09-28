@@ -63,6 +63,14 @@ class puppetlabs::service::www {
       port          => '82',
       dest          => 'http://www.puppetlabs.com',
       status        => '301';
+    'marionette-collective.com':
+      serveraliases => 'www.marionette-collective.com',
+      port          => '80',
+      dest          => 'http://docs.puppetlabs.com/mcollective/';
+    'marionette-collective.org':
+      serveraliases => 'www.marionette-collective.org',
+      port          => '80',
+      dest          => 'http://docs.puppetlabs.com/mcollective/';
   }
 
   nagios::website { 'madstop.com': }

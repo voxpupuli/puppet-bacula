@@ -70,12 +70,12 @@ class puppetlabs::service::www {
     'marionette-collective.com':
       serveraliases => 'www.marionette-collective.com',
       port          => $apache_port,
-      dest          => 'http://docs.puppetlabs.com/mcollective/',
+      dest          => 'http://docs.puppetlabs.com/mcollective',
       status        => '301';
     'marionette-collective.org':
       serveraliases => 'www.marionette-collective.org',
       port          => $apache_port,
-      dest          => 'http://docs.puppetlabs.com/mcollective/',
+      dest          => 'http://docs.puppetlabs.com/mcollective',
       status        => '301';
   }
 
@@ -90,7 +90,7 @@ class puppetlabs::service::www {
       db_pw           => 'illYZbw108Ckle8Q',
       template        => 'puppetlabs/wordpress_vhost.conf.erb',
       priority        => '07',
-      port            => '82',
+      port            => $apache_port,
   }
   file { "/var/www/madstop.com/.htaccess": owner => root, group => root, mode => 644, source => "puppet:///modules/puppetlabs/madstop_htaccess"; }
 
@@ -106,7 +106,7 @@ class puppetlabs::service::www {
       db_user         => 'plabs',
       template        => 'puppetlabs/puppetlabs_vhost.conf.erb',
       priority        => '02',
-      port            => '82',
+      port            => $apache_port,
       seturl          => true,
   }
 
@@ -150,7 +150,7 @@ class puppetlabs::service::www {
       db_user    => 'pdchallange',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
       priority   => '06',
-      port       => '82',
+      port       => $apache_port,
       seturl     => true,
   }
 
@@ -162,7 +162,7 @@ class puppetlabs::service::www {
       db_user    => 'pconf',
       template   => 'puppetlabs/wordpress_vhost.conf.erb',
       priority   => '06',
-      port       => '82',
+      port       => $apache_port,
       seturl     => true,
   }
 

@@ -2,6 +2,8 @@ class puppetlabs::os::freebsd {
 
   $packages_to_install = [  'sysutils/tmux',
                             'sysutils/pv',
+                            'shells/bash',
+                            'shells/zsh',
                             'net/netcat',
                             'sysutils/lsof',
                             'editors/vim-lite' ]
@@ -14,8 +16,9 @@ class puppetlabs::os::freebsd {
 
   # This is horrible, but it stops a lot of things breaking (concat for example)
   file{ '/bin/bash':
-    ensure => link,
-    target => '/usr/local/bin/bash',
+    ensure   => link,
+    target   => '/usr/local/bin/bash',
+    requires => Package['shells/bash'],
   }
 
 }

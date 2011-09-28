@@ -21,14 +21,12 @@ class puppetlabs::service::www {
     priority        => '01',
   }
 
+  ##################################################################
+  # NOTE: Apache runs on port 82, nginx runs on port 80.
+  # Get it right, or things break!
   $apache_port = '82'
   Apache::Vhost { port => $apache_port }
   Apache::Vhost::Redirect { port => $apache_port }
-  
-
-  Apache::Vhost { port => '82'
-  # MIND THE APACHE PORT!!
-  $apache_port = '82'
 
   # WWW stuff
   # site for server itself

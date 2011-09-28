@@ -13,11 +13,14 @@
 # Sample Usage:
 #
 class apache {
+
   include apache::params
+
   package { 'httpd': 
     name   => $apache::params::apache_name,
     ensure => installed,
   }
+
   service { 'httpd':
     name      => $apache::params::apache_name,
     ensure    => running,
@@ -38,8 +41,7 @@ class apache {
     }
     default: { }
   }
-  
-  
+
   file { $apache::params::vdir:
     ensure => directory,
     recurse => true,

@@ -45,32 +45,38 @@ class puppetlabs::service::www {
       source => "puppet:///modules/puppetlabs/web01_apache2.conf";
   }
 
+  # MIND THE APACHE PORT!!
+  $apache_port = '82'
+
   # Some apache redirects, cause we love them
   apache::vhost::redirect {
     'puppetcon.com':
       serveraliases => "www.puppetcon.com",
-      port          => '82',
+      port          => $apache_port,
       dest          => 'http://www.puppetconf.com';
     'blog.puppetlabs.com':
-      port          => '82',
+      port          => $apache_port,
       dest          => 'http://www.puppetlabs.com/blog';
     'puppetcamp.org':
       serveraliases => "www.puppetcamp.org",
-      port          => '82',
-      dest          => 'http://www.puppetlabs.com/community/puppet-camp';
+      port          => $apache_port,
+      dest          => 'http://www.puppetlabs.com/community/puppet-camp',
+      status        => '301';
     'reductivelabs.com':
       serveraliases => "www.reductivelabs.com",
-      port          => '82',
+      port          => $apache_port,
       dest          => 'http://www.puppetlabs.com',
       status        => '301';
     'marionette-collective.com':
       serveraliases => 'www.marionette-collective.com',
-      port          => '80',
-      dest          => 'http://docs.puppetlabs.com/mcollective/';
+      port          => $apache_port,
+      dest          => 'http://docs.puppetlabs.com/mcollective/',
+      status        => '301';
     'marionette-collective.org':
       serveraliases => 'www.marionette-collective.org',
-      port          => '80',
-      dest          => 'http://docs.puppetlabs.com/mcollective/';
+      port          => $apache_port,
+      dest          => 'http://docs.puppetlabs.com/mcollective/',
+      status        => '301';
   }
 
   nagios::website { 'madstop.com': }

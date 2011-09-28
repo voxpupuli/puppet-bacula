@@ -16,7 +16,6 @@ node web01 {
 
   apache::vhost::redirect {
     "docs.mirror0.puppetlabs.com":
-      #port => $apache_port,
       dest => 'http://docs.puppetlabs.com';
   }
 
@@ -30,7 +29,6 @@ node web01 {
 
   apache::vhost::redirect {
     'learningpuppet.com':
-      #port => $apache_port,
       dest => 'http://docs.puppetlabs.com/learning'
   }
 

@@ -4,4 +4,10 @@
 
 node 'dave.dc1.puppetlabs.net' {
   include role::base
+
+  # Accounts
+  # This should probably be more selective on certain hosts/distros/oses
+  include virtual::users
+  Account::User <| name == 'ben' or name == 'zach' or name == 'james' |>
+  Group         <| tag == 'allstaff' |>
 }

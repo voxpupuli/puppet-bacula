@@ -12,4 +12,5 @@ node 'dave.dc1.puppetlabs.net' {
   Group         <| tag == 'allstaff' |>
 
   include sudo
+  sudo::allowgroup { 'sysadmin': }
 }

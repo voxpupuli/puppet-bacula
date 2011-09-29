@@ -7,9 +7,10 @@ class sudo {
   $sudoers_file = $::sudo::params::sudoers_file
   $sudoers_tmp  = $::sudo::params::sudoers_tmp
   $visiblepw    = $::sudo::params::visiblepw
+  $sudo_pkg     = $::sudo::params::sudo_pkg
 
   if $operatingsystem != "Darwin" {
-    package { "sudo": ensure => installed }
+    package { $sudo_pkg: ensure => installed }
   }
 
   concat::fragment {

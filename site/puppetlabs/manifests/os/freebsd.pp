@@ -4,6 +4,7 @@ class puppetlabs::os::freebsd {
                             'sysutils/pv',
                             'net/netcat',
                             'sysutils/lsof',
+                            'textproc/p5-ack',
                             'editors/vim-lite' ]
 
   # Install some basic packages. Nothing too spicy.

@@ -39,7 +39,7 @@ define account::user (
 
   # Manage Shells
   if $shell == '/bin/zsh' {
-    Package <| title == 'zsh' |>
+    Package <| alias == 'zsh' |>
   }
 
   # Manage Shells

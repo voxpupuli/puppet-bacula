@@ -44,7 +44,7 @@ define account::user (
 
   # Manage Shells
   if $shell == '/bin/bash' {
-    Package <| title == 'bash' |>
+    Package <| name == 'bash' |>
   }
 
   # realize needed groups

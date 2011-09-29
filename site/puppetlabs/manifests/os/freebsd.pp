@@ -2,8 +2,6 @@ class puppetlabs::os::freebsd {
 
   $packages_to_install = [  'sysutils/tmux',
                             'sysutils/pv',
-                            'shells/bash',
-                            'shells/zsh',
                             'net/netcat',
                             'sysutils/lsof',
                             'editors/vim-lite' ]
@@ -18,7 +16,7 @@ class puppetlabs::os::freebsd {
   file{ '/bin/bash':
     ensure  => link,
     target  => '/usr/local/bin/bash',
-    require => Package['shells/bash'],
+    require => Package['bash'],
   }
 
 }

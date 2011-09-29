@@ -42,6 +42,11 @@ define account::user (
     Package <| title == 'zsh' |>
   }
 
+  # Manage Shells
+  if $shell == '/bin/bash' {
+    Package <| title == 'bash' |>
+  }
+
   # realize needed groups
   if $group { 
     $groupname = $group

@@ -1,6 +1,11 @@
 Facter.add("currentenvironment") do
-  path = '/usr/bin/puppet'
   setcode do
-    %x{#{path} --configprint environment}.chomp
+    kernel = Facter.value('kernel')
+    if kernel.match(/FreeBSD/)
+      path = '/usr/local/bin/puppet'
+    elsif
+      path = '/usr/bin/puppet'
+    end
+    %x{#{path} --configprint environment}.chomp if File.exists?(path)
   end
 end

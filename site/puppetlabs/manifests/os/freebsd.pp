@@ -18,5 +18,10 @@ class puppetlabs::os::freebsd {
     target  => '/usr/local/bin/bash',
     require => Package['bash'],
   }
+  file{ '/bin/zsh':
+    ensure  => link,
+    target  => '/usr/local/bin/zsh',
+    require => Package['zsh'],
+  }
 
 }

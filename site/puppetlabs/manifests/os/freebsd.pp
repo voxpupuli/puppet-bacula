@@ -16,9 +16,9 @@ class puppetlabs::os::freebsd {
 
   # This is horrible, but it stops a lot of things breaking (concat for example)
   file{ '/bin/bash':
-    ensure   => link,
-    target   => '/usr/local/bin/bash',
-    requires => Package['shells/bash'],
+    ensure  => link,
+    target  => '/usr/local/bin/bash',
+    require => Package['shells/bash'],
   }
 
 }

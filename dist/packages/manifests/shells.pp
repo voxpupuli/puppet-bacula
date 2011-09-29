@@ -3,12 +3,12 @@
 
 class packages::shells {
 
-  $bash = $operatingsystem ? {
+  $bash = $::operatingsystem ? {
     'freebsd' => 'shells/bash',
     default   => 'bash'
   }
 
-  $zsh = $operatingsystem ? {
+  $zsh = $::operatingsystem ? {
     'freebsd' => 'shells/zsh',
     default   => 'zsh'
   }

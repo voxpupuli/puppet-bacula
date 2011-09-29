@@ -61,7 +61,7 @@ define account::user (
   if $home { # Set home
     $homedir = $home 
   } else {
-    $homedir = $kernel ? {
+    $homedir = $::kernel ? {
       Darwin  => "/Users/${name}",
       default => "/home/${name}",
     }

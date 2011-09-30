@@ -206,16 +206,12 @@ define mrepo::repo (
       }
     }
     absent: {
-      exec { "Unmount any mirrored ISOs":
+      exec { "Unmount any mirrored ISOs for ${name}":
         command   => "umount ${www_root_subdir}/disc*",
         path      => ["/usr/bin", "/bin", "/usr/sbin", "/sbin"],
         onlyif    => "mount | grep ${www_root_subdir}/disk",
         provider  => shell,
         logoutput => true,
-        before    => [
-          File[$www_root_subdir],
-          File["${mrepo::params::src_root}/${name}"],
-        ],
       }
       file {
         $www_root_subdir:
@@ -223,7 +219,8 @@ define mrepo::repo (
           backup  => false,
           recurse => false,
           force   => true,
-          before  => File["${mrepo::params::src_root}/$name"];
+          before  => File["${mrepo::params::src_root}/$name"],
+          require => Exec["Unmount any mirrored ISOs for ${name}"];
         "${mrepo::params::src_root}/$name":
           ensure  => absent,
           backup  => false,

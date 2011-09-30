@@ -82,9 +82,9 @@ class puppetlabs::service::mrepo {
     update    => "never",
   }
 
-  file { "/var/www/html/cent5server-x86_64":
+  file { "/var/www/mrepo/cent5server-x86_64":
     ensure => link,
-    target => "/var/www/html/cent5latestserver-x86_64",
+    target => "/var/www/mrepo/cent5latestserver-x86_64",
     require => Mrepo::Repo["cent6server-x86_64"],
   }
 
@@ -96,9 +96,9 @@ class puppetlabs::service::mrepo {
     update    => "never",
   }
 
-  file { "/var/www/html/cent5server-i386":
+  file { "/var/www/mrepo/cent5server-i386":
     ensure => link,
-    target => "/var/www/html/cent5latestserver-i386",
+    target => "/var/www/mrepo/cent5latestserver-i386",
     require => Mrepo::Repo["cent5server-i386"],
   }
 
@@ -110,9 +110,9 @@ class puppetlabs::service::mrepo {
     update    => "never",
   }
 
-  file { "/var/www/html/cent4server-x86_64":
+  file { "/var/www/mrepo/cent4server-x86_64":
     ensure => link,
-    target => "/var/www/html/cent4latestserver-x86_64",
+    target => "/var/www/mrepo/cent4latestserver-x86_64",
     require => Mrepo::Repo["cent4server-x86_64"],
   }
 
@@ -124,9 +124,9 @@ class puppetlabs::service::mrepo {
     update    => "never",
   }
 
-  file { "/var/www/html/cent4server-i386":
+  file { "/var/www/mrepo/cent4server-i386":
     ensure => link,
-    target => "/var/www/html/cent4latestserver-i386",
+    target => "/var/www/mrepo/cent4latestserver-i386",
     require => Mrepo::Repo["cent4server-i386"],
   }
 
@@ -138,9 +138,9 @@ class puppetlabs::service::mrepo {
     update    => "never",
   }
 
-  file { "/var/www/html/cent6server-i386":
+  file { "/var/www/mrepo/cent6server-i386":
     ensure => link,
-    target => "/var/www/html/cent6latestserver-i386",
+    target => "/var/www/mrepo/cent6latestserver-i386",
     require => Mrepo::Repo["cent6server-i386"],
   }
 
@@ -152,9 +152,9 @@ class puppetlabs::service::mrepo {
     update    => "never",
   }
 
-  file { "/var/www/html/cent6server-x86_64":
+  file { "/var/www/mrepo/cent6server-x86_64":
     ensure => link,
-    target => "/var/www/html/cent6latestserver-x86_64",
+    target => "/var/www/mrepo/cent6latestserver-x86_64",
     require => Mrepo::Repo["cent6server-x86_64"],
   }
 

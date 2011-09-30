@@ -1,3 +1,3 @@
 node zbook { include role::workstation }
-node qa01 { include role::workstation }
+node /puppetlabs-laptop\d+/ { include role::workstation }
 node methodman { include role::workstation }

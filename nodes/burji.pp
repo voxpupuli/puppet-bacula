@@ -127,7 +127,7 @@ node burji {
     checksum => none,
   }
 
-  file {
+  file { # training links
     "/opt/downloads/training/current-pm-vm.tar.gz":
       ensure   => link,
       target   => "centos-5.5-pe-1.0.tar.gz";
@@ -140,6 +140,22 @@ node burji {
     "/opt/downloads/training/current-pm-vm-ovf.tar.gz.md5":
       ensure   => link,
       target   => "centos-5.5-pe-1.0-ovf.tar.gz.md5";
+  }
+
+  $puppet_link_version = "2.7.4"
+  file { # puppet links
+    "/opt/downloads/puppet/puppet-latest.tar.gz":
+      ensure => link,
+      target => "puppet-${puppet_link_version}.tar.gz";
+    "/opt/downloads/puppet/puppet-latest.tgz":
+      ensure => link,
+      target => "puppet-${puppet_link_version}.tar.gz";
+    "/opt/downloads/puppet/puppet-latest.tar.gz.asc":
+      ensure => link,
+      target => "puppet-${puppet_link_version}.tar.gz.asc";
+    "/opt/downloads/puppet/puppet-latest.tgz.asc":
+      ensure => link,
+      target => "puppet-${puppet_link_version}.tar.gz.asc";
   }
 
 }

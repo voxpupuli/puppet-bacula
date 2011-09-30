@@ -75,75 +75,87 @@ class puppetlabs::service::mrepo {
 
 
   mrepo::repo { "cent5server-x86_64":
-    ensure    => present,
+    ensure    => absent,
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "x86_64",
     release   => "5",
     update    => "never",
-    iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
-    urls      => {
-      updates => "$centos_mirror/centos/\$release/updates/\$arch/",
-    },
+  }
+
+  file { "/var/www/html/cent5server-x86_64":
+    ensure => link,
+    target => "/var/www/html/cent5latestserver-x86_64",
+    require => Mrepo::Repo["cent6server-x86_64"],
   }
 
   mrepo::repo { "cent5server-i386":
-    ensure    => present,
+    ensure    => absent,
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "i386",
     release   => "5",
     update    => "never",
-    iso       => 'CentOS-5.0-$arch-bin-DVD.iso',
-    urls      => {
-      updates => "$centos_mirror/centos/\$release/updates/\$arch/",
-    },
+  }
+
+  file { "/var/www/html/cent5server-i386":
+    ensure => link,
+    target => "/var/www/html/cent5latestserver-i386",
+    require => Mrepo::Repo["cent5server-i386"],
   }
 
   mrepo::repo { "cent4server-x86_64":
-    ensure    => present,
+    ensure    => absent,
     repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
     arch      => "x86_64",
     release   => "4",
     update    => "never",
-    iso       => 'CentOS-4.0-$arch-bin?of4.iso',
-    urls      => {
-      updates => "$centos_mirror/centos/\$release/updates/\$arch/",
-    },
+  }
+
+  file { "/var/www/html/cent4server-x86_64":
+    ensure => link,
+    target => "/var/www/html/cent4latestserver-x86_64",
+    require => Mrepo::Repo["cent4server-x86_64"],
   }
 
   mrepo::repo { "cent4server-i386":
-    ensure    => present,
+    ensure    => absent,
     repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
     arch      => "i386",
     release   => "4",
     update    => "never",
-    iso       => 'CentOS-4.0-$arch-bin?of4.iso',
-    urls      => {
-      updates => "$centos_mirror/centos/\$release/updates/\$arch/",
-    },
+  }
+
+  file { "/var/www/html/cent4server-i386":
+    ensure => link,
+    target => "/var/www/html/cent4latestserver-i386",
+    require => Mrepo::Repo["cent4server-i386"],
   }
 
   mrepo::repo { "cent6server-i386":
-    ensure    => present,
+    ensure    => absent,
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "i386",
     release   => "6",
     update    => "never",
-    iso       => 'CentOS-6.0-$arch-bin-DVD.iso',
-    urls      => {
-      updates => "$centos_mirror/\$release/updates/\$arch/",
-    },
+  }
+
+  file { "/var/www/html/cent6server-i386":
+    ensure => link,
+    target => "/var/www/html/cent6latestserver-i386",
+    require => Mrepo::Repo["cent6server-i386"],
   }
 
   mrepo::repo { "cent6server-x86_64":
-    ensure    => present,
+    ensure    => absent,
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "x86_64",
     release   => "6",
     update    => "never",
-    iso       => 'CentOS-6.0-$arch-bin-DVD?.iso',
-    urls      => {
-      updates => "$centos_mirror/\$release/updates/\$arch/",
-    },
+  }
+
+  file { "/var/www/html/cent6server-x86_64":
+    ensure => link,
+    target => "/var/www/html/cent6latestserver-x86_64",
+    require => Mrepo::Repo["cent6server-x86_64"],
   }
 
   ##############################################################################

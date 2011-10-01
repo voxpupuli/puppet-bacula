@@ -11,6 +11,7 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
 <% elsif serveraliases != '' -%>
 <%= "  ServerAlias #{serveraliases}" -%>
 <% end -%>
+
   DocumentRoot <%= docroot %>
   <Directory <%= docroot %>>
     Options <%= options %>
@@ -18,9 +19,19 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     Order allow,deny
     allow from all
   </Directory>
+
   ErrorLog /var/log/apache2/<%= name %>_error.log
   LogLevel warn
   CustomLog /var/log/apache2/<%= name %>_access.log combined
+
   ServerSignature Off
+
+  <% if block_scm == "true" -%>
+  # Block access to SCM directories. Stolen from
+  # http://stackoverflow.com/questions/398008/deny-access-to-svn-folders-on-apache
+  <DirectoryMatch .*\.(svn|git|bzr)/.*>
+      Deny From All
+  </DirectoryMatch>
+  <% end -%>
 </VirtualHost>
 

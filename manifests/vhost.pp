@@ -36,7 +36,8 @@ define apache::vhost(
     $auth          = false,
     $redirect_ssl  = false,
     $options       = "Indexes FollowSymLinks MultiViews",
-    $vhost_name    = '*'
+    $vhost_name    = '*',
+    $block_scm     = false   # block .svn|.git folders, see template.
   ) {
 
   include apache

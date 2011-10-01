@@ -26,5 +26,12 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
 
   ServerSignature Off
 
+  <% if block_scm == "true" -%>
+  # Block access to SCM directories. Stolen from
+  # http://stackoverflow.com/questions/398008/deny-access-to-svn-folders-on-apache
+  <DirectoryMatch .*\.(svn|git|bzr)/.*>
+      Deny From All
+  </DirectoryMatch>
+  <% end -%>
 </VirtualHost>
 

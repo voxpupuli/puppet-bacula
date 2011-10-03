@@ -1,6 +1,6 @@
 Name: default
 IncomingDir: incoming
 Tempdir: tmp
-Allow: unstable>sid
+Allow: oldstable>lenny stable>squeeze testing>wheezy unstable>sid
 Multiple: Yes
 Cleanup: on_deny on_error

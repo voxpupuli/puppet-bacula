@@ -39,7 +39,12 @@ define account::user (
 
   # Manage Shells
   if $shell == '/bin/zsh' {
-    Package <| title == 'zsh' |>
+    Package <| alias == 'zsh' |>
+  }
+
+  # Manage Shells
+  if $shell == '/bin/bash' {
+    Package <| alias == 'bash' |>
   }
 
   # realize needed groups
@@ -61,7 +66,7 @@ define account::user (
   if $home { # Set home
     $homedir = $home 
   } else {
-    $homedir = $kernel ? {
+    $homedir = $::kernel ? {
       Darwin  => "/Users/${name}",
       default => "/home/${name}",
     }

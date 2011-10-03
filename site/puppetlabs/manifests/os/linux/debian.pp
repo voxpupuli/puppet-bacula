@@ -1,4 +1,5 @@
-class puppetlabs::os::linux::debian inherits puppetlabs::os::linux {
+class puppetlabs::os::linux::debian  {
+  include puppetlabs::os::linux
 
   # This doesn't help at all, since the provider is actually adduser, not useradd
   # should be removed, class and module included
@@ -25,7 +26,7 @@ class puppetlabs::os::linux::debian inherits puppetlabs::os::linux {
   exec {
     "import puppet labs apt key":
       user    => root,
-      command => "/usr/bin/wget -q -O - http://apt.puppetlabs.com/ops/4BD6EC30.asc | apt-key add -",
+      command => "/usr/bin/wget -q -O - http://apt.puppetlabs.com/debian/4BD6EC30.asc | apt-key add -",
       unless  => "/usr/bin/apt-key list | grep -q 4BD6EC30",
       before  => Exec["apt-get update"];
     "apt-get update":
@@ -36,8 +37,13 @@ class puppetlabs::os::linux::debian inherits puppetlabs::os::linux {
 
   file {
     "/etc/apt/sources.list.d/ops.list":
-      content => "deb http://apt.puppetlabs.com/ops sid main\n",
-      notify  => Exec["apt-get update"],
+      ensure   => absent,
+  }
+  file {
+    "/etc/apt/sources.list.d/puppetlabs.list":
+      content => "deb http://apt.puppetlabs.com/debian squeeze main\n",
+      #content  => "deb http://apt.puppetlabs.com/debian $lsbdistcodename main\n",
+      notify   => Exec["apt-get update"],
   }
 
   cron { "apt-get update":

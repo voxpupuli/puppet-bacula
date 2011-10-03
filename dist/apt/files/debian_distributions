@@ -9,3 +9,25 @@ DscIndices: Sources Release .gz .bz2
 Tracking: all includechanges keepsources
 Log: logfile
 
+Suite: squeeze
+Codename: squeeze
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: lenny
+Codename: lenny
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+

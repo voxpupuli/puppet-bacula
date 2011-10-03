@@ -47,6 +47,5 @@ class puppetlabs::service::pkgrepo (
 
   }
 
-
 }
 

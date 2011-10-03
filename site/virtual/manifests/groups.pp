@@ -54,8 +54,10 @@ class virtual::groups {
     ensure => present,
     gid    => 680,
   }
-
-
+  @group { 'qa': # Package Builders
+    ensure => present,
+    gid    => 681,
+  }
 
 #
 # Service Groups

@@ -310,6 +310,7 @@ class virtual::users {
     comment => 'Michael Higgins',
     uid     => '1155',
     group   => allstaff,
+    groups  => ["qa"],
     tag     => allstaff,
   }
 
@@ -327,7 +328,7 @@ class virtual::users {
     comment => 'Justin Stoller',
     uid     => '1157',
     group   => allstaff,
-    groups  => ["developers"],
+    groups  => ["qa"],
     tag     => allstaff,
   }
 

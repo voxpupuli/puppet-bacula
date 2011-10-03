@@ -1,6 +1,8 @@
 node enkal {
   include role::server
 
+  ssh::allowgroup { "qa": }
+
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
 
   # Base

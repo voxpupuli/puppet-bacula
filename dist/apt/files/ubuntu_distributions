@@ -9,9 +9,9 @@ DscIndices: Sources Release .gz .bz2
 Tracking: all includechanges keepsources
 Log: logfile
 
-Suite: oneriric
+Suite: oneiric
 Version: 11.10
-Codename: oneriric
+Codename: oneiric
 Architectures: i386 amd64 source
 Components: main
 Description: Puppet Labs APT Repository

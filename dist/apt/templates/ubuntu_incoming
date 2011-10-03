@@ -1,7 +1,7 @@
 Name: default
 IncomingDir: incoming
 Tempdir: tmp
-Allow: unstable>unstable hardy>hardy lucid>lucid karmic>karmic intrepid>intrepid jaunty>jaunty meerkat>meerkat natty>natty 
+Allow: unstable>unstable hardy>hardy lucid>lucid karmic>karmic intrepid>intrepid jaunty>jaunty meerkat>meerkat natty>natty oneiric>oneiric
 Multiple: Yes
 Cleanup: on_deny on_error
 

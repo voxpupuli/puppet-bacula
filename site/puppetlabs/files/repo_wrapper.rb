@@ -17,7 +17,7 @@ repos = [
 repos.each do |repo|
   puts "Working on #{repo}"
   incoming = "#{repo}/incoming"
-  if File.directory?("#{incoming}") == true 
+  if File.directory?("#{incoming}") == true
     files = Dir.entries("#{incoming}") - ['.','..']
     if files.length > 0
       Dir.chdir(repo)

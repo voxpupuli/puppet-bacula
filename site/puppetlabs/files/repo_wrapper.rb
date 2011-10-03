@@ -28,6 +28,7 @@ repos.each do |repo|
         cmdlist << "reprepro -b #{repo} includedeb #{dist} #{incoming}/*.deb"
         cmdlist << "reprepro -b #{repo} include #{dist} #{incoming}/*.changes"
         cmdlist.each do |cmd|
+          puts "running #{cmd}"
           `#{cmd}`
         end
       end

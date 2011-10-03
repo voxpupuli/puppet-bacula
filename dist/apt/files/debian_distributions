@@ -9,7 +9,18 @@ DscIndices: Sources Release .gz .bz2
 Tracking: all includechanges keepsources
 Log: logfile
 
-Suite: squeeze
+Suite: testing
+Codename: wheezy
+Architectures: i386 amd64 source
+Components: main
+Description: Puppet Labs APT Repository
+SignWith: yes
+DebIndices: Packages Release . .gz .bz2
+DscIndices: Sources Release .gz .bz2
+Tracking: all includechanges keepsources
+Log: logfile
+
+Suite: stable
 Codename: squeeze
 Architectures: i386 amd64 source
 Components: main
@@ -20,7 +31,7 @@ DscIndices: Sources Release .gz .bz2
 Tracking: all includechanges keepsources
 Log: logfile
 
-Suite: lenny
+Suite: oldstable
 Codename: lenny
 Architectures: i386 amd64 source
 Components: main

@@ -26,6 +26,12 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
     allow from all
   </Directory>
 
+  # Block access to SCM directories. Stolen from
+  # http://stackoverflow.com/questions/398008/deny-access-to-svn-folders-on-apache
+  <DirectoryMatch .*\.(svn|git|bzr)/.*>
+      Deny From All
+  </DirectoryMatch>
+
   LogLevel info
   ErrorLog /var/log/apache2/puppetlabs.com_error.log
   CustomLog /var/log/apache2/puppetlabs.com_access.log combined

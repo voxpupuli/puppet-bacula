@@ -10,7 +10,6 @@ puts "Starting agent..."
 repos = [
   '/opt/repository/apt/ubuntu',
   '/opt/repository/apt/debian',
-  '/opt/repository/apt/ops',
 ]
 
 #Dir.glob("#{apt_base}/*").each do |repo|

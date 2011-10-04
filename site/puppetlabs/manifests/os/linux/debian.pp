@@ -35,7 +35,7 @@ class puppetlabs::os::linux::debian  {
       refreshonly => true;
   }
 
-  file {
+  file { # remove after September October 10
     "/etc/apt/sources.list.d/ops.list":
       ensure   => absent,
   }

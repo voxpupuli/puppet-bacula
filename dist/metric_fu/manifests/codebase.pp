@@ -18,53 +18,60 @@
 define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
   include metric_fu
   
-  $timeout = 0
+  $timeout       = 0
   
+<<<<<<< Updated upstream
   $repo_base = "$metric_fu::parent_dir/$repo_name"
+=======
+  $repo_base     = "$metric_fu::parent_dir/$repo_name"
+>>>>>>> Stashed changes
   $rakefile_path = "$repo_base/tasks/rake/metrics.rake"
   
   vcsrepo { $repo_base:
 ## you would think this should be latest, but "present" actually always gets the latest rev of desired branch
 ## latest fires a refresh every time, but this only fires when the source actually changed, which is desirable
-    ensure => present,
+    ensure   => present,
     provider => git,
     revision => $repo_rev,
-    source => $repo_url,
-    require => [File[$metric_fu::parent_dir],Package["git-core"],Package["rake"]],
+    source   => $repo_url,
+    require  => [File[$metric_fu::parent_dir],Package["git-core"],Package["rake"]],
   }
-
-# No need for this: the subscribe will ensure that the metrics are run when (and only when) the codebase changes.
-#  cron { "metric_fu_$repo_name":
-#    command => "cd $repo_base && $metric_fu::metricfu_cmd",
-#    hour => $cron_hr,
-#    minute => $cron_min,
-#    user => $metric_fu::owner,
-#    require => Vcsrepo[$repo_base],
-#  }
   
   exec { "metric_fu_$repo_name":
-    command => $metric_fu::metricfu_cmd,
-#    user => $metric_fu::owner,
-    cwd => $repo_base,
-    subscribe => Vcsrepo[$repo_base],
+    command     => $metric_fu::metricfu_cmd,
+#    user       => $metric_fu::owner,
+    cwd         => $repo_base,
+    subscribe   => Vcsrepo[$repo_base],
     refreshonly => true,
+<<<<<<< Updated upstream
     timeout => $timeout,
     require => [Package["main"],Package["metric_fu","rspec","mocha","zaml","rack"],File[$rakefile_path]]
+=======
+    timeout     => $timeout,
+    require     => [Package["main"],Package["metric_fu","rspec","mocha","zaml","rack"],File[$rakefile_path]],
+>>>>>>> Stashed changes
   }
 
   file { "$metric_fu::web_root/$repo_name":
-    group => $group,
-    owner => $owner,  
-    ensure => link,
-    target => "$repo_base/tmp/metric_fu/output",
+    group   => $group,
+    owner   => $owner,  
+    ensure  => link,
+    target  => "$repo_base/tmp/metric_fu/output",
     require => [Exec["metric_fu_$repo_name"], File[$metric_fu::web_root]],
   }
 
   file { "$rakefile_path":
+<<<<<<< Updated upstream
     group => $group,
     owner => $owner,  
     ensure => present,
     source => "puppet:///modules/metric_fu/metrics.rake",
+=======
+    group   => $group,
+    owner   => $owner,  
+    ensure  => present,
+    source  => "puppet:///modules/metric_fu/metrics.rake",
+>>>>>>> Stashed changes
     require => [Vcsrepo["$repo_base"]],
   }
 }

@@ -21,11 +21,11 @@
 class codemetrics {
   include vcsrepo
 
-  $parent_dir = "/opt/metrics"  
-  $cloc_script = "$parent_dir/cloc.py"
+  $parent_dir      = "/opt/metrics"  
+  $cloc_script     = "$parent_dir/cloc.py"
   $spectime_script = "$parent_dir/spectime.py"
   
-#  package { ["git-core"]:
+#  package { ["git-core"]: ## Commented because already provided by metric_fu.
 #    ensure => present,
 #  }
 #  package { ["rake"]:
@@ -39,22 +39,20 @@ class codemetrics {
     ensure => present,
   }
 
-#  file { $parent_dir:
-#     ensure => directory,
+#  file { $parent_dir: ## Commented because metric_fu is taking care of it.
+#     ensure  => directory,
 #     recurse => true,
 #  }
 
   file { $cloc_script:
-     ensure => present,
-     source => "puppet:///modules/codemetrics/cloc.py",
+     ensure  => present,
+     source  => "puppet:///modules/codemetrics/cloc.py",
      require => File[$parent_dir],
-#     recurse => true,
   }
   
   file { $spectime_script:
-     ensure => present,
-     source => "puppet:///modules/codemetrics/spectime.py",
-     require => File[$parent_dir],
-#     recurse => true,
+     ensure   => present,
+     source   => "puppet:///modules/codemetrics/spectime.py",
+     require  => File[$parent_dir],
   }
 }

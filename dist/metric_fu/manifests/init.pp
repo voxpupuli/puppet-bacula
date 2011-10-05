@@ -18,17 +18,10 @@ class metric_fu {
   include apache
   include vcsrepo
   
-<<<<<<< Updated upstream
-  $parent_dir = "/opt/metrics"
-  $web_root = "$parent_dir/www"
-  $owner = "www-data"
-  $group = "www-data"
-=======
   $parent_dir   = "/opt/metrics"
   $web_root     = "$parent_dir/www"
   $owner        = "www-data"
   $group        = "www-data"
->>>>>>> Stashed changes
   $metricfu_cmd = "/usr/bin/rake metrics:all"
   $port         = 80
   

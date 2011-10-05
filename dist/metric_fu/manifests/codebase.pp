@@ -43,13 +43,8 @@ define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
     cwd         => $repo_base,
     subscribe   => Vcsrepo[$repo_base],
     refreshonly => true,
-<<<<<<< Updated upstream
-    timeout => $timeout,
-    require => [Package["main"],Package["metric_fu","rspec","mocha","zaml","rack"],File[$rakefile_path]]
-=======
     timeout     => $timeout,
     require     => [Package["main"],Package["metric_fu","rspec","mocha","zaml","rack"],File[$rakefile_path]],
->>>>>>> Stashed changes
   }
 
   file { "$metric_fu::web_root/$repo_name":
@@ -61,17 +56,10 @@ define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
   }
 
   file { "$rakefile_path":
-<<<<<<< Updated upstream
-    group => $group,
-    owner => $owner,  
-    ensure => present,
-    source => "puppet:///modules/metric_fu/metrics.rake",
-=======
     group   => $group,
     owner   => $owner,  
     ensure  => present,
     source  => "puppet:///modules/metric_fu/metrics.rake",
->>>>>>> Stashed changes
     require => [Vcsrepo["$repo_base"]],
   }
 }

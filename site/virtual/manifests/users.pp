@@ -340,5 +340,14 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'ssvarma':
+    comment => 'Shubhra Sinha Varma',
+    uid     => '1169',
+    group   => allstaff,
+    groups  => ["interns"],
+    shell   => '/bin/bash',
+    tag     => allstaff,
+  }
+
 }
 

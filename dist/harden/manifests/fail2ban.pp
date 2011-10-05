@@ -27,10 +27,11 @@ class harden::fail2ban {
 
   concat {
     '/etc/fail2ban/jail.local':
-      owner  => root,
-      group  => root,
-      mode   => 644,
-      notify => Service["fail2ban"];
+      owner   => root,
+      group   => root,
+      mode    => 644,
+      notify  => Service["fail2ban"],
+      require => Package["fail2ban"];
   }
 
 }

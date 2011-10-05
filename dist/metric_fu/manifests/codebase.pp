@@ -49,7 +49,7 @@ define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
     subscribe => Vcsrepo[$repo_base],
     refreshonly => true,
     timeout => $timeout,
-    require => [Package["main"],Package["metric_fu","rspec","mocha","zaml"],File[$rakefile_path]]
+    require => [Package["main"],Package["metric_fu","rspec","mocha","zaml","rack"],File[$rakefile_path]]
   }
 
   file { "$metric_fu::web_root/$repo_name":

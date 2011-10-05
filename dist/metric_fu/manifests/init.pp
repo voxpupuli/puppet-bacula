@@ -18,7 +18,7 @@ class metric_fu {
   include apache
   include vcsrepo
   
-  $parent_dir = "/opt/metric_fu"
+  $parent_dir = "/opt/metrics"
   $web_root = "$parent_dir/www"
   $owner = "www-data"
   $group = "www-data"
@@ -36,7 +36,7 @@ class metric_fu {
   package { ["rake"]:
     ensure => present,
   }
-  package { ["metric_fu","rspec","mocha"]:
+  package { ["metric_fu","rspec","mocha","zaml"]:
     ensure => present,
     provider => gem,
     require => [Package["main"],Package["ruby_parser"]],

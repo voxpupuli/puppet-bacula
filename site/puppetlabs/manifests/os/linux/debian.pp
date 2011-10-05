@@ -1,6 +1,8 @@
 class puppetlabs::os::linux::debian  {
   include puppetlabs::os::linux
 
+  include harden
+
   # This doesn't help at all, since the provider is actually adduser, not useradd
   # should be removed, class and module included
   #class { "useradd::settings":

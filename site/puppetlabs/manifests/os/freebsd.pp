@@ -2,6 +2,7 @@ class puppetlabs::os::freebsd {
 
   $packages_to_install = [  'sysutils/tmux',
                             'sysutils/pv',
+                            'sysutils/screen',
                             'net/netcat',
                             'sysutils/lsof',
                             'textproc/p5-ack',

@@ -1,0 +1,5 @@
+flush;
+spdflush;
+# To the home network
+spdadd <%= ourside %> <%= theirside %> any -P out ipsec esp/tunnel/<%= from %>-<%= to %>/use;
+spdadd <%= theirside %> <%= ourside %> any -P in  ipsec esp/tunnel/<%= to %>-<%= from %>/use;

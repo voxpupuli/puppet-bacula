@@ -12,5 +12,6 @@ CHANGES="$( git status --porcelain )"
 if [ ${#CHANGES} -gt 0 ]
 then
 	git add --all
-	git commit -m "Automatic commit by a magical script" -a
+	git diff --no-color
+	git commit -m "Automatic commit by a magical script." -a --quiet
 fi

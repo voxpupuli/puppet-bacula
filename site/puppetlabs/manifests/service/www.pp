@@ -107,6 +107,20 @@ class puppetlabs::service::www {
       seturl          => true,
   }
 
+  # Add magic to watch the wordpress/themes/etc for puppetlabs.com
+  file{ '/usr/local/bin/git_magic_wordpress.sh':
+    ensure => present,
+    mode   => '0755',
+    owner  => 'root',
+    source => 'puppet:///modules/puppetlabs/git_magic_wordpress.sh',
+  } ->
+  cron{ 'commit_puppetlabs': 
+    command     => '/usr/local/bin/git_magic_wordpress.sh',
+    user        => 'root',
+    minute      => '*/10',
+    environment => 'MAILTO=root@puppetlabs.com',
+  }
+
   # 8631
   file { "/var/www/puppetlabs.com/google297ed9803f18b575.html":
     owner   => root,

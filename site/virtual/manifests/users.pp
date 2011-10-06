@@ -342,7 +342,7 @@ class virtual::users {
 
   @account::user {'ssvarma':
     comment => 'Shubhra Sinha Varma',
-    uid     => '1169',
+    uid     => '1159',
     group   => allstaff,
     groups  => ["interns"],
     shell   => '/bin/bash',

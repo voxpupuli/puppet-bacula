@@ -118,7 +118,7 @@ class puppetlabs::service::www {
     command     => '/usr/local/bin/git_magic_wordpress.sh',
     user        => 'root',
     minute      => '*/10',
-    environment => 'MAILTO=root@puppetlabs.com',
+    environment => 'MAILTO=markops@puppetlabs.com',
   }
 
   # 8631

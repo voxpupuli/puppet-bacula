@@ -11,6 +11,8 @@ node 'dave.dc1.puppetlabs.net' {
   Account::User <| groups == 'sysadmin' |>
   Group         <| tag == 'allstaff' |>
 
+  include ntp
+
   include sudo
   sudo::allowgroup { 'sysadmin': }
 

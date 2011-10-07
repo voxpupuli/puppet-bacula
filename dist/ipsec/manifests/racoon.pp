@@ -1,4 +1,4 @@
-class ipsec::racoon(  $from, $to, $ourside, $theirside , $key ) {
+class ipsec::racoon(  $my_ip, $their_ip, $local_subnet, $remote_subnet , $key ) {
 
   include ipsec
 
@@ -12,7 +12,7 @@ class ipsec::racoon(  $from, $to, $ourside, $theirside , $key ) {
     ensure  => present,
     owner   => 'root',
     mode    => '0600',
-    content => "$to $key\n",
+    content => "${their_ip} ${key}\n",
   } ->
 
   file{ $ipsec::params::ipsec_racoon_conf:

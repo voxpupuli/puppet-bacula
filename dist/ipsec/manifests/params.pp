@@ -2,7 +2,7 @@ class ipsec::params {
 
   case $operatingsystem {
     'freebsd': {
-      $ipsec_setkey_conf = '/etc/setkey.conf'
+      $ipsec_setkey_conf = '/etc/ipsec.conf'
       $ipsec_racoon_conf = '/usr/local/etc/racoon/racoon.conf'
       $ipsec_psk_file    = '/usr/local/etc/racoon/psk.txt'
       $ipsec_setkey_cmd  = '/sbin/setkey'

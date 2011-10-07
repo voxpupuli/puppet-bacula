@@ -1,6 +1,6 @@
 # NOTE: currently only works for a single VPN
 
-class ipsec::setkey( $from, $to, $ourside, $theirside , $key=undef ) {
+class ipsec::setkey( $my_ip, $their_ip, $local_subnet, $remote_subnet , $key=undef ) {
 
   include ipsec
 

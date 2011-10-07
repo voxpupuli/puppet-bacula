@@ -1,22 +1,29 @@
+log     notify;  #log verbosity setting: set to 'notify' when testing and debugging is complete
+
 path pre_shared_key "/usr/local/etc/racoon/psk.txt" ;
 
-remote <%= to %>
+remote <%= their_ip %>
 {
-   exchange_mode main,base;
+  exchange_mode main,base;
 
-   my_identifier address "<%= from %>";
-   peers_identifier address <%= to %>;
+  my_identifier address "<%= my_ip %>";
+  peers_identifier address <%= their_ip %>;
 
-   lifetime time 24 hour;
-   proposal {
-           encryption_algorithm blowfish;
-           hash_algorithm sha1;
-           authentication_method pre_shared_key;
-           dh_group 2;
-   }
+  initial_contact on; 
+  ike_frag on; 
+  support_proxy on; 
+  proposal_check obey;
+
+  lifetime time 24 hour;
+  proposal {
+    encryption_algorithm blowfish;
+    hash_algorithm sha1;
+    authentication_method pre_shared_key;
+    dh_group 2;
+  }
 }
 
-sainfo address <%= ourside %> any address <%= theirside %> any
+sainfo address <%= local_subnet %> any address <%= remote_subnet %> any
 {
    pfs_group 2;
    lifetime time 12 hour ;

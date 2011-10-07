@@ -1,5 +1,8 @@
+# Flush everything, then add in all the rules
 flush;
 spdflush;
-# To the home network
-spdadd <%= ourside %> <%= theirside %> any -P out ipsec esp/tunnel/<%= from %>-<%= to %>/use;
-spdadd <%= theirside %> <%= ourside %> any -P in  ipsec esp/tunnel/<%= to %>-<%= from %>/use;
+# Not sure why you need these first two..
+spdadd <%= local_subnet %> <%= remote_router %>/32 any -P in  none;
+spdadd <%= remote_router %>/32 <%= local_subnet %> any -P out none;
+spdadd <%= local_subnet %> <%= remote_subnet %> any -P out ipsec esp/tunnel/<%= my_ip %>-<%= their_ip %>/use;
+spdadd <%= remote_subnet %> <%= local_subnet %> any -P in  ipsec esp/tunnel/<%= their_ip %>-<%= my_ip %>/use;

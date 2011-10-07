@@ -1,4 +1,11 @@
-class ipsec( $from, $to, $ourside, $theirside , $key=undef ) {
+class ipsec(
+  $my_ip,
+  $their_ip,
+  $local_subnet,
+  $remote_subnet,
+  $local_router,
+  $remote_router,
+  $key ) {
 
   include ipsec::params
 
@@ -7,25 +14,26 @@ class ipsec( $from, $to, $ourside, $theirside , $key=undef ) {
     alias  => 'ipsec',
   }
 
-  exec{ 'ipsec_make_tun_interfaces':
-    command => "ifconfig gif0 create; ifconfig gif0 tunnel $from $to ; ifconfig gif0 inet 172.16.1.1 172.16.1.2 netmask 255.255.255.248",
-    path => '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
+  if $::operatingsystem == 'FreeBSD' {
+    # We need to put that in to rc.conf somehow too.
+    service{ 'ipsec':
+      enable => true,
+    }
   }
-  
 
   class{ 'ipsec::setkey':
-    from      => $from,
-    to        => $to,
-    ourside   => $ourside,
-    theirside => $theirside,
+    my_ip         => $my_ip,
+    their_ip      => $their_ip,
+    local_subnet  => $local_subnet,
+    remote_subnet => $remote_subnet,
   }
 
   class{ 'ipsec::racoon':
-    from      => $from,
-    to        => $to,
-    ourside   => $ourside,
-    theirside => $theirside,
-    key       => $key,
+    my_ip         => $my_ip,
+    their_ip      => $their_ip,
+    local_subnet  => $local_subnet,
+    remote_subnet => $remote_subnet,
+    key           => $key,
   }
 
 }

@@ -1,5 +1,5 @@
-class harden::denyhosts {
-  
+class denyhosts {
+
   package { "denyhosts": ensure => installed; }
 
 }

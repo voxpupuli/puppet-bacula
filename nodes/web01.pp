@@ -12,7 +12,7 @@ node web01 {
   include puppetlabs_ssl
   include puppetlabs::service::www  # Contains wordpresses for this
                                     # host. (madstop, www.pl.com, &c)
-  class { "puppetlabs::docs": port => $apache_port; }
+  class { "puppetlabs::docs": http_port => $apache_port; }
 
   apache::vhost::redirect {
     "docs.mirror0.puppetlabs.com":

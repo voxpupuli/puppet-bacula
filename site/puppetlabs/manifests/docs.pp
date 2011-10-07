@@ -26,7 +26,7 @@ class puppetlabs::docs (
 
   # HTTPS added for #9976
   apache::vhost {
-    'docs.puppetlabs.com':
+    'docs.puppetlabs.com_ssl':
       port          => $https_port,
       docroot       => $docroot,
       template      => 'puppetlabs/docs_vhost.erb',

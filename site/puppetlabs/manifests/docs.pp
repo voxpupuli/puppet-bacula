@@ -32,7 +32,7 @@ class puppetlabs::docs (
       docroot       => $docroot,
       template      => 'puppetlabs/docs_vhost.erb',
       ssl           => true,
-      priority      => 20,
+      priority      => 15,
   }
 
 

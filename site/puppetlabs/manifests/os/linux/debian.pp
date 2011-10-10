@@ -31,18 +31,6 @@ class puppetlabs::os::linux::debian  {
       refreshonly => true;
   }
 
-  file { # remove after September October 10
-    "/etc/apt/sources.list.d/ops.list":
-      ensure   => absent,
-  }
-
-  file {
-    "/etc/apt/sources.list.d/puppetlabs.list":
-      content => "deb http://apt.puppetlabs.com/debian squeeze main\n",
-      #content  => "deb http://apt.puppetlabs.com/debian $lsbdistcodename main\n",
-      notify   => Exec["apt-get update"],
-  }
-
   cron { "apt-get update":
     command => "/usr/bin/apt-get -qq update",
     user    => root,
@@ -56,6 +44,30 @@ class puppetlabs::os::linux::debian  {
     package{ 'mpt-status':
       ensure => purged,
     }
+  }
+
+  # Once facter is included in the /debian repo, the /ops repo can be removed
+  apt::source { "puppetlabs_ops.list":
+    uri          => "http://apt.puppetlabs.com/ops",
+    distribution => "sid"
+  }
+
+  case $operatingsystem {
+    Debian: {
+      apt::source { "puppetlabs.list":
+        uri          => "http://apt.puppetlabs.com/debian",
+      }
+      apt::source { "main.list": }
+      apt::source { "security.list":
+        uri          => "http://security.debian.org/",
+        distribution => "squeeze/updates"
+      }
+      apt::source { "updates.list":
+        uri          => "http://ftp.us.debian.org/debian/",
+        distribution => "squeeze-updates"
+      }
+    }
+    default: { }
   }
 
 }

@@ -17,11 +17,11 @@ node www-dev {
 
   cron {
     'www dir perms':
-      command => "/usr/bin/find /var/www/www-dev.puppetlabs.com/ -type d -print0 | xargs -o -I {} chmod 2775 {}",
+      command => "/usr/bin/find /var/www/www-dev.puppetlabs.com/ -type d -print0 | xargs -0 -I {} chmod 2775 {}",
       user    => root,
       minute  => '*/5';
     'www file perms':
-      command => "/usr/bin/find /var/www/www-dev.puppetlabs.com/ -type f -print0 | xargs -o -I {} chmod 0664 {}",
+      command => "/usr/bin/find /var/www/www-dev.puppetlabs.com/ -type f -print0 | xargs -0 -I {} chmod 0664 {}",
       user    => root,
       minute  => '*/5';
     'www ownership':

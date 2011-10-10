@@ -25,4 +25,13 @@ node 'dave.dc1.puppetlabs.net' {
     remote_router => '192.168.100.1',
     key           => 'SacyimejhabNedinyootLeOtnemgionobfudolcodNaulufcaupAgDeumsisyicUthCopDur'
   }
+
+  # Make this a template, please.
+  file{ '/etc/periodic.conf':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'wheel',
+    mode    => '0644',
+    content => "# email me less, thanks to Puppet\ndaily_show_success='NO'\nweekly_show_success='NO'\nmonthly_show_success='NO'\n",
+  }
 }

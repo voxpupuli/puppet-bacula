@@ -2,6 +2,7 @@ class role::server {
   include role::base
 
   include postfix
+  include postfix::mboxcheck # let me know that we have crap mail.
 
   $location = hiera("location")
 

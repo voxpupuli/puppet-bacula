@@ -13,6 +13,9 @@ node 'dave.dc1.puppetlabs.net' {
 
   include ntp
 
+  include postfix
+  include postfix::mboxcheck
+
   include sudo
   sudo::allowgroup { 'sysadmin': }
 

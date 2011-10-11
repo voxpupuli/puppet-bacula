@@ -70,12 +70,6 @@ node dxul {
       user    => www-data,
       minute  => "*/10",
       command => 'rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppet allow_override=project folder=tickets';
-    'redmine issue dump':
-      user    => root,
-      minute  => 10,
-      hour    => 1,
-      command => "(cd /opt/projects.puppetlabs.com; ./script/console production < console-csv.rb; cp issues_dump.csv ~james/Dropbox/Redmine\ Data/)",
-      ensure => absent;
   }
 
 }

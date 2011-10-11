@@ -4,6 +4,7 @@ class puppetlabs::os::freebsd {
                             'sysutils/pv',
                             'sysutils/screen',
                             'net/netcat',
+                            'security/ca_root_nss',
                             'sysutils/lsof',
                             'textproc/p5-ack',
                             'editors/vim-lite' ]

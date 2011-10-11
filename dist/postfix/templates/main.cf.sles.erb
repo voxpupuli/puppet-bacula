@@ -717,6 +717,4 @@ message_size_limit = 0
 smtp_tls_security_level = may
 smtp_tls_CAfile = <%= scope.lookupvar( 'postfix::params::ssl_certs') %>
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-#
-# Disable the smtp/inet port on FreeBSD so we don't have port 25 listening to *
-master_service_disable = inet
+

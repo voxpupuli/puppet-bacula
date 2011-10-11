@@ -110,7 +110,6 @@ mail_owner = postfix
 #inet_interfaces = all
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
-inet_interfaces = loopback-only
 
 # The proxy_interfaces parameter specifies the network interface
 # addresses that this mail system receives mail on by way of a
@@ -677,5 +676,5 @@ smtp_tls_security_level = may
 smtp_tls_CAfile = <%= scope.lookupvar( 'postfix::params::ssl_certs') %>
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
  
-# Disable the smtp/inet port on FreeBSD so we don't have port 25 listening to *
-master_service_disable = inet
+# only listen on loopback, for broken clients.
+inet_interfaces = loopback-only

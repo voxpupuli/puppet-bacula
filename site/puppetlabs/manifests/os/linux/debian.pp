@@ -56,7 +56,8 @@ class puppetlabs::os::linux::debian  {
     service{ 'mpt-statusd':
       ensure => stopped,
       enable => false,
-    } ->
+      before => Package['mpt-status'],
+    }
     package{ 'mpt-status':
       ensure => purged,
     }

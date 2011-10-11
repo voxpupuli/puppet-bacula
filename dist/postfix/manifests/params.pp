@@ -28,6 +28,15 @@ class postfix::params {
       $postfix_maincf_erb = 'postfix/main.cf.centos.erb'
       $ssl_certs = '/etc/pki/tls/certs/ca-bundle.crt'
     }
+    'sles','sled','opensuse','suse': {
+      $postfix_package = 'postfix'
+      $postfix_service = 'postfix'
+      $postfix_alias_files = '/etc/postfix/aliases'
+      $postfix_newaliases  = '/usr/bin/newaliases'
+      $postfix_maincf = '/etc/postfix/main.cf'
+      $postfix_maincf_erb = 'postfix/main.cf.sles.erb'
+      $ssl_certs = '/etc/ssl/ca-bundle.pem'
+    }
     default: {
       fail("Please check ${module_name} for this OS.")
     }

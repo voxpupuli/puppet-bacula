@@ -7,14 +7,16 @@ cd $dir || (echo "Oh, Fuck!"; exit 1)
 perm_guid () {
   sub=$1
   group=$2
-  find ${dir}/${sub} -type f -print0 | xargs -0 chmod 0664
-  find ${dir}/${sub} -type d -print0 | xargs -0 chmod 2775
+  find ${dir}/${sub} -type f -print0 | xargs -0 --no-run-if-empty chmod 0664
+  find ${dir}/${sub} -type d -print0 | xargs -0 --no-run-if-empty chmod 2775
   chown -R root:$group ${dir}/${sub}
   wait
 }
 
-for x in `find {yum,apt}/* -maxdepth 0 -type d`; do
-  echo "Setting permissions for: ${dir}/${x}/"
+for x in `find {yum,apt}/* -maxdepth 0 -type d`
+do
+  # # comment this out, as it's annoying to get emails about it, every day!
+  # echo "Setting permissions for: ${dir}/${x}/"
   current=`basename $x`
   case "$current" in
     prosvc|prosvc.unsigned)

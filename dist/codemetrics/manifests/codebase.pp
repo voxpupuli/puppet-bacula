@@ -33,14 +33,12 @@ define codemetrics::codebase ($repo_url, $repo_rev, $repo_name) {
   
   exec { "$python $codemetrics::cloc_script $repo_name $repo_base":
     subscribe   => [Vcsrepo[$repo_base],File[$codemetrics::cloc_script]],
-    refreshonly => true,
     timeout     => $timeout,
     require     => [Package["cloc","python2.7"]],
   }
   
   exec { "$python $codemetrics::spectime_script $repo_name $repo_base":
     subscribe   => [Vcsrepo[$repo_base],File[$codemetrics::spectime_script]],
-    refreshonly => true,
     timeout     => $timeout,
     require     => [Package["cloc","python2.7"],Package["rspec","mocha"]],
   }

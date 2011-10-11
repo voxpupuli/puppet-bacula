@@ -13,4 +13,9 @@ node mawu {
     insecure => true,
   }
 
+  unbound::stub { "100.168.192.in-addr.arpa.":
+    address  => '192.168.100.1',
+    insecure => true,
+  }
+
 }

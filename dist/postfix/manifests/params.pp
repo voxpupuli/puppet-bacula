@@ -19,7 +19,7 @@ class postfix::params {
       $postfix_maincf_erb = 'postfix/main.cf.freebsd.erb'
       $ssl_certs = '/usr/local/share/certs/ca-root-nss.crt'
     }
-    'centos': {
+    'fedora','redhat','centos': {
       $postfix_package = 'postfix'
       $postfix_service = 'postfix'
       $postfix_alias_files = '/etc/postfix/aliases'

@@ -11,6 +11,8 @@ class graphite (
   package { "python-cairo":    ensure => installed; }
   package { "python-memcache": ensure => installed; }
   package { "python-sqlite":   ensure => installed; }
+  package { "python-twisted":  ensure => installed; }
+  package { "python-django-tagging":  ensure => installed; }
   package { "memcached":       ensure => installed; }
 
   apache::vhost {"$site_alias":
@@ -19,6 +21,7 @@ class graphite (
     ssl      => false,
     priority => 10,
     template => 'graphite/apache.conf.erb',
+    require  => Exec["install graphite"],
   }
 
   file { "/opt/graphite/conf/graphite.wsgi":
@@ -34,17 +37,27 @@ class graphite (
 
   file { "/opt/graphite/conf/carbon.conf":
     source    => "puppet:///modules/graphite/carbon.conf",
-    subscribe => Exec["install graphite"],
+    subscribe => Exec["install carbon"],
   }
 
   file { "/opt/graphite/conf/storage-schemas.conf":
     source    => "puppet:///modules/graphite/storage-schemas.conf",
-    subscribe => Exec["install graphite"],
+    subscribe => Exec["install carbon"],
   }
 
   file { "/opt/graphite/conf/dashboard.conf":
     source    => "puppet:///modules/graphite/dashboard.conf",
     subscribe => Exec["install graphite"],
+  }
+
+  service { "carbon-cache":
+    require    => [File["/opt/graphite/conf/carbon.conf"],Exec["install whisper"]],
+    ensure     => running,
+    hasrestart => false,
+    hasstatus  => true,
+    stop       => "/opt/graphite/bin/carbon-cache.py stop",
+    start      => "/opt/graphite/bin/carbon-cache.py start",
+    status     => "/opt/graphite/bin/carbon-cache.py status",
   }
 
   bacula::job {

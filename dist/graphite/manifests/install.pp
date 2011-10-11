@@ -15,21 +15,23 @@ class graphite::install {
   exec { "extract graphite":
     command => "/bin/tar -xzf $graphite::params::webapp_dl_loc",
     cwd     => '/usr/local/src',
-    creates => '/usr/local/src/graphite-web-0.9.9',
+    creates => "/usr/local/src/graphite-web-${graphite::params::version}",
   }
 
   exec { "install graphite":
     command     => '/usr/bin/python setup.py install',
-    cwd         => '/usr/local/src/graphite-web-0.9.9',
-    refreshonly => true;
+    cwd         => "/usr/local/src/graphite-web-${graphite::params::version}",
+    refreshonly => true,
+    require     => Package["python-django-tagging"],
   }
 
   exec { "initialize db":
-    command     => '/usr/bin/python manage.py syncdb',
+    command     => '/usr/bin/python manage.py syncdb --noinput',
     cwd         => '/opt/graphite/webapp/graphite',
     environment => "PYTHONPATH=/opt/graphite/webapp",
     refreshonly => true,
     user        => $graphite::params::web_user,
+    require     => Package["python-sqlite"],
   }
 
   #
@@ -45,13 +47,14 @@ class graphite::install {
   exec { "extract carbon":
     command => "/bin/tar -xzf $graphite::params::carbon_dl_loc",
     cwd     => '/usr/local/src',
-    creates => '/usr/local/src/carbon-0.9.9',
+    creates => "/usr/local/src/carbon-${graphite::params::version}",
   }
 
   exec { "install carbon":
     command     => '/usr/bin/python setup.py install',
-    cwd         => '/usr/local/src/carbon-0.9.9',
-    refreshonly => true;
+    cwd         => "/usr/local/src/carbon-${graphite::params::version}",
+    refreshonly => true,
+    require     => Package["python-twisted"],
   }
 
   #
@@ -67,12 +70,12 @@ class graphite::install {
   exec { "extract whisper":
     command => "/bin/tar -xzf $graphite::params::whisper_dl_loc",
     cwd     => '/usr/local/src',
-    creates => '/usr/local/src/whisper-0.9.9',
+    creates => "/usr/local/src/whisper-${graphite::params::version}",
   }
 
   exec { "install whisper":
     command => '/usr/bin/python setup.py install',
-    cwd     => '/usr/local/src/whisper-0.9.9',
+    cwd     => "/usr/local/src/whisper-${graphite::params::version}",
     refreshonly => true;
   }
 

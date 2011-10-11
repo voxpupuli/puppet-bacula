@@ -2,11 +2,18 @@ class role::server {
   include role::base
 
   include postfix
+  include postfix::mboxcheck # let me know that we have crap mail.
 
   $location = hiera("location")
 
-  class { "nagios": nrpe_server  => hiera("nrpe_server");  }
-  class { 'munin':  munin_server => hiera("munin_server"); }
+  # We spin up VMs all the time. We don't want to put them in munin
+  # and nagios by default. We can go do this in a node if we really
+  # really must, but I suspect this will very rarely happen.
+  if $virtual != virtualbox {
+    class { "nagios": nrpe_server  => hiera("nrpe_server");  }
+    class { 'munin':  munin_server => hiera("munin_server"); }
+  }
+
   class { "ntp":    server       => hiera("ntpserver"); }
 
   # SSH

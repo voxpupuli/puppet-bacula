@@ -11,6 +11,30 @@ node 'dave.dc1.puppetlabs.net' {
   Account::User <| groups == 'sysadmin' |>
   Group         <| tag == 'allstaff' |>
 
+  include ntp
+
+  include postfix
+  include postfix::mboxcheck
+
   include sudo
   sudo::allowgroup { 'sysadmin': }
+
+  class{ 'ipsec':
+    my_ip         => $::ipaddress,
+    their_ip      => '74.85.255.4',
+    local_subnet  => '10.0.42.0/24',
+    remote_subnet => '192.168.100.0/24',
+    local_router  => '10.0.42.1',
+    remote_router => '192.168.100.1',
+    key           => 'SacyimejhabNedinyootLeOtnemgionobfudolcodNaulufcaupAgDeumsisyicUthCopDur'
+  }
+
+  # Make this a template, please.
+  file{ '/etc/periodic.conf':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'wheel',
+    mode    => '0644',
+    content => "# email me less, thanks to Puppet\ndaily_show_success='NO'\nweekly_show_success='NO'\nmonthly_show_success='NO'\n",
+  }
 }

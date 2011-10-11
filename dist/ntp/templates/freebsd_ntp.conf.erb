@@ -3,4 +3,7 @@
 <% elsif ntpserver != '' -%>
 <%= "server #{ntpserver} iburst maxpoll 9" -%>
 <% end -%>
+# allow the use of ntpq and the likes.
+restrict 127.0.0.1
+restrict ::1
 

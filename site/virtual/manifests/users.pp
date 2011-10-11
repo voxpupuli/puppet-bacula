@@ -340,5 +340,24 @@ class virtual::users {
     tag     => allstaff,
   }
 
+  @account::user {'ssvarma':
+    comment => 'Shubhra Sinha Varma',
+    uid     => '1159',
+    group   => allstaff,
+    groups  => ["interns"],
+    shell   => '/bin/bash',
+    tag     => allstaff,
+  }
+
+  @account::user {'mkincaid':
+    comment => 'Michael Kincaid',
+    uid     => '1160',
+    group   => allstaff,
+    groups  => ["interns"],
+    shell   => '/bin/zsh',
+    tag     => allstaff,
+    key     => "AAAAB3NzaC1yc2EAAAABIwAAAQEAzsbGV53B8L/UPtGgo6YjiotCGulp1ZfS6Zhvr58N/4KxoKmrEOUXSnHGuwJ0XMHeN186XlValWTIMEQTjwpMKmEXZuqNwBd5VPCEQg56RnzuH1iqhAPTzKU2sIEh7Dy7dZGsTXZg7XjKobhZcNbU+z03bmz5uv3RPbpSJMZmxshympPMWhuMWOuuwjH+5HnGZJ1pk1LSYhROc9Ch+gwynjeqAysaz/EMN/EyZDNGd3EofDAX9g1uT3ukTKoPVPn07aS8D3UKN9aMVL/SPwCu5js7VHDQyjXVJ8ePoIfmoypOsHHpF3M3l7WKgTSbUFLKBAufAvrzDfejkAmMqb1jPw==",
+    keytype => "ssh-rsa",
+  }
 }
 

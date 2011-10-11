@@ -1,12 +1,7 @@
 class puppetlabs::os::linux::debian  {
   include puppetlabs::os::linux
 
-  # This doesn't help at all, since the provider is actually adduser, not useradd
-  # should be removed, class and module included
-  #class { "useradd::settings":
-  #  last_uid => '1099',
-  #  last_gid => '1099',
-  #}
+  include harden
 
   case $domain {
     "puppetlabs.lan": {
@@ -19,8 +14,9 @@ class puppetlabs::os::linux::debian  {
   }
 
   package {
-    "lsb-release": ensure => installed;
-    "keychain":    ensure => installed;
+    'lsb-release': ensure     => installed;
+    'keychain':    ensure     => installed;
+    'ca-certificates': ensure => latest;
   }
 
   exec {
@@ -39,6 +35,7 @@ class puppetlabs::os::linux::debian  {
     "/etc/apt/sources.list.d/ops.list":
       ensure   => absent,
   }
+
   file {
     "/etc/apt/sources.list.d/puppetlabs.list":
       content => "deb http://apt.puppetlabs.com/debian squeeze main\n",
@@ -52,5 +49,14 @@ class puppetlabs::os::linux::debian  {
     minute  => 20,
     hour    => 1,
   }
+
+  # For some reason, we keep getting mpt installed on things. Not
+  # cool.
+  if $is_virtual == true {
+    package{ 'mpt-status':
+      ensure => absent,
+    }
+  }
+
 
 }

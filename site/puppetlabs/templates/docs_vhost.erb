@@ -4,8 +4,14 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
 <% if serveraliases.is_a? Array -%>
 <% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
 <% elsif serveraliases != '' -%>
-<%= "  ServerAlias #{serveraliases}" -%>
+<%= "  ServerAlias #{serveraliases}\n" -%>
 <% end -%>
+<% if ssl == true -%>
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/certs/pl.cert
+  SSLCertificateKeyFile /etc/ssl/private/pl.key
+<% end -%>
+
   DocumentRoot <%= docroot %>
   <Directory <%= docroot %>>
     Options <%= options %>

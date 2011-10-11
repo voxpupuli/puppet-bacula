@@ -29,7 +29,7 @@ class puppet (
   $puppet_vardir   = $puppet::params::puppet_vardir
   $puppet_ssldir   = $puppet::params::puppet_ssldir
 
-  if $kernel != "Darwin" {
+  if $kernel != "Darwin" and $kernel != "FreeBSD" {
     package { 'puppet':
       ensure => latest,
     }
@@ -43,6 +43,7 @@ class puppet (
         group  => 'root',
         source => "puppet:///modules/puppet/${puppet::params::puppetd_defaults}",
       }
+      $puppet_path = '/usr/bin/puppet'
     }
     darwin: {
       file { "com.puppetlabs.puppet.plist":
@@ -52,12 +53,16 @@ class puppet (
         source  => "puppet:///modules/puppet/com.puppetlabs.puppet.plist",
         path    => "/Library/LaunchDaemons/com.puppetlabs.puppet.plist",
       }
+      $puppet_path = '/opt/local/bin/puppet'
+    }
+    freebsd: {
+      $puppet_path = '/usr/local/bin/puppet'
     }
   }
 
   if $agent == true {
     service { "puppetd":
-      name       => "$puppetd_service",
+      name       => $puppetd_service,
       ensure     => running,
       enable     => true,
       hasstatus  => true,
@@ -66,7 +71,7 @@ class puppet (
     class { "puppet::monitor": enable => true; }
   } else {
     service { "puppetd":
-      name       => "$puppetd_service",
+      name       => $puppetd_service,
       ensure     => stopped,
       enable     => false,
       hasstatus  => true,
@@ -75,7 +80,7 @@ class puppet (
     }
     cron {
       "puppet agent":
-        command => "/usr/bin/puppet agent --onetime --no-daemonize",
+        command => "${puppet_path} agent --onetime --no-daemonize",
         minute  => "*/30";
     }
     class { "puppet::monitor": enable => false; }
@@ -83,11 +88,11 @@ class puppet (
 
   concat::fragment { 'puppet.conf-common':
     order   => '00',
-    target  => "$puppet::params::puppet_conf",
+    target  => $puppet::params::puppet_conf,
     content => template("puppet/puppet.conf-common.erb");
   }
 
-  concat { "$puppet::params::puppet_conf":
+  concat { $puppet::params::puppet_conf:
     mode    => '0644',
   }
 

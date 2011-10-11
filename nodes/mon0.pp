@@ -1,11 +1,11 @@
 node mon0 {
   include role::server
-
   include ganglia::server
-
   include graphite
-
   include harden
+
+  ssh::allowgroup {"interns": }
+  sudo::allowgroup {"interns": }
 
   # gather project
   package { "libxml-simple-perl": ensure => installed; }

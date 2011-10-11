@@ -15,12 +15,12 @@ class graphite::install {
   exec { "extract graphite":
     command => "/bin/tar -xzf $graphite::params::webapp_dl_loc",
     cwd     => '/usr/local/src',
-    creates => '/usr/local/src/graphite-web-0.9.8',
+    creates => '/usr/local/src/graphite-web-0.9.9',
   }
 
   exec { "install graphite":
     command     => '/usr/bin/python setup.py install',
-    cwd         => '/usr/local/src/graphite-web-0.9.8',
+    cwd         => '/usr/local/src/graphite-web-0.9.9',
     refreshonly => true;
   }
 
@@ -45,12 +45,12 @@ class graphite::install {
   exec { "extract carbon":
     command => "/bin/tar -xzf $graphite::params::carbon_dl_loc",
     cwd     => '/usr/local/src',
-    creates => '/usr/local/src/carbon-0.9.8',
+    creates => '/usr/local/src/carbon-0.9.9',
   }
 
   exec { "install carbon":
     command     => '/usr/bin/python setup.py install',
-    cwd         => '/usr/local/src/carbon-0.9.8',
+    cwd         => '/usr/local/src/carbon-0.9.9',
     refreshonly => true;
   }
 
@@ -67,12 +67,12 @@ class graphite::install {
   exec { "extract whisper":
     command => "/bin/tar -xzf $graphite::params::whisper_dl_loc",
     cwd     => '/usr/local/src',
-    creates => '/usr/local/src/whisper-0.9.8',
+    creates => '/usr/local/src/whisper-0.9.9',
   }
 
   exec { "install whisper":
     command => '/usr/bin/python setup.py install',
-    cwd     => '/usr/local/src/whisper-0.9.8',
+    cwd     => '/usr/local/src/whisper-0.9.9',
     refreshonly => true;
   }
 

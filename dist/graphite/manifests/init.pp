@@ -2,12 +2,6 @@ class graphite (
     $site_alias = $fqdn
   ) {
 
-# TODO:
-#  /opt/graphite/conf/carbon.conf
-#  /opt/graphite/conf/storage-schemas.conf
-#  /opt/graphite/conf/dashboard.conf
-#  /opt/graphite/webapp/graphite/local_settings.py
-
   include graphite::install
 
   include apache::mod::wsgi
@@ -38,9 +32,24 @@ class graphite (
     recurse   => true
   }
 
+  file { "/opt/graphite/conf/carbon.conf":
+    source    => "puppet:///modules/graphite/carbon.conf",
+    subscribe => Exec["install graphite"],
+  }
+
+  file { "/opt/graphite/conf/storage-schemas.conf":
+    source    => "puppet:///modules/graphite/storage-schemas.conf",
+    subscribe => Exec["install graphite"],
+  }
+
+  file { "/opt/graphite/conf/dashboard.conf":
+    source    => "puppet:///modules/graphite/dashboard.conf",
+    subscribe => Exec["install graphite"],
+  }
+
   bacula::job {
     "${fqdn}-graphite":
-      files => ["/opt/graphite","/home/zach"],
+      files => ["/opt/graphite"],
   }
 
 }

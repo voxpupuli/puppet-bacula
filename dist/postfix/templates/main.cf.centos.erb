@@ -36,19 +36,13 @@ queue_directory = /var/spool/postfix
 # The command_directory parameter specifies the location of all
 # postXXX commands.
 #
-command_directory = /usr/local/sbin
+command_directory = /usr/sbin
 
 # The daemon_directory parameter specifies the location of all Postfix
 # daemon programs (i.e. programs listed in the master.cf file). This
 # directory must be owned by root.
 #
-daemon_directory = /usr/local/libexec/postfix
-
-# The data_directory parameter specifies the location of Postfix-writable
-# data files (caches, random numbers). This directory must be owned
-# by the mail_owner account (see below).
-#
-data_directory = /var/db/postfix
+daemon_directory = /usr/libexec/postfix
 
 # QUEUE AND PROCESS OWNERSHIP
 #
@@ -116,6 +110,7 @@ mail_owner = postfix
 #inet_interfaces = all
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
+inet_interfaces = loopback-only
 
 # The proxy_interfaces parameter specifies the network interface
 # addresses that this mail system receives mail on by way of a
@@ -160,7 +155,7 @@ mail_owner = postfix
 #
 # See also below, section "REJECTING MAIL FOR UNKNOWN LOCAL USERS".
 #
-#mydestination = $myhostname, localhost.$mydomain, localhost
+mydestination = $myhostname, localhost.$mydomain, localhost
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
 #mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain,
 #	mail.$mydomain, www.$mydomain, ftp.$mydomain
@@ -247,7 +242,7 @@ unknown_local_recipient_reject_code = 550
 # 
 #mynetworks_style = class
 #mynetworks_style = subnet
-mynetworks_style = host
+#mynetworks_style = host
 
 # Alternatively, you can specify the mynetworks list by hand, in
 # which case Postfix ignores the mynetworks_style setting.
@@ -262,7 +257,7 @@ mynetworks_style = host
 #
 #mynetworks = 168.100.189.0/28, 127.0.0.0/8
 #mynetworks = $config_directory/mynetworks
-#mynetworks = hash:$config_directory/network_table
+#mynetworks = hash:/etc/postfix/network_table
 
 # The relay_domains parameter restricts what destinations this system will
 # relay mail to.  See the smtpd_recipient_restrictions description in
@@ -327,7 +322,7 @@ mynetworks_style = host
 # In the left-hand side, specify an @domain.tld wild-card, or specify
 # a user@domain.tld address.
 # 
-#relay_recipient_maps = hash:$config_directory/relay_recipients
+#relay_recipient_maps = hash:/etc/postfix/relay_recipients
 
 # INPUT RATE CONTROL
 #
@@ -382,7 +377,7 @@ mynetworks_style = host
 # "postfix reload" to eliminate the delay.
 #
 #alias_maps = dbm:/etc/aliases
-#alias_maps = hash:/etc/aliases
+alias_maps = hash:/etc/aliases
 #alias_maps = hash:/etc/aliases, nis:mail.aliases
 #alias_maps = netinfo:/aliases
 
@@ -392,7 +387,8 @@ mynetworks_style = host
 # tables that are not necessarily all under control by Postfix.
 #
 #alias_database = dbm:/etc/aliases
-#alias_database = hash:/etc/aliases
+#alias_database = dbm:/etc/mail/aliases
+alias_database = hash:/etc/aliases
 #alias_database = hash:/etc/aliases, hash:/opt/majordomo/aliases
 
 # ADDRESS EXTENSIONS (e.g., user+foo)
@@ -460,7 +456,29 @@ mynetworks_style = host
 # the main.cf file, otherwise the SMTP server will reject mail for    
 # non-UNIX accounts with "User unknown in local recipient table".
 #
-#mailbox_transport = lmtp:unix:/file/name
+#mailbox_transport = lmtp:unix:/var/lib/imap/socket/lmtp
+
+# If using the cyrus-imapd IMAP server deliver local mail to the IMAP
+# server using LMTP (Local Mail Transport Protocol), this is prefered
+# over the older cyrus deliver program by setting the
+# mailbox_transport as below:
+#
+# mailbox_transport = lmtp:unix:/var/lib/imap/socket/lmtp
+#
+# The efficiency of LMTP delivery for cyrus-imapd can be enhanced via
+# these settings.
+#
+# local_destination_recipient_limit = 300
+# local_destination_concurrency_limit = 5
+#
+# Of course you should adjust these settings as appropriate for the
+# capacity of the hardware you are using. The recipient limit setting
+# can be used to take advantage of the single instance message store
+# capability of Cyrus. The concurrency limit can be used to control
+# how many simultaneous LMTP sessions will be permitted to the Cyrus
+# message store. 
+#
+# To use the old cyrus deliver program you have to set:
 #mailbox_transport = cyrus
 
 # The fallback_transport specifies the optional transport in master.cf
@@ -477,8 +495,7 @@ mynetworks_style = host
 # the main.cf file, otherwise the SMTP server will reject mail for    
 # non-UNIX accounts with "User unknown in local recipient table".
 #
-#fallback_transport = lmtp:unix:/file/name
-#fallback_transport = cyrus
+#fallback_transport = lmtp:unix:/var/lib/imap/socket/lmtp
 #fallback_transport =
 
 # The luser_relay parameter specifies an optional destination address
@@ -519,7 +536,7 @@ mynetworks_style = host
 #
 # For details, see "man header_checks".
 #
-#header_checks = regexp:$config_directory/header_checks
+#header_checks = regexp:/etc/postfix/header_checks
 
 # FAST ETRN SERVICE
 #
@@ -589,7 +606,7 @@ debug_peer_level = 2
 #
 debugger_command =
 	 PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin
-	 ddd $daemon_directory/$process_name $process_id & sleep 5
+	 xxgdb $daemon_directory/$process_name $process_id & sleep 5
 
 # If you can't use X, use this to capture the call stack when a
 # daemon crashes. The result is in a file in the configuration
@@ -617,41 +634,40 @@ debugger_command =
 # sendmail_path: The full pathname of the Postfix sendmail command.
 # This is the Sendmail-compatible mail posting interface.
 # 
-sendmail_path = /usr/local/sbin/sendmail
+sendmail_path = /usr/sbin/sendmail.postfix
 
 # newaliases_path: The full pathname of the Postfix newaliases command.
 # This is the Sendmail-compatible command to build alias databases.
 #
-newaliases_path = /usr/local/bin/newaliases
+newaliases_path = /usr/bin/newaliases.postfix
 
 # mailq_path: The full pathname of the Postfix mailq command.  This
 # is the Sendmail-compatible mail queue listing command.
 # 
-mailq_path = /usr/local/bin/mailq
+mailq_path = /usr/bin/mailq.postfix
 
 # setgid_group: The group for mail submission and queue management
 # commands.  This must be a group name with a numerical group ID that
 # is not shared with other accounts, not even with the Postfix account.
 #
-setgid_group = maildrop
+setgid_group = postdrop
 
 # html_directory: The location of the Postfix HTML documentation.
 #
-html_directory = /usr/local/share/doc/postfix
+html_directory = no
 
 # manpage_directory: The location of the Postfix on-line manual pages.
 #
-manpage_directory = /usr/local/man
+manpage_directory = /usr/share/man
 
 # sample_directory: The location of the Postfix sample configuration files.
 # This parameter is obsolete as of Postfix 2.1.
 #
-sample_directory = /usr/local/etc/postfix
+sample_directory = /usr/share/doc/postfix-2.3.3/samples
 
 # readme_directory: The location of the Postfix README files.
 #
-readme_directory = /usr/local/share/doc/postfix
-
+readme_directory = /usr/share/doc/postfix-2.3.3/README_FILES
 
 # Now follows non-default settings.
 # Remember this is still under Puppet control.
@@ -660,6 +676,6 @@ readme_directory = /usr/local/share/doc/postfix
 smtp_tls_security_level = may
 smtp_tls_CAfile = <%= scope.lookupvar( 'postfix::params::ssl_certs') %>
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-
+ 
 # Disable the smtp/inet port on FreeBSD so we don't have port 25 listening to *
 master_service_disable = inet

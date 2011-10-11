@@ -52,10 +52,11 @@ class puppetlabs::os::linux::debian  {
 
   # For some reason, we keep getting mpt installed on things. Not
   # cool.
-  if $is_virtual == true {
+  if $is_virtual == 'true' {
     package{ 'mpt-status':
       ensure => absent,
     }
+    notice( 'removed mpt!')
   }
 
 

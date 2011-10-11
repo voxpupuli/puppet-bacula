@@ -38,7 +38,7 @@ class postfix::params {
       $ssl_certs = '/etc/ssl/ca-bundle.pem'
     }
     default: {
-      fail("Please check ${module_name} for this OS.")
+      fail("Haven't yet made ${module_name} for ${operatingsystem}.")
     }
   }
 }

@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python
 
 import sys
 import time
@@ -14,7 +14,7 @@ CLOC_CMD = ["/usr/bin/cloc",REPO_PATH,"--csv","--quiet","--progress-rate=0"]
 LANG = "Ruby"
 
 def get_cloc():
-  cloc_result = subprocess.check_output(CLOC_CMD).splitlines()
+  cloc_result = subprocess.Popen(CLOC_CMD, stdout=subprocess.PIPE).communicate()[0].splitlines()
   for line in cloc_result:
    if line and line.split(",")[1] == LANG:
     return line.split(",")

@@ -35,7 +35,7 @@ class codemetrics {
 #    ensure => present,
 #    provider => gem,
 #  }
-  package { ["cloc","python2.7"]:
+  package { ["cloc"]:
     ensure => present,
   }
 

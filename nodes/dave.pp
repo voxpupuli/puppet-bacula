@@ -16,6 +16,10 @@ node 'dave.dc1.puppetlabs.net' {
   include postfix
   include postfix::mboxcheck
 
+  include motd
+  motd::register{"the god damn firewall!": }
+
+
   include sudo
   sudo::allowgroup { 'sysadmin': }
 

@@ -70,6 +70,26 @@ node dxul {
       user    => www-data,
       minute  => "*/10",
       command => 'rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppet allow_override=project folder=tickets';
+
+    # A slew of git "backup" cron jobs, which just throw stuff in
+    # /opt/git so bacula backs them up. These are the ones taken from
+    # crontab that actually worked at time of writing.
+    'git_backups':
+      minute => 0,
+      hour => '*/3',
+      command => 'for i in puppet puppet-docs puppet-dashboard facter; do ( cd "/opt/git/${i}" && git --bare fetch --quiet --force origin master:master > /dev/null ) ; done';
+    'git_backups_puppet_24':
+      minute => 0,
+      hour => '*/3',
+      command => 'cd /opt/git/puppet && git --bare fetch --quiet --force origin 0.24.x:0.24.x > /dev/null';
+    'git_backups_puppet_25':
+      minute => 0,
+      hour => '*/3',
+      command => 'cd /opt/git/puppet && git --bare fetch --quiet --force origin 0.25.x:0.25.x > /dev/null';
+    'git_backups_puppet_26':
+      minute => 0,
+      hour => '*/3',
+      command => 'cd /opt/git/puppet && git --bare fetch --quiet --force origin 2.6.x:2.6.x > /dev/null';
   }
 
 }

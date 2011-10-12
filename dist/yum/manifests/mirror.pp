@@ -24,7 +24,7 @@ class yum::mirror {
 	cron {
 		"yum-mirror":
 			user => root,
-			command => "/usr/local/bin/yum-mirror",
+			command => "/usr/local/bin/yum-mirror >/dev/null",
 			minute => 10,
 			hour => 1,
 			require => File["/usr/local/bin/yum-mirror"];

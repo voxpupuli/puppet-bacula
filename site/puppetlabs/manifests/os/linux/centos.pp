@@ -35,5 +35,11 @@ class puppetlabs::os::linux::centos inherits puppetlabs::os::linux {
     }
     default: {}
   }
-}
 
+  # Make logwatch not run, we have other monitoring for that (famous
+  # last words).
+  file{ '/etc/cron.daily/0logwatch':
+    ensure => absent,
+  }
+
+}

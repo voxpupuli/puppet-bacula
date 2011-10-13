@@ -11,7 +11,7 @@ for i in 4 5; do
     echo "********************************"
     echo "* CORE ${i}/${a}"
     echo "********************************"
-    mkdir -p $BASEDIR/centos/${i}/os/${a}/
+    [ -d "$BASEDIR/centos/${i}/os/${a}/" ] || mkdir -p $BASEDIR/centos/${i}/os/${a}/
     rsync -avxHiy --progress  \
       rsync://mirror.csclub.uwaterloo.ca/centos/${i}/os/${a}/ \
       $BASEDIR/centos/${i}/os/${a}/
@@ -27,7 +27,7 @@ for i in 4 5; do
     echo "********************************"
     echo "* UPDATES ${i}/${a}"
     echo "********************************"
-    mkdir -p $BASEDIR/centos/${i}/updates/${a}/
+    [ -d "$BASEDIR/centos/${i}/updates/${a}/" ] || mkdir -p $BASEDIR/centos/${i}/updates/${a}/
     rsync -avxHiy --progress  \
       rsync://mirror.csclub.uwaterloo.ca/centos/${i}/updates/${a}/ \
       $BASEDIR/centos/${i}/updates/${a}/
@@ -43,7 +43,7 @@ for i in 4 5; do
     echo "********************************"
     echo "* EPEL ${i}/${a}"
     echo "********************************"
-    mkdir -p $BASEDIR/epel/${i}/${a}/
+    [ -d "$BASEDIR/epel/${i}/${a}/" ] || mkdir -p $BASEDIR/epel/${i}/${a}/
     rsync -vaxHiy --progress --numeric-ids --delay-updates --delete --delete-after \
       rsync://mirrors.servercentral.net/fedora-epel/${i}/${a}/ \
       $BASEDIR/epel/${i}/${a}/
@@ -54,7 +54,7 @@ done
 cd $BASEDIR/
 for i in 4 5; do
   for a in i386 x86_64; do
-    wget -e robots=off --wait 1 --accept=.html,.rpm,.gz,.xml -np -rmk \
+    wget -e robots=off --wait 1 --quiet --accept=.html,.rpm,.gz,.xml -np -rmk \
       http://buildsys.fedoraproject.org/buildgroups/rhel${i}/${a}/
   done
 done

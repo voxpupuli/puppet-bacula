@@ -1,6 +1,7 @@
 node urd {
   include role::server
-  include yum::mirror
+  # yum mirroring has been moved to yo.puppetlabs.lan
+  # include yum::mirror
   #include pxe
   include jumpstart
 

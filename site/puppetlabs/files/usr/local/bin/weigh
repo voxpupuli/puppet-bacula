@@ -1,0 +1,72 @@
+#!/usr/bin/perl
+
+# summarize the disk usage and sort by size
+
+use strict;
+#use warnings;
+use File::Find;
+
+my @searchlist; # list of directories to search
+my %summary;    # size summary information per file
+
+unless (@ARGV > 0) { push @searchlist, "."; } else { @searchlist = @ARGV; }
+
+foreach my $search_dir (@searchlist) {
+	opendir my $dh, $search_dir or warn "could not open directory: $!";
+	my @allfiles = readdir($dh);
+	closedir $dh;
+
+	my @filelist;
+	foreach (@allfiles) { push @filelist, $_ if -r;}
+
+	foreach my $file (@filelist) {
+		if (-d $file) {
+			unless ($file eq "..") { # Don't count backwards
+				my $sum = sum_dir($file);
+				if ($sum > 0) { $summary{"$file/"} = $sum; }
+			}
+		} elsif (-f $file) {
+			my $size = -s $file;
+			if ($size > 0) { $summary{$file} = $size; }
+		}
+	}
+}
+
+
+foreach my $filename (sort {$summary{$a} <=> $summary{$b} } keys %summary) {
+	my $size = get_filesize_str($summary{$filename});
+	print sprintf("%15s   %s\n", $size, "$filename");
+}
+
+
+sub sum_dir {
+	my $dir = shift;
+	my $total_size = 0;
+	find( 
+		{	wanted 			=> sub { $total_size += -s if -f && !-l },
+      	follow 			=> 0,
+      	follow_skip 	=> 1,
+		},
+		$dir,
+	);
+	
+	return $total_size;
+}
+
+
+sub get_filesize_str {
+	my $size = shift;
+	
+	if ( $size > 2 ** 40 ) {		# TiB: 1024 GiB
+		return sprintf("%.2f TiB", $size / 2**40);
+	} elsif ( $size > 2 ** 30 ) {	# GiB: 1024 MiB
+		return sprintf("%.2f GiB", $size / 2**30);
+	} elsif ( $size > 2 ** 20 ) {	# MiB: 1024 KiB
+		return sprintf("%.2f MiB", $size / 2**20);
+	} elsif ($size > 2 ** 10 ) {	# KiB: 1024 B
+		return sprintf("%.2f KiB", $size / 2**10);
+	} else {							# bytes
+		return sprintf("%.2f bytes", $size);
+	}
+}
+

@@ -10,3 +10,6 @@
 [submodule "dist/hiera"]
 	path = dist/hiera
 	url = git://github.com/ripienaar/hiera-puppet.git
+[submodule "dist/concat"]
+	path = dist/concat
+	url = https://github.com/ripienaar/puppet-concat.git

@@ -16,6 +16,10 @@ node 'dave.dc1.puppetlabs.net' {
   include postfix
   include postfix::mboxcheck
 
+  include motd
+  motd::register{"the god damn firewall!": }
+
+
   include sudo
   sudo::allowgroup { 'sysadmin': }
 
@@ -31,10 +35,10 @@ node 'dave.dc1.puppetlabs.net' {
 
   # Make this a template, please.
   file{ '/etc/periodic.conf':
-    ensure  => file,
-    owner   => 'root',
-    group   => 'wheel',
-    mode    => '0644',
-    content => "# email me less, thanks to Puppet\ndaily_show_success='NO'\nweekly_show_success='NO'\nmonthly_show_success='NO'\n",
+    ensure => file,
+    owner  => 'root',
+    group  => 'wheel',
+    mode   => '0644',
+    source => 'puppet:///modules/puppetlabs/os/freebsd/periodic.conf',
   }
 }

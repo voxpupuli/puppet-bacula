@@ -1,6 +1,10 @@
 class harden {
 
   include harden::fail2ban
-  include denyhosts
+
+  class {
+    "denyhosts":
+      adminemail => "root@puppetlabs.com",
+  }
 
 }

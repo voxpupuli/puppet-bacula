@@ -20,6 +20,7 @@ node clippy {
     require    => File["/var/www/git"],
   }
 
+  # QA github mirrors
   github::mirror {
     "puppetlabs/facter":
       ensure => present;
@@ -30,5 +31,15 @@ node clippy {
     "puppetlabs/pe_acceptance_tests":
       ensure  => present,
       private => true,
+  }
+
+  # Ops github mirrors
+  github::mirror {
+    "puppetlabs/puppetlabs-modules":
+      private => true,
+      ensure => present;
+    "puppetlabs/puppetlabs-sysadmin-docs":
+      private => true,
+      ensure => present;
   }
 }

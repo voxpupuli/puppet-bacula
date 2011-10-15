@@ -14,9 +14,10 @@ class denyhosts (
 
   service {
     "denyhosts":
-      ensure  => running,
-      enable  => true,
-      pattern => "denyhosts",
+      ensure    => running,
+      enable    => true,
+      hasstatus => false,
+      pattern   => "denyhosts",
   }
 
 }

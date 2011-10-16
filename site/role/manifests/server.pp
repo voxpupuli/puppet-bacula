@@ -6,6 +6,8 @@ class role::server {
 
   $location = hiera("location")
 
+  include motd  # update /etc/motd, use motd::register for more.
+
   # We spin up VMs all the time. We don't want to put them in munin
   # and nagios by default. We can go do this in a node if we really
   # really must, but I suspect this will very rarely happen.

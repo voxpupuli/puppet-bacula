@@ -33,6 +33,7 @@ class postfix( $rootmail = 'root@puppetlabs.com' ) {
     owner   => 'root',
     mode    => '0644',
     content => template( $postfix::params::postfix_maincf_erb ),
+    require => Package[$postfix::params::postfix_package],
     notify  => Service[$postfix::params::postfix_service],
   }
 

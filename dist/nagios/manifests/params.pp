@@ -26,6 +26,7 @@ class nagios::params {
       $nrpe_packages      = 'nagios-nrpe-server'
       $nrpe_service       = 'nagios-nrpe-server'
       $nrpe_configuration = '/etc/nagios/nrpe.cfg'
+      $nrpe_config_dir    = '/etc/nagios/nrpe.d'
       $nrpe_pid           = '/var/run/nagios/nrpe.pid'
       $nrpe_user          = 'nagios'
       $nrpe_group         = 'nagios'
@@ -37,6 +38,7 @@ class nagios::params {
       $nagios_packages        = [ 'nagios', 'nagios-devel' ]
       $nrpe_packages          = 'nagios-nrpe'
       $nrpe_configuration     = '/etc/nagios/nrpe.cfg'
+      $nrpe_config_dir        = '/etc/nagios/nrpe.d'
       $nrpe_pid               = '/var/run/nrpe/nrpe.pid'
       $nrpe_user              = 'nrpe'
       $nrpe_group             = 'nrpe'
@@ -49,6 +51,7 @@ class nagios::params {
       $nagios_packages        = [ 'nagios', 'nagios-devel' ]
       $nrpe_packages          = 'nrpe'
       $nrpe_configuration     = '/etc/nagios/nrpe.cfg'
+      $nrpe_config_dir        = '/etc/nagios/nrpe.d'
       $nrpe_pid               = '/var/run/nrpe/nrpe.pid'
       $nrpe_user              = 'nrpe'
       $nrpe_group             = 'nrpe'
@@ -68,6 +71,7 @@ class nagios::params {
       $nrpe_packages          = 'nrpe'
       $nrpe_service           = 'org.macports.nrpe'
       $nrpe_configuration     = '/opt/local/etc/nrpe/nrpe.cfg'
+      $nrpe_config_dir        = '/opt/local/etc/nagios/nrpe.d'
       $nrpe_pid               = '/var/run/nrpe.pid'
       $nrpe_user              = 'nagios'
       $nrpe_group             = 'nagios'

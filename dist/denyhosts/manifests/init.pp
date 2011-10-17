@@ -23,7 +23,7 @@ class denyhosts (
 
   file {
     "/etc/hosts.allow":
-      content => inline_template("<%= allow.to_a.join('\n') %>"),
+      content => inline_template('<%= [ allow.to_a.join("\n") , "\n" ].join %>'),
       owner   => root,
       group   => root,
       mode    => 644,

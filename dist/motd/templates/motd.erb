@@ -1,5 +1,5 @@
 Welcome abord to the good ship <%= fqdn %>(<%= ipaddress %>)
-Running on <%= operatingsystem %> <%= operatingsystemrelease %> <% if has_variable?("architecture") then %><%= architecture %> <% end %>on <%= virtual %> hardware.
+Running on <%= operatingsystem %> <%= operatingsystemrelease %><% if has_variable?("lsbdistcodename") then %>/<%= lsbdistcodename %> <% end %> <% if has_variable?("architecture") then %><%= architecture %> <% end %>on <%= virtual %> hardware.
 
 Puppet: <%= puppetversion %>          Facter: <%= facterversion %>          Environment: <%= environment %>
 <% if has_variable?("processor0") then -%> Processor: <%= processor0.gsub( / +/ , ' ' ) -%> <% end -%> <% if has_variable?("memorysize") then -%> Memory:    <%= memorysize -%> <% end -%>

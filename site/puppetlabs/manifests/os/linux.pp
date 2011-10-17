@@ -18,7 +18,7 @@ class puppetlabs::os::linux {
 
   cron {
     "clean /tmp":
-      command => "/usr/bin/find /tmp -mtime +3 -print0 | xargs --no-run-if-empty -0 rm",
+      command => "/usr/bin/find /tmp -mtime +3 -print0 | xargs --no-run-if-empty -0 rm -r",
       ensure  => present,
       user => root,  minute => 10,  hour => 20, weekday => 0;
   }

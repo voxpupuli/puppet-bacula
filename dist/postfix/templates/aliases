@@ -36,6 +36,13 @@ abuse:		postmaster
 # trap decode to catch security attacks
 decode:		root
 
+# Bunch of other ones that exist on machines that we may as well catch
+# everywhere.
+nagios:		root
+mail:		root
+sysop:		root
+www-data:	root
+
 # ALIASES(5)                                                          ALIASES(5)
 # 
 # NAME

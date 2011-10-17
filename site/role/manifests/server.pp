@@ -16,7 +16,7 @@ class role::server {
     class { 'munin':  munin_server => hiera("munin_server"); }
   }
 
-  class { "ntp":    server       => hiera("ntpserver"); }
+  class { "ntp": server => hiera("ntpserver"); }
 
   # SSH
   include ssh::server
@@ -34,4 +34,5 @@ class role::server {
 
   # Firewall
   if defined(Class["firewall"]) { Firewall <||> }
+
 }

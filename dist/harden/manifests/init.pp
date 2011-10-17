@@ -5,6 +5,7 @@ class harden {
   class {
     "denyhosts":
       adminemail => "root@puppetlabs.com",
+      allow      => hiera("allowhosts"),
   }
 
 }

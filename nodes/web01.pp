@@ -47,8 +47,9 @@ node web01 {
     type    => 'ssh-rsa',
     ensure  => 'present',
     user    => 'wordpresssync',
-    options => $ssh_options;
-  'wordpressrsync@wordpresssync':
+    options => $ssh_options,
+  } ->
+  ssh_authorized_key{ 'wordpressrsync@wordpresssync':
     key => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDWtNmx5XnCrP+8jpBurQ6r9xdx9pPz4bS7lOmdwXpPfpz4mZvtO6nzsBWHh/THsJtHRHCA580UzK/4Y+7vBoIOxYUVbbiHssVcudLpZcTrhOCYr3skTwzANi0vc5449/GNdqAeHsT4xI59/XmJrlB9lhU/jLUpf1HESAZYt+5HvJnJZh84yb4JJD9CTqqDsBxFlA9DcMZ0VOJmGjjowvatpdMlgzy4N+pIRYPPuCisaEpho4sRsasjCvLmQTbRBd58Eeg4J5QVBtmx/ieq1uj09AJOCxiFN8MmJRrMWhY5xPPDDz5Yf79mhR7cDCRtO5ijgsLkBAdPNMj983lDD9Zl',
     type    => 'ssh-rsa',
     ensure  => 'present',

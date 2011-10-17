@@ -44,7 +44,7 @@ node web01 {
     type    => 'ssh-dss',
     ensure  => 'present',
     user    => 'root',
-    options => ['command="/usr/local/bin/wordpress_db_dumper.sh"','from="192.168.100.18,markops.puppetlabs.lan"'],
+    options => ["command='/usr/local/bin/wordpress_db_dumper.sh'","from='192.168.100.18,markops.puppetlabs.lan'"],
   }
 
 }

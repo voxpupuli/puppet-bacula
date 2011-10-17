@@ -35,7 +35,7 @@ node web01 {
 
   # allow syncing from development via ssh/sudo/mysql. This isn't hack
   # is it?
-  $ssh_options = [ "command='/usr/local/bin/wordpress_db_dumper.sh'" , "from='192.168.100.18,markops.puppetlabs.lan'" ]
+  $ssh_options = [ "command='/usr/local/bin/wordpress_db_dumper.sh'" , "from=192.168.100.18" ]
   group{ 'wordpresssync': ensure => present, } ->
   user{  'wordpresssync': ensure => present, gid => 'wordpresssync', password => '*', } ->
   ssh::allowgroup { 'wordpresssync': } ->

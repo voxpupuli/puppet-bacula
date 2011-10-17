@@ -36,7 +36,7 @@ node web01 {
   # allow syncing from development via ssh/sudo/mysql. This isn't hack
   # is it?
   group{ 'wordpresssync': ensure => present, } ->
-  user{  'wordpresssync': ensure => present, password => '*', } ->
+  user{  'wordpresssync': ensure => present, gid => 'wordpresssync', password => '*', } ->
   ssh::allowgroup { 'wordpresssync': } ->
   sudo::entry{ "wordpresssync": entry => "wordpresssync ALL=(ALL) NOPASSWD: /usr/local/bin/wordpress_db_dumper.sh\n", }
 

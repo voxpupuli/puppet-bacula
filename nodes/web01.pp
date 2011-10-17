@@ -37,7 +37,7 @@ node web01 {
   # is it?
   $ssh_options = [ "command='/usr/local/bin/wordpress_db_dumper.sh'" , "from=192.168.100.18" ]
   group{ 'wordpresssync': ensure => present, } ->
-  user{  'wordpresssync': ensure => present, gid => 'wordpresssync', password => '*', } ->
+  user{  'wordpresssync': ensure => present, gid => 'wordpresssync', managehome => true, password => '*', } ->
   ssh::allowgroup { 'wordpresssync': } ->
   sudo::entry{ "wordpresssync": entry => "wordpresssync ALL=(ALL) NOPASSWD: /usr/local/bin/wordpress_db_dumper.sh\n", } ->
   ssh_authorized_key{ 'wordpresssync@wordpresssync':

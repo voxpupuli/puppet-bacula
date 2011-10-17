@@ -35,7 +35,7 @@ node web01 {
 
   # allow syncing from development via ssh/sudo/mysql. This isn't hack
   # is it?
-  $ssh_options = [ "command='/usr/local/bin/wordpress_db_dumper.sh'" , "from=192.168.100.18" ]
+  $ssh_options = [ "command='/usr/local/bin/wordpress_db_dumper.sh'" ]
   group{ 'wordpresssync': ensure      => present, } ->
   user{  'wordpresssync': ensure      => present, gid => 'wordpresssync', managehome => true, password => '*', } ->
   file{ '/home/wordpresssync': ensure => directory, owner => 'wordpresssync', group => 'wordpresssync', } ->

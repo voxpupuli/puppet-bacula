@@ -19,6 +19,7 @@ class nagios::commands {
     before => Service[$nagios::params::nagios_service],
   }
 
+  # this is no longer used and should be absent.
   nagios_command { 'check_bacula':
     command_line => "/usr/lib/nagios/plugins/check_bacula.pl -H \$ARG1\$ -w 1 -c 1 -j \$ARG2\$",
     command_name => 'check_bacula',

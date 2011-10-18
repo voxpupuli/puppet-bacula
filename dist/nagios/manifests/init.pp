@@ -16,21 +16,10 @@ class nagios (
   ) {
 
   include nagios::params
+  include nagios::nrpe
 
-  $nrpe_pid    = $nagios::params::nrpe_pid
-  $nrpe_user   = $nagios::params::nrpe_user
-  $nrpe_group  = $nagios::params::nrpe_group
-  $nagios_plugins_path = $nagios::params::nagios_plugins_path
 
   package { $::nagios::params::nagios_plugin_packages:
-    ensure   => installed,
-    provider => $kernel ? {
-      Darwin  => macports,
-      default => undef,
-    }
-  }
-
-  package { $::nagios::params::nrpe_packages:
     ensure   => installed,
     provider => $kernel ? {
       Darwin  => macports,
@@ -41,16 +30,6 @@ class nagios (
   file { '/etc/nagios':
     ensure  => present,
     require => Package[$nagios::params::nrpe_packages],
-  }
-
-  # File that contains some nrpd command "aliases"
-  file { $nagios::params::nrpe_configuration:
-    ensure  => present,
-    owner   => nagios,
-    group   => nagios,
-    content => template('nagios/nrpe.cfg.erb'),
-    notify  => Service[$nagios::params::nrpe_service],
-    require => File['/etc/nagios'],
   }
 
   service { $nagios::params::nrpe_service:

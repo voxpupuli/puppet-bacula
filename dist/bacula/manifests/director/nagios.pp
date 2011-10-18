@@ -12,6 +12,8 @@
 #
 class bacula::director::nagios {
 
+  include nagios::params
+
   @@nagios_service { "check_baculadir_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
@@ -48,12 +50,20 @@ class bacula::director::nagios {
     notify              => Service[$nagios::params::nagios_service],
   }
 
+  $nagios_plugins_path = $::nagios::params::nagios_plugins_path
   # put here because it needs the database password from the 
-  file { "/usr/lib/nagios/plugins/check_bacula.pl":
-    #source  => "puppet:///modules/nagios/check_bacula.pl",
+  file { "${nagios_plugins_path}/check_bacula.pl":
     content => template("nagios/check_bacula.pl.erb"),
-    mode    => 0755,
+    group   => $::nagios::params::nrpe_group,
+    mode    => 0750,
     ensure  => present,
+  }
+
+  nagios::nrpe::command {
+    "check_bacula":
+      path    => "${nagios_plugins_path}/check_bacula.pl",
+      args    => '-H $ARG1$ -w 1 -c 1 -j $ARG2$',
+      require => File["/usr/lib/nagios/plugins/check_bacula.pl"],
   }
 
 

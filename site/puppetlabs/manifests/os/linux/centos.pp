@@ -7,6 +7,10 @@ class puppetlabs::os::linux::centos inherits puppetlabs::os::linux {
 #      purge => true;
 #  }
 
+  package {
+    "redhat-lsb": ensure => installed;
+  }
+
   yumrepo { 'epel':
     descr      => "Extra Packages for Enterprise Linux ${lsbmajdistrelease} - \$basearch",
     mirrorlist => "http://mirrors.fedoraproject.org/mirrorlist?repo=epel-${lsbmajdistrelease}&arch=\$basearch",
@@ -14,6 +18,15 @@ class puppetlabs::os::linux::centos inherits puppetlabs::os::linux {
     gpgcheck   => 1,
     keepalive  => 1,
     gpgkey     => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL'
+  }
+
+  yumrepo { 'puppetlabs':
+    descr      => "Puppet Labs",
+    baseurl    => "http://yum.puppetlabs.com/el/5/products/$architecture/",
+    enabled    => 1,
+    gpgcheck   => 1,
+    keepalive  => 1,
+    gpgkey     => 'http://yum.puppetlabs.com/RPM-GPG-KEY-puppetlabs'
   }
 
   case $domain {

@@ -41,4 +41,36 @@ node 'dave.dc1.puppetlabs.net' {
     mode   => '0644',
     source => 'puppet:///modules/puppetlabs/os/freebsd/periodic.conf',
   }
+
+
+  file {
+    "/usr/local/bin/zfs-snapshot.sh":
+      owner => root,
+      group => 0,
+      mode =>  750,
+      source => "puppet:///znet/zfs-snapshot.sh";
+  }
+
+  cron {
+    "zfs hourly snapshot":
+      user    => root,
+      minute  => 0,
+      command => "/usr/local/bin/zfs-snapshot.sh storage hourly 25",
+      require => File["/usr/local/bin/zfs-snapshot.sh"];
+    "zfs daily snapshot":
+      user    => root,
+      minute  => 0,
+      hour    => 0,
+      command => "/usr/local/bin/zfs-snapshot.sh storage daily 8",
+      require => File["/usr/local/bin/zfs-snapshot.sh"];
+    "zfs weekly snapshot":
+      user    => root,
+      minute  => 0,
+      hour    => 0,
+      weekday => 0,
+      command => "/usr/local/bin/zfs-snapshot.sh storage weekly 5",
+      require => File["/usr/local/bin/zfs-snapshot.sh"];
+  }
+
+
 }

@@ -23,10 +23,18 @@ define redmine::unicorn (
     # uncomment the above ONCE we migrate redmine past 1.1.x
   }
 
-  service { 
+  # Dxul, on karmic, for instance NEVER works, so lets no pretend the
+  # init script is good. Lets use hasstatus if it's there, and fall
+  # back to a pattern if not.
+  service {
     'unicorn':
-      ensure  => running,
-      enable  => true,
+      ensure    => running,
+      enable    => true,
+      hasstatus => $lsbdistcodename ? {
+        default  => true,
+        'karmic' => false,
+      },
+      pattern => 'unicorn_rails master',
       require => [
         Package['unicorn'],
         File["/etc/init.d/unicorn","${dir}/${name}/config/unicorn.config.rb"]],

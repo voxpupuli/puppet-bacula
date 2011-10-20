@@ -96,10 +96,9 @@ define redmine::instance (
   file{
     "${dir}/${name}/log":
       ensure  => directory,
-      #recurse => true,
       owner   => $user,
       group   => $group,
-      mode    => '0666',
+      mode    => '0755',
       require => Exec["${name}-migrate"],
   }
 

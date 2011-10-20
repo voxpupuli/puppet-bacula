@@ -12,6 +12,14 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   RewriteRule ^/account/register$ https://%{SERVER_NAME}/account/register [R,L]
   RewriteCond %{HTTPS} !=on
   RewriteRule ^/my(.*) https://%{SERVER_NAME}/my$1 [R,L]
+
+  # Bing is hammering the crap out of us. Leave this in for a bit till
+  # they all re-read robots.txt
+  RewriteCond %{HTTP_USER_AGENT}  ^bingbot/.*             [OR,NC]
+  RewriteCond %{HTTP_USER_AGENT}  .*bingbot/.*            [OR]
+  RewriteCond %{HTTP_USER_AGENT}  .*Bingbot/.*            [OR]
+  RewriteRule ^/issues.csv\?.* - [F]
+
 <% if ssl == true %>
   RequestHeader set X_FORWARDED_PROTO 'https'
   SSLEngine on

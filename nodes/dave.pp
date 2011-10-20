@@ -42,13 +42,12 @@ node 'dave.dc1.puppetlabs.net' {
     source => 'puppet:///modules/puppetlabs/os/freebsd/periodic.conf',
   }
 
-
   file {
     "/usr/local/bin/zfs-snapshot.sh":
       owner => root,
       group => 0,
       mode =>  750,
-      source => "puppet:///znet/zfs-snapshot.sh";
+      source => "puppet:///puppetlabs/zfs-snapshot.sh";
   }
 
   cron {

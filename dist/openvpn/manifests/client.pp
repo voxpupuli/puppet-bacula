@@ -2,20 +2,18 @@ define openvpn::client (
     $server,
     $port = '1194',
     $proto = 'udp',
-    $dev   = 'tun'
-
+    $dev   = 'tun',
+    $cert  = $name
   ) {
 
-  package { "openvpn": ensure => installed; }
+  include openvpn
 
   file { "/etc/openvpn/$server.conf":
-    owner => root,
-    group => root,
-    mode  => 640,
+    owner   => root,
+    group   => root,
+    mode    => 640,
     content => template("openvpn/client.conf.erb");
   }
-
-  service { "openvpn": enable => true, ensure => running; }
 
 }
 

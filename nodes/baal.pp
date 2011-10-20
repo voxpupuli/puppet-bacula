@@ -120,8 +120,8 @@ node baal {
 
   # Munin
   #if $environment == 'production' {
-    class { "munin::server": site_alias => "munin.puppetlabs.com"; }
-    include munin::dbservices
+  class { "munin::server": site_alias => "munin.puppetlabs.com"; }
+  include munin::dbservices
     #include munin::passenger
     #include munin::puppet
     #include munin::puppetmaster
@@ -136,8 +136,15 @@ node baal {
 
   # VPN for internal monitoring and DNS Resolution
   openvpn::client {
-    "node_$hostname":
+    "node_${hostname}_office":
       server => "office.puppetlabs.com",
+      cert   => "node_${hostname}",
+  }
+
+  openvpn::client {
+    "node_${hostname}_dc1":
+      server => "dave.dc1.puppetlabs.net",
+      cert   => "node_${hostname}",
   }
 
   # DNS resolution to internal hosts

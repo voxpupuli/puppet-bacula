@@ -18,6 +18,11 @@ class nagios (
   include nagios::params
   include nagios::nrpe
 
+  # ensure server pacakges are removed
+  if ! defined(Class["nagios::server"]) {
+    package { $::nagios::params::nagios_packages: ensure => absent; }
+  }
+
   package { $::nagios::params::nagios_plugin_packages:
     ensure   => installed,
     provider => $kernel ? {

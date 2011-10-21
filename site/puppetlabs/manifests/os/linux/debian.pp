@@ -13,11 +13,13 @@ class puppetlabs::os::linux::debian  {
     default: { }
   }
 
-  package {
-    'lsb-release': ensure     => installed;
-    'keychain':    ensure     => installed;
-    'ca-certificates': ensure => latest;
-  }
+  $packages = [
+    'lsb-release',
+    'keychain',
+    'ca-certificates',
+  ]
+
+  package { $packages: ensure => latest; }
 
   exec {
     "import puppet labs apt key":
@@ -71,3 +73,4 @@ class puppetlabs::os::linux::debian  {
   }
 
 }
+

@@ -79,5 +79,14 @@ class virtual::users::customers {
     expire  => "2011-08-19",
   }
 
+  # SCEA, #10214
+  @account::user {'scea':
+    comment => 'scea',
+    group   => 'scea',
+    tag     => customer,
+    key     => "AAAAB3NzaC1yc2EAAAADAQABAAABAQCyA10XNKjUlfsMXn4qI2nAnGUlc6cz+AH/gNFY2Pbvy4ziv0jxacT+0AjwI5BXz9yNk4kERKeLC9K0lRYr6yi7iZV1Sy8bfXeRU/NyUS5YsbNdQYtGtZ6gkZ3KLWunaiDaWla09IsyQFdvzaYH0dvpubq185OXjkcE7dypUn6/IlwkOE+uXxrfdrpqXxXZQ0HgKEL1K89d9VbbDuxJt9JfI3VwWhkAXj+M0Ffe4X1BLzhhFbKYXYeHaPPEv2WR4/XxuED033eYgjiAmPU3KNCB0pmWQujFR+1IBvHMKYii3YgPU4xX9cvQymvVi0uZ+gHYPe195bFyIW2PVn6pgM59",
+    keytype => "ssh-rsa",
+    expire  => "2011-11-30",
+  }
 }
 

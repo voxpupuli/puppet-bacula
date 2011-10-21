@@ -17,6 +17,7 @@ node pluto {
     "secureworks",
     "bioware",
     "wealthfront",
+    "scea",
     "advance"
   ]
 

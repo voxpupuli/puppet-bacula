@@ -129,6 +129,12 @@ class virtual::groups {
     tag    => customer,
   }
 
+  @group { 'scea':
+    ensure => present,
+    gid    => 1058,
+    tag    => customer,
+  }
+
 
 #
 # Functional

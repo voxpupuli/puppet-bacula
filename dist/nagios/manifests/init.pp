@@ -18,6 +18,10 @@ class nagios (
   include nagios::params
   include nagios::nrpe
 
+  # ensure server pacakges are removed
+  if ! defined(Class["nagios::server"]) {
+    package { $::nagios::params::nagios_packages: ensure => absent; }
+  }
 
   package { $::nagios::params::nagios_plugin_packages:
     ensure   => installed,
@@ -25,20 +29,6 @@ class nagios (
       Darwin  => macports,
       default => undef,
     }
-  }
-
-  file { '/etc/nagios':
-    ensure  => present,
-    require => Package[$nagios::params::nrpe_packages],
-  }
-
-  service { $nagios::params::nrpe_service:
-    pattern    => 'nrpe',
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
-    hasstatus  => false,
-    require    => [ File[$nagios::params::nrpe_configuration], Package[$nagios::params::nrpe_packages] ],
   }
 
   @@nagios_host { $fqdn:

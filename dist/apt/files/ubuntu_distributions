@@ -1,14 +1,3 @@
-Suite: unstable
-Codename: unstable
-Architectures: i386 amd64 source
-Components: main
-Description: Puppet Labs APT Repository
-SignWith: yes
-DebIndices: Packages Release . .gz .bz2
-DscIndices: Sources Release .gz .bz2
-Tracking: all includechanges keepsources
-Log: logfile
-
 Suite: oneiric
 Version: 11.10
 Codename: oneiric
@@ -35,7 +24,7 @@ Log: logfile
 
 Suite: maverick
 Version: 10.10
-Codename: meerkat
+Codename: maverick
 Architectures: i386 amd64 source
 Components: main
 Description: Puppet Labs APT Repository

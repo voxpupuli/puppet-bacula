@@ -52,17 +52,20 @@ node 'dave.dc1.puppetlabs.net' {
 
   cron {
     "zfs hourly snapshot":
+      ensure  => absent,
       user    => root,
       minute  => 0,
       command => "/usr/local/bin/zfs-snapshot.sh zroot hourly 25",
       require => File["/usr/local/bin/zfs-snapshot.sh"];
     "zfs daily snapshot":
+      ensure  => absent,
       user    => root,
       minute  => 0,
       hour    => 0,
       command => "/usr/local/bin/zfs-snapshot.sh zroot daily 8",
       require => File["/usr/local/bin/zfs-snapshot.sh"];
     "zfs weekly snapshot":
+      ensure  => absent,
       user    => root,
       minute  => 0,
       hour    => 0,

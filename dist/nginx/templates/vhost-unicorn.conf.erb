@@ -95,6 +95,9 @@ server {
       auth_basic            "Credentials please";
       auth_basic_user_file  <%= auth['auth_file'] %>
     <% end -%>
+    # <%= auth %>
+    # <%= auth['auth'] %>
+    #
 
     proxy_pass http://app_server;
   }

@@ -22,7 +22,8 @@ define unicorn::app (
       owner   => root,
       group   => root,
       mode    => 755,
-      content => template("${initscript}");
+      content => template("${initscript}"),
+      notify  => Service["unicorn_${name}"],
   }
 
 }

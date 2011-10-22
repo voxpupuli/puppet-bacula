@@ -10,6 +10,7 @@
 define nginx::unicorn(
   $port,
   #$dest,
+  $unicorn_socket,
   $priority   = '10',
   $template   = 'nginx/vhost-unicorn.conf.erb',
   $servername = '',

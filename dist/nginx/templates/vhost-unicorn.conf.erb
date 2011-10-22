@@ -87,7 +87,7 @@ server {
     # proxy_buffering off;
     
     # Crazed auth section:
-    <% if has_variable?( auth['allowfrom'] ) %>
+    <% if auth['allowfrom'] != nil  %>
     satisfy any;
     allow <%= auth['allowfrom'].split(',').join( ";\n" ) %>
     <% end -%>

@@ -9,12 +9,12 @@ define unicorn::app (
 
   service {
     "unicorn_${name}":
-      ensure      => running,
-      enable      => true,
-      hasstatus   => true,
-      hasrrestart => true,
-      restart     => "/etc/init.d/unicorn_${name} reload",
-      require     => File["/etc/init.d/unicorn_${name}"],
+      ensure     => running,
+      enable     => true,
+      hasstatus  => true,
+      hasrestart => true,
+      restart    => "/etc/init.d/unicorn_${name} reload",
+      require    => File["/etc/init.d/unicorn_${name}"],
   }
 
   file {

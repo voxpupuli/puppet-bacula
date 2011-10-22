@@ -25,7 +25,7 @@ PIDFILE="${APP_ROOT}/tmp/pids/unicorn.pid"
 
 ENV=production
 RETVAL=0
-DAEMON=/var/lib/gems/1.8/bin/unicorn
+DAEMON="RAILS_ENV=$ENV /var/lib/gems/1.8/bin/unicorn"
 DAEMON_OPTS="-D -E ${ENV} -c <%= config %>"
 
 . /lib/lsb/init-functions

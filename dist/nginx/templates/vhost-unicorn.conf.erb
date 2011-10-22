@@ -1,0 +1,98 @@
+# This vhost is managed by puppet, do not mess with it, terrible terrible things
+# will happen.
+#
+#
+# May be lifted from http://unicorn.bogomips.org/examples/nginx.conf
+
+server {
+
+  listen   <%= port %> default deferred; ## listen for ipv4, sorry no IPv6 for now.
+
+
+  server_name <%= srvname %> ;
+
+  access_log  /var/log/nginx/<%= srvname %>.access.log;
+
+
+  tcp_nopush on; # off may be better for *some* Comet/long-poll stuff
+  tcp_nodelay off; # on may be better for some Comet/long-poll stuff
+
+  # we haven't checked to see if Rack::Deflate on the app server is
+  # faster or not than doing compression via nginx.  It's easier
+  # to configure it all in one place here for static files and also
+  # to disable gzip for clients who don't get gzip/deflate right.
+  # There are other other gzip settings that may be needed used to deal with
+  # bad clients out there, see http://wiki.nginx.org/NginxHttpGzipModule
+  gzip on;
+  gzip_http_version 1.0;
+  gzip_proxied any;
+  gzip_min_length 500;
+  gzip_disable "MSIE [1-6]\.";
+  gzip_types text/plain text/html text/xml text/css
+             text/comma-separated-values
+             text/javascript application/x-javascript
+             application/atom+xml;
+
+  # this can be any application server, not just Unicorn/Rainbows!
+  upstream app_server {
+    # fail_timeout=0 means we always retry an upstream even if it failed
+    # to return a good HTTP response (in case the Unicorn master nukes a
+    # single worker for timing out).
+
+    server unix:<%= unicorn_socket %> fail_timeout=0;
+  }
+
+  client_max_body_size 128m;
+
+  # Prefer to serve static files directly from nginx to avoid unnecessary
+  # data copies from the application server.
+  #
+  # try_files directive appeared in in nginx 0.7.27 and has stabilized
+  # over time.  Older versions of nginx (e.g. 0.6.x) requires
+  # "if (!-f $request_filename)" which was less efficient:
+  # http://bogomips.org/unicorn.git/tree/examples/nginx.conf?id=v3.3.1#n127
+  try_files $uri/index.html $uri.html $uri @app;
+
+  location @app {
+    # an HTTP header important enough to have its own Wikipedia entry:
+    #   http://en.wikipedia.org/wiki/X-Forwarded-For
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    # enable this if and only if you use HTTPS, this helps Rack
+    # set the proper protocol for doing redirects:
+    # proxy_set_header X-Forwarded-Proto https;
+
+    # pass the Host: header from the client right along so redirects
+    # can be set properly within the Rack application
+    proxy_set_header Host $http_host;
+
+    # we don't want nginx trying to do something clever with
+    # redirects, we set the Host: header above already.
+    proxy_redirect off;
+
+    # set "proxy_buffering off" *only* for Rainbows! when doing
+    # Comet/long-poll/streaming.  It's also safe to set if you're using
+    # only serving fast clients with Unicorn + nginx, but not slow
+    # clients.  You normally want nginx to buffer responses to slow
+    # clients, even with Rails 3.1 streaming because otherwise a slow
+    # client can become a bottleneck of Unicorn.
+    #
+    # The Rack application may also set "X-Accel-Buffering (yes|no)"
+    # in the response headers do disable/enable buffering on a
+    # per-response basis.
+    # proxy_buffering off;
+
+    proxy_pass http://app_server;
+  }
+
+  # Rails error pages
+  error_page 500 502 503 504 /500.html;
+  location = /500.html {
+    root /path/to/app/current/public;
+  }
+
+
+  # Anything here is added by use of "magic" so is pretty jazzy.
+  <%= magic %>
+}
+

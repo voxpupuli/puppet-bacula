@@ -27,7 +27,7 @@ define nginx::unicorn(
   }
 
   if $path == '' {
-    $rootpath = '/var/www/$srvname'
+    $rootpath = "/var/www/$srvname"
   } else {
     $rootpath = $path
   }

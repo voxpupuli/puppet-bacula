@@ -36,6 +36,7 @@ define nginx::unicorn(
 
   if $ssl == true {
     include puppetlabs_ssl
+    $ssl_path = $puppetlabs_ssl::params::ssl_path
   }
 
 

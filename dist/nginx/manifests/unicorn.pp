@@ -15,6 +15,7 @@ define nginx::unicorn(
   $template   = 'nginx/vhost-unicorn.conf.erb',
   $servername = '',
   $path       = '',
+  $auth       = '',
   $magic      = ''
   ) {
 

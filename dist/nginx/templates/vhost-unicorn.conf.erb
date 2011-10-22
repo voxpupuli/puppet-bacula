@@ -84,6 +84,16 @@ server {
     # in the response headers do disable/enable buffering on a
     # per-response basis.
     # proxy_buffering off;
+    
+    # Crazed auth section:
+    <% if has_variable?( auth['allowfrom'] ) %>
+      satisfy any;
+      allow <%= allowfrom.split(',').join( ";\n" ) %>
+    <% end -%>
+    <% if auth['auth]'] == 'true' %>
+      auth_basic            "Credentials please";
+      auth_basic_user_file  <%= auth['auth_file'] %>
+    <% end -%>
 
     proxy_pass http://app_server;
   }

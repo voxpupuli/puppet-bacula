@@ -20,6 +20,8 @@ server {
 
   server_name <%= srvname %> ;
 
+  root <%= rootpath %>/public;
+
   access_log  /var/log/nginx/<%= srvname %>.access.log;
 
 
@@ -89,7 +91,7 @@ server {
   # Rails error pages
   error_page 500 502 503 504 /500.html;
   location = /500.html {
-    root /path/to/app/current/public;
+    root <%= rootpath %>/public;
   }
 
 

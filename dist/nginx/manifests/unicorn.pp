@@ -14,6 +14,7 @@ define nginx::unicorn(
   $priority   = '10',
   $template   = 'nginx/vhost-unicorn.conf.erb',
   $servername = '',
+  $path       = '',
   $magic      = ''
   ) {
 
@@ -24,6 +25,13 @@ define nginx::unicorn(
   } else {
     $srvname = $servername
   }
+
+  if $path == '' {
+    $rootpath = '/var/www/$srvname'
+  } else {
+    $rootpath = $path
+  }
+
 
   file {
     "${nginx::params::vdir}/${priority}-${name}":

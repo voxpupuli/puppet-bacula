@@ -16,6 +16,10 @@ class role::server {
     class { 'munin':  munin_server => hiera("munin_server"); }
   }
 
+  if $virtual != "physical" {
+    package { "pciutils": ensure => absent; }
+  }
+
   class { "ntp": server => hiera("ntpserver"); }
 
   # SSH

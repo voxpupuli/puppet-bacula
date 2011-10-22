@@ -13,10 +13,17 @@ upstream app_server {
   server unix:<%= unicorn_socket %> fail_timeout=0;
 }
 
+<% if $ssl == true -%>
+ssl_certificate      <%= ssl_path %>/certs/pl.cert
+ssl_certificate_key  <%= ssl_path %>/private/pl.key
+<% end -%>
 
 server {
 
   listen   <%= port %> default deferred; ## listen for ipv4, sorry no IPv6 for now.
+  <% if $ssl == true -%>
+  ssl    on;
+  <% end -%>
 
   server_name <%= srvname %> ;
 

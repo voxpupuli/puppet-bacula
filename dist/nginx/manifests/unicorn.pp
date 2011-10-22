@@ -16,7 +16,8 @@ define nginx::unicorn(
   $servername = '',
   $path       = '',
   $auth       = '',
-  $magic      = ''
+  $magic      = '',
+  $ssl        = false
   ) {
 
   include nginx
@@ -31,6 +32,10 @@ define nginx::unicorn(
     $rootpath = "/var/www/$srvname"
   } else {
     $rootpath = $path
+  }
+
+  if $ssl == true {
+    include puppetlabs_ssl
   }
 
 

@@ -23,6 +23,7 @@ server {
   root <%= rootpath %>/public;
 
   access_log  /var/log/nginx/<%= srvname %>.access.log;
+  error_log   /var/log/nginx/<%= srvname %>.error.log;
 
 
   tcp_nopush on; # off may be better for *some* Comet/long-poll stuff
@@ -90,7 +91,7 @@ server {
       satisfy any;
       allow <%= allowfrom.split(',').join( ";\n" ) %>
     <% end -%>
-    <% if auth['auth]'] == 'true' %>
+    <% if auth['auth]'] == true or auth['auth'] == 'true' %>
       auth_basic            "Credentials please";
       auth_basic_user_file  <%= auth['auth_file'] %>
     <% end -%>

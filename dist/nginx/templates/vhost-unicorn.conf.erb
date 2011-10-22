@@ -87,17 +87,14 @@ server {
     # proxy_buffering off;
     
     # Crazed auth section:
-    <% if auth['allowfrom'] != nil  %>
+    <% if auth['allowfrom'] != nil -%>
     satisfy any;
-    allow <%= auth['allowfrom'].split(',').join( ";\n" ) %>
+    allow <%= auth['allowfrom'].split(',').join( "\;\n" ) %>
     <% end -%>
-    <% if auth['auth'] == true or auth['auth'] == 'true' %>
+    <% if auth['auth'] == true or auth['auth'] == 'true' -%>
     auth_basic            "Credentials please";
     auth_basic_user_file  <%= auth['auth_file'] %>;
     <% end -%>
-    # <%= auth %>
-    # <%= auth['auth'] %>
-    #
 
     proxy_pass http://app_server;
   }

@@ -22,8 +22,12 @@ server {
 
   listen   <%= port %> default deferred; ## listen for ipv4, sorry no IPv6 for now.
 <% if ssl == true -%>
-  ssl    on;
-  ssl_ciphers ALL:!aNULL:!ADH:!eNULL:!MEDIUM:!LOW:!EXP:RC4:RSA:HIGH:!kEDH;  # use decent and non-crap ciphers.
+  # Do SSL, and don't do it terribly.  
+  ssl                  on;
+  ssl_ciphers          ALL:!aNULL:!ADH:!eNULL:!MEDIUM:!LOW:!EXP:RC4:RSA:HIGH:!kEDH;  # use decent and non-crap ciphers.
+  ssl_session_cache    shared:SSL:10m;
+  ssl_session_timeout  10m;
+  ssl_protocols        TLSv1 SSLv3;
 <% end -%>
 
   server_name <%= srvname %> ;

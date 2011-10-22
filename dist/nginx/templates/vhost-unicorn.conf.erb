@@ -88,12 +88,12 @@ server {
     
     # Crazed auth section:
     <% if has_variable?( auth['allowfrom'] ) %>
-      satisfy any;
-      allow <%= allowfrom.split(',').join( ";\n" ) %>
+    satisfy any;
+    allow <%= auth['allowfrom'].split(',').join( ";\n" ) %>
     <% end -%>
     <% if auth['auth'] == true or auth['auth'] == 'true' %>
-      auth_basic            "Credentials please";
-      auth_basic_user_file  <%= auth['auth_file'] %>
+    auth_basic            "Credentials please";
+    auth_basic_user_file  <%= auth['auth_file'] %>;
     <% end -%>
     # <%= auth %>
     # <%= auth['auth'] %>

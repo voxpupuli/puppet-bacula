@@ -21,9 +21,10 @@ ssl_certificate_key  <%= ssl_path %>/private/pl.key;
 server {
 
   listen   <%= port %> default deferred; ## listen for ipv4, sorry no IPv6 for now.
-  <% if ssl == true -%>
+<% if ssl == true -%>
   ssl    on;
-  <% end -%>
+  ssl_ciphers ALL:!aNULL:!ADH:!eNULL:!MEDIUM:!LOW:!EXP:RC4:RSA:HIGH:!kEDH;  # use decent and non-crap ciphers.
+<% end -%>
 
   server_name <%= srvname %> ;
 
@@ -94,14 +95,14 @@ server {
     # proxy_buffering off;
     
     # Crazed auth section:
-    <% if auth['allowfrom'] != nil -%>
+<% if auth['allowfrom'] != nil -%>
     satisfy any;
     allow <%= [ auth['allowfrom'].split(','), '' ].join( "\;\n" ) %>
-    <% end -%>
-    <% if auth['auth'] == true or auth['auth'] == 'true' -%>
+<% end -%>
+<% if auth['auth'] == true or auth['auth'] == 'true' -%>
     auth_basic            "Credentials please";
     auth_basic_user_file  <%= auth['auth_file'] %>;
-    <% end -%>
+<% end -%>
 
     proxy_pass http://app_server;
   }

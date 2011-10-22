@@ -14,8 +14,8 @@ upstream app_server {
 }
 
 <% if ssl == true -%>
-ssl_certificate      <%= ssl_path %>/certs/pl.cert
-ssl_certificate_key  <%= ssl_path %>/private/pl.key
+ssl_certificate      <%= ssl_path %>/certs/pl.cert;
+ssl_certificate_key  <%= ssl_path %>/private/pl.key;
 <% end -%>
 
 server {

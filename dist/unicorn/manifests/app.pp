@@ -1,17 +1,19 @@
 define unicorn::app (
     $approot,
     $config='config/unicorn.config.rb',
-    $initscript = "unicorn/initscript.erb" #default template location
+    $initscript = "unicorn/initscript_newer.erb" #default template location
   ) {
 
-  # get the common stuff, like package(s)
+  # get the common stuff, like the unicon package(s)
   include unicorn
 
   service {
     "unicorn_$name":
-      ensure  => running,
-      enable  => true,
-      require => File["/etc/init.d/unicorn_$name"],
+      ensure     => running,
+      enable     => true,
+      hasstatus  => true,
+      hasrefresh => true,
+      require    => File["/etc/init.d/unicorn_$name"],
   }
 
   file {
@@ -20,10 +22,6 @@ define unicorn::app (
       group   => root,
       mode    => 755,
       content => template("$initscript");
-  }
-
-  if $operatingsystem == "Debian" {
-
   }
 
 }

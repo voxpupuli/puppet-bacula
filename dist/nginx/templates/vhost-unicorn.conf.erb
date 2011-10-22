@@ -4,10 +4,19 @@
 #
 # May be lifted from http://unicorn.bogomips.org/examples/nginx.conf
 
+# this can be any application server, not just Unicorn/Rainbows!
+upstream app_server {
+  # fail_timeout=0 means we always retry an upstream even if it failed
+  # to return a good HTTP response (in case the Unicorn master nukes a
+  # single worker for timing out).
+
+  server unix:<%= unicorn_socket %> fail_timeout=0;
+}
+
+
 server {
 
   listen   <%= port %> default deferred; ## listen for ipv4, sorry no IPv6 for now.
-
 
   server_name <%= srvname %> ;
 
@@ -28,19 +37,11 @@ server {
   gzip_proxied any;
   gzip_min_length 500;
   gzip_disable "MSIE [1-6]\.";
-  gzip_types text/plain text/html text/xml text/css
+  gzip_types text/plain text/xml text/css
              text/comma-separated-values
              text/javascript application/x-javascript
              application/atom+xml;
 
-  # this can be any application server, not just Unicorn/Rainbows!
-  upstream app_server {
-    # fail_timeout=0 means we always retry an upstream even if it failed
-    # to return a good HTTP response (in case the Unicorn master nukes a
-    # single worker for timing out).
-
-    server unix:<%= unicorn_socket %> fail_timeout=0;
-  }
 
   client_max_body_size 128m;
 

@@ -1,0 +1,81 @@
+#!/bin/bash
+# unicorn-puppet         This init script enables something in unicorn, with
+#                        rackup, for <%= name %>
+#
+# Authors:               Richard Crowley
+#                        Naresh V.
+#
+#    Modified for Debian usage by Matt Carroll
+#    Modified for Debian 6+ usage by Zach Leslie
+#
+
+### BEGIN INIT INFO
+# Provides:          unicorn_<%= name %>
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: <%= name %> runnning in Unicorn
+### END INIT INFO
+
+
+APP_ROOT=<%= approot %> # we don't need this, as the config contains the worker dir.
+lockfile=/var/lock/unicorn-<%= name %>
+PIDFILE="${APP_ROOT}/tmp/pids/unicorn.pid"
+
+ENV=production
+RETVAL=0
+DAEMON=/var/lib/gems/1.8/bin/unicorn
+DAEMON_OPTS="-D -E ${ENV} -c <%= config %>"
+
+. /lib/lsb/init-functions
+
+start() {
+    log_daemon_msg "Starting Unicorn server for <%= name %>" "unicorn_<%= name %>"
+    if start-stop-daemon --start --quiet --oknodo --user $USER --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_OPTS; then
+      log_end_msg 0
+    else
+      log_end_msg 1
+    fi
+}
+
+stop() {
+    log_daemon_msg "Stopping Unicorn server for <%= name %>" "unicorn_<%= name %>"
+    if start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE; then
+      log_end_msg 0
+    else
+      log_end_msg 1
+    fi
+}
+
+restart() {
+    stop
+    sleep 1
+    start
+    log_end_msg $?
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    reload)
+        start-stop-daemon --stop --quiet --signal HUP --pidfile $PIDFILE
+        ;;
+    status)
+        status_of_proc -p "$PIDFILE" "${DAEMON}"
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}" >&2
+        exit 1
+        ;;
+esac
+
+exit $RETVAL
+

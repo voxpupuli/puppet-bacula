@@ -1,0 +1,13 @@
+# This vhost is managed by puppet, do not mess with it, terrible terrible things
+# will happen.
+
+server {
+
+  listen   <%= port %>; ## listen for ipv4, sorry no IPv6 for now.
+  server_name <%= srvname %>;
+
+  rewrite ^/(.*) <%=dest%>/$1 <%=status%>;
+
+  # Anything here is added by use of "magic" so is pretty jazzy.
+  <%= magic %>
+}

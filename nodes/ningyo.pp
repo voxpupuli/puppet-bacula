@@ -61,6 +61,13 @@ node ningyo {
     appserver => "unicorn",
   }
 
+  nginx::vhost::redirect{
+    'dashboard_to_ssl':
+      servername => 'dashboard.puppetlabs.com',
+      port       => '80',
+      dest       => 'https://dashboard.puppetlabs.com/',
+  }
+
   file {
     "/usr/local/bin/puppet_deploy.rb":
       owner => root,

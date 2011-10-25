@@ -1,0 +1,9 @@
+; HI THERE!
+@                       0       IN      SOA     a.puppetlabs.net. ns.puppetlabs.net. 2011063001 1800 900 604800 86400
+
+                         IN NS	dave.puppetlabs.net.
+
+1            PTR  dave.puppetlabs.net
+
+42           PTR  net02.puppetlabs.net
+

@@ -34,8 +34,5 @@ lines.append("sources.%(project)s.blank %(result)s %(time)s" % {'project' : PROJ
 lines.append("sources.%(project)s.comment %(result)s %(time)s" % {'project' : PROJECT_NAME, 'result' : cloc[3], 'time' : now})
 lines.append("sources.%(project)s.code %(result)s %(time)s" % {'project' : PROJECT_NAME, 'result' : cloc[4], 'time' : now})
 message = '\n'.join(lines) + '\n' #all lines must end in a newline
-print "sending message\n"
-print '-' * 80
 print message
-print
 sock.sendall(message)

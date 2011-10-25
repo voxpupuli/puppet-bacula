@@ -35,8 +35,5 @@ spectime = time_spec()
 now = int( time.time() )
 lines.append("sources.%(project)s.spectime %(result)s %(time)s" % {'project' : PROJECT_NAME, 'result' : spectime, 'time' : now})
 message = '\n'.join(lines) + '\n' #all lines must end in a newline
-print "sending message\n"
-print '-' * 80
 print message
-print
 sock.sendall(message)

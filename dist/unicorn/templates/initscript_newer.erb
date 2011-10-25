@@ -21,7 +21,7 @@
 
 APP_ROOT=<%= approot %> # we don't need this, as the config contains the worker dir.
 lockfile=/var/lock/unicorn-<%= name %>
-PIDFILE="${APP_ROOT}/tmp/pids/unicorn.pid"
+PIDFILE="<%= unicorn_pidfile %>"
 
 ENV=production
 RETVAL=0

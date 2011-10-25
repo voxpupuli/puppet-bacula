@@ -5,6 +5,8 @@ node ningyo {
   ssh::allowgroup { "techops": }
   sudo::allowgroup { "techops": }
 
+  ssh::allowgroup { "interns": }
+
   ###
   # Mysql
   #

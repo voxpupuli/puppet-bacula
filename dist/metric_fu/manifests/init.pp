@@ -18,12 +18,12 @@ class metric_fu {
   include apache
   include vcsrepo
   
-  $parent_dir = "/opt/metric_fu"
-  $web_root = "$parent_dir/www"
-  $owner = "www-data"
-  $group = "www-data"
+  $parent_dir   = "/opt/metrics"
+  $web_root     = "$parent_dir/www"
+  $owner        = "www-data"
+  $group        = "www-data"
   $metricfu_cmd = "/usr/bin/rake metrics:all"
-  $port = 80
+  $port         = 80
   
   apache::vhost{"metrics":
     docroot  => $web_root,
@@ -36,7 +36,7 @@ class metric_fu {
   package { ["rake"]:
     ensure => present,
   }
-  package { ["metric_fu","rspec","mocha"]:
+  package { ["metric_fu","rspec","mocha","zaml","rack"]:
     ensure => present,
     provider => gem,
     require => [Package["main"],Package["ruby_parser"]],
@@ -51,19 +51,17 @@ class metric_fu {
   }
 
   file { $parent_dir:
-     group => $group,
-     owner => $owner,  
-     mode => 644,  
+     group  => $group,
+     owner  => $owner,  
+     mode   => 644,  
      ensure => directory,
-#     recurse => true,
   }
 
   file { $web_root:
-     group => $group,
-     owner => $owner,  
-     mode => 644,  
-     ensure => directory,
-     require => File[$parent_dir],
-#     recurse => true,
+     group    => $group,
+     owner    => $owner,  
+     mode     => 644,  
+     ensure   => directory,
+     require  => File[$parent_dir],
   }
 }

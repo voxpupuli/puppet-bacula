@@ -1,0 +1,9 @@
+; HI THERE!
+@                       0       IN      SOA     a.puppetlabs.lan. ns.puppetlabs.lan. 2011063001 1800 900 604800 86400
+
+                         IN NS	net01.ops.puppetlabs.lan.
+
+$INCLUDE	/var/lib/bind/110.168.192.in-addr.arpa.statics
+
+; scientific5x-x86_64      IN A	192.168.100.64
+; scientific5x-x86_64      IN TXT	"testbed"

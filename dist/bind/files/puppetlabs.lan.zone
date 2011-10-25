@@ -1,0 +1,177 @@
+; HI THERE!
+@                       0       IN      SOA     a.puppetlabs.lan. ns.puppetlabs.lan. 2011063001 1800 900 604800 86400
+
+                         IN NS	imana.puppetlabs.lan.
+
+imana                    IN A	192.168.100.1
+imana                    IN TXT "Firewall"
+
+tiki                     IN A	192.168.100.22
+tiki                     IN TXT	"Top Server"
+soko                     IN A	192.168.100.23
+soko                     IN TXT	"Bottom Server"
+eir                      IN A	192.168.100.24
+eir                      IN TXT	"New Hardware for demos"
+dev-lucid-amd64          IN A	192.168.100.48
+dev-lucid-amd64          IN TXT	"Jenkins slave"
+tb-driver                IN A	192.168.100.49
+centos-55-64-1           IN A	192.168.100.50
+centos-55-386-1          IN A	192.168.100.51
+ubuntu-1004-32-1         IN A	192.168.100.52
+ubuntu-1004-32-1         IN TXT	"Testbed"
+ubuntu-1004-64-1         IN A	192.168.100.53
+ubuntu-1004-64-1         IN TXT	"Testbed"
+sol-10-u9-ga-x86         IN A	192.168.100.54
+sol-10-u9-ga-x86         IN TXT	"TestBed Solaris 10u9 x86"
+sol-10-sparc.test        IN A	192.168.100.55
+sol-10-sparc.test        IN TXT	"Solaris sparc zone"
+net01                    IN A	192.168.100.56
+net01                    IN TXT	"opsteam management"
+forge-dev                IN A	192.168.100.57
+forge-dev                IN TXT	"Forge/puppet modules development"
+debian6-latest-amd64     IN A	192.168.100.58
+debian6-latest-amd64     IN TXT	"debian6-latest-amd64 for test harness"
+debian6-latest-i386      IN A	192.168.100.59
+debian6-latest-i386      IN TXT	"debian6-latest-i386"
+scientific6.0-i386       IN A	192.168.100.61
+scientific6.0-i386       IN TXT	"testbed"
+scientific6.0-x86_64     IN A	192.168.100.62
+scientific6.0-x86_64     IN TXT	"testbed"
+scientific5x-i386        IN A	192.168.100.63
+scientific5x-i386        IN TXT	"testbed"
+scientific5x-x86_64      IN A	192.168.100.64
+scientific5x-x86_64      IN TXT	"testbed"
+rpm-builder              IN A	192.168.100.78
+rpm-builder              IN TXT	"Mock box"
+bacula01                 IN A	192.168.100.79
+bacula01                 IN TXT	"the lan bacula server"
+debian5-latest-i386      IN A	192.168.100.80
+debian5-latest-i386      IN TXT	"testbed"
+debian5-latest-amd64     IN A	192.168.100.81
+debian5-latest-amd64     IN TXT	"testbed"
+printer02                IN A	192.168.100.82
+printer02                IN TXT	"Printer on ann's desk"
+mawu                     IN A	192.168.100.83
+mawu                     IN TXT	"mac mini server #2"
+sles-11-586-1            IN A	192.168.100.84
+sles-11-586-1            IN TXT	"testbed"
+centos4-latest-x86-64    IN A	192.168.100.85
+centos4-latest-x86-64    IN TXT	"testbed"
+centos4-latest-i386      IN A	192.168.100.86
+centos4-latest-i386      IN TXT	"testbed"
+centos40-i386            IN A	192.168.100.87
+centos40-i386            IN TXT	"testbed"
+centos40-x86-64          IN A	192.168.100.88
+centos40-x86-64          IN TXT	"testbed"
+rhel5-latest-x86-64      IN A	192.168.100.89
+rhel5-latest-x86-64      IN TXT	"testbed"
+slave05                  IN A	192.168.100.90
+slave05                  IN TXT	"slave for building packages"
+slave06                  IN A	192.168.100.91
+slave06                  IN TXT	"slave for building packages"
+wyrd                     IN A	192.168.100.92
+wyrd                     IN TXT	"Deb6 For Zach"
+qat                      IN A	192.168.100.93
+qat                      IN TXT	"RHEL 6 Box for Mirror"
+printer01                IN A	192.168.100.96
+printer01                IN TXT	"Xerox Printer"
+hpux                     IN A	192.168.100.97
+hpux                     IN TXT	"hpux box"
+rhel6-64-1               IN A	192.168.100.98
+rhel6-64-1               IN TXT	"tb system for rhel6-64"
+vc01                     IN A	192.168.100.99
+vc01                     IN TXT	"Virtual Center Server"
+deb-builder              IN A	192.168.100.100
+deb-builder              IN TXT	"Package Builder for Debs"
+pluto                    IN A	192.168.100.101
+pluto                    IN TXT	"Developer share box"
+redminedev               IN A	192.168.100.103
+redminedev               IN TXT	"Redmine Development box"
+mon0                     IN A	192.168.100.104
+mon0                     IN TXT	"ganglia monitor"
+rhel60-i386              IN A	192.168.100.105
+rhel60-i386              IN TXT	"testbed"
+netra                    IN A	192.168.100.106
+netra                    IN TXT	"Sun Sparc Netra 120"
+qa                       IN A	192.168.100.107
+qa                       IN TXT	"OSQA Box"
+slave03                  IN A	192.168.100.108
+slave03                  IN TXT	"slave03 for hudson"
+slave02                  IN A	192.168.100.109
+slave02                  IN TXT	"hudson slave02"
+dev-win7                 IN A	192.168.100.110
+dev-win7                 IN TXT	"Development Windows 7 "
+rhel5-latest-i386        IN A	192.168.100.111
+rhel5-latest-i386        IN TXT	"testbed"
+rhel50-x86-64            IN A	192.168.100.112
+rhel50-x86-64            IN TXT	"testbed"
+rhel50-i386              IN A	192.168.100.113
+rhel50-i386              IN TXT	"testbed"
+rhel6-32-1               IN A	192.168.100.114
+dev-centos01             IN A	192.168.100.115
+dev-centos01             IN TXT	"Dev Box"
+dev-ubuntu01             IN A	192.168.100.116
+dev-ubuntu01             IN TXT	"Dev Box"
+dev-osol-x86             IN A	192.168.100.117
+dev-osol-x86             IN TXT	"open solairs dev box"
+www-dev                  IN A	192.168.100.118
+www-dev                  IN TXT	"Dev Environment for PL WWW"
+slave01                  IN A	192.168.100.119
+slave01                  IN TXT	"hudson slave01"
+wiki                     IN A	192.168.100.120
+wiki                     IN TXT	"Nan's wiki box"
+slave1-9                 IN A	192.168.100.121
+slave1-9                 IN TXT	"hudson slave for ruby 1.9"
+naz                      IN A	192.168.100.122
+naz                      IN TXT	"Naz Mac Mini"
+vanir                    IN A	192.168.100.123
+vanir                    IN TXT	"Ubuntu proxy system"
+mock                     IN A	192.168.100.124
+mock                     IN TXT	"Jeff's Mock Box"
+faro                     IN A	192.168.100.125
+faro                     IN TXT	"Mac Mini Server - Faro"
+app02                    IN A	192.168.100.126
+app02                    IN TXT	"Application Test VM 2"
+app01                    IN A	192.168.100.127
+app01                    IN TXT	"Application Test VM"
+ops-win7                 IN A	192.168.100.128
+ops-win7                 IN TXT	"Operations Windows 7"
+urd                      IN A	192.168.100.129
+urd                      IN TXT	"PXE Builder"
+juok-rac                 IN A	192.168.100.130
+juok-rac                 IN TXT	"Dell T310 52B1KN1"
+kaang-rac                IN A	192.168.100.131
+kaang-rac                IN TXT	"Dell T310 42B1KN1"
+juok                     IN A	192.168.100.132
+juok                     IN TXT	"Dell T310 52B1KN1 eth0"
+kaang                    IN A	192.168.100.134
+kaang                    IN TXT	"Dell T310 52B1KN1 eth0"
+rhel60-x86-64            IN A	192.168.100.135
+rhel60-x86-64            IN TXT	"testbed"
+rhel6-latest-x86-64      IN A	192.168.100.136
+rhel6-latest-x86-64      IN TXT	"testbed"
+rhel6-latest-i386        IN A	192.168.100.137
+rhel6-latest-i386        IN TXT	"testbed"
+rhel6-mock               IN A	192.168.100.138
+rhel6-mock               IN TXT	"rhel6-mock vm"
+sles-11-64-1             IN A	192.168.100.139
+sles-11-64-1             IN TXT	"sles-11-64-1 for testbed"
+tomcat0                  IN A	192.168.100.140
+tomcat0                  IN TXT	"JJM - Tomcat 0 Gold Master for Demo"
+tomcat1                  IN A	192.168.100.141
+tomcat1                  IN TXT	"Tomcat 1 VM"
+tomcat2                  IN A	192.168.100.142
+tomcat2                  IN TXT	"Tomcat VM"
+yo                       IN A	192.168.100.143
+yo                       IN TXT	"Mrepo Machine"
+slave10                  IN A	192.168.100.144
+centos-55-64-2           IN A	192.168.100.145
+centos-55-64-2           IN TXT	"centos-55-64-2"
+centos-55-386-2          IN A	192.168.100.146
+centos-55-386-2          IN TXT	"centos-55-386-2"
+projects-dev             IN A	192.168.100.147
+projects-dev             IN TXT	"Projects Development Site"
+hyel                     IN A	192.168.100.148
+hyel                     IN TXT	"ProSvc Testing Machine"
+gunab                    IN A	192.168.100.149
+gunab                    IN TXT	"PS R&D Physical Machine (Gateway PC)"

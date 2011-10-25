@@ -1,7 +1,0 @@
-I am not adding the AllowUsers namd entry to sshd_config
-
-config secondary DNS with chroot
-
-why is this required???
-
-also , I need to add this line define so that I can add snmp line

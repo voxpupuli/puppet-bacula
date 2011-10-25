@@ -35,35 +35,10 @@ node mon0 {
   }
 
   cron { # need to source some files here and run under not zach user
-    "redmine_gmetrics.pl": 
-      ensure => absent,
-      command => "/usr/local/bin/redmine_gmetric.pl",
-      user => zach,
-      minute => "*/5";
     "start_ii.sh":
       command => "~/bin/start_ii.sh",
       user => zach,
       minute => "*/3";
-    "ircusers_graph":
-      ensure => absent,
-      command => '/usr/bin/gmetric -c /etc/ganglia/gmond.conf --name="ircusers" --value=`~/bin/get_irc_users.sh` --type=int16',
-      user => zach,
-      minute => "*/5";
-    "puppet-users-count":
-      ensure => absent,
-      command => '/usr/bin/gmetric -c /etc/ganglia/gmond.conf --name="puppet-users_count" --value=`wget -q -O - http://groups.google.com/group/puppet-users | grep Members | awk \'{ print $NF }\'` --type=int16',
-      user => zach,
-      minute => "*/10";
-    "puppet-dev-count":
-      ensure => absent,
-      command => '/usr/bin/gmetric -c /etc/ganglia/gmond.conf --name="puppet-dev-count" --value=`wget -q -O - http://groups.google.com/group/puppet-dev | grep Members | awk \'{ print $NF }\'` --type=int16',
-      user => zach,
-      minute => "*/10";
-    "gd_irc.sh":
-      ensure => absent,
-      command => '~/bin/gd_irc_csv.sh >> ~/projects/irc/irc_users.csv',
-      user => zach,
-      minute => "*/10";
     "gather.rb":
       command => "(cd ~/gather; ./gather.rb)",
       user => zach,

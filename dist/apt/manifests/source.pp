@@ -1,11 +1,14 @@
 define apt::source (
-  $apt_dir      = "/etc/apt",
-  $sources_dir  = "/etc/apt/sources.list.d",
+  $apt_dir      = "${::apt::apt_dir}",
+  $sources_dir  = "${::apt::sources_dir}",
   $source_type  = "deb",
   $uri          = "http://ftp.us.debian.org/debian",
   $distribution = "${lsbdistcodename}",
-  $component    = "main"
+  $component    = "main",
+  $ensure       = present
   ) {
+
+  include apt
 
   file {
     "aptsource_${name}":
@@ -14,8 +17,9 @@ define apt::source (
       owner   => root,
       group   => root,
       mode    => 0644,
-      ensure  => present,
+      ensure  => $ensure,
       notify  => Exec["apt-get update"],
   }
 
 }
+

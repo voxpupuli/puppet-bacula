@@ -27,17 +27,6 @@ class puppetlabs::os::linux::debian  {
       command => "/usr/bin/wget -q -O - http://apt.puppetlabs.com/debian/4BD6EC30.asc | apt-key add -",
       unless  => "/usr/bin/apt-key list | grep -q 4BD6EC30",
       before  => Exec["apt-get update"];
-    "apt-get update":
-      user        => root,
-      command     => "/usr/bin/apt-get -qq update",
-      refreshonly => true;
-  }
-
-  cron { "apt-get update":
-    command => "/usr/bin/apt-get -qq update",
-    user    => root,
-    minute  => 20,
-    hour    => 1,
   }
 
   # For some reason, we keep getting mpt installed on things. Not
@@ -48,26 +37,55 @@ class puppetlabs::os::linux::debian  {
     }
   }
 
-  # Once facter is included in the /debian repo, the /ops repo can be removed
+  ####
+  # APT REPO SHIT
+  #
   apt::source { "puppetlabs_ops.list":
+    ensure       => absent,
     uri          => "http://apt.puppetlabs.com/ops",
     distribution => "sid"
   }
 
+  apt::source {
+    "security.list":
+      uri       => $lsbdistid ? {
+        "debian" => "http://security.debian.org/",
+        "ubuntu" => "http://security.ubuntu.com/ubuntu",
+      },
+      distribution => $lsbdistid ? {
+        "debian" => "${lsbdistcodename}/updates",
+        "ubuntu" => "${lsbdistcodename}-security",
+      },
+      component => $lsbdistid ? {
+        "debian" => "main",
+        "ubuntu" => "main universe",
+      },
+  }
+
+  apt::source { "puppetlabs.list":
+    uri          => $lsbdistid ? {
+      "debian" => "http://apt.puppetlabs.com/debian",
+      "ubuntu" => "http://apt.puppetlabs.com/ubuntu",
+    }
+  }
+
+  apt::source { "updates.list":
+    uri          => $lsbdistid ? {
+      "debian" => "http://ftp.us.debian.org/debian/",
+      "ubuntu" => "http://us.archive.ubuntu.com/ubuntu/",
+    },
+    distribution => "${lsbdistcodename}-updates",
+    component => $lsbdistid ? {
+      "debian" => "main",
+      "ubuntu" => "universe",
+    },
+  }
+
+  # Debian Specific things
   case $operatingsystem {
     Debian: {
-      apt::source { "puppetlabs.list":
-        uri          => "http://apt.puppetlabs.com/debian",
-      }
       apt::source { "main.list": }
-      apt::source { "security.list":
-        uri          => "http://security.debian.org/",
-        distribution => "squeeze/updates"
-      }
-      apt::source { "updates.list":
-        uri          => "http://ftp.us.debian.org/debian/",
-        distribution => "squeeze-updates"
-      }
+
     }
     default: { }
   }

@@ -69,14 +69,6 @@ class bind (
     default:      { $ipv6listen = 'any' }
   }
 
-
-  # Allow not binding to IPv6 if you don't want it.
-  case $bind_disable_v6 {
-    'true','yes': { $ipv6listen = 'none' }
-    default:      { $ipv6listen = 'any' }
-  }
-
-
   ############
   # Packages #
   ############

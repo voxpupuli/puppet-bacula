@@ -3,7 +3,7 @@
 
                          IN NS	dave.puppetlabs.net.
 
-1            PTR  dave.puppetlabs.net
+1            PTR  dave.puppetlabs.net.
 
-42           PTR  net02.puppetlabs.net
+42           PTR  net02.puppetlabs.net.
 

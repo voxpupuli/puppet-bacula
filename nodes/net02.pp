@@ -33,7 +33,7 @@ node 'net02.dc1.puppetlabs.net' {
     dnsdomain    => 'puppetlabs.net',
     nameservers  => ['10.0.42.1'],
     ntpservers   => ['us.pool.ntp.org'],
-    interfaces   => ['eth1'],
+    interfaces   => ['eth0'],
     dnsupdatekey => "/etc/bind/keys.d/$ddnskeyname",
     require      => Bind::Key[ $ddnskeyname ],
   }

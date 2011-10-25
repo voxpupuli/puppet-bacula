@@ -98,15 +98,6 @@ class bind (
     notify  => Service[$bind_service],
   }
 
-  file { $bind_config_options:
-    content => $bind_config_options_content,
-    owner   => root,
-    group   => $bind_group,
-    mode    => "0644",
-    require => Package[$bind_package],
-    notify  => Service[$bind_service],
-  }
-
   ########################
   # Configuration: Zones #
   ########################

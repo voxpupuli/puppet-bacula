@@ -1,0 +1,15 @@
+; HI THERE!
+@                       0       IN      SOA     a.puppetlabs.lan. ns.puppetlabs.lan. 2011063001 1800 900 604800 86400
+
+                         IN NS	net01.ops.puppetlabs.lan.
+
+; Load the statics zonefile in to here too.
+$INCLUDE	/var/lib/bind/ops.puppetlabs.lan.statics
+
+
+net01                    IN A	192.168.110.56
+net01                    IN TXT	"opsteam management"
+
+; scientific5x-x86_64      IN A	192.168.100.64
+; scientific5x-x86_64      IN TXT	"testbed"
+

@@ -102,7 +102,7 @@ server {
   satisfy any;
   <% auth['allowfrom'].split(',').each do |allowip| -%>
   allow <%= allowip %>;
-  <%= end -%>
+  <% end -%>
 <% end -%>
 <% if auth['auth'] == true or auth['auth'] == 'true' -%>
     auth_basic            "Credentials please";

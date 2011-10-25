@@ -1,1 +1,1 @@
-node default { include puppetlabs::base }
+node default { include role::base }

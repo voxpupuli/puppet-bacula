@@ -1,14 +1,17 @@
 class graphite::params {
   $build_dir = "/tmp/graphite_build_root"
 
-  $whisper_dl_url = "http://launchpad.net/graphite/1.0/0.9.8/+download/whisper-0.9.8.tar.gz"
-  $whisper_dl_loc = "whisper.tar-0.9.8.gz"
+  $series = "0.9"
+  $version = "0.9.9"
 
-  $webapp_dl_url = "http://launchpad.net/graphite/1.0/0.9.8/+download/graphite-web-0.9.8.tar.gz"
-  $webapp_dl_loc = "graphite-web-0.9.8.tar.gz"
+  $whisper_dl_url = "http://launchpad.net/graphite/${series}/${version}/+download/whisper-${version}.tar.gz"
+  $whisper_dl_loc = "whisper-${version}.tar.gz"
 
-  $carbon_dl_url = "http://launchpad.net/graphite/1.0/0.9.8/+download/carbon-0.9.8.tar.gz"
-  $carbon_dl_loc = "carbon-0.9.8.tar.gz"
+  $webapp_dl_url = "http://launchpad.net/graphite/${series}/${version}/+download/graphite-web-${version}.tar.gz"
+  $webapp_dl_loc = "graphite-web-${version}.tar.gz"
+
+  $carbon_dl_url = "http://launchpad.net/graphite/${series}/${version}/+download/carbon-${version}.tar.gz"
+  $carbon_dl_loc = "carbon-${version}.tar.gz"
 
   $install_prefix = "/opt/"
 

@@ -99,8 +99,10 @@ server {
     
     # Crazed auth section:
 <% if auth['allowfrom'] != nil -%>
-    satisfy any;
-    allow <%= [ auth['allowfrom'].split(','), '' ].join( "\;\n" ) %>
+  satisfy any;
+  <% auth['allowfrom'].split(',').each do |allowip| -%>
+  allow <%= allowip %>;
+  <%= end -%>
 <% end -%>
 <% if auth['auth'] == true or auth['auth'] == 'true' -%>
     auth_basic            "Credentials please";

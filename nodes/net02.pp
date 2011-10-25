@@ -6,7 +6,7 @@ node 'net02.dc1.puppetlabs.net' {
   sudo::allowgroup  { "techops": }
 
   class { 'bind':
-    customoptions => "check-names master ignore;\n",
+    customoptions => "check-names master ignore;\nallow-recursion {192.168.100.0/24; 10.0.0.0/16; };\n",
   }
 
   bind::zone {

@@ -31,13 +31,13 @@ define codemetrics::codebase ($repo_url, $repo_rev, $repo_name) {
 #    require  => #[File[$codemetrics::parent_dir],Package["git-core"],Package["rake"]],
 #  }
   
-  exec { "$python $codemetrics::cloc_script $repo_name $repo_base":
+  exec { "$python $codemetrics::cloc_script $repo_name $repo_base >> $codemetrics::cloc_log":
     subscribe   => [Vcsrepo[$repo_base],File[$codemetrics::cloc_script]],
     timeout     => $timeout,
     require     => [Package["cloc"]],
   }
   
-  exec { "$python $codemetrics::spectime_script $repo_name $repo_base":
+  exec { "$python $codemetrics::spectime_script $repo_name $repo_base >> $codemetrics::spectime_log":
     subscribe   => [Vcsrepo[$repo_base],File[$codemetrics::spectime_script]],
     timeout     => $timeout,
     require     => [Package["cloc"],Package["rspec","mocha"]],

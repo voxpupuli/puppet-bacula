@@ -12,11 +12,13 @@ CARBON_PORT = 2003
 PROJECT_NAME = sys.argv[1]
 REPO_PATH = sys.argv[2]
 SPEC_CMD = ["/usr/bin/rake","spec"]
+SPEC_OUTPUT = open("/opt/metrics/spec_output.log",'a')
+SPEC_ERRORS = open("/opt/metrics/spec_errors.log",'a')
 
 LANG = "Ruby"
 
 def run_spec():
-  subprocess.call(SPEC_CMD,cwd=REPO_PATH)
+  subprocess.call(SPEC_CMD,cwd=REPO_PATH,stdout=SPEC_OUTPUT,stderr=SPEC_ERRORS)
 
 def time_spec():
   t0 = time.time()

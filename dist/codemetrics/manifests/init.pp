@@ -24,6 +24,8 @@ class codemetrics {
   $parent_dir      = "/opt/metrics"  
   $cloc_script     = "$parent_dir/cloc.py"
   $spectime_script = "$parent_dir/spectime.py"
+  $cloc_log        = "$parent_dir/cloc.log"
+  $spectime_log    = "$parent_dir/spectime.log"
   
 #  package { ["git-core"]: ## Commented because already provided by metric_fu.
 #    ensure => present,

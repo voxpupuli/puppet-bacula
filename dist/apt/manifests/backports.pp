@@ -30,13 +30,19 @@ class apt::backports( $release=undef ) {
   }
 
   case $operatingsystem {
-    'Debian': {
-      $repourl = 'http://backports.debian.org/debian-backports'
-      $repocomponent = 'main'
-    }
-    'Ubuntu': {
-      $repourl = 'http://archive.ubuntu.com/ubuntu'
-      $repocomponent = 'universe multiverse restricted'
+    'Debian','Ubuntu': {
+      apt::source {
+        "backports.list":
+          uri       => $lsbdistid ? {
+            "debian" => "http://backports.debian.org/debian-backports",
+            "ubuntu" => "http://archive.ubuntu.com/ubuntu",
+          },
+          distribution => "${releasename}-backports",
+          component => $lsbdistid ? {
+            "debian" => "main",
+            "ubuntu" => "universe multiverse restricted",
+          },
+      }
     }
     default: {
       fail( "$module_name is Debian & Umbongo only." )
@@ -51,17 +57,10 @@ class apt::backports( $release=undef ) {
     filename => 'star'
   }
 
-  file { '/etc/apt/sources.list.d/backports.list':
-    ensure   => file,
-    content  => "#Added by Puppet\ndeb ${repourl} ${releasename}-backports ${repocomponent}\n",
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0644',
-  }
-
   exec { 'Refresh apt cache after adding backports':
     command     => '/usr/bin/aptitude --quiet update',
     refreshonly => 'true',
     subscribe   => File['/etc/apt/sources.list.d/backports.list'],
   }
 }
+

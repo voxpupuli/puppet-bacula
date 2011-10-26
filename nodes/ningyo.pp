@@ -65,6 +65,8 @@ node ningyo {
     appserver => "unicorn",
   }
 
+  include puppet::server::xmppreport
+
   nginx::vhost::redirect{
     'dashboard_to_ssl':
       servername => 'dashboard.puppetlabs.com',

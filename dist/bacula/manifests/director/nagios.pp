@@ -61,4 +61,3 @@ class bacula::director::nagios {
 
 }
 
-

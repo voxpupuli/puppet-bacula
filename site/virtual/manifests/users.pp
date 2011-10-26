@@ -359,5 +359,15 @@ class virtual::users {
     key     => "AAAAB3NzaC1yc2EAAAABIwAAAQEAzsbGV53B8L/UPtGgo6YjiotCGulp1ZfS6Zhvr58N/4KxoKmrEOUXSnHGuwJ0XMHeN186XlValWTIMEQTjwpMKmEXZuqNwBd5VPCEQg56RnzuH1iqhAPTzKU2sIEh7Dy7dZGsTXZg7XjKobhZcNbU+z03bmz5uv3RPbpSJMZmxshympPMWhuMWOuuwjH+5HnGZJ1pk1LSYhROc9Ch+gwynjeqAysaz/EMN/EyZDNGd3EofDAX9g1uT3ukTKoPVPn07aS8D3UKN9aMVL/SPwCu5js7VHDQyjXVJ8ePoIfmoypOsHHpF3M3l7WKgTSbUFLKBAufAvrzDfejkAmMqb1jPw==",
     keytype => "ssh-rsa",
   }
-}
 
+  @account::user {'ryan':
+    comment => 'Ryan Coleman',
+    uid     => '1161',
+    group   => allstaff,
+    groups  => ["prosvc"],
+    shell   => '/bin/bash',
+    tag     => allstaff,
+    key     => "AAAAB3NzaC1kc3MAAACBAJA99mHspuhsBc/DC7dv+fVtHNqNKqLzgnJo9rPCktXVIL8VWHxgX7e0HaRBMydr1RhCFtIKeXnJnON8pSzkQoZl9N32zRuuWMy/7blFzuXTyKjec8Cp+wnzkBCuB3jLj+jZvjl+4fTItB1R1rtYSoAye0xYwjppiXhEa89TA+OhAAAAFQCCf0vhMbK7pwJY+fvqyhxd3ATbVQAAAIAwmojvpiAPL80bb0twFAwZ0F1cI0iyDTBzQmAFtYMqmMcbZ+TfqRT6h31cFSn8bZWtzhYeCyy0Gukfklkt+0bHb9etUVQbaBrBxqt8Qpc9sH3XliR6yzc/ZWtts5epCRtmvLvT2EyvijZC0cW8ree5iTl5UX7kMj2Pz5EhDpCLcwAAAIB6NdcUgxitfOoAdXtntsWkIZYsuZTRG4YP8ig/9Crse/bBRzFFsr+o/OLiG93Wo4AAl1J9z1M4pFjKxZRpIzKOVWpO0wgNO8gy5W6bc2+BORBOVmdmh1/Zk2lvA1NTZBmfgK1UtSLonZF6MFBrSfNV6Pf4oYMkLNaLUBEJK9GcMg==",
+    keytype => "ssh-dss",
+  }
+}

@@ -26,13 +26,14 @@ node mon0 {
       mode => 755;
   }
 
-  file {
-    "/opt/graphite/conf/dashboard.conf":
-      owner => root,
-      group => root,
-      mode => 644,
-      source => "puppet:///modules/puppetlabs/graphite_dashboard.conf";
-  }
+  # Conflicts with dist/graphite/init.pp's file definition.
+  # file {
+  #   "/opt/graphite/conf/dashboard.conf":
+  #     owner => root,
+  #     group => root,
+  #     mode => 644,
+  #     source => "puppet:///modules/puppetlabs/graphite_dashboard.conf";
+  # }
 
   cron { # need to source some files here and run under not zach user
     "start_ii.sh":

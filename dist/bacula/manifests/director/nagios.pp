@@ -32,15 +32,6 @@ class bacula::director::nagios {
     notify              => Service[$nagios::params::nagios_service],
   }
 
-  @@nagios_service { "check_baculafd_${hostname}":
-    use                 => 'generic-service',
-    host_name           => "$fqdn",
-    check_command       => 'check_nrpe!check_proc!1:1 bacula-fd',
-    service_description => "check_baculafd_${hostname}",
-    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify              => Service[$nagios::params::nagios_service],
-  }
-
   @@nagios_service { "check_baculadisk_${hostname}":
     # nagios is now monitoring all disks, so no need here
     ensure              => absent,

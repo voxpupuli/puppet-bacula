@@ -31,13 +31,26 @@ class bacula (
     $job_retention  = "6 months",
     $autoprune      = "yes",
     $director,
-    $password
+    $password,
+    $monitor       = true
   ){
 
   include bacula::params
 
   $bacula_director = $director
   $bacula_password = $password
+
+  if $monitor == true {
+    @@nagios_service { "check_baculafd_${hostname}":
+      use                 => 'generic-service',
+      host_name           => "$fqdn",
+      check_command       => 'check_nrpe!check_proc!1:1 bacula-fd',
+      service_description => "check_baculafd_${hostname}",
+      target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+      notify              => Service[$nagios::params::nagios_service],
+      require             => Service[$bacula::params::bacula_client_services],
+    }
+  }
 
   package { 'bacula-common':
     ensure => present,

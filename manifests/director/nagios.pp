@@ -42,6 +42,8 @@ class bacula::director::nagios {
   }
 
   @@nagios_service { "check_baculadisk_${hostname}":
+    # nagios is now monitoring all disks, so no need here
+    ensure              => absent,
     use                 => 'generic-service',
     host_name           => "$fqdn",
     check_command       => 'check_nrpe_1arg!check_xvdc',
@@ -65,7 +67,6 @@ class bacula::director::nagios {
       args    => '-H $ARG1$ -w 1 -c 1 -j $ARG2$',
       require => File["/usr/lib/nagios/plugins/check_bacula.pl"],
   }
-
 
 }
 

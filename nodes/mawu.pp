@@ -18,4 +18,14 @@ node mawu {
     insecure => true,
   }
 
+  unbound::stub { "puppetlabs.net":
+    address  => '10.0.42.42',
+    insecure => true,
+  }
+
+  unbound::stub { "42.0.10.in-addr.arpa.":
+    address  => '10.0.42.42',
+    insecure => true,
+  }
+
 }

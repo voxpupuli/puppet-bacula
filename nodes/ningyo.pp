@@ -70,6 +70,7 @@ node ningyo {
   nginx::vhost::redirect{
     'dashboard_to_ssl':
       servername => 'dashboard.puppetlabs.com',
+      priority   => '49',
       port       => '80',
       dest       => 'https://dashboard.puppetlabs.com/',
   }

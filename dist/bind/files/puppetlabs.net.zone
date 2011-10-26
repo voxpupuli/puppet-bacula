@@ -1,10 +1,19 @@
 ; HI THERE!
-@                       0       IN      SOA     a.puppetlabs.net. ns.puppetlabs.net. 2011063001 1800 900 604800 86400
+@               0 IN  SOA a.puppetlabs.net. ns.puppetlabs.net. ( 2011063001 1800 900 604800 86400 )
 
-                         IN NS  net02.puppetlabs.net.
+                  IN  NS  net02.puppetlabs.net.
 
-dave                     IN A  10.0.42.1
-dave                     IN TXT "Firewall"
+dave              IN  A   10.0.42.1
+dave              IN  TXT "Firewall"
 
-net02                    IN A  10.0.42.42
+vali-ilo          IN  A   10.0.42.13
+balder-ilo        IN  A   10.0.42.14
+
+vali              IN  A   10.0.42.31
+vali              IN  TXT "HP 2U 2UX8340AC9 dc1.puppetlabs.net"
+
+balder            IN  A   10.0.42.32
+balder            IN  TXT "HP 2U 2UX83408YK dc1.puppetlabs.net"
+
+net02             IN  A   10.0.42.42
 

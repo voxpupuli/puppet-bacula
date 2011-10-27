@@ -51,7 +51,9 @@ class bacula::director (
     group   => bacula,
     ensure  => directory,
   }
+
   file { "/etc/bacula/conf.d": ensure  => directory; }
+
   file {
     "/etc/bacula/bconsole.conf":
       owner   => root,
@@ -67,7 +69,7 @@ class bacula::director (
       content => template("bacula/bacula-dir-header.erb")
   }
 
-  Concat::Fragment <<| tag == "bacula-$fqdn" |>>
+  Concat::Fragment <<| tag == "bacula-${fqdn}" |>>
 
   concat {
     '/etc/bacula/bacula-dir.conf':

@@ -28,12 +28,10 @@
 define bacula::job (
     $files    = '',
     $excludes = '',
-    $fileset  = true #should we generate a fileset for this job
+    $fileset  = true
   ) {
 
-  if ! defined(Class["bacula"]) {
-    err("need class bacula for this to be useful")
-  } else {
+  if defined(Class["bacula"]) {
     $director = $bacula::bacula_director
 
     # so if the fileset is not defined, we fall back to one called Common
@@ -53,7 +51,7 @@ define bacula::job (
       "bacula-job-$name":
         target  => '/etc/bacula/conf.d/job.conf',
         content => template("bacula/job.conf.erb"),
-        tag     => "bacula-$director";
+        tag     => "bacula-${::bacula::director}";
     }
 
     if $bacula::monitor == true {
@@ -67,6 +65,8 @@ define bacula::job (
         first_notification_delay => '120',
       }
     }
+  } else {
+    err("need Class['bacula'] for this to be useful")
   }
 }
 

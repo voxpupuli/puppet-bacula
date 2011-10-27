@@ -1,4 +1,4 @@
-Welcome abord to the good ship <%= fqdn %>(<%= ipaddress %>)
+Welcome aboard to the good ship <%= fqdn %>(<%= ipaddress %>)
 Running on <%= operatingsystem %> <%= operatingsystemrelease %><% if has_variable?("lsbdistcodename") then %>/<%= lsbdistcodename %> <% end %> <% if has_variable?("architecture") then %><%= architecture %> <% end %>on <%= virtual %> hardware.
 
 Puppet: <%= puppetversion %>          Facter: <%= facterversion %>          Environment: <%= environment %>

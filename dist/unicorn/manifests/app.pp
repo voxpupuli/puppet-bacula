@@ -8,7 +8,7 @@ define unicorn::app (
     $unicorn_backlog          = '2048',
     $unicorn_worker_processes = '4',
     $stdlog_path              = '',
-    $log_stds                 = false, # yes I know what it looks like.
+    $log_stds                 = 'false', # yes I know what it looks like.
     $unicorn_user             = '',
     $unicorn_group            = '',
     $config_file              = ''
@@ -17,7 +17,7 @@ define unicorn::app (
   # get the common stuff, like the unicon package(s)
   include unicorn
 
-  if $log_stds in [ 'true', 'yes', true , 'present', present ] {
+  if "${log_stds}" in [ 'true', 'yes', 'present' ] {
     if $stdlog_path == '' {
       $unicorn_stdlog_path = "${APPROOT}/log/"
     } else {

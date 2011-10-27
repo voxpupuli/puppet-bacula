@@ -5,14 +5,24 @@ node 'net02.dc1.puppetlabs.net' {
   ssh::allowgroup   { "techops": }
   sudo::allowgroup  { "techops": }
 
+  apt::source {
+    "wheezy.list":
+      distribution => "wheezy",
+  }
+
+  class {
+    "nagios::gearman":
+      key => hiera("gearman_key")
+  }
+
   class { 'bind':
     customoptions => "check-names master ignore;\nallow-recursion {192.168.100.0/24; 10.0.0.0/16; };\n",
   }
 
   bind::zone {
-    'puppetlabs.net':
+    'dc1.puppetlabs.net':
       type         => 'master',
-      source       => 'puppet:///modules/bind/puppetlabs.net.zone',
+      source       => 'puppet:///modules/bind/dc1.puppetlabs.net.zone',
       allow_update => 'key "dhcp_updater"',
       require      => Bind::Key['dhcp_updater'];
     '42.0.10.in-addr.arpa':
@@ -30,7 +40,7 @@ node 'net02.dc1.puppetlabs.net' {
   }
 
   class { 'dhcp':
-    dnsdomain    => 'puppetlabs.net',
+    dnsdomain    => 'dc1.puppetlabs.net',
     nameservers  => ['10.0.42.1'],
     ntpservers   => ['us.pool.ntp.org'],
     interfaces   => ['eth0'],
@@ -38,7 +48,7 @@ node 'net02.dc1.puppetlabs.net' {
     require      => Bind::Key[ $ddnskeyname ],
   }
 
-  dhcp::pool{ 'puppetlabs.net':
+  dhcp::pool{ 'dc1.puppetlabs.net':
     network => '10.0.42.0',
     mask    => '255.255.255.0',
     range   => '10.0.42.100 10.0.42.200',

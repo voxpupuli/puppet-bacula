@@ -19,7 +19,6 @@ node 'dave.dc1.puppetlabs.net' {
   include motd
   motd::register{"the god damn firewall!": }
 
-
   include sudo
   sudo::allowgroup { 'sysadmin': }
 
@@ -75,7 +74,14 @@ node 'dave.dc1.puppetlabs.net' {
   }
 
   class { "openvpn::server":
-    route => "10.0.42.0 255.255.255.0",
+    server => "10.0.44.0 255.255.255.0",
+    route  => ["10.0.42.0 255.255.255.0"],
+  }
+
+  openvpn::server::csc {
+    "baal.puppetlabs.com":
+      content => "ifconfig-push 10.0.44.9 10.0.44.10",
   }
 
 }
+

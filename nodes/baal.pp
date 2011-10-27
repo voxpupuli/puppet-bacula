@@ -143,7 +143,7 @@ node baal {
 
   openvpn::client {
     "node_${hostname}_dc1":
-      server => "dave.dc1.puppetlabs.net",
+      server => "vpn.puppetlabs.net",
       cert   => "node_${hostname}",
   }
 
@@ -151,6 +151,21 @@ node baal {
   include unbound
   unbound::stub { "puppetlabs.lan":
     address  => '192.168.100.1',
+    insecure => true,
+  }
+
+  unbound::stub { "100.168.192.in-addr.arpa.":
+    address  => '192.168.100.1',
+    insecure => true,
+  }
+
+  unbound::stub { "dc1.puppetlabs.net":
+    address  => '10.0.42.42',
+    insecure => true,
+  }
+
+  unbound::stub { "42.0.10.in-addr.arpa.":
+    address  => '10.0.42.42',
     insecure => true,
   }
 

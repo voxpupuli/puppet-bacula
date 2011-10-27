@@ -1,3 +1,3 @@
 ---
-nrpe_server: %{ipaddress}, 192.168.101.9
+nrpe_server: %{ipaddress},192.168.101.9
 

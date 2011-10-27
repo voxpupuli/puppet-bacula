@@ -20,20 +20,15 @@ class nagios::hostgroups {
       before => Service[$::nagios::params::nagios_service],
   }
 
-  nagios_hostgroup {
-    "office":
-      target => '/etc/nagios3/conf.d/hostgroups_nagios2.cfg',
-      notify => Service[$::nagios::params::nagios_service],
-  }
+  $hostgroups = [
+    "dc1",
+    "office",
+    "cloaked",
+    "world"
+  ]
 
   nagios_hostgroup {
-    "cloaked":
-      target => '/etc/nagios3/conf.d/hostgroups_nagios2.cfg',
-      notify => Service[$::nagios::params::nagios_service],
-  }
-
-  nagios_hostgroup {
-    "world":
+    $hostgroups:
       target => '/etc/nagios3/conf.d/hostgroups_nagios2.cfg',
       notify => Service[$::nagios::params::nagios_service],
   }

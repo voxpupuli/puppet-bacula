@@ -29,7 +29,7 @@ node wyrd {
     insecure => true,
   }
 
-  unbound::stub { "puppetlabs.net":
+  unbound::stub { "dc1.puppetlabs.net":
     address  => '10.0.42.42',
     insecure => true,
   }

@@ -133,17 +133,17 @@ class nagios::server (
     notify => Service[$nagios::params::nagios_service],
   }
 
-#  apache::vhost::redirect {
-#    "$site_alias":
-#      port => 80,
-#      dest => "https://${site_alias}",
-#  }
+  apache::vhost::redirect {
+    "$site_alias":
+      port => 80,
+      dest => "https://${site_alias}",
+  }
 
   apache::vhost { "${site_alias}":
-    port          => '80',
+    port          => '443',
     serveraliases => "$site_alias",
     priority      => '30',
-    ssl           => false,
+    ssl           => true,
     docroot       => '/usr/share/nagios3/htdocs',
     template      => 'nagios/nagios-apache.conf.erb',
     require       => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 

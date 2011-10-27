@@ -24,7 +24,7 @@ node baal {
   ###
   # Base
   #
-  #include puppetlabs_ssl
+  include puppetlabs_ssl
   #include account::master
   include vim
 

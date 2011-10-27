@@ -6,14 +6,15 @@ rails_env = ENV['RAILS_ENV'] || 'production'
 worker_processes <%= unicorn_worker_processes %>
 working_directory '<%= approot %>'
 listen '<%= unicorn_socket %>', :backlog => <%= unicorn_backlog %>
-timeout 120
+timeout 300
 pid "<%= unicorn_pidfile %>"
+client_body_buffer_size 512k
+stderr_path '<%= approot %>/log/stderr.log'
+stdout_path '<%= approot %>/log/stdout.log'
 
-preload_app true
-if GC.respond_to?(:copy_on_write_friendly=)
-  GC.copy_on_write_friendly = true
-end
+preload_app false # We have turned this off, as we don't use REE.
 
+# See http://unicorn.bogomips.org/SIGNALS.html for what this does.
 before_fork do |server, worker|
   old_pid = "#{server.config[:pid]}.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
@@ -27,6 +28,7 @@ end
 
 
 <% if has_variable?( 'unicorn_user' ) and unicorn_user != '' and has_variable?( 'unicorn_group' ) and unicorn_group != ''  -%>
+# Stolen from https://github.com/blog/517-unicorn
 after_fork do |server, worker|
 
   begin

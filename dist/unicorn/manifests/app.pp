@@ -7,6 +7,8 @@ define unicorn::app (
     $initscript               = "unicorn/initscript_newer.erb", #default template location
     $unicorn_backlog          = '2048',
     $unicorn_worker_processes = '4',
+    $stdlog_path              = '',
+    $log_stds                 = false, # yes I know what it looks like.
     $unicorn_user             = '',
     $unicorn_group            = '',
     $config_file              = ''
@@ -14,6 +16,15 @@ define unicorn::app (
 
   # get the common stuff, like the unicon package(s)
   include unicorn
+
+  if $log_stds in [ 'true', 'yes', true , 'present', present ] {
+    if $stdlog_path == '' {
+      $unicorn_stdlog_path = "${APPROOT}/log/"
+    } else {
+      $unicorn_stdlog_path = $stdlog_path
+    }
+    $unicorn_log_stdout = true  # easier than parsing it all in ERB
+  }
 
   # If we have been given a config path, use it, if not, make one up.
   if $config_file == '' {

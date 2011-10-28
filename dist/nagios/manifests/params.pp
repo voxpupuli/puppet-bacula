@@ -71,7 +71,7 @@ class nagios::params {
       $nagios_packages        = 'net-mgmt/nagios'
       $nrpe_packages          = 'net-mgmt/nrpe2'
       $nrpe_configuration     = '/usr/local/etc/nrpe.cfg'
-      $nrpe_config_dir        = '/etc/nagios/nrpe.d'
+      $nrpe_config_dir        = '/usr/local/etc/nrpe.d'
       $nrpe_pid               = '/var/spool/nagios/nrpe2.pid'
       $nrpe_user              = 'nagios'
       $nrpe_group             = 'nagios'

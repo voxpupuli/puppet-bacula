@@ -3,24 +3,8 @@
 # trying to do anything too smart.
 
 node 'dave.dc1.puppetlabs.net' {
-  include role::base
+  include role::server
 
-  # Accounts
-  # This should probably be more selective on certain hosts/distros/oses
-  include virtual::users
-  Account::User <| groups == 'sysadmin' |>
-  Group         <| tag == 'allstaff' |>
-
-  include ntp
-
-  include postfix
-  include postfix::mboxcheck
-
-  include motd
-  motd::register{"the god damn firewall!": }
-
-  include sudo
-  sudo::allowgroup { 'sysadmin': }
 
   class{ 'ipsec':
     my_ip         => $::ipaddress,
@@ -32,7 +16,8 @@ node 'dave.dc1.puppetlabs.net' {
     key           => 'SacyimejhabNedinyootLeOtnemgionobfudolcodNaulufcaupAgDeumsisyicUthCopDur'
   }
 
-  # Make this a template, please.
+  # Set periodic, so we can control a bit more what we get emailed
+  # about.
   file{ '/etc/periodic.conf':
     ensure => file,
     owner  => 'root',

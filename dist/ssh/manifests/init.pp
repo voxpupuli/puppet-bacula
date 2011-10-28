@@ -31,6 +31,8 @@ class ssh {
     ensure    => file,
     require   => $kernel ? {
       "Darwin" => undef,
+      'freebsd' => undef,
+      'openbsd' => undef,
       default  => Package[$client_package],
     }
   }

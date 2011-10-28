@@ -23,6 +23,16 @@ class munin::params {
       $node_service  = 'org.macports.munin-node'
       $node_config   = '/opt/local/etc/munin/munin-node.conf'
     }
+    'freebsd': {
+      $munin_base_packages = 'munin-node'
+      $plugin_source = '/usr/local/share/munin/plugins'
+      $plugin_dest   = '/usr/local/etc/munin/plugins'
+      $group         = 'wheel'
+      $log_file      = '/var/log/munin/munin-node.log'
+      $pid_file      = '/var/run/munin/munin-node.pid'
+      $node_service  = 'munin-node'
+      $node_config   = '/usr/local/etc/munin/munin-node.conf'
+    }
     default: {
       $log_file            = '/var/log/munin/munin-node.log'
       $pid_file            = '/var/run/munin/munin-node.pid'

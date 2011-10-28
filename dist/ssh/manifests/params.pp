@@ -27,6 +27,11 @@ class ssh::params {
       $ssh_config  = '/etc/ssh_config'
       $sshd_config = '/etc/sshd_config'
     }
+    'freebsd': {
+      $ssh_service = 'sshd'
+      $ssh_config  = '/etc/ssh_config'
+      $sshd_config = '/etc/sshd_config'
+    }
     default: {
       fail("module ssh does not support operatingsystem $operatingsystem")
     }

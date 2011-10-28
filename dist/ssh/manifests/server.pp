@@ -36,6 +36,7 @@ class ssh::server {
     mode    => '0640',
     require => $kernel ? {
       "Darwin" => undef,
+      'freebsd' => undef,
       default  => Package[$server_package],
     },
     notify  => Service['sshd'],

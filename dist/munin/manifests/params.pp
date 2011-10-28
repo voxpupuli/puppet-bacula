@@ -24,7 +24,7 @@ class munin::params {
       $node_config   = '/opt/local/etc/munin/munin-node.conf'
     }
     'freebsd': {
-      $munin_base_packages = 'munin-node'
+      $munin_base_packages = 'sysutils/munin-node'
       $plugin_source = '/usr/local/share/munin/plugins'
       $plugin_dest   = '/usr/local/etc/munin/plugins'
       $group         = 'wheel'

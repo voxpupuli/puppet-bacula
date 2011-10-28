@@ -34,11 +34,18 @@ class munin::server (
   }
 
   apache::vhost { "$site_alias":
-    port     => '80',
+    port     => '443',
     priority => '40',
+    ssl      => true,
     docroot  => '/var/cache/munin/www',
     template => 'munin/munin-apache.conf.erb',
     require  => [ Package['munin'], File['/etc/apache2/conf.d/munin'] ]
+  }
+
+  apache::vhost::redirect {
+    "${site_alias}":
+      port => 80,
+      dest => "https://${site_alias}",
   }
 
   File <<| tag == 'munin_host' |>>

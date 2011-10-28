@@ -67,6 +67,19 @@ class nagios::params {
         }
       }
     }
+    'freebsd': {
+      $nagios_packages        = 'net-mgmt/nagios'
+      $nrpe_packages          = 'net-mgmt/nrpe2'
+      $nrpe_configuration     = '/usr/local/etc/nrpe.cfg'
+      $nrpe_config_dir        = '/etc/nagios/nrpe.d'
+      $nrpe_pid               = '/var/spool/nagios/nrpe2.pid'
+      $nrpe_user              = 'nagios'
+      $nrpe_group             = 'nagios'
+      $nrpe_service           = 'nrpe2'
+      $nagios_plugin_packages = 'net-mgmt/nagios-plugins'
+      $nagios_service         = 'nagios'
+      $nagios_plugins_path    = '/usr/local/libexec/nagios/'
+    }
     "darwin": { 
       $nrpe_packages          = 'nrpe'
       $nrpe_service           = 'org.macports.nrpe'

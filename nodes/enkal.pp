@@ -3,7 +3,7 @@ node enkal {
 
   ssh::allowgroup { "qa": }
 
-  ssh::allowgroup { "techops": }
+  ssh::allowgroup  { "techops": }
   sudo::allowgroup { "techops": }
 
   $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
@@ -26,10 +26,6 @@ node enkal {
   class { "jenkins":
     site_alias => 'jenkins.puppetlabs.com',
   }
-
-#  cron { "restart jetty": hour => 1, minute => 0,
-#    command => "/etc/init.d/jetty stop; sleep 5; /etc/init.d/jetty start; /etc/init.d/apache2 restart";
-#  }
 
   Account::User <| tag == 'developers' |>
   Group <| tag == 'developers' |>

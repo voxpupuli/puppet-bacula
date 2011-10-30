@@ -34,6 +34,7 @@ node 'dave.dc1.puppetlabs.net' {
       source => "puppet:///puppetlabs/zfs-snapshot.sh";
   }
 
+  # zleslie: needs fixing
   cron {
     "zfs hourly snapshot":
       ensure  => absent,

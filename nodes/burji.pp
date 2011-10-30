@@ -126,22 +126,7 @@ node burji {
     recurse  => true,
     checksum => none,
   }
-#
-#  file { # training links
-#    "/opt/downloads/training/current-pm-vm.tar.gz":
-#      ensure   => link,
-#      target   => "centos-5.5-pe-1.0.tar.gz";
-#    "/opt/downloads/training/current-pm-vm.tar.gz.md5":
-#      ensure   => link,
-#      target   => "centos-5.5-pe-1.0.tar.gz.md5";
-#    "/opt/downloads/training/current-pm-vm-ovf.tar.gz":
-#      ensure   => link,
-#      target   => "centos-5.5-pe-1.0-ovf.tar.gz";
-#    "/opt/downloads/training/current-pm-vm-ovf.tar.gz.md5":
-#      ensure   => link,
-#      target   => "centos-5.5-pe-1.0-ovf.tar.gz.md5";
-#  }
-#
+
   $puppet_link_version = "2.7.4"
   file { # puppet links
     "/opt/downloads/puppet/puppet-latest.tar.gz":
@@ -159,5 +144,4 @@ node burji {
   }
 
 }
-
 

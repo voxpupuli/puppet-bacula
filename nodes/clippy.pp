@@ -37,9 +37,10 @@ node clippy {
   github::mirror {
     "puppetlabs/puppetlabs-modules":
       private => true,
-      ensure => present;
+      ensure  => present;
     "puppetlabs/puppetlabs-sysadmin-docs":
       private => true,
-      ensure => present;
+      ensure  => present;
   }
 }
+

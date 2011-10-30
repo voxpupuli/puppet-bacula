@@ -77,7 +77,7 @@ class nagios::params {
       $nrpe_group             = 'nagios'
       $nrpe_service           = 'nrpe2'
       $nagios_plugin_packages = 'net-mgmt/nagios-plugins'
-      $nagios_service         = 'nagios'
+      $nagios_service         = 'nagios3'
       $nagios_plugins_path    = '/usr/local/libexec/nagios/'
     }
     "darwin": { 

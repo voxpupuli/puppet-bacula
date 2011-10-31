@@ -36,6 +36,22 @@ class munin (
     require => Package[$munin::params::munin_base_packages],
   }
 
+  # Yes, this is somewhat dirty, but there isn't a Puppet function
+  # directly for getting the directory name.
+  $logdir = inline_template( "<%= File.dirname( log_file ) %>" )
+  $piddir = inline_template( "<%= File.dirname( pid_file ) %>" )
+
+  file {
+    $logdir:
+      ensure => directory,
+      owner  => 'munin',
+      mode   => '0750';
+    $piddir:
+      ensure => directory,
+      owner  => 'munin',
+      mode   => '0750';
+  } ->
+
   service { $munin::params::node_service:
     ensure     => running,
     enable     => true,

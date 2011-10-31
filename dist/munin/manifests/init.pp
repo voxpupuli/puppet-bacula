@@ -50,7 +50,7 @@ class munin (
       ensure => directory,
       owner  => 'munin',
       mode   => '0750';
-  } ->
+  }
 
   service { $munin::params::node_service:
     ensure     => running,
@@ -58,7 +58,9 @@ class munin (
     hasrestart => true,
     require    => [
       File[$munin::params::node_config],
-      Package[$munin::params::munin_base_packages]
+      Package[$munin::params::munin_base_packages],
+      File[$logdir],
+      File[$piddir]
     ],
   }
 

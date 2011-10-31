@@ -16,6 +16,9 @@ default:
 
 puppetlabs/puppet: {}
 puppetlabs/facter: {}
+puppetlabs/hiera: {}
+puppetlabs/hiera-puppet: {}
+puppetlabs/hiera-json: {}
 puppetlabs/puppet-dashboard: {}
 puppetlabs/puppet-module-tool: {}
 puppetlabs/puppet-docs: {}

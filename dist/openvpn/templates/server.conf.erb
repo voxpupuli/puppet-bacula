@@ -20,7 +20,7 @@ ifconfig-pool-persist ipp.txt
 # address pool (10.8.0.0/255.255.255.0)
 # back to the OpenVPN server.
 <% if route.is_a? Array -%>
-<% route.each do |r| -%>push route <%= r %><% end %>
+<% route.each do |r| -%>push route <%= r %>"\n"<% end %>
 <% elsif route != '' -%>
 push route <%= route %> 
 <% end -%>

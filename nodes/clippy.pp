@@ -1,46 +1,17 @@
+# clippy, aka git.puppetlabs.net
+#
+# Hosts gitolite for github mirrors as well as puppetlabs private repos.
+
 node clippy {
   include role::server
+  include puppetlabs::service::gitolite
 
   sudo::allowgroup  { "techops": }
   ssh::allowgroup   { "techops": }
 
-  include git::gitolite
-
-  file { "/var/www/git":
-    ensure => directory,
-    owner  => "root",
-    group  => "root",
-    mode   => "0755",
-  }
-
-  class { 'github::params':
-    wwwroot    => "/var/www/git",
-    basedir    => "/home/git/repositories",
-    vhost_name => "git.puppetlabs.lan",
-    require    => File["/var/www/git"],
-  }
-
-  # QA github mirrors
-  github::mirror {
-    "puppetlabs/facter":
-      ensure => present;
-    "puppetlabs/puppet":
-      ensure => present;
-    "puppetlabs/puppet-acceptance":
-      ensure => present;
-    "puppetlabs/pe_acceptance_tests":
-      ensure  => present,
-      private => true,
-  }
-
-  # Ops github mirrors
-  github::mirror {
-    "puppetlabs/puppetlabs-modules":
-      private => true,
-      ensure  => present;
-    "puppetlabs/puppetlabs-sysadmin-docs":
-      private => true,
-      ensure  => present;
+  # Required for encrypted backups of gitolite
+  package { "duplicity":
+    ensure => present
   }
 }
 

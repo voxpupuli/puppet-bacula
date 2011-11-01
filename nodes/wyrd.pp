@@ -30,12 +30,12 @@ node wyrd {
   }
 
   unbound::stub { "dc1.puppetlabs.net":
-    address  => '10.0.42.42',
+    address  => '10.0.1.20',
     insecure => true,
   }
 
   unbound::stub { "42.0.10.in-addr.arpa.":
-    address  => '10.0.42.42',
+    address  => '10.0.1.20',
     insecure => true,
   }
 

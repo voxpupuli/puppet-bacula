@@ -55,5 +55,12 @@ node 'net02.dc1.puppetlabs.net' {
     gateway => '10.0.42.1',
   }
 
+  dhcp::pool{ 'ops.dc1.puppetlabs.net':
+    network => '10.0.1.0',
+    mask    => '255.255.255.0',
+    range   => '10.0.1.100 10.0.1.200',
+    gateway => '10.0.1.1',
+  }
+
 }
 

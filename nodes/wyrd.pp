@@ -7,6 +7,12 @@ node wyrd {
       distribution => "wheezy",
   }
 
+  apt::pin{ '*':
+    release  => 'testing',
+    priority => '200',
+    filename => 'star'
+  }
+
   class {
     "nagios::gearman":
       key => hiera("gearman_key")

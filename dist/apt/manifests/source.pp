@@ -1,6 +1,4 @@
 define apt::source (
-  $apt_dir      = "${::apt::apt_dir}",
-  $sources_dir  = "${::apt::sources_dir}",
   $source_type  = "deb",
   $uri          = "http://ftp.us.debian.org/debian",
   $distribution = "${lsbdistcodename}",
@@ -9,6 +7,9 @@ define apt::source (
   ) {
 
   include apt
+
+  $apt_dir      = "${::apt::apt_dir}"
+  $sources_dir  = "${::apt::sources_dir}"
 
   file {
     "aptsource_${name}":

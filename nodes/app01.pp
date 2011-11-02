@@ -20,7 +20,7 @@ node app01 {
   # github pull request robot
   # THIS DOESN'T WORK, VCSREPO IS UTTER MONKEY SHIT.
   class{ 'githubrobotpuller':
-    version => 'ab2f4d7621a963f648c028cc4ed2f281f62a2311',
+    version => 'bd4ea8f52b66556a1d45c03f9ff975e09f6b16e2',
   }
 
 }

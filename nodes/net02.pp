@@ -41,7 +41,7 @@ node 'net02.dc1.puppetlabs.net' {
 
   class { 'dhcp':
     dnsdomain    => 'dc1.puppetlabs.net',
-    nameservers  => ['10.0.42.1'],
+    nameservers  => ['10.0.1.20'],
     ntpservers   => ['us.pool.ntp.org'],
     interfaces   => ['eth0'],
     dnsupdatekey => "/etc/bind/keys.d/$ddnskeyname",

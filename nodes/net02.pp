@@ -31,6 +31,11 @@ node 'net02.dc1.puppetlabs.net' {
       source       => 'puppet:///modules/bind/dc1.puppetlabs.net.zone',
       allow_update => 'key "dhcp_updater"',
       require      => Bind::Key['dhcp_updater'];
+    '1.0.10.in-addr.arpa':
+      type         => 'master',
+      source       => 'puppet:///modules/bind/1.0.10.in-addr.arpa.zone',
+      allow_update => 'key "dhcp_updater"',
+      require      => Bind::Key['dhcp_updater'];
     '42.0.10.in-addr.arpa':
       type         => 'master',
       source       => 'puppet:///modules/bind/42.0.10.in-addr.arpa.zone',

@@ -1,0 +1,5 @@
+---
+nrpe_server: 10.0.1.20
+munin_server: 10.0.44.9
+location: dc1
+

@@ -43,10 +43,10 @@ node 'net02.dc1.puppetlabs.net' {
       require      => Bind::Key['dhcp_updater'];
     'puppetlabs.lan':
       type          => 'forward',
-      custom_config => 'forwarders {192.168.100.83; };';
+      custom_config => 'forwarders { 192.168.100.83; };';
     '100.168.192.in-addr.arpa':
       type          => 'forward',
-      custom_config => 'forwarders {192.168.100.83; };';
+      custom_config => 'forwarders { 192.168.100.83; };';
   }
 
   # Will live at /etc/bind/keys.d/dhcp_updater

@@ -8,8 +8,8 @@
 ;         All operations systems should go here
 ;--
 net02.ops         IN  A   10.0.1.20
-net02             IN  CNAME net02.ops.puppetlabs.net.
-ns                IN  CNAME net02.ops.puppetlabs.net.
+net02             IN  CNAME net02.ops.dc1.puppetlabs.net.
+ns                IN  CNAME net02.ops.dc1.puppetlabs.net.
 
 ;++
 ;         10.0.5.0/24 is the sales lab subnet

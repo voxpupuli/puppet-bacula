@@ -11,6 +11,11 @@ net02.ops         IN  A   10.0.1.20
 net02             IN  CNAME net02.ops.puppetlabs.net.
 ns                IN  CNAME net02.ops.puppetlabs.net.
 
+;++
+;         10.0.5.0/24 is the sales lab subnet
+;         All sales demo systems go here
+;--
+fw.selab          IN  A   10.0.5.1
 
 ;++
 ;         10.0.42.0/24 is the oob/management vlan
@@ -18,6 +23,7 @@ ns                IN  CNAME net02.ops.puppetlabs.net.
 ;--
 dave              IN  A   10.0.42.1
 dave              IN  TXT "Firewall"
+fw                IN  CNAME dave.dc1.puppetlabs.net.
 
 switch1           IN  A   10.0.42.10
 
@@ -28,5 +34,11 @@ vali              IN  A   10.0.42.31
 vali              IN  TXT "HP 2U 2UX8340AC9 dc1.puppetlabs.net"
 balder            IN  A   10.0.42.32
 balder            IN  TXT "HP 2U 2UX83408YK dc1.puppetlabs.net"
+
+;++
+;         10.0.42.0/24 is the oob/management vlan
+;         All nodes connected to the sslvpn should go here
+;--
+baal.sslvpn       IN  A   10.0.44.9
 
 

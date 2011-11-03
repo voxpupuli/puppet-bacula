@@ -13,8 +13,8 @@ class puppetlabs::service::bootserver {
 
   $ubuntu_common = {
     file    => "os_<%= os %>",
-    kernel  => "images/<%= os %>/<%= arch %>/<%= ver %>/linux",
-    append  => "vga=791 initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=debian url=http://urd.puppetlabs.lan/seed/ubuntu_base.cfg text",
+    kernel  => "images/<%= os %>/<%= ver %>/<%= arch %>/linux",
+    append  => "vga=791 initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=debian url=http://urd.puppetlabs.lan/seed/ubuntu_base.cfg text",
   }
 
   $debian = {
@@ -25,8 +25,8 @@ class puppetlabs::service::bootserver {
 
   $debian_common = {
     "file"    => "os_<%= os %>",
-    "kernel"  => "images/<%= os %>/<%= arch %>/<%= ver %>/linux",
-    "append"  => "vga=791 initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=<%= os %> url=http://urd.puppetlabs.lan/seed/debian_base.cfg text",
+    "kernel"  => "images/<%= os %>/<%= ver %>/<%= arch %>/linux",
+    "append"  => "vga=791 initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=<%= os %> url=http://urd.puppetlabs.lan/seed/debian_base.cfg text",
   }
 
   $centos = {
@@ -37,8 +37,8 @@ class puppetlabs::service::bootserver {
 
   $centos_common = {
     "file"    => "os_<%= os %>",
-    "kernel"  => "images/<%= os %>/<%= arch %>/<%= ver %>/vmlinuz",
-    "append"  => "initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.img ks=http://urd.puppetlabs.lan/ks/centos_kickstart.cfg text",
+    "kernel"  => "images/<%= os %>/<%= ver %>/<%= arch %>/vmlinuz",
+    "append"  => "initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.img ks=http://urd.puppetlabs.lan/ks/centos_kickstart.cfg text",
   }
 
   $redhat = {
@@ -50,8 +50,8 @@ class puppetlabs::service::bootserver {
   $redhat_common = {
     "baseurl" => "http://yo.puppetlabs.lan/rhel<%= ver %>server-<%= arch %>/disc1/images/pxeboot",
     "file"    => "os_<%= os %>",
-    "kernel"  => "images/<%= os %>/<%= arch %>/<%= ver %>/vmlinuz",
-    "append"  => "initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.img ks=http://urd.puppetlabs.lan/ks/<% os %><%= ver %>-<%= arch %>.cfg text",
+    "kernel"  => "images/<%= os %>/<%= ver %>/<%= arch %>/vmlinuz",
+    "append"  => "initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.img ks=http://urd.puppetlabs.lan/ks/<% os %><%= ver %>-<%= arch %>.cfg text",
   }
 
   $scientific = {
@@ -63,8 +63,8 @@ class puppetlabs::service::bootserver {
   $scientific_common = {
     "baseurl" => "http://mirror.yellowfiber.net/scientific/<%= ver %>/<%= arch %>/os/images/pxeboot/",
     "file"    => "os_<%= os %>",
-    "kernel"  => "images/<%= os %>/<%= arch %>/<%= ver %>/vmlinuz",
-    "append"  => "initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.img ks=http://urd.puppetlabs.lan/ks/<% os %><%= ver %>-<%= arch %>.cfg text",
+    "kernel"  => "images/<%= os %>/<%= ver %>/<%= arch %>/vmlinuz",
+    "append"  => "initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.img ks=http://urd.puppetlabs.lan/ks/<% os %><%= ver %>-<%= arch %>.cfg text",
   }
 
   $fedora = {
@@ -76,8 +76,8 @@ class puppetlabs::service::bootserver {
   $fedora_common = {
     "baseurl" => "http://fedora.cat.pdx.edu/linux/releases/<%= ver %>/Fedora/<%= arch %>/os/images/pxeboot/",
     "file"    => "os_<%= os %>",
-    "kernel"  => "images/<%= os %>/<%= arch %>/<%= ver %>/vmlinuz",
-    "append"  => "initrd=images/<%= os %>/<%= arch %>/<%= ver %>/initrd.img ks=http://urd.puppetlabs.lan/ks/<%= os %><%= ver %>-<%= arch %>.cfg text",
+    "kernel"  => "images/<%= os %>/<%= ver %>/<%= arch %>/vmlinuz",
+    "append"  => "initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.img ks=http://urd.puppetlabs.lan/ks/<%= os %><%= ver %>-<%= arch %>.cfg text",
   }
 
   resource_permute('pxe::bootstrap', $debian, $debian_common)

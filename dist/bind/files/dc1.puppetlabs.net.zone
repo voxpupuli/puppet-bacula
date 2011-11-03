@@ -1,19 +1,31 @@
 ; HI THERE!
-@               0 IN  SOA a.dc1.puppetlabs.net. ns.dc1.puppetlabs.net. ( 2011063001 1800 900 604800 86400 )
+@               0 IN  SOA a.dc1.puppetlabs.net. ns.dc1.puppetlabs.net. ( 2011102036 1800 900 604800 86400 )
 
-                  IN  NS  net02.dc1.puppetlabs.net.
+                  IN  NS  net02.ops.dc1.puppetlabs.net.
 
-net02             IN  A   10.0.1.20
+;++
+;         10.0.1.0/24 is the ops vlan
+;         All operations systems should go here
+;--
+net02.ops         IN  A   10.0.1.20
+net02             IN  CNAME net02.ops.puppetlabs.net.
+ns                IN  CNAME net02.ops.puppetlabs.net.
 
+
+;++
+;         10.0.42.0/24 is the oob/management vlan
+;         All systems management IPs should go here
+;--
 dave              IN  A   10.0.42.1
 dave              IN  TXT "Firewall"
+
+switch1           IN  A   10.0.42.10
 
 vali-ilo          IN  A   10.0.42.13
 balder-ilo        IN  A   10.0.42.14
 
 vali              IN  A   10.0.42.31
 vali              IN  TXT "HP 2U 2UX8340AC9 dc1.puppetlabs.net"
-
 balder            IN  A   10.0.42.32
 balder            IN  TXT "HP 2U 2UX83408YK dc1.puppetlabs.net"
 

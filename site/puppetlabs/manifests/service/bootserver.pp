@@ -1,7 +1,9 @@
 class puppetlabs::service::bootserver {
 
   include pxe
-  include tftp
+  class { "tftp":
+    inet => false;
+  }
 
   $ubuntu = {
     "arch" => ["amd64","i386"],

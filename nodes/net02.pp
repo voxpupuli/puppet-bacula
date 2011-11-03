@@ -41,6 +41,12 @@ node 'net02.dc1.puppetlabs.net' {
       source       => 'puppet:///modules/bind/42.0.10.in-addr.arpa.zone',
       allow_update => 'key "dhcp_updater"',
       require      => Bind::Key['dhcp_updater'];
+    'puppetlabs.lan':
+      type          => 'forward',
+      custom_config => 'forwarders {192.168.100.83; };';
+    '100.168.192.in-addr.arpa':
+      type          => 'forward',
+      custom_config => 'forwarders {192.168.100.83; };';
   }
 
   # Will live at /etc/bind/keys.d/dhcp_updater

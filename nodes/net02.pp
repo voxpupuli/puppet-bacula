@@ -81,5 +81,11 @@ node 'net02.dc1.puppetlabs.net' {
     gateway => '10.0.1.1',
   }
 
+  dhcp::host {
+    'ran.ops.dc1.puppetlabs.net':
+      mac => "00:50:56:b2:00:ab",
+      ip  => "10.0.1.50";
+  }
+
 }
 

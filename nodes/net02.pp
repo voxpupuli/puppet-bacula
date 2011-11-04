@@ -63,7 +63,7 @@ node 'net02.dc1.puppetlabs.net' {
     interfaces   => ['eth0'],
     dnsupdatekey => "/etc/bind/keys.d/$ddnskeyname",
     require      => Bind::Key[ $ddnskeyname ],
-    pxeserver    => '10.0.1.101',
+    pxeserver    => '10.0.1.50',
     pxefilename  => 'pxelinux.0',
   }
 

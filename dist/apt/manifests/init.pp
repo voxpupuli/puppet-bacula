@@ -5,6 +5,7 @@ class apt {
 
       $apt_dir = "/etc/apt"
       $sources_dir = "${apt_dir}/sources.list.d"
+      $aptconf_dir = "${apt_dir}/apt.conf.d"
 
       exec {
         "apt-get update":
@@ -30,6 +31,18 @@ class apt {
         "${apt_dir}/sources.list":
           ensure => absent;
       }
+
+      file {
+        "apt.conf.d":
+          path     => "${aptconf_dir}",
+          ensure   => directory,
+          owner    => root,
+          group    => root,
+          mode     => 0755;
+        "${apt_dir}/apt.conf":
+          ensure => absent;
+      }
+
     }
     default: {
       err("apt_defaults class is for Debian-derived systems.")

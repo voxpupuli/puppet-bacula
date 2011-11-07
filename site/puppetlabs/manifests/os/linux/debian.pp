@@ -36,16 +36,19 @@ class puppetlabs::os::linux::debian  {
       ensure => purged,
     }
   }
-
+  
   ####
-  # APT REPO SHIT
+  # Apt Configuration
   #
-  apt::source { "puppetlabs_ops.list":
-    ensure       => absent,
-    uri          => "http://apt.puppetlabs.com/ops",
-    distribution => "sid"
+  apt::conf {
+    "norecommends":
+      priority => '00',
+      content  => "Apt::Install-Recommends 0;\nApt::AutoRemove::InstallRecommends 1;\n",
   }
 
+  ####
+  # Apt Repo Sources
+  #
   apt::source {
     "security.list":
       uri       => $lsbdistid ? {

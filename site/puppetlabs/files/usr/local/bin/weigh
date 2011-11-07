@@ -1,72 +1,134 @@
-#!/usr/bin/perl
+#! /usr/bin/env ruby
 
-# summarize the disk usage and sort by size
+require 'find'
+require 'pp'
+require 'optparse'
 
-use strict;
-#use warnings;
-use File::Find;
+options = {}
 
-my @searchlist; # list of directories to search
-my %summary;    # size summary information per file
+optparse = OptionParser.new do|opts|
+  opts.banner = "Usage: weigh.rb [options] file1 file2 ..."
 
-unless (@ARGV > 0) { push @searchlist, "."; } else { @searchlist = @ARGV; }
+  options[:verbose] = false
+  opts.on( '-v', '--verbose', 'Output more information' ) do
+    options[:verbose] = true
+  end
 
-foreach my $search_dir (@searchlist) {
-	opendir my $dh, $search_dir or warn "could not open directory: $!";
-	my @allfiles = readdir($dh);
-	closedir $dh;
+  options[:depth] = 1
+  opts.on( '-d', '--depth DEPTH', 'Sumarize deeper than DEPTH' ) do|d|
+    options[:depth] = d
+  end
 
-	my @filelist;
-	foreach (@allfiles) { push @filelist, $_ if -r;}
+  opts.on( '-h', '--help', 'Display this screen' ) do
+    puts opts
+    exit
+  end
+end
 
-	foreach my $file (@filelist) {
-		if (-d $file) {
-			unless ($file eq "..") { # Don't count backwards
-				my $sum = sum_dir($file);
-				if ($sum > 0) { $summary{"$file/"} = $sum; }
-			}
-		} elsif (-f $file) {
-			my $size = -s $file;
-			if ($size > 0) { $summary{$file} = $size; }
-		}
-	}
+optparse.parse!
+
+def neat_size(size)
+  # return a human readble size from the bytes supplied
+  size = size.to_f
+  if size > 2 ** 40       # TiB: 1024 GiB
+    neat = sprintf("%.2f TiB", size / 2**40)
+  elsif size > 2 ** 30    # GiB: 1024 MiB
+    neat = sprintf("%.2f GiB", size / 2**30)
+  elsif  size > 2 ** 20   # MiB: 1024 KiB
+    neat = sprintf("%.2f MiB", size / 2**20)
+  elsif size > 2 ** 10    # KiB: 1024 B
+    neat = sprintf("%.2f KiB", size / 2**10)
+  else                    # bytes
+    neat = sprintf("%.0f bytes", size)
+  end
+  neat
+end
+
+#def sum_dir(dir,curdep,sumdep)
+def sum_dir(dir,verbose=false)
+  # return the size of a given directory
+  #"Entering: #{dir}"
+  count=0
+  dir_size=0
+  data={}
+  Find.find(dir) do |path|
+    count += 1
+    next if FileTest.symlink?(path)
+    next if dir == path
+    if FileTest.directory?(path)
+      ret = sum_dir(path,verbose)
+      size = ret[:dir_size]
+      count += ret[:count]
+      dir_size += size
+      Find.prune
+    else
+      size = FileTest.size(path)
+      #puts "File: #{path} is #{size}"
+      puts "Found zero size file: #{path}" if verbose
+      dir_size += size
+    end
+  end
+  #puts "Exiting: #{dir} with #{dir_size}"
+  data[:dir_size] = dir_size
+  data[:count] = count
+  data
+end
+
+def blag(pathlist,curdepth0,depth=1)
+  pathlist.each do |p|
+
+
+  end
+
+end
+
+
+pathlist = []
+if ARGV.size > 0
+  ARGV.each do |f|
+    pathlist << f
+  end
+else
+  pathlist << "."
+end
+
+total_size = 0
+summary = {}
+count = 0
+sumdep = options[:depth]
+verbose = options[:verbose]
+
+pathlist.each do |p|
+  curdep = 0
+  Find.find(p) do |path|
+    count += 1
+    next if FileTest.symlink?(path)
+    if FileTest.directory?(path)
+      next if p == path
+      ret = sum_dir(path,verbose)
+      dir_size = ret[:dir_size]
+      next if dir_size == 0
+      count += ret[:count]
+      total_size += dir_size
+      summary["#{path}/"] = dir_size
+      Find.prune
+    else
+      size = FileTest.size(path)
+      next if size == 0
+      total_size += size
+      summary["#{path}"] = size
+    end
+  end
+end
+
+# Print summary
+summary.sort{|a,b| a[1]<=>b[1]}.each { |elem|
+  size     = elem[1]
+  filename = elem[0]
+  puts sprintf("%15s   %s\n", neat_size(size), filename)
 }
 
-
-foreach my $filename (sort {$summary{$a} <=> $summary{$b} } keys %summary) {
-	my $size = get_filesize_str($summary{$filename});
-	print sprintf("%15s   %s\n", $size, "$filename");
-}
-
-
-sub sum_dir {
-	my $dir = shift;
-	my $total_size = 0;
-	find( 
-		{	wanted 			=> sub { $total_size += -s if -f && !-l },
-      	follow 			=> 0,
-      	follow_skip 	=> 1,
-		},
-		$dir,
-	);
-	
-	return $total_size;
-}
-
-
-sub get_filesize_str {
-	my $size = shift;
-	
-	if ( $size > 2 ** 40 ) {		# TiB: 1024 GiB
-		return sprintf("%.2f TiB", $size / 2**40);
-	} elsif ( $size > 2 ** 30 ) {	# GiB: 1024 MiB
-		return sprintf("%.2f GiB", $size / 2**30);
-	} elsif ( $size > 2 ** 20 ) {	# MiB: 1024 KiB
-		return sprintf("%.2f MiB", $size / 2**20);
-	} elsif ($size > 2 ** 10 ) {	# KiB: 1024 B
-		return sprintf("%.2f KiB", $size / 2**10);
-	} else {							# bytes
-		return sprintf("%.2f bytes", $size);
-	}
-}
-
+puts sprintf("%16s %s\n", "---", "---")
+puts sprintf("%15s   %s\n", neat_size(total_size), ":total size")
+#puts sprintf("%15s   %s\n", "#{count}", ":counted")
+puts sprintf("%16s %s\n", "---", "---")

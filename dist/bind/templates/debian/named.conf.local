@@ -8,3 +8,4 @@
 
 include "<%= bind_config_zones %>";
 include "<%= bind_config_keys %>";
+include "<%= bind_config_logging %>";

@@ -50,6 +50,7 @@ class bind::params {
       $bind_config_keys_dir  = "${bind_config_dir}/keys.d"
       $bind_config_local     = "${bind_config_dir}/named.conf.local"
       $bind_config_options   = "${bind_config_dir}/named.conf.options"
+      $bind_config_logging   = "${bind_config_dir}/named.conf.logging"
       $bind_zone_dir         = '/var/lib/bind/'
 
     }

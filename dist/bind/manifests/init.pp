@@ -98,6 +98,15 @@ class bind (
     notify  => Service[$bind_service],
   }
 
+  file { $bind_config_logging:
+    content => template("${module_name}/debian/named.conf.logging"),
+    owner   => root,
+    group   => $bind_group,
+    mode    => "0644",
+    require => Package[$bind_package],
+    notify  => Service[$bind_service],
+  }
+
   ########################
   # Configuration: Zones #
   ########################

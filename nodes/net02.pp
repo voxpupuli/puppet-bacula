@@ -50,16 +50,17 @@ node 'net02.dc1.puppetlabs.net' {
   }
 
   # Will live at /etc/bind/keys.d/dhcp_updater
+  # RFC 2104 says must be hmac-md5 (man nsupdate)
   $ddnskeyname = 'dhcp_updater'
   bind::key { $ddnskeyname:
-      algorithm => 'hmac-sha512',
-      secret    => 'LVoHMoAlaPZOK1KusefGWatPQK6zgg==',
+      algorithm => 'hmac-md5',
+      secret    => 'S5acGh2LrqMeuRkFPmXFqw==',
   }
 
   class { 'dhcp':
     dnsdomain    => [
       'dc1.puppetlabs.net',
-      'ops.dc1.puppetlabs.net',
+      '1.0.10.in-addr.arpa',
       ],
     nameservers  => ['10.0.1.20'],
     ntpservers   => ['us.pool.ntp.org'],
@@ -85,9 +86,9 @@ node 'net02.dc1.puppetlabs.net' {
   }
 
   dhcp::host {
-    'ran.ops.dc1.puppetlabs.net':
+    'ran':
       mac => "00:50:56:b2:00:ab",
-      ip  => "10.0.1.50";
+      ip  => "10.0.1.50",
   }
 
 }

@@ -14,7 +14,7 @@ class puppetlabs::service::bootserver {
   $ubuntu_common = {
     file    => "os_<%= os %>",
     kernel  => "images/<%= os %>/<%= ver %>/<%= arch %>/linux",
-    append  => "vga=791 initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=debian url=http://urd.puppetlabs.lan/seed/ubuntu_base.cfg text",
+    append  => "vga=791 initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-setup/layoutcode=us netcfg/get_hostname=debian url=http://ran.dc1.puppetlabs.net/d-i/ubuntu_base.cfg text",
   }
 
   $debian = {
@@ -26,7 +26,7 @@ class puppetlabs::service::bootserver {
   $debian_common = {
     "file"    => "os_<%= os %>",
     "kernel"  => "images/<%= os %>/<%= ver %>/<%= arch %>/linux",
-    "append"  => "vga=normal initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-keymaps-at/keymap=us hostname=<%= os %> url=http://urd.puppetlabs.lan/seed/debian_base.cfg text",
+    "append"  => "vga=normal initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-keymaps-at/keymap=us hostname=<%= os %> url=http://ran.dc1.puppetlabs.net/d-i/debian_base.cfg text",
   }
 
   $centos = {

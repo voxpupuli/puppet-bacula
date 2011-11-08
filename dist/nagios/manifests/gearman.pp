@@ -27,7 +27,7 @@ class nagios::gearman (
     package {
       $packages:
         ensure  => installed,
-        require => File["/etc/apt/sources.list.d/wheezy.list"];
+        require => Apt::Source["wheezy.list"];
     }
   }
 

@@ -10,10 +10,10 @@ server {
 
   access_log  /var/log/nginx/<%= srvname %>.access.log;
 
-	location / {
+  location / {
     root   /var/www/<%= srvname %>;
-		index  index.html index.htm;
-	}
+    index  index.html index.htm;
+  }
 
   # Anything here is added by use of "magic" so is pretty jazzy.
   <%= magic %>

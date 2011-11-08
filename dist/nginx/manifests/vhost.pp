@@ -17,6 +17,7 @@ define nginx::vhost(
   ) {
 
   include nginx
+  include nginx::server
 
   if $servername == '' {
     $srvname = $name

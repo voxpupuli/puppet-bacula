@@ -23,7 +23,7 @@ class nagios::gearman (
   }
 
   # remove once wheezy is everywhere
-  if ! $lsbdistcodename == "wheezy" {
+  if $lsbdistcodename != "wheezy" {
     package {
       $packages:
         ensure  => installed,

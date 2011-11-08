@@ -10,21 +10,17 @@
 #  Assumes a git repository, though other vcsrepos should work with minor changes.
 #
 # Requires:
-#   class metric_fu
+#   class metric_fu to be included first
 #
 # Sample Usage:
-#   metric_fu::codebase { "puppet" : repo_url => "https://github.com/puppetlabs/puppet.git", repo_rev => "origin/next", repo_name => "puppet"}
+#   include metric_fu [or] class { "metric_fu" : site_alias => "metricsvhost.puppetlabs.lan" }
+#   metric_fu::codebase { "puppet" : repo_url => "https://github.com/puppetlabs/puppet.git", repo_rev => "origin/master", repo_name => "puppet"}
 
 define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
   include metric_fu
-  
   $timeout       = 0
   
-<<<<<<< Updated upstream
-  $repo_base = "$metric_fu::parent_dir/$repo_name"
-=======
   $repo_base     = "$metric_fu::parent_dir/$repo_name"
->>>>>>> Stashed changes
   $rakefile_path = "$repo_base/tasks/rake/metrics.rake"
   
   vcsrepo { $repo_base:

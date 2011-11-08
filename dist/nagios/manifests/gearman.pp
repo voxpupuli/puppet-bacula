@@ -3,6 +3,8 @@ class nagios::gearman (
     $key
   ){
 
+  $nrpe_server = $::nagios::nrpe_server
+
   case $server {
     true: {
       $packages = [

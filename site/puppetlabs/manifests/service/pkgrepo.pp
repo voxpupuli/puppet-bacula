@@ -35,8 +35,7 @@ class puppetlabs::service::pkgrepo (
     nagios::website { 'yum.puppetlabs.com': }
     class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
     include yumrepo
-
-    Package <| title == "gnupg-agent" |>
+    include gpg
   }
 
   rsync::server {

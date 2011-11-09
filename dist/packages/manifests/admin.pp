@@ -9,7 +9,10 @@ class packages::admin {
 
   package { $admin_packages: ensure => installed; }
 
-  @package { "gnupg-agent": ensure => installed; }
+  # This was only being used by site/puppetlabs/manifests/service/pkgrepo.pp
+  # gpg stuff has been moved to its own module; if gpg-agent should be part of
+  # this package loadout then you should do 'include gpg'
+  #@package { "gnupg-agent": ensure => installed; }
 
   # OS specific/named specific packages.
   case $operatingsystem {

@@ -12,9 +12,10 @@ node clippy {
   gpg::agent { "git": }
 
   duplicity::cron {"/home/git":
-    user   => "git",
-    target => "ssh://gitbackups@bacula01.puppetlabs.lan:22//bacula/duplicity/git.puppetlabs.net",
-    options => [
+    user           => "git",
+    target         => "ssh://gitbackups@bacula01.puppetlabs.lan:22//bacula/duplicity/git.puppetlabs.net",
+    gpg_agent_info => "/home/git/.gpg-agent-info",
+    options        => [
       "--encrypt-key 409D0688",
       "--sign-key 409D0688",
       "--use-agent",

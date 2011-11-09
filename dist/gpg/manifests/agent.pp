@@ -11,11 +11,11 @@
 #
 define gpg::agent ($ensure='present', $outfile = '') {
 
-  if $outfile {
-    $info = $outfile
+  if $outfile == '' {
+    $gpg_agent_info = "/home/${name}/.gpg-agent-info"
   }
   else {
-    $info = "/home/${name}/.gpg-agent-info"
+    $gpg_agent_info = $outfile
   }
 
   case $ensure { 
@@ -23,7 +23,7 @@ define gpg::agent ($ensure='present', $outfile = '') {
       exec { "gpg-agent":
         user    => $name,
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
-        command => "gpg-agent --write-env-file ${info} --daemon",
+        command => "gpg-agent --write-env-file ${gpg_agent_info} --daemon",
         unless  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
       }
     }

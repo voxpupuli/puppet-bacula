@@ -1,4 +1,4 @@
-class duplicity::ssh_server($droproot) {
+class duplicity::ssh_server {
 
   include duplicity::params
 

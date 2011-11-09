@@ -1,7 +1,6 @@
 define duplicity::cron(
   $ensure = "present",
   $user,
-  $host,
   $target,
   $options = []
 ) {

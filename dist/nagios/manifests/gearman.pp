@@ -48,7 +48,7 @@ class nagios::gearman (
     #replace => false,
     content => template("nagios/worker.conf.erb"),
     notify  => Service["mod-gearman-worker"],
-    require => Package["${packages}"],
+    require => Package[$packages],
   }
 
   # Server only stuff, only need one per site

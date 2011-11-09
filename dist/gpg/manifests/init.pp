@@ -1,5 +1,5 @@
 class gpg {
-  package { ["gnupg", "gnupg-agent"]:
+  package { ["gnupg2", "gnupg-agent"]:
     ensure => present
   }
 }

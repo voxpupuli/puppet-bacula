@@ -45,7 +45,7 @@ class nagios::gearman (
   }
 
   file { "/etc/mod-gearman/worker.conf":
-    replace => false,
+    #replace => false,
     content => template("nagios/worker.conf.erb"),
     notify  => Service["mod-gearman-worker"],
     require => Package["${packages}"],

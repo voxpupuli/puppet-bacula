@@ -4,7 +4,7 @@ class role::server {
   include postfix
   include postfix::mboxcheck # let me know that we have crap mail.
 
-  $location = hiera("location")
+  $::location = hiera("location")
 
   include motd  # update /etc/motd, use motd::register for more.
 

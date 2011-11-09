@@ -4,6 +4,7 @@ class nagios::gearman (
   ){
 
   $nrpe_server = $::nagios::nrpe_server
+  $hostgroup = hiera("location")
 
   case $server {
     true: {

@@ -77,6 +77,11 @@ class virtual::groups {
     gid    => 622,
   }
 
+  @group { 'backupusers':
+    ensure => present,
+    gid    => 623,
+  }
+
 #
 # Customers
 # 1050 - 2000
@@ -134,7 +139,6 @@ class virtual::groups {
     gid    => 1058,
     tag    => customer,
   }
-
 
 #
 # Functional

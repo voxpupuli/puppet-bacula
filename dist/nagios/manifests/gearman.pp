@@ -3,7 +3,7 @@ class nagios::gearman (
     $key
   ){
 
-  $nrpe_server = $::nagios::nrpe_server
+  $nrpe_server = hiera("nrpe_server");
   $hostgroup = hiera("location")
 
   case $server {

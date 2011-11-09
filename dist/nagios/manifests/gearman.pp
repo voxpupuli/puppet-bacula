@@ -15,9 +15,6 @@ class nagios::gearman (
         "mod-gearman-tools",
         "mod-gearman-worker"
       ]
-      $gearman_check_hosts = true
-      $gearman_check_services = true
-      $gearman_check_eventhandler = true
     }
     false: {
       $packages = [

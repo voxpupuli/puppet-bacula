@@ -2,7 +2,7 @@
 #
 server=<% nrpe_server %>
 key=<%= key %>
-hosts=<% if gearman_check_hosts == true%>yes<% else %>no<% end %>
-services=<% if gearman_check_hosts == true%>yes<% else %>no<% end %>
-eventhandler=<% if gearman_check_hosts == true%>yes<% else %>no<% end %>
+hosts=<% if server == true %>yes<% else %>no<% end %>
+services=<% if server == true %>yes<% else %>no<% end %>
+eventhandler=<% if server == true %>yes<% else %>no<% end %>
 <% if server == false %>hostgroup=<%= location %><% end %>

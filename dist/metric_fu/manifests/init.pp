@@ -8,13 +8,15 @@
 # Requires:
 #   Module "apache" and its dependencies (specifically, a2enmod must be present)
 #   Module "vcsrepo" (some vcsrepo provider must be present; if it is not git, git will be installed)
-#   rubygems (for the gem provider)
-#   Metric_fu can consume up to 800MB of memory while running; 1GB at least is recommended.
+#   rubygems (for the gem provider) correctly installing binaries into path. Check this on Debian.
+#   Metric_fu can consume up 2-300MB of memory while running; 500MB at least is recommended.
 #
 # Sample Usage:
-#   metric_fu::codebase { "puppet" : repo_url => "https://github.com/puppetlabs/puppet.git", repo_rev => "origin/next", repo_name => "puppet"}
+#   include metric_fu [or] class { "metric_fu" : site_alias => "metricsvhost.puppetlabs.lan" }
+#   metric_fu::codebase { "puppet" : repo_url => "https://github.com/puppetlabs/puppet.git", repo_rev => "origin/master", repo_name => "puppet"}
 
-class metric_fu {
+class metric_fu ( $site_alias = $fqdn )
+ {
   include apache
   include vcsrepo
   
@@ -25,9 +27,10 @@ class metric_fu {
   $metricfu_cmd = "/usr/bin/rake metrics:all"
   $port         = 80
   
-  apache::vhost{"metrics":
+  apache::vhost{"$site_alias":
     docroot  => $web_root,
-    port => $port,
+    port     => $port,
+    ssl      => false,
   }
   
   package { ["git-core"]:
@@ -36,10 +39,13 @@ class metric_fu {
   package { ["rake"]:
     ensure => present,
   }
-  package { ["metric_fu","rspec","mocha","zaml","rack"]:
+  package { ["bison"]:
+    ensure => present,
+  }
+  package { ["metric_fu","rspec","mocha","zaml","rack","ripper"]:
     ensure => present,
     provider => gem,
-    require => [Package["main"],Package["ruby_parser"]],
+    require => [Package["main"],Package["ruby_parser"],Package["bison"]],
   }
   package { ["main"]:
     ensure => "4.7.1", # chronic dependency breaks starting in 4.7.2

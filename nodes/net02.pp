@@ -88,7 +88,7 @@ node 'net02.dc1.puppetlabs.net' {
   dhcp::pool{ 'selab.dc1.puppetlabs.net':
     network => '10.0.5.0',
     mask    => '255.255.255.0',
-    range   => '10.0.5.50 10.0.42.200',
+    range   => '10.0.5.50 10.0.5.200',
     gateway => '10.0.5.1',
   }
 

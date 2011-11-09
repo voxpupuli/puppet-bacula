@@ -1,12 +1,16 @@
 ---
+#NRPE and Nagios related information
 nrpe_server: 127.0.0.1
 nagios_check_ping_delay: "100"
+# the address that nrpe will use to contact the host by
+nrpe_host_address: %{ipaddress}
+gearman_key: "FpIHcrKjZrZy2DYzhEMog9OLwAD4KuV"
 munin_server: 127.0.0.1
 ntpserver:  - 0.us.pool.ntp.org
             - 1.us.pool.ntp.org
 puppet_server: ningyo.puppetlabs.com
 location: cloaked
-gearman_key: "FpIHcrKjZrZy2DYzhEMog9OLwAD4KuV"
+# for denyhosts
 allowhosts: - "sshd: 74.85.255.0/27"
             - "sshd: 74.85.247.184/29"
             - "sshd: 10.42.0.0/16"

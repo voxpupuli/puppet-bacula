@@ -1,0 +1,3 @@
+---
+nrpe_host_address: %{ipaddress_vlan1}
+

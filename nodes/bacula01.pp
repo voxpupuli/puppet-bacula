@@ -47,5 +47,17 @@ node bacula01 {
       files => ["/etc"],
   }
 
+  ####
+  # Duplicity
+  #
+  class { 'duplicity::params':
+    droproot => "/bacula/duplicity",
+  }
+
+  include duplicity::ssh_server
+
+  duplicity::drop { "git.puppetlabs.net":
+    owner => "gitbackups"
+  }
 }
 

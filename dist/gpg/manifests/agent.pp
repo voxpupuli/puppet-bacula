@@ -9,14 +9,21 @@
 #   ensure => present,
 # }
 #
-define gpg::agent ($ensure='present') {
+define gpg::agent ($ensure='present', $outfile = '') {
+
+  if $outfile {
+    $info = $outfile
+  }
+  else {
+    $info = "/home/${name}/.gpg-agent-info"
+  }
 
   case $ensure { 
     present: {
       exec { "gpg-agent":
         user    => $name,
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
-        command => "gpg-agent --write-env-file /tmp/gpg --daemon",
+        command => "gpg-agent --write-env-file ${info} --daemon",
         unless  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
       }
     }

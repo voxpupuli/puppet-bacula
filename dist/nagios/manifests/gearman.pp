@@ -3,6 +3,9 @@ class nagios::gearman (
     $key
   ){
 
+  $nrpe_server = hiera("nrpe_server")
+  $hostgroup = hiera("location")
+
   case $server {
     true: {
       $packages = [
@@ -23,11 +26,11 @@ class nagios::gearman (
   }
 
   # remove once wheezy is everywhere
-  if ! $lsbdistcodename == "wheezy" {
+  if $lsbdistcodename != "wheezy" {
     package {
       $packages:
         ensure  => installed,
-        require => File["/etc/apt/sources.list.d/wheezy.list"];
+        require => Apt::Source["wheezy.list"];
     }
   }
 
@@ -42,9 +45,10 @@ class nagios::gearman (
   }
 
   file { "/etc/mod-gearman/worker.conf":
-    replace => false,
+    #replace => false,
     content => template("nagios/worker.conf.erb"),
     notify  => Service["mod-gearman-worker"],
+    require => Package[$packages],
   }
 
   # Server only stuff, only need one per site

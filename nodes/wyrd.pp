@@ -7,7 +7,7 @@ node wyrd {
       distribution => "wheezy",
   }
 
-  apt::pin{ '*':
+  apt::pin { '*':
     release  => 'testing',
     priority => '200',
     filename => 'star'

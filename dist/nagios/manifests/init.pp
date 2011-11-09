@@ -18,6 +18,8 @@ class nagios (
   include nagios::params
   include nagios::nrpe
 
+  $nrpe_host_address = hiera("nrpe_host_address")
+
   package { $::nagios::params::nagios_plugin_packages:
     ensure   => installed,
     provider => $kernel ? {
@@ -29,7 +31,7 @@ class nagios (
   @@nagios_host { $fqdn:
     ensure     => present,
     alias      => $hostname,
-    address    => $ipaddress,
+    address    => $nrpe_host_address,
     hostgroups => $location,
     use        => 'generic-host',
     target     => '/etc/nagios3/conf.d/nagios_host.cfg',

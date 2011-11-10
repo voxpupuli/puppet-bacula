@@ -9,7 +9,7 @@
 #   ensure => present,
 # }
 #
-define gpg::agent ($ensure='present', $outfile = '') {
+define gpg::agent ($ensure='present', $outfile = '', $options = []) {
 
   if $outfile == '' {
     $gpg_agent_info = "/home/${name}/.gpg-agent-info"
@@ -18,13 +18,15 @@ define gpg::agent ($ensure='present', $outfile = '') {
     $gpg_agent_info = $outfile
   }
 
+  $command = inline_template("gpg-agent --write-env-file ${gpg_agent_info} --daemon <%= options.join(' ') %>")
+
   case $ensure { 
     present: {
       exec { "gpg-agent":
         user    => $name,
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
-        command => "gpg-agent --write-env-file ${gpg_agent_info} --daemon",
-        unless  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
+        command => $command,
+        unless  => "ps -U ${name} -o args | grep -v grep | grep \"${command}\"",
       }
     }
     absent: {

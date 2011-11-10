@@ -9,7 +9,12 @@ node clippy {
   sudo::allowgroup  { "techops": }
   ssh::allowgroup   { "techops": }
 
-  gpg::agent { "git": }
+  gpg::agent { "git":
+    options => [
+      "--default-cache-ttl 0",
+      "--max-cache-ttl 0",
+    ],
+  }
 
   duplicity::cron {"/home/git":
     user           => "git",

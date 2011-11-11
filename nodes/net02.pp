@@ -98,5 +98,13 @@ node 'net02.dc1.puppetlabs.net' {
       ip  => "10.0.1.50",
   }
 
+  ####
+  # Bacula
+  #
+  $bacula_director = 'bacula01.puppetlabs.lan'
+  $bacula_password = 'ES1RyU8raYukCYj6rBwMrAV8hPqi5yYArtoQ38Wj'
+  class { "bacula":
+    director => $bacula_director,
+    password => $bacula_password,
+  }
 }
-

@@ -11,12 +11,12 @@ node clippy {
 
   gpg::agent { "git":
     options => [
-      "--default-cache-ttl 0",
-      "--max-cache-ttl 0",
-    ],
+      "--default-cache-ttl 999999999",
+      "--max-cache-ttl     999999999",
+    ], 
   }
 
-  duplicity::cron {"/home/git":
+  duplicity::cron { "/home/git":
     user           => "git",
     target         => "ssh://gitbackups@bacula01.puppetlabs.lan:22//bacula/duplicity/git.puppetlabs.net",
     gpg_agent_info => "/home/git/.gpg-agent-info",
@@ -27,4 +27,3 @@ node clippy {
     ],
   }
 }
-

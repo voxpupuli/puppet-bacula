@@ -18,5 +18,6 @@ define duplicity::cron(
     user    => $user,
     hour    => 0,
     minute  => 0,
+    environment => [ "MAILTO=root" ],
   }
 }

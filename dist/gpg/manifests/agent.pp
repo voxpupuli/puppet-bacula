@@ -26,14 +26,14 @@ define gpg::agent ($ensure='present', $outfile = '', $options = []) {
         user    => $name,
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
         command => $command,
-        unless  => "ps -U ${name} -o args | grep -v grep | grep \"${command}\"",
+        unless  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
       }
     }
     absent: {
       exec { "kill gpg-agent":
         user    => $name,
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
-        command => "ps -U ${name} -eo pid,args | grep -v grep | grep gpg-agent | xargs kill",
+        command => "ps -U ${name} -o pid,args | grep -v grep | grep gpg-agent | awk '{print $1}' | xargs kill",
         onlyif  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
       }
     }

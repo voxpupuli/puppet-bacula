@@ -22,10 +22,9 @@ define gpg::agent ($ensure='present', $outfile = 'UNSET', $options = []) {
 
   case $ensure { 
     present: {
-      exec { "gpg-agent":
+      exec { $command:
         user    => $name,
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
-        command => $command,
         unless  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
       }
     }

@@ -7,7 +7,9 @@
 
 13        PTR  vali-ilo.dc1.puppetlabs.net.
 14        PTR  balder-ilo.dc1.puppetlabs.net.
+15        PTR  eir-mgmt.dc1.puppetlabs.net.
 
 31        PTR  vali.dc1.puppetlabs.net.
 32        PTR  balder.dc1.puppetlabs.net.
+33        PTR  eir.dc1.puppetlabs.net.
 

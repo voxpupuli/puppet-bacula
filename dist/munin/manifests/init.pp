@@ -12,7 +12,8 @@
 # Sample Usage:
 #
 class munin (
-    $munin_server
+    $munin_server,
+    $munin_node_address = $ipaddress
   ) {
   include munin::params
 

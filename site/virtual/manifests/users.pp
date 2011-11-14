@@ -370,4 +370,15 @@ class virtual::users {
     key     => "AAAAB3NzaC1kc3MAAACBAJA99mHspuhsBc/DC7dv+fVtHNqNKqLzgnJo9rPCktXVIL8VWHxgX7e0HaRBMydr1RhCFtIKeXnJnON8pSzkQoZl9N32zRuuWMy/7blFzuXTyKjec8Cp+wnzkBCuB3jLj+jZvjl+4fTItB1R1rtYSoAye0xYwjppiXhEa89TA+OhAAAAFQCCf0vhMbK7pwJY+fvqyhxd3ATbVQAAAIAwmojvpiAPL80bb0twFAwZ0F1cI0iyDTBzQmAFtYMqmMcbZ+TfqRT6h31cFSn8bZWtzhYeCyy0Gukfklkt+0bHb9etUVQbaBrBxqt8Qpc9sH3XliR6yzc/ZWtts5epCRtmvLvT2EyvijZC0cW8ree5iTl5UX7kMj2Pz5EhDpCLcwAAAIB6NdcUgxitfOoAdXtntsWkIZYsuZTRG4YP8ig/9Crse/bBRzFFsr+o/OLiG93Wo4AAl1J9z1M4pFjKxZRpIzKOVWpO0wgNO8gy5W6bc2+BORBOVmdmh1/Zk2lvA1NTZBmfgK1UtSLonZF6MFBrSfNV6Pf4oYMkLNaLUBEJK9GcMg==",
     keytype => "ssh-dss",
   }
+
+  @account::user{'devon':
+    comment => 'Devon Harless',
+    uid     => '1162',
+    group   => 'allstaff',
+    groups  => ["developers"],
+    shell   => '/bin/bash',
+    tag     => 'allstaff',
+    key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA/yfuW1BXz6/jjtMAPEK1ZgtqNtY9ZXgzYOOhabn5irkaSxEP6q4kFMHRcWWcr/1dn1MHOV0sARINz/cc1DzhtAAeP+ooRFHFVbfTiaA6dzyU8uyJ0mVYKmwar8j83B/VTxlW1iAKlV//f5dlxghiFgxptFpYvQzetfEtvOtL8IlcJulZwtJojjqvujNk1lG8mK1Ymb5a88wPoBvL0mDoBbtupexH2Zf2zSeqMjp3ex3Po6qvH3dRid6QzniFoO1Vy7PYXDpmmFNaOBoEACTZNlptZC38WIhdhwaDbWxPbYYhwR4uG/kjZVPsvnBDFodwiL5X20aRHAsuSPR4Tf2/Kw==',
+    keytype => 'ssh-rsa',
+  }
 }

@@ -9,30 +9,31 @@
 #   ensure => present,
 # }
 #
-define gpg::agent ($ensure='present', $outfile = 'UNSET', $options = []) {
+define gpg::agent ($ensure='present', $outfile = '', $options = []) {
 
-
-  $gpg_agent_info = $outfile ? {
-    'UNSET' => "--write-env-file /home/${name}/.gpg-agent-info",
-    undef   => "",
-    default => "--write-env-file $outfile",
+  if $outfile == '' {
+    $gpg_agent_info = "/home/${name}/.gpg-agent-info"
+  }
+  else {
+    $gpg_agent_info = $outfile
   }
 
   $command = inline_template("gpg-agent --allow-preset-passphrase --write-env-file ${gpg_agent_info} --daemon <%= options.join(' ') %>")
 
   case $ensure { 
     present: {
-      exec { $command:
+      exec { "gpg-agent":
         user    => $name,
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
-        unless  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
+        command => $command,
+        unless  => "ps -U ${name} -o args | grep -v grep | grep \"${command}\"",
       }
     }
     absent: {
       exec { "kill gpg-agent":
         user    => $name,
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
-        command => "ps -U ${name} -o pid,args | grep -v grep | grep gpg-agent | awk '{print $1}' | xargs kill",
+        command => "ps -U ${name} -eo pid,args | grep -v grep | grep gpg-agent | xargs kill",
         onlyif  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
       }
     }

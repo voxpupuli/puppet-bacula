@@ -98,12 +98,6 @@ node 'net02.dc1.puppetlabs.net' {
       ip  => "10.0.1.50",
   }
 
-  dhcp::host {
-    'eir':
-      mac => "00:25:90:39:1C:56",
-      ip  => "10.0.42.33",
-  }
-
   ####
   # Bacula
   #
@@ -113,5 +107,4 @@ node 'net02.dc1.puppetlabs.net' {
     director => $bacula_director,
     password => $bacula_password,
   }
-
 }

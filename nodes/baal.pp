@@ -102,7 +102,7 @@ node baal {
   nagios::website { 'munin.puppetlabs.com':     auth => 'monit:5kUg8uha', }
   nagios::website { 'docs.puppetlabs.com': } # monitored here to avoid resource collision
 
-  @@nagios_service { "check_gearman_baal":
+  nagios_service { "check_gearman_baal":
     use                 => 'generic-service',
     check_command       => 'check_gearman!localhost!worker_baal',
     host_name           => "$fqdn",
@@ -111,7 +111,7 @@ node baal {
     notify              => Service[$nagios::params::nagios_service],
   }
 
-  @@nagios_service { "check_gearman_wyrd":
+  nagios_service { "check_gearman_wyrd":
     use                 => 'generic-service',
     check_command       => 'check_gearman!localhost!worker_wyrd',
     host_name           => "$fqdn",
@@ -185,6 +185,25 @@ node baal {
     group  => root,
     mode   => 644,
     source => "puppet:///modules/puppetlabs/local_resolv.conf";
+  }
+
+  nagios_host { "imana.puppetlabs.lan":
+    ensure     => present,
+    alias      => "imana",
+    address    => "192.168.100.1",
+    hostgroups => "office",
+    use        => 'generic-host',
+    target     => '/etc/nagios3/conf.d/nagios_host.cfg',
+    notify     => Service[$nagios::params::nagios_service],
+  }
+
+  nagios_service { "check_ping_imana":
+    use                 => 'generic-service',
+    check_command       => 'check_ping!100.0,20%!500.0,60%',
+    host_name           => "imana.puppetlabs.lan",
+    service_description => "check_ping_imana.puppetlabs.lan",
+    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify              => Service[$nagios::params::nagios_service],
   }
 
 }

@@ -102,9 +102,8 @@ node 'net02.dc1.puppetlabs.net' {
   # Bacula
   #
   $bacula_director = 'bacula01.puppetlabs.lan'
-  $bacula_password = 'ES1RyU8raYukCYj6rBwMrAV8hPqi5yYArtoQ38Wj'
   class { "bacula":
     director => $bacula_director,
-    password => $bacula_password,
+    password => hiera('bacula_password'),
   }
 }

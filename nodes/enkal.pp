@@ -15,11 +15,10 @@ node enkal {
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 
   # Backup
-  $bacula_password = 'pc08mK4Gi4ZqqE9JGa5eiOzFTDPsYseUG'
   $bacula_director = 'baal.puppetlabs.com'
   class { "bacula":
     director => $bacula_director,
-    password => $bacula_password,
+    password => hiera('bacula_password'),
   }
 
   # Jenkins

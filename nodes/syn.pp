@@ -26,10 +26,9 @@ node syn {
   }
 
   $bacula_director = 'bacula01.puppetlabs.lan'
-  $bacula_password = 'zu4GxF8ij0JI6zgo0OaPcxnqVZRqIO8AvdNb48ssfGG47wtystSKkBFIzoGvtS8'
   class { "bacula":
     director => $bacula_director,
-    password => $bacula_password,
+    password => hiera('bacula_password'),
   }
 
 }

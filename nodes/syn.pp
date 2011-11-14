@@ -25,9 +25,8 @@ node syn {
       minute  => "*";
   }
 
-  $bacula_director = 'bacula01.puppetlabs.lan'
   class { "bacula":
-    director => $bacula_director,
+    director => hiera('bacula_director'),
     password => hiera('bacula_password'),
   }
 

@@ -49,9 +49,8 @@ node mon0 {
   ####
   # Bacula
   #
-  $bacula_director = 'bacula01.puppetlabs.lan'
   class { "bacula":
-    director => $bacula_director,
+    director => hiera('bacula_director'),
     password => hiera('bacula_password'),
   }
 

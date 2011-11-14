@@ -15,9 +15,8 @@ node enkal {
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 
   # Backup
-  $bacula_director = 'baal.puppetlabs.com'
   class { "bacula":
-    director => $bacula_director,
+    director => hiera('bacula_director'),
     password => hiera('bacula_password'),
   }
 

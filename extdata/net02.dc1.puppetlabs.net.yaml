@@ -1,4 +1,5 @@
 ---
 nrpe_server: %{ipaddress},10.0.1.50,10.0.44.9
+bacula_director: 'bacula01.puppetlabs.lan'
 bacula_password: 'ES1RyU8raYukCYj6rBwMrAV8hPqi5yYArtoQ38Wj'
 

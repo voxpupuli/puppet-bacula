@@ -35,11 +35,10 @@ node bacula01 {
       label       => "Inc-";
   }
 
-  $bacula_password = 'YgBDlDIYfOAYC6UYRX28QD3Q7S3UYLBuGUBW9'
   $bacula_director = 'bacula01.puppetlabs.lan'
   class { "bacula":
     director => $bacula_director,
-    password => $bacula_password,
+    password => hiera('bacula_password'),
   }
 
   bacula::fileset {

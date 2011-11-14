@@ -20,10 +20,9 @@ node dxul {
 
   # Backup
   $bacula_director = 'baal.puppetlabs.com'
-  $bacula_password = '9haB2+SxaNXF2C1LFdptETvihkk/zKro2Hxf+cQFEbIQ'
   class { "bacula":
     director => $bacula_director,
-    password => $bacula_password,
+    password => hiera('bacula_password'),
   }
 
   # Nagios

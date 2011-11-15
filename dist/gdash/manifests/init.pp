@@ -21,7 +21,7 @@ class gdash ($gdash_base="/opt/gdash" ) {
   $gem_path=$passenger::params::gem_path
   
   file{"${gdash_base}/config/gdash.yaml":
-    content => template("gdash/gdash-yaml.erb"),
+    content => template("gdash/gdash.yaml.erb"),
   }
 }
 

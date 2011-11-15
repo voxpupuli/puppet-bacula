@@ -54,7 +54,7 @@ class nagios::gearman (
 
   @@nagios_service { "check_gearman_worker_${hostname}":
     use                 => 'generic-service',
-    check_command       => 'check_gearman_worker!localhost!worker_${hostname}',
+    check_command       => "check_gearman_worker!localhost!worker_${hostname}",
     host_name           => "${nagios_server}",
     service_description => "check_gearman_worker_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',

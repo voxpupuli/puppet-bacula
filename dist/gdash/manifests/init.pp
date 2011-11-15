@@ -1,11 +1,10 @@
-class gdash ($gdash_base="/opt/gdash" ) {
+class gdash ($site_alias = $fqdn, $gdash_base="/opt/gdash" ) {
   
   $site_title    = "Puppet Labs Statistics"
   $graphite_url  = "http://graphite.puppetlabs.lan"
   $dashboard_dir = "${gdash_base}/graph_templates/dashboards"
   $whisper_dir   = "/opt/graphite/storage/whisper"
   $repo_url      = "https://github.com/ripienaar/gdash.git"
-  $port          = 8080
   
   package { "sinatra" : provider => gem, ensure => present, }
   
@@ -26,17 +25,19 @@ class gdash ($gdash_base="/opt/gdash" ) {
     content => template("gdash/gdash.yaml.erb"),
   }
   
-  gdash::passenger { "gdash-vhost": gdash_base => $gdash_base, port => $port , }
+  gdash::passenger { "gdash-vhost": 
+    gdash_base => $gdash_base,
+    site_alias => $site_alias }
 }
 
-define gdash::passenger ($gdash_base, $port='80') {
+define gdash::passenger ($gdash_base, $site_alias, $port='80') {
   include apache::params
   include ::passenger
 
   $passenger_version=$passenger::params::version
   $gem_path=$passenger::params::gem_path
 
-  apache::vhost{$name:
+  apache::vhost{$site_alias:
     port     => $port,
     priority => '30',
     docroot  => "${gdash_base}/public/",

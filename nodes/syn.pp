@@ -25,7 +25,7 @@ node syn {
       minute  => "*";
   }
 
-  include gdash
+  class { "gdash" : site_alias => "dashboard.puppetlabs.lan" }
 
   class { "bacula":
     director => hiera('bacula_director'),

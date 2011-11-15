@@ -1,0 +1,64 @@
+##
+# The following is configuration Mike wanted on rpm-builder.  This may not be the best place for it, but at least it's in puppet
+##
+
+# Disable selinux
+
+class rpmbuilder::selinux {
+  file { "/etc/selinux/config":
+    ensure => present,
+    mode => 644,
+    owner => 'root',
+    group => 'root',
+    source => 'puppet:///modules/rpmbuilder/config',
+  }
+
+  exec { "turn-off-selinux":
+   path => [ '/usr/sbin', '/usr/bin' ] ,
+   command => 'setenforce 0',
+   onlyif => "selinuxenabled",
+  }
+
+}
+
+class rpmbuilder {
+  $pkgs = [ 'vim-enhanced', 'git', 'keychain', 'rubygem-rake', 'rpmdevtools', 'fedora-packager', 'mock', 'bash-completion', 'gnupg' , 'rubygem-rspec-core' , 'git-email', 'make', 'strace', 'rpm-sign', 'mlocate', 's3cmd', 'nfs-utils', 'rubygem-gem2rpm', 'createrepo' ]
+
+  package { $pkgs:
+    ensure => present,
+  }
+
+
+# I imagine this part will cause conflicts
+# FIXME
+
+  # Add stahnma to the mock group
+  user { 'stahnma':
+     ensure => present,
+     groups => [  'release', 'allstaff', 'mock', 'enterprise', 'developers', 'release' ] ,
+  }
+
+  # Add stahnma to the mock group
+  user { 'matthaus':
+     ensure => present,
+     groups => [  'release', 'allstaff', 'mock', 'enterprise', 'developers', 'release' ] ,
+  }
+
+
+#######
+# here is the file, but i don't see a files area
+########
+
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#     targeted - Targeted processes are protected,
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted 
+
+
+

@@ -26,7 +26,7 @@ class gdash ($gdash_base="/opt/gdash" ) {
     content => template("gdash/gdash.yaml.erb"),
   }
   
-  gdash::passenger { gdash_base => $gdash_base, port => $port } ,
+  gdash::passenger { "gdash-vhost": gdash_base => $gdash_base, port => $port } ,
 }
 
 define gdash::passenger ($gdash_base, $port='80') {

@@ -44,9 +44,17 @@ class nagios::commands {
     notify       => Service[$nagios::params::nagios_service],
   }
 
-  nagios_command { 'check_gearman':
+  nagios_command { 'check_gearman_worker':
     command_line => "/usr/lib/nagios/plugins/check_gearman -H \$ARG1\$ -q \$ARG2\$ -t 10 -s check ",
-    command_name => 'check_gearman',
+    command_name => 'check_gearman_worker',
+    ensure       => present,
+    target       => '/etc/nagios/conf.d/nagios_commands.cfg',
+    notify       => Service[$nagios::params::nagios_service],
+  }
+
+  nagios_command { 'check_gearman_server':
+    command_line => "/usr/lib/nagios/plugins/check_gearman -H \$ARG1\$ -t 20 ",
+    command_name => 'check_gearman_server',
     ensure       => present,
     target       => '/etc/nagios/conf.d/nagios_commands.cfg',
     notify       => Service[$nagios::params::nagios_service],

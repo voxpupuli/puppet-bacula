@@ -29,7 +29,8 @@ node ran {
 
   class {
     "nagios::gearman":
-      key => hiera("gearman_key")
+      key           => hiera("gearman_key"),
+      nagios_server => hiera("nagios_server")
   }
 
 }

@@ -18,7 +18,8 @@ node 'net02.dc1.puppetlabs.net' {
 
   class {
     "nagios::gearman":
-      key => hiera("gearman_key")
+      key           => hiera("gearman_key"),
+      nagios_server => hiera("nagios_server")
   }
 
   class { 'bind':

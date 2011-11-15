@@ -3,6 +3,7 @@
 nrpe_server: 127.0.0.1
 nagios_check_ping_delay: "100"
 # the address that nrpe will use to contact the host by
+nagios_server: baal.puppetlabs.com
 nrpe_host_address: %{ipaddress}
 gearman_key: "FpIHcrKjZrZy2DYzhEMog9OLwAD4KuV"
 # Munin

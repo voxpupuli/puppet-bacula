@@ -19,13 +19,6 @@ define gdash ($gdash_base="/opt/gdash" ) {
 
   $passenger_version=$passenger::params::version
   $gem_path=$passenger::params::gem_path
-
-  apache::vhost{$name:
-    port     => $port,
-    priority => '30',
-    docroot  => "${gdash_base}/public/",
-    template => 'gdash/gdash-passenger.conf.erb',
-  }
   
   file{"${gdash_base}/config/gdash.yaml":
     content => template("gdash/gdash-yaml.erb"),

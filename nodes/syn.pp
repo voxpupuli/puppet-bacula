@@ -25,6 +25,8 @@ node syn {
       minute  => "*";
   }
 
+  include gdash
+
   class { "bacula":
     director => hiera('bacula_director'),
     password => hiera('bacula_password'),

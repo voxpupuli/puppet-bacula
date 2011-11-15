@@ -1,4 +1,4 @@
-define gdash ($gdash_base="/opt/gdash" ) {
+class gdash ($gdash_base="/opt/gdash" ) {
   
   $site_title    = "Puppet Labs Statistics"
   $graphite_url  = "http://graphite.puppetlabs.lan"

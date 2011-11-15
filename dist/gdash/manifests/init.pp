@@ -7,6 +7,8 @@ class gdash ($gdash_base="/opt/gdash" ) {
   $repo_url      = "https://github.com/ripienaar/gdash.git"
   $port          = 8080
   
+  package { "sinatra" : provider => gem, ensure => present, }
+  
   vcsrepo { $gdash_base:
     ensure   => present,
     provider => git,

@@ -15,7 +15,7 @@ node dxul {
   # Puppet Forge
   class { 'forge':
     vhost        => 'forge.puppetlabs.com',
-    git_revision => 'bb25f03db8b27fca61756b230c5641629e1d31ec',
+    git_revision => '60eee6fd01457e738c587eda0b434eb7492392ea',
   }
 
   # Backup

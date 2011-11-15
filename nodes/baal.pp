@@ -206,5 +206,62 @@ node baal {
     notify              => Service[$nagios::params::nagios_service],
   }
 
+  nagios_host { "vali.dc1.puppetlabs.lan":
+    ensure     => present,
+    alias      => "vali",
+    address    => "10.0.42.31",
+    hostgroups => "dc1",
+    use        => 'generic-host',
+    target     => '/etc/nagios3/conf.d/nagios_host.cfg',
+    notify     => Service[$nagios::params::nagios_service],
+  }
+
+  nagios_host { "balder.dc1.puppetlabs.lan":
+    ensure     => present,
+    alias      => "balder",
+    address    => "10.0.42.32",
+    hostgroups => "dc1",
+    use        => 'generic-host',
+    target     => '/etc/nagios3/conf.d/nagios_host.cfg',
+    notify     => Service[$nagios::params::nagios_service],
+  }
+
+  nagios_host { "eir.dc1.puppetlabs.lan":
+    ensure     => present,
+    alias      => "eir",
+    address    => "10.0.42.33",
+    hostgroups => "dc1",
+    use        => 'generic-host',
+    target     => '/etc/nagios3/conf.d/nagios_host.cfg',
+    notify     => Service[$nagios::params::nagios_service],
+  }
+
+  nagios_service { "check_ping_vali":
+    use                 => 'generic-service',
+    check_command       => 'check_ping!100.0,20%!500.0,60%',
+    host_name           => "vali.dc1.puppetlabs.net",
+    service_description => "check_ping_vali.dc1.puppetlabs.lan",
+    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify              => Service[$nagios::params::nagios_service],
+  }
+
+  nagios_service { "check_ping_balder":
+    use                 => 'generic-service',
+    check_command       => 'check_ping!100.0,20%!500.0,60%',
+    host_name           => "balder.dc1.puppetlabs.net",
+    service_description => "check_ping_balder.dc1.puppetlabs.lan",
+    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify              => Service[$nagios::params::nagios_service],
+  }
+
+  nagios_service { "check_ping_eir":
+    use                 => 'generic-service',
+    check_command       => 'check_ping!100.0,20%!500.0,60%',
+    host_name           => "eir.dc1.puppetlabs.net",
+    service_description => "check_ping_eir.dc1.puppetlabs.lan",
+    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify              => Service[$nagios::params::nagios_service],
+  }
+
 }
 

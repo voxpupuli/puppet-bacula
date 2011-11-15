@@ -35,8 +35,8 @@ vali              IN  A   10.0.42.31
 vali              IN  TXT "HP 2U 2UX8340AC9 dc1.puppetlabs.net"
 balder            IN  A   10.0.42.32
 balder            IN  TXT "HP 2U 2UX83408YK dc1.puppetlabs.net"
-eir               IN  A   10.0.42.33
-eir               IN  TXT "Demo Box"
+;eir               IN  A   10.0.42.33
+;eir               IN  TXT "Demo Box"
 
 ;++
 ;         10.0.42.0/24 is the oob/management vlan

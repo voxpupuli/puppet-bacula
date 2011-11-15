@@ -42,8 +42,4 @@ define gdash::passenger ($gdash_base, $port='80') {
     docroot  => "${gdash_base}/public/",
     template => 'gdash/gdash-passenger.conf.erb',
   }
-  file{"${dir}/${name}/config/environment.rb":
-    owner   => $apache::params::user,
-    group   => $apache::params::group,
-  }
 }

@@ -206,7 +206,7 @@ node baal {
     notify              => Service[$nagios::params::nagios_service],
   }
 
-  nagios_host { "vali.dc1.puppetlabs.lan":
+  nagios_host { "vali.dc1.puppetlabs.net":
     ensure     => present,
     alias      => "vali",
     address    => "10.0.42.31",
@@ -216,7 +216,7 @@ node baal {
     notify     => Service[$nagios::params::nagios_service],
   }
 
-  nagios_host { "balder.dc1.puppetlabs.lan":
+  nagios_host { "balder.dc1.puppetlabs.net":
     ensure     => present,
     alias      => "balder",
     address    => "10.0.42.32",
@@ -226,7 +226,7 @@ node baal {
     notify     => Service[$nagios::params::nagios_service],
   }
 
-  nagios_host { "eir.dc1.puppetlabs.lan":
+  nagios_host { "eir.dc1.puppetlabs.net":
     ensure     => present,
     alias      => "eir",
     address    => "10.0.42.33",

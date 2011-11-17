@@ -101,16 +101,20 @@ class GitRepo
     end
   end
 
-
   def populate_branchi
     if $zoom
+      pidlist = []
       @branches.each do |b|
-        Thread.new do
+        pid = fork
+        if pid.nil?
           self.make_subbranch b
+          Process.exit
+        else
+          pidlist << pid
         end
       end
-      (Thread.list - [Thread.main]).each do |t|
-        t.join
+      pidlist.each do |pid|
+        Process.waitpid pid, 0
       end
     else
       @branches.each do |b|

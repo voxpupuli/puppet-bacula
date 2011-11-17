@@ -12,6 +12,7 @@
 
 require 'pp'
 require 'fileutils'
+require 'thread'
 
 github_repo_urls = { :default => 'git@github.com:puppetlabs/puppetlabs-modules.git',
                      # :adrient => 'git@github.com:adrienthebo/puppetlabs-modules.git',
@@ -34,6 +35,8 @@ $gitnoise = ""
 unless $debug == true
   $gitnoise = "--quiet"
 end
+
+$zoom = ARGV.delete('-z')
 
 def pp_and_system( dome )
   pp dome if $debug == true
@@ -100,8 +103,16 @@ class GitRepo
 
 
   def populate_branchi
-    @branches.each do |b|
-      self.make_subbranch b
+    if $zoom
+      @branches.each do |b|
+        Thread.new do
+          self.make_subbranch b
+        end
+      end
+    else
+      @branches.each do |b|
+        self.make_subbranch b
+      end
     end
   end
 

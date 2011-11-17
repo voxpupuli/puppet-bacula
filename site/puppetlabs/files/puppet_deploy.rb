@@ -12,7 +12,6 @@
 
 require 'pp'
 require 'fileutils'
-require 'thread'
 
 github_repo_urls = { :default => 'git@github.com:puppetlabs/puppetlabs-modules.git',
                      # :adrient => 'git@github.com:adrienthebo/puppetlabs-modules.git',

@@ -109,6 +109,9 @@ class GitRepo
           self.make_subbranch b
         end
       end
+      (Thread.list - [Thread.main]).each do |t|
+        t.join
+      end
     else
       @branches.each do |b|
         self.make_subbranch b

@@ -5,6 +5,8 @@ node pluto {
   ssh::allowgroup { "prosvc": }
   ssh::allowgroup { "builder": }
 
+  sudo::allowgroup { "builder": }
+
   # Customer Groups
   Account::User <| tag == customer |>
   Group <| tag == customer |>

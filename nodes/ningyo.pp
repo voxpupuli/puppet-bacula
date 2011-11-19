@@ -4,8 +4,8 @@ node ningyo {
 
   ssh::allowgroup { "techops": }
   sudo::allowgroup { "techops": }
-
   ssh::allowgroup { "interns": }
+  ssh::allowgroup { "infra": }
 
   ###
   # Mysql
@@ -16,10 +16,8 @@ node ningyo {
   ###
   # Puppet
   #
-  sudo::entry{
-    "mkincaid":
-      entry => "mkincaid ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n";
-  }
+  sudo::entry { "mkincaid": entry => "mkincaid ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n"; }
+  sudo::entry { "infra": entry => "%infra ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n"; }
 
   $dashboard_site = 'dashboard.puppetlabs.com'
 

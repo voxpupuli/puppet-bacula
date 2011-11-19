@@ -58,6 +58,10 @@ class virtual::groups {
     ensure => present,
     gid    => 681,
   }
+  @group { 'infra': # People who work on puppet infra
+    ensure => present,
+    gid    => 682,
+  }
 
 #
 # Service Groups

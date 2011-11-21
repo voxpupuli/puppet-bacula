@@ -25,6 +25,8 @@ node syn {
       minute  => "*";
   }
 
+  class { "gdash" : site_alias => "stats.puppetlabs.lan" }
+
   class { "bacula":
     director => hiera('bacula_director'),
     password => hiera('bacula_password'),

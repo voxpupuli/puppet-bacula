@@ -1,6 +1,6 @@
 define duplicity::cron(
   $ensure = "present",
-  $quiet  = "true",
+  $mailto = "",
   $user,
   $target,
   $gpg_agent_info,
@@ -19,6 +19,6 @@ define duplicity::cron(
     user    => $user,
     hour    => 0,
     minute  => 0,
-    environment => [ "MAILTO=root" ],
+    environment => [ "MAILTO=$mailto" ],
   }
 }

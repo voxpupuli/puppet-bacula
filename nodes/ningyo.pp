@@ -17,6 +17,7 @@ node ningyo {
   # Puppet
   #
   sudo::entry { "mkincaid": entry => "mkincaid ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n"; }
+  sudo::entry { "ssvarma": entry => "ssvarma ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n"; }
   sudo::entry { "infra": entry => "%infra ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n"; }
 
   $dashboard_site = 'dashboard.puppetlabs.com'

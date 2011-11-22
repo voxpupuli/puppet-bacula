@@ -73,7 +73,7 @@ class forge(
   }
  
   package { 'acts-as-taggable-on':
-    ensure => '2.0.4',
+    ensure => '2.1.1',
     provider => gem,
     require => Vcsrepo['/opt/forge'],
   }

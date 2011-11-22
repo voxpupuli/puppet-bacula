@@ -84,6 +84,14 @@ node ningyo {
       before => Class['puppet::server'];
   }
 
+  file {
+    "/etc/apache2/htpasswd":
+      owner => root,
+      group => root,
+      mode  => 0755,
+      source => "puppet:///modules/puppetlabs/ops_htpasswd";
+  }
+
   cron {
     "compress_reports":
       user    => root,

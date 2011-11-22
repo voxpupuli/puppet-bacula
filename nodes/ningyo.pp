@@ -85,11 +85,16 @@ node ningyo {
   }
 
   file {
-    "/etc/apache2/htpasswd":
+    "/etc/nginx/htpasswd":
       owner => root,
       group => www-data,
       mode  => 0640,
       source => "puppet:///modules/puppetlabs/ops_htpasswd";
+  }
+
+  file {
+    "/etc/apache2/htpasswd":
+      ensure => absent;
   }
 
   cron {

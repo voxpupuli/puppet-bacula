@@ -87,8 +87,8 @@ node ningyo {
   file {
     "/etc/apache2/htpasswd":
       owner => root,
-      group => root,
-      mode  => 0755,
+      group => www-data,
+      mode  => 0640,
       source => "puppet:///modules/puppetlabs/ops_htpasswd";
   }
 

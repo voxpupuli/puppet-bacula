@@ -1,4 +1,4 @@
-class duplicity::client {
+class duplicity::install {
 
   package { "duplicity":
     ensure => present,

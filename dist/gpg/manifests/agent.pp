@@ -25,9 +25,8 @@ define gpg::agent ($ensure='present', $outfile = '', $options = []) {
   case $ensure { 
     present: {
       exec { "gpg-agent":
-        user    => $name,
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
-        command => $command,
+        command => "su - $name -c '$command'",
         unless  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
         logoutput => on_failure,
       }

@@ -47,6 +47,8 @@ class puppetlabs::os::freebsd {
   }
 
   cron { "update ports":
+    minute  => 20,
+    hour    => 20,
     user    => root,
     command => "/usr/bin/csup /root/ports-supfile > /dev/null",
   }

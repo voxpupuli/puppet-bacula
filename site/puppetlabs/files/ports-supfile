@@ -1,0 +1,9 @@
+*default host=ftp.freebsd.org
+*default base=/var/db
+*default prefix=/usr
+*default release=cvs tag=.
+*default delete use-rel-suffix
+
+*default compress
+
+ports-all

@@ -42,4 +42,13 @@ class puppetlabs::os::freebsd {
     require => Package['zsh'],
   }
 
+  file { "/root/ports-supfile":
+    source => "puppet:///modules/puppetlabs/ports-supfile",
+  }
+
+  cron { "update ports":
+    user    => root,
+    command => "/usr/bin/csup /root/ports-supfile > /dev/null",
+  }
+
 }

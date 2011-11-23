@@ -13,7 +13,7 @@
 node baal {
   include role::server
 
-  ssh::allowgroup { "techops": }
+  ssh::allowgroup { ["interns","techops"]: }
 
   ###
   # Mysql

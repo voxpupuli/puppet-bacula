@@ -18,7 +18,7 @@ define gpg::agent ($ensure='present', $outfile = '', $options = []) {
     $gpg_agent_info = $outfile
   }
 
-  $command = inline_template("gpg-agent --allow-preset-passphrase --write-env-file ${gpg_agent_info} --daemon <%= options.join(' ') %>")
+  $command = inline_template('<%= "gpg-agent --allow-preset-passphrase --write-env-file #{gpg_agent_info} --daemon #{options.join(' ').gsub(/\s+/, ' ')}" %>')
 
   case $ensure { 
     present: {

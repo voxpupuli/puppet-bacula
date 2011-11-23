@@ -13,7 +13,8 @@
 node baal {
   include role::server
 
-  ssh::allowgroup { ["interns","techops"]: }
+  ssh::allowgroup { "techops": }
+  ssh::allowgroup { "interns": }
 
   ###
   # Mysql
@@ -98,6 +99,14 @@ node baal {
   include nagios::dbservices
   include nagios::pagerduty
 
+  file {
+    "/etc/nagios3/htpasswd.users":
+      owner => root,
+      group => www-data,
+      mode  => 0640,
+      source => "puppet:///modules/puppetlabs/ops_htpasswd";
+  }
+
   nagios::website { 'nagios.puppetlabs.com':    auth => 'monit:5kUg8uha', }
   nagios::website { 'dashboard.puppetlabs.com': auth => 'monit:5kUg8uha', }
   nagios::website { 'munin.puppetlabs.com':     auth => 'monit:5kUg8uha', }
@@ -116,6 +125,19 @@ node baal {
     priority => '08',
     port     => '80',
     docroot  => '/var/www',
+  }
+  
+  file {
+    "/etc/munin/htpasswd.users":
+      owner => root,
+      group => www-data,
+      mode  => 0640,
+      source => "puppet:///modules/puppetlabs/ops_htpasswd";
+  }
+
+  file {
+    "/etc/apache2/htpasswd":
+      ensure => absent;
   }
 
   # VPN for internal monitoring and DNS Resolution

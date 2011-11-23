@@ -13,6 +13,7 @@ node clippy {
     options => [
       "--default-cache-ttl 999999999",
       "--max-cache-ttl     999999999",
+      "--use-standard-socket",
     ], 
   }
 

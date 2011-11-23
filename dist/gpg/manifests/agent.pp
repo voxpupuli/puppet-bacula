@@ -11,6 +11,8 @@
 #
 define gpg::agent ($ensure='present', $outfile = '', $options = []) {
 
+  require gpg::install
+
   if $outfile == '' {
     $gpg_agent_info = "/home/${name}/.gpg-agent-info"
   }

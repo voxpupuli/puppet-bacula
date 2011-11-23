@@ -27,6 +27,7 @@ define gpg::agent ($ensure='present', $outfile = '', $options = []) {
         path    => "/usr/bin:/bin:/usr/sbin:/sbin",
         command => $command,
         unless  => "ps -U ${name} -o args | grep -v grep | grep gpg-agent",
+        logoutput => on_failure,
       }
     }
     absent: {

@@ -35,7 +35,7 @@ class puppetlabs::service::pkgrepo (
     nagios::website { 'yum.puppetlabs.com': }
     class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
     include yumrepo
-    include gpg
+    include gpg::install
   }
 
   rsync::server {

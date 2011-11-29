@@ -116,7 +116,7 @@ class virtual::users {
     comment => 'Dominic Maraglia',
     uid     => '1124',
     group   => allstaff,
-    groups  => ["developers"],
+    groups  => ["developers","qa"],
     tag     => allstaff,
  }
 

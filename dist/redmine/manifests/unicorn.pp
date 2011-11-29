@@ -71,7 +71,7 @@ define redmine::unicorn (
     template   => 'redmine/redmine-unicorn.conf.erb',
     require    => Service['unicorn'],
   }
-  
+
   file { "${dir}/${name}/config/environment.rb":
     owner   => $apache::params::user,
     group   => $apache::params::group,
@@ -95,6 +95,13 @@ define redmine::unicorn (
   file { "/usr/bin/unicorn_rails":
     ensure => symlink,
     target => "/var/lib/gems/1.8/bin/unicorn_rails";
+  }
+
+  logrotate::job {
+    "redmine_unicorn":
+      log        => "${dir}/${name}/log/*log",
+      options    => ["rotate 28", "daily", "compress", "notifempty","sharedscripts"],
+      postrotate => "/etc/init.d/unicorn reopen-logs"
   }
 
 }

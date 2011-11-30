@@ -3,7 +3,6 @@
 # Parameters:
 #  $repo_url: the git url of the repository
 #  $repo_rev: what branch of that repository to run metrics on
-#  $repo_name: what you want to call the directory for the metric_fu output
 #
 # Actions:
 #  This subclass pulls down one codebase/repo and runs metric_fu every time it changes.
@@ -14,13 +13,13 @@
 #
 # Sample Usage:
 #   include metric_fu [or] class { "metric_fu" : site_alias => "metricsvhost.puppetlabs.lan" }
-#   metric_fu::codebase { "puppet" : repo_url => "https://github.com/puppetlabs/puppet.git", repo_rev => "origin/master", repo_name => "puppet"}
+#   metric_fu::codebase { "puppet" : repo_url => "https://github.com/puppetlabs/puppet.git", repo_rev => "origin/master"}
 
-define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
+define metric_fu::codebase ($repo_url, $repo_rev) {
   include metric_fu
   $timeout       = 0
   
-  $repo_base     = "$metric_fu::parent_dir/$repo_name"
+  $repo_base     = "$metric_fu::parent_dir/$title"
   $rakefile_path = "$repo_base/tasks/rake/metrics.rake"
   
   vcsrepo { $repo_base:
@@ -33,7 +32,7 @@ define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
     require  => [File[$metric_fu::parent_dir],Package["git-core"],Package["rake"]],
   }
   
-  exec { "metric_fu_$repo_name":
+  exec { "metric_fu_$title":
     command     => $metric_fu::metricfu_cmd,
 #    user       => $metric_fu::owner,
     cwd         => $repo_base,
@@ -43,12 +42,12 @@ define metric_fu::codebase ($repo_url, $repo_rev, $repo_name) {
     require     => [Package["main"],Package["metric_fu","rspec","mocha","zaml","rack"],File[$rakefile_path]],
   }
 
-  file { "$metric_fu::web_root/$repo_name":
+  file { "$metric_fu::web_root/$title":
     group   => $group,
     owner   => $owner,  
     ensure  => link,
     target  => "$repo_base/tmp/metric_fu/output",
-    require => [Exec["metric_fu_$repo_name"], File[$metric_fu::web_root]],
+    require => [Exec["metric_fu_$title"], File[$metric_fu::web_root]],
   }
 
   file { "$rakefile_path":

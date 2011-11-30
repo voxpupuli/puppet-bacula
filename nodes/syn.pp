@@ -5,8 +5,8 @@ node syn {
 
   class { "metric_fu" : site_alias => "metrics.puppetlabs.lan" }
 
-  metric_fu::codebase { "puppet" : repo_url => "https://github.com/puppetlabs/puppet.git", repo_rev => "origin/master", repo_name => "puppet"}
-  metric_fu::codebase { "facter" : repo_url => "https://github.com/puppetlabs/facter.git", repo_rev => "origin/master", repo_name => "facter"}
+  metric_fu::codebase { "puppet" : repo_url => "https://github.com/puppetlabs/puppet.git", repo_rev => "origin/master"}
+  metric_fu::codebase { "facter" : repo_url => "https://github.com/puppetlabs/facter.git", repo_rev => "origin/master"}
 
   ssh::allowgroup  { "interns": }
   sudo::allowgroup { "interns": }

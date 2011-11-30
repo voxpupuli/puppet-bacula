@@ -246,7 +246,7 @@ class virtual::users {
     comment => 'Matthaus Litteken',
     uid     => '1028',
     group   => allstaff,
-    groups  => ["builder","release","enterprise","infra"],
+    groups  => ["developers","builder","release","enterprise","infra"],
     tag     => allstaff,
   }
 

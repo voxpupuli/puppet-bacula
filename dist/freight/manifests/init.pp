@@ -53,7 +53,6 @@ class freight ($freight_docroot, $freight_gpgkey, $freight_libdir) {
     priority => '10',
     port => '80',
     docroot => $freight_docroot,
-    template => 'freight/apache2.conf.erb',
     require => File[$freight_docroot],
   }
 

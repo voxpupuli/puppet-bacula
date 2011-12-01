@@ -110,7 +110,7 @@ define account::user (
   if $ensure == 'present' {
     File { owner => $name, group => $groupname}
     file {
-      "${homedir}": ensure => directory, require => User["$name"];
+      "${homedir}": ensure => directory, require => User[$name];
     }
 
     # Only if we are using key auth
@@ -129,14 +129,14 @@ define account::user (
             ensure  => directory, 
             owner   => $name, 
             group   => $groupname, 
-            require => User["$name"];
+            require => User[$name];
           "${homedir}/.ssh/authorized_keys": 
             mode    => 0600, 
             recurse => true, 
             source  => "${userdir}/.ssh/authorized_keys", 
             owner   => $name, 
             group   => $groupname, 
-            require => [File["$homedir/.ssh"], User["$name"]];
+            require => [File["$homedir/.ssh"], User[$name]];
         }
       }
     }

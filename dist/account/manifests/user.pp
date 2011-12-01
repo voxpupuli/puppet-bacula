@@ -109,8 +109,7 @@ define account::user (
   # Only if we are ensuring a user is present
   if $ensure == 'present' {
     File { owner => $name, group => $groupname}
-    file {
-      "${homedir}": ensure => directory, require => User[$name];
+    file { $homedir: ensure => directory, require => User[$name];
     }
 
     # Only if we are using key auth
@@ -121,7 +120,7 @@ define account::user (
           key     => $key,
           type    => $keytype,
           user    => $name,
-          require => User[$name],
+          require => File[$homedir],
         }
       } else {
         file {

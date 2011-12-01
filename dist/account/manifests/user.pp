@@ -117,10 +117,11 @@ define account::user (
     if $usekey == true {
       if $key { 
         ssh_authorized_key { "$name@$group":
-          ensure => present,
-          key    => $key,
-          type   => $keytype,
-          user   => $name,
+          ensure  => present,
+          key     => $key,
+          type    => $keytype,
+          user    => $name,
+          require => User[$name],
         }
       } else {
         file {

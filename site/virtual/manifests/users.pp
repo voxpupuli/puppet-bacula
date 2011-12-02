@@ -337,7 +337,7 @@ class virtual::users {
     comment => 'Jonathan Grochowski',
     uid     => '1158',
     group   => allstaff,
-    groups  => ["developers"],
+    groups  => ["developers","release","builder"],
     tag     => allstaff,
   }
 

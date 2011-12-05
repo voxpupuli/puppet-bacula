@@ -80,5 +80,12 @@ define apache::vhost(
         proto => 'tcp'
     }
   }
+
+  apache::port {
+    $name:
+      port        => $port,
+      vhost_name  => $vhost_name,
+  }
+
 }
 

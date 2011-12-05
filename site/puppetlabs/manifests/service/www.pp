@@ -36,13 +36,9 @@ class puppetlabs::service::www {
     priority => '99';
   }
 
-  # Hacked up apache configuration for nginx support
+  # Hacked up apache configuration for nginx support.
+  # LogFormat specifically so we can see the originating IP
   file {
-    "/etc/apache2/ports.conf":
-      owner  => root,
-      group  => root,
-      mode   => 644,
-      source => "puppet:///modules/puppetlabs/web01_ports.conf";
     "/etc/apache2/apache2.conf":
       owner  => root,
       group  => root,

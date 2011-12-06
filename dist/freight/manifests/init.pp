@@ -57,13 +57,12 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     require   => Package['freight'],
   }
 
-  if ! defined("Apache::vhost[${freight_vhost_name}]") {
-    apache::vhost { $freight_vhost_name:
-      priority  => '10',
-      port      => '80',
-      docroot   => $freight_docroot,
-      require   => File[$freight_docroot],
-    }
+  apache::vhost { "${freight_vhost_name}-the-sequel":
+    servername  => $freight_vhost_name,
+    priority    => '10',
+    port        => '80',
+    docroot     => $freight_docroot,
+    require     => File[$freight_docroot],
   }
 
   apt::source { "rcrowley.list":

@@ -59,7 +59,7 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
 
   apache::vhost { "${freight_vhost_name}-the-sequel":
     servername  => $freight_vhost_name,
-    priority    => '10',
+    priority    => '15',
     port        => '80',
     docroot     => $freight_docroot,
     require     => File[$freight_docroot],

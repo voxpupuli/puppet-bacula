@@ -43,10 +43,12 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     }
   }
 
-  file { [$freight_docroot, $freight_libdir]:
-    ensure    => directory,
-    group     => $freight_group,
-    require   => Group[$freight_group],
+  if ! defined("File[${freight_docroot}]") and ! defined("File[${freight_libdir}]") {
+    file { [$freight_docroot, $freight_libdir]:
+      ensure    => directory,
+      group     => $freight_group,
+      require   => Group[$freight_group],
+    }
   }
 
   file { '/etc/freight.conf':

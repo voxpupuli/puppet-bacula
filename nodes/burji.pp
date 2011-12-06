@@ -145,6 +145,14 @@ node burji {
     ensure    => directory,
     group     => 'release',
     require   => Group['release'],
+    mode      => 0775,
+  }
+
+  file { '/opt/repository/incoming':
+    ensure    => directory,
+    group     => 'release',
+    require   => [Group['release'], File['/opt/repository']]
+    mode      => 0775,
   }
 
   class { 'freight':

@@ -56,6 +56,7 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
       ensure    => directory,
       group     => $freight_group,
       require   => Group[$freight_group],
+      mode      => 0775,
     }
   }
 

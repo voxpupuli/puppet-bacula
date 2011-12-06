@@ -87,6 +87,7 @@ node pluto {
     freight_gpgkey      => 'pluto@puppetlabs.lan',
     freight_group       => 'enterprise',
     freight_libdir      => '/opt/tools/freight',
+    freight_manage_dirs => true,
   }
 
 }

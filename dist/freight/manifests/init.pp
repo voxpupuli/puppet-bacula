@@ -29,7 +29,7 @@
 #     freight_libdir      => '/var/lib/freight',
 #   }
 #
-class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_group, $freight_libdir) {
+class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_group, $freight_libdir, $freight_manage_dirs = true) {
   include apache
 
   package { 'freight':
@@ -43,10 +43,12 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     }
   }
 
-  file { [$freight_docroot, $freight_libdir]:
-    ensure    => directory,
-    group     => $freight_group,
-    require   => Group[$freight_group],
+  if $freight_manage_dirs = true {
+    file { [$freight_docroot, $freight_libdir]:
+      ensure    => directory,
+      group     => $freight_group,
+      require   => Group[$freight_group],
+    }
   }
 
   file { '/etc/freight.conf':

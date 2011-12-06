@@ -147,6 +147,7 @@ node burji {
     freight_gpgkey      => 'info@puppetlabs.com',
     freight_group       => 'release',
     freight_libdir      => '/opt/tools/freight',
+    freight_manage_dirs => false,
   }
 
 }

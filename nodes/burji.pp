@@ -151,7 +151,7 @@ node burji {
   file { '/opt/repository/incoming':
     ensure    => directory,
     group     => 'release',
-    require   => [Group['release'], File['/opt/repository']]
+    require   => [ Group['release'], File['/opt/repository'] ],
     mode      => 0775,
   }
 

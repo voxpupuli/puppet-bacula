@@ -29,7 +29,7 @@
 #     freight_libdir      => '/var/lib/freight',
 #   }
 #
-class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_group, $freight_libdir, $freight_manage_dirs = true) {
+class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_group, $freight_libdir, $freight_manage_docroot = true, $freight_manage_libdir = true, $freight_manage_vhost = true) {
   include apache
 
   package { 'freight':
@@ -43,8 +43,16 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     }
   }
 
-  if ($freight_manage_dirs) {
-    file { [$freight_docroot, $freight_libdir]:
+  if ($freight_manage_docroot) {
+    file { $freight_docroot:
+      ensure    => directory,
+      group     => $freight_group,
+      require   => Group[$freight_group],
+    }
+  }
+
+  if ($freight_manage_libdir) {
+    file { $freight_libdir:
       ensure    => directory,
       group     => $freight_group,
       require   => Group[$freight_group],
@@ -57,12 +65,14 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     require   => Package['freight'],
   }
 
-  apache::vhost { "${freight_vhost_name}-the-sequel":
-    servername  => $freight_vhost_name,
-    priority    => '15',
-    port        => '80',
-    docroot     => $freight_docroot,
-    require     => File[$freight_docroot],
+  if ($freight_manage_vhost) {
+    apache::vhost { $freight_vhost_name:
+      servername  => $freight_vhost_name,
+      priority    => '10',
+      port        => '80',
+      docroot     => $freight_docroot,
+      require     => File[$freight_docroot],
+    }
   }
 
   apt::source { "rcrowley.list":

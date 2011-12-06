@@ -82,9 +82,11 @@ node pluto {
 
   include apt::backports
   class { 'freight':
-    freight_docroot   => '/opt/enterprise/repos/debian',
-    freight_gpgkey    => 'pluto@puppetlabs.lan',
-    freight_libdir    => '/opt/tools/freight'
+    freight_vhost_name  => 'freight.puppetlabs.lan',
+    freight_docroot     => '/opt/enterprise/repos/debian',
+    freight_gpgkey      => 'pluto@puppetlabs.lan',
+    freight_group       => 'enterprise',
+    freight_libdir      => '/opt/tools/freight',
   }
 
 }

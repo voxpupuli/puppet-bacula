@@ -3,9 +3,11 @@
 # This class installs and configures a local APT repo using freight
 #
 # Parameters:
+# - The $freight_vhost_name choses a virtual host name for the repo
 # - The $freight_docroot chooses a docroot to serve the repo out of
 #     (used for the vhost and for freight config)
 # - The $freight_gpgkey is the gpg key used to sign the repository
+# - The $freight_group is used to define the group for the docroot and libdir
 # - The $freight_libdir is where the freight stores the debs, before
 #     hard-linking them into the vhost docroot
 #
@@ -20,12 +22,14 @@
 #
 # Sample Usage:
 #   class { 'freight':
+#     freight_vhost_name  => 'freight.somewhere.com',
 #     freight_docroot     => '/var/www/html',
 #     freight_gpgkey      => 'me@somewhere.com',
+#     freight_group       => 'release',
 #     freight_libdir      => '/var/lib/freight',
 #   }
 #
-class freight ($freight_docroot, $freight_gpgkey, $freight_libdir) {
+class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_group, $freight_libdir) {
   include apache
 
   package { 'freight':
@@ -39,21 +43,23 @@ class freight ($freight_docroot, $freight_gpgkey, $freight_libdir) {
 
   file { [$freight_docroot, $freight_libdir]:
     ensure    => directory,
-    group     => "enterprise",
-    require   => Group["enterprise"],
+    group     => $freight_group,
+    require   => Group[$freight_group],
   }
 
   file { '/etc/freight.conf':
-    ensure => present,
-    content => template('freight/freight.conf.erb'),
-    require => Package['freight'],
+    ensure    => present,
+    content   => template('freight/freight.conf.erb'),
+    require   => Package['freight'],
   }
 
-  apache::vhost { 'freight.puppetlabs.lan':
-    priority => '10',
-    port => '80',
-    docroot => $freight_docroot,
-    require => File[$freight_docroot],
+  if ! defined("Apache::vhost[${freight_vhost_name}]") {
+    apache::vhost { $freight_vhost_name:
+      priority  => '10',
+      port      => '80',
+      docroot   => $freight_docroot,
+      require   => File[$freight_docroot],
+    }
   }
 
   apt::source { "rcrowley.list":

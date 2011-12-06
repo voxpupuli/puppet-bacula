@@ -73,6 +73,7 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
       port        => '80',
       docroot     => $freight_docroot,
       require     => File[$freight_docroot],
+      template    => 'freight/apache2.conf.erb',
     }
   }
 

@@ -141,6 +141,12 @@ node burji {
       target => "puppet-${puppet_link_version}.tar.gz.asc";
   }
 
+  file { '/opt/tools':
+    ensure    => directory,
+    group     => 'release',
+    require   => Group['release'],
+  }
+
   class { 'freight':
     freight_vhost_name      => 'apt.puppetlabs.com',
     freight_docroot         => '/opt/repository/apt',

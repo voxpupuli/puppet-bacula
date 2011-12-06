@@ -43,7 +43,7 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     }
   }
 
-  if ($freight_manage_dirs = true) {
+  if ($freight_manage_dirs) {
     file { [$freight_docroot, $freight_libdir]:
       ensure    => directory,
       group     => $freight_group,

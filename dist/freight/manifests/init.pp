@@ -43,8 +43,16 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     }
   }
 
-  if ! defined("File[${freight_docroot}]") and ! defined("File[${freight_libdir}]") {
-    file { [$freight_docroot, $freight_libdir]:
+  if ! defined("File[${freight_docroot}]") {
+    file { $freight_docroot:
+      ensure    => directory,
+      group     => $freight_group,
+      require   => Group[$freight_group],
+    }
+  }
+
+  if ! defined("File[${freight_libdir}]") {
+    file { $freight_libdir:
       ensure    => directory,
       group     => $freight_group,
       require   => Group[$freight_group],

@@ -37,8 +37,10 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     require => Apt::Source["rcrowley.list"],
   }
 
-  package { 'gnupg-agent':
-    ensure  => present,
+  if ! defined(Package["gnupg-agent"]) {
+    package { 'gnupg-agent':
+      ensure  => present,
+    }
   }
 
   file { [$freight_docroot, $freight_libdir]:

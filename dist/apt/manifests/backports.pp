@@ -22,6 +22,7 @@
 #
 # Copyright 2011 Puppet Labs Inc, unless otherwise noted.
 class apt::backports( $release=undef ) {
+  include apt
 
   if $release == undef {
     $releasename = $lsbdistcodename
@@ -42,6 +43,7 @@ class apt::backports( $release=undef ) {
             "debian" => "main",
             "ubuntu" => "universe multiverse restricted",
           },
+          notify => Exec["apt-get update"],
       }
     }
     default: {
@@ -57,10 +59,5 @@ class apt::backports( $release=undef ) {
     filename => 'star'
   }
 
-  exec { 'Refresh apt cache after adding backports':
-    command     => '/usr/bin/aptitude --quiet update',
-    refreshonly => 'true',
-    subscribe   => File['/etc/apt/sources.list.d/backports.list'],
-  }
 }
 

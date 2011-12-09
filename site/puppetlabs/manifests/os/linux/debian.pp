@@ -65,12 +65,7 @@ class puppetlabs::os::linux::debian  {
       },
   }
 
-  apt::source { "puppetlabs.list":
-    uri          => $lsbdistid ? {
-      "debian" => "http://apt.puppetlabs.com/debian",
-      "ubuntu" => "http://apt.puppetlabs.com/ubuntu",
-    }
-  }
+  apt::source { "puppetlabs.list": uri => "http://apt.puppetlabs.com/", }
 
   apt::source { "updates.list":
     uri          => $lsbdistid ? {

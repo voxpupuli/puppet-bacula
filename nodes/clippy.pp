@@ -21,7 +21,7 @@ node clippy {
     user           => "git",
     target         => "ssh://gitbackups@bacula01.puppetlabs.lan:22//bacula/duplicity/git.puppetlabs.net",
     gpg_agent_info => "/home/git/.gpg-agent-info",
-    mailto         => "sysadmin+gitbackups@puppetlabs.com",
+    mailto         => "",
     options        => [
       "--encrypt-key 409D0688",
       "--sign-key 409D0688",

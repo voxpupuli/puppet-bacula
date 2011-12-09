@@ -4,5 +4,7 @@ node shell {
   include apt::backports
   ssh::allowgroup { "allstaff": }
 
+  apt::source { "http://ppa.launchpad.net/schwuk/znc/ubuntu": }
+
 }
 

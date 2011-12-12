@@ -48,7 +48,7 @@ node ningyo {
     dbuser     => "puppet",
     dbpassword => "M@gickF$ck!ngP@$$w0rddd!",
     dbsocket   => "/var/run/mysqld/mysqld.sock",
-    reporturl  => "https://dashboard.puppetlabs.com/reports/upload",
+    reporturl  => "https://dashboard.puppetlabs.com/reports",
     servertype => "unicorn",
   }
 

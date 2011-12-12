@@ -114,7 +114,7 @@ node ningyo {
       hour => '2';
     "Puppet: puppet_deploy.rb":
       user    => root,
-      command => '/usr/local/bin/puppet_deploy.rb',
+      command => '/usr/local/bin/puppet_deploy.rb 2>/dev/null',
       minute  => '*/8',
       require => File["/usr/local/bin/puppet_deploy.rb"];
   }

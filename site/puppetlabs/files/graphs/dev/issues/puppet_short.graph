@@ -1,0 +1,11 @@
+title       "Puppet issues (including subprojects) over the past month"
+vtitle      "Redmine tickets"
+from        "-1month"
+description "Open issues over the past week. Total includes all Redmine subprojects: Puppet, Facter, dashboard, docs, modules, acceptance, cloud-pack, etc."
+linewidth   2
+ymin        0
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet issues (all subprojects)",
+               :data  => "redmine.puppet.issues.count"

@@ -1,0 +1,31 @@
+title       "Age of oldest pull request by project over the past month"
+vtitle      "Number of days old"
+from        "-1month"
+description "Age of the oldest open pull request, in days, over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+linewidth   2
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet oldest pull request",
+               :data  => "github.puppet.oldest_pull"
+
+field :facter,
+               :color => "red",
+               :alias => "Facter oldest pull request",
+               :data  => "github.facter.oldest_pull"
+
+field :dashboard,
+               :color => "aqua",
+               :alias => "Dashboard oldest pull request",
+               :data  => "github.puppet-dashboard.oldest_pull"
+
+field :mco,
+               :color => "yellow",
+               :alias => "MCollective oldest pull request",
+               :data  => "github.marionette-collective.oldest_pull"
+
+field :mcoplugins,
+               :color => "orange",
+               :alias => "MCollective plugins oldest pull request",
+               :data  => "github.mcollective-plugins.oldest_pull"
+

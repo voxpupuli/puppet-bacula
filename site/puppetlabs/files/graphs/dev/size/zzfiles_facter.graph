@@ -1,0 +1,22 @@
+title       "Facter code stats over the past month"
+vtitle      "Lines"
+from        "-1month"
+description "Lines of code over the past month"
+linewidth   2
+ymin        0
+
+field :code,
+               :color => "blue",
+               :alias => "Facter lines of code",
+               :data  => "sources.facter.code"
+
+field :blank,
+               :color => "green",
+               :alias => "Facter lines blank",
+               :data  => "sources.facter.blank"
+
+field :comment,
+               :color => "purple",
+               :alias => "Facter comment lines",
+               :data  => "sources.facter.comment"
+

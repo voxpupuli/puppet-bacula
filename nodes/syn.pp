@@ -32,5 +32,15 @@ node syn {
     password => hiera('bacula_password'),
   }
 
+  file {
+    "/opt/gdash/graph_templates/dashboards":
+      owner => root,
+      group => www-data,
+      mode  => 0644,
+      ensure => directory,
+      recurse => true,
+      source => "puppet:///modules/puppetlabs/graphs";
+  }
+
 }
 

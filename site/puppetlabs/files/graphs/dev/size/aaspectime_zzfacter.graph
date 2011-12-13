@@ -1,0 +1,13 @@
+title       "Facter testing complexity over the past month"
+vtitle      "Seconds"
+from        "-1month"
+description "Time to run rake spec over the past month"
+linewidth   2
+ymax        10
+ymin        0
+
+field :files,
+               :color => "orange",
+               :alias => "Facter test time",
+               :data  => "sources.facter.spectime"
+

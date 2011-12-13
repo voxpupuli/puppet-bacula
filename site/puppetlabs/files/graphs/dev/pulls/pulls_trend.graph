@@ -1,0 +1,32 @@
+title       "Pull requests by project over the past 6 months"
+vtitle      "Pull requests"
+from        "-6months"
+description "Open pull requests over the past 6 months. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+linewidth   2
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet open pull requests",
+               :data  => "github.puppet.pulls"
+
+field :facter,
+               :color => "red",
+               :alias => "Facter open pull requests",
+               :data  => "github.facter.pulls"
+
+field :dashboard,
+               :color => "aqua",
+               :alias => "Dashboard open pull requests",
+               :data  => "github.puppet-dashboard.pulls"
+
+field :mco,
+               :color => "yellow",
+               :alias => "MCollective open pull requests",
+               :data  => "github.marionette-collective.pulls"
+
+field :mcoplugins,
+               :color => "orange",
+               :alias => "MCollective plugins open pull requests",
+               :data  => "github.mcollective-plugins.pulls"
+
+

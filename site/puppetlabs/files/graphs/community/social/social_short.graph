@@ -1,0 +1,15 @@
+title       "Social media changes by day"
+vtitle      "followers"
+from        "-6month"
+description "Twitter and Facebook followers over the past 6 months"
+linewidth   2
+
+field :fb,
+               :color => "blue",
+               :alias => "New Facebook likes per day",
+               :data  => 'derivative(summarize(facebook.likes,"1day","avg"))'
+
+field :twitter,
+               :color => "aqua",
+               :alias => "New Twitter followers per day",
+               :data  => 'derivative(summarize(twitter.followers_count,"1day","avg"))'

@@ -1,0 +1,21 @@
+title       "Puppet Enterprise 2.0: time since last Jenkins success, un-success and failure"
+vtitle      "Hours"
+from        "-1month"
+description "Number of hours since the last Jenkins run with each outcome."
+linewidth   2
+
+field :success,
+               :color => "blue",
+               :alias => "Last successful Jenkins run for pe-20",
+               :data  => "scale(jenkins.pe-20.last-success,0.0002777)"
+
+field :failure,
+               :color => "red",
+               :alias => "Last failed Jenkins run for pe-20",
+               :data  => "scale(jenkins.pe-20.last-failure,0.0002777)"
+
+field :unsuccess,
+               :color => "orange",
+               :alias => "Last unsuccessful Jenkins run for pe-20",
+               :data  => "scale(jenkins.pe-20.last-unsuccessful,0.0002777)"
+

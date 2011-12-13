@@ -1,0 +1,31 @@
+title       "Github time since push by project over the past month"
+vtitle      "Days"
+from        "-1month"
+description "Time (in days) since the last push by project over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+linewidth   2
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet days since push",
+               :data  => "scale(github.puppet.time-ago-pushed,0.0000115740)"
+
+field :facter,
+               :color => "red",
+               :alias => "Facter days since push",
+               :data  => "scale(github.facter.time-ago-pushed,0.0000115740)"
+
+field :dashboard,
+               :color => "aqua",
+               :alias => "Dashboard days since push",
+               :data  => "scale(github.puppet-dashboard.time-ago-pushed,0.0000115740)"
+
+field :mco,
+               :color => "yellow",
+               :alias => "MCollective days since push",
+               :data  => "scale(github.marionette-collective.time-ago-pushed,0.0000115740)"
+
+field :mcoplugins,
+               :color => "orange",
+               :alias => "MCollective plugins days since push",
+               :data  => "scale(github.mcollective-plugins.time-ago-pushed,0.0000115740)"
+

@@ -1,0 +1,21 @@
+title       "Mcollective: time since last Jenkins success, un-success and failure"
+vtitle      "Hours"
+from        "-1month"
+description "Number of hours since the last Jenkins run with each outcome."
+linewidth   2
+
+field :success,
+               :color => "blue",
+               :alias => "Last successful Jenkins run for marionette-collective",
+               :data  => "scale(jenkins.marionette-collective.last-success,0.0002777)"
+
+field :failure,
+               :color => "red",
+               :alias => "Last failed Jenkins run for marionette-collective",
+               :data  => "scale(jenkins.marionette-collective.last-failure,0.0002777)"
+
+field :unsuccess,
+               :color => "orange",
+               :alias => "Last unsuccessful Jenkins run for marionette-collective",
+               :data  => "scale(jenkins.marionette-collective.last-unsuccessful,0.0002777)"
+

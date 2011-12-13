@@ -1,8 +1,9 @@
-title       "Age of maximum time since pull request response response by project over the past month"
+title       "Maximum time since pull request response by project over the past month"
 vtitle      "Number of days old"
 from        "-1month"
 description "Maximum time since last response to any open pull request, in days, over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
 linewidth   2
+ymin        0
 
 field :puppet,
                :color => "blue",

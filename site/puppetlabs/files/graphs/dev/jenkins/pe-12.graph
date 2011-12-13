@@ -3,6 +3,7 @@ vtitle      "Hours"
 from        "-1month"
 description "Number of hours since the last Jenkins run with each outcome."
 linewidth   2
+ymin        0
 
 field :success,
                :color => "blue",

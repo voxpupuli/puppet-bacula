@@ -3,6 +3,7 @@ vtitle      "Number of pull requests"
 from        "-1month"
 description "Number of pull requests inactive for more than the specified time, by project over the past month."
 linewidth   2
+ymin        0
 
 field :fourwks,
                :color => "blue",

@@ -116,7 +116,7 @@ class virtual::users {
     comment => 'Dominic Maraglia',
     uid     => '1124',
     group   => allstaff,
-    groups  => ["developers"],
+    groups  => ["developers","qa"],
     tag     => allstaff,
  }
 
@@ -246,7 +246,7 @@ class virtual::users {
     comment => 'Matthaus Litteken',
     uid     => '1028',
     group   => allstaff,
-    groups  => ["builder","release","enterprise","infra"],
+    groups  => ["developers","builder","release","enterprise","infra"],
     tag     => allstaff,
   }
 
@@ -337,7 +337,7 @@ class virtual::users {
     comment => 'Jonathan Grochowski',
     uid     => '1158',
     group   => allstaff,
-    groups  => ["developers"],
+    groups  => ["developers","release","builder"],
     tag     => allstaff,
   }
 
@@ -380,6 +380,17 @@ class virtual::users {
     shell   => '/bin/bash',
     tag     => 'allstaff',
     key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA/yfuW1BXz6/jjtMAPEK1ZgtqNtY9ZXgzYOOhabn5irkaSxEP6q4kFMHRcWWcr/1dn1MHOV0sARINz/cc1DzhtAAeP+ooRFHFVbfTiaA6dzyU8uyJ0mVYKmwar8j83B/VTxlW1iAKlV//f5dlxghiFgxptFpYvQzetfEtvOtL8IlcJulZwtJojjqvujNk1lG8mK1Ymb5a88wPoBvL0mDoBbtupexH2Zf2zSeqMjp3ex3Po6qvH3dRid6QzniFoO1Vy7PYXDpmmFNaOBoEACTZNlptZC38WIhdhwaDbWxPbYYhwR4uG/kjZVPsvnBDFodwiL5X20aRHAsuSPR4Tf2/Kw==',
+    keytype => 'ssh-rsa',
+  }
+
+  @account::user{'patrick':
+    comment => 'Patrick Carlisle',
+    uid     => '1163',
+    group   => 'allstaff',
+    groups  => ["developers"],
+    shell   => '/bin/bash',
+    tag     => 'allstaff',
+    key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAvawBAbT0tag9cV3idlTCSsX72/mBdFKFqSPqRZ9E6rVNP3V0jpSxPfEyUzVQJXTghR+4J8PdnAPMTpazoOlWQOTptuh25zJffvvWUnyKh/fV/hZSKkwATFXOzl0g570ZQ2Bitgv6vQG7O9l6Md4zNmTp8tzvnXuhmMpCfPqDnzMjdmZo73IpIuUy6vzJL8l6Op4filDAU/UAtS6qD2Kffi3G0T+IArq4uFJldGf3L1SswmOSJmUCsLNg/BFe3WRAJ/6aWni0/+VwXqb0gR/hg1SqrQxxT69E9NPPoDuUGv69HxUDgkvbw7jjAesXbwDUqa23/4FREU1NSoetPhvr/Q==',
     keytype => 'ssh-rsa',
   }
 }

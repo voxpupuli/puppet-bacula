@@ -115,6 +115,7 @@ class GitRepo
       pidlist.each do |pid|
         Process.waitpid pid, 0
       end
+      puts # Part of fancy output for parallel operation.
     else
       @branches.each do |b|
         self.make_subbranch b
@@ -154,6 +155,13 @@ class GitRepo
         pp_and_system "LANG='C' git clone #{$gitnoise} -b #{branch_checkout_dirname} #{@mirrordir} #{checkout_as}" 
         pp_and_system "LANG='C' cd #{checkout_as} && git submodule #{$gitnoise} update --init | grep -vE 'Cloning into |^From |->'" unless %x< cd #{checkout_as} && git submodule status >.empty?
       end
+    end
+    if $zoom and not $debug
+      # print a dot for each branch so that progress is more clear when running
+      # in parallel. Better than using debug mode to vomit output to make sure
+      # that things be getting done.
+      $stdout.print '.'
+      $stdout.flush
     end
   end
 

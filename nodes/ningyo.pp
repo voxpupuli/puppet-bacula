@@ -48,7 +48,7 @@ node ningyo {
     dbuser     => "puppet",
     dbpassword => "M@gickF$ck!ngP@$$w0rddd!",
     dbsocket   => "/var/run/mysqld/mysqld.sock",
-    reporturl  => "https://dashboard.puppetlabs.com/reports/upload",
+    reporturl  => "https://dashboard.puppetlabs.com/reports",
     servertype => "unicorn",
   }
 
@@ -114,7 +114,7 @@ node ningyo {
       hour => '2';
     "Puppet: puppet_deploy.rb":
       user    => root,
-      command => '/usr/local/bin/puppet_deploy.rb',
+      command => '/usr/local/bin/puppet_deploy.rb 2>/dev/null',
       minute  => '*/8',
       require => File["/usr/local/bin/puppet_deploy.rb"];
   }

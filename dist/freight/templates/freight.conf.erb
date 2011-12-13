@@ -1,0 +1,15 @@
+# Example Freight configuration.
+
+# Directories for the Freight library and Freight cache.  Your web
+# server's document root should be `$VARCACHE`.
+VARLIB="<%= freight_libdir %>"
+VARCACHE="<%= freight_docroot %>"
+
+# Default `Origin` and `Label` fields for `Release` files.
+ORIGIN="Puppetlabs"
+LABEL="Puppetlabs"
+
+# GPG key to use to sign repositories.  This is required by the `apt`
+# repository provider.  Use `gpg --gen-key` (see `gpg`(1) for more
+# details) to generate a key and put its email address here.
+GPG="<%= freight_gpgkey %>"

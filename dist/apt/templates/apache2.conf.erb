@@ -3,10 +3,16 @@ NameVirtualHost *:<%= port %>
   ServerName <%= name %>
   DocumentRoot <%= docroot %>
   <Directory <%= docroot %>>
-    Options Indexes
+    Options Indexes FollowSymLinks
     AllowOverride None
     Order allow,deny
     allow from all
+  </Directory>
+
+  <Directory ~ "<%= docroot %>/dists/[a-z]+-[0-9]+">
+    Order allow,deny
+    Deny from all
+    Satisfy all
   </Directory>
 
   <Directory <%= docroot %>/*/conf>

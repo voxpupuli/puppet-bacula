@@ -34,7 +34,7 @@ class virtual::groups {
     ensure => present,
     gid    => 675,
   }
-  @group { 'release':
+  @group { 'release': # access to burji for releases and downloads
     ensure => present,
     gid    => 676,
   }

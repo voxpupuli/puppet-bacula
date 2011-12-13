@@ -33,7 +33,6 @@ class puppetlabs::service::pkgrepo (
   if $ensure == present {
     nagios::website { 'apt.puppetlabs.com': }
     nagios::website { 'yum.puppetlabs.com': }
-    class { "apt::server::repo": site_name => "apt.puppetlabs.com"; }
     include yumrepo
     include gpg::install
   }

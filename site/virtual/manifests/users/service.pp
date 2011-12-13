@@ -47,4 +47,12 @@ class virtual::users::service {
     group   => osqa,
     tag     => osqa,
   }
+
+  @account::user { 'jenkins':
+    uid     => 22002,
+    comment => 'Jenkins User',
+    group   => 'jenkins',
+    tag     => 'jenkins',
+    usekey  => false, # Keys are managed outside of puppet.
+  }
 }

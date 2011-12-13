@@ -1,4 +1,4 @@
-title       "Puppet pull requests not commented on in the specified time, by project over the past month"
+title       "Puppet pull requests not commented on in the specified time"
 vtitle      "Number of pull requests"
 from        "-1month"
 description "Number of pull requests inactive for more than the specified time, by project over the past month."

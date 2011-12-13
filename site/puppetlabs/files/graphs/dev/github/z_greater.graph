@@ -1,4 +1,4 @@
-title       "Puppet pull requests of specified age by project over the past month"
+title       "Puppet pull requests of specified age over the past month"
 vtitle      "Number of pull requests"
 from        "-1month"
 description "Number of pull requests of the specified age, by project over the past month."

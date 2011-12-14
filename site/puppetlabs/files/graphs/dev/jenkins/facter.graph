@@ -1,5 +1,5 @@
 title       "Facter: time since last Jenkins success, un-success and failure"
-vtitle      "Hours"
+vtitle      "Hours ago"
 from        "-1month"
 description "Number of hours since the last Jenkins run with each outcome."
 linewidth   2

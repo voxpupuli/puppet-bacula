@@ -334,6 +334,7 @@ class virtual::users {
   }
 
   @account::user {'jonathan':
+    ensure  => absent,
     comment => 'Jonathan Grochowski',
     uid     => '1158',
     group   => allstaff,

@@ -101,7 +101,7 @@ define redmine::unicorn (
     "redmine_unicorn":
       log        => "${dir}/${name}/log/*log",
       options    => ["rotate 28", "daily", "compress", "notifempty","sharedscripts"],
-      postrotate => "/etc/init.d/unicorn reopen-logs"
+      postrotate => "/etc/init.d/unicorn reopen-logs > /dev/null"
   }
 
 }

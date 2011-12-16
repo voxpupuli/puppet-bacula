@@ -66,6 +66,8 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   RedirectMatch permanent /projects/puppet/wiki/Using_Multiple_Environments         http://docs.puppetlabs.com/guides/environment.html
   ProxyPass /projects/puppet/wiki/Writing_Your_Own_Functions !
   RedirectMatch permanent /projects/puppet/wiki/Writing_Your_Own_Functions          http://docs.puppetlabs.com/guides/custom_functions.html
+  ProxyPass /projects/puppet/wiki/Puppet_Modules  !
+  RedirectMatch permanent /projects/puppet/wiki/Puppet_Modules                      http://docs.puppetlabs.com/guides/modules.html
 
   ProxyPass /projects/1/wiki/Exported_Resources !
   RedirectMatch permanent	/projects/1/wiki/Exported_Resources?                 http://docs.puppetlabs.com/guides/exported_resources.html
@@ -97,6 +99,8 @@ NameVirtualHost <%= ipaddress %>:<%= port %>
   RedirectMatch permanent /projects/1/wiki/Using_Multiple_Environments         http://docs.puppetlabs.com/guides/environment.html
   ProxyPass /projects/1/wiki/Writing_Your_Own_Functions !
   RedirectMatch permanent /projects/1/wiki/Writing_Your_Own_Functions          http://docs.puppetlabs.com/guides/custom_functions.html
+  ProxyPass /projects/1/wiki/Puppet_Modules  !
+  RedirectMatch permanent /projects/1/wiki/Puppet_Modules                      http://docs.puppetlabs.com/guides/modules.html
 
 
   # Whoever named forge needs "schooling"

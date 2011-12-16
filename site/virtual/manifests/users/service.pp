@@ -10,8 +10,14 @@ class virtual::users::service {
     uid     => 22000,
     comment => 'Deployment User',
     group   => www-data,
+    groups  => ["enterprise"], # 11435
     tag     => deploy,
+    usekey  => "false",
   }
+  # 11435 Jenkins slaves need access to pluto to move tarballs to a
+  # distribution directory when tests succeed. Needs ssh access to pluto
+  # and write access to the enterprise dist dir. SSH keys are managed outside
+  # of the account type
 
   @account::user { 'gitbackups':
     uid     => 22001,

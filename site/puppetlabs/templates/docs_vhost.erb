@@ -28,4 +28,50 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   RewriteRule ^(.*)$ http://docs.puppetlabs.com%{REQUEST_URI} [R=permanent,L]
   Redirect permanent /guides/language_tutorial.html http://docs.puppetlabs.com/guides/language_guide.html
 
+  # See #11359 "Create a pile of redirects to clean up my deletion of the page-per-type types reference"
+  Redirect permanent	/guides/types/augeas.html			/references/latest/type.html#augeas
+  Redirect permanent	/guides/types/computer.html			/references/latest/type.html#computer
+  Redirect permanent	/guides/types/cron.html			/references/latest/type.html#cron
+  Redirect permanent	/guides/types/exec.html			/references/latest/type.html#exec
+  Redirect permanent	/guides/types/file.html			/references/latest/type.html#file
+  Redirect permanent	/guides/types/filebucket.html			/references/latest/type.html#filebucket
+  Redirect permanent	/guides/types/group.html			/references/latest/type.html#group
+  Redirect permanent	/guides/types/host.html			/references/latest/type.html#host
+  Redirect permanent	/guides/types/index.html			/references/latest/type.html#index
+  Redirect permanent	/guides/types/k5login.html			/references/latest/type.html#k5login
+  Redirect permanent	/guides/types/macauthorization.html			/references/latest/type.html#macauthorization
+  Redirect permanent	/guides/types/mailalias.html			/references/latest/type.html#mailalias
+  Redirect permanent	/guides/types/maillist.html			/references/latest/type.html#maillist
+  Redirect permanent	/guides/types/mcx.html			/references/latest/type.html#mcx
+  Redirect permanent	/guides/types/mount.html			/references/latest/type.html#mount
+  Redirect permanent	/guides/types/nagios/nagios_command.html			/references/latest/type.html#nagioscommand
+  Redirect permanent	/guides/types/nagios/nagios_contact.html			/references/latest/type.html#nagioscontact
+  Redirect permanent	/guides/types/nagios/nagios_contactgroup.html			/references/latest/type.html#nagioscontactgroup
+  Redirect permanent	/guides/types/nagios/nagios_host.html			/references/latest/type.html#nagioshost
+  Redirect permanent	/guides/types/nagios/nagios_hostdependency.html			/references/latest/type.html#nagioshostdependency
+  Redirect permanent	/guides/types/nagios/nagios_hostescalation.html			/references/latest/type.html#nagioshostescalation
+  Redirect permanent	/guides/types/nagios/nagios_hostextinfo.html			/references/latest/type.html#nagioshostextinfo
+  Redirect permanent	/guides/types/nagios/nagios_hostgroup.html			/references/latest/type.html#nagioshostgroup
+  Redirect permanent	/guides/types/nagios/nagios_service.html			/references/latest/type.html#nagiosservice
+  Redirect permanent	/guides/types/nagios/nagios_servicedependency.html			/references/latest/type.html#nagiosservicedependency
+  Redirect permanent	/guides/types/nagios/nagios_serviceescalation.html			/references/latest/type.html#nagiosserviceescalation
+  Redirect permanent	/guides/types/nagios/nagios_serviceextinfo.html			/references/latest/type.html#nagiosserviceextinfo
+  Redirect permanent	/guides/types/nagios/nagios_servicegroup.html			/references/latest/type.html#nagiosservicegroup
+  Redirect permanent	/guides/types/nagios/nagios_timeperiod.html			/references/latest/type.html#nagiostimeperiod
+  Redirect permanent	/guides/types/notify.html			/references/latest/type.html#notify
+  Redirect permanent	/guides/types/package.html			/references/latest/type.html#package
+  Redirect permanent	/guides/types/resources.html			/references/latest/type.html#resources
+  Redirect permanent	/guides/types/schedule.html			/references/latest/type.html#schedule
+  Redirect permanent	/guides/types/selinux/selboolean.html			/references/latest/type.html#selboolean
+  Redirect permanent	/guides/types/selinux/selmodule.html			/references/latest/type.html#selmodule
+  Redirect permanent	/guides/types/service.html			/references/latest/type.html#service
+  Redirect permanent	/guides/types/ssh/ssh_authorized_key.html			/references/latest/type.html#sshauthorizedkey
+  Redirect permanent	/guides/types/ssh/sshkey.html			/references/latest/type.html#sshkey
+  Redirect permanent	/guides/types/tidy.html			/references/latest/type.html#tidy
+  Redirect permanent	/guides/types/user.html			/references/latest/type.html#user
+  Redirect permanent	/guides/types/yumrepo.html			/references/latest/type.html#yumrepo
+  Redirect permanent	/guides/types/zfs.html			  /references/latest/type.html#zfs
+  Redirect permanent	/guides/types/zone.html		  	/references/latest/type.html#zone
+  Redirect permanent	/guides/types/zpool.html			/references/latest/type.html#zpool
+
 </VirtualHost>

@@ -1,0 +1,16 @@
+title       "IRC activity, past 6 months"
+vtitle      "participants"
+from        "-6months"
+description "IRC participants over the past half-year"
+linewidth   2
+ymin        0
+
+field :irc,
+               :color => "blue",
+               :alias => "IRC chatters",
+               :data  => "irc.puppet.users"
+
+field :ircsmoothed,
+               :color => "green",
+               :alias => "IRC chatters (weekly average)",
+               :data  => 'summarize(irc.puppet.users,"1week","avg")'

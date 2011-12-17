@@ -1,0 +1,32 @@
+title       "Github open issues by project over the past month"
+vtitle      "Open issues"
+from        "-1month"
+description "Open issues over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+linewidth   2
+ymin        0
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet open issues",
+               :data  => "github.puppet.open-issues"
+
+field :facter,
+               :color => "red",
+               :alias => "Facter open issues",
+               :data  => "github.facter.open-issues"
+
+field :dashboard,
+               :color => "aqua",
+               :alias => "Dashboard open issues",
+               :data  => "github.puppet-dashboard.open-issues"
+
+field :mco,
+               :color => "yellow",
+               :alias => "MCollective open issues",
+               :data  => "github.marionette-collective.open-issues"
+
+field :mcoplugins,
+               :color => "orange",
+               :alias => "MCollective plugins open issues",
+               :data  => "github.mcollective-plugins.open-issues"
+

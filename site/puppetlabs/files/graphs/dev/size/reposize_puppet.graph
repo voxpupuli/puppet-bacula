@@ -1,0 +1,10 @@
+title       "Puppet repo size over the past month"
+from        "-1month"
+description "Repository size of puppet as reported by Github over the past month."
+linewidth   2
+ymin        0
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet repo size",
+               :data  => "github.puppet.size"

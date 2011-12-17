@@ -1,0 +1,11 @@
+title       "Forge modules"
+vtitle      "modules"
+from        "-6months"
+description "Forge module development over time"
+linewidth   2
+ymin        0
+
+field :forge,
+               :color => "blue",
+               :alias => "Forge modules",
+               :data  => "forge.modules.total"

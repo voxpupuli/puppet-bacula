@@ -1,0 +1,32 @@
+title       "Age of average pull request by project over the past month"
+vtitle      "Number of days old"
+from        "-1month"
+description "Average age of open pull requests, in days, over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+linewidth   2
+ymin        0
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet average pull request age",
+               :data  => "scale(github.puppet.pull-requests.age.avg,0.0000115740)"
+
+field :facter,
+               :color => "red",
+               :alias => "Facter average pull request age",
+               :data  => "scale(github.facter.pull-requests.age.avg,0.0000115740)"
+
+field :dashboard,
+               :color => "aqua",
+               :alias => "Dashboard average pull request age",
+               :data  => "scale(github.puppet-dashboard.pull-requests.age.avg,0.0000115740)"
+
+field :mco,
+               :color => "yellow",
+               :alias => "MCollective average pull request age",
+               :data  => "scale(github.marionette-collective.pull-requests.age.avg,0.0000115740)"
+
+field :mcoplugins,
+               :color => "orange",
+               :alias => "MCollective plugins average pull request age",
+               :data  => "scale(github.mcollective-plugins.pull-requests.age.avg,0.0000115740)"
+

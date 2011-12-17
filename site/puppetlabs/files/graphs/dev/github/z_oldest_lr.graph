@@ -1,0 +1,32 @@
+title       "Maximum time since pull request response by project over the past month"
+vtitle      "Number of days old"
+from        "-1month"
+description "Maximum time since last response to any open pull request, in days, over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+linewidth   2
+ymin        0
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet maximum time since pull request response",
+               :data  => "scale(github.puppet.pull-requests.last-response.max,0.0000115740)"
+
+field :facter,
+               :color => "red",
+               :alias => "Facter maximum time since pull request response",
+               :data  => "scale(github.facter.pull-requests.last-response.max,0.0000115740)"
+
+field :dashboard,
+               :color => "aqua",
+               :alias => "Dashboard maximum time since pull request response",
+               :data  => "scale(github.puppet-dashboard.pull-requests.last-response.max,0.0000115740)"
+
+field :mco,
+               :color => "yellow",
+               :alias => "MCollective maximum time since pull request response",
+               :data  => "scale(github.marionette-collective.pull-requests.last-response.max,0.0000115740)"
+
+field :mcoplugins,
+               :color => "orange",
+               :alias => "MCollective plugins maximum time since pull request response",
+               :data  => "scale(github.mcollective-plugins.pull-requests.last-response.max,0.0000115740)"
+

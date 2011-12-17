@@ -1,0 +1,32 @@
+title       "Puppet pull requests of specified age over the past month"
+vtitle      "Number of pull requests"
+from        "-1month"
+description "Number of pull requests of the specified age, by project over the past month."
+linewidth   2
+ymin        0
+
+field :fourwks,
+               :color => "blue",
+               :alias => "Puppet pull requests greater than 4 weeks old",
+               :data  => "github.puppet.pull-requests.age.greater-than.four-weeks-old"
+
+field :twowks,
+               :color => "red",
+               :alias => "Puppet pull requests greater than 2 weeks old",
+               :data  => "github.puppet.pull-requests.age.greater-than.two-weeks-old"
+
+field :onewk,
+               :color => "aqua",
+               :alias => "Puppet pull requests greater than 1 week old",
+               :data  => "github.puppet.pull-requests.age.greater-than.one-week-old"
+
+field :fivedays,
+               :color => "yellow",
+               :alias => "Puppet pull requests greater than 5 days old",
+               :data  => "github.puppet.pull-requests.age.greater-than.five-days-old"
+
+field :oneday,
+               :color => "orange",
+               :alias => "Puppet pull requests greater than 1 day old",
+               :data  => "github.puppet.pull-requests.age.greater-than.one-day-old"
+

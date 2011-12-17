@@ -1,0 +1,21 @@
+title       "Puppet code stats over the past month"
+vtitle      "Lines"
+from        "-1month"
+description "Lines of code over the past month"
+linewidth   2
+
+field :code,
+               :color => "blue",
+               :alias => "Puppet lines of code",
+               :data  => "sources.puppet.code"
+
+field :blank,
+               :color => "green",
+               :alias => "Puppet lines blank",
+               :data  => "sources.puppet.blank"
+
+field :comment,
+               :color => "purple",
+               :alias => "Puppet comment lines",
+               :data  => "sources.puppet.comment"
+

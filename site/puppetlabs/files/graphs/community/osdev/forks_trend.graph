@@ -1,0 +1,30 @@
+title       "Community development interest: Github forks"
+from        "-6months"
+description "Forks by project on Github over the past 6 months"
+linewidth   2
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet forks",
+               :data  => "github.puppet.forks"
+
+field :facter,
+               :color => "red",
+               :alias => "Facter forks",
+               :data  => "github.facter.forks"
+
+field :puppetdashboard,
+               :color => "aqua",
+               :alias => "Puppet dashboard forks",
+               :data  => "github.puppet-dashboard.forks"
+
+field :marionettecollective,
+               :color => "yellow",
+               :alias => "MCollective forks",
+               :data  => "github.marionette-collective.forks"
+
+field :mcollectiveplugins,
+               :color => "orange",
+               :alias => "MCollective-plugins forks",
+               :data  => "github.mcollective-plugins.forks"
+

@@ -1,0 +1,12 @@
+title       "Puppet file count over the past month"
+vtitle      "Files"
+from        "-1month"
+description "File counts over the past month"
+linewidth   2
+ymin        0
+
+field :files,
+               :color => "blue",
+               :alias => "Puppet source files",
+               :data  => "sources.puppet.files"
+

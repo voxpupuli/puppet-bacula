@@ -1,0 +1,15 @@
+title       "Social media growth, past half-year"
+vtitle      "followers"
+from        "-6months"
+description "Twitter and Facebook followers over the past 6 months"
+linewidth   2
+
+field :fb,
+               :color => "blue",
+               :alias => "Total Facebook likes",
+               :data  => "facebook.likes"
+
+field :twitter,
+               :color => "aqua",
+               :alias => "Total Twitter followers",
+               :data  => "twitter.followers_count"

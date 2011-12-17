@@ -1,0 +1,32 @@
+title       "Puppet pull requests not commented on in the specified time"
+vtitle      "Number of pull requests"
+from        "-1month"
+description "Number of pull requests inactive for more than the specified time, by project over the past month."
+linewidth   2
+ymin        0
+
+field :fourwks,
+               :color => "blue",
+               :alias => "Puppet pull requests last responded to more than 4 weeks old",
+               :data  => "github.puppet.pull-requests.last-response.greater-than.four-weeks-old"
+
+field :twowks,
+               :color => "red",
+               :alias => "Puppet pull requests last responded to more than 2 weeks old",
+               :data  => "github.puppet.pull-requests.last-response.greater-than.two-weeks-old"
+
+field :onewk,
+               :color => "aqua",
+               :alias => "Puppet pull requests last responded to more than 1 week old",
+               :data  => "github.puppet.pull-requests.last-response.greater-than.one-week-old"
+
+field :fivedays,
+               :color => "yellow",
+               :alias => "Puppet pull requests last responded to more than 5 days old",
+               :data  => "github.puppet.pull-requests.last-response.greater-than.five-days-old"
+
+field :oneday,
+               :color => "orange",
+               :alias => "Puppet pull requests last responded to more than 1 day old",
+               :data  => "github.puppet.pull-requests.last-response.greater-than.one-day-old"
+

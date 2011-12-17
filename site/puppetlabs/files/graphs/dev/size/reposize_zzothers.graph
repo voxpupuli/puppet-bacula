@@ -1,0 +1,27 @@
+title       "Repo size by project over the past month"
+from        "-1month"
+description "Secondary projects' repository sizes as reported by Github over the past month."
+linewidth   2
+ymin        0
+
+field :facter,
+               :color => "red",
+               :alias => "Facter repo size",
+               :data  => "github.facter.size"
+
+field :dashboard,
+               :color => "aqua",
+               :alias => "Dashboard repo size",
+               :data  => "github.puppet-dashboard.size"
+
+field :mco,
+               :color => "yellow",
+               :alias => "MCollective repo size",
+               :data  => "github.marionette-collective.size"
+
+field :mcoplugins,
+               :color => "orange",
+               :alias => "MCollective plugins repo size",
+               :data  => "github.mcollective-plugins.size"
+
+

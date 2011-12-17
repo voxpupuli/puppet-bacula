@@ -1,0 +1,22 @@
+title       "Facter: time since last Jenkins success, un-success and failure"
+vtitle      "Hours ago"
+from        "-1month"
+description "Number of hours since the last Jenkins run with each outcome."
+linewidth   2
+ymin        0
+
+field :success,
+               :color => "blue",
+               :alias => "Last successful Jenkins run for Facter",
+               :data  => "scale(jenkins.facter.last-success,0.0002777)"
+
+field :failure,
+               :color => "red",
+               :alias => "Last failed Jenkins run for Facter",
+               :data  => "scale(jenkins.facter.last-failure,0.0002777)"
+
+field :unsuccess,
+               :color => "orange",
+               :alias => "Last unsuccessful Jenkins run for Facter",
+               :data  => "scale(jenkins.facter.last-unsuccessful,0.0002777)"
+

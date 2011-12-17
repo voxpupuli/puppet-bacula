@@ -1,0 +1,30 @@
+title       "Community development interest: Github watchers"
+from        "-6months"
+description "Watchers by project on Github over the past half-year"
+linewidth   2
+
+field :puppet,
+               :color => "blue",
+               :alias => "Puppet watchers",
+               :data  => "github.puppet.watchers"
+
+field :facter,
+               :color => "red",
+               :alias => "Facter watchers",
+               :data  => "github.facter.watchers"
+
+field :puppetdashboard,
+               :color => "aqua",
+               :alias => "Puppet dashboard watchers",
+               :data  => "github.puppet-dashboard.watchers"
+
+field :marionettecollective,
+               :color => "yellow",
+               :alias => "MCollective watchers",
+               :data  => "github.marionette-collective.watchers"
+
+field :mcollectiveplugins,
+               :color => "orange",
+               :alias => "MCollective-plugins watchers",
+               :data  => "github.mcollective-plugins.watchers"
+

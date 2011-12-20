@@ -86,6 +86,11 @@ class virtual::groups {
     gid    => 623,
   }
 
+  @group { 'jenkins':
+    ensure => present,
+    gid    => 624,
+  }
+
 #
 # Customers
 # 1050 - 2000

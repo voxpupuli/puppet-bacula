@@ -1,3 +1,9 @@
+# = Node: modi
+#
+# == Description
+#
+# modi provides an caching proxy for the office puppetlabs.lan network.
+# it listens on http://modi.puppetlabs.lan:3128
 node modi {
   include role::server
 

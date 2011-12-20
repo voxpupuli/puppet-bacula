@@ -1,3 +1,19 @@
+# = Node: burji
+#
+# == Description
+#
+# This node hosts downloads for puppet products, so such things as
+# yum.puppetlabs.com, apt.puppetlabs.com, downloads.puppetlabs.com, and other
+# roles.
+#
+# This host should be accessible to anyone that needs to administer releases,
+# such as the enterprise release team, solutions, and professional services.
+#
+# == Other names
+#
+# - downloads.puppetlabs.com
+# - apt.puppetlabs.com
+# - yum.puppetlabs.com
 node burji {
   include role::server
   include puppetlabs_ssl

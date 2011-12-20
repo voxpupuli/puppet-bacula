@@ -11,10 +11,9 @@ node rpm-builder {
   # Putting this in puppet to avoid breakage.
   Account::User <| tag == 'jenkins' |>
 
-  # (#11486) Setup 'deploy' user on rpm-builder
-  Account::User <| tag == deploy |>
-  Ssh_authorized_key <| tag == deploy |>
-  ssh::allowgroup { "www-data": }
-  sudo::entry { "deploy": entry => "deploy ALL=(ALL) NOPASSWD: ALL\n" }
+  # (#11486) Setup 'jenkins' user on rpm-builder
+  Account::User <| title == 'jenkins' |>
+  Ssh_authorized_key <| user == 'jenkins' |>
+  ssh::allowgroup { "jenkins": }
+  sudo::allowgroup { "jenkins": }
 }
-

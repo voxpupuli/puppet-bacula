@@ -1,5 +1,6 @@
 class virtual::users {
   include virtual::groups
+  include virtual::ssh_authorized_keys
   include virtual::users::service
   include virtual::users::customers
   include virtual::users::external

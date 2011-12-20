@@ -10,6 +10,10 @@ class unbound (
   $unbound_logdir  = $unbound::params::unbound_logdir
   $unbound_service = $unbound::params::unbound_service
 
+  # We assume for our modules, we have the motd module, & use it.
+  motd::register{ 'Unbound caching resolver': }
+
+
   package { "unbound":
     ensure   => installed,
     provider => $kernel ? {

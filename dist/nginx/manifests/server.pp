@@ -9,6 +9,9 @@
 class nginx::server {
   include nginx
 
+  # We assume for our modules, we have the motd module, & use it.
+  motd::register{ 'nginx': }
+
   package{ 'nginx':
     name   => $nginx::params::package,
     ensure => present,

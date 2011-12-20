@@ -9,6 +9,9 @@ define redmine::unicorn (
     ) {
   include apache::params
 
+  # We assume for our modules, we have the motd module, & use it.
+  motd::register{ 'Redmine running on unicorn': }
+
   # more modules: ssl
 
   a2mod { [ 'proxy', 'proxy_balancer', 'proxy_http' ]: ensure => present, }

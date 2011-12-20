@@ -13,6 +13,10 @@
 #
 # installs mysql 
 class mysql::server {
+
+  # We assume for our modules, we have the motd module, & use it.
+  motd::register{ 'MySQL server': }
+
   # set the mysql root password
   if(! $mysql_root_pw) {
     fail('$mysql_root_pw must be set for class mysql::server')

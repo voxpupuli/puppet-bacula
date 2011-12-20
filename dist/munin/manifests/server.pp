@@ -18,6 +18,9 @@ class munin::server (
   include apache
   include munin::params
 
+  # We assume for our modules, we have the motd module, & use it.
+  motd::register{ "Munin server at ${site_alias}": }
+
   package { 'munin':
     ensure => present,
   }

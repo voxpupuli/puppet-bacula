@@ -29,6 +29,9 @@ class nagios::server (
   include nagios::hostgroups
   include virtual::nagioscontacts
 
+  # We assume for our modules, we have the motd module, & use it.
+  motd::register{ "Nagios server at $site_alias": }
+
   # Do we want external commands?
   # http://nagios.sourceforge.net/docs/3_0/extcommands.html
   if $external_commands == true {

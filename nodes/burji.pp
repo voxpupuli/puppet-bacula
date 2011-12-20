@@ -125,7 +125,7 @@ node burji {
     checksum => none,
   }
 
-  $puppet_link_version = "2.7.4"
+  $puppet_link_version = "2.7.9"
   file { # puppet links
     "/opt/downloads/puppet/puppet-latest.tar.gz":
       ensure => link,

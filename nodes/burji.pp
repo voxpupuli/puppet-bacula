@@ -48,30 +48,27 @@ node burji {
 
   file { "/var/www/index.html": ensure => absent; }
 
-  apache::vhost {
-    "$fqdn":
-      port    => 80,
-      options => "None",
-      docroot => '/var/www'
+  apache::vhost { $fqdn:
+    port    => 80,
+    options => "None",
+    docroot => '/var/www'
   }
 
   # http://ps.puppetlabs.com
   #
-  apache::vhost::redirect {
-    'ps.puppetlabs.com':
-      port => '80',
-      dest => 'https://ps.puppetlabs.com',
+  apache::vhost::redirect { 'ps.puppetlabs.com':
+    port => '80',
+    dest => 'https://ps.puppetlabs.com',
   }
 
-  apache::vhost {
-    'ps.puppetlabs.com_ssl':
-      serveraliases => "ps.puppetlabs.com",
-      port          => '443',
-      docroot       => '/opt/prosvc',
-      ssl           => true,
-      auth          => true,
-      priority      => 11,
-      template      => 'puppetlabs/legba.conf.erb';
+  apache::vhost { 'ps.puppetlabs.com_ssl':
+    serveraliases => "ps.puppetlabs.com",
+    port          => '443',
+    docroot       => '/opt/prosvc',
+    ssl           => true,
+    auth          => true,
+    priority      => 11,
+    template      => 'puppetlabs/legba.conf.erb';
   }
 
   file { "/opt/prosvc":
@@ -92,15 +89,14 @@ node burji {
       dest => 'https://pm.puppetlabs.com',
   }
 
-  apache::vhost {
-    'pm.puppetlabs.com_ssl':
-      serveraliases => "pm.puppetlabs.com",
-      port          => 443,
-      docroot       => '/opt/pm',
-      ssl           => true,
-      auth          => false,
-      priority      => 16,
-      template      => 'puppetlabs/legba.conf.erb';
+  apache::vhost { 'pm.puppetlabs.com_ssl':
+    serveraliases => "pm.puppetlabs.com",
+    port          => 443,
+    docroot       => '/opt/pm',
+    ssl           => true,
+    auth          => false,
+    priority      => 16,
+    template      => 'puppetlabs/legba.conf.erb';
   }
 
   file { "/opt/pm":

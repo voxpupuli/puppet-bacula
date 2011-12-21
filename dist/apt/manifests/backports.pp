@@ -47,10 +47,11 @@ class apt::backports( $release=$lsbdistcodename ) {
 
   # Do this, as per http://backports-master.debian.org/Instructions/
   # so we get backports updates.
-  apt::pin { '*':
+  apt::pin { "${releasename}-backports":
     release  => "${releasename}-backports",
     priority => '200',
-    filename => 'star'
+    wildcard => true,
+    filename => 'backports_pin',
   }
 
 }

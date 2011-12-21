@@ -1,7 +1,18 @@
-# clippy, aka git.puppetlabs.net
+# = Node: clippy
 #
-# Hosts gitolite for github mirrors as well as puppetlabs private repos.
-
+# == Description
+#
+# This node hosts downloads for puppet products, so such things as
+# yum.puppetlabs.com, apt.puppetlabs.com, downloads.puppetlabs.com, and other
+# roles.
+#
+# This host should be accessible to anyone that needs to administer releases,
+# such as the enterprise release team, solutions, and professional services.
+#
+# == Other names
+#
+# - git.puppetlabs.lan
+# - git.puppetlabs.net
 node clippy {
   include role::server
   include puppetlabs::service::gitolite
@@ -14,7 +25,7 @@ node clippy {
       "--default-cache-ttl 999999999",
       "--max-cache-ttl     999999999",
       "--use-standard-socket",
-    ], 
+    ],
   }
 
   duplicity::cron { "/home/git":

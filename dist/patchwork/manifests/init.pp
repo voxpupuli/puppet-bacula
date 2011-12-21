@@ -1,3 +1,14 @@
+# = Class patchwork
+#
+# == Description
+#
+# Keeps patchwork installed on app01
+#
+# == Caveats
+#
+# the MAILTO parameter in the crontab is managed outside of puppet. Perhaps
+# this should be fixed, but the intersection of cron env variables and puppet
+# is somewhat gnarly.
 class patchwork {
   include postfix
 

@@ -32,7 +32,7 @@ class apt::backports( $release=$lsbdistcodename ) {
             "debian" => "http://backports.debian.org/debian-backports",
             "ubuntu" => "http://archive.ubuntu.com/ubuntu",
           },
-          distribution => "${releasename}-backports",
+          distribution => "${release}-backports",
           component => $lsbdistid ? {
             "debian" => "main",
             "ubuntu" => "universe multiverse restricted",
@@ -47,8 +47,8 @@ class apt::backports( $release=$lsbdistcodename ) {
 
   # Do this, as per http://backports-master.debian.org/Instructions/
   # so we get backports updates.
-  apt::pin { "${releasename}-backports":
-    release  => "${releasename}-backports",
+  apt::pin { "${release}-backports":
+    release  => "${release}-backports",
     priority => '200',
     wildcard => true,
     filename => 'backports_pin',

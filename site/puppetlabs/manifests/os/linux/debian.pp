@@ -36,7 +36,7 @@ class puppetlabs::os::linux::debian  {
       ensure => purged,
     }
   }
-  
+
   ####
   # Apt Configuration
   #
@@ -87,6 +87,12 @@ class puppetlabs::os::linux::debian  {
     }
     default: { }
   }
+
+  # We want backports, this doesn't pin anything, just throws the
+  # option of it being there in (and pins for auto-updating, as
+  # reccomended).
+  include apt::backports
+
 
 }
 

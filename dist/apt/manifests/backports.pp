@@ -21,14 +21,8 @@
 # == Copyright
 #
 # Copyright 2011 Puppet Labs Inc, unless otherwise noted.
-class apt::backports( $release=undef ) {
+class apt::backports( $release=$lsbdistcodename ) {
   include apt
-
-  if $release == undef {
-    $releasename = $lsbdistcodename
-  } else {
-    $releasename = $release
-  }
 
   case $operatingsystem {
     'Debian','Ubuntu': {

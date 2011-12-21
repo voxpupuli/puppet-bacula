@@ -7,10 +7,11 @@ node wyrd {
       distribution => "wheezy",
   }
 
-  apt::pin { '*':
+  apt::pin{ 'wheey_repo_pin':
     release  => 'testing',
     priority => '200',
-    filename => 'star'
+    filename => 'testingforgearman',
+    wildcard => true
   }
 
   class {

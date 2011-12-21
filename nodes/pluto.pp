@@ -81,7 +81,6 @@ node pluto {
       recurse => true;
   }
 
-  include apt::backports
   class { 'freight':
     freight_vhost_name      => 'freight.puppetlabs.lan',
     freight_docroot         => '/opt/enterprise/repos/debian',

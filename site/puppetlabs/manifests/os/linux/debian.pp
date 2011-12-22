@@ -24,7 +24,7 @@ class puppetlabs::os::linux::debian  {
   exec {
     "import puppet labs apt key":
       user    => root,
-      command => "/usr/bin/wget -q -O - http://apt.puppetlabs.com/debian/4BD6EC30.asc | apt-key add -",
+      command => "/usr/bin/wget -q -O - http://apt.puppetlabs.com/debian/pubkey.gpg | /usr/bin/apt-key add -",
       unless  => "/usr/bin/apt-key list | grep -q 4BD6EC30",
       before  => Exec["apt-get update"];
   }

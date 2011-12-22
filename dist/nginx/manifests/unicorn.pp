@@ -11,13 +11,14 @@ define nginx::unicorn(
   $port,
   #$dest,
   $unicorn_socket,
-  $priority   = '10',
-  $template   = 'nginx/vhost-unicorn.conf.erb',
-  $servername = '',
-  $path       = '',
-  $auth       = '',
-  $magic      = '',
-  $ssl        = false
+  $priority     = '10',
+  $template     = 'nginx/vhost-unicorn.conf.erb',
+  $servername   = '',
+  $path         = '',
+  $auth         = '',
+  $magic        = '',
+  $ssl          = false,
+  $severaliases
   ) {
 
   include nginx
@@ -32,6 +33,15 @@ define nginx::unicorn(
     $rootpath = "/var/www/$srvname"
   } else {
     $rootpath = $path
+  }
+
+  # Need to make some variable names so the templates can use them!
+  # Such as an app_server name that is unique, so when we have ssl and
+  # non-ssl unicorn hosts they still work.
+  if $ssl == true {
+    $appname = regsubst( $srvname , '^(\w+?)\..*?$' , '\1_ssl' )
+  } else {
+    $appname = regsubst( $srvname , '^(\w+?)\..*?$' , '\1' )
   }
 
   if $ssl == true {

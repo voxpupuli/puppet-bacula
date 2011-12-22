@@ -15,7 +15,7 @@ class ruby::dev {
   require ruby
   include ruby::params
 
-  if ! $kernel == "Darwin" {
+  if $kernel != "Darwin" {
     package { $ruby::params::ruby_dev:
       ensure => installed,
     }

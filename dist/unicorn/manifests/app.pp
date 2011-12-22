@@ -19,7 +19,7 @@ define unicorn::app (
 
   if "${log_stds}" in [ 'true', 'yes', 'present' ] {
     if $stdlog_path == '' {
-      $unicorn_stdlog_path = "${APPROOT}/log/"
+      $unicorn_stdlog_path = "${approot}/log/"
     } else {
       $unicorn_stdlog_path = $stdlog_path
     }
@@ -27,6 +27,9 @@ define unicorn::app (
   }
 
   # If we have been given a config path, use it, if not, make one up.
+  # This _may_ not be the most secure, as it should live outside of
+  # the approot unless it's almost going to be non $unicorn_user
+  # writable.
   if $config_file == '' {
     $config = "${approot}/config/unicorn.config.rb"
   } else {
@@ -57,8 +60,8 @@ define unicorn::app (
         content => template( $config_template ),
         notify  => Service["unicorn_${name}"];
     "${approot}/config.ru":
-        owner  => root,
-        group  => root,
+        owner  => $unicorn_user,
+        group  => $unicorn_group,
         mode   => 644,
         source => $rack_file,
         notify  => Service["unicorn_${name}"],

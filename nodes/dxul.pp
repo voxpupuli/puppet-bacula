@@ -60,7 +60,7 @@ node dxul {
   include pdns
 
   file{ '/usr/local/sbin/cron_imap_runner.sh':
-    source => 'puppet://modules/redmine/cron_imap_runner.sh',
+    source => 'puppet:///modules/redmine/cron_imap_runner.sh',
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
@@ -76,8 +76,8 @@ node dxul {
     "redmine_infras_email":
       user    => www-data,
       minute  => "*/10",
-      ensure  => absent;
-      # command => 'rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppet allow_override=project folder=infras';
+      ensure  => absent,
+      command => 'rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppetlabs-infras allow_override=project folder=infras';
 
     # A slew of git "backup" cron jobs, which just throw stuff in
     # /opt/git so bacula backs them up. These are the ones taken from

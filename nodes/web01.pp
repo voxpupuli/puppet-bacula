@@ -11,7 +11,7 @@ node web01 {
   include postfix
   include puppetlabs_ssl
   include puppetlabs::service::www  # Contains wordpresses for this
-                                    # host. (madstop, www.pl.com, &c)
+                                    # host. (www.pl.com, &c)
   class { "puppetlabs::docs": http_port => $apache_port; }
 
   apache::vhost::redirect {

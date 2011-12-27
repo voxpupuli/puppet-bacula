@@ -28,7 +28,12 @@ node pluto {
   ssh::allowgroup { "www-data": }
   Account::User <| tag == deploy |>
   Ssh_authorized_key <| tag == deploy |>
-  # 11435 allow ssh access for deploy user
+  # (#11435) allow ssh access for deploy user
+  # This is gross. Remove for doing builds if possible
+
+  # (#11435) replace deploy user with jenkins user for QA/release automation
+  Account::User <| tag == 'jenkins' |>
+  Ssh_authorized_key <| tag == 'jenkins' |>
 
   # Enterprise
   package { "daemontools": ensure => installed; }

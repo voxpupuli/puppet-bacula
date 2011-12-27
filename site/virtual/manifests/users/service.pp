@@ -6,6 +6,17 @@ class virtual::users::service {
   # UID range 22000-22999
   #
 
+  # Account used to deploy puppetlabs documentation to the mirror. This
+  # username is hardcoded in several locations, so it has to remain constant
+  # for documentation deploys.
+  #
+  # Recently it's been coopted to do deploys of PE. That's currently being
+  # unravelled.
+  #
+  # 11435 Jenkins slaves need access to pluto to move tarballs to a
+  # distribution directory when tests succeed. Needs ssh access to pluto and
+  # write access to the enterprise dist dir. SSH keys are managed outside of
+  # the account type
   @account::user { 'deploy':
     uid     => 22000,
     comment => 'Deployment User',
@@ -14,10 +25,6 @@ class virtual::users::service {
     tag     => deploy,
     usekey  => "false",
   }
-  # 11435 Jenkins slaves need access to pluto to move tarballs to a
-  # distribution directory when tests succeed. Needs ssh access to pluto
-  # and write access to the enterprise dist dir. SSH keys are managed outside
-  # of the account type
 
   @account::user { 'gitbackups':
     uid     => 22001,

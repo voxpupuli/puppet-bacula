@@ -81,6 +81,7 @@ class virtual::users::customers {
 
   # SCEA, #10214
   @account::user {'scea':
+    uid     => 21001,
     comment => 'scea',
     group   => 'scea',
     tag     => customer,

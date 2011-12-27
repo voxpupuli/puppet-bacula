@@ -54,11 +54,17 @@ class virtual::users::service {
     tag     => osqa,
   }
 
+  # (#11486) Jenkins slaves need access to rpm-builder, deb-builder, and pluto
+  # to initiate builds and create preview releases for gated releases.  In
+  # general, this account is for automating the process of building releases.
+  # Ssh keys are managed in virtual::ssh_authorized_keys instead of here since
+  # keys could vary on a per-host basis.
   @account::user { 'jenkins':
     uid     => 22002,
     comment => 'Jenkins User',
     group   => 'jenkins',
     tag     => 'jenkins',
-    usekey  => false, # Keys are managed outside of puppet.
+    groups  => ["enterprise", "release"],
+    usekey  => false, # Keys are managed outside of the account::user class.
   }
 }

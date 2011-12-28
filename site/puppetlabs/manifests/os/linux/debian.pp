@@ -68,13 +68,19 @@ class puppetlabs::os::linux::debian  {
 
   apt::source { "puppetlabs.list": uri => "http://apt.puppetlabs.com/", }
 
+  apt::pin { "puppetlabs":
+    origin   => "apt.puppetlabs.com",
+    priority => '900',
+    wildcard => true,
+  }
+
   apt::source { "updates.list":
     uri          => $lsbdistid ? {
       "debian" => "http://ftp.us.debian.org/debian/",
       "ubuntu" => "http://us.archive.ubuntu.com/ubuntu/",
     },
     distribution => "${lsbdistcodename}-updates",
-    component => $lsbdistid ? {
+    component    => $lsbdistid ? {
       "debian" => "main",
       "ubuntu" => "universe",
     },

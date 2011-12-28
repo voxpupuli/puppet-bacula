@@ -4,6 +4,7 @@ class puppetlabs::os::linux {
   include linuxlogo
   include virtual::packages
   include packages
+  include vim
 
   File {
     owner => root,

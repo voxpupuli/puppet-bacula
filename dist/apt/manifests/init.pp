@@ -4,8 +4,9 @@ class apt {
     debian,ubuntu: {
 
       $apt_dir = "/etc/apt"
-      $sources_dir = "${apt_dir}/sources.list.d"
-      $aptconf_dir = "${apt_dir}/apt.conf.d"
+      $sources_dir     = "${apt_dir}/sources.list.d"
+      $aptconf_dir     = "${apt_dir}/apt.conf.d"
+      $preferences_dir = "${apt_dir}/preferences.d"
 
       exec {
         "apt-get update":
@@ -41,6 +42,17 @@ class apt {
           mode     => 0755;
         "${apt_dir}/apt.conf":
           ensure => absent;
+      }
+
+      file {
+        "preferences.d":
+          path    => "${preferences_dir}",
+          ensure  => directory,
+          recurse => true,
+          purge   => true,
+          owner   => root,
+          group   => root,
+          mode    => 0755;
       }
 
     }

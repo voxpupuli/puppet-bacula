@@ -17,6 +17,7 @@ class puppetlabs::os::linux::debian  {
     'lsb-release',
     'keychain',
     'ca-certificates',
+    'less',
   ]
 
   package { $packages: ensure => latest; }

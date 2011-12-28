@@ -25,6 +25,8 @@ define apt::pin(
     $ensure   = 'present',
     $wildcard = false
   ) {
+  include apt
+
   # get around naming things such as '*'
   if $filename == undef {
     $fname = $name

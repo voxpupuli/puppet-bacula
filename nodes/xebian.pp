@@ -1,4 +1,4 @@
-node "xebian.puppetlabs.lan" {
+node xebian {
   include role::server
 }
 

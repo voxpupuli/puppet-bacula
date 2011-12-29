@@ -37,12 +37,6 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     require => Apt::Source["rcrowley.list"],
   }
 
-  if ! defined(Package["gnupg-agent"]) {
-    package { 'gnupg-agent':
-      ensure  => present,
-    }
-  }
-
   if ($freight_manage_docroot) {
     file { $freight_docroot:
       ensure    => directory,
@@ -91,12 +85,12 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
     before  => Exec["apt-get update"];
   }
 
-  exec { "start gpg-agent":
-    user      => root,
-    alias     => "gpg-exec",
-    command   => "/bin/bash -c 'eval \$(gpg-agent --daemon)'",
-    unless    => "/usr/bin/pgrep -u root gpg-agent",
-    require   => Package["gnupg-agent"],
+  gpg::agent { "root":
+    options => [
+      "--default-cache-ttl 999999999",
+      "--max-cache-ttl     999999999",
+      "--use-standard-socket",
+    ],
   }
 }
 

@@ -66,7 +66,10 @@ class forge(
     require  => File['/opt/forge'],
   }
 
-  package { [ 'json', 'less', 'archive-tar-minitar', 'bcrypt-ruby', 'diff-lcs', 'haml', 'maruku', 'paperclip', 'versionomy', 'warden', 'will_paginate', 'sqlite3-ruby', 'hpricot', 'factory_girl', 'remarkable_activerecord', 'remarkable_rails', 'rspec', 'rspec-rails', 'vlad', 'vlad-git' ]:
+  # I just removed 'less' from this array. Which is needed, but
+  # clashes with the system package. This module will be replaced
+  # soon, so this won't matter.
+  package { [ 'json', 'archive-tar-minitar', 'bcrypt-ruby', 'diff-lcs', 'haml', 'maruku', 'paperclip', 'versionomy', 'warden', 'will_paginate', 'sqlite3-ruby', 'hpricot', 'factory_girl', 'remarkable_activerecord', 'remarkable_rails', 'rspec', 'rspec-rails', 'vlad', 'vlad-git' ]:
     ensure => present,
     provider => gem,
     require => Vcsrepo['/opt/forge'],

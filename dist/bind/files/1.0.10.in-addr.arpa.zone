@@ -3,5 +3,5 @@
 
       IN  NS   net02.ops.dc1.puppetlabs.net.
 
-20        PTR  net02.ops.dc1.puppetlabs.net.
+$INCLUDE  /var/lib/bind/1.0.10.in-addr.arpa.static
 

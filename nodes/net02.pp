@@ -30,17 +30,25 @@ node 'net02.dc1.puppetlabs.net' {
   bind::zone {
     'dc1.puppetlabs.net':
       type         => 'master',
-      source       => 'puppet:///modules/bind/dc1.puppetlabs.net.zone',
+      #source       => 'puppet:///modules/bind/dc1.puppetlabs.net.zone',
+      initialfile  => 'puppet:///modules/bind/dc1.puppetlabs.net.initial',
       allow_update => 'key "dhcp_updater"',
       require      => Bind::Key['dhcp_updater'];
     '1.0.10.in-addr.arpa':
       type         => 'master',
-      source       => 'puppet:///modules/bind/1.0.10.in-addr.arpa.zone',
+      #source       => 'puppet:///modules/bind/1.0.10.in-addr.arpa.zone',
+      initialfile  => 'puppet:///modules/bind/1.0.10.in-addr.arpa.initial',
+      allow_update => 'key "dhcp_updater"',
+      require      => Bind::Key['dhcp_updater'];
+    '5.0.10.in-addr.arpa':
+      type         => 'master',
+      initialfile  => 'puppet:///modules/bind/5.0.10.in-addr.arpa.initial',
       allow_update => 'key "dhcp_updater"',
       require      => Bind::Key['dhcp_updater'];
     '42.0.10.in-addr.arpa':
       type         => 'master',
-      source       => 'puppet:///modules/bind/42.0.10.in-addr.arpa.zone',
+      #source       => 'puppet:///modules/bind/42.0.10.in-addr.arpa.zone',
+      initialfile  => 'puppet:///modules/bind/42.0.10.in-addr.arpa.initial',
       allow_update => 'key "dhcp_updater"',
       require      => Bind::Key['dhcp_updater'];
     'puppetlabs.lan':
@@ -49,6 +57,22 @@ node 'net02.dc1.puppetlabs.net' {
     '100.168.192.in-addr.arpa':
       type          => 'forward',
       custom_config => 'forwarders { 192.168.100.83; };';
+  }
+
+  include git
+  include bind::params
+
+  exec { "ensure dns-zone repo exists":
+    path    => ["/usr/bin", "/usr/local/bin"],
+    command => "git clone git@git.puppetlabs.net:puppetlabs-dnszones.git /opt/dns",
+    creates => "/opt/dns/.git",
+  }
+
+  cron { "update dns zones":
+    command => "(cd /opt/dns; git pull origin master; /opt/dns/zonedump.rb | /usr/bin/nsupdate -v -k /etc/bind/keys.d/dhcp_updater) ",
+    minute  => "*/5",
+    user    => "root",
+    require => Exec["ensure dns-zone repo exists"],
   }
 
   # Will live at /etc/bind/keys.d/dhcp_updater

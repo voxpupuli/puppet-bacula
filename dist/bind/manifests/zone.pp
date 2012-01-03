@@ -76,23 +76,24 @@ define bind::zone (
   # of updates. If we have one or the other, then probably fail. If we
   # have neither, do what we were doing before.
 
-  if $staticsfile != undef and $initialfile != undef {
+  #if $staticsfile != undef and $initialfile != undef {
+  if $initialfile =~ /^puppet:/ {
 
-      # equivilent of basename( ... )
-      $staticsfilename = regsubst( $staticsfile , '(.*)/(.*)' , '\2' )
+  #    # equivilent of basename( ... )
+  #    $staticsfilename = regsubst( $staticsfile , '(.*)/(.*)' , '\2' )
       $initialfilename = regsubst( $initialfile , '(.*)/(.*)' , '\2' )
 
-      # So we notify on the staticsfile, and ignore the initialfile
-      # $bindfile_to_notify = ""
+  #    # So we notify on the staticsfile, and ignore the initialfile
+  #    # $bindfile_to_notify = ""
 
-      file{ "${bind::params::bind_zone_dir}/$staticsfilename":
-          ensure => file,
-          source => $staticsfile,
-          mode   => '0644',
-          owner  => $binduser,
-          group  => $bindgroup,
-          notify => Service[$bind::bind_service],
-      }
+  #    file{ "${bind::params::bind_zone_dir}/$staticsfilename":
+  #        ensure => file,
+  #        source => $staticsfile,
+  #        mode   => '0644',
+  #        owner  => $binduser,
+  #        group  => $bindgroup,
+  #        notify => Service[$bind::bind_service],
+  #    }
 
       file{ $real_file:
           replace => false, # don't overwrite it, if it's there.
@@ -103,9 +104,8 @@ define bind::zone (
           source  => $initialfile,
       }
 
-
-  } elsif $staticfile != undef or $initialfile != undef {
-      fail( "Sorry, you need to set both staticfile and initialfile in ${module_name}/${name}" )
+  #} elsif $staticfile != undef or $initialfile != undef {
+  #    fail( "Sorry, you need to set both staticfile and initialfile in ${module_name}/${name}" )
   } else {
 
       # If we have a puppet:// source use that, if we have a blank zone do

@@ -78,7 +78,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "x86_64",
     release   => "5",
-    iso       => 'CentOS-5.7-$arch-bin-DVD.iso',
+    iso       => 'CentOS-5.7-$arch-bin-DVD-?of2.iso',
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
       updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
@@ -90,7 +90,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "i386",
     release   => "5",
-    iso       => 'CentOS-5.7-$arch-bin-DVD.iso',
+    iso       => 'CentOS-5.7-$arch-bin-DVD-?of2.iso',
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
       updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",

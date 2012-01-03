@@ -6,8 +6,6 @@ node enkal {
   ssh::allowgroup  { "techops": }
   sudo::allowgroup { "techops": }
 
-  $mysql_root_pw = 'c@11-m3-m1st3r-p1t4ul'
-
   # Base
   include puppetlabs_ssl
   include puppetlabs::docs
@@ -38,7 +36,6 @@ node enkal {
     address  => '192.168.100.1',
     insecure => true,
   }
-
 
   # zleslie: stop dhclient from updating resolve.conf
   file { "/etc/dhcp3/dhclient-enter-hooks.d/nodnsupdate":

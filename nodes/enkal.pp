@@ -34,7 +34,11 @@ node enkal {
   }
 
   include unbound
-  unbound::stub { "puppetlabs.lan": address => '192.168.100.1' }
+  unbound::stub { "puppetlabs.lan":
+    address  => '192.168.100.1',
+    insecure => true,
+  }
+
 
   # zleslie: stop dhclient from updating resolve.conf
   file { "/etc/dhcp3/dhclient-enter-hooks.d/nodnsupdate":

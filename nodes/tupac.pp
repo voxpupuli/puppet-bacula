@@ -8,7 +8,8 @@ node tupac {
   include virtual::users
   include motd
 
-  Account::User <| tag = sysadmin |>
+  Account::User <| groups == 'sysadmin' |>
+  Group <| name == 'allstaff' |>
   ssh::allowgroup { "sysadmin": }
   sudo::allowgroup { "sysadmin": }
 }

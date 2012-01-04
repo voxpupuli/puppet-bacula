@@ -8,6 +8,11 @@ class apt {
       $aptconf_dir     = "${apt_dir}/apt.conf.d"
       $preferences_dir = "${apt_dir}/preferences.d"
 
+      $apt_update_ensure = $lsbdistcodename ? {
+        default => present,
+        karmic  => absent, # NO UPDATES FOR KARMIC
+      }
+
       exec {
         "apt-get update":
           user        => root,
@@ -16,6 +21,7 @@ class apt {
       }
 
       cron { "apt-get update":
+        ensure  => $apt_get_update_ensure,
         command => "/usr/bin/apt-get -qq update",
         user    => root,
         minute  => 20,

@@ -34,6 +34,7 @@ node pluto {
   # (#11435) replace deploy user with jenkins user for QA/release automation
   Account::User <| tag == 'jenkins' |>
   Ssh_authorized_key <| tag == 'jenkins' |>
+  ssh::allowgroup { "jenkins": }
 
   # Enterprise
   package { "daemontools": ensure => installed; }

@@ -36,8 +36,6 @@ node pluto {
   Ssh_authorized_key <| tag == 'jenkins' |>
   ssh::allowgroup { "jenkins": }
 
-  # Enterprise
-  package { "daemontools": ensure => installed; }
   cron { "sync /opt/enterprise to tbdriver":
     minute  => '*/10',
     user    => root,

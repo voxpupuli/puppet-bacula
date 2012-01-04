@@ -7,31 +7,14 @@ node pluto {
 
   sudo::allowgroup { "builder": }
 
-  # Customer Groups
-  Account::User <| tag == customer |>
-  Group <| tag == customer |>
-
-  $ssh_customer = [
-    "vmware",
-    "motorola",
-    "nokia",
-    "blackrock",
-    "secureworks",
-    "bioware",
-    "wealthfront",
-    "scea",
-    "advance"
-  ]
-
-  ssh::allowgroup { $ssh_customer: chroot => true; }
-
+  # The deploy user is used for the automated deployment of documentation.
+  # see https://github.com/puppetlabs/puppet-docs/blob/master/config/deploy.rb
+  # for the Rest of the Story (TM)
   ssh::allowgroup { "www-data": }
   Account::User <| tag == deploy |>
   Ssh_authorized_key <| tag == deploy |>
-  # (#11435) allow ssh access for deploy user
-  # This is gross. Remove for doing builds if possible
 
-  # (#11435) replace deploy user with jenkins user for QA/release automation
+  # (#11435) jenkins user for QA/release automation
   Account::User <| tag == 'jenkins' |>
   Ssh_authorized_key <| tag == 'jenkins' |>
   ssh::allowgroup { "jenkins": }
@@ -49,17 +32,12 @@ node pluto {
     source => "puppet:///modules/puppetlabs/_opt_enterprise_sync.sh";
   }
 
-  # Crypt filesystem
-  package { "cryptsetup": ensure => installed; }
-  exec    { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4": creates => '/var/chroot.key'; }
-  file    { "/var/chroot.key": mode => 0400, require => Exec["/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4"]; }
-
-  apache::vhost {
-    "$fqdn":
+  apache::vhost { $fqdn:
       port    => 80,
       docroot => '/opt/enterprise'
   }
 
+  # Permissions corrections.
   file {
     "/opt/enterprise":
       owner   => root,
@@ -96,5 +74,34 @@ node pluto {
     freight_manage_vhost    => true,
   }
 
-}
+  ##############################################################################
+  # Dropbox functionality
+  #
+  # This host used to be used as a customer dropbox but this role is
+  # deprecated and has been moved to odin.
+  #
+  # Remove these resources after 1/15/2012 unless the email sent to
+  # pro@puppetlabs.com has objections.
+  ##############################################################################
+  $ssh_customer = [
+    "vmware",
+    "motorola",
+    "nokia",
+    "blackrock",
+    "secureworks",
+    "bioware",
+    "wealthfront",
+    "scea",
+    "advance"
+  ]
 
+  # Customer Groups
+  Account::User <| tag == customer |>
+  Group <| tag == customer |>
+  ssh::allowgroup { $ssh_customer: chroot => true; }
+
+  # Crypt filesystem
+  package { "cryptsetup": ensure => installed; }
+  exec    { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4": creates => '/var/chroot.key'; }
+  file    { "/var/chroot.key": mode => 0400, require => Exec["/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4"]; }
+}

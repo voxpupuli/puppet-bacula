@@ -14,6 +14,12 @@ node syn {
   package { ["rest-client","mime-types"]: provider => gem, ensure => present, }
   package { "ii": ensure => present, }
 
+  file { "/var/lib/gather":
+    ensure => directory,
+    owner  => root,
+    mode   => 750,
+  }
+
   cron {
     "start_ii.sh":
       command => "/opt/start_ii.sh",

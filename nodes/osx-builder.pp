@@ -7,6 +7,9 @@ node osx-builder {
   # include role::server
   include role::base
 
+  Account::User <| groups == "sysadmin" |>
+  Account::User <| groups == "release" or groups == "builder" |>
+
   ssh::allowgroup  { "release": }
   ssh::allowgroup  { "builder": }
 

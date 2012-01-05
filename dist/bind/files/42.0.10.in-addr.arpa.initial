@@ -1,0 +1,5 @@
+; HI THERE!
+@   0 IN  SOA  net02.dc1.puppetlabs.net. ns.dc1.puppetlabs.net. ( 2011063001 1800 900 604800 86400 )
+
+      IN  NS   net02.dc1.puppetlabs.net.
+

@@ -5,6 +5,7 @@
 node osx-builder {
   # adding this on OSX terrifies me
   # include role::server
+  include role::base
 
   ssh::allowgroup  { "release": }
   ssh::allowgroup  { "builder": }

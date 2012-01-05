@@ -10,7 +10,7 @@ node idun {
     vhost         => 'forge.puppetlabs.com',
     serveraliases => 'newforge.puppetlabs.com', # remove me at some point.
     github_url    => 'git@github.com:puppetlabs/puppet-forge.git',
-    git_revision  => 'bee0b91f11197bee486c1c374ddc1257fb966739',
+    git_revision  => 'f9529be2b6c3f3fd2e2db44aa1fda5e797e449e9',
     appserver     => 'unicorn',
     do_ssh_keys   => true,
   }

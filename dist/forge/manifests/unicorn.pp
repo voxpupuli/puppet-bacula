@@ -40,7 +40,7 @@ class forge::unicorn(
   # reduce repeating myself.
   Nginx::Unicorn {
     servername     => $vhost,
-    severaliases   => $serveraliases,
+    serveraliases   => $serveraliases,
     unicorn_socket => $unicorn_socket,
     path           => '/opt/forge',
   }

@@ -18,7 +18,7 @@ define nginx::unicorn(
   $auth         = '',
   $magic        = '',
   $ssl          = false,
-  $severaliases
+  $serveraliases = undef
   ) {
 
   include nginx

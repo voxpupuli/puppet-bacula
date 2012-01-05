@@ -27,7 +27,10 @@ define account::user (
     $expire=''
     ) {
 
-  include packages::shells
+  case $operatingsystem {
+    'Darwin': { } # Like Darwin can do anything
+    default: { include packages::shells }
+  }
 
   if $test == true { # what does this even do?
     $userdir = "puppet:///modules/account/${name}"

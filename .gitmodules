@@ -16,3 +16,6 @@
 [submodule "dist/dhcp"]
 	path = dist/dhcp
 	url = https://github.com/puppetlabs/puppet-dhcp.git
+[submodule "dist/vcsrepo"]
+	path = dist/vcsrepo
+	url = git@github.com:puppetlabs/puppet-vcsrepo.git

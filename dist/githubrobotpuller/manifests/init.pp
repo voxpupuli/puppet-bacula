@@ -12,9 +12,6 @@ class githubrobotpuller (
   $version = 'HEAD'
 ) {
 
-  # Requirements
-  include vcsrepo
-
   $user = 'deckard'
   $path = '/opt/robopuller'
 

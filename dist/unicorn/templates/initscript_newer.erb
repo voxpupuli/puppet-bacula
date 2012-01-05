@@ -69,6 +69,13 @@ case "$1" in
     reload)
         start-stop-daemon --stop --quiet --signal HUP --pidfile $PIDFILE
         ;;
+    reopen-logs)
+        # I am unsure about the use of echos here.
+        echo -n "Reopening <%= name %> logs: "
+        start-stop-daemon --stop --quiet --signal USR1 --pidfile $PIDFILE
+        echo "<%= name %>."
+        ;;
+
     status)
         status_of_proc -p "$PIDFILE" "${DAEMON}"
         ;;

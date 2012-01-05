@@ -18,7 +18,6 @@
 class metric_fu ( $site_alias = $fqdn )
  {
   include apache
-  include vcsrepo
   
   $parent_dir   = "/opt/metrics"
   $web_root     = "$parent_dir/www"

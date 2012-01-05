@@ -12,12 +12,6 @@ node dxul {
   #$dashboard_site = 'demo.puppetlabs.com'
   #$puppet_storedconfig_password = 'password'
 
-  # Puppet Forge
-  class { 'forge':
-    vhost        => 'forge.puppetlabs.com',
-    git_revision => '60eee6fd01457e738c587eda0b434eb7492392ea',
-  }
-
   # Backup
   class { "bacula":
     director => hiera('bacula_director'),
@@ -27,7 +21,6 @@ node dxul {
   # Nagios
   include nagios::webservices
   #nagios::website { 'demo.puppetlabs.com': }
-  nagios::website { 'forge.puppetlabs.com': }
   nagios::website { 'projects.puppetlabs.com': }
 
   # Munin

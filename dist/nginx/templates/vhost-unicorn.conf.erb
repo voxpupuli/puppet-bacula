@@ -5,7 +5,7 @@
 # May be lifted from http://unicorn.bogomips.org/examples/nginx.conf
 
 # this can be any application server, not just Unicorn/Rainbows!
-upstream app_server {
+upstream up_<%= appname %> {
   # fail_timeout=0 means we always retry an upstream even if it failed
   # to return a good HTTP response (in case the Unicorn master nukes a
   # single worker for timing out).
@@ -29,7 +29,7 @@ server {
   ssl_protocols        TLSv1 SSLv3;
 <% end -%>
 
-  server_name <%= srvname %> ;
+  server_name <%= srvname %> <%= severaliases %>;
 
   root <%= rootpath %>/public;
 
@@ -109,7 +109,7 @@ server {
     auth_basic_user_file  <%= auth['auth_file'] %>;
 <% end -%>
 
-    proxy_pass http://app_server;
+    proxy_pass http://up_<%= appname %>;
   }
 
   # Rails error pages

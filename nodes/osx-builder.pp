@@ -6,8 +6,14 @@ node osx-builder {
   # adding this on OSX terrifies me
   # include role::server
   include role::base
+  include virtual::users
+  include motd
 
-  Account::User <| groups == "sysadmin" |>
+  Account::User <| groups == 'sysadmin' |>
+  Group <| name == 'allstaff' |>
+  ssh::allowgroup { "sysadmin": }
+  sudo::allowgroup { "sysadmin": }
+
   Account::User <| groups == "release" or groups == "builder" |>
 
   ssh::allowgroup  { "release": }

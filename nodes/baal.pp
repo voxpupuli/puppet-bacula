@@ -112,14 +112,9 @@ node baal {
   nagios::website { 'dashboard.puppetlabs.com': auth => 'monit:5kUg8uha', }
   nagios::website { 'munin.puppetlabs.com':     auth => 'monit:5kUg8uha', }
   nagios::website { 'docs.puppetlabs.com': } # monitored here to avoid resource collision
-  # Munin
-  #if $environment == 'production' {
+
   class { "munin::server": site_alias => "munin.puppetlabs.com"; }
   include munin::dbservices
-    #include munin::passenger
-    #include munin::puppet
-    #include munin::puppetmaster
-    #}
 
   apache::vhost { $fqdn:
     options  => "None",
@@ -127,7 +122,7 @@ node baal {
     port     => '80',
     docroot  => '/var/www',
   }
-  
+
   file {
     "/etc/munin/htpasswd.users":
       owner => root,

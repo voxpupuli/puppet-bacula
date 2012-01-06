@@ -20,28 +20,31 @@ class apache::params {
 
   $user  = 'www-data'
   $group = 'www-data'
-  
+
   case $operatingsystem {
     'centos', 'redhat', 'fedora': {
        $apache_name = 'httpd'
        $php_package = 'php'
        $ssl_package = 'mod_ssl'
        $apache_dev  = 'httpd-devel'
-       $vdir = '/etc/httpd/conf.d/'
+       $vdir        = '/etc/httpd/conf.d/'
+       $portsconf   = '/etc/httpd/conf.d/ports.conf'
     }
     'ubuntu', 'debian': {
        $apache_name = 'apache2'
        $php_package = 'libapache2-mod-php5'
        $ssl_package = 'apache-ssl'
        $apache_dev  = [ 'libaprutil1-dev', 'libapr1-dev', 'apache2-prefork-dev' ]
-       $vdir = '/etc/apache2/sites-enabled/'
+       $vdir        = '/etc/apache2/sites-enabled/'
+       $portsconf   = '/etc/apache2/ports.conf'
     }
     default: {
        $apache_name = 'apache2'
        $php_package = 'libapache2-mod-php5'
        $ssl_package = 'apache-ssl'
        $apache_dev  = 'apache-dev'
-       $vdir = '/etc/apache2/sites-enabled/'
+       $vdir        = '/etc/apache2/sites-enabled/'
     }
   }
+
 }

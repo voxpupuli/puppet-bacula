@@ -6,7 +6,8 @@ define apache::port (
   include concat::setup
 
   case $operatingsystem {
-    debian:  {
+    debian,
+    ubuntu:  {
       if ! defined(Concat::Fragment["apache_port_${port}"]) { #only create it if its not already there
         concat::fragment { "apache_port_${port}":
           target  => "/etc/apache2/ports.conf",

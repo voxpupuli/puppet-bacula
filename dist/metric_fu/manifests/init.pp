@@ -35,9 +35,6 @@ class metric_fu ( $site_alias = $fqdn )
   package { ["git-core"]:
     ensure => present,
   }
-  package { ["rake"]:
-    ensure => present,
-  }
   package { ["bison"]:
     ensure => present,
   }

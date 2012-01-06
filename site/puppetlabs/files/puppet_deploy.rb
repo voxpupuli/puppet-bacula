@@ -12,6 +12,7 @@
 
 require 'pp'
 require 'fileutils'
+require 'optparse'
 
 github_repo_urls = { :default => 'git@github.com:puppetlabs/puppetlabs-modules.git',
                      # :adrient => 'git@github.com:adrienthebo/puppetlabs-modules.git',
@@ -24,18 +25,38 @@ $NSIDENT = 'nonPL'
 # $modulepath=`puppet master --configprint modulepath`
 env_base_dir  = '/etc/puppet/environments'
 
-$debug = false
+$debug      = false
+$submodules = true
+$gitnoise   = ""
 
-if ARGV.include? "-d" or ARGV.include? "--debug"
-  $debug = true
+opt_parser = OptionParser.new do |opts|
+  opts.banner = "#{$0}: [options] [environment]"
+  
+  opts.on('-z', '--zoom', "Run updates in parallel") do
+    $zoom = "GO REALLY FAST"
+  end
+
+  opts.on('-d', '--debug', "Include debug output") do
+    $debug    = true
+    $gitnoise = "--quiet"
+  end
+
+  opts.on('-f', '--fast', "Include debug output") do
+    $submodules = false
+  end
+
+  opts.on('-h', '--help', "Display this help") do
+    puts opts
+    exit
+  end
 end
 
-$gitnoise = ""
-unless $debug == true
-  $gitnoise = "--quiet"
+begin
+  opt_parser.parse! ARGV
+rescue => e
+  $stderr.puts e
+  $stderr.puts opt_parser
 end
-
-$zoom = ARGV.delete('-z')
 
 def pp_and_system( dome )
   pp dome if $debug == true
@@ -43,7 +64,7 @@ def pp_and_system( dome )
 end
 
 def dputs( text )
-  puts text if $debug == true
+  puts text if $debug
 end
 
 class GitRepo
@@ -147,7 +168,9 @@ class GitRepo
       dputs "doing a pull on an existing branch"
       Dir.chdir branch_dir do
         pp_and_system "LANG='C' git fetch #{$gitnoise} --all && git reset #{$gitnoise} --hard origin/#{branch_to_make}" # origin #{branch_to_make}"
-        pp_and_system "LANG='C' git submodule #{$gitnoise} update --init | grep -vE 'Cloning into |^From |->'" unless %x{ git submodule status }.empty?
+        if $submodules
+          pp_and_system "LANG='C' git submodule #{$gitnoise} update --init | grep -vE 'Cloning into |^From |->'" unless %x{ git submodule status }.empty?
+        end
       end
     else
       dputs "doing a clone on a new branch"

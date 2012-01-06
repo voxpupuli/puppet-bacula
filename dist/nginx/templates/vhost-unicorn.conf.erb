@@ -29,7 +29,7 @@ server {
   ssl_protocols        TLSv1 SSLv3;
 <% end -%>
 
-  server_name <%= srvname %> <%= serveraliases %>;
+  server_name <%= srvname %> <% if has_variable?( 'serveralias' )%><%= serveraliases %><% end %>;
 
   root <%= rootpath %>/public;
 

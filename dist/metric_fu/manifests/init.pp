@@ -41,7 +41,7 @@ class metric_fu ( $site_alias = $fqdn )
   package { ["bison"]:
     ensure => present,
   }
-  package { ["metric_fu","rspec","mocha","zaml","rack","ripper"]:
+  package { ["metric_fu","rspec","mocha","zaml","ripper"]:
     ensure => present,
     provider => gem,
     require => [Package["main"],Package["ruby_parser"],Package["bison"]],

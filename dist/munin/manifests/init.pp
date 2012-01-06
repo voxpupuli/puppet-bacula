@@ -44,13 +44,15 @@ class munin (
 
   file {
     $logdir:
-      ensure => directory,
-      owner  => 'munin',
-      mode   => '0750';
+      ensure  => directory,
+      owner   => 'munin',
+      mode    => '0750',
+      require => Package[$munin::params::munin_base_packages];
     $piddir:
-      ensure => directory,
-      owner  => 'munin',
-      mode   => '0750';
+      ensure  => directory,
+      owner   => 'munin',
+      mode    => '0750',
+      require => Package[$munin::params::munin_base_packages];
   }
 
   service { $munin::params::node_service:

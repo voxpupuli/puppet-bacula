@@ -27,7 +27,7 @@ env_base_dir  = '/etc/puppet/environments'
 
 $debug      = false
 $submodules = true
-$gitnoise   = ""
+$gitnoise   = "--quiet"
 
 opt_parser = OptionParser.new do |opts|
   opts.banner = "#{$0}: [options] [environment]"
@@ -38,7 +38,7 @@ opt_parser = OptionParser.new do |opts|
 
   opts.on('-d', '--debug', "Include debug output") do
     $debug    = true
-    $gitnoise = "--quiet"
+    $gitnoise = ""
   end
 
   opts.on('-f', '--fast', "Include debug output") do

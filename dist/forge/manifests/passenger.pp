@@ -3,6 +3,9 @@ class forge::passenger {
       include passenger::params
       include apache::ssl
 
+      $passenger_version=$passenger::params::version
+      $gem_path=$passenger::params::gem_path
+
       file { "/etc/apache2/conf.d/passenger.conf":
         owner   => root,
         group   => root,

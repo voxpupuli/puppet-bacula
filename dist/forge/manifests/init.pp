@@ -49,8 +49,6 @@ class forge(
 
   $rails_version='2.3.14'
   require rails
-  $passenger_version=$passenger::params::version
-  $gem_path=$passenger::params::gem_path
 
   # This relies on the host in question having bacula class
   if defined( Class['bacula'] ) {

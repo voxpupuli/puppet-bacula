@@ -73,35 +73,4 @@ node pluto {
     freight_manage_libdir   => true,
     freight_manage_vhost    => true,
   }
-
-  ##############################################################################
-  # Dropbox functionality
-  #
-  # This host used to be used as a customer dropbox but this role is
-  # deprecated and has been moved to odin.
-  #
-  # Remove these resources after 1/15/2012 unless the email sent to
-  # pro@puppetlabs.com has objections.
-  ##############################################################################
-  $ssh_customer = [
-    "vmware",
-    "motorola",
-    "nokia",
-    "blackrock",
-    "secureworks",
-    "bioware",
-    "wealthfront",
-    "scea",
-    "advance"
-  ]
-
-  # Customer Groups
-  Account::User <| tag == customer |>
-  Group <| tag == customer |>
-  ssh::allowgroup { $ssh_customer: chroot => true; }
-
-  # Crypt filesystem
-  package { "cryptsetup": ensure => installed; }
-  exec    { "/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4": creates => '/var/chroot.key'; }
-  file    { "/var/chroot.key": mode => 0400, require => Exec["/bin/dd if=/dev/urandom of=/var/chroot.key bs=512 count=4"]; }
 }

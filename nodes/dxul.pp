@@ -93,4 +93,22 @@ node dxul {
       command => 'cd /opt/git/puppet && git --bare fetch --quiet --force origin 2.6.x:2.6.x > /dev/null';
   }
 
+
+  # Forge redirects, for now.
+  apache::vhost { 'forge.puppetlabs.com':
+    port     => 80,
+    priority => 60,
+    docroot  => '/opt/forge/public/',
+    template => 'puppetlabs/60-forge.puppetlabs.com',
+  }
+
+  apache::vhost { 'forge.puppetlabs.com_ssl':
+    port       => 443,
+    priority   => 61,
+    ssl        => true,
+    servername => 'forge.puppetlabs.com',
+    docroot    => '/opt/forge/public/',
+    template   => 'puppetlabs/61-forge.puppetlabs.com_ssl',
+  }
+
 }

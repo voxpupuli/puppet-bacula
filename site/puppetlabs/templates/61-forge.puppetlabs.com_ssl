@@ -1,0 +1,30 @@
+<VirtualHost 66.228.54.166:443>
+  #ServerName forge.puppetlabs.com_ssl
+  ServerName oldforge.puppetlabs.com
+  ServerAlias oldforge.puppetlabs.com
+  DocumentRoot /opt/forge/public/
+
+  
+  SSLEngine on
+  SSLCertificateFile /etc/ssl/certs/pl.cert
+  SSLCertificateKeyFile /etc/ssl/private/pl.key
+  
+ 
+  RewriteEngine On
+  RewriteRule ^/(.*) https://newforge.puppetlabs.com/%{REQUEST_URI}
+
+#  RewriteEngine On
+#  RewriteCond %{HTTPS} off
+#  RewriteRule ^/users(.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+  <Directory /opt/forge/public/>
+    Options None
+    AllowOverride AuthConfig
+    Order allow,deny
+    allow from all
+  </Directory>
+  ErrorLog /var/log/apache2/forge.puppetlabs.com_ssl_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/forge.puppetlabs.com_ssl_access.log combined
+  ServerSignature On
+</VirtualHost>

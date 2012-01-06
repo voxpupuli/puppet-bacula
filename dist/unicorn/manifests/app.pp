@@ -9,8 +9,8 @@ define unicorn::app (
     $unicorn_worker_processes = '4',
     $stdlog_path              = '',
     $log_stds                 = 'false', # yes I know what it looks like.
-    $unicorn_user             = '',
-    $unicorn_group            = '',
+    $unicorn_user             = 'root',
+    $unicorn_group            = 'root',
     $config_file              = ''
   ) {
 

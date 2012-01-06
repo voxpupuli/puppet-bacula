@@ -29,7 +29,7 @@ before_fork do |server, worker|
 end
 
 
-<% if has_variable?( 'unicorn_user' ) and unicorn_user != '' and has_variable?( 'unicorn_group' ) and unicorn_group != ''  -%>
+<% if has_variable?( 'unicorn_user' ) and unicorn_user != '' and unicorn_user != 'root' and has_variable?( 'unicorn_group' ) and unicorn_group != '' and unicorn_group != 'root' -%>
 # Stolen from https://github.com/blog/517-unicorn
 after_fork do |server, worker|
 

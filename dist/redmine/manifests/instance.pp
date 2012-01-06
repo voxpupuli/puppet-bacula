@@ -31,6 +31,7 @@ define redmine::instance (
   vcsrepo{
     "${dir}/${name}":
       source   => $source,
+      provider => git,
       revision => $version_to_grab,
       #require => File[$dir],
       #path => $dir,

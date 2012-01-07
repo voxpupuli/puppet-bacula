@@ -1,13 +1,13 @@
 logging {
   channel update_debug {
-    file "/var/log/update-debug.log";
+    file "/var/log/update-debug.log" versions 5 size 20m;
     severity  debug 3;
     print-category yes;
     print-severity yes;
     print-time     yes;
   };
   channel security_info    {
-    file "/var/log/named-auth.info";
+    file "/var/log/named-auth.info" versions 10 size 10m;
     severity  info;
     print-category yes;
     print-severity yes;

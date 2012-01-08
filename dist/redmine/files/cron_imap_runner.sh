@@ -46,7 +46,7 @@ tickets() {
 }
 
 infras() {
-	rakerunrapper 'rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV=production host=imap.gmail.com username=tickets@puppetlabs.com password=5JjteNVs port=993 ssl=true move_on_success=read move_on_failure=failed project=puppetlabs-infras allow_override=project folder=infras >/dev/null'
+	rakerunrapper 'rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV=production host=imap.gmail.com username=tickets@puppetlabs.com password=5JjteNVs port=993 ssl=true move_on_success=read move_on_failure=failed project=puppetlabs-infras allow_override=project folder=infras'
 	return $?
 }
 

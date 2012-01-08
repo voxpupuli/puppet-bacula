@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # This was just sitting in a cron entry, thusly emailing the following
 # password around as it went. So I threw it in a file instead.
@@ -16,12 +16,38 @@ help() {
 	exit 10
 }
 
+# The stupid redmine rake tasks returns:
+#  rake aborted!
+#  No folder read (Failure)
+#
+# (See full trace by running task with --trace)
+#
+# So lets kludge a wrapper around that, rather than fixing the ruby.
+#
+rakerunrapper() {
+	command=$*
+	declare -a rakeoutput
+	rakeoutput=$( $command )
+	RC=$?
+
+	# if it worked, then don't care.
+	[ $RC -eq 0 ] && return 0
+
+	if ! echo "${rakeoutput[@]}" | grep -Fq 'No folder read (Failure)'
+	then
+		echo ${rakeoutput[@]}
+	fi
+	return $RC
+}
+
 tickets() {
-	rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppet allow_override=project folder=tickets >/dev/null
+	rakerunrapper 'rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV=production host=imap.gmail.com username=tickets@puppetlabs.com password=5JjteNVs port=993 ssl=true move_on_success=read move_on_failure=failed project=puppet allow_override=project folder=tickets'
+	return $?
 }
 
 infras() {
-	rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV="production" host=imap.gmail.com username=tickets@puppetlabs.com password="5JjteNVs" port=993 ssl=true move_on_success=read move_on_failure=failed project=puppetlabs-infras allow_override=project folder=infras >/dev/null
+	rakerunrapper 'rake --silent -f /opt/projects.puppetlabs.com/Rakefile redmine:email:receive_imap RAILS_ENV=production host=imap.gmail.com username=tickets@puppetlabs.com password=5JjteNVs port=993 ssl=true move_on_success=read move_on_failure=failed project=puppetlabs-infras allow_override=project folder=infras >/dev/null'
+	return $?
 }
 
 case $1 in

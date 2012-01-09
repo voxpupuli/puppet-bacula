@@ -27,7 +27,7 @@ help() {
 rakerunrapper() {
 	command=$*
 	declare -a rakeoutput
-	rakeoutput=$( $command )
+	rakeoutput=$( $command 2>&1 )
 	RC=$?
 
 	# if it worked, then don't care.

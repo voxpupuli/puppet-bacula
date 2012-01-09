@@ -42,6 +42,7 @@ define bind::zone (
   $source         = undef,
   $class          = "IN",
   $allow_update   = undef,
+  $masters        = undef,
   $custom_config  = undef
 
   ) {

@@ -1,0 +1,7 @@
+; HI THERE!
+@               0 IN  SOA puppetlabs.lan. ns.puppetlabs.lan. ( 2011102036 1800 900 604800 86400 )
+
+                  IN  NS  net01.puppetlabs.lan.
+
+net01             IN  A   192.168.100.8
+

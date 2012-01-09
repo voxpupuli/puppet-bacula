@@ -58,6 +58,7 @@ class bind (
   $bind_config_keys_dir        = $bind::params::bind_config_keys_dir,
   $bind_user                   = $bind::params::bind_user,
   $bind_group                  = $bind::params::bind_group,
+  $bind_restart                = $bind::params::bind_restart,
   $bind_disable_v6             = "false",
   $customoptions               = undef
 
@@ -175,6 +176,7 @@ class bind (
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
+    restart    => $bind_restart,
   }
 
 }

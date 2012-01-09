@@ -2,7 +2,13 @@
 #
 # for things like DNS, DHCP, and friends. 
 
-class puppetlabs::net01 {
+node net01 {
+
+  include role::server
+
+  ssh::allowgroup   { "techops": }
+  sudo::allowgroup  { "techops": }
+
 
   # rsyslog hackery.
   file{ '/etc/rsyslog.d/aruba.conf':

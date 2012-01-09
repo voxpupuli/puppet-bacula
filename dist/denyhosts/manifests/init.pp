@@ -19,6 +19,7 @@ class denyhosts (
       enable    => true,
       hasstatus => false,
       pattern   => "denyhosts",
+      require   => Package["denyhosts"],
   }
 
   file {

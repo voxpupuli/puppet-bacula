@@ -26,7 +26,6 @@ node dxul {
   # Munin
   include munin
   include munin::dbservices
-  include munin::passenger
   include munin::puppet
 
   include mysql::server

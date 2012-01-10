@@ -27,6 +27,10 @@ server {
   ssl_ciphers          ALL:!aNULL:!ADH:!eNULL:!MEDIUM:!LOW:!EXP:RC4:RSA:HIGH:!kEDH;  # use decent and non-crap ciphers.
   ssl_session_timeout  10m;
   ssl_protocols        TLSv1 SSLv3;
+
+  # Redirect non-SSL on SSL port to SSL..
+  # http://www.ruby-forum.com/topic/193781#844520
+  error_page  497  https://$host$request_uri;
 <% end -%>
 
   server_name <%= srvname %><% if has_variable?( 'serveralias' )%> <%= serveraliases %><% end %>;

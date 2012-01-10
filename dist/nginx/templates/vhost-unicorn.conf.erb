@@ -20,8 +20,14 @@ ssl_certificate_key  <%= ssl_path %>/private/pl.key;
 
 server {
 
-  listen   <%= port %> default deferred; ## listen for ipv4, sorry no IPv6 for now.
-<% if ssl == true -%>
+  listen   <%= port %>      default deferred; ## listen for ipv4, sorry no IPv6 for now.
+  <% if has_variable?( 'ipaddress6' ) -%>
+  # Listen on an ipv6 version of this port too, but only do v6 on it, so we
+  # don't get strange v4 mapped IPs in v6.
+  listen   [::]:<%= port %> default ipv6only=on;
+  <% end -%>
+
+  <% if ssl == true -%>
   # Do SSL, and don't do it terribly.  
   ssl                  on;
   ssl_ciphers          ALL:!aNULL:!ADH:!eNULL:!MEDIUM:!LOW:!EXP:RC4:RSA:HIGH:!kEDH;  # use decent and non-crap ciphers.

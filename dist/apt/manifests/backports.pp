@@ -30,7 +30,10 @@ class apt::backports( $release=$lsbdistcodename ) {
         "backports.list":
           uri       => $lsbdistid ? {
             "debian" => "http://backports.debian.org/debian-backports",
-            "ubuntu" => "http://archive.ubuntu.com/ubuntu",
+            "ubuntu" => $lsbdistcodename ? {
+              'karmic' => 'http://old-releases.ubuntu.com/ubuntu',
+              default  => "http://archive.ubuntu.com/ubuntu",
+            }
           },
           distribution => "${release}-backports",
           component => $lsbdistid ? {

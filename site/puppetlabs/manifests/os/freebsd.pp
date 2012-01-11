@@ -50,7 +50,7 @@ class puppetlabs::os::freebsd {
     minute  => 20,
     hour    => 20,
     user    => root,
-    command => "/usr/bin/csup /root/ports-supfile > /dev/null",
+    command => "/usr/bin/csup /root/ports-supfile > /dev/null || echo \$?",
   }
 
 }

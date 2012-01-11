@@ -8,7 +8,9 @@ class puppetlabs::service::mrepo {
     rhn_password  => 'yXgBdtwfEs',
   }
 
-  $centos_mirror = "http://mirrors.cat.pdx.edu"
+  # mirrors.cat.pdx.edu is down as of 1-11-2012
+  # $centos_mirror = "http://mirrors.cat.pdx.edu"
+  $centos_mirror = "http://mirrors.ecvps.com"
   $vault_mirror = "http://vault.centos.org"
 
   ##############################################################################

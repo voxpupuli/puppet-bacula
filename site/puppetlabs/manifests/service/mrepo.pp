@@ -24,6 +24,7 @@ class puppetlabs::service::mrepo {
     arch      => "x86_64",
     release   => "6",
     rhnrelease => "6Server",
+    hour      => 22,
     iso       => 'rhel-server-6.0-$arch-dvd.iso',
     urls      => {
       updates   => 'rhns:///rhel-$arch-server-$release',
@@ -38,6 +39,7 @@ class puppetlabs::service::mrepo {
     arch       => "i386",
     release    => "6",
     rhnrelease => "6Server",
+    hour       => 23,
     iso        => 'rhel-server-6.0-$arch-dvd.iso',
     urls       => {
       updates   => 'rhns:///rhel-$arch-server-$release',
@@ -52,6 +54,7 @@ class puppetlabs::service::mrepo {
     arch       => "x86_64",
     release    => "5",
     rhnrelease => "5Server",
+    hour       => 0,
     iso        => 'rhel-5-server-$arch-disc?.iso',
     urls       => {
       updates  => 'rhns:///rhel-$arch-server-5',
@@ -65,6 +68,7 @@ class puppetlabs::service::mrepo {
     arch       => "i386",
     release    => "5",
     rhnrelease => "5Server",
+    hour       => 1,
     iso        => 'rhel-5-server-$arch-disc?.iso',
     urls       => {
       updates  => 'rhns:///rhel-$arch-server-5',
@@ -81,6 +85,7 @@ class puppetlabs::service::mrepo {
     arch      => "x86_64",
     release   => "5",
     iso       => 'CentOS-5.7-$arch-bin-DVD-?of2.iso',
+    hour      => 2,
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
       updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
@@ -93,6 +98,7 @@ class puppetlabs::service::mrepo {
     arch      => "i386",
     release   => "5",
     iso       => 'CentOS-5.7-$arch-bin-DVD-?of2.iso',
+    hour      => 3,
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
       updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
@@ -104,6 +110,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
     arch      => "x86_64",
     release   => "4",
+    hour      => 4,
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
       updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
@@ -115,6 +122,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
     arch      => "i386",
     release   => "4",
+    hour      => 5,
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
       updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
@@ -126,6 +134,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "i386",
     release   => "6",
+    hour      => 6,
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
       updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
@@ -137,6 +146,7 @@ class puppetlabs::service::mrepo {
     repotitle => 'CentOS Linux $release ($arch) LATEST',
     arch      => "x86_64",
     release   => "6",
+    hour      => 6,
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
       updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",

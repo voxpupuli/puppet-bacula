@@ -32,6 +32,10 @@
 # Default: nightly
 # Values: now, nightly, weekly, never
 #
+# [*hour*]
+# The hour to run the sync. Optional.
+# Default: 0
+#
 # [*iso*]
 # The pattern of the ISO to mirror. Optional.
 #
@@ -85,6 +89,7 @@ define mrepo::repo (
   $urls       = {},
   $metadata   = 'repomd',
   $update     = 'nightly',
+  $hour       = '0',
   $iso        = '',
   $rhn        = false,
   $rhnrelease = $release,
@@ -166,7 +171,7 @@ define mrepo::repo (
             "Nightly synchronize repo $name":
               ensure  => present,
               command   => "/usr/bin/mrepo -qgu $name",
-              hour    => "0",
+              hour    => $hour,
               minute  => "0",
               user    => $user,
               require => Class['mrepo'];
@@ -180,7 +185,7 @@ define mrepo::repo (
               ensure  => present,
               command   => "/usr/bin/mrepo -qgu $name",
               day     => "0",
-              hour    => "0",
+              hour    => $hour,
               minute  => "0",
               user    => $user,
               require => Class['mrepo'];

@@ -13,6 +13,7 @@
 worker_processes 4
 
 listen      "127.0.0.1:8080", :tcp_nopush => true
+listen      "/var/run/unicorn/redmine.sock"
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.

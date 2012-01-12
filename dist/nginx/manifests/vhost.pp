@@ -10,10 +10,11 @@
 define nginx::vhost(
   $port,
   #$dest,
-  $priority   = '10',
-  $template   = 'nginx/vhost-default.conf.erb',
-  $servername = '',
-  $magic      = ''
+  $priority       = '10',
+  $template       = 'nginx/vhost-default.conf.erb',
+  $servername     = '',
+  $magic          = '',
+  $isdefaultvhost = false
   ) {
 
   include nginx

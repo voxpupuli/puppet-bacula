@@ -46,21 +46,16 @@ class forge::unicorn(
   }
 
   # do nginx..
+  # It carries the SSL, which if true, will default to port 443, so
+  # and if not, will just be the default of port 80.
+  #
+  # We, somewhat rudely, assume that this machine _just_ does forge.
+  # So become the default vhost. Which I think is reasonable.
   nginx::unicorn {
     $vhost:
-      port           => 80,
       priority       => 66,
-  }
-
-  # would it be more intelligent to make a "ssl => both" option in
-  # nginx::unicorn?
-  if $ssl == true {
-    nginx::unicorn {
-      "${vhost}_ssl":
-        port           => 443,
-        priority       => 55,
-        ssl            => true,
-    }
+      ssl            => $ssl,
+      isdefaultvhost => true,
   }
 
   # Rotation job, so production.log doesn't get out of control!

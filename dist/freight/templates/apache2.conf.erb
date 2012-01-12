@@ -33,6 +33,10 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
 
   ServerSignature Off
 
+  RewriteEngine On
+  Redirect 302 /ubuntu http://apt.puppetlabs.com
+  Redirect 302 /debian http://apt.puppetlabs.com
+
   <% if block_scm == "true" -%>
   # Block access to SCM directories. Stolen from
   # http://stackoverflow.com/questions/398008/deny-access-to-svn-folders-on-apache

@@ -50,14 +50,24 @@ class graphite (
     subscribe => Exec["install graphite"],
   }
 
+  exec { "remove stale carbon-cache pidfile":
+    command => "rm /opt/graphite/storage/carbon-cache-a.pid",
+    path    => ["/usr/bin", "/bin"],
+    unless  => "pgrep carbon-cache.py || test ! -f /opt/graphite/storage/carbon-cache-a.pid",
+  }
+
   service { "carbon-cache":
-    require    => [File["/opt/graphite/conf/carbon.conf"],Exec["install whisper"]],
     ensure     => running,
     hasrestart => false,
     hasstatus  => true,
     stop       => "/opt/graphite/bin/carbon-cache.py stop",
     start      => "/opt/graphite/bin/carbon-cache.py start",
     status     => "/opt/graphite/bin/carbon-cache.py status",
+    require    => [
+      File["/opt/graphite/conf/carbon.conf"],
+      Exec["install whisper"],
+      Exec["remove stale carbon-cache pidfile"],
+    ],
   }
 
   bacula::job {

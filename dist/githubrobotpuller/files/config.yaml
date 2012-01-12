@@ -11,8 +11,8 @@ default:
   # Both opened_subject, and closed_subject are rendered using
   # Mustache and provided all of the same information as the body
   # template, along with the repository's name as 'repository_name'.
-  open_subject: "({{repository_name}}) New pull request: {{title}}"
-  closed_subject: "({{repository_name}}) Closed pull request: {{title}}"
+  open_subject: "({{repository_name}}) {{title}}"
+  closed_subject: "({{repository_name}}) {{title}}"
 
 puppetlabs/puppet: {}
 puppetlabs/facter: {}

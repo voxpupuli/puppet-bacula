@@ -30,22 +30,24 @@ class apt {
 
       file {
         "sources.list.d":
-          path     => "${sources_dir}",
-          ensure   => directory,
-          owner    => root,
-          group    => root,
-          mode     => 0755;
+          path    => "${sources_dir}",
+          ensure  => directory,
+          recurse => true,
+          purge   => true,
+          owner   => root,
+          group   => root,
+          mode    => 0755;
         "${apt_dir}/sources.list":
           ensure => absent;
       }
 
       file {
         "apt.conf.d":
-          path     => "${aptconf_dir}",
-          ensure   => directory,
-          owner    => root,
-          group    => root,
-          mode     => 0755;
+          path    => "${aptconf_dir}",
+          ensure  => directory,
+          owner   => root,
+          group   => root,
+          mode    => 0755;
         "${apt_dir}/apt.conf":
           ensure => absent;
       }

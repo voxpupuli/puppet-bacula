@@ -33,7 +33,7 @@ define metric_fu::codebase ($repo_url, $repo_rev) {
   }
   
   exec { "metric_fu_$title":
-    command     => $metric_fu::metricfu_cmd,
+    command     => "${metric_fu::metricfu_cmd} </dev/null",
 #    user       => $metric_fu::owner,
     cwd         => $repo_base,
     subscribe   => Vcsrepo[$repo_base],

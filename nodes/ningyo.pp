@@ -2,8 +2,6 @@ node ningyo {
 
   include role::server
 
-  notify { "holy shit": message => "poop"; }
-
   ssh::allowgroup { "techops": }
   sudo::allowgroup { "techops": }
   ssh::allowgroup { "interns": }

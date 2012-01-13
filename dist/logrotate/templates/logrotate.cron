@@ -1,0 +1,4 @@
+#!/bin/sh
+
+test -x /usr/sbin/logrotate || exit 0
+/usr/bin/nice -n 19 /usr/bin/ionice -c3 /usr/sbin/logrotate /etc/logrotate.conf

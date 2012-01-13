@@ -8,7 +8,8 @@ class openvpn::server (
     $dh     = "dh2048.pem",
     $server = "10.8.0.0 255.255.255.0",
     $route  = '',
-    $cipher = "AES-192-CBC"
+    $cipher = "AES-192-CBC",
+    $dns    = ''
   ) {
   include openvpn
   include openvpn::params

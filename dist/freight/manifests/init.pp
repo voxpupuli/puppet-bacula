@@ -70,6 +70,9 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
       require     => File[$freight_docroot],
       template    => 'freight/apache2.conf.erb',
     }
+
+    # We need mod_rewrite for freight.
+    realize(A2mod['rewrite'])
   }
 
   apt::source { "rcrowley.list":

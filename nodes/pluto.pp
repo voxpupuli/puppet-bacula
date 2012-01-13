@@ -61,11 +61,6 @@ node pluto {
       group   => developers,
       mode    => 664,
       recurse => true;
-    "/opt/archive-enterprise":
-      owner   => root,
-      group   => enterprise,
-      mode    => 0664,
-      recurse => true;
   }
 
   class { 'freight':

@@ -61,5 +61,9 @@ class jenkins (
       dest          => 'http://localhost:8080',
   }
 
-
+  service { "jenkins":
+    ensure => running,
+    enable => true,
+    require => Package["jenkins"],
+  }
 }

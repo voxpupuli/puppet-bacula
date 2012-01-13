@@ -10,7 +10,13 @@ node enkal {
   include puppetlabs_ssl
   include puppetlabs::docs
   include account::master
-  $ssl_path = $puppetlabs_ssl::params::ssl_path
+
+  # Having a double slash, eg /etc/ssl//certs/pk.key makes apache asplode.
+  # Rather than changing the globally used puppetlabs_ssl variable,
+  # changing it here.
+  # Fix me after hours when this can be tested without blowing up the world.
+  #$ssl_path = $puppetlabs_ssl::params::ssl_path
+  $ssl_path = "/etc/ssl"
 
   # Backup
   class { "bacula":

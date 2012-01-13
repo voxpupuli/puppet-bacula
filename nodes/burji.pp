@@ -121,6 +121,15 @@ node burji {
       docroot => '/opt/downloads'
   }
 
+  apache::vhost {
+    "downloads.puppetlabs.com_ssl":
+      servername => 'downloads.puppetlabs.com',
+      priority   => '99',
+      ssl        => true,
+      port       => 443,
+      docroot    => '/opt/downloads',
+  }
+
   file { "/opt/downloads":
     owner    => deploy,
     group    => release,

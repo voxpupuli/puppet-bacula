@@ -128,6 +128,7 @@ node burji {
       ssl        => true,
       port       => 443,
       docroot    => '/opt/downloads',
+      template   => 'apache/vhost-default-ssl.conf.erb',
   }
 
   file { "/opt/downloads":

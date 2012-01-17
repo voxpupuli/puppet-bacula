@@ -59,9 +59,6 @@ node 'dave.dc1.puppetlabs.net' {
   file {
     "/usr/local/bin/zfs-snapshot.sh":
       ensure => absent,
-      owner  => root,
-      group  => 0,
-      mode   =>  750,
   }
 
   class { "openvpn::server":

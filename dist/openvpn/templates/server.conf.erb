@@ -88,6 +88,10 @@ client-config-dir ccd
 ;push "dhcp-option DNS 10.8.0.1"
 ;push "dhcp-option WINS 10.8.0.1"
 
+<% if dns != '' -%>
+push "dhcp-option DNS <%= dns %>"
+<% end -%>
+
 # Uncomment this directive to allow different
 # clients to be able to "see" each other.
 # By default, clients will only see the server.

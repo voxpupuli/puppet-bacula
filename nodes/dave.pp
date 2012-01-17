@@ -25,37 +25,44 @@ node 'dave.dc1.puppetlabs.net' {
     source => 'puppet:///modules/puppetlabs/os/freebsd/periodic.conf',
   }
 
-  file {
-    "/usr/local/bin/zfs-snapshot.sh":
-      owner => root,
-      group => 0,
-      mode =>  750,
-      source => "puppet:///puppetlabs/zfs-snapshot.sh";
+  file { "/usr/local/bin/zfs-snapshot.rb":
+    source => "puppet:///modules/os/zfs-snapshot.rb",
+    owner  => root,
+    group  => 0,
+    mode   => 750,
   }
 
-  # zleslie: needs fixing
   cron {
     "zfs hourly snapshot":
-      ensure  => absent,
-      user    => root,
-      minute  => 0,
-      command => "/usr/local/bin/zfs-snapshot.sh zroot hourly 25",
-      require => File["/usr/local/bin/zfs-snapshot.sh"];
+      user        => root,
+      minute      => 5,
+      command     => "/usr/local/bin/zfs-snapshot.rb -r -c 25 -s hourly",
+      environment => "PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin",
+      require     => File["/usr/local/bin/zfs-snapshot.rb"];
     "zfs daily snapshot":
-      ensure  => absent,
-      user    => root,
-      minute  => 0,
-      hour    => 0,
-      command => "/usr/local/bin/zfs-snapshot.sh zroot daily 8",
-      require => File["/usr/local/bin/zfs-snapshot.sh"];
+      user        => root,
+      minute      => 10,
+      hour        => 1,
+      command     => "/usr/local/bin/zfs-snapshot.rb -r -c 8 -s daily",
+      environment => "PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin",
+      require     => File["/usr/local/bin/zfs-snapshot.rb"];
     "zfs weekly snapshot":
-      ensure  => absent,
-      user    => root,
-      minute  => 0,
-      hour    => 0,
-      weekday => 0,
-      command => "/usr/local/bin/zfs-snapshot.sh zroot weekly 5",
-      require => File["/usr/local/bin/zfs-snapshot.sh"];
+      user        => root,
+      minute      => 15,
+      hour        => 2,
+      weekday     => 0,
+      command     => "/usr/local/bin/zfs-snapshot.rb -r -c 5 -s weekly",
+      environment => "PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin",
+      require     => File["/usr/local/bin/zfs-snapshot.rb"];
+  }
+
+  file {
+    "/usr/local/bin/zfs-snapshot.sh":
+      ensure => absend,
+      owner  => root,
+      group  => 0,
+      mode   =>  750,
+      source => "puppet:///puppetlabs/zfs-snapshot.sh";
   }
 
   class { "openvpn::server":

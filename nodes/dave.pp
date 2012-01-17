@@ -62,7 +62,6 @@ node 'dave.dc1.puppetlabs.net' {
       owner  => root,
       group  => 0,
       mode   =>  750,
-      source => "puppet:///puppetlabs/zfs-snapshot.sh";
   }
 
   class { "openvpn::server":

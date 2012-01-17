@@ -1,10 +1,18 @@
-class puppetlabs::os::linux {
+class os::linux {
 
   include packages::admin
   include linuxlogo
   include virtual::packages
   include packages
   include vim
+
+  case $operatingsystem {
+    debian:  { include os::linux::debian }
+    ubuntu:  { include os::linux::ubuntu }
+    centos:  { include os::linux::centos }
+    fedora:  { include os::linux::fedora }
+    default: { notify { "Linux distro ${operatingsystem} hos no love": }
+  }
 
   File {
     owner => root,

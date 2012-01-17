@@ -1,4 +1,4 @@
-class puppetlabs::os::linux::fedora inherits puppetlabs::os::linux {
+class os::linux::fedora {
 
   package {
     "redhat-lsb": ensure => installed;

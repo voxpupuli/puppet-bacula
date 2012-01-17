@@ -1,5 +1,4 @@
-class puppetlabs::os::linux::debian  {
-  include puppetlabs::os::linux
+class os::linux::debian  {
 
   include harden
 

@@ -58,7 +58,7 @@ node 'dave.dc1.puppetlabs.net' {
 
   file {
     "/usr/local/bin/zfs-snapshot.sh":
-      ensure => absend,
+      ensure => absent,
       owner  => root,
       group  => 0,
       mode   =>  750,

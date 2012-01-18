@@ -1,9 +1,6 @@
-#!/usr/bin/env ruby
-
-require 'pp'
-require 'yaml'
-
 module Puppet::Parser::Functions
+  require 'pp'
+  require 'yaml'
   newfunction(:genpass, :type => :rvalue) do |args|
     store   = lookupvar('hostname')
     search  = args[0]

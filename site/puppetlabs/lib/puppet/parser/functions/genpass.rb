@@ -2,7 +2,7 @@ require 'pp'
 require 'yaml'
 
 Puppet::Parser::Functions::newfunction(:genpass, :type => :rvalue) do |args|
-  store   = lookupvar('hostname')
+  store   = lookupvar('fqdn')
   search  = args[0]
   datadir = '/etc/puppet/Pdubs'
   datastore = "#{datadir}/#{store}.yaml"

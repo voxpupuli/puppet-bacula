@@ -10,6 +10,7 @@ Puppet::Parser::Functions::newfunction(:genpass, :type => :rvalue) do |args|
   unless File.directory?(datadir)
     Puppet::info "Creating datadir #{datadir}"
     Dir.mkdir(datadir)
+    raise Puppet::Error, "Data directory #{datadir} was not created" unless File.directory?(datadir)
   end
 
   data = {}
@@ -23,7 +24,6 @@ Puppet::Parser::Functions::newfunction(:genpass, :type => :rvalue) do |args|
       f.write(data.to_yaml)
     end
   end
-  Puppet.info data["#{search}"]
   data["#{search}"]
 end
 

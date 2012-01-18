@@ -1,7 +1,7 @@
 # some of this code comes from windows refund
 class logrotate {
 
-  if $kernel == "Linux" }
+  if $kernel == "Linux" {
 
     File{
       owner   => root,
@@ -31,7 +31,7 @@ class logrotate {
     }
 
   } else {
-    notify {"Class[logrotate] does not support kernel $kernel"}
+    notify ("Class[logrotate] does not support kernel $kernel")
   }
 
 }

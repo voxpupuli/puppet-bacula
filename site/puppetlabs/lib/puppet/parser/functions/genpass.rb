@@ -1,7 +1,7 @@
 require 'pp'
 require 'yaml'
 
-newfunction(:genpass, :type => :rvalue) do |args|
+Puppet::Parser::Functions::newfunction(:genpass, :type => :rvalue) do |args|
   store   = lookupvar('hostname')
   search  = args[0]
   datadir = '/etc/puppet/Pdubs'
@@ -26,4 +26,8 @@ newfunction(:genpass, :type => :rvalue) do |args|
   Puppet.info data["#{search}"]
   data["#{search}"]
 end
+
+
+
+
 

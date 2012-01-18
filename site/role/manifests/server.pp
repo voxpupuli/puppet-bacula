@@ -40,6 +40,6 @@ class role::server {
   #  password => genpass('bacula_password',),
   #}
   $fuck = genpass('bacula_password')
-  notify { "${fuck}"}
+  notify { "${fuck}": }
 
 }

@@ -35,11 +35,6 @@ node bacula01 {
       label       => "Inc-";
   }
 
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
-
   bacula::fileset {
     "Common":
       files => ["/etc"],

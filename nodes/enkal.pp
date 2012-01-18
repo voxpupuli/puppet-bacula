@@ -18,12 +18,6 @@ node enkal {
   #$ssl_path = $puppetlabs_ssl::params::ssl_path
   $ssl_path = "/etc/ssl"
 
-  # Backup
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
-
   # Jenkins
   class { "jenkins":
     site_alias => 'jenkins.puppetlabs.com',

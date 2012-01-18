@@ -36,12 +36,6 @@ node burji {
 
   include puppetlabs::service::pkgrepo
 
-  # Bacula
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
-
   # Sites
   nagios::website { 'pm.puppetlabs.com': }
   nagios::website { 'ps.puppetlabs.com': }

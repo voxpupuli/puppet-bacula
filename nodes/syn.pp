@@ -33,11 +33,6 @@ node syn {
 
   class { "gdash" : site_alias => "stats.puppetlabs.lan" }
 
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
-
   file {
     "/opt/gdash/graph_templates/dashboards":
       owner => root,

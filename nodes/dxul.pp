@@ -12,12 +12,6 @@ node dxul {
   #$dashboard_site = 'demo.puppetlabs.com'
   #$puppet_storedconfig_password = 'password'
 
-  # Backup
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
-
   # Nagios
   include nagios::webservices
   #nagios::website { 'demo.puppetlabs.com': }

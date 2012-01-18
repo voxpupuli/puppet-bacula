@@ -11,7 +11,7 @@ class os::linux {
     ubuntu:  { include os::linux::ubuntu }
     centos:  { include os::linux::centos }
     fedora:  { include os::linux::fedora }
-    default: { notify { "Linux distro ${operatingsystem} hos no love": }
+    default: { notify { "Linux distro ${operatingsystem} hos no love": } }
   }
 
   File {

@@ -28,6 +28,7 @@ module Puppet::Parser::Functions
     end
     Puppet.info data["#{search}"]
     data["#{search}"]
+    "foo"
   end
 end
 

@@ -37,7 +37,7 @@ class role::server {
 
   class { "bacula":
     director => hiera('bacula_director'),
-    password => genpass('bacula_password',),
+    password => genpass('bacula_password'),
   }
 
 }

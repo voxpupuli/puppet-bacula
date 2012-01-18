@@ -32,6 +32,9 @@ class bacula::director (
 
   include bacula::params
 
+  $working_directory = $bacula::params::working_directory
+  $pid_directory     = $bacula::params::pid_directory
+
   if $monitor == true { include bacula::director::nagios }
 
   package { $bacula::params::bacula_director_packages:

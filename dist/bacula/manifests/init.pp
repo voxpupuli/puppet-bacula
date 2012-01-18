@@ -32,13 +32,18 @@ class bacula (
     $autoprune      = "yes",
     $director,
     $password,
-    $monitor       = true
+    $monitor        = true,
   ){
 
   include bacula::params
 
-  $bacula_director = $director
-  $bacula_password = $password
+  $bacula_director   = $director
+  $bacula_password   = $password
+
+  $working_directory = $bacula::params::working_directory
+  $pid_directory     = $bacula::params::pid_directory
+
+  $listen_address    = hiera('bacula_client_listen')
 
   if $monitor == true {
     @@nagios_service { "check_baculafd_${hostname}":
@@ -52,10 +57,6 @@ class bacula (
     }
   }
 
-  package { 'bacula-common':
-    ensure => present,
-  }
-
   package { $bacula::params::bacula_client_packages:
     ensure => present,
   }
@@ -66,13 +67,13 @@ class bacula (
     require => Package[$bacula::params::bacula_client_packages],
   }
 
-  file { '/etc/bacula/bacula-fd.conf':
+  file { $bacula::params::client_config:
     require => Package[$bacula::params::bacula_client_packages],
     content => template('bacula/bacula-fd.conf.erb'),
     notify  => Service[$bacula::params::bacula_client_services],
   }
 
-  file { '/var/lib/bacula':
+  file { $bacula::params::working_directory:
     ensure  => directory,
     require => Package[$bacula::params::bacula_client_packages],
   }

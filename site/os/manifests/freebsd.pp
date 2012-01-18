@@ -1,5 +1,8 @@
 class os::freebsd {
 
+  #Package { source => "http://ftp4.freebsd.org/pub/FreeBSD/ports/${architecture}/packages-${kernelmajversion}-release/", provider => portupgrade }
+  Package { provider => portupgrade }
+
   $packages_to_install = [  'sysutils/tmux',
                             'sysutils/pv',
                             'sysutils/screen',

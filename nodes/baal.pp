@@ -32,11 +32,6 @@ node baal {
   ###
   # Bacula
   #
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
-
   class { "bacula::director":
     db_user => 'bacula',
     db_pw   => 'qhF4M6TADEkl',

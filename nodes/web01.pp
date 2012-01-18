@@ -19,12 +19,6 @@ node web01 {
       dest => 'http://docs.puppetlabs.com';
   }
 
-  # Bacula
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
-
   apache::vhost::redirect {
     'learningpuppet.com':
       dest => 'http://docs.puppetlabs.com/learning'

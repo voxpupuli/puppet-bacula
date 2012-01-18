@@ -1,5 +1,4 @@
 node idun {
-
   include role::server
 
   # Base
@@ -18,10 +17,5 @@ node idun {
   nagios::website { 'forge.puppetlabs.com': }
   include munin
   include munin::puppet
-
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
 
 }

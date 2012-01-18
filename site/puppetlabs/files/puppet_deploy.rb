@@ -2,7 +2,7 @@
 ##
 # So could probably make this more modular. But that's just the fact it was a 5
 # line shell script, and now it's a Ruby script with a class in it. Get over it.
-# 
+#
 # This purely checks out our github repo and puts all the branches in their own
 # dir. Inspired by/copied from
 # http://hunnur.com/blog/2010/10/dynamic-git-branch-puppet-environments/
@@ -31,7 +31,7 @@ $gitnoise   = "--quiet"
 
 opt_parser = OptionParser.new do |opts|
   opts.banner = "#{$0}: [options] [environment]"
-  
+
   opts.on('-z', '--zoom', "Run updates in parallel") do
     $zoom = "GO REALLY FAST"
   end
@@ -41,7 +41,7 @@ opt_parser = OptionParser.new do |opts|
     $gitnoise = ""
   end
 
-  opts.on('-f', '--fast', "Include debug output") do
+  opts.on('-f', '--fast', "Skip updating submodules") do
     $submodules = false
   end
 
@@ -95,7 +95,7 @@ class GitRepo
         dputs "Trying to mkdir -p to #{base_dir}"
         FileUtils.mkdir_p base_dir
       rescue
-        raise "Can't make environments base dir of #{base_dir}." 
+        raise "Can't make environments base dir of #{base_dir}."
         exit 10
       end
     end
@@ -104,7 +104,7 @@ class GitRepo
 
   def get_branches
     dputs "CDing to #{@mirrordir} from #{Dir.getwd}"
-    Dir.chdir @mirrordir do 
+    Dir.chdir @mirrordir do
 
       branches_wot_we_have = []
 
@@ -145,7 +145,7 @@ class GitRepo
   end
 
   def make_subbranch( branch_to_make , make_as=nil )
-    Dir.chdir @env_base_dir 
+    Dir.chdir @env_base_dir
 
     envname = make_as
     branch_checkout_dirname = branch_to_make.split( '/' ).last
@@ -159,7 +159,7 @@ class GitRepo
     dputs "Making ol' #{branch_to_make}"
     branch_dir = "#{@env_base_dir}/#{checkout_as}"
 
-    # Chunk stolen from 
+    # Chunk stolen from
     # { cd $BRANCH_DIR/$BRANCH && git pull origin $BRANCH ; } \
     #     || { mkdir -p $BRANCH_DIR && cd $BRANCH_DIR \
     #     && git clone $REPO $BRANCH && cd $BRANCH \
@@ -175,7 +175,7 @@ class GitRepo
     else
       dputs "doing a clone on a new branch"
       Dir.chdir @env_base_dir do
-        pp_and_system "LANG='C' git clone #{$gitnoise} -b #{branch_checkout_dirname} #{@mirrordir} #{checkout_as}" 
+        pp_and_system "LANG='C' git clone #{$gitnoise} -b #{branch_checkout_dirname} #{@mirrordir} #{checkout_as}"
         pp_and_system "LANG='C' cd #{checkout_as} && git submodule #{$gitnoise} update --init | grep -vE 'Cloning into |^From |->'" unless %x< cd #{checkout_as} && git submodule status >.empty?
       end
     end
@@ -213,7 +213,7 @@ class GitRepo
         next if @branches.include? dir
 
         # Remove things, but base it on namespaces.
-        if @namespace.empty? 
+        if @namespace.empty?
           next if dir =~ /^#{$NSIDENT}/
         else
           next if dir !~ /^#{@namespace}/

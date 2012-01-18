@@ -1,6 +1,6 @@
-class puppetlabs::os::linux::ubuntu inherits puppetlabs::os::linux {
+class os::linux::ubuntu {
 
-  include puppetlabs::os::linux::debian
+  include os::linux::debian
 
   # On older, deprecated, dying Ubuntus we have to use
   # http://old-releases.ubuntu.com/ for their apt sources.
@@ -17,7 +17,6 @@ class puppetlabs::os::linux::ubuntu inherits puppetlabs::os::linux {
       $security_apt_host = 'http://security.ubuntu.com/'
     }
   }
-
 
   apt::source {
     "main.list":

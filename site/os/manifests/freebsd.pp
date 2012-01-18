@@ -1,4 +1,4 @@
-class puppetlabs::os::freebsd {
+class os::freebsd {
 
   $packages_to_install = [  'sysutils/tmux',
                             'sysutils/pv',

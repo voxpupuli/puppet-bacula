@@ -1,4 +1,4 @@
-class puppetlabs::os::darwin {
+class os::darwin {
 
   # let local admins login over ssh and sudo
   ssh::allowgroup  { "admin": }

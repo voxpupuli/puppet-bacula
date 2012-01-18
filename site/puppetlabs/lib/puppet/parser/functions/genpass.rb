@@ -7,9 +7,13 @@ module Puppet::Parser::Functions
   newfunction(:genpass) do |args|
     store   = lookupvar('hostname')
     search  = args[0]
-    datadir = '/etc/puppet/data'
+    datadir = '/etc/puppet/Pdubs'
     datastore = "#{datadir}/#{store}.yaml"
-    Dir.mkdir(datadir) unless File.directory?(datadir)
+
+    unless File.directory?(datadir)
+      Puppet::info "Creating datadir #{datadir}"
+      Dir.mkdir(datadir)
+    end
 
     data = {}
     if File.exists?(datastore)
@@ -22,6 +26,7 @@ module Puppet::Parser::Functions
         f.write(data.to_yaml)
       end
     end
+    Puppet.info data["#{search}"]
     data["#{search}"]
   end
 end

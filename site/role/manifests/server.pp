@@ -35,4 +35,9 @@ class role::server {
   # Firewall
   if defined(Class["firewall"]) { Firewall <||> }
 
+  class { "bacula":
+    director => hiera('bacula_director'),
+    password => genpass('bacula_password'),
+  }
+
 }

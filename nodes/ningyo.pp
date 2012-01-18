@@ -119,11 +119,5 @@ node ningyo {
       require => File["/usr/local/bin/puppet_deploy.rb"];
   }
 
-  # Bacula
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
-
 }
 

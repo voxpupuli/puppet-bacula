@@ -33,7 +33,7 @@ export RAILS_ENV="$ENV"
 
 start() {
     log_daemon_msg "Starting Unicorn server for <%= name %>" "unicorn_<%= name %>"
-    if start-stop-daemon --start --quiet --oknodo --user $USER --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_OPTS; then
+    if start-stop-daemon --start --quiet --oknodo --user "${USER:-root}" --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_OPTS; then
       log_end_msg 0
     else
       log_end_msg 1

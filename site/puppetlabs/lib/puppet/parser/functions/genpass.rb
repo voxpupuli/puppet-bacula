@@ -27,7 +27,3 @@ Puppet::Parser::Functions::newfunction(:genpass, :type => :rvalue) do |args|
   data["#{search}"]
 end
 
-
-
-
-

@@ -2,3 +2,4 @@
 nrpe_server: 173.255.196.32
 munin_server: 173.255.196.32
 location: world
+bacula_director: 'baal.puppetlabs.com'

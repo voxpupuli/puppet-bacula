@@ -124,11 +124,4 @@ node 'net02.dc1.puppetlabs.net' {
       ip  => "10.0.1.50",
   }
 
-  ####
-  # Bacula
-  #
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
 }

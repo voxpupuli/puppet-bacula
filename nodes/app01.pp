@@ -6,14 +6,6 @@ node app01 {
   ssh::allowgroup { "techops": }
   sudo::allowgroup { "techops": }
 
-  ####
-  # Bacula
-  #
-  class { "bacula":
-    director => hiera('bacula_director'),
-    password => hiera('bacula_password'),
-  }
-
   # https://projects.puppetlabs.com/issues/7849
   # github pull request robot
   # THIS DOESN'T WORK, VCSREPO IS UTTER MONKEY SHIT.

@@ -18,3 +18,4 @@ allowhosts: - "sshd: 74.85.255.0/27"
             - "sshd: 74.85.247.184/29"
             - "sshd: 10.42.0.0/16"
             - "sshd: 192.168.100.0/24"
+bacula_director: 'bacula01.puppetlabs.lan'

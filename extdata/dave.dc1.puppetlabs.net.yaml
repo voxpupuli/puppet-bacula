@@ -1,3 +1,4 @@
 ---
 nrpe_host_address: %{ipaddress_vlan1}
 munin_node_address: %{ipaddress_carp42}
+bacula_client_listen: %{ipaddress_carp42}

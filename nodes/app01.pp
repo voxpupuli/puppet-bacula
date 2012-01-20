@@ -14,6 +14,11 @@ node app01 {
   }
 
 
+  package{ 'rubygems-update': ensure => installed, provider => gem }
+  exec{ 'updaterubygems':
+    command => '/var/lib/gems/1.8/bin/update_rubygems',
+    unless  => '/usr/bin/gem env  | /bin/egrep -q "RUBYGEMS VERSION: 1.([456789]\.[0-9][0-9]?[0-9]?|3\.[6789][0-9]?)"',
+    require => Package['rubygems-update']}
 
   # 11924 - Triage-a-thon site
   vcsrepo { '/opt/tally':
@@ -35,6 +40,7 @@ node app01 {
   package { [ 'json', 'data_mapper', 'dm-adjust', 'sinatra', 'httpclient' ]:
     ensure   => installed,
     provider => gem,
+    require  => Exec['updaterubygems']
   }
 
   file{ '/var/run/tally/': ensure => directory, group => 'nogroup', mode => '0770' }
@@ -44,7 +50,7 @@ node app01 {
    unicorn_pidfile => '/var/run/tally/tally.pid',
    unicorn_socket  => 'http://192.168.100.127:6666',
    rack_file       => '/opt/tally/config.ru',
-   require         => File['/var/run/tally'],
+   require         => [ File['/var/run/tally'], Vcsrepo['/opt/tally'], ],
   }
 
 }

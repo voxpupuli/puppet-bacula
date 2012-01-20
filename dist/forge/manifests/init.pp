@@ -25,7 +25,7 @@ class forge(
     $ssl           = true,
     $newrelic      = true,
     $do_ssh_keys   = false,
-    $git_revision  = 'bee0b91f11197bee486c1c374ddc1257fb966739',
+    $git_revision  = '6971a82bb7334c04587fa64a1bb8312158f8f185',
     $github_url    = 'git@github.com:puppetlabs/puppet-forge.git',
     $user          = 'forge',
     $group         = 'forge',
@@ -37,7 +37,6 @@ class forge(
   # before the vcsrepo, that should fit nicer in to the dependancy
   # graph.
   include ruby::dev
-  require forge::packages       # see later on, down the page.
 
   motd::register{ "A Forge at ${vhost}": }
 
@@ -152,7 +151,8 @@ class forge(
         serveraliases => $serveraliases,
         ssl           => $ssl,
       }
-      Class['forge::packages::mustbeinstalledfirst'] -> Class['forge::packages'] -> Package['unicorn']
+      include forge::packages
+      Vcsrepo['/opt/forge'] -> Class['forge::packages'] -> Package['unicorn']
     }
   }
 
@@ -218,44 +218,7 @@ class forge::raketasks {
 
 }
 
-# Due to idiocy in the gem install ordering, these packages MUST be
-# installed first, or other packages pull in newer versions and break
-# everything!
-class forge::packages::mustbeinstalledfirst {
-
-
-  # Nastily, this matches up the system rake and the gem installed
-  # rake to the same version, otherwise you get super confused and
-  # rails breaks with a 'uninitialized constant Rake::DSL' error.
-  #
-  # Okay, before screaming, at time of writing you can't have two
-  # chickens with the same name, even if you alias one. See
-  # https://projects.puppetlabs.com/issues/1398 and
-  # http://groups.google.com/group/puppet-users/browse_thread/thread/3c9b0193e924c1d8
-  # for more details.
-  #
-  # So I am doing something horrible. Please forgive me.
-  # (yeah, it assumes you're using Ruby 1.8 too).
-  exec { 'install_rake_gem_and_goto_hell':
-    command  => 'gem install rake --version 0.8.7 --no-ri --no-rdoc',
-    unless   => 'gem list rake | egrep -q "^rake \(.*0\.8\.7.*\)"',
-    path     => '/bin:/usr/bin:/usr/local/bin',
-  } ->
-
-  # So, forge needs a rack of 1.1.X and will near silently fail if it
-  # doesn't have it (it will bomb out with a rails version issue). Now
-  # I don't know a better way of doing this than just throwing it in
-  # and hoping it's first.
-  package { 'rack':
-    ensure => '1.1.2',
-    provider => gem,
-  }
-
-}
-
 class forge::packages {
-
-  include forge::packages::mustbeinstalledfirst
 
   # So gems needs some packages around it. This can be split to a
   # params class later. My fear here is them clashing with them being
@@ -268,150 +231,15 @@ class forge::packages {
     }
   }
 
-  # Non version specific gems. DANGER WILL ROBINSON.
-  package { [ 'json', 'archive-tar-minitar', 'bcrypt-ruby', 'diff-lcs', 'haml', 'maruku', 'versionomy', 'warden', 'sqlite3', 'hpricot', 'vlad', 'vlad-git' ]:
-    ensure => present,
+  package { 'bundler':
+    ensure   => present,
     provider => gem,
   }
 
-  package { 'devise':
-    ensure => '1.0.7',
-    provider => gem,
-  }
-
-  package { 'super_exception_notifier':
-    ensure => '2.0.0',
-    provider => gem,
-  }
-  package { 'rspec':
-    ensure   => '1.3.2',
-    provider => gem,
-  }
-
-  # otherwise it pulls in newer rails.
-  package { 'rspec-rails':
-    ensure   => '1.3.4',
-    provider => gem,
-  }
-
-  # As we have a system package named less, use this horrible method
-  # again to get it to work. See install_rake_gem_and_goto_hell for
-  # more details.
-  exec { 'install_less_gem_and_goto_hell':
-    command  => 'gem install less --version 1.2.21 --no-ri --no-rdoc',
-    unless   => 'gem list less | egrep -q "^less \(.*1\.2\.21.*\)"',
-    path     => '/bin:/usr/bin:/usr/local/bin',
-  }
-
-  package{ 'will_paginate':
-    ensure => '2.3.16',
-    provider => gem,
-  }
-
-  packagegemwithnodeps { 'acts-as-taggable-on':
-    version => '2.1.1',
-  }
-
-  # Which depends on:
-  # [root@idun:forge]# gem dependency paperclip -v 2.4.5 | grep runtime
-  #  activerecord (>= 2.3.0, runtime)
-  #  activesupport (>= 2.3.2, runtime)
-  #  cocaine (>= 0.0.2, runtime)
-  #  mime-types (>= 0, runtime)
-  packagegemwithnodeps{ 'paperclip' :
-    version => '2.4.5',
-    require => [ Package['cocaine'], Package['mime-types']]
-  }
-
-  package{ 'cocaine':
-    ensure => '0.2.1',
-    provider => gem,
-  }
-
-  package{ 'mime-types':
-    ensure => '1.17.2',
-    provider => gem,
-  }
-
-
-  # Installing remarkable pulls in the later versions of rspec, which
-  # pulls in more crap that I don't want. So we do the same thing
-  # here.
-  #
-  # [ben@dxul:~]% for i in $(gem list | awk '/^remarkable/ {print $1}'); do gem dep $i ; done  | grep runtime | sort -u
-  # remarkable (~> 3.1.13, runtime)
-  # remarkable_activerecord (~> 3.1.13, runtime)
-  # rspec (>= 1.2.0, runtime)
-  # rspec-rails (>= 1.2.0, runtime)
-  packagegemwithnodeps{ [ 'remarkable' , 'remarkable_activerecord' , 'remarkable_rails' ]:
-    version => '3.1.3',
-    require => [ Package['rspec'], Package['rspec-rails']],
-  }
-
-
-  # Same again, in the code it requires:
-  # config.gem 'i18n', :version => '~> 0.3.5'
-  package{ 'i18n':
-    ensure => '0.3.7',
-    provider => gem,
-  }
-
-  package{ 'factory_girl':
-    ensure   => '2.3.2',
-    provider => gem,
-    require  => [ Exec['install_rake_gem_and_goto_hell']],
-  }
-
-  # Requires:   activerecord (>= 0, runtime)
-  packagegemwithnodeps { 'bitmask-attribute':
-    version => '1.1.0',
-  }
-
-}
-
-# So gems will randomly upgrade a package if it can find a version
-# _EVEN_ if it's dependancy has been met. This could be a lack of
-# understanding on how gems work, if so, they shouldn't hide their
-# fucking documentation so well. But after I asked around, this was
-# deemed the least terrible way of doing it.
-#
-# This is to stop rails 3 being installed by things, even when a rails
-# 2.3.x is installed and the gem calls for "rails >0". You then have
-# two gems for say, rails, and it activates the wrong one first, and
-# bombs out, often silently.
-#
-# This does mean you're on your own for dependancies... Not ideal
-# (almost as if this should be say the package management's job...)
-# But it's better than it not working in the first place.
-#
-# This forge code is "only temporary" so we _shouldn't_ have to
-# rebuild it later, so you shouldn't have to ever reuse this. My
-# apologises if you do.
-#
-define packagegemwithnodeps(
-  $version = ''
-) {
-
-  case $operatingsystem {
-    'debian','ubuntu': { }
-    # This is because of the creates line in the versioned one, as I
-    # still feel doing a gem list on every gem is too expensive!
-    default: { fail( "This VILE hack for gems only works on debian/ubuntu. See dist/forge/manifests/init.pp") }
-  }
-
-  if $version == '' {
-    exec{ "install_gem_badly_for_${name}":
-      command => "gem install ${name} --ignore-dependencies --no-ri --no-rdoc",
-      path    => '/bin:/usr/bin',
-      unless  => "gem list --local ${name} | grep -q '^${name} '" # Not perfect,
-                                                       # as doesn't check
-                                                       # the version.
-    }
-  } else {
-    exec{ "install_gem_badly_for_${name}":
-      command => "gem install ${name} --version ${version} --ignore-dependencies --no-ri --no-rdoc",
-      path    => '/bin:/usr/bin',
-      creates => "/var/lib/gems/1.8/gems/${name}-${version}",
-    }
+  exec { "bundle install" :
+    cwd     => '/opt/forge',
+    path    => '/bin:/usr/bin:/var/lib/gems/1.8/bin',
+    require => Package['bundler'],
+    logoutput => true,
   }
 }

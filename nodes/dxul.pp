@@ -43,6 +43,7 @@ node dxul {
       template       => 'nginx/vhost-redmine-unicorn.nginx.erb',
       isdefaultvhost => true,
       require        => Redmine::Unicorn['projects.puppetlabs.com'],
+      before         => Class['nagios::webservices'],
   }
 
   nginx::vhost::redirect {

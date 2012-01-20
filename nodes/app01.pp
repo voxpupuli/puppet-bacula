@@ -26,6 +26,7 @@ node app01 {
     provider => git,
     owner    => 'nobody',
     group    => 'nogroup',
+    ensure   => latest,
   }
 
   package{ 'libsqlite3-dev':

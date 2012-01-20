@@ -21,13 +21,26 @@ class nagios::webservices {
     notify              => Service[$nagios::params::nagios_service],
   }
 
-  @@nagios_service { "check_apache2_${hostname}":
-    use                 => 'generic-service',
-    host_name           => "$fqdn",
-    check_command       => 'check_nrpe!check_proc!1:50 apache2',
-    service_description => "check_apache2_${hostname}",
-    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify              => Service[$nagios::params::nagios_service],
+  if defined (Class["Apache"]) {
+    @@nagios_service { "check_apache2_${hostname}":
+      use                 => 'generic-service',
+      host_name           => "$fqdn",
+      check_command       => 'check_nrpe!check_proc!1:50 apache2',
+      service_description => "check_apache2_${hostname}",
+      target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+      notify              => Service[$nagios::params::nagios_service],
+    }
+  }
+
+  if defined (Class["Nginx"]) {
+    @@nagios_service { "check_nginx_${hostname}":
+      use                 => 'generic-service',
+      host_name           => "$fqdn",
+      check_command       => 'check_nrpe!check_proc!1:50 nginx',
+      service_description => "check_nginx_${hostname}",
+      target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+      notify              => Service[$nagios::params::nagios_service],
+    }
   }
 
   define nagios::website {

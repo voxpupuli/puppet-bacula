@@ -29,6 +29,14 @@ node app01 {
     ensure   => latest,
   }
 
+  file{ '/opt/tally/config':
+    ensure => directory,
+    owner    => 'nobody',
+    group    => 'nogroup',
+    before   => Unicorn::App['tally'],
+    require  => Vcsrepo['/opt/tally'],
+  }
+
   package{ 'libsqlite3-dev':
     ensure => installed,
   }

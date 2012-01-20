@@ -14,7 +14,6 @@ node dxul {
 
   # Nagios
   include nagios::webservices
-  #nagios::website { 'demo.puppetlabs.com': }
   nagios::website { 'projects.puppetlabs.com': }
 
   # Munin
@@ -29,23 +28,20 @@ node dxul {
     db_user => 'redmine',
     db_pw   => 'c@11-m3-m1st3r-p1t4ul',
     port    => '80',
-  }
-
-  bacula::job {
-    "${fqdn}-redmine":
-      files    => ["/var/lib/bacula/mysql","/opt/projects.puppetlabs.com"],
+    webserver => 'none', # deal with webserving later on.
   }
 
   # Throw nginx in the mix.
   include nginx::server
-  file{ '/var/run/unicorn/': ensure => directory, owner => 'root', group => 'www-data', mode => 0550 }
-  nginx::unicorn{
+  file { '/var/run/unicorn/': ensure => directory, owner => 'root', group => 'www-data', mode => 0550 } ->
+  nginx::unicorn {
     'projects.puppetlabs.com':
       ssl            => true,
       unicorn_socket => '/var/run/unicorn/redmine.sock',
       path           => '/opt/projects.puppetlabs.com/public/',
       template       => 'nginx/vhost-redmine-unicorn.nginx.erb',
       isdefaultvhost => true,
+      require        => Redmine::Unicorn['projects.puppetlabs.com'],
   }
 
   nginx::vhost::redirect {
@@ -58,6 +54,12 @@ node dxul {
         ssl        => true,
         dest       => 'https://newforge.puppetlabs.com';
   }
+
+  bacula::job {
+    "${fqdn}-redmine":
+      files    => ["/var/lib/bacula/mysql","/opt/projects.puppetlabs.com"],
+  }
+
 
   # pDNS
   include pdns

@@ -1,11 +1,12 @@
 define redmine::unicorn (
-    $db, 
-    $db_user, 
-    $db_pw, 
-    $dir, 
-    $port='80', 
-    $backup='true',
-    $version = 'UNSET'
+    $db,
+    $db_user,
+    $db_pw,
+    $dir,
+    $port      = '80',
+    $backup    = 'true',
+    $webserver = 'none',
+    $version   = 'UNSET'
     ) {
   include apache::params
 
@@ -56,8 +57,8 @@ define redmine::unicorn (
   }
 
   # I promise I will make this good...
-  $appserver = "nginx"
-  if $appserver == "apache" {
+  # And I lied... -ben
+  if $webserver == "apache" {
     apache::vhost { $name:
       servername => $name,
       port       => $port,

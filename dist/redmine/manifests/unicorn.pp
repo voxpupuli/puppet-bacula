@@ -55,24 +55,28 @@ define redmine::unicorn (
       version => $version,
   }
 
-  apache::vhost { $name:
-    servername => $name,
-    port       => $port,
-    priority   => '30',
-    ssl        => false,
-    docroot    => "${dir}/${name}/public/",
-    template   => 'redmine/redmine-unicorn.conf.erb',
-    require    => Service['unicorn'],
-  }
+  # I promise I will make this good...
+  $appserver = "nginx"
+  if $appserver == "apache" {
+    apache::vhost { $name:
+      servername => $name,
+      port       => $port,
+      priority   => '30',
+      ssl        => false,
+      docroot    => "${dir}/${name}/public/",
+      template   => 'redmine/redmine-unicorn.conf.erb',
+      require    => Service['unicorn'],
+    }
 
-  apache::vhost { "${name}_ssl":
-    servername => $name,
-    port       => 443,
-    priority   => '31',
-    ssl        => true,
-    docroot    => "${dir}/${name}/public/",
-    template   => 'redmine/redmine-unicorn.conf.erb',
-    require    => Service['unicorn'],
+    apache::vhost { "${name}_ssl":
+      servername => $name,
+      port       => 443,
+      priority   => '31',
+      ssl        => true,
+      docroot    => "${dir}/${name}/public/",
+      template   => 'redmine/redmine-unicorn.conf.erb',
+      require    => Service['unicorn'],
+    }
   }
 
   file { "${dir}/${name}/config/environment.rb":

@@ -36,20 +36,12 @@ node dxul {
       files    => ["/var/lib/bacula/mysql","/opt/projects.puppetlabs.com"],
   }
 
-  apache::vhost::redirect {
-    'projects.reductivelabs.com':
-      port => '80',
-      dest => 'http://projects.puppetlabs.com'
-  }
-
   # Throw nginx in the mix.
   include nginx::server
   file{ '/var/run/unicorn/': ensure => directory, owner => 'root', group => 'www-data', mode => 0550 }
   nginx::unicorn{
     'projects.puppetlabs.com':
-      port           => 88,
       ssl            => true,
-      ssl_port       => 8443,
       unicorn_socket => '/var/run/unicorn/redmine.sock',
       path           => '/opt/projects.puppetlabs.com/public/',
       template       => 'nginx/vhost-redmine-unicorn.nginx.erb',
@@ -59,15 +51,11 @@ node dxul {
   nginx::vhost::redirect {
     'projects.reductivelabs.com':
         priority   => 20,
-        port       => 88,
         ssl        => true,
-        ssl_port   => 8443,
         dest       => 'https://projects.puppetlabs.com';
     'forge.puppetlabs.com':
         priority   => 30,
-        port       => 88,
         ssl        => true,
-        ssl_port   => 8443,
         dest       => 'https://newforge.puppetlabs.com';
   }
 

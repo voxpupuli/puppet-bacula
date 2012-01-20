@@ -23,6 +23,7 @@ node dxul {
 
   include mysql::server
   redmine::unicorn { 'projects.puppetlabs.com':
+    version => '2435525db2c08c68e18cfde56b03bf654e6d92e9',
     dir     => '/opt',
     db      => 'projectspuppetlabscom',
     db_user => 'redmine',

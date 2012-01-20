@@ -20,6 +20,7 @@ class nginx::params {
     'ubuntu': {
         $package    = 'nginx'
         $service    = 'nginx'
+        $restart    = '/usr/sbin/nginx -t && /etc/init.d/nginx reload'
         $hasrestart = true
         $hasstatus  = true
         $etcdir     = '/etc/nginx'

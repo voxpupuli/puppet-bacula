@@ -23,6 +23,7 @@ class nginx::server {
     enable     => true,
     hasstatus  => $nginx::params::hasstatus,
     hasrestart => $nginx::params::hasrestart,
+    restart    => $nginx::params::restart,
     subscribe  => Package['nginx'],
   }
 

@@ -67,6 +67,7 @@ node ningyo {
       servername => 'dashboard.puppetlabs.com',
       priority   => '49',
       port       => '80',
+      ssl        => false,
       dest       => 'https://dashboard.puppetlabs.com/',
   }
 

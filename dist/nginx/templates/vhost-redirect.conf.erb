@@ -1,13 +1,47 @@
 # This vhost is managed by puppet, do not mess with it, terrible terrible things
 # will happen.
+#
+#
 
 server {
 
-  listen   <%= port %>; ## listen for ipv4, sorry no IPv6 for now.
-  server_name <%= srvname %>;
+  listen   <%= port %><% if isdefaultvhost == true %> default<% end %>; ## listen for ipv4, sorry no IPv6 for now.
+<% if has_variable?( 'ipaddress6' ) -%>
+  # Listen on an ipv6 version of this port too, but only do v6 on it, so we
+  # don't get strange v4 mapped IPs in v6.
+  listen   [::]:<%= port %><% if isdefaultvhost == true %> default ipv6only=on<% end %>;
+<% end -%>
+
+<% if ssl == true -%>
+  # Do SSL, and don't do it terribly.  
+  listen    <%= ssl_port %><% if isdefaultvhost == true %> default ssl<% end %>;
+<% if has_variable?( 'ipaddress6' ) -%>
+  # Listen on an ipv6 version of this port too, but only do v6 on it, so we
+  # don't get strange v4 mapped IPs in v6.
+  listen   [::]:<%= ssl_port %><% if isdefaultvhost == true %> default ssl ipv6only=on<% end %>;
+<% end -%>
+  ssl_certificate      <%= ssl_path %>/certs/pl.cert;
+  ssl_certificate_key  <%= ssl_path %>/private/pl.key;
+  ssl_ciphers          ALL:!aNULL:!ADH:!eNULL:!MEDIUM:!LOW:!EXP:RC4:RSA:HIGH:!kEDH;  # use decent and non-crap ciphers.
+  ssl_session_timeout  10m;
+  ssl_protocols        TLSv1 SSLv3;
+  ssl_session_cache    shared:SSL_<%= appname %>:1m;
+
+  # Redirect non-SSL on SSL port to SSL..
+  # http://www.ruby-forum.com/topic/193781#844520
+  error_page  497  https://$host$request_uri;
+<% end -%>
+
+  server_name <%= srvname %><% if has_variable?( 'serveralias' )%> <%= serveraliases %><% end %>;
+
+  # Not sure if you want these for a mere redirector, but here they are.
+  #
+  # access_log  /var/log/nginx/<%= srvname %>.access.log;
+  # error_log   /var/log/nginx/<%= srvname %>.error.log;
 
   rewrite ^/(.*) <%= dest.chomp('/') %>/$1 <%=status%>;
 
   # Anything here is added by use of "magic" so is pretty jazzy.
   <%= magic %>
 }
+

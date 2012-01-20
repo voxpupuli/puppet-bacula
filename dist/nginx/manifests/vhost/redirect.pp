@@ -9,12 +9,15 @@
 #
 define nginx::vhost::redirect (
   $dest,
-  $port       = '80',
-  $priority   = '10',
-  $template   = 'nginx/vhost-redirect.conf.erb',
-  $servername = '',
-  $status     = 'permanent',
-  $magic      = ''
+  $port           = '80',
+  $priority       = '10',
+  $template       = 'nginx/vhost-redirect.conf.erb',
+  $servername     = '',
+  $ssl            = false,
+  $ssl_port       = '443',
+  $status         = 'permanent',
+  $magic          = '',
+  $isdefaultvhost = false
   ) {
 
   include nginx
@@ -23,6 +26,20 @@ define nginx::vhost::redirect (
     $srvname = $name
   } else {
     $srvname = $servername
+  }
+
+  if $ssl == true {
+    include puppetlabs_ssl
+    $ssl_path = $puppetlabs_ssl::params::ssl_path
+  }
+
+  # Need to make some variable names so the templates can use them!
+  # Such as an app_server name that is unique, so when we have ssl and
+  # non-ssl unicorn hosts they still work.
+  if $ssl == true {
+    $appname = regsubst( $srvname , '^(\w+?)\..*?$' , '\1_ssl' )
+  } else {
+    $appname = regsubst( $srvname , '^(\w+?)\..*?$' , '\1' )
   }
 
   file {

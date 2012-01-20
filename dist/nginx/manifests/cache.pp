@@ -3,6 +3,10 @@
 #   Ngninx standard cache for offloading connections. Saves the
 #   backend app server having to do it.
 #
+#   Assumes itself to be the default vhost. It has to be, it's caching
+#   foreverything beyond it. Is probably therefore not compaitable
+#   with other nginx modules.
+#
 # Parameters:
 #   upstream_server/port are the apache/unicorn thing behind the
 #   scenes.

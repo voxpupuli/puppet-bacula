@@ -1,5 +1,5 @@
 class redmine::params {
-  $version = '1448df014b24840f8addb2ccf55335a0a4253198'
+  $version = '88f02455a3e183b0925b4700c65f684427ecc6db'
   $source  = 'git://github.com/puppetlabs/redmine'
   $rails_version = '2.3.12'
 }

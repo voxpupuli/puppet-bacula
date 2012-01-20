@@ -38,7 +38,7 @@ class bacula::params {
         $pid_directory          = "/var/run"
         $working_directory      = "/var/db/bacula"
      }
-     default: { notify { "bacula::params has no love for $operatingsystem": } }
+     default: { fail("bacula::params has no love for $operatingsystem") }
   }
 
 }

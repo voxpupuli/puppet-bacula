@@ -120,5 +120,11 @@ node ningyo {
       require => File["/usr/local/bin/puppet_deploy.rb"];
   }
 
+  file { "/var/lib/puppet/moduledata":
+    ensure => directory,
+    owner  => puppet,
+    mode   => 0700,
+  }
+
 }
 

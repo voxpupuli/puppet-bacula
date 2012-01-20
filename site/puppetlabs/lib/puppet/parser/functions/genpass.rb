@@ -4,7 +4,7 @@ require 'yaml'
 Puppet::Parser::Functions::newfunction(:genpass, :type => :rvalue) do |args|
   store   = lookupvar('fqdn')
   search  = args[0]
-  datadir = '/etc/puppet/Pdubs'
+  datadir = '/var/lib/puppet/moduledata/pw'
   datastore = "#{datadir}/#{store}.yaml"
 
   unless File.directory?(datadir)

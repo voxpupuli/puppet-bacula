@@ -110,7 +110,14 @@ server {
     # in the response headers do disable/enable buffering on a
     # per-response basis.
     # proxy_buffering off;
-    
+
+    # #11047, redirect wrong server names elsewhere!
+    # So if they aren't going to the defined vhost servername, then it will
+    # redirect there properly.
+    if ( $host != $server_name) {
+      rewrite ^/.*$        https://$server_name/                  last;
+    }
+
     # Moved from the wilds of apache in
     # https://github.com/puppetlabs/puppetlabs-modules/blob/master/dist/redmine/templates/redmine-unicorn.conf.erb
     if ($ssl_protocol = "") {

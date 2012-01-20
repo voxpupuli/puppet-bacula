@@ -23,9 +23,14 @@ node app01 {
     group    => 'nogroup',
   }
 
+  package{ 'libsqlite3-dev':
+    ensure => installed,
+  }
+
   package { [ 'json', 'data_mapper', 'dm-sqlite-adapter', 'dm-adjust', 'sinatra', 'httpclient' ]:
     ensure   => installed,
     provider => gem,
+    require  => Package['libsqlite3'],
   }
 
   file{ '/var/run/tally/': ensure => directory, group => 'nogroup', mode => '0770' }

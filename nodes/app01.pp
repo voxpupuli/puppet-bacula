@@ -13,4 +13,29 @@ node app01 {
     version => 'bd4ea8f52b66556a1d45c03f9ff975e09f6b16e2',
   }
 
+
+
+  # 11924 - Triage-a-thon site
+  vcsrepo { '/opt/tally':
+    source   => 'https://github.com/jamtur01/tally.git',
+    provider => git,
+    owner    => 'nobody',
+    group    => 'nogroup',
+  }
+
+  package { [ 'json', 'data_mapper', 'dm-sqlite-adapter', 'dm-adjust', 'sinatra', 'httpclient' ]:
+    ensure   => installed,
+    provider => gem,
+  }
+
+  file{ '/var/run/tally/': ensure => directory, group => 'nogroup', mode => '0770' }
+
+  unicorn::app{ 'tally':
+   approot         =>  '/opt/tally/',
+   unicorn_pidfile => '/var/run/tally/tally.pid',
+   unicorn_socket  => 'http://192.168.100.127:6666',
+   rack_file       => '/opt/tally/config.ru',
+   require         => File['/var/run/tally'],
+  }
+
 }

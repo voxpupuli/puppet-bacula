@@ -29,7 +29,7 @@ node app01 {
   package{ 'dm-sqlite-adapter':
     ensure   => installed,
     provider => gem,
-    require  => Package['libsqlite3'],
+    require  => Package['libsqlite3-dev'],
   }
 
   package { [ 'json', 'data_mapper', 'dm-adjust', 'sinatra', 'httpclient' ]:

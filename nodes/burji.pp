@@ -172,14 +172,15 @@ node burji {
   }
 
   class { 'freight':
-    freight_vhost_name      => 'apt.puppetlabs.com',
-    freight_docroot         => '/opt/repository/apt',
-    freight_gpgkey          => 'info@puppetlabs.com',
-    freight_group           => 'release',
-    freight_libdir          => '/opt/tools/freight',
-    freight_manage_libdir   => true,
-    freight_manage_docroot  => true,
-    freight_manage_vhost    => true,
+    freight_vhost_name       => 'apt.puppetlabs.com',
+    freight_docroot          => '/opt/repository/apt',
+    freight_gpgkey           => 'info@puppetlabs.com',
+    freight_group            => 'release',
+    freight_libdir           => '/opt/tools/freight',
+    freight_manage_libdir    => true,
+    freight_manage_docroot   => true,
+    freight_manage_vhost     => true,
+    freight_manage_ssl_vhost => true,
   }
 
 }

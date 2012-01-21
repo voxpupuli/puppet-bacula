@@ -3,13 +3,18 @@
 # Managed by Puppet
 # ************************************
 
-NameVirtualHost <%= vhost_name %>:<%= port %>
+# NameVirtualHost <%= vhost_name %>:<%= port %>
 <VirtualHost <%= vhost_name %>:<%= port %>>
   ServerName <%= srvname %>
 <% if serveraliases.is_a? Array -%>
-<% serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+<%   serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
 <% elsif serveraliases != '' -%>
 <%= "  ServerAlias #{serveraliases}" -%>
+<% end -%>
+<% if ssl == true %>
+  SSLEngine on
+  SSLCertificateFile <%= ssl_path %>/certs/pl.cert
+  SSLCertificateKeyFile <%= ssl_path %>/private/pl.key
 <% end -%>
 
   DocumentRoot <%= docroot %>
@@ -37,12 +42,12 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   Redirect 302 /ubuntu http://apt.puppetlabs.com
   Redirect 302 /debian http://apt.puppetlabs.com
 
-  <% if block_scm == "true" -%>
+<% if block_scm == "true" -%>
   # Block access to SCM directories. Stolen from
   # http://stackoverflow.com/questions/398008/deny-access-to-svn-folders-on-apache
   <DirectoryMatch .*\.(svn|git|bzr)/.*>
       Deny From All
   </DirectoryMatch>
-  <% end -%>
+<% end -%>
 </VirtualHost>
 

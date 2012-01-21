@@ -29,7 +29,17 @@
 #     freight_libdir      => '/var/lib/freight',
 #   }
 #
-class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_group, $freight_libdir, $freight_manage_docroot = true, $freight_manage_libdir = true, $freight_manage_vhost = true) {
+class freight (
+  $freight_vhost_name,
+  $freight_docroot,
+  $freight_gpgkey,
+  $freight_group,
+  $freight_libdir,
+  $freight_manage_docroot = true,
+  $freight_manage_libdir = true,
+  $freight_manage_vhost = true,
+  $freight_manage_ssl_vhost = false
+) {
   include apache
 
   package { 'freight':
@@ -66,9 +76,25 @@ class freight ($freight_vhost_name, $freight_docroot, $freight_gpgkey, $freight_
       servername  => $freight_vhost_name,
       priority    => '10',
       port        => '80',
+      ssl         => false,
       docroot     => $freight_docroot,
       require     => File[$freight_docroot],
       template    => 'freight/apache2.conf.erb',
+    }
+
+    if ($freight_manage_ssl_vhost == true ) {
+
+      include puppetlabs_ssl
+
+      apache::vhost { "${freight_vhost_name}_ssl":
+        servername  => $freight_vhost_name,
+        priority    => '11',
+        port        => '443',
+        ssl         => true,
+        docroot     => $freight_docroot,
+        require     => File[$freight_docroot],
+        template    => 'freight/apache2.conf.erb',
+      }
     }
 
     # We need mod_rewrite for freight.

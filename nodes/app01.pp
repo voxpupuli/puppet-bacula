@@ -33,7 +33,6 @@ node app01 {
     ensure => directory,
     owner    => 'nobody',
     group    => 'nogroup',
-    before   => Unicorn::App['tally'],
     require  => Vcsrepo['/opt/tally'],
   }
 

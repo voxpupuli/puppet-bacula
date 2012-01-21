@@ -22,7 +22,7 @@ class bacula::params {
         $working_directory      = "/var/lib/bacula"
         $pid_directory          = "/var/run/bacula"
      }
-     "fedora", "centos": {
+     "fedora", "centos","sles": {
         $bacula_director_packages = [ "bacula-director-common", "bacula-director-mysql", "bacula-sd-mysql", "bacula-console" ]
         $bacula_director_services = [ "bacula-dir", "bacula-sd" ]
         $bacula_client_packages = "bacula-client"

@@ -54,15 +54,13 @@ node app01 {
 
   file{ '/var/run/tally/': ensure => directory, group => 'nogroup', mode => '0770' }
 
-  unicorn::app{ 'tally':
-   approot         =>  '/opt/tally/',
-   unicorn_pidfile => '/var/run/tally/tally.pid',
-   unicorn_socket  => '0.0.0.0:8888',
-   rack_file       => '/opt/tally/config.ru',
-   unicorn_user    => 'nobody',
-   unicorn_group   => 'nogroup',
-   log_stds        => true,
-   require         => [ File['/var/run/tally'], Vcsrepo['/opt/tally'], ],
+  exec{
+    'run_tally':
+      command => '/usr/bin/nohup /opt/tally/bin/tally >>/opt/tally/log/tally.log 2>&1',
+      user    => 'nobody',
+      group   => 'nogroup',
+      unless  => '/usr/bin/pgrep -lf "ruby /opt/tally/bin/tally"',
+      require => [ File['/opt/tally/config'], Package['dm-sqlite-adapter'], Package['json'] ]
   }
 
 }

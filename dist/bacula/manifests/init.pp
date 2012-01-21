@@ -30,6 +30,11 @@ class bacula (
 
   $bacula_director   = hiera('bacula_director')
   $bacula_password   = genpass('bacula_password')
+  $bacula_is_storage = hiera('bacula_is_storage')
+
+  if $bacula_is_storage == "yes" {
+    include bacula::storage
+  }
 
   $working_directory = $bacula::params::working_directory
   $pid_directory     = $bacula::params::pid_directory

@@ -61,6 +61,7 @@ node app01 {
    rack_file       => '/opt/tally/config.ru',
    unicorn_user    => 'nobody',
    unicorn_group   => 'nogroup',
+   log_stds        => true,
    require         => [ File['/var/run/tally'], Vcsrepo['/opt/tally'], ],
   }
 

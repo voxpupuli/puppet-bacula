@@ -7,9 +7,7 @@
 #   * file_retention - how long to keep files information around
 #   * job_retention - how long to keep information about jobs around
 #   * autoprune - weather to auto-truncate old volumes
-#   * director - the director that will be connecting to this file daemon
-#   * password - the password used to connect to this file daemone
-#
+#   * monitor - should we monitor the services ( ie: nagios )
 #
 # Actions:
 #   * Installs packages for the bacula-fd
@@ -18,27 +16,20 @@
 # Requires:
 #
 # Sample Usage:
-#  $bacula_director = 'bacula01.example.net'
-#  $bacula_password = 'mySUPERaw3s0m3p@ssw0rd!'
-#  class { "bacula":
-#    director => $bacula_director,
-#    password => $bacula_password,
-#  }
+#   include bacula
 #
 class bacula (
     $port           = '9102',
     $file_retention = "45 days",
     $job_retention  = "6 months",
     $autoprune      = "yes",
-    $director,
-    $password,
     $monitor        = true,
   ){
 
   include bacula::params
 
-  $bacula_director   = $director
-  $bacula_password   = $password
+  $bacula_director   = hiera('bacula_director')
+  $bacula_password   = genpass('bacula_password')
 
   $working_directory = $bacula::params::working_directory
   $pid_directory     = $bacula::params::pid_directory
@@ -82,7 +73,7 @@ class bacula (
     "bacula-client-$hostname":
       target  => '/etc/bacula/conf.d/client.conf',
       content => template("bacula/client.conf.erb"),
-      tag     => "bacula-$director";
+      tag     => "bacula-${bacula_director}";
   }
 
   bacula::job {
@@ -96,7 +87,7 @@ class bacula (
       '0175-INPUT allow tcp 9102':
         proto  => 'tcp',
         dport  => '9102',
-        source => "$director",
+        source => "$bacula_director",
         jump   => 'ACCEPT',
     }
   }

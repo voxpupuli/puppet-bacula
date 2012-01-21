@@ -49,13 +49,13 @@ define bacula::job (
       "bacula-job-$name":
         target  => '/etc/bacula/conf.d/job.conf',
         content => template("bacula/job.conf.erb"),
-        tag     => "bacula-${::bacula::director}";
+        tag     => "bacula-${::bacula::bacula_director}";
     }
 
     if $bacula::monitor == true {
       @@nagios_service { "check_bacula_${name}":
         use                      => 'generic-service',
-        host_name                => "$::bacula::director",
+        host_name                => "$::bacula::bacula_director",
         check_command            => "check_nrpe!check_bacula!30 ${name}",
         service_description      => "check_bacula_${name}",
         target                   => '/etc/nagios3/conf.d/nagios_service.cfg',

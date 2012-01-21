@@ -57,7 +57,7 @@ node app01 {
   unicorn::app{ 'tally':
    approot         =>  '/opt/tally/',
    unicorn_pidfile => '/var/run/tally/tally.pid',
-   unicorn_socket  => 'http://192.168.100.127:6666',
+   unicorn_socket  => '0.0.0.0:8888',
    rack_file       => '/opt/tally/config.ru',
    require         => [ File['/var/run/tally'], Vcsrepo['/opt/tally'], ],
   }

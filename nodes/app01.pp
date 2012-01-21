@@ -54,8 +54,8 @@ node app01 {
   file{ '/var/run/tally/': ensure => directory, group => 'nogroup', mode => '0770' }
 
   exec{
-    'run_tally':
-      command => '/usr/bin/nohup /opt/tally/bin/tally >>/opt/tally/log/tally.log 2>&1',
+    'runtally':
+      command => '/usr/bin/nohup /opt/tally/bin/tally >>/opt/tally/log/tally.log 2>&1 &',
       user    => 'nobody',
       group   => 'nogroup',
       unless  => '/usr/bin/pgrep -lf "ruby /opt/tally/bin/tally"',

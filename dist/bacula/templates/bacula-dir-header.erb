@@ -61,11 +61,11 @@ Pool {
 
 # Definition of file storage device
 Storage {
-  Name = File
-  Address = <%= fqdn %>                # N.B. Use a fully qualified name here
-  SDPort = 9103
-  Password = "<%= sd_pass %>"
-  Device = FileStorage
+  Name       = File
+  Address    = <%= fqdn %> # N.B. Use a fully qualified name here
+  SDPort     = 9103
+  Password   = "<%= sd_pass %>"
+  Device     = FileStorage
   Media Type = File
 }
 
@@ -91,11 +91,11 @@ Messages {
 }
 
 Messages {
-  Name = Daemon
+  Name         = Daemon
   #mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) %r\" -s \"Bacula daemon message\" %r"
-  #mail = root@localhost = all, !skipped
-  console = all, !skipped, !saved
-  append = "/var/lib/bacula/log" = all, !skipped
+  #mail        = root@localhost = all, !skipped
+  console      = all, !skipped, !saved
+  append       = "/var/lib/bacula/log" = all, !skipped
 }
 
 #

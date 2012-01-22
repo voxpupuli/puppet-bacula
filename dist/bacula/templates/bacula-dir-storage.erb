@@ -1,0 +1,12 @@
+# This is a snip that is exported and realized on the director.
+#
+# Definition of file storage device
+Storage {
+  Name       = File
+  Address    = <%= fqdn %> # N.B. Use a fully qualified name here
+  SDPort     = 9103
+  Password   = "<%= bacula_storage_password %>"
+  Device     = FileStorage
+  Media Type = File
+}
+

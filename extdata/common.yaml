@@ -20,3 +20,4 @@ allowhosts: - "sshd: 74.85.255.0/27"
             - "sshd: 192.168.100.0/24"
 bacula_director: 'bacula01.puppetlabs.lan'
 bacula_client_listen: %{ipaddress}
+bacula_is_storage: "no"

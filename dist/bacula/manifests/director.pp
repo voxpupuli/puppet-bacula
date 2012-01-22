@@ -49,12 +49,6 @@ class bacula::director (
     require    => Package[$bacula::params::bacula_director_packages],
   }
 
-  file { "/bacula":
-    owner   => bacula,
-    group   => bacula,
-    ensure  => directory,
-  }
-
   file { "/etc/bacula/conf.d": ensure  => directory; }
 
   file {
@@ -122,14 +116,4 @@ class bacula::director (
     db_pw   => $db_pw,
   }
 
-  file {
-    "/etc/bacula/bacula-sd.conf":
-      owner   => root,
-      group   => bacula,
-      mode    => 640,
-      notify  => Service[$bacula::params::bacula_director_services],
-      content => template("bacula/bacula-sd.conf.erb"),
-  }
-
 }
-

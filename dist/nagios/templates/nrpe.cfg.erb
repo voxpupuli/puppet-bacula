@@ -21,6 +21,7 @@ command[check_alldisks]=<%= nagios_plugins_path %>/check_disk -w 20% -c 10% -l -
 command[check_zombie_procs]=<%= nagios_plugins_path %>/check_procs -w 5 -c 10 -s Z
 command[check_total_procs]=<%= nagios_plugins_path %>/check_procs -w 150 -c 200
 command[check_mysql]=<%= nagios_plugins_path %>/check_mysql
+command[check_env]=<%= nagios_plugins_path %>/check_envy.rb
 
 #command[check_users]=<%= nagios_plugins_path %>/check_users -w $ARG1$ -c $ARG2$
 #command[check_load]=<%= nagios_plugins_path %>/check_load -w $ARG1$ -c $ARG2$

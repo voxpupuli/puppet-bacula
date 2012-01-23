@@ -4,7 +4,9 @@
 
 class nagios::plugins {
 
-  file {'/usr/lib/nagios/plugins/artisan/':
+  include nagios::params
+
+  file { '${nagios::params::nagios_plugins_path}/artisan/':
     source  => 'puppet:///nagios/artisan-plugins/',
     ensure  => directory,
     recurse => true,

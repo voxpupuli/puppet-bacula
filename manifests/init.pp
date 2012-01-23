@@ -23,7 +23,7 @@ class bacula (
     $file_retention = "45 days",
     $job_retention  = "6 months",
     $autoprune      = "yes",
-    $monitor        = true,
+    $monitor        = true
   ){
 
   include bacula::params

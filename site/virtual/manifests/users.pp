@@ -395,4 +395,16 @@ class virtual::users {
     key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAvawBAbT0tag9cV3idlTCSsX72/mBdFKFqSPqRZ9E6rVNP3V0jpSxPfEyUzVQJXTghR+4J8PdnAPMTpazoOlWQOTptuh25zJffvvWUnyKh/fV/hZSKkwATFXOzl0g570ZQ2Bitgv6vQG7O9l6Md4zNmTp8tzvnXuhmMpCfPqDnzMjdmZo73IpIuUy6vzJL8l6Op4filDAU/UAtS6qD2Kffi3G0T+IArq4uFJldGf3L1SswmOSJmUCsLNg/BFe3WRAJ/6aWni0/+VwXqb0gR/hg1SqrQxxT69E9NPPoDuUGv69HxUDgkvbw7jjAesXbwDUqa23/4FREU1NSoetPhvr/Q==',
     keytype => 'ssh-rsa',
   }
+
+  # (#12008) Release engineering intern
+  @account::user{'moses':
+    comment => 'Moses Mendoza',
+    uid     => '1164',
+    group   => 'allstaff',
+    groups  => ["developers","release","builder"],
+    shell   => '/bin/bash',
+    tag     => 'allstaff',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDC+2o3IIBRPPE1iS8OqTvd0A091Utb6XMnIzz7yfgv02N0LyAHbc4vFPPXpt3kORuGTdRuLZ3SOP2VuIiua2eo2kHHKGYKSj7rheRNvbZTuaCXyC9jiLGgA3X+QNHzg33uDK1ygAgyKBWGlJ+CgPsr6tVdLZ4xg/4vJP9eV/Z4DQ6LvENi2pZl1+zDZp9jgEFo3ELNZInhybd52Hy4mKkC6HcgJflRgPf5m05uLT98pjOo/t8/wJ6A98e/p8oVPFT8KCm2EXtXeoq11s1bChR94sig8DFHXiKbfjjkaWz84f+VdoOqltUksicmHAi+DvP4+2VxPN1kOg6Tdoi/eEfz',
+    keytype => 'ssh-rsa',
+  }
 }

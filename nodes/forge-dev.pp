@@ -11,7 +11,7 @@ node forge-dev {
       newrelic    => false,
       do_ssh_keys => true,
       appserver   => 'unicorn',
-      github_url  => 'git@github.com:puppetlabs/puppet-module-site.git',
+      github_url  => 'git@github.com:puppetlabs/puppet-forge.git',
       git_revision => 'latest',
   }
 

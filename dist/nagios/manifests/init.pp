@@ -102,6 +102,15 @@ class nagios (
     notify              => Service[$nagios::params::nagios_service],
   }
 
+  @@nagios_service { "check_env_${hostname}":
+    use                 => 'generic-service',
+    host_name           => "$fqdn",
+    check_command       => 'check_nrpe_1arg!check_env',
+    service_description => "check_env_${hostname}",
+    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify              => Service[$nagios::params::nagios_service],
+  }
+
   @firewall {
     '0120-INPUT ACCEPT 5666':
       jump   => 'ACCEPT',

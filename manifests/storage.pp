@@ -71,7 +71,7 @@ class bacula::storage (
       owner   => root,
       group   => bacula,
       mode    => 640,
-      notify  => Service[$bacula::params::bacula_director_services],
+      notify  => Service[$bacula::params::bacula_storage_services],
   }
 
 

@@ -11,7 +11,7 @@ class nagios::plugins {
     ensure  => directory,
     recurse => true,
     owner   => 'root',
-    group   => 'root',
+    group   => 0,
     mode    => '0755',
   }
 

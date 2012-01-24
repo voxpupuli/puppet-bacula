@@ -76,32 +76,16 @@ class bacula::director (
       notify => Service[$bacula::params::bacula_director_services];
   }
 
-  concat {
-    '/etc/bacula/conf.d/pools.conf':
-      owner  => root,
-      group  => bacula,
-      mode   => 640,
-      notify => Service[$bacula::params::bacula_director_services];
-  }
+  $sub_confs = [
+    '/etc/bacula/conf.d/storage.conf',
+    '/etc/bacula/conf.d/pools.conf',
+    '/etc/bacula/conf.d/job.conf',
+    '/etc/bacula/conf.d/client.conf',
+    '/etc/bacula/conf.d/fileset.conf',
+  ]
 
   concat {
-    '/etc/bacula/conf.d/job.conf':
-      owner  => root,
-      group  => bacula,
-      mode   => 640,
-      notify => Service[$bacula::params::bacula_director_services];
-  }
-
-  concat {
-    '/etc/bacula/conf.d/client.conf':
-      owner  => root,
-      group  => bacula,
-      mode   => 640,
-      notify => Service[$bacula::params::bacula_director_services];
-  }
-
-  concat {
-    '/etc/bacula/conf.d/fileset.conf':
+    $sub_confs:
       owner  => root,
       group  => bacula,
       mode   => 640,

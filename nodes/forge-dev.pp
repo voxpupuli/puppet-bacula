@@ -4,6 +4,10 @@ node forge-dev {
   include postfix
   include vim
 
+  # Devs have full access as it's a staging/dev/warground.
+  ssh::allowgroup { "developers": }
+  sudo::allowgroup { "developers": }
+
   # Puppet Forge
   class { 'forge':
       vhost        => 'forge-dev.puppetlabs.com',

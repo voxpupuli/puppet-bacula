@@ -415,6 +415,6 @@ class virtual::users {
     shell   => '/bin/bash',
     tag     => 'allstaff',
     key     => 'AAAAB3NzaC1kc3MAAACBAKpvSzmjm4u1N4HHhwAmCa3f59O8ae1jDYPHRNbSy6w0Ln9en0+wcJuKRu9ya0xnGSF7VAyQActySYJPO78lb3KiwCOtMBflapUqhTB9wN6B+OEeQbG7zXN0gl3rzW+atWUPav29cYO6wtk/fYPd2XpmTCtABPow9VbwaA5n/i+rAAAAFQDODO+yzkMFOjiGHjnJ5ID9NTwkVwAAAIEAi6dPl7CXPbUPT9xCrZ2n4wewCXtkhX6ZgQggi4+mp3dfOjO2b9ZswOcY3pudrAbwLlOn5H6DZLef2xk8HSkEDzLQv49aQWLIJHDQrnhIDAjqebt6obUQsUxFXwDBannzo49LyfxAxWbzCrTwVU88zyX57QInldXYmVuL4lum+nsAAACBAIEUqATog7A6qJAlbRHw6zoY/hqWiFGHYe9M6qWug7iZylYjDKPsdWOa1mvE57Ffk/R93LYX2/rM7aGFvKiWZUWeb+madTqOAnv2RpE3dSMe2CwKDp73hbqgvchSXPjqnOdtvF4YUlz/V7B6DmPJzXtLji83dxSws1726rvpsBTY',
-    type    => 'ssh-dss',
+    keytype => 'ssh-dss',
   }
 }

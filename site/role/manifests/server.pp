@@ -13,7 +13,7 @@ class role::server {
   # really must, but I suspect this will very rarely happen.
   if $virtual != virtualbox {
     include nagios
-    class { 'munin':  munin_server => hiera("munin_server"), munin_node_address => hiera("munin_node_address"); }
+    include munin
     include bacula
   }
 

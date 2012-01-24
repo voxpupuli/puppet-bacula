@@ -11,15 +11,14 @@
 #
 # Sample Usage:
 #
-class munin (
-    $munin_server,
-    $munin_node_address = $ipaddress
-  ) {
+class munin {
   include munin::params
 
-  $log_file = $munin::params::log_file
-  $pid_file = $munin::params::pid_file
-  $group    = $munin::params::group
+  $munin_server       = hiera("munin_server")
+  $munin_node_address = hiera('munin_node_address',$ipaddress)
+  $log_file           = $munin::params::log_file
+  $pid_file           = $munin::params::pid_file
+  $group              = $munin::params::group
 
   package {
     $munin::params::munin_base_packages:

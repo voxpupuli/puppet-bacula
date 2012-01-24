@@ -12,6 +12,7 @@
 # Sample Usage:
 #
 class munin {
+
   include munin::params
 
   $munin_server       = hiera("munin_server")

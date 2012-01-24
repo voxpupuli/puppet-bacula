@@ -32,6 +32,7 @@ command[check_proc]=<%= nagios_plugins_path %>/check_procs -c $ARG1$ -C $ARG2$
 # Ones we have made should go in the artisan-plugins dir and referenced
 # accordingly.
 command[check_env]=<%= nagios_plugins_path %>/artisan/check_envy.rb
+command[check_zfs]=<%= nagios_plugins_path %>/artisan/check_zfs.rb
 
 
 #

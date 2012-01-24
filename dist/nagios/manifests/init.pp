@@ -113,7 +113,7 @@ class nagios {
     notify              => Service[$nagios::params::nagios_service],
   }
 
-  if $::haszfs == true {
+  if $::haszfs == "true" {
     @@nagios_service { "check_zfs${hostname}":
       use                 => 'generic-service',
       host_name           => "$fqdn",

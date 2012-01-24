@@ -6,7 +6,7 @@ define unicorn::app (
     $config_template          = 'unicorn/config_unicorn.config.rb.erb',
     $initscript               = "unicorn/initscript_newer.erb", #default template location
     $unicorn_backlog          = '2048',
-    $unicorn_worker_processes = '4',
+    $unicorn_worker_processes = $::processorcount,
     $stdlog_path              = '',
     $log_stds                 = 'false', # yes I know what it looks like.
     $unicorn_user             = 'root',

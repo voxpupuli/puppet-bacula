@@ -11,9 +11,7 @@
 #
 # Sample Usage:
 #
-class nagios (
-    $nrpe_server
-  ) {
+class nagios {
 
   include nagios::params
   include nagios::nrpe
@@ -23,6 +21,7 @@ class nagios (
   include nagios::plugins
 
   $nrpe_host_address = hiera("nrpe_host_address")
+  $nrpe_server       = hiera('nrpe_server')
 
   package { $::nagios::params::nagios_plugin_packages:
     ensure   => installed,

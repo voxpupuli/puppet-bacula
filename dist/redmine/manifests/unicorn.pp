@@ -15,8 +15,6 @@ define redmine::unicorn (
 
   # more modules: ssl
 
-  a2mod { [ 'proxy', 'proxy_balancer', 'proxy_http' ]: ensure => present, }
-
   $unicorn_packages = [ 'libmysql-ruby', 'unicorn', 'i18n' ]
 
   package {
@@ -59,6 +57,11 @@ define redmine::unicorn (
   # I promise I will make this good...
   # And I lied... -ben
   if $webserver == "apache" {
+
+    # load the modules we use for apache to bounce connections between
+    # unicorn and apache.
+    a2mod { [ 'proxy', 'proxy_balancer', 'proxy_http' ]: ensure => present, }
+
     apache::vhost { $name:
       servername => $name,
       port       => $port,

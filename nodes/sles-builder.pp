@@ -29,7 +29,7 @@ node sles-builder {
   include motd  # update /etc/motd, use motd::register for more.
 
   include nagios
-  class { 'munin':  munin_server => hiera("munin_server"), munin_node_address => hiera("munin_node_address"); }
+  include munin
   class { "ntp": server => hiera("ntpserver"); }
 
   # SSH

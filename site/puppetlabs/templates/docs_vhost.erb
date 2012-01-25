@@ -74,4 +74,8 @@ NameVirtualHost <%= vhost_name %>:<%= port %>
   Redirect permanent	/guides/types/zone.html		  	/references/latest/type.html#zone
   Redirect permanent	/guides/types/zpool.html			/references/latest/type.html#zpool
 
+  # #12093 and #12113 add yet more redirects for docs.
+  Redirect permanent  /guides/installing_dashboard.html   /dashboard/manual/1.2/bootstrapping.html
+  Redirect permanent  /pe/2.0/installing.html             /pe/2.0/install_preparing.html
+
 </VirtualHost>

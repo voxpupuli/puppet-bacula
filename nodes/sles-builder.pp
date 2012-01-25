@@ -28,7 +28,7 @@ node sles-builder {
 
   include motd  # update /etc/motd, use motd::register for more.
 
-  class { "nagios": nrpe_server  => hiera("nrpe_server");  }
+  include nagios
   class { 'munin':  munin_server => hiera("munin_server"), munin_node_address => hiera("munin_node_address"); }
   class { "ntp": server => hiera("ntpserver"); }
 

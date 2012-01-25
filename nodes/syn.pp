@@ -43,5 +43,11 @@ node syn {
       source => "puppet:///modules/puppetlabs/graphs";
   }
 
+  logrotate::job {
+    "gather info.log":
+      log        => "/opt/gather/log/info.log",
+      options    => ["rotate 28", "daily", "compress", "notifempty","sharedscripts"],
+  }
+
 }
 

@@ -26,7 +26,7 @@ node syn {
       user    => root,
       minute  => "*/3";
     "gather.rb":
-      command => "cd /opt/gather && bin/gather --server localhost --port 2003",
+      command => "(cd /opt/gather && ./bin/gather --server localhost --port 2003)",
       user    => root,
       minute  => "*";
   }

@@ -35,18 +35,23 @@ node syn {
 
   file {
     "/opt/gdash/graph_templates/dashboards":
-      owner => root,
-      group => www-data,
-      mode  => 0644,
-      ensure => directory,
+      owner   => root,
+      group   => www-data,
+      mode    => 0644,
+      ensure  => directory,
       recurse => true,
-      source => "puppet:///modules/puppetlabs/graphs";
+      source  => "puppet:///modules/puppetlabs/graphs";
   }
 
   logrotate::job {
     "gather info.log":
       log        => "/opt/gather/log/info.log",
       options    => ["rotate 28", "daily", "compress", "notifempty","sharedscripts"],
+  }
+
+  bacula::job {
+    "${fqdn}-gather":
+      files => ["/opt/gather"],
   }
 
 }

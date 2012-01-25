@@ -32,7 +32,7 @@ class nagios::webservices {
     }
   }
 
-  if defined (Class["Nginx"]) {
+  if defined (Class["nginx"]) {
     @@nagios_service { "check_nginx_${hostname}":
       use                 => 'generic-service',
       host_name           => "$fqdn",

@@ -69,7 +69,7 @@ node 'net02.dc1.puppetlabs.net' {
   }
 
   cron { "update dns zones":
-    command => "(cd /opt/dns; git pull origin master; /opt/dns/zonedump.rb | /usr/bin/nsupdate -v -k /etc/bind/keys.d/dhcp_updater) ",
+    command => "(cd /opt/dns &&  git pull --quiet origin master && /opt/dns/zonedump.rb | /usr/bin/nsupdate -v -k /etc/bind/keys.d/dhcp_updater) ",
     minute  => "*/5",
     user    => "root",
     require => Exec["ensure dns-zone repo exists"],

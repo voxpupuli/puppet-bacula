@@ -184,23 +184,24 @@ class forge::raketasks {
     group       => $group,
     path        => '/bin:/var/lib/gems/1.8/bin:/usr/bin:/usr/sbin',
     refreshonly => true,
-    require     => [ Vcsrepo['/opt/forge'], Class['forge::packages']],
+    require     => [ Vcsrepo['/opt/forge'], Class['forge::packages'], Exec['rakeforgemigrate'] ],
     subscribe   => Vcsrepo['/opt/forge'],
-    # notify      => Exec['rakeforgerestart'],
+    notify      => $forge::appserver ? {
+      'unicorn'   => Service['unicorn_forge'],
+      'passenger' => Exec['rakeforgerestart'],
+    },
     logoutput   => true,
   }
 
-  #   # I am needed for passenger.
-  #   exec { 'touch /opt/forge/tmp/restart.txt':
-  #     alias       => 'rakeforgerestart',
-  #     cwd         => '/opt/forge',
-  #     user        => $user,
-  #     group       => $group,
-  #     path        => '/usr/bin:/usr/sbin:/bin',
-  #     require     => [ Vcsrepo['/opt/forge'], Class['forge::packages']],
-  #     refreshonly => true,
-  #     logoutput   => true,
-  #   }
+  # I am needed for passenger.
+  exec { 'rakeforgerestart':
+    command     => 'touch /opt/forge/tmp/restart.txt',
+    cwd         => '/opt/forge',
+    user        => $user,
+    group       => $group,
+    path        => '/usr/bin:/usr/sbin:/bin',
+    refreshonly => true,
+  }
 
   # So, it seems on creation we need to migrate _twice_ before it
   # actually works. I think.

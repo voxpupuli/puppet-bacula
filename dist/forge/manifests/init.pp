@@ -200,7 +200,7 @@ class forge::raketasks {
     user        => $user,
     group       => $group,
     path        => '/usr/bin:/usr/sbin:/bin',
-    refreshonly => on_failure,
+    refreshonly => true,
   }
 
   # So, it seems on creation we need to migrate _twice_ before it

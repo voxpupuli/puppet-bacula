@@ -173,7 +173,7 @@ class forge::raketasks {
     path        => '/bin:/var/lib/gems/1.8/bin:/usr/bin:/usr/sbin',
     require     => [ Vcsrepo['/opt/forge'], Class['forge::packages'], Exec['rakeforgedb'] ],
     subscribe   => Vcsrepo['/opt/forge'],
-    logoutput   => true,
+    logoutput   => on_failure,
     refreshonly => true,
   }
 
@@ -190,7 +190,7 @@ class forge::raketasks {
       'unicorn'   => Service['unicorn_forge'],
       'passenger' => Exec['rakeforgerestart'],
     },
-    logoutput   => true,
+    logoutput   => on_failure,
   }
 
   # I am needed for passenger.
@@ -200,7 +200,7 @@ class forge::raketasks {
     user        => $user,
     group       => $group,
     path        => '/usr/bin:/usr/sbin:/bin',
-    refreshonly => true,
+    refreshonly => on_failure,
   }
 
   # So, it seems on creation we need to migrate _twice_ before it
@@ -214,7 +214,7 @@ class forge::raketasks {
     creates    => '/opt/forge/db/production.sqlite3',
     before     => Exec['rakeforgemigrate'],
     require    => [ Vcsrepo['/opt/forge'], Class['forge::packages']],
-    logoutput  => true,
+    logoutput  => on_failure,
   }
 
 }
@@ -241,6 +241,6 @@ class forge::packages {
     cwd     => '/opt/forge',
     path    => '/bin:/usr/bin:/var/lib/gems/1.8/bin',
     require => Package['bundler'],
-    logoutput => true,
+    logoutput => on_failure,
   }
 }

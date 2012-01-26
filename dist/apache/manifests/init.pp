@@ -22,10 +22,12 @@ class apache {
   }
 
   service { 'httpd':
-    name      => $apache::params::apache_name,
-    ensure    => running,
-    enable    => true,
-    subscribe => Package['httpd'],
+    name       => $apache::params::apache_name,
+    ensure     => running,
+    enable     => true,
+    subscribe  => Package['httpd'],
+    hasrestart => true,
+    restart    => $apache::params::restart,
   }
 
   # May want to purge all none realize modules using the resources resource type.

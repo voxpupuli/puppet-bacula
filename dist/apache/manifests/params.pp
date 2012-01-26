@@ -29,6 +29,7 @@ class apache::params {
        $apache_dev  = 'httpd-devel'
        $vdir        = '/etc/httpd/conf.d/'
        $portsconf   = '/etc/httpd/conf.d/ports.conf'
+       $restart     = '/usr/sbin/apachectl -t && /etc/init.d/httpd reload'
     }
     'ubuntu', 'debian': {
        $apache_name = 'apache2'
@@ -37,6 +38,7 @@ class apache::params {
        $apache_dev  = [ 'libaprutil1-dev', 'libapr1-dev', 'apache2-prefork-dev' ]
        $vdir        = '/etc/apache2/sites-enabled/'
        $portsconf   = '/etc/apache2/ports.conf'
+       $restart     = '/usr/sbin/apache2ctl -t && /etc/init.d/apache2 reload'
     }
     default: {
        $apache_name = 'apache2'

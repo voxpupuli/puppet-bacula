@@ -1,6 +1,5 @@
 node app01 {
   include role::server
-  include patchwork::absent
 
   ssh::allowgroup { "developers": }
   ssh::allowgroup { "techops": }

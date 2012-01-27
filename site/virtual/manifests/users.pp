@@ -96,7 +96,9 @@ class virtual::users {
     tag     => allstaff,
  }
 
+ # Left the company 31/12/2011
  @account::user {'jhelwig':
+    ensure  => absent,
     comment => 'Jacob Helwig',
     uid     => '1121',
     group   => allstaff,

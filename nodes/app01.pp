@@ -8,9 +8,12 @@ node app01 {
   # https://projects.puppetlabs.com/issues/7849
   # github pull request robot
   # THIS DOESN'T WORK, VCSREPO IS UTTER MONKEY SHIT.
-  class{ 'githubrobotpuller':
-    version => 'bd4ea8f52b66556a1d45c03f9ff975e09f6b16e2',
-  }
+  #
+  # Moved githubrobopuller to jotunn
+  #
+  #class{ 'githubrobotpuller':
+  #  version => 'bd4ea8f52b66556a1d45c03f9ff975e09f6b16e2',
+  #}
 
 
   package{ 'rubygems-update': ensure => installed, provider => gem }

@@ -11,7 +11,7 @@
 #
 # Sample Usage:
 #
-class pdns ($ensure => present){
+class pdns ($ensure = present){
   include pdns::params
   include pdns::nagios
 

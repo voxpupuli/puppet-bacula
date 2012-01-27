@@ -7,7 +7,6 @@ node web01 {
   $apache_port = '82'
   Apache::Vhost::Redirect { port => $apache_port }
 
-  class { "pdns": ensure => absent; }
   include postfix
   include puppetlabs_ssl
   include puppetlabs::service::www  # Contains wordpresses for this

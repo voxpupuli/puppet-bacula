@@ -14,4 +14,7 @@ node jotunn {
   class{ 'githubrobotpuller':
     version => 'bd4ea8f52b66556a1d45c03f9ff975e09f6b16e2',
   }
+
+  # (#11931) Host a JSONP proxy on the local network
+  include freddy
 }

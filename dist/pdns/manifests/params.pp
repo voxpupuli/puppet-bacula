@@ -23,7 +23,6 @@ class pdns::params {
   # IPs pretty much futile in storing away from the rest of the
   # information in the template. - benh
   $mirror0 = '96.126.112.51'
-  $mirror1 = '82.113.151.205'
   $mirror2 = '74.207.228.223'
 
   $user = 'pdns'

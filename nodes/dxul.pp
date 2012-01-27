@@ -62,10 +62,6 @@ node dxul {
       files    => ["/var/lib/bacula/mysql","/opt/projects.puppetlabs.com"],
   }
 
-
-  # pDNS
-  class { "pdns": ensure => absent; }
-
   file{ '/usr/local/sbin/cron_imap_runner.sh':
     source => 'puppet:///modules/redmine/cron_imap_runner.sh',
     owner  => 'root',

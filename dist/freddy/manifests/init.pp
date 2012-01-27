@@ -1,7 +1,5 @@
 class freddy($root = '/opt/freddy') {
 
-  include apache
-
   vcsrepo { $root:
     ensure   => present,
     provider => git,

@@ -8,6 +8,7 @@
 node jotunn {
   include role::server
 
+
   # https://projects.puppetlabs.com/issues/7849
   # github pull request robot
   # THIS DOESN'T WORK, VCSREPO IS UTTER MONKEY SHIT.
@@ -16,5 +17,7 @@ node jotunn {
   }
 
   # (#11931) Host a JSONP proxy on the local network
+  include apache
+  apache::port { "eighty": port => 80 }
   include freddy
 }

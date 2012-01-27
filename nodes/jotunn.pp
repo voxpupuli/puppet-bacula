@@ -17,7 +17,7 @@ node jotunn {
   }
 
   # (#11931) Host a JSONP proxy on the local network
-  include apache
+  include apache::mod::passenger
   apache::port { "eighty": port => 80 }
   include freddy
 }

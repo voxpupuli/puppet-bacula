@@ -49,6 +49,7 @@ class apache {
     recurse => true,
     purge   => true,
     notify  => Service['httpd'],
+    require => Package['httpd'],
   }
 
   # Manage the ports.conf
@@ -60,6 +61,6 @@ class apache {
 
   concat { $apache::params::portsconf:
     notify => Service["httpd"],
+    require => Package['httpd'],
   }
-
 }

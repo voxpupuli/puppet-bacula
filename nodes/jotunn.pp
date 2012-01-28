@@ -18,6 +18,15 @@ node jotunn {
 
   # (#11931) Host a JSONP proxy on the local network
   include apache::mod::passenger
-  apache::port { "eighty": port => 80 }
   include freddy
+
+  apache::vhost { 'jotunn.puppetlabs.lan':
+    port     => 80,
+    options  => '-Multiviews',
+    docroot  => '/var/www',
+    template => 'apache/vhost-passenger.conf.erb',
+    template_options => {
+      rack_base_uris => ["/jsonp"],
+    }
+  }
 }

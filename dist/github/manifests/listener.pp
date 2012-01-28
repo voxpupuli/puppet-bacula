@@ -5,6 +5,7 @@
 class github::listener {
   include concat::setup
   include apache
+  include sinatra
 
   $user       = $github::params::user
   $group      = $github::params::group
@@ -53,11 +54,6 @@ class github::listener {
     owner => $user,
     group => $group,
     mode  => '0600',
-  }
-
-  package { "sinatra":
-    ensure    => present,
-    provider  => "gem",
   }
 
   apache::vhost { $vhost_name:

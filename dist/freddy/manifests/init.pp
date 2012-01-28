@@ -1,5 +1,7 @@
 class freddy($root = '/opt/freddy') {
 
+  require sinatra
+
   vcsrepo { $root:
     ensure   => present,
     provider => git,

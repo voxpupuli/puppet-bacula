@@ -29,4 +29,10 @@ node jotunn {
       rack_base_uris => ["/jsonp"],
     }
   }
+
+  # Link up freddy to apache docroot
+  file { "/var/www/jsonp":
+    ensure => link,
+    target => "/opt/freddy/public",
+  }
 }

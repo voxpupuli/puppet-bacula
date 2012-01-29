@@ -24,7 +24,7 @@ node wyrd {
   class {
     "unbound":
       interface => ["::0","0.0.0.0"],
-      access    => ["192.168.100.0/24","10.0.0.0/16"],
+      access    => ["192.168.100.0/23","10.0.0.0/16"],
   }
 
   unbound::stub { "puppetlabs.lan":

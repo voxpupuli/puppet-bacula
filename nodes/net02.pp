@@ -24,7 +24,7 @@ node 'net02.dc1.puppetlabs.net' {
   }
 
   class { 'bind':
-    customoptions => "check-names master ignore;\nallow-recursion {192.168.100.0/24; 10.0.0.0/16; };\n",
+    customoptions => "check-names master ignore;\nallow-recursion {192.168.100.0/23; 10.0.0.0/16; };\n",
   }
 
   bind::zone {

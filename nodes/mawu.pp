@@ -9,12 +9,12 @@ node mawu {
   }
 
   unbound::stub { "puppetlabs.lan":
-    address  => '192.168.100.1',
+    address  => '192.168.100.8',
     insecure => true,
   }
 
   unbound::stub { "100.168.192.in-addr.arpa.":
-    address  => '192.168.100.1',
+    address  => '192.168.100.8',
     insecure => true,
   }
 

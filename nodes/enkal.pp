@@ -33,7 +33,7 @@ node enkal {
 
   include unbound
   unbound::stub { "puppetlabs.lan":
-    address  => '192.168.100.1',
+    address  => '192.168.100.8',
     insecure => true,
   }
 

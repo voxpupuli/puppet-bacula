@@ -2,6 +2,6 @@
 nrpe_server: 192.168.100.76
 nagios_check_ping_delay: "200"
 munin_server: 192.168.124.9
-ntpserver: 192.168.100.1
+ntpserver: 192.168.100.83
 location: office
 proxy: "http://modi.puppetlabs.lan:3128"

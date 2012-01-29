@@ -52,11 +52,13 @@ node 'net02.dc1.puppetlabs.net' {
       allow_update => 'key "dhcp_updater"',
       require      => Bind::Key['dhcp_updater'];
     'puppetlabs.lan':
-      type          => 'forward',
-      custom_config => 'forwarders { 192.168.100.83; };';
+      type          => 'slave',
+      masters       => '192.168.100.8',
+      require       => Bind::Key['dhcp_updater'];
     '100.168.192.in-addr.arpa':
       type          => 'forward',
-      custom_config => 'forwarders { 192.168.100.83; };';
+      masters       => '192.168.100.8',
+      require       => Bind::Key['dhcp_updater'];
   }
 
   include git
@@ -69,7 +71,7 @@ node 'net02.dc1.puppetlabs.net' {
   }
 
   cron { "update dns zones":
-    command => "(cd /opt/dns &&  git pull --quiet origin master && /opt/dns/zonedump.rb | /usr/bin/nsupdate -v -k /etc/bind/keys.d/dhcp_updater) ",
+    command => "(cd /opt/dns &&  git pull --quiet origin master && /opt/dns/zonedump.rb ${::domain}.ns | /usr/bin/nsupdate -v -k /etc/bind/keys.d/dhcp_updater) ",
     minute  => "*/5",
     user    => "root",
     require => Exec["ensure dns-zone repo exists"],

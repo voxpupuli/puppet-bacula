@@ -61,7 +61,7 @@ node net01 {
       initialfile  => 'puppet:///modules/bind/puppetlabs.lan.initial',
       allow_update => 'key "dhcp_updater"',
       require      => Bind::Key['dhcp_updater'];
-    '110.168.192.in-addr.arpa':
+    '100.168.192.in-addr.arpa':
       type         => 'master',
       initialfile  => 'puppet:///modules/bind/42.0.10.in-addr.arpa.initial',
       allow_update => 'key "dhcp_updater"',
@@ -84,13 +84,29 @@ node net01 {
       require       => Bind::Key['dhcp_updater'];
   }
 
+  include git
+  include bind::params
+
+  exec { "ensure dns-zone repo exists":
+    path    => ["/usr/bin", "/usr/local/bin"],
+    command => "git clone git@git.puppetlabs.net:puppetlabs-dnszones.git /opt/dns",
+    creates => "/opt/dns/.git",
+  }
+
+  cron { "update dns zones":
+    command => "(cd /opt/dns &&  git pull --quiet origin master && /opt/dns/zonedump.rb ${::domain}.ns | /usr/bin/nsupdate -v -k /etc/bind/keys.d/dhcp_updater) ",
+    minute  => "*/5",
+    user    => "root",
+    require => Exec["ensure dns-zone repo exists"],
+  }
+
   # DHCP
   class { 'dhcp':
     dnsdomain    => [
       'puppetlabs.lan',
-      '110.168.192.in-addr.arpa',
+      '100.168.192.in-addr.arpa',
       ],
-    nameservers  => ['192.168.110.8'],
+    nameservers  => ['192.168.100.8'],
     ntpservers   => ['us.pool.ntp.org'],
     interfaces   => ['eth0'],
     dnsupdatekey => "/etc/bind/keys.d/$ddnskeyname",

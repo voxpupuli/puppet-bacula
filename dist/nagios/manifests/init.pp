@@ -105,12 +105,13 @@ class nagios {
   }
 
   @@nagios_service { "check_env_${hostname}":
-    use                 => 'generic-service',
-    host_name           => "$fqdn",
-    check_command       => 'check_nrpe_1arg!check_env',
-    service_description => "check_env_${hostname}",
-    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify              => Service[$nagios::params::nagios_service],
+    use                      => 'generic-service',
+    host_name                => "$fqdn",
+    check_command            => 'check_nrpe_1arg!check_env',
+    service_description      => "check_env_${hostname}",
+    first_notification_delay => '120',
+    target                   => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify                   => Service[$nagios::params::nagios_service],
   }
 
   if $::haszfs == "true" {

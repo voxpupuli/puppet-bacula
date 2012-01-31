@@ -7,7 +7,7 @@ Puppet::Type.type(:database).provide(:mysql) do
   commands :mysqladmin => 'mysqladmin'
   commands :mysql      => 'mysql'
   commands :mysqlshow  => 'mysqlshow'
-	
+
   def create
     mysqladmin("--default-character-set=#{resource[:charset]}", 'create', @resource[:name])
   end

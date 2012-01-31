@@ -64,9 +64,10 @@ define wordpress::instance(
       priority => $priority,
   }
 
-  if $backup == true {
-    bacula::mysql { $dbname: }
-  }
+  # database backups have been moved to mysql::db
+  #if $backup == true {
+  #  bacula::mysql { $dbname: }
+  #}
 
   # Develop a wordpress versioning/staging strategy.
   #

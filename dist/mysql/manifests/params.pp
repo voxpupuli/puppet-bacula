@@ -1,11 +1,18 @@
 class mysql::params{
-  $socket = '/var/run/mysqld/mysqld.sock'
 
-  $mysql_service_name = $operatingsystem ? {
-    ubuntu  => 'mysql',
-    debian  => 'mysql',
-    darwin  => 'org.mysql.mysqld',
-    default => 'mysqld',
+  case $operatingsystem {
+    'debian','ubuntu': {
+      $socket             = '/var/run/mysqld/mysqld.sock'
+      $mysql_service_name = 'mysql'
+    }
+    'darwin': {
+      $socket             = '/var/run/mysqld/mysqld.sock'
+      $mysql_service_name = 'org.mysql.mysqld'
+    }
+    default: {
+      $socket             = '/var/run/mysqld/mysqld.sock'
+      $mysql_service_name = 'mysqld'
+    }
   }
 
 }

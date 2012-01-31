@@ -13,7 +13,7 @@
 worker_processes 4
 
 listen      "127.0.0.1:8080", :tcp_nopush => true
-listen      "/var/run/unicorn/redmine.sock"
+listen      "<%= unicorn_socket %>"
 
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
@@ -23,7 +23,7 @@ listen      "/var/run/unicorn/redmine.sock"
 timeout 30
 
 # feel free to point this anywhere accessible on the filesystem
-pid "<%=dir%>/<%=name%>/tmp/pids/unicorn.pid"
+pid "<%= unicorn_pidfile %>"
 
 # By default, the Unicorn logger will write to stderr.
 # Additionally, ome applications/frameworks log to stderr or stdout,

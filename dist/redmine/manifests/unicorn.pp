@@ -1,4 +1,77 @@
-define redmine::unicorn (
+class redmine::unicorn (
+  $vhost         = 'projects.puppetlabs.com',
+  $serveraliases = undef,
+  $user          = 'redmine',
+  $group         = 'redmine',
+  $ssl           = true,
+  $approot       = '/opt/redmine'
+) {
+
+  include nginx::server
+
+  file{ "/var/run/${user}":
+    ensure => directory,
+    owner  => $user,
+    group  => $group,
+    mode   => '0755',
+  }
+
+  $unicorn_socket = "/var/run/${user}/unicorn.sock"
+
+  # Use the dashboard rack file, as it turns out it's generic.
+  # The config_file needs to be outside of the approot, as it's run by
+  # root having it writable means you can change it, cause the app to
+  # die and then probably get root.
+  unicorn::app{ 'redmine':
+    approot         => $approot,
+    rack_file       => 'puppet:///modules/unicorn/config.ru',
+    unicorn_pidfile => "/var/run/${user}/unicorn.pid",
+    unicorn_socket  => $unicorn_socket,
+    unicorn_user    => $user,
+    unicorn_group   => $group,
+    config_file     => '/etc/unicorn_redmine_runner.rb',
+    #config_template => 'redmine/unicorn.config.rb.erb',
+    log_stds        => true,
+    require         => File["/var/run/${user}"],
+  }
+
+
+  # Set some defaults for the possibly two following unicorns, just to
+  # reduce repeating myself.
+  Nginx::Unicorn {
+    servername     => $vhost,
+    serveraliases  => $serveraliases,
+    unicorn_socket => $unicorn_socket,
+    path           => '/opt/redmine',
+  }
+
+  # do nginx..
+  # It carries the SSL, which if true, will default to port 443, so
+  # and if not, will just be the default of port 80.
+  #
+  # We, somewhat rudely, assume that this machine _just_ does redmine.
+  # So become the default vhost. Which I think is reasonable.
+  nginx::unicorn {
+    $vhost:
+      priority       => 66,
+      ssl            => $ssl,
+      isdefaultvhost => true,
+      template       => 'redmine/vhost-redmine-unicorn.nginx.erb',
+  }
+
+  # Rotation job, so production.log doesn't get out of control!
+  logrotate::job {
+    'redmine_unicorn':
+      log        => '/opt/redmine/log/*.log',
+      options    => ['rotate 28', 'weekly', 'compress', 'compresscmd /usr/bin/xz', 'uncompresscmd /usr/bin/unxz', 'notifempty','sharedscripts'],
+      postrotate => '/etc/init.d/unicorn_redmine reopen-logs > /dev/null',
+      require    => Unicorn::App['redmine'],
+  }
+
+
+}
+
+define redmine::unicorn::oldshit (
     $db,
     $db_user,
     $db_pw,
@@ -10,15 +83,13 @@ define redmine::unicorn (
     ) {
   include apache::params
 
-  # We assume for our modules, we have the motd module, & use it.
-  motd::register{ 'Redmine running on unicorn': }
-
   # more modules: ssl
 
   $unicorn_packages = [ 'libmysql-ruby', 'unicorn', 'i18n' ]
 
+  include ruby::mysql
+
   package {
-    "libmysql-ruby": ensure => installed;
     'unicorn':       ensure => installed, provider => gem;
     'i18n':          ensure => '0.4.2',   provider => gem;
     # 'rack':          ensure => '1.1.0',   provider => gem;
@@ -83,12 +154,6 @@ define redmine::unicorn (
     }
   }
 
-  file { "${dir}/${name}/config/environment.rb":
-    owner   => $apache::params::user,
-    group   => $apache::params::group,
-    require => Redmine::Instance[$name],
-  }
-
   file { "${dir}/${name}/config/unicorn.config.rb":
     owner   => $apache::params::user,
     group   => $apache::params::group,
@@ -103,17 +168,7 @@ define redmine::unicorn (
     content => template("redmine/unicorn.initscript.erb");
   }
 
-  file { "/usr/bin/unicorn_rails":
-    ensure => symlink,
-    target => "/var/lib/gems/1.8/bin/unicorn_rails";
-  }
 
-  logrotate::job {
-    "redmine_unicorn":
-      log        => "${dir}/${name}/log/*log",
-      options    => ["rotate 28", "daily", "compress", "notifempty","sharedscripts"],
-      postrotate => "/etc/init.d/unicorn reopen-logs > /dev/null"
-  }
 
 }
 

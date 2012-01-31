@@ -2,7 +2,7 @@
 
 user=<%= user %>
 group=<%= group %>
-dir=<%= dir %>
+dir=<%= approot %>
 name=<%= name %>
 p="${dir}/${name}"
 

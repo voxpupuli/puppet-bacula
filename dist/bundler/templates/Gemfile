@@ -1,0 +1,5 @@
+source <%= source %>
+<% gems.keys.sort.each do |g| -%>
+gem "<%= g %>", "<%= gems[g] %>"
+<% end -%>
+

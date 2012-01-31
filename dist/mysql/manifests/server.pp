@@ -18,7 +18,7 @@ class mysql::server {
   motd::register{ 'MySQL server': }
 
   # set the mysql root password
-  if(! $mysql_root_pw) {
+  if (! $mysql_root_pw) {
     fail('$mysql_root_pw must be set for class mysql::server')
   }
 
@@ -84,6 +84,7 @@ class mysql::server {
     mode    => '0400',
     content => template('mysql/my.cnf.erb'),
     notify  => Exec['mysqld-restart'],
+    require => Exec['set_mysql_rootpw']
   }
 
 }

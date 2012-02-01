@@ -5,9 +5,15 @@
 module Facter::Util::RootHome
   class << self
   def get_root_home
-    root_ent = Facter::Util::Resolution.exec("getent passwd root")
-    # The home directory is the sixth element in the passwd entry
-    root_ent.split(":")[5]
+    # This doesn't work on Darwin...
+    if Facter.value('operatingsystem') == 'Darwin'
+      root_ent = Facter::Util::Resolution.exec("dscl . -read /Users/root NFSHomeDirectory")
+      root_ent.split(":")[1].strip
+    else
+      root_ent = Facter::Util::Resolution.exec("getent passwd root")
+      # The home directory is the sixth element in the passwd entry
+      root_ent.split(":")[5]
+    end
   end
   end
 end

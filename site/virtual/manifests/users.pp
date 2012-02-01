@@ -410,6 +410,7 @@ class virtual::users {
     keytype => 'ssh-rsa',
   }
 
+  # (#12006) support engineer
   @account::user{'celia':
     comment => 'Celia Cottle',
     uid     => '1165',
@@ -418,5 +419,17 @@ class virtual::users {
     tag     => 'allstaff',
     key     => 'AAAAB3NzaC1kc3MAAACBAKpvSzmjm4u1N4HHhwAmCa3f59O8ae1jDYPHRNbSy6w0Ln9en0+wcJuKRu9ya0xnGSF7VAyQActySYJPO78lb3KiwCOtMBflapUqhTB9wN6B+OEeQbG7zXN0gl3rzW+atWUPav29cYO6wtk/fYPd2XpmTCtABPow9VbwaA5n/i+rAAAAFQDODO+yzkMFOjiGHjnJ5ID9NTwkVwAAAIEAi6dPl7CXPbUPT9xCrZ2n4wewCXtkhX6ZgQggi4+mp3dfOjO2b9ZswOcY3pudrAbwLlOn5H6DZLef2xk8HSkEDzLQv49aQWLIJHDQrnhIDAjqebt6obUQsUxFXwDBannzo49LyfxAxWbzCrTwVU88zyX57QInldXYmVuL4lum+nsAAACBAIEUqATog7A6qJAlbRHw6zoY/hqWiFGHYe9M6qWug7iZylYjDKPsdWOa1mvE57Ffk/R93LYX2/rM7aGFvKiWZUWeb+madTqOAnv2RpE3dSMe2CwKDp73hbqgvchSXPjqnOdtvF4YUlz/V7B6DmPJzXtLji83dxSws1726rvpsBTY',
     keytype => 'ssh-dss',
+  }
+
+  # (#12331) developer
+  @account::user{'ploubser':
+    comment => 'Peter Loubser',
+    uid     => '1166',
+    group   => 'allstaff',
+    shell   => '/bin/bash',
+    tag     => 'allstaff',
+    groups  => ["developers"],
+    key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAum4MBPLi+toenr/bmdyswftrF8FMT4AB1O9ej5wXriJyzXuF/GWSaqlilVxX4kul2nn6F6QGh/XL+y3O0gJMDheAKFZjPO0qP67FqemVkAxFI79nz9QWCLax8WMCHY0BdRkB3p8KQh2jimQVxhmApXZQuGdSsCMf+KZZFnLTYcUQRcvStcZbUGF6sGyoTLCmIFxHlGFkEmy3l8xDQ5aof3POUdF5bHj9tyTYcpuKsKdeXYKURpyikW0k2WMsNagHIrkevWjv4J/ODRK/xy+mhT/N6qGTThf35rXjM0b/K3ebiwlA4jSqxkrmy7TaqyJ1LQ9hfwVzZwF1VQdxIdLrWQ==',
+    keytype => 'ssh-rsa',
   }
 }

@@ -8,15 +8,15 @@ ymin        0
 field :success,
                :color => "blue",
                :alias => "Last successful Jenkins run for pe-12",
-               :data  => "scale(jenkins.pe-12.last-success,0.0002777)"
+               :data  => "scale(jenkins.pe-12.last-success.max.time-ago,0.0002777)"
 
 field :failure,
                :color => "red",
                :alias => "Last failed Jenkins run for pe-12",
-               :data  => "scale(jenkins.pe-12.last-failure,0.0002777)"
+               :data  => "scale(jenkins.pe-12.last-failure.max.time-ago,0.0002777)"
 
 field :unsuccess,
                :color => "orange",
                :alias => "Last unsuccessful Jenkins run for pe-12",
-               :data  => "scale(jenkins.pe-12.last-unsuccessful,0.0002777)"
+               :data  => "scale(jenkins.pe-12.last-unsuccessful.max.time-ago,0.0002777)"
 

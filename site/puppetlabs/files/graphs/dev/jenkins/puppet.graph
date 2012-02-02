@@ -8,15 +8,15 @@ ymin        0
 field :success,
                :color => "blue",
                :alias => "Last successful Jenkins run for puppet",
-               :data  => "scale(jenkins.puppet.last-success.max.time-ago,0.0002777)"
+               :data  => "scale(jenkins.puppet.last-success.time-ago.max,0.0002777)"
 
 field :failure,
                :color => "red",
                :alias => "Last failed Jenkins run for puppet",
-               :data  => "scale(jenkins.puppet.last-failure.max.time-ago,0.0002777)"
+               :data  => "scale(jenkins.puppet.last-failure.time-ago.max,0.0002777)"
 
 field :unsuccess,
                :color => "orange",
                :alias => "Last unsuccessful Jenkins run for puppet",
-               :data  => "scale(jenkins.puppet.last-unsuccessful.max.time-ago,0.0002777)"
+               :data  => "scale(jenkins.puppet.last-unsuccessful.time-ago.max,0.0002777)"
 

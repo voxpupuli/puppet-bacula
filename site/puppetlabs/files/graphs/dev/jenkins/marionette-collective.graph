@@ -8,15 +8,15 @@ ymin        0
 field :success,
                :color => "blue",
                :alias => "Last successful Jenkins run for marionette-collective",
-               :data  => "scale(jenkins.marionette-collective.last-success.max.time-ago,0.0002777)"
+               :data  => "scale(jenkins.marionette-collective.last-success.time-ago.max,0.0002777)"
 
 field :failure,
                :color => "red",
                :alias => "Last failed Jenkins run for marionette-collective",
-               :data  => "scale(jenkins.marionette-collective.last-failure.max.time-ago,0.0002777)"
+               :data  => "scale(jenkins.marionette-collective.last-failure.time-ago.max,0.0002777)"
 
 field :unsuccess,
                :color => "orange",
                :alias => "Last unsuccessful Jenkins run for marionette-collective",
-               :data  => "scale(jenkins.marionette-collective.last-unsuccessful.max.time-ago,0.0002777)"
+               :data  => "scale(jenkins.marionette-collective.last-unsuccessful.time-ago.max,0.0002777)"
 

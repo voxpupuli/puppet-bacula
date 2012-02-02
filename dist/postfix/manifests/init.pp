@@ -62,4 +62,16 @@ class postfix( $rootmail = 'root@puppetlabs.com' ) {
                      File[$postfix::params::postfix_alias_files] ],
   }
 
+
+
+  # FreeBSD, by default, will have sendmail running. Make that not
+  # happen.
+  if $::operatingsystem == 'FreeBSD' {
+    service{ 'sendmail':
+      ensure => stopped,
+      enable => false,
+      before => Service[$postfix::params::postfix_service],
+    }
+  }
+
 }

@@ -91,5 +91,15 @@ class virtual::users::customers {
     keytype => "ssh-rsa",
     expire  => "2011-11-30",
   }
+
+  # (#12410) McGraw Hill Evaluation',
+  @account::user {'mcgraw':
+    uid     => '21002',
+    group   => 'mcgraw',
+    tag     => 'customer',
+    comment => '(12410) McGraw Hill',
+    usekey  => 'false',
+    expire  => "2012-02-28",
+  }
 }
 

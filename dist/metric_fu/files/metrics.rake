@@ -9,7 +9,6 @@ begin
     end
 
     MetricFu::Configuration.run do |config|
-        config.metrics = [:churn, :flay, :flog, :rcov, :reek, :roodi, :saikuro, :rails_best_practices, :hotspots] # add RBP
         config.rcov[:rcov_opts] << "-Ispec" # Needed to find spec_helper
         config.flay = { :dirs_to_flay => ['lib'] } # Does nothing otherwise
     end

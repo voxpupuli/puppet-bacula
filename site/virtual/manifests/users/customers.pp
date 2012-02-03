@@ -71,6 +71,7 @@ class virtual::users::customers {
 
   # tlinkin@advance.net
   @account::user {'tomlinkin':
+    uid     => '21002',
     ensure  => absent,
     comment => 'Tom Linkin',
     group   => advance,
@@ -94,7 +95,7 @@ class virtual::users::customers {
 
   # (#12410) McGraw Hill Evaluation',
   @account::user {'mcgraw':
-    uid     => '21002',
+    uid     => '21003',
     group   => 'mcgraw',
     tag     => 'customer',
     comment => '(12410) McGraw Hill',

@@ -71,6 +71,7 @@ class virtual::users::customers {
 
   # tlinkin@advance.net
   @account::user {'tomlinkin':
+    ensure  => absent,
     comment => 'Tom Linkin',
     group   => advance,
     tag     => customer,
@@ -81,6 +82,7 @@ class virtual::users::customers {
 
   # SCEA, #10214
   @account::user {'scea':
+    ensure  => absent,
     uid     => 21001,
     comment => 'scea',
     group   => 'scea',

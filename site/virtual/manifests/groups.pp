@@ -96,55 +96,55 @@ class virtual::groups {
 # 1050 - 2000
 
   @group { 'vmware':
-    ensure => present,
+    ensure => absent,
     gid    => 1050,
     tag    => customer,
   }
 
   @group { 'motorola':
-    ensure => present,
+    ensure => absent,
     gid    => 1051,
     tag    => customer,
   }
 
   @group { 'nokia':
-    ensure => present,
+    ensure => absent,
     gid    => 1052,
     tag    => customer,
   }
 
   @group { 'blackrock':
-    ensure => present,
+    ensure => absent,
     gid    => 1053,
     tag    => customer,
   }
 
   @group { 'secureworks':
-    ensure => present,
+    ensure => absent,
     gid    => 1054,
     tag    => customer,
   }
 
   @group { 'bioware':
-    ensure => present,
+    ensure => absent,
     gid    => 1055,
     tag    => customer,
   }
 
   @group { 'wealthfront':
-    ensure => present,
+    ensure => absent,
     gid    => 1056,
     tag    => customer,
   }
 
   @group { 'advance':
-    ensure => present,
+    ensure => absent,
     gid    => 1057,
     tag    => customer,
   }
 
   @group { 'scea':
-    ensure => present,
+    ensure => absent,
     gid    => 1058,
     tag    => customer,
   }

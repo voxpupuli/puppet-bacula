@@ -22,7 +22,7 @@ node syn {
 
   cron {
     "start_ii.sh":
-      command => "/opt/start_ii.sh",
+      command => "/opt/gather/start_ii.sh",
       user    => root,
       minute  => "*/3";
     "gather.rb":

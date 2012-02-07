@@ -34,7 +34,7 @@ node burji {
 
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 
-  include puppetlabs::service::pkgrepo
+  include service::pkgrepo
 
   # Sites
   nagios::website { 'pm.puppetlabs.com': }

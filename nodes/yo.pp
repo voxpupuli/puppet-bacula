@@ -10,6 +10,7 @@ node yo {
     entry => "stahnma ALL=(ALL) NOPASSWD: ALL\n",
   }
 
-  include puppetlabs::service::mrepo
+  include service::mrepo
+
 }
 

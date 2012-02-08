@@ -200,12 +200,6 @@ node net01 {
     ip  => '192.168.100.43',
   }
 
-  # For James, testing auth on RHEL
-  dhcp::host { "rhel-auth-tester":
-    mac => '00:50:56:b2:00:b1',
-    ip  => '192.168.100.45',
-  }
-
   # Postgres box for dev work.
   dhcp::host { "vor.puppetlabs.lan":
     mac => '00:50:56:b2:00:98',
@@ -452,12 +446,6 @@ node net01 {
     ip  => '192.168.100.107',
   }
 
-  # Development Windows 7 
-  dhcp::host { "dev-win7":
-    mac => '00:0c:29:7f:01:a2',
-    ip  => '192.168.100.110',
-  }
-
   # testbed
   dhcp::host { "rhel5-latest-i386":
     mac => '00:50:56:b2:00:25',
@@ -482,18 +470,6 @@ node net01 {
     ip  => '192.168.100.114',
   }
 
-  # Dev Box
-  dhcp::host { "dev-centos01":
-    mac => '00:0c:29:1c:13:b5',
-    ip  => '192.168.100.115',
-  }
-
-  # Dev Box
-  dhcp::host { "dev-ubuntu01":
-    mac => '00:0c:29:3a:12:e6',
-    ip  => '192.168.100.116',
-  }
-
   # open solairs dev box
   dhcp::host { "dev-osol-x86":
     mac => '00:0c:29:57:23:26',
@@ -510,12 +486,6 @@ node net01 {
   dhcp::host { "wiki":
     mac => '00:0c:29:27:cd:71',
     ip  => '192.168.100.120',
-  }
-
-  # Lukes dev box
-  dhcp::host { "lukedev01":
-    mac => '00:50:56:b2:00:1a',
-    ip  => '192.168.100.124',
   }
 
   # Mac Mini Server - Faro
@@ -904,6 +874,40 @@ node net01 {
   dhcp::host { "projects-dev":
     mac => '00:50:56:b2:00:16',
     ip  => '192.168.100.147',
+  }
+
+  ##############################################################################
+  # Engineering test/development
+  ##############################################################################
+
+  # For James, testing auth on RHEL
+  dhcp::host { "rhel-auth-tester":
+    mac => '00:50:56:b2:00:b1',
+    ip  => '192.168.100.45',
+  }
+
+  # Development Windows 7 
+  dhcp::host { "dev-win7":
+    mac => '00:0c:29:7f:01:a2',
+    ip  => '192.168.100.110',
+  }
+
+  # Dev Box
+  dhcp::host { "dev-centos01":
+    mac => '00:0c:29:1c:13:b5',
+    ip  => '192.168.100.115',
+  }
+
+  # Dev Box
+  dhcp::host { "dev-ubuntu01":
+    mac => '00:0c:29:3a:12:e6',
+    ip  => '192.168.100.116',
+  }
+
+  # Lukes dev box
+  dhcp::host { "lukedev01":
+    mac => '00:50:56:b2:00:1a',
+    ip  => '192.168.100.124',
   }
 
 }

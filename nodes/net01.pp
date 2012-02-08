@@ -182,12 +182,6 @@ node net01 {
     ip  => '192.168.100.54',
   }
 
-  # Forge/puppet modules development
-  dhcp::host { "forge-dev":
-    mac => '00:50:56:b2:00:36',
-    ip  => '192.168.100.57',
-  }
-
   # debian6-latest-amd64 for test harness
   dhcp::host { "debian6-latest-amd64":
     mac => '00:50:56:b2:00:3e',
@@ -711,6 +705,12 @@ node net01 {
   dhcp::host { "projects-dev":
     mac => '00:50:56:b2:00:16',
     ip  => '192.168.100.147',
+  }
+
+  # Forge/puppet modules development
+  dhcp::host { "forge-dev":
+    mac => '00:50:56:b2:00:36',
+    ip  => '192.168.100.57',
   }
 
   ##############################################################################

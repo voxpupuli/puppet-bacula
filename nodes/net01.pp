@@ -254,18 +254,6 @@ node net01 {
     ip  => '192.168.100.46',
   }
 
-  # SLES 11 slave for Jenkins
-  dhcp::host { "slave-sles11":
-    mac => '00:50:56:b2:00:97',
-    ip  => '192.168.100.47',
-  }
-
-  # Jenkins slave
-  dhcp::host { "dev-lucid-amd64":
-    mac => '00:50:56:b2:00:07',
-    ip  => '192.168.100.48',
-  }
-
   # 
   dhcp::host { "tb-driver":
     mac => '00:50:56:b2:00:0b',
@@ -494,18 +482,6 @@ node net01 {
     ip  => '192.168.100.89',
   }
 
-  # slave for building packages
-  dhcp::host { "slave05":
-    mac => '00:50:56:b2:00:1f',
-    ip  => '192.168.100.90',
-  }
-
-  # slave for building packages
-  dhcp::host { "slave06":
-    mac => '00:50:56:b2:00:24',
-    ip  => '192.168.100.91',
-  }
-
   # Gateway Machine for Dhogland's Lan
   dhcp::host { "fw-selab":
     mac => '00:50:56:b2:00:08',
@@ -522,12 +498,6 @@ node net01 {
   dhcp::host { "xaman":
     mac => '00:50:56:b2:00:52',
     ip  => '192.168.100.94',
-  }
-
-  # #9298
-  dhcp::host { "slave-tb":
-    mac => '00:50:56:b2:00:9d',
-    ip  => '192.168.100.95',
   }
 
   # Xerox Printer
@@ -590,18 +560,6 @@ node net01 {
     ip  => '192.168.100.107',
   }
 
-  # slave03 for hudson
-  dhcp::host { "slave03":
-    mac => '00:0c:29:17:30:70',
-    ip  => '192.168.100.108',
-  }
-
-  # hudson slave02
-  dhcp::host { "slave02":
-    mac => '00:50:56:b2:00:05',
-    ip  => '192.168.100.109',
-  }
-
   # Development Windows 7 
   dhcp::host { "dev-win7":
     mac => '00:0c:29:7f:01:a2',
@@ -656,22 +614,10 @@ node net01 {
     ip  => '192.168.100.118',
   }
 
-  # hudson slave01
-  dhcp::host { "slave01":
-    mac => '00:50:56:b2:00:00',
-    ip  => '192.168.100.119',
-  }
-
   # Nan's wiki box
   dhcp::host { "wiki":
     mac => '00:0c:29:27:cd:71',
     ip  => '192.168.100.120',
-  }
-
-  # hudson slave for ruby 1.9
-  dhcp::host { "slave1-9":
-    mac => '00:50:56:b2:00:1d',
-    ip  => '192.168.100.121',
   }
 
   # Ubuntu proxy system
@@ -690,12 +636,6 @@ node net01 {
   dhcp::host { "faro":
     mac => 'c4:2c:03:05:3a:4c',
     ip  => '192.168.100.125',
-  }
-
-  # #9298
-  dhcp::host { "slave-tb2":
-    mac => '00:50:56:b2:00:9e',
-    ip  => '192.168.100.126',
   }
 
   # Application Test VM
@@ -800,12 +740,6 @@ node net01 {
     ip  => '192.168.100.143',
   }
 
-  # 
-  dhcp::host { "slave10":
-    mac => '99:90:99:90:99:91',
-    ip  => '192.168.100.144',
-  }
-
   # centos-55-64-2
   dhcp::host { "centos-55-64-2":
     mac => '00:50:56:b2:00:21',
@@ -893,4 +827,73 @@ node net01 {
     mac => '00:50:56:b2:00:d1',
     ip  => '192.168.100.41',
   }
+
+  ##############################################################################
+  # Jenkins slaves
+  ##############################################################################
+  # SLES 11 slave for Jenkins
+  dhcp::host { "slave-sles11":
+    mac => '00:50:56:b2:00:97',
+    ip  => '192.168.100.47',
+  }
+
+  dhcp::host { "slave10":
+    mac => '99:90:99:90:99:91',
+    ip  => '192.168.100.144',
+  }
+
+  # #9298
+  dhcp::host { "slave-tb2":
+    mac => '00:50:56:b2:00:9e',
+    ip  => '192.168.100.126',
+  }
+
+  # hudson slave for ruby 1.9
+  dhcp::host { "slave1-9":
+    mac => '00:50:56:b2:00:1d',
+    ip  => '192.168.100.121',
+  }
+
+  # hudson slave01
+  dhcp::host { "slave01":
+    mac => '00:50:56:b2:00:00',
+    ip  => '192.168.100.119',
+  }
+
+  # hudson slave02
+  dhcp::host { "slave02":
+    mac => '00:50:56:b2:00:05',
+    ip  => '192.168.100.109',
+  }
+
+  # slave03 for hudson
+  dhcp::host { "slave03":
+    mac => '00:0c:29:17:30:70',
+    ip  => '192.168.100.108',
+  }
+
+  # #9298
+  dhcp::host { "slave-tb":
+    mac => '00:50:56:b2:00:9d',
+    ip  => '192.168.100.95',
+  }
+
+  # slave for building packages
+  dhcp::host { "slave06":
+    mac => '00:50:56:b2:00:24',
+    ip  => '192.168.100.91',
+  }
+
+  # slave for building packages
+  dhcp::host { "slave05":
+    mac => '00:50:56:b2:00:1f',
+    ip  => '192.168.100.90',
+  }
+
+  # Jenkins slave
+  dhcp::host { "dev-lucid-amd64":
+    mac => '00:50:56:b2:00:07',
+    ip  => '192.168.100.48',
+  }
+
 }

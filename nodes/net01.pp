@@ -122,18 +122,6 @@ node net01 {
     gateway => '192.168.100.1',
   }
 
-  # 
-  dhcp::host { "pseudo-ilo-host":
-    mac => 'de:fa:ce:df:ab:1e',
-    ip  => '192.168.100.20',
-  }
-
-  # 
-  dhcp::host { "pseudo-ilo-host2":
-    mac => 'de:fa:ce:df:ab:1f',
-    ip  => '192.168.100.21',
-  }
-
   # (#11702) 2k3 dev server
   dhcp::host { "win2k3-dev":
     mac => '00:50:56:b2:00:7a',
@@ -420,18 +408,6 @@ node net01 {
   dhcp::host { "ops-win7":
     mac => '00:50:56:b2:00:0f',
     ip  => '192.168.100.128',
-  }
-
-  # Dell T310 52B1KN1
-  dhcp::host { "juok-rac":
-    mac => '84:2b:2b:19:f7:e5',
-    ip  => '192.168.100.130',
-  }
-
-  # Dell T310 42B1KN1
-  dhcp::host { "kaang-rac":
-    mac => '84:2b:2b:19:f3:94',
-    ip  => '192.168.100.131',
   }
 
   # mac mini in the kitchen
@@ -908,4 +884,29 @@ node net01 {
     ip  => '192.168.100.134',
   }
 
+  ##############################################################################
+  # Lights out management
+  ##############################################################################
+
+  dhcp::host { "pseudo-ilo-host":
+    mac => 'de:fa:ce:df:ab:1e',
+    ip  => '192.168.100.20',
+  }
+
+  dhcp::host { "pseudo-ilo-host2":
+    mac => 'de:fa:ce:df:ab:1f',
+    ip  => '192.168.100.21',
+  }
+
+  # Dell T310 52B1KN1
+  dhcp::host { "juok-rac":
+    mac => '84:2b:2b:19:f7:e5',
+    ip  => '192.168.100.130',
+  }
+
+  # Dell T310 42B1KN1
+  dhcp::host { "kaang-rac":
+    mac => '84:2b:2b:19:f3:94',
+    ip  => '192.168.100.131',
+  }
 }

@@ -18,7 +18,6 @@ node jotunn {
 
   # (#11931) Host a JSONP proxy on the local network
   include apache::mod::passenger
-  include freddy
 
   apache::vhost { 'jotunn.puppetlabs.lan':
     port     => 80,
@@ -30,9 +29,11 @@ node jotunn {
     }
   }
 
-  # Link up freddy to apache docroot
-  file { "/var/www/jsonp":
-    ensure => link,
-    target => "/opt/freddy/public",
+  include freddy
+  rack::app { 'jsonp':
+    ensure => present,
+    doc_root => '/var/www',
+    app_root => '/opt/freddy',
+    require  => Class['freddy'],
   }
 }

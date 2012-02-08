@@ -134,24 +134,6 @@ node net01 {
     ip  => '192.168.100.21',
   }
 
-  # Top Server
-  dhcp::host { "tiki":
-    mac => '00:25:90:33:68:2e',
-    ip  => '192.168.100.22',
-  }
-
-  # Bottom Server
-  dhcp::host { "soko":
-    mac => '00:25:90:33:6a:80',
-    ip  => '192.168.100.23',
-  }
-
-  # ESXI box, dl380 hardware.
-  dhcp::host { "magni":
-    mac => '0:1f:29:e0:11:de',
-    ip  => '192.168.100.26',
-  }
-
   # (#11702) 2k3 dev server
   dhcp::host { "win2k3-dev":
     mac => '00:50:56:b2:00:7a',
@@ -452,22 +434,10 @@ node net01 {
     ip  => '192.168.100.131',
   }
 
-  # Dell T310 52B1KN1 eth0
-  dhcp::host { "juok":
-    mac => '84:2b:2b:19:f7:e3',
-    ip  => '192.168.100.132',
-  }
-
   # mac mini in the kitchen
   dhcp::host { "kitchenwall":
     mac => '28:37:37:17:4c:27',
     ip  => '192.168.100.133',
-  }
-
-  # Dell T310 52B1KN1 eth0
-  dhcp::host { "kaang":
-    mac => '84:2b:2b:19:f3:92',
-    ip  => '192.168.100.134',
   }
 
   # testbed
@@ -902,6 +872,40 @@ node net01 {
   dhcp::host { "netra":
     mac => '00:03:ba:14:c6:4b',
     ip  => '192.168.100.106',
+  }
+
+  ##############################################################################
+  # Hypervisors
+  ##############################################################################
+
+  # Top Server
+  dhcp::host { "tiki":
+    mac => '00:25:90:33:68:2e',
+    ip  => '192.168.100.22',
+  }
+
+  # Bottom Server
+  dhcp::host { "soko":
+    mac => '00:25:90:33:6a:80',
+    ip  => '192.168.100.23',
+  }
+
+  # ESXI box, dl380 hardware.
+  dhcp::host { "magni":
+    mac => '0:1f:29:e0:11:de',
+    ip  => '192.168.100.26',
+  }
+
+  # Dell T310 52B1KN1 eth0
+  dhcp::host { "juok":
+    mac => '84:2b:2b:19:f7:e3',
+    ip  => '192.168.100.132',
+  }
+
+  # Dell T310 52B1KN1 eth0
+  dhcp::host { "kaang":
+    mac => '84:2b:2b:19:f3:92',
+    ip  => '192.168.100.134',
   }
 
 }

@@ -71,6 +71,8 @@ class virtual::users::customers {
 
   # tlinkin@advance.net
   @account::user {'tomlinkin':
+    uid     => '21002',
+    ensure  => absent,
     comment => 'Tom Linkin',
     group   => advance,
     tag     => customer,
@@ -81,6 +83,7 @@ class virtual::users::customers {
 
   # SCEA, #10214
   @account::user {'scea':
+    ensure  => absent,
     uid     => 21001,
     comment => 'scea',
     group   => 'scea',
@@ -88,6 +91,16 @@ class virtual::users::customers {
     key     => "AAAAB3NzaC1yc2EAAAADAQABAAABAQCyA10XNKjUlfsMXn4qI2nAnGUlc6cz+AH/gNFY2Pbvy4ziv0jxacT+0AjwI5BXz9yNk4kERKeLC9K0lRYr6yi7iZV1Sy8bfXeRU/NyUS5YsbNdQYtGtZ6gkZ3KLWunaiDaWla09IsyQFdvzaYH0dvpubq185OXjkcE7dypUn6/IlwkOE+uXxrfdrpqXxXZQ0HgKEL1K89d9VbbDuxJt9JfI3VwWhkAXj+M0Ffe4X1BLzhhFbKYXYeHaPPEv2WR4/XxuED033eYgjiAmPU3KNCB0pmWQujFR+1IBvHMKYii3YgPU4xX9cvQymvVi0uZ+gHYPe195bFyIW2PVn6pgM59",
     keytype => "ssh-rsa",
     expire  => "2011-11-30",
+  }
+
+  # (#12410) McGraw Hill Evaluation',
+  @account::user {'mcgraw':
+    uid     => '21003',
+    group   => 'mcgraw',
+    tag     => 'customer',
+    comment => '(12410) McGraw Hill',
+    usekey  => 'false',
+    expire  => "2012-02-28",
   }
 }
 

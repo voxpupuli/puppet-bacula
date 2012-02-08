@@ -6,15 +6,7 @@ node odin {
   Group <| tag == customer |>
 
   $ssh_customer = [
-    "vmware",
-    "motorola",
-    "nokia",
-    "blackrock",
-    "secureworks",
-    "bioware",
-    "wealthfront",
-    "scea",        #10214
-    "advance"
+    "mcgraw", # (#12410)
   ]
 
   ssh::allowgroup { "prosvc": }

@@ -146,12 +146,6 @@ node net01 {
     ip  => '192.168.100.40',
   }
 
-  # Postgres box for dev work.
-  dhcp::host { "vor.puppetlabs.lan":
-    mac => '00:50:56:b2:00:98',
-    ip  => '192.168.100.46',
-  }
-
   # 
   dhcp::host { "centos-55-64-1":
     mac => '00:50:56:b2:00:0a',
@@ -751,6 +745,12 @@ node net01 {
   dhcp::host { "win2k3-dev":
     mac => '00:50:56:b2:00:7a',
     ip  => '192.168.100.30',
+  }
+
+  # Postgres box for dev work.
+  dhcp::host { "vor.puppetlabs.lan":
+    mac => '00:50:56:b2:00:98',
+    ip  => '192.168.100.46',
   }
 
   ##############################################################################

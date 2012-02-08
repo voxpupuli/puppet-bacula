@@ -284,12 +284,6 @@ node net01 {
     ip  => '192.168.100.64',
   }
 
-  # Ben testing, can remove in August 2011
-  dhcp::host { "bentest":
-    mac => '00:50:56:b2:00:2a',
-    ip  => '192.168.100.65',
-  }
-
   # 
   dhcp::host { "centos60-i386":
     mac => '00:50:56:b2:00:4b',
@@ -404,12 +398,6 @@ node net01 {
     ip  => '192.168.100.93',
   }
 
-  # 
-  dhcp::host { "xaman":
-    mac => '00:50:56:b2:00:52',
-    ip  => '192.168.100.94',
-  }
-
   # hpux box
   dhcp::host { "hpux":
     mac => '00:30:6e:39:86:9e',
@@ -492,12 +480,6 @@ node net01 {
   dhcp::host { "faro":
     mac => 'c4:2c:03:05:3a:4c',
     ip  => '192.168.100.125',
-  }
-
-  # Application Test VM
-  dhcp::host { "app01":
-    mac => '00:50:56:b2:00:63',
-    ip  => '192.168.100.127',
   }
 
   # Operations Windows 7
@@ -909,5 +891,6 @@ node net01 {
     mac => '00:50:56:b2:00:1a',
     ip  => '192.168.100.124',
   }
+
 
 }

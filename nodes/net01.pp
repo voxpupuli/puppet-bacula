@@ -122,90 +122,6 @@ node net01 {
     gateway => '192.168.100.1',
   }
 
-  # opsteam management
-  dhcp::host { "net01":
-    mac => '00:50:56:b2:0:34',
-    ip  => '192.168.100.8',
-  }
-
-  # Wordpress test box
-  dhcp::host { "wordtodapress":
-    mac => '00:50:56:b2:00:57',
-    ip  => '192.168.100.18',
-  }
-
-  # Customer dropbox #11518
-  dhcp::host { "odin":
-    mac => '00:50:56:b2:00:74',
-    ip  => '192.168.100.19',
-  }
-
-  # 
-  dhcp::host { "pseudo-ilo-host":
-    mac => 'de:fa:ce:df:ab:1e',
-    ip  => '192.168.100.20',
-  }
-
-  # 
-  dhcp::host { "pseudo-ilo-host2":
-    mac => 'de:fa:ce:df:ab:1f',
-    ip  => '192.168.100.21',
-  }
-
-  # Top Server
-  dhcp::host { "tiki":
-    mac => '00:25:90:33:68:2e',
-    ip  => '192.168.100.22',
-  }
-
-  # Bottom Server
-  dhcp::host { "soko":
-    mac => '00:25:90:33:6a:80',
-    ip  => '192.168.100.23',
-  }
-
-  # test box for chiliproject
-  dhcp::host { "projects2-dev":
-    mac => '00:50:56:b2:00:62',
-    ip  => '192.168.100.25',
-  }
-
-  # ESXI box, dl380 hardware.
-  dhcp::host { "magni":
-    mac => '0:1f:29:e0:11:de',
-    ip  => '192.168.100.26',
-  }
-
-  # Juniper for Nan/Tumblr.
-  dhcp::host { "junos":
-    mac => '88:e0:f3:68:dd:1',
-    ip  => '192.168.100.27',
-  }
-
-  # Operations OSX VMWare Fusion host
-  dhcp::host { "tupac":
-    mac => '10:9a:dd:5b:5d:79',
-    ip  => '192.168.100.28',
-  }
-
-  # (#11498) Lion VM for release eng
-  dhcp::host { "osx-builder":
-    mac => '00:0c:29:22:f2:5a',
-    ip  => '192.168.100.29',
-  }
-
-  # (#11702) 2k3 dev server
-  dhcp::host { "win2k3-dev":
-    mac => '00:50:56:b2:00:7a',
-    ip  => '192.168.100.30',
-  }
-
-  # (#12222) app server
-  dhcp::host { "jotunn":
-    mac => '00:50:56:b2:00:7c',
-    ip  => '192.168.100.31',
-  }
-
   # testbed
   dhcp::host { "sles-11-x64-2":
     mac => '00:50:56:b2:00:69',
@@ -228,60 +144,6 @@ node net01 {
   dhcp::host { "oel-r4-u7-i386":
     mac => '00:50:56:b2:00:ae',
     ip  => '192.168.100.40',
-  }
-
-  # build host for SLES packages
-  dhcp::host { "sles-builder":
-    mac => '00:50:56:b2:00:d1',
-    ip  => '192.168.100.41',
-  }
-
-  # Jeff 2011-09-21 PuppetConf PuppetMaster Demo Machine.  This reservation may be removed after PuppetConf but please talk to Jeff.
-  dhcp::host { "puppetmaster":
-    mac => '00:50:56:b2:00:f3',
-    ip  => '192.168.100.42',
-  }
-
-  # Adrien's AIX Box
-  dhcp::host { "aix":
-    mac => '00:14:5e:96:87:90',
-    ip  => '192.168.100.43',
-  }
-
-  # Web Staging Server
-  dhcp::host { "webstage":
-    mac => '00:50:56:b2:00:b2',
-    ip  => '192.168.100.44',
-  }
-
-  # For James, testing auth on RHEL
-  dhcp::host { "rhel-auth-tester":
-    mac => '00:50:56:b2:00:b1',
-    ip  => '192.168.100.45',
-  }
-
-  # Postgres box for dev work.
-  dhcp::host { "vor.puppetlabs.lan":
-    mac => '00:50:56:b2:00:98',
-    ip  => '192.168.100.46',
-  }
-
-  # SLES 11 slave for Jenkins
-  dhcp::host { "slave-sles11":
-    mac => '00:50:56:b2:00:97',
-    ip  => '192.168.100.47',
-  }
-
-  # Jenkins slave
-  dhcp::host { "dev-lucid-amd64":
-    mac => '00:50:56:b2:00:07',
-    ip  => '192.168.100.48',
-  }
-
-  # 
-  dhcp::host { "tb-driver":
-    mac => '00:50:56:b2:00:0b',
-    ip  => '192.168.100.49',
   }
 
   # 
@@ -312,18 +174,6 @@ node net01 {
   dhcp::host { "sol-10-u9-ga-x86":
     mac => '00:50:56:b2:00:31',
     ip  => '192.168.100.54',
-  }
-
-  # Solaris sparc zone
-  dhcp::host { "sol-10-sparc.test":
-    mac => '99:90:99:90:99:90',
-    ip  => '192.168.100.55',
-  }
-
-  # Forge/puppet modules development
-  dhcp::host { "forge-dev":
-    mac => '00:50:56:b2:00:36',
-    ip  => '192.168.100.57',
   }
 
   # debian6-latest-amd64 for test harness
@@ -362,12 +212,6 @@ node net01 {
     ip  => '192.168.100.64',
   }
 
-  # Ben testing, can remove in August 2011
-  dhcp::host { "bentest":
-    mac => '00:50:56:b2:00:2a',
-    ip  => '192.168.100.65',
-  }
-
   # 
   dhcp::host { "centos60-i386":
     mac => '00:50:56:b2:00:4b',
@@ -404,12 +248,6 @@ node net01 {
     ip  => '192.168.100.71',
   }
 
-  # 
-  dhcp::host { "clippy":
-    mac => '00:50:56:b2:00:50',
-    ip  => '192.168.100.72',
-  }
-
   # testbed
   dhcp::host { "oel-r6-u1-x86-64":
     mac => '00:50:56:b2:00:55',
@@ -422,36 +260,6 @@ node net01 {
     ip  => '192.168.100.74',
   }
 
-  # F5 BIGIP for Nan's testing
-  dhcp::host { "pro-bigip":
-    mac => '00:50:56:b2:00:5f',
-    ip  => '192.168.100.75',
-  }
-
-  # Zach building a new Puppet master
-  dhcp::host { "wyrd":
-    mac => '00:50:56:b2:00:1c',
-    ip  => '192.168.100.76',
-  }
-
-  # New Graphite Box
-  dhcp::host { "syn":
-    mac => '00:50:56:b2:01:09',
-    ip  => '192.168.100.77',
-  }
-
-  # Mock box
-  dhcp::host { "rpm-builder":
-    mac => '00:50:56:b2:00:47',
-    ip  => '192.168.100.78',
-  }
-
-  # the lan bacula server
-  dhcp::host { "bacula01":
-    mac => '00:50:56:b2:00:39',
-    ip  => '192.168.100.79',
-  }
-
   # testbed
   dhcp::host { "debian5-latest-i386":
     mac => '00:50:56:b2:00:38',
@@ -462,18 +270,6 @@ node net01 {
   dhcp::host { "debian5-latest-amd64":
     mac => '00:50:56:b2:00:37',
     ip  => '192.168.100.81',
-  }
-
-  # Printer on ann's desk
-  dhcp::host { "printer02":
-    mac => '98:4b:e1:39:9f:6b',
-    ip  => '192.168.100.82',
-  }
-
-  # mac mini server #2
-  dhcp::host { "mawu":
-    mac => 'c4:2c:03:0b:b6:e6',
-    ip  => '192.168.100.83',
   }
 
   # testbed
@@ -512,130 +308,16 @@ node net01 {
     ip  => '192.168.100.89',
   }
 
-  # slave for building packages
-  dhcp::host { "slave05":
-    mac => '00:50:56:b2:00:1f',
-    ip  => '192.168.100.90',
-  }
-
-  # slave for building packages
-  dhcp::host { "slave06":
-    mac => '00:50:56:b2:00:24',
-    ip  => '192.168.100.91',
-  }
-
-  # Gateway Machine for Dhogland's Lan
-  dhcp::host { "fw-selab":
-    mac => '00:50:56:b2:00:08',
-    ip  => '192.168.100.92',
-  }
-
-  # ticket #9022
-  dhcp::host { "selenium-test":
-    mac => '00:50:56:b2:00:9a',
-    ip  => '192.168.100.93',
-  }
-
-  # 
-  dhcp::host { "xaman":
-    mac => '00:50:56:b2:00:52',
-    ip  => '192.168.100.94',
-  }
-
-  # #9298
-  dhcp::host { "slave-tb":
-    mac => '00:50:56:b2:00:9d',
-    ip  => '192.168.100.95',
-  }
-
-  # Xerox Printer
-  dhcp::host { "printer01":
-    mac => '00:00:aa:e3:04:2c',
-    ip  => '192.168.100.96',
-  }
-
-  # hpux box
-  dhcp::host { "hpux":
-    mac => '00:30:6e:39:86:9e',
-    ip  => '192.168.100.97',
-  }
-
   # tb system for rhel6-64
   dhcp::host { "rhel6-64-1":
     mac => '00:50:56:b2:00:02',
     ip  => '192.168.100.98',
   }
 
-  # Virtual Center Server
-  dhcp::host { "vc01":
-    mac => '00:0c:29:69:d2:c4',
-    ip  => '192.168.100.99',
-  }
-
-  # Package Builder for Debs
-  dhcp::host { "deb-builder":
-    mac => '00:50:56:b2:00:46',
-    ip  => '192.168.100.100',
-  }
-
-  # Developer share box
-  dhcp::host { "pluto":
-    mac => '00:50:56:b2:00:0e',
-    ip  => '192.168.100.101',
-  }
-
-  # Proxy and PXE
-  dhcp::host { "modi":
-    mac => '00:50:56:b2:00:99',
-    ip  => '192.168.100.102',
-  }
-
-  # Redmine Development box
-  dhcp::host { "redminedev":
-    mac => '00:0c:29:4e:ed:c1',
-    ip  => '192.168.100.103',
-  }
-
-  # Release Eng. solaris builder #11354
-  dhcp::host { "sol10-builder":
-    mac => '00:50:56:b2:00:6a',
-    ip  => '192.168.100.104',
-  }
-
   # testbed
   dhcp::host { "rhel60-i386":
     mac => '00:50:56:b2:00:2c',
     ip  => '192.168.100.105',
-  }
-
-  # Sun Sparc Netra 120
-  dhcp::host { "netra":
-    mac => '00:03:ba:14:c6:4b',
-    ip  => '192.168.100.106',
-  }
-
-  # OSQA Box
-  dhcp::host { "qa":
-    mac => '00:50:56:b2:00:04',
-    ip  => '192.168.100.107',
-  }
-
-  # slave03 for hudson
-  dhcp::host { "slave03":
-    mac => '00:0c:29:17:30:70',
-    ip  => '192.168.100.108',
-  }
-
-  # hudson slave02
-  dhcp::host { "slave02":
-    mac => '00:50:56:b2:00:05',
-    ip  => '192.168.100.109',
-  }
-
-  # Development Windows 7 
-  dhcp::host { "dev-win7":
-    mac => '00:0c:29:7f:01:a2',
-    ip  => '192.168.100.110',
   }
 
   # testbed
@@ -662,18 +344,6 @@ node net01 {
     ip  => '192.168.100.114',
   }
 
-  # Dev Box
-  dhcp::host { "dev-centos01":
-    mac => '00:0c:29:1c:13:b5',
-    ip  => '192.168.100.115',
-  }
-
-  # Dev Box
-  dhcp::host { "dev-ubuntu01":
-    mac => '00:0c:29:3a:12:e6',
-    ip  => '192.168.100.116',
-  }
-
   # open solairs dev box
   dhcp::host { "dev-osol-x86":
     mac => '00:0c:29:57:23:26',
@@ -684,96 +354,6 @@ node net01 {
   dhcp::host { "oel-r4-u7-x86-64":
     mac => '00:50:56:b2:00:15',
     ip  => '192.168.100.118',
-  }
-
-  # hudson slave01
-  dhcp::host { "slave01":
-    mac => '00:50:56:b2:00:00',
-    ip  => '192.168.100.119',
-  }
-
-  # Nan's wiki box
-  dhcp::host { "wiki":
-    mac => '00:0c:29:27:cd:71',
-    ip  => '192.168.100.120',
-  }
-
-  # hudson slave for ruby 1.9
-  dhcp::host { "slave1-9":
-    mac => '00:50:56:b2:00:1d',
-    ip  => '192.168.100.121',
-  }
-
-  # Ubuntu proxy system
-  dhcp::host { "vanir":
-    mac => '00:50:56:b2:00:27',
-    ip  => '192.168.100.123',
-  }
-
-  # Lukes dev box
-  dhcp::host { "lukedev01":
-    mac => '00:50:56:b2:00:1a',
-    ip  => '192.168.100.124',
-  }
-
-  # Mac Mini Server - Faro
-  dhcp::host { "faro":
-    mac => 'c4:2c:03:05:3a:4c',
-    ip  => '192.168.100.125',
-  }
-
-  # #9298
-  dhcp::host { "slave-tb2":
-    mac => '00:50:56:b2:00:9e',
-    ip  => '192.168.100.126',
-  }
-
-  # Application Test VM
-  dhcp::host { "app01":
-    mac => '00:50:56:b2:00:63',
-    ip  => '192.168.100.127',
-  }
-
-  # Operations Windows 7
-  dhcp::host { "ops-win7":
-    mac => '00:50:56:b2:00:0f',
-    ip  => '192.168.100.128',
-  }
-
-  # PXE Builder
-  dhcp::host { "urd":
-    mac => '00:50:56:b2:00:0c',
-    ip  => '192.168.100.129',
-  }
-
-  # Dell T310 52B1KN1
-  dhcp::host { "juok-rac":
-    mac => '84:2b:2b:19:f7:e5',
-    ip  => '192.168.100.130',
-  }
-
-  # Dell T310 42B1KN1
-  dhcp::host { "kaang-rac":
-    mac => '84:2b:2b:19:f3:94',
-    ip  => '192.168.100.131',
-  }
-
-  # Dell T310 52B1KN1 eth0
-  dhcp::host { "juok":
-    mac => '84:2b:2b:19:f7:e3',
-    ip  => '192.168.100.132',
-  }
-
-  # mac mini in the kitchen
-  dhcp::host { "kitchenwall":
-    mac => '28:37:37:17:4c:27',
-    ip  => '192.168.100.133',
-  }
-
-  # Dell T310 52B1KN1 eth0
-  dhcp::host { "kaang":
-    mac => '84:2b:2b:19:f3:92',
-    ip  => '192.168.100.134',
   }
 
   # testbed
@@ -805,37 +385,6 @@ node net01 {
     mac => '00:50:56:b2:00:23',
     ip  => '192.168.100.139',
   }
-
-  # JJM - Tomcat 0 Gold Master for Demo
-  dhcp::host { "tomcat0":
-    mac => '00:16:36:45:21:ec',
-    ip  => '192.168.100.140',
-  }
-
-  # Tomcat 1 VM
-  dhcp::host { "tomcat1":
-    mac => '00:16:36:45:21:d0',
-    ip  => '192.168.100.141',
-  }
-
-  # Tomcat VM
-  dhcp::host { "tomcat2":
-    mac => '00:16:36:45:21:d1',
-    ip  => '192.168.100.142',
-  }
-
-  # Mrepo Machine
-  dhcp::host { "yo":
-    mac => '00:50:56:b2:00:1b',
-    ip  => '192.168.100.143',
-  }
-
-  # 
-  dhcp::host { "slave10":
-    mac => '99:90:99:90:99:91',
-    ip  => '192.168.100.144',
-  }
-
   # centos-55-64-2
   dhcp::host { "centos-55-64-2":
     mac => '00:50:56:b2:00:21',
@@ -848,23 +397,351 @@ node net01 {
     ip  => '192.168.100.146',
   }
 
+  ##############################################################################
+  # Release engineering builder hosts
+  ##############################################################################
+
+  # (#11498) Lion VM for release eng
+  dhcp::host { "osx-builder":
+    mac => '00:0c:29:22:f2:5a',
+    ip  => '192.168.100.29',
+  }
+
+  # Release Eng. solaris builder #11354
+  dhcp::host { "sol10-builder":
+    mac => '00:50:56:b2:00:6a',
+    ip  => '192.168.100.104',
+  }
+
+  # Package Builder for Debs
+  dhcp::host { "deb-builder":
+    mac => '00:50:56:b2:00:46',
+    ip  => '192.168.100.100',
+  }
+
+  # Mock box
+  dhcp::host { "rpm-builder":
+    mac => '00:50:56:b2:00:47',
+    ip  => '192.168.100.78',
+  }
+
+  # build host for SLES packages
+  dhcp::host { "sles-builder":
+    mac => '00:50:56:b2:00:d1',
+    ip  => '192.168.100.41',
+  }
+  ##############################################################################
+  # Jenkins testbed drivers
+  ##############################################################################
+
+  dhcp::host { "tb-driver":
+    mac => '00:50:56:b2:00:0b',
+    ip  => '192.168.100.49',
+  }
+
+  # #9298
+  dhcp::host { "slave-tb":
+    mac => '00:50:56:b2:00:9d',
+    ip  => '192.168.100.95',
+  }
+
+  # #9298
+  dhcp::host { "slave-tb2":
+    mac => '00:50:56:b2:00:9e',
+    ip  => '192.168.100.126',
+  }
+
+  ##############################################################################
+  # Jenkins slaves
+  ##############################################################################
+  # SLES 11 slave for Jenkins
+  dhcp::host { "slave-sles11":
+    mac => '00:50:56:b2:00:97',
+    ip  => '192.168.100.47',
+  }
+
+  dhcp::host { "slave10":
+    mac => '99:90:99:90:99:91',
+    ip  => '192.168.100.144',
+  }
+
+
+  # hudson slave for ruby 1.9
+  dhcp::host { "slave1-9":
+    mac => '00:50:56:b2:00:1d',
+    ip  => '192.168.100.121',
+  }
+
+  # hudson slave01
+  dhcp::host { "slave01":
+    mac => '00:50:56:b2:00:00',
+    ip  => '192.168.100.119',
+  }
+
+  # hudson slave02
+  dhcp::host { "slave02":
+    mac => '00:50:56:b2:00:05',
+    ip  => '192.168.100.109',
+  }
+
+  # slave03 for hudson
+  dhcp::host { "slave03":
+    mac => '00:0c:29:17:30:70',
+    ip  => '192.168.100.108',
+  }
+
+  # slave for building packages
+  dhcp::host { "slave06":
+    mac => '00:50:56:b2:00:24',
+    ip  => '192.168.100.91',
+  }
+
+  # slave for building packages
+  dhcp::host { "slave05":
+    mac => '00:50:56:b2:00:1f',
+    ip  => '192.168.100.90',
+  }
+
+  # Jenkins slave
+  dhcp::host { "dev-lucid-amd64":
+    mac => '00:50:56:b2:00:07',
+    ip  => '192.168.100.48',
+  }
+
+  ##############################################################################
+  # Selenium testing
+  ##############################################################################
+
+  # ticket #9022
+  dhcp::host { "selenium-test":
+    mac => '00:50:56:b2:00:9a',
+    ip  => '192.168.100.93',
+  }
+
+  ##############################################################################
+  # Printers. Evil, wicked devices.
+  ##############################################################################
+
+  # Printer on ann's desk
+  dhcp::host { "printer02":
+    mac => '98:4b:e1:39:9f:6b',
+    ip  => '192.168.100.82',
+  }
+
+  # Xerox Printer
+  dhcp::host { "printer01":
+    mac => '00:00:aa:e3:04:2c',
+    ip  => '192.168.100.96',
+  }
+
+  ##############################################################################
+  # Operations production
+  ##############################################################################
+
+  # Mrepo Machine
+  dhcp::host { "yo":
+    mac => '00:50:56:b2:00:1b',
+    ip  => '192.168.100.143',
+  }
+
+  # IPv6 tunnel box.
+  dhcp::host { 'veesix':
+    mac => '00:50:56:b2:00:72',
+    ip  => '192.168.100.254'
+  }
+
+  # opsteam management
+  dhcp::host { "net01":
+    mac => '00:50:56:b2:0:34',
+    ip  => '192.168.100.8',
+  }
+
+  # Customer dropbox #11518
+  dhcp::host { "odin":
+    mac => '00:50:56:b2:00:74',
+    ip  => '192.168.100.19',
+  }
+
+  # (#12222) app server
+  dhcp::host { "jotunn":
+    mac => '00:50:56:b2:00:7c',
+    ip  => '192.168.100.31',
+  }
+
+  # Operations OSX VMWare Fusion host
+  dhcp::host { "tupac":
+    mac => '10:9a:dd:5b:5d:79',
+    ip  => '192.168.100.28',
+  }
+
+  # Gitolite host
+  dhcp::host { "clippy":
+    mac => '00:50:56:b2:00:50',
+    ip  => '192.168.100.72',
+  }
+
+  # Zach building a new Puppet master
+  # also allegedly backup DNS
+  dhcp::host { "wyrd":
+    mac => '00:50:56:b2:00:1c',
+    ip  => '192.168.100.76',
+  }
+
+  # mac mini server #2
+  dhcp::host { "mawu":
+    mac => 'c4:2c:03:0b:b6:e6',
+    ip  => '192.168.100.83',
+  }
+
+  # New Graphite Box
+  dhcp::host { "syn":
+    mac => '00:50:56:b2:01:09',
+    ip  => '192.168.100.77',
+  }
+
+  # the lan bacula server
+  dhcp::host { "bacula01":
+    mac => '00:50:56:b2:00:39',
+    ip  => '192.168.100.79',
+  }
+
+  # Virtual Center Server
+  dhcp::host { "vc01":
+    mac => '00:0c:29:69:d2:c4',
+    ip  => '192.168.100.99',
+  }
+
+  # Proxy and PXE
+  dhcp::host { "modi":
+    mac => '00:50:56:b2:00:99',
+    ip  => '192.168.100.102',
+  }
+
+  # Ubuntu proxy system
+  dhcp::host { "vanir":
+    mac => '00:50:56:b2:00:27',
+    ip  => '192.168.100.123',
+  }
+
+  # PXE Builder
+  dhcp::host { "urd":
+    mac => '00:50:56:b2:00:0c',
+    ip  => '192.168.100.129',
+  }
+
+  # Release engineering bastion
+  dhcp::host { "pluto":
+    mac => '00:50:56:b2:00:0e',
+    ip  => '192.168.100.101',
+  }
+
+  # Mac Mini Server - Faro
+  dhcp::host { "faro":
+    mac => 'c4:2c:03:05:3a:4c',
+    ip  => '192.168.100.125',
+  }
+
+  # Operations Windows 7
+  dhcp::host { "ops-win7":
+    mac => '00:50:56:b2:00:0f',
+    ip  => '192.168.100.128',
+  }
+
+  # mac mini in the kitchen
+  dhcp::host { "kitchenwall":
+    mac => '28:37:37:17:4c:27',
+    ip  => '192.168.100.133',
+  }
+
+  ##############################################################################
+  # Operations staging/development
+  ##############################################################################
+
+  # Wordpress test box
+  dhcp::host { "wordtodapress":
+    mac => '00:50:56:b2:00:57',
+    ip  => '192.168.100.18',
+  }
+
+  # test box for chiliproject
+  dhcp::host { "projects2-dev":
+    mac => '00:50:56:b2:00:62',
+    ip  => '192.168.100.25',
+  }
+
+  # Web Staging Server
+  dhcp::host { "webstage":
+    mac => '00:50:56:b2:00:b2',
+    ip  => '192.168.100.44',
+  }
+
+  # Redmine Development box
+  dhcp::host { "redminedev":
+    mac => '00:0c:29:4e:ed:c1',
+    ip  => '192.168.100.103',
+  }
+
   # Projects Development Site
   dhcp::host { "projects-dev":
     mac => '00:50:56:b2:00:16',
     ip  => '192.168.100.147',
   }
 
-  # ProSvc Testing Machine
-  dhcp::host { "hyel":
-    mac => '00:26:2d:31:24:fd',
-    ip  => '192.168.100.148',
+  # Forge/puppet modules development
+  dhcp::host { "forge-dev":
+    mac => '00:50:56:b2:00:36',
+    ip  => '192.168.100.57',
   }
 
-  # PS R&D Physical Machine (Gateway PC)
-  dhcp::host { "gunab":
-    mac => '00:26:2d:31:20:f1',
-    ip  => '192.168.100.149',
+  ##############################################################################
+  # Engineering test/development
+  ##############################################################################
+
+  # For James, testing auth on RHEL
+  dhcp::host { "rhel-auth-tester":
+    mac => '00:50:56:b2:00:b1',
+    ip  => '192.168.100.45',
   }
+
+  # Development Windows 7 
+  dhcp::host { "dev-win7":
+    mac => '00:0c:29:7f:01:a2',
+    ip  => '192.168.100.110',
+  }
+
+  # Dev Box
+  dhcp::host { "dev-centos01":
+    mac => '00:0c:29:1c:13:b5',
+    ip  => '192.168.100.115',
+  }
+
+  # Dev Box
+  dhcp::host { "dev-ubuntu01":
+    mac => '00:0c:29:3a:12:e6',
+    ip  => '192.168.100.116',
+  }
+
+  # Lukes dev box
+  dhcp::host { "lukedev01":
+    mac => '00:50:56:b2:00:1a',
+    ip  => '192.168.100.124',
+  }
+
+  # (#11702) 2k3 dev server
+  dhcp::host { "win2k3-dev":
+    mac => '00:50:56:b2:00:7a',
+    ip  => '192.168.100.30',
+  }
+
+  # Postgres box for dev work.
+  dhcp::host { "vor.puppetlabs.lan":
+    mac => '00:50:56:b2:00:98',
+    ip  => '192.168.100.46',
+  }
+
+  ##############################################################################
+  # Access points
+  ##############################################################################
 
   # Aruba AP 3 (mark/admin)
   dhcp::host { "arubaap3":
@@ -884,10 +761,167 @@ node net01 {
     ip  => '192.168.100.253',
   }
 
-  # IPv6 tunnel box.
-  dhcp::host { 'veesix':
-    mac => '00:50:56:b2:00:72',
-    ip  => '192.168.100.254'
+  ##############################################################################
+  # Sales Engineering/Demo boxes
+  ##############################################################################
+
+  # Gateway Machine for Dhogland's Lan
+  dhcp::host { "fw-selab":
+    mac => '00:50:56:b2:00:08',
+    ip  => '192.168.100.92',
+  }
+
+  # JJM - Tomcat 0 Gold Master for Demo
+  dhcp::host { "tomcat0":
+    mac => '00:16:36:45:21:ec',
+    ip  => '192.168.100.140',
+  }
+
+  # Tomcat 1 VM
+  dhcp::host { "tomcat1":
+    mac => '00:16:36:45:21:d0',
+    ip  => '192.168.100.141',
+  }
+
+  # Tomcat VM
+  dhcp::host { "tomcat2":
+    mac => '00:16:36:45:21:d1',
+    ip  => '192.168.100.142',
+  }
+
+  # Jeff 2011-09-21 PuppetConf PuppetMaster Demo Machine.  This reservation may be removed after PuppetConf but please talk to Jeff.
+  dhcp::host { "puppetmaster":
+    mac => '00:50:56:b2:00:f3',
+    ip  => '192.168.100.42',
+  }
+
+  ##############################################################################
+  # Testing hardware(ish)
+  ##############################################################################
+
+  # Adrien's AIX Box
+  # It's not my damn box. I disavow any knowledge of that hateful device.
+  dhcp::host { "aix":
+    mac => '00:14:5e:96:87:90',
+    ip  => '192.168.100.43',
+  }
+
+  # hpux box
+  dhcp::host { "hpux":
+    mac => '00:30:6e:39:86:9e',
+    ip  => '192.168.100.97',
+  }
+
+  # Juniper for Nan/Tumblr.
+  dhcp::host { "junos":
+    mac => '88:e0:f3:68:dd:1',
+    ip  => '192.168.100.27',
+  }
+
+  # Solaris sparc zone
+  dhcp::host { "sol-10-sparc.test":
+    mac => '99:90:99:90:99:90',
+    ip  => '192.168.100.55',
+  }
+
+  # F5 BIGIP for Nan's testing
+  dhcp::host { "pro-bigip":
+    mac => '00:50:56:b2:00:5f',
+    ip  => '192.168.100.75',
+  }
+
+  # Sun Sparc Netra 120
+  dhcp::host { "netra":
+    mac => '00:03:ba:14:c6:4b',
+    ip  => '192.168.100.106',
+  }
+
+  ##############################################################################
+  # Hypervisors
+  ##############################################################################
+
+  # Top Server
+  dhcp::host { "tiki":
+    mac => '00:25:90:33:68:2e',
+    ip  => '192.168.100.22',
+  }
+
+  # Bottom Server
+  dhcp::host { "soko":
+    mac => '00:25:90:33:6a:80',
+    ip  => '192.168.100.23',
+  }
+
+  # ESXI box, dl380 hardware.
+  dhcp::host { "magni":
+    mac => '0:1f:29:e0:11:de',
+    ip  => '192.168.100.26',
+  }
+
+  # Dell T310 52B1KN1 eth0
+  dhcp::host { "juok":
+    mac => '84:2b:2b:19:f7:e3',
+    ip  => '192.168.100.132',
+  }
+
+  # Dell T310 52B1KN1 eth0
+  dhcp::host { "kaang":
+    mac => '84:2b:2b:19:f3:92',
+    ip  => '192.168.100.134',
+  }
+
+  # ProSvc Testing Machine
+  dhcp::host { "hyel":
+    mac => '00:26:2d:31:24:fd',
+    ip  => '192.168.100.148',
+  }
+
+  # PS R&D Physical Machine (Gateway PC)
+  dhcp::host { "gunab":
+    mac => '00:26:2d:31:20:f1',
+    ip  => '192.168.100.149',
+  }
+
+  ##############################################################################
+  # Lights out management
+  ##############################################################################
+
+  dhcp::host { "pseudo-ilo-host":
+    mac => 'de:fa:ce:df:ab:1e',
+    ip  => '192.168.100.20',
+  }
+
+  dhcp::host { "pseudo-ilo-host2":
+    mac => 'de:fa:ce:df:ab:1f',
+    ip  => '192.168.100.21',
+  }
+
+  # Dell T310 52B1KN1
+  dhcp::host { "juok-rac":
+    mac => '84:2b:2b:19:f7:e5',
+    ip  => '192.168.100.130',
+  }
+
+  # Dell T310 42B1KN1
+  dhcp::host { "kaang-rac":
+    mac => '84:2b:2b:19:f3:94',
+    ip  => '192.168.100.131',
+  }
+
+  ##############################################################################
+  # Misc boxes
+  ##############################################################################
+
+  # Nan's wiki box
+  dhcp::host { "wiki":
+    mac => '00:0c:29:27:cd:71',
+    ip  => '192.168.100.120',
+  }
+
+  # OSQA Box
+  dhcp::host { "qa":
+    mac => '00:50:56:b2:00:04',
+    ip  => '192.168.100.107',
   }
 
 }

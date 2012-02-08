@@ -152,12 +152,6 @@ node net01 {
     ip  => '192.168.100.26',
   }
 
-  # Juniper for Nan/Tumblr.
-  dhcp::host { "junos":
-    mac => '88:e0:f3:68:dd:1',
-    ip  => '192.168.100.27',
-  }
-
   # (#11702) 2k3 dev server
   dhcp::host { "win2k3-dev":
     mac => '00:50:56:b2:00:7a',
@@ -186,12 +180,6 @@ node net01 {
   dhcp::host { "oel-r4-u7-i386":
     mac => '00:50:56:b2:00:ae',
     ip  => '192.168.100.40',
-  }
-
-  # Adrien's AIX Box
-  dhcp::host { "aix":
-    mac => '00:14:5e:96:87:90',
-    ip  => '192.168.100.43',
   }
 
   # Postgres box for dev work.
@@ -228,12 +216,6 @@ node net01 {
   dhcp::host { "sol-10-u9-ga-x86":
     mac => '00:50:56:b2:00:31',
     ip  => '192.168.100.54',
-  }
-
-  # Solaris sparc zone
-  dhcp::host { "sol-10-sparc.test":
-    mac => '99:90:99:90:99:90',
-    ip  => '192.168.100.55',
   }
 
   # Forge/puppet modules development
@@ -326,12 +308,6 @@ node net01 {
     ip  => '192.168.100.74',
   }
 
-  # F5 BIGIP for Nan's testing
-  dhcp::host { "pro-bigip":
-    mac => '00:50:56:b2:00:5f',
-    ip  => '192.168.100.75',
-  }
-
   # testbed
   dhcp::host { "debian5-latest-i386":
     mac => '00:50:56:b2:00:38',
@@ -386,12 +362,6 @@ node net01 {
     ip  => '192.168.100.93',
   }
 
-  # hpux box
-  dhcp::host { "hpux":
-    mac => '00:30:6e:39:86:9e',
-    ip  => '192.168.100.97',
-  }
-
   # tb system for rhel6-64
   dhcp::host { "rhel6-64-1":
     mac => '00:50:56:b2:00:02',
@@ -408,12 +378,6 @@ node net01 {
   dhcp::host { "rhel60-i386":
     mac => '00:50:56:b2:00:2c',
     ip  => '192.168.100.105',
-  }
-
-  # Sun Sparc Netra 120
-  dhcp::host { "netra":
-    mac => '00:03:ba:14:c6:4b',
-    ip  => '192.168.100.106',
   }
 
   # OSQA Box
@@ -897,6 +861,47 @@ node net01 {
   dhcp::host { "puppetmaster":
     mac => '00:50:56:b2:00:f3',
     ip  => '192.168.100.42',
+  }
+
+  ##############################################################################
+  # Testing hardware(ish)
+  ##############################################################################
+
+  # Adrien's AIX Box
+  # It's not my damn box. I disavow any knowledge of that hateful device.
+  dhcp::host { "aix":
+    mac => '00:14:5e:96:87:90',
+    ip  => '192.168.100.43',
+  }
+
+  # hpux box
+  dhcp::host { "hpux":
+    mac => '00:30:6e:39:86:9e',
+    ip  => '192.168.100.97',
+  }
+
+  # Juniper for Nan/Tumblr.
+  dhcp::host { "junos":
+    mac => '88:e0:f3:68:dd:1',
+    ip  => '192.168.100.27',
+  }
+
+  # Solaris sparc zone
+  dhcp::host { "sol-10-sparc.test":
+    mac => '99:90:99:90:99:90',
+    ip  => '192.168.100.55',
+  }
+
+  # F5 BIGIP for Nan's testing
+  dhcp::host { "pro-bigip":
+    mac => '00:50:56:b2:00:5f',
+    ip  => '192.168.100.75',
+  }
+
+  # Sun Sparc Netra 120
+  dhcp::host { "netra":
+    mac => '00:03:ba:14:c6:4b',
+    ip  => '192.168.100.106',
   }
 
 }

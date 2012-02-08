@@ -122,12 +122,6 @@ node net01 {
     gateway => '192.168.100.1',
   }
 
-  # Wordpress test box
-  dhcp::host { "wordtodapress":
-    mac => '00:50:56:b2:00:57',
-    ip  => '192.168.100.18',
-  }
-
   # 
   dhcp::host { "pseudo-ilo-host":
     mac => 'de:fa:ce:df:ab:1e',
@@ -150,12 +144,6 @@ node net01 {
   dhcp::host { "soko":
     mac => '00:25:90:33:6a:80',
     ip  => '192.168.100.23',
-  }
-
-  # test box for chiliproject
-  dhcp::host { "projects2-dev":
-    mac => '00:50:56:b2:00:62',
-    ip  => '192.168.100.25',
   }
 
   # ESXI box, dl380 hardware.
@@ -210,12 +198,6 @@ node net01 {
   dhcp::host { "aix":
     mac => '00:14:5e:96:87:90',
     ip  => '192.168.100.43',
-  }
-
-  # Web Staging Server
-  dhcp::host { "webstage":
-    mac => '00:50:56:b2:00:b2',
-    ip  => '192.168.100.44',
   }
 
   # For James, testing auth on RHEL
@@ -452,12 +434,6 @@ node net01 {
     ip  => '192.168.100.101',
   }
 
-  # Redmine Development box
-  dhcp::host { "redminedev":
-    mac => '00:0c:29:4e:ed:c1',
-    ip  => '192.168.100.103',
-  }
-
   # testbed
   dhcp::host { "rhel60-i386":
     mac => '00:50:56:b2:00:2c',
@@ -648,12 +624,6 @@ node net01 {
   dhcp::host { "centos-55-386-2":
     mac => '00:50:56:b2:00:20',
     ip  => '192.168.100.146',
-  }
-
-  # Projects Development Site
-  dhcp::host { "projects-dev":
-    mac => '00:50:56:b2:00:16',
-    ip  => '192.168.100.147',
   }
 
   # ProSvc Testing Machine
@@ -900,6 +870,40 @@ node net01 {
   dhcp::host { "urd":
     mac => '00:50:56:b2:00:0c',
     ip  => '192.168.100.129',
+  }
+
+  ##############################################################################
+  # Operations staging/development
+  ##############################################################################
+
+  # Wordpress test box
+  dhcp::host { "wordtodapress":
+    mac => '00:50:56:b2:00:57',
+    ip  => '192.168.100.18',
+  }
+
+  # test box for chiliproject
+  dhcp::host { "projects2-dev":
+    mac => '00:50:56:b2:00:62',
+    ip  => '192.168.100.25',
+  }
+
+  # Web Staging Server
+  dhcp::host { "webstage":
+    mac => '00:50:56:b2:00:b2',
+    ip  => '192.168.100.44',
+  }
+
+  # Redmine Development box
+  dhcp::host { "redminedev":
+    mac => '00:0c:29:4e:ed:c1',
+    ip  => '192.168.100.103',
+  }
+
+  # Projects Development Site
+  dhcp::host { "projects-dev":
+    mac => '00:50:56:b2:00:16',
+    ip  => '192.168.100.147',
   }
 
 }

@@ -162,6 +162,7 @@ server {
     rewrite ^/projects/1/wiki/Puppet_Modules                                  http://docs.puppetlabs.com/guides/modules.html                   permanent;
     rewrite ^/projects/forge                                                  https://projects.puppetlabs.com/projects/module-site             permanent;
     rewrite ^/projects/puppet-forge                                           https://projects.puppetlabs.com/projects/module-site             permanent;
+    rewrite ^/projects/1/wiki/Adding_Facts                                    http://docs.puppetlabs.com/guides/custom_facts.html              permanent;
         
 
     proxy_pass http://up_<%= appname %>;

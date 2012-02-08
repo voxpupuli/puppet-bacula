@@ -188,12 +188,6 @@ node net01 {
     ip  => '192.168.100.28',
   }
 
-  # (#11498) Lion VM for release eng
-  dhcp::host { "osx-builder":
-    mac => '00:0c:29:22:f2:5a',
-    ip  => '192.168.100.29',
-  }
-
   # (#11702) 2k3 dev server
   dhcp::host { "win2k3-dev":
     mac => '00:50:56:b2:00:7a',
@@ -228,12 +222,6 @@ node net01 {
   dhcp::host { "oel-r4-u7-i386":
     mac => '00:50:56:b2:00:ae',
     ip  => '192.168.100.40',
-  }
-
-  # build host for SLES packages
-  dhcp::host { "sles-builder":
-    mac => '00:50:56:b2:00:d1',
-    ip  => '192.168.100.41',
   }
 
   # Jeff 2011-09-21 PuppetConf PuppetMaster Demo Machine.  This reservation may be removed after PuppetConf but please talk to Jeff.
@@ -440,12 +428,6 @@ node net01 {
     ip  => '192.168.100.77',
   }
 
-  # Mock box
-  dhcp::host { "rpm-builder":
-    mac => '00:50:56:b2:00:47',
-    ip  => '192.168.100.78',
-  }
-
   # the lan bacula server
   dhcp::host { "bacula01":
     mac => '00:50:56:b2:00:39',
@@ -572,12 +554,6 @@ node net01 {
     ip  => '192.168.100.99',
   }
 
-  # Package Builder for Debs
-  dhcp::host { "deb-builder":
-    mac => '00:50:56:b2:00:46',
-    ip  => '192.168.100.100',
-  }
-
   # Developer share box
   dhcp::host { "pluto":
     mac => '00:50:56:b2:00:0e',
@@ -594,12 +570,6 @@ node net01 {
   dhcp::host { "redminedev":
     mac => '00:0c:29:4e:ed:c1',
     ip  => '192.168.100.103',
-  }
-
-  # Release Eng. solaris builder #11354
-  dhcp::host { "sol10-builder":
-    mac => '00:50:56:b2:00:6a',
-    ip  => '192.168.100.104',
   }
 
   # testbed
@@ -890,4 +860,37 @@ node net01 {
     ip  => '192.168.100.254'
   }
 
+  ##############################################################################
+  # Release engineering builder hosts
+  ##############################################################################
+
+  # (#11498) Lion VM for release eng
+  dhcp::host { "osx-builder":
+    mac => '00:0c:29:22:f2:5a',
+    ip  => '192.168.100.29',
+  }
+
+  # Release Eng. solaris builder #11354
+  dhcp::host { "sol10-builder":
+    mac => '00:50:56:b2:00:6a',
+    ip  => '192.168.100.104',
+  }
+
+  # Package Builder for Debs
+  dhcp::host { "deb-builder":
+    mac => '00:50:56:b2:00:46',
+    ip  => '192.168.100.100',
+  }
+
+  # Mock box
+  dhcp::host { "rpm-builder":
+    mac => '00:50:56:b2:00:47',
+    ip  => '192.168.100.78',
+  }
+
+  # build host for SLES packages
+  dhcp::host { "sles-builder":
+    mac => '00:50:56:b2:00:d1',
+    ip  => '192.168.100.41',
+  }
 }

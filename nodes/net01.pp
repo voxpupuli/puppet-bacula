@@ -434,12 +434,6 @@ node net01 {
     ip  => '192.168.100.81',
   }
 
-  # Printer on ann's desk
-  dhcp::host { "printer02":
-    mac => '98:4b:e1:39:9f:6b',
-    ip  => '192.168.100.82',
-  }
-
   # mac mini server #2
   dhcp::host { "mawu":
     mac => 'c4:2c:03:0b:b6:e6',
@@ -498,12 +492,6 @@ node net01 {
   dhcp::host { "xaman":
     mac => '00:50:56:b2:00:52',
     ip  => '192.168.100.94',
-  }
-
-  # Xerox Printer
-  dhcp::host { "printer01":
-    mac => '00:00:aa:e3:04:2c',
-    ip  => '192.168.100.96',
   }
 
   # hpux box
@@ -894,6 +882,22 @@ node net01 {
   dhcp::host { "dev-lucid-amd64":
     mac => '00:50:56:b2:00:07',
     ip  => '192.168.100.48',
+  }
+
+  ##############################################################################
+  # Printers. Evil, wicked devices.
+  ##############################################################################
+
+  # Printer on ann's desk
+  dhcp::host { "printer02":
+    mac => '98:4b:e1:39:9f:6b',
+    ip  => '192.168.100.82',
+  }
+
+  # Xerox Printer
+  dhcp::host { "printer01":
+    mac => '00:00:aa:e3:04:2c',
+    ip  => '192.168.100.96',
   }
 
 }

@@ -122,6 +122,10 @@ node net01 {
     gateway => '192.168.100.1',
   }
 
+  ##############################################################################
+  # Jenkins acceptance testbed hosts
+  ##############################################################################
+
   # testbed
   dhcp::host { "sles-11-x64-2":
     mac => '00:50:56:b2:00:69',
@@ -132,12 +136,6 @@ node net01 {
   dhcp::host { "sles-11-i386-2":
     mac => '00:50:56:b2:00:68',
     ip  => '192.168.100.38',
-  }
-
-  # Selena mailinglist stats making box
-  dhcp::host { "mysqlisrad":
-    mac => '00:50:56:b2:01:06',
-    ip  => '192.168.100.39',
   }
 
   # testbed
@@ -922,6 +920,12 @@ node net01 {
   dhcp::host { "qa":
     mac => '00:50:56:b2:00:04',
     ip  => '192.168.100.107',
+  }
+
+  # Selena mailinglist stats making box
+  dhcp::host { "mysqlisrad":
+    mac => '00:50:56:b2:01:06',
+    ip  => '192.168.100.39',
   }
 
 }

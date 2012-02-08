@@ -10,7 +10,7 @@ node modi {
   ssh::allowgroup { "techops": }
   sudo::allowgroup { "techops": }
 
-  include puppetlabs::service::bootserver
+  include service::bootserver
 
   class { "squid::params":
     listen      => "192.168.100.102",

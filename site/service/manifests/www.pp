@@ -1,4 +1,4 @@
-class puppetlabs::service::www {
+class service::www {
 
   include postfix
   # MySQL

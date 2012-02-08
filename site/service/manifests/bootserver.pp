@@ -1,4 +1,4 @@
-class puppetlabs::service::bootserver {
+class service::bootserver {
 
   include pxe
   class { "tftp":

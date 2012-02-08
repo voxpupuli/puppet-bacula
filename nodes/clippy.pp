@@ -15,7 +15,7 @@
 # - git.puppetlabs.net
 node clippy {
   include role::server
-  include puppetlabs::service::gitolite
+  include service::gitolite
 
   sudo::allowgroup  { "techops": }
   ssh::allowgroup   { "techops": }

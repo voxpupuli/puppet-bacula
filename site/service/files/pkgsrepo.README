@@ -1,0 +1,12 @@
+Welcome to the Puppet Labs Package Repository
+===
+
+Here you will find information on using the repository.
+
+Apt
+---
+
+For those who would like to run an apt mirror for internal usage, we provide an rsync server for just this purpose.  Other options include running apt-cacher and the like.  The following command will sync our apt repository.
+
+rsync -av --copy-links --del rsync://apt.puppetlabs.com/packages/apt/ /opt/repo/apt/
+

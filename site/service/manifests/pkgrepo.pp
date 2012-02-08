@@ -1,4 +1,4 @@
-class puppetlabs::service::pkgrepo (
+class service::pkgrepo (
   $ensure = present
 ) {
   ###

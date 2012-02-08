@@ -9,7 +9,7 @@ node web01 {
 
   include postfix
   include puppetlabs_ssl
-  include puppetlabs::service::www  # Contains wordpresses for this
+  include service::www  # Contains wordpresses for this
                                     # host. (www.pl.com, &c)
   class { "puppetlabs::docs": http_port => $apache_port; }
 

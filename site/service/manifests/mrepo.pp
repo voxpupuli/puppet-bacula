@@ -1,4 +1,4 @@
-class puppetlabs::service::mrepo {
+class service::mrepo {
 
   class { 'mrepo::params':
     rhn           => true,

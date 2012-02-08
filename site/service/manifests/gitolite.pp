@@ -2,7 +2,7 @@
 #
 # Installs and configures gitolite, and sets up github mirrors
 
-class puppetlabs::service::gitolite {
+class service::gitolite {
   include git::gitolite
 
   file { "/var/www/git":

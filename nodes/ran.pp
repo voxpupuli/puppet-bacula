@@ -2,7 +2,7 @@ node ran {
 
   include role::server
 
-  include puppetlabs::service::bootserver
+  include service::bootserver
 
   nginx::vhost {
     "$fqdn":

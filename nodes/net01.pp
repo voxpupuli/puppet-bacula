@@ -374,24 +374,6 @@ node net01 {
     ip  => '192.168.100.120',
   }
 
-  # Mac Mini Server - Faro
-  dhcp::host { "faro":
-    mac => 'c4:2c:03:05:3a:4c',
-    ip  => '192.168.100.125',
-  }
-
-  # Operations Windows 7
-  dhcp::host { "ops-win7":
-    mac => '00:50:56:b2:00:0f',
-    ip  => '192.168.100.128',
-  }
-
-  # mac mini in the kitchen
-  dhcp::host { "kitchenwall":
-    mac => '28:37:37:17:4c:27',
-    ip  => '192.168.100.133',
-  }
-
   # testbed
   dhcp::host { "rhel60-x86-64":
     mac => '00:50:56:b2:00:2b',
@@ -661,10 +643,28 @@ node net01 {
     ip  => '192.168.100.129',
   }
 
-  # Developer share box
+  # Release engineering bastion
   dhcp::host { "pluto":
     mac => '00:50:56:b2:00:0e',
     ip  => '192.168.100.101',
+  }
+
+  # Mac Mini Server - Faro
+  dhcp::host { "faro":
+    mac => 'c4:2c:03:05:3a:4c',
+    ip  => '192.168.100.125',
+  }
+
+  # Operations Windows 7
+  dhcp::host { "ops-win7":
+    mac => '00:50:56:b2:00:0f',
+    ip  => '192.168.100.128',
+  }
+
+  # mac mini in the kitchen
+  dhcp::host { "kitchenwall":
+    mac => '28:37:37:17:4c:27',
+    ip  => '192.168.100.133',
   }
 
   ##############################################################################

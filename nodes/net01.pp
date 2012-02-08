@@ -188,12 +188,6 @@ node net01 {
     ip  => '192.168.100.40',
   }
 
-  # Jeff 2011-09-21 PuppetConf PuppetMaster Demo Machine.  This reservation may be removed after PuppetConf but please talk to Jeff.
-  dhcp::host { "puppetmaster":
-    mac => '00:50:56:b2:00:f3',
-    ip  => '192.168.100.42',
-  }
-
   # Adrien's AIX Box
   dhcp::host { "aix":
     mac => '00:14:5e:96:87:90',
@@ -386,12 +380,6 @@ node net01 {
     ip  => '192.168.100.89',
   }
 
-  # Gateway Machine for Dhogland's Lan
-  dhcp::host { "fw-selab":
-    mac => '00:50:56:b2:00:08',
-    ip  => '192.168.100.92',
-  }
-
   # ticket #9022
   dhcp::host { "selenium-test":
     mac => '00:50:56:b2:00:9a',
@@ -547,25 +535,6 @@ node net01 {
     mac => '00:50:56:b2:00:23',
     ip  => '192.168.100.139',
   }
-
-  # JJM - Tomcat 0 Gold Master for Demo
-  dhcp::host { "tomcat0":
-    mac => '00:16:36:45:21:ec',
-    ip  => '192.168.100.140',
-  }
-
-  # Tomcat 1 VM
-  dhcp::host { "tomcat1":
-    mac => '00:16:36:45:21:d0',
-    ip  => '192.168.100.141',
-  }
-
-  # Tomcat VM
-  dhcp::host { "tomcat2":
-    mac => '00:16:36:45:21:d1',
-    ip  => '192.168.100.142',
-  }
-
   # centos-55-64-2
   dhcp::host { "centos-55-64-2":
     mac => '00:50:56:b2:00:21',
@@ -894,6 +863,40 @@ node net01 {
   dhcp::host { "arubaap5":
     mac => '00:24:6c:c9:36:ef',
     ip  => '192.168.100.253',
+  }
+
+  ##############################################################################
+  # Sales Engineering/Demo boxes
+  ##############################################################################
+
+  # Gateway Machine for Dhogland's Lan
+  dhcp::host { "fw-selab":
+    mac => '00:50:56:b2:00:08',
+    ip  => '192.168.100.92',
+  }
+
+  # JJM - Tomcat 0 Gold Master for Demo
+  dhcp::host { "tomcat0":
+    mac => '00:16:36:45:21:ec',
+    ip  => '192.168.100.140',
+  }
+
+  # Tomcat 1 VM
+  dhcp::host { "tomcat1":
+    mac => '00:16:36:45:21:d0',
+    ip  => '192.168.100.141',
+  }
+
+  # Tomcat VM
+  dhcp::host { "tomcat2":
+    mac => '00:16:36:45:21:d1',
+    ip  => '192.168.100.142',
+  }
+
+  # Jeff 2011-09-21 PuppetConf PuppetMaster Demo Machine.  This reservation may be removed after PuppetConf but please talk to Jeff.
+  dhcp::host { "puppetmaster":
+    mac => '00:50:56:b2:00:f3',
+    ip  => '192.168.100.42',
   }
 
 }

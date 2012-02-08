@@ -122,22 +122,10 @@ node net01 {
     gateway => '192.168.100.1',
   }
 
-  # opsteam management
-  dhcp::host { "net01":
-    mac => '00:50:56:b2:0:34',
-    ip  => '192.168.100.8',
-  }
-
   # Wordpress test box
   dhcp::host { "wordtodapress":
     mac => '00:50:56:b2:00:57',
     ip  => '192.168.100.18',
-  }
-
-  # Customer dropbox #11518
-  dhcp::host { "odin":
-    mac => '00:50:56:b2:00:74',
-    ip  => '192.168.100.19',
   }
 
   # 
@@ -182,22 +170,10 @@ node net01 {
     ip  => '192.168.100.27',
   }
 
-  # Operations OSX VMWare Fusion host
-  dhcp::host { "tupac":
-    mac => '10:9a:dd:5b:5d:79',
-    ip  => '192.168.100.28',
-  }
-
   # (#11702) 2k3 dev server
   dhcp::host { "win2k3-dev":
     mac => '00:50:56:b2:00:7a',
     ip  => '192.168.100.30',
-  }
-
-  # (#12222) app server
-  dhcp::host { "jotunn":
-    mac => '00:50:56:b2:00:7c',
-    ip  => '192.168.100.31',
   }
 
   # testbed
@@ -374,12 +350,6 @@ node net01 {
     ip  => '192.168.100.71',
   }
 
-  # 
-  dhcp::host { "clippy":
-    mac => '00:50:56:b2:00:50',
-    ip  => '192.168.100.72',
-  }
-
   # testbed
   dhcp::host { "oel-r6-u1-x86-64":
     mac => '00:50:56:b2:00:55',
@@ -398,24 +368,6 @@ node net01 {
     ip  => '192.168.100.75',
   }
 
-  # Zach building a new Puppet master
-  dhcp::host { "wyrd":
-    mac => '00:50:56:b2:00:1c',
-    ip  => '192.168.100.76',
-  }
-
-  # New Graphite Box
-  dhcp::host { "syn":
-    mac => '00:50:56:b2:01:09',
-    ip  => '192.168.100.77',
-  }
-
-  # the lan bacula server
-  dhcp::host { "bacula01":
-    mac => '00:50:56:b2:00:39',
-    ip  => '192.168.100.79',
-  }
-
   # testbed
   dhcp::host { "debian5-latest-i386":
     mac => '00:50:56:b2:00:38',
@@ -426,12 +378,6 @@ node net01 {
   dhcp::host { "debian5-latest-amd64":
     mac => '00:50:56:b2:00:37',
     ip  => '192.168.100.81',
-  }
-
-  # mac mini server #2
-  dhcp::host { "mawu":
-    mac => 'c4:2c:03:0b:b6:e6',
-    ip  => '192.168.100.83',
   }
 
   # testbed
@@ -500,22 +446,10 @@ node net01 {
     ip  => '192.168.100.98',
   }
 
-  # Virtual Center Server
-  dhcp::host { "vc01":
-    mac => '00:0c:29:69:d2:c4',
-    ip  => '192.168.100.99',
-  }
-
   # Developer share box
   dhcp::host { "pluto":
     mac => '00:50:56:b2:00:0e',
     ip  => '192.168.100.101',
-  }
-
-  # Proxy and PXE
-  dhcp::host { "modi":
-    mac => '00:50:56:b2:00:99',
-    ip  => '192.168.100.102',
   }
 
   # Redmine Development box
@@ -602,12 +536,6 @@ node net01 {
     ip  => '192.168.100.120',
   }
 
-  # Ubuntu proxy system
-  dhcp::host { "vanir":
-    mac => '00:50:56:b2:00:27',
-    ip  => '192.168.100.123',
-  }
-
   # Lukes dev box
   dhcp::host { "lukedev01":
     mac => '00:50:56:b2:00:1a',
@@ -630,12 +558,6 @@ node net01 {
   dhcp::host { "ops-win7":
     mac => '00:50:56:b2:00:0f',
     ip  => '192.168.100.128',
-  }
-
-  # PXE Builder
-  dhcp::host { "urd":
-    mac => '00:50:56:b2:00:0c',
-    ip  => '192.168.100.129',
   }
 
   # Dell T310 52B1KN1
@@ -716,12 +638,6 @@ node net01 {
     ip  => '192.168.100.142',
   }
 
-  # Mrepo Machine
-  dhcp::host { "yo":
-    mac => '00:50:56:b2:00:1b',
-    ip  => '192.168.100.143',
-  }
-
   # centos-55-64-2
   dhcp::host { "centos-55-64-2":
     mac => '00:50:56:b2:00:21',
@@ -768,12 +684,6 @@ node net01 {
   dhcp::host { "arubaap5":
     mac => '00:24:6c:c9:36:ef',
     ip  => '192.168.100.253',
-  }
-
-  # IPv6 tunnel box.
-  dhcp::host { 'veesix':
-    mac => '00:50:56:b2:00:72',
-    ip  => '192.168.100.254'
   }
 
   ##############################################################################
@@ -895,6 +805,101 @@ node net01 {
   dhcp::host { "printer01":
     mac => '00:00:aa:e3:04:2c',
     ip  => '192.168.100.96',
+  }
+
+  ##############################################################################
+  # Operations production
+  ##############################################################################
+
+  # Mrepo Machine
+  dhcp::host { "yo":
+    mac => '00:50:56:b2:00:1b',
+    ip  => '192.168.100.143',
+  }
+
+  # IPv6 tunnel box.
+  dhcp::host { 'veesix':
+    mac => '00:50:56:b2:00:72',
+    ip  => '192.168.100.254'
+  }
+
+  # opsteam management
+  dhcp::host { "net01":
+    mac => '00:50:56:b2:0:34',
+    ip  => '192.168.100.8',
+  }
+
+  # Customer dropbox #11518
+  dhcp::host { "odin":
+    mac => '00:50:56:b2:00:74',
+    ip  => '192.168.100.19',
+  }
+
+  # (#12222) app server
+  dhcp::host { "jotunn":
+    mac => '00:50:56:b2:00:7c',
+    ip  => '192.168.100.31',
+  }
+
+  # Operations OSX VMWare Fusion host
+  dhcp::host { "tupac":
+    mac => '10:9a:dd:5b:5d:79',
+    ip  => '192.168.100.28',
+  }
+
+  # Gitolite host
+  dhcp::host { "clippy":
+    mac => '00:50:56:b2:00:50',
+    ip  => '192.168.100.72',
+  }
+
+  # Zach building a new Puppet master
+  # also allegedly backup DNS
+  dhcp::host { "wyrd":
+    mac => '00:50:56:b2:00:1c',
+    ip  => '192.168.100.76',
+  }
+
+  # mac mini server #2
+  dhcp::host { "mawu":
+    mac => 'c4:2c:03:0b:b6:e6',
+    ip  => '192.168.100.83',
+  }
+
+  # New Graphite Box
+  dhcp::host { "syn":
+    mac => '00:50:56:b2:01:09',
+    ip  => '192.168.100.77',
+  }
+
+  # the lan bacula server
+  dhcp::host { "bacula01":
+    mac => '00:50:56:b2:00:39',
+    ip  => '192.168.100.79',
+  }
+
+  # Virtual Center Server
+  dhcp::host { "vc01":
+    mac => '00:0c:29:69:d2:c4',
+    ip  => '192.168.100.99',
+  }
+
+  # Proxy and PXE
+  dhcp::host { "modi":
+    mac => '00:50:56:b2:00:99',
+    ip  => '192.168.100.102',
+  }
+
+  # Ubuntu proxy system
+  dhcp::host { "vanir":
+    mac => '00:50:56:b2:00:27',
+    ip  => '192.168.100.123',
+  }
+
+  # PXE Builder
+  dhcp::host { "urd":
+    mac => '00:50:56:b2:00:0c',
+    ip  => '192.168.100.129',
   }
 
 }

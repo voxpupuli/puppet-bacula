@@ -12,6 +12,7 @@ class os::freebsd {
                             'security/ca_root_nss',
                             'sysutils/lsof',
                             'textproc/p5-ack',
+                            'sysutils/zfs-stats',
                             'editors/vim-lite' ]
 
   # Install some basic packages. Nothing too spicy.
@@ -43,6 +44,12 @@ class os::freebsd {
     ensure  => link,
     target  => '/usr/local/bin/zsh',
     require => Package['zsh'],
+  }
+
+  # This just makes our lives easier.
+  file{ '/etc/puppet':
+    ensure  => link,
+    target  => '/usr/local/etc/puppet',
   }
 
   file { "/root/ports-supfile":

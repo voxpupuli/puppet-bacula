@@ -5,6 +5,7 @@ class os::linux {
   include virtual::packages
   include packages
   include vim
+  include git
 
   case $operatingsystem {
     debian:  { include os::linux::debian }

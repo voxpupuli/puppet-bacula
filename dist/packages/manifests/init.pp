@@ -2,7 +2,6 @@
 
 class packages {
   if $kernel == "Linux" {
-    include packages::vcs
     include packages::shells
     include packages::archive
   }

@@ -8,7 +8,7 @@ class service::projects {
     user          => 'redmine',
     group         => 'redmine',
     appserver     => 'unicorn',
-    git_revision  => '2435525db2c08c68e18cfde56b03bf654e6d92e9',
+    git_revision  => '12f60a564f708cf645a98d87553110100a61d130', #pl-1.3-stable branch
     github_url    => 'git@github.com:puppetlabs/redmine.git',
   }
 

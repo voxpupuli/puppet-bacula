@@ -1,0 +1,11 @@
+title       "Registered users over the past 6 months"
+vtitle      "Users"
+from        "-6months"
+description "Users registered in Redmine over the past 6 months."
+linewidth   2
+ymin        0
+
+field :dashboard,
+               :color => "purple",
+               :alias => "Redmine registered users",
+               :data  => "redmine.users"

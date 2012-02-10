@@ -241,7 +241,7 @@ class redmine (
   file{ '/usr/local/sbin/cron_imap_runner.sh':
     source => 'puppet:///modules/redmine/cron_imap_runner.sh',
     owner  => root,
-    group  => root,
+    group  => $group,
     mode   => 0750,
   }
 

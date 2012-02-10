@@ -1,6 +1,8 @@
-class linuxlogo { 
+class linuxlogo {
   include linuxlogo::params
 
-  package { "$linuxlogo::params::linuxlogo_package": ensure => installed; }
+  if $operatingsystem != 'SLES' {
+    package { "$linuxlogo::params::linuxlogo_package": ensure => installed; }
+  }
 
 }

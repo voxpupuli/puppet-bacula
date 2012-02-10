@@ -233,7 +233,7 @@ class redmine (
 
   file { '/usr/local/bin/redmine_permission_keeper.sh':
       owner   => root,
-      group   => root,
+      group   => $group,
       mode    => 0750,
       content => template("redmine/permission_keeper.sh");
   }
@@ -247,7 +247,7 @@ class redmine (
 
   cron {
     "redmine_tickets_email":
-      user    => www-data,
+      user    => $user,
       minute  => "*/10",
       command => '/usr/local/sbin/cron_imap_runner.sh all';
 

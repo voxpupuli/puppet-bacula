@@ -5,6 +5,7 @@ class git {
     'Debian': { $package_name = 'git' }
     'CentOS': { $package_name = 'git' }
     'Ubuntu': { $package_name = 'git-core' }
+    'SLES':   { $package_name = 'git' }
     default: { fail("No git package known for operating system ${operatingsystem}") }
   }
 

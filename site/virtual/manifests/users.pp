@@ -52,7 +52,7 @@ class virtual::users {
     comment => 'Matt Robinson',
     uid     => '1114',
     group   => allstaff,
-    groups  => ["developers"],
+    groups  => ["developers", "infra"],
     tag     => allstaff,
  }
 

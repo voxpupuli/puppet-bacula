@@ -11,7 +11,7 @@ node syn {
   ssh::allowgroup  { "interns": }
   sudo::allowgroup { "interns": }
 
-  package { ["rest-client","mime-types"]: provider => gem, ensure => present, }
+  package { ["rest-client","mime-types","httparty"]: provider => gem, ensure => present, }
   package { "ii": ensure => present, }
 
   file { "/var/lib/gather":

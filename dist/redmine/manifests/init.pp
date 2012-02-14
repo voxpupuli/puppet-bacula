@@ -111,6 +111,15 @@ class redmine (
     ]
   }
 
+  file{ "${approot}/config/configuration.yml":
+    source => 'puppet:///modules/redmine/configuration.yml',
+    owner   => $user,
+    group   => $group,
+    ensure  => present,
+    before  => Class['redmine::unicorn'],
+    require => Vcsrepo[$approot],
+  }
+
   if $newrelic == true {
       file { "${approot}/config/newrelic.yml":
         owner   => $user,
@@ -125,12 +134,25 @@ class redmine (
         provider => gem,
         require  => Vcsrepo[$approot],
       }
+
+      # The cheeky unicorn hack script from
+      # http://newrelic.com/docs/discussions/2909-unicorn-without-preload_app-with-rails
+      file{ "${approot}/config/initializers/unicorn_preloader.rb":
+        owner   => $user,
+        group   => $group,
+        ensure  => present,
+        source  => 'puppet:///modules/redmine/unicorn_preloader.rb',
+        before  => Class['redmine::unicorn'],
+        require => [ Vcsrepo[$approot], Package['newrelic_rpm'] ],
+      }
+
   }
 
   file { [ "${approot}/tmp", "${approot}/log", "${approot}/files"]:
     owner   => $user,
     group   => $group,
     ensure  => directory,
+    mode    => '0755',
     require => Vcsrepo[$approot],
   }
 
@@ -211,7 +233,7 @@ class redmine (
 
   file { '/usr/local/bin/redmine_permission_keeper.sh':
       owner   => root,
-      group   => root,
+      group   => $group,
       mode    => 0750,
       content => template("redmine/permission_keeper.sh");
   }
@@ -219,13 +241,13 @@ class redmine (
   file{ '/usr/local/sbin/cron_imap_runner.sh':
     source => 'puppet:///modules/redmine/cron_imap_runner.sh',
     owner  => root,
-    group  => root,
+    group  => $group,
     mode   => 0750,
   }
 
   cron {
     "redmine_tickets_email":
-      user    => www-data,
+      user    => $user,
       minute  => "*/10",
       command => '/usr/local/sbin/cron_imap_runner.sh all';
 

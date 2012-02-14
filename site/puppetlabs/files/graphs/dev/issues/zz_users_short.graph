@@ -1,0 +1,11 @@
+title       "New account registrations over the past 6 months"
+vtitle      "New user registrations"
+from        "-1month"
+description "New users registered per day in Redmine over the past 6 months."
+linewidth   2
+ymin        0
+
+field :dashboard,
+               :color => "orange",
+               :alias => "New account registrations (daily)",
+               :data  => 'derivative(summarize(redmine.users,"1day","avg"))'

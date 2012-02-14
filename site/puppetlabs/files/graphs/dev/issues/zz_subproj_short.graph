@@ -8,14 +8,14 @@ ymin        0
 field :dashboard,
                :color => "aqua",
                :alias => "Dashboard issues (total)",
-               :data  => "redmine.dashboard.issues.count"
+               :data  => "redmine.dashboard.issues.open"
 
 field :facter,
                :color => "green",
                :alias => "Facter issues (total)",
-               :data  => "redmine.facter.issues.count"
+               :data  => "redmine.facter.issues.open"
 
 field :modulesite,
                :color => "yellow",
                :alias => "Module site issues (total)",
-               :data  => "redmine.module-site.issues.count"
+               :data  => "redmine.module-site.issues.open"

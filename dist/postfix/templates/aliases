@@ -42,6 +42,7 @@ nagios:		root
 mail:		root
 sysop:		root
 www-data:	root
+redmine:	root
 
 # ALIASES(5)                                                          ALIASES(5)
 # 

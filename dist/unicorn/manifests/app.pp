@@ -4,7 +4,7 @@ define unicorn::app (
     $unicorn_socket,
     $rack_file,
     $config_template          = 'unicorn/config_unicorn.config.rb.erb',
-    $initscript               = "unicorn/initscript_newer.erb", #default template location
+    $initscript               = "unicorn/initscript_newer.erb", # default template location
     $unicorn_backlog          = '2048',
     $unicorn_worker_processes = $::processorcount,
     $stdlog_path              = '',

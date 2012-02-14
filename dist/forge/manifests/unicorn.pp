@@ -25,7 +25,7 @@ class forge::unicorn(
   # die and then probably get root.
   unicorn::app{ 'forge':
     approot         => '/opt/forge',
-    rack_file       => 'puppet:///modules/unicorn/dashboard_config.ru',
+    rack_file       => 'puppet:///modules/unicorn/config.ru',
     unicorn_pidfile => "/var/run/${user}/unicorn.pid",
     unicorn_socket  => $unicorn_socket,
     unicorn_user    => $user,

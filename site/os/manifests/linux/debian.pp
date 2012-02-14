@@ -89,7 +89,7 @@ class os::linux::debian  {
   case $operatingsystem {
     Debian: {
       apt::source { "main.list": }
-
+      apt::source { "main_source.list": source_type => "deb-src"; }
     }
     default: { }
   }

@@ -10,7 +10,9 @@ Job {
   Incremental Backup Pool = PuppetLabsPool-Inc
 <% end -%>
   Messages         = Standard
+<% if jobtype == "Restore" -%>
   Where            = /tmp/bacula-restores
+<% end -%>
   JobDefs          = "PuppetLabsOps"
 }
 

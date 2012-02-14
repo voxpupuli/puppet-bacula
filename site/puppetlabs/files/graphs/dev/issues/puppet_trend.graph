@@ -8,4 +8,4 @@ ymin        0
 field :puppet,
                :color => "blue",
                :alias => "Puppet issues (all subprojects)",
-               :data  => "redmine.puppet.issues.count"
+               :data  => "redmine.puppet.issues.open"

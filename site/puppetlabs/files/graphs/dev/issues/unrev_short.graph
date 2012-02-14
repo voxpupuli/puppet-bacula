@@ -1,11 +1,16 @@
-title       "Puppet unreviewed issues (including subprojects) over the past month"
+title       "Puppet unreviewed issues (including subprojects) over the past 6 months"
 vtitle      "Redmine tickets"
-from        "-1month"
+from        "-6months"
 description "Open issues marked unreviewed over the past month. As above, includes all of the open-source subprojects in Redmine."
 linewidth   2
 ymin        0
 
 field :puppetunrev,
+               :color => "blue",
+               :alias => "Puppet total unreviewed issues (all subprojects)",
+               :data  => "redmine.puppet.issues.unreviewed.total"
+
+field :puppetunrevsla,
                :color => "red",
-               :alias => "Puppet unreviewed issues (all subprojects)",
-               :data  => "redmine.puppet.issues.unreviewed"
+               :alias => "Puppet unreviewed issues out of SLA (all subprojects)",
+               :data  => "redmine.puppet.issues.unreviewed.out-of-sla"

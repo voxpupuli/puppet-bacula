@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 define bacula::jobdefs (
-    $type     = "Backup",
+    $jobtype  = "Backup",
     $sched    = "WeeklyCycle",
     $messages = "Standard",
     $priority = "10"

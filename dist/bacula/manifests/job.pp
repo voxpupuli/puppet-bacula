@@ -54,14 +54,16 @@ define bacula::job (
     }
 
     if $bacula::monitor == true {
-      @@nagios_service { "check_bacula_${name}":
-        use                      => 'generic-service',
-        host_name                => $::bacula::bacula_director,
-        check_command            => "check_nrpe!check_bacula!30 ${name}",
-        service_description      => "check_bacula_${name}",
-        target                   => '/etc/nagios3/conf.d/nagios_service.cfg',
-        notify                   => Service[$nagios::params::nagios_service],
-        first_notification_delay => '120',
+      if $jobtype == 'Backup' {
+        @@nagios_service { "check_bacula_${name}":
+          use                      => 'generic-service',
+          host_name                => $::bacula::bacula_director,
+          check_command            => "check_nrpe!check_bacula!30 ${name}",
+          service_description      => "check_bacula_${name}",
+          target                   => '/etc/nagios3/conf.d/nagios_service.cfg',
+          notify                   => Service[$nagios::params::nagios_service],
+          first_notification_delay => '120',
+        }
       }
     }
   } else {

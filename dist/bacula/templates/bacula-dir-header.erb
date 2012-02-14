@@ -12,43 +12,6 @@ Director {                # define myself
   DirAddress              = 127.0.0.1
 }
 
-# Only one restore job?
-Job {
-  Name     = "RestoreFiles"
-  Type     = Restore
-  Client   = <%= fqdn %>-fd
-  FileSet  = "PuppetLabsOps"
-  Storage  = File
-  Where    = /tmp/bacula-restores
-  Messages = Standard
-  Pool     = Default
-}
-
-JobDefs {
-  Name     = "PuppetLabsOps"
-  Type     = Backup
-  Schedule = "WeeklyCycle"
-  Messages = Standard
-  Priority = 10
-}
-
-FileSet {
-  Name = PuppetLabsOps
-  Include {
-    Options {
-      signature = MD5
-      compression=gzip
-  }
-    File = /etc
-    File = /opt
-    File = /var/www
-    File = /var/lib/bacula/mysql
-  }
-  Exclude {
-    File = /var/www/puppetlabs.com/downloads
-  }
-}
-
 Schedule {
   Name = "WeeklyCycle"
   Run  = Level=Full sun at 2:05
@@ -103,6 +66,7 @@ Console {
 @/etc/bacula/conf.d/pools.conf
 @/etc/bacula/conf.d/client.conf
 @/etc/bacula/conf.d/fileset.conf
+@/etc/bacula/conf.d/jobdefs.conf
 @/etc/bacula/conf.d/job.conf
 
 

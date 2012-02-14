@@ -80,6 +80,7 @@ class bacula::director (
     '/etc/bacula/conf.d/storage.conf',
     '/etc/bacula/conf.d/pools.conf',
     '/etc/bacula/conf.d/job.conf',
+    '/etc/bacula/conf.d/jobdefs.conf',
     '/etc/bacula/conf.d/client.conf',
     '/etc/bacula/conf.d/fileset.conf',
   ]
@@ -90,6 +91,17 @@ class bacula::director (
       group  => bacula,
       mode   => 640,
       notify => Service[$bacula::params::bacula_director_services];
+  }
+
+  bacula::fileset {
+    "Common":
+      files => ["/etc"],
+  }
+
+  bacula::job {
+    "RestoreFiles":
+      jobtype => 'Restore',
+      fileset => false,
   }
 
   ## backup the bacula database  -- database are being backed up by being created in mysql::db

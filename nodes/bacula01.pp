@@ -35,9 +35,12 @@ node bacula01 {
       label       => "Inc-";
   }
 
-  bacula::fileset {
-    "Common":
-      files => ["/etc"],
+  bacula::jobdefs {
+    "PuppetLabsOps":
+      jobtype  => "Backup",
+      sched    => "WeeklyCycle",
+      messages => "Standard",
+      priority => "10",
   }
 
   ####

@@ -63,6 +63,14 @@ node baal {
       files    => ["/var/lib/bacula/mysql"],
   }
 
+  bacula::jobdefs {
+    "PuppetLabsOps":
+      type     => "Backup",
+      schedule => "WeekCycle",
+      messages => "Standard",
+      priority => "10",
+  }
+
   ###
   # Monitoring
   #

@@ -40,6 +40,14 @@ node bacula01 {
       files => ["/etc"],
   }
 
+  bacula::jobdefs {
+    "PuppetLabsOps":
+      type     => "Backup",
+      schedule => "WeekCycle",
+      messages => "Standard",
+      priority => "10",
+  }
+
   ####
   # Duplicity
   #

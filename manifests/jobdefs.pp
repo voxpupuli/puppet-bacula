@@ -12,7 +12,7 @@
 #
 define bacula::jobdefs (
     $type     = "Backup",
-    $schedule = "Default",
+    $sched    = "WeeklyCycle",
     $messages = "Standard",
     $priority = "10"
   ) {

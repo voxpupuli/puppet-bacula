@@ -28,7 +28,7 @@ define bacula::mysql {
 
   bacula::job {
     "${fqdn}-mysql-${name}":
-      files    => "/var/lib/bacula/mysql",
+      files    => "/var/lib/bacula/mysql/${name}.sql",
   }
 
 }

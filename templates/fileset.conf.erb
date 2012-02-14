@@ -6,9 +6,9 @@ FileSet {
       compression=gzip
     }
 <% if files.is_a? Array %>
-<% files.each do |file| %><%= "    File = #{file}\n" %><% end %>
+<% files.each do |f| %><%= "    File = #{f}\n" %><% end %>
 <% elsif files != '' %>
-<%= "    File = #{file}" %>
+<%= "    File = #{f}" %>
 <% end %>
   }
   Exclude {

@@ -53,16 +53,6 @@ node baal {
       label       => "Inc-";
   }
 
-  bacula::fileset {
-    "Common":
-      files => ["/etc"],
-  }
-
-  bacula::job {
-    "${fqdn}":
-      files    => ["/var/lib/bacula/mysql"],
-  }
-
   bacula::jobdefs {
     "PuppetLabsOps":
       jobtype  => "Backup",

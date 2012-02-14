@@ -93,6 +93,11 @@ class bacula::director (
       notify => Service[$bacula::params::bacula_director_services];
   }
 
+  bacula::fileset {
+    "Common":
+      files => ["/etc"],
+  }
+
   ## backup the bacula database  -- database are being backed up by being created in mysql::db
   #bacula::mysql { 'bacula': }
 

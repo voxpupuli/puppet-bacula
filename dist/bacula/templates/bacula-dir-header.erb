@@ -32,23 +32,6 @@ JobDefs {
   Priority = 10
 }
 
-FileSet {
-  Name = PuppetLabsOps
-  Include {
-    Options {
-      signature = MD5
-      compression=gzip
-  }
-    File = /etc
-    File = /opt
-    File = /var/www
-    File = /var/lib/bacula/mysql
-  }
-  Exclude {
-    File = /var/www/puppetlabs.com/downloads
-  }
-}
-
 Schedule {
   Name = "WeeklyCycle"
   Run  = Level=Full sun at 2:05

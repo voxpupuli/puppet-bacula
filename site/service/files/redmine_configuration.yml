@@ -13,9 +13,9 @@
 #
 # ==== Sendmail command
 #
-# production:
-#   email_delivery:
-#     delivery_method: :sendmail
+production:
+  email_delivery:
+    delivery_method: :sendmail
 #
 # ==== Simple SMTP server at localhost
 #
@@ -57,18 +57,18 @@
 # This requires some additional configuration.  See the article at:
 # http://redmineblog.com/articles/setup-redmine-to-send-email-using-gmail/
 #
-production:
-  email_delivery:
-    delivery_method: :smtp
-    smtp_settings:
-      tls: true
-      enable_starttls_auto: true
-      address: "smtp.gmail.com"
-      port: 587
-      domain: "smtp.gmail.com" # 'your.domain.com' for GoogleApps
-      authentication: :plain
-      user_name: "tickets@puppetlabs.com"
-      password: "5JjteNVs"
+# production:
+#   email_delivery:
+#     delivery_method: :smtp
+#     smtp_settings:
+#       tls: true
+#       enable_starttls_auto: true
+#       address: "smtp.gmail.com"
+#       port: 587
+#       domain: "smtp.gmail.com" # 'your.domain.com' for GoogleApps
+#       authentication: :plain
+#       user_name: "tickets@puppetlabs.com"
+#       password: "5JjteNVs"
 #
 #
 # === More configuration options
@@ -82,15 +82,15 @@ production:
 # default configuration options for all environments
 default:
   # Outgoing emails configuration (see examples above)
-  email_delivery:
-    delivery_method: :smtp
-    smtp_settings:
-      address: smtp.example.net
-      port: 25
-      domain: example.net
-      authentication: :login
-      user_name: "redmine@example.net"
-      password: "redmine"
+  # email_delivery:
+  #   delivery_method: :smtp
+  #   smtp_settings:
+  #     address: smtp.example.net
+  #     port: 25
+  #     domain: example.net
+  #     authentication: :login
+  #     user_name: "redmine@example.net"
+  #     password: "redmine"
 
   # Absolute path to the directory where attachments are stored.
   # The default is the 'files' directory in your Redmine instance.

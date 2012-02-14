@@ -35,7 +35,7 @@ define bacula::job (
   if defined(Class["bacula"]) {
     # if the fileset is not defined, we fall back to one called "Common"
     if $fileset == true {
-      if $files == '' { err("you tell me to create a fileset, but not files given") }
+      if $files == '' { err("you tell me to create a fileset, but no files given") }
       $fileset_real = $name
       bacula::fileset {
         $name:

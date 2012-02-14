@@ -12,17 +12,6 @@ Director {                # define myself
   DirAddress              = 127.0.0.1
 }
 
-Job {
-  Name     = "RestoreFiles"
-  Type     = Restore
-  Client   = <%= fqdn %>-fd
-  FileSet  = "Common"
-  Storage  = File
-  Where    = /tmp/bacula-restores
-  Messages = Standard
-  Pool     = Default
-}
-
 Schedule {
   Name = "WeeklyCycle"
   Run  = Level=Full sun at 2:05

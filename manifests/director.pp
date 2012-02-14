@@ -92,8 +92,8 @@ class bacula::director (
       notify => Service[$bacula::params::bacula_director_services];
   }
 
-  # backup the bacula database
-  bacula::mysql { 'bacula': }
+  ## backup the bacula database  -- database are being backed up by being created in mysql::db
+  #bacula::mysql { 'bacula': }
 
   mysql::db { "bacula":
     db_user => $db_user,

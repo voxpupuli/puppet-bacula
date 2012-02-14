@@ -67,8 +67,8 @@ production:
 #       port: 587
 #       domain: "smtp.gmail.com" # 'your.domain.com' for GoogleApps
 #       authentication: :plain
-#       user_name: "tickets@puppetlabs.com"
-#       password: "5JjteNVs"
+#       user_name: "username@gmail.com"
+#       password: "password"
 #
 #
 # === More configuration options

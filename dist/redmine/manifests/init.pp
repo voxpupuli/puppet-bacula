@@ -111,6 +111,15 @@ class redmine (
     ]
   }
 
+  file{ "${approot}/config/configuration.yml":
+    source => 'puppet:///modules/redmine/configuration.yml',
+    owner   => $user,
+    group   => $group,
+    ensure  => present,
+    before  => Class['redmine::unicorn'],
+    require => Vcsrepo[$approot],
+  }
+
   if $newrelic == true {
       file { "${approot}/config/newrelic.yml":
         owner   => $user,
@@ -125,12 +134,25 @@ class redmine (
         provider => gem,
         require  => Vcsrepo[$approot],
       }
+
+      # The cheeky unicorn hack script from
+      # http://newrelic.com/docs/discussions/2909-unicorn-without-preload_app-with-rails
+      file{ "${approot}/config/initializers/unicorn_preloader.rb":
+        owner   => $user,
+        group   => $group,
+        ensure  => present,
+        source  => 'puppet:///modules/redmine/unicorn_preloader.rb',
+        before  => Class['redmine::unicorn'],
+        require => [ Vcsrepo[$approot], Package['newrelic_rpm'] ],
+      }
+
   }
 
   file { [ "${approot}/tmp", "${approot}/log", "${approot}/files"]:
     owner   => $user,
     group   => $group,
     ensure  => directory,
+    mode    => '0755',
     require => Vcsrepo[$approot],
   }
 

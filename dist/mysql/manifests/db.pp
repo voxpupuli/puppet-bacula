@@ -52,7 +52,7 @@ define mysql::db (
   }
 
   if defined(Class['bacula']) {
-    bacula::mysql { $db: }
+    bacula::mysql { $name: }
   }
 
 }

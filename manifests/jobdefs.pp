@@ -11,6 +11,10 @@
 # Sample Usage:
 #
 define bacula::jobdefs (
+    $type     = "Backup",
+    $schedule = "Default",
+    $messages = "Standard",
+    $priority = "10"
   ) {
 
   if defined(Class["bacula"]) {

@@ -98,6 +98,12 @@ class bacula::director (
       files => ["/etc"],
   }
 
+  bacula::job {
+    "RestoreFiles":
+      jobtype => 'Restore',
+      fileset => false,
+  }
+
   ## backup the bacula database  -- database are being backed up by being created in mysql::db
   #bacula::mysql { 'bacula': }
 

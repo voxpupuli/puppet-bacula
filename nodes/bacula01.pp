@@ -1,8 +1,8 @@
 node bacula01 {
   include role::server
 
-  ssh::allowgroup {"techops": }
-  sudo::allowgroup {"techops": }
+  ssh::allowgroup  { "techops": }
+  sudo::allowgroup { "techops": }
 
   ####
   # MySQL

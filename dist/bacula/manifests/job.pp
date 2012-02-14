@@ -35,9 +35,9 @@ define bacula::job (
     # if the fileset is not defined, we fall back to one called "Common"
     if $fileset == true {
       if $files == '' { err("you tell me to create a fileset, but not files given") }
-      $fileset_real = "$name"
+      $fileset_real = $name
       bacula::fileset {
-        "$name":
+        $name:
           files    => $files,
           excludes => $excludes
         }
@@ -46,7 +46,7 @@ define bacula::job (
     }
 
     @@concat::fragment {
-      "bacula-job-$name":
+      "bacula-job-${name}":
         target  => '/etc/bacula/conf.d/job.conf',
         content => template("bacula/job.conf.erb"),
         tag     => "bacula-${::bacula::bacula_director}";
@@ -55,7 +55,7 @@ define bacula::job (
     if $bacula::monitor == true {
       @@nagios_service { "check_bacula_${name}":
         use                      => 'generic-service',
-        host_name                => "$::bacula::bacula_director",
+        host_name                => $::bacula::bacula_director,
         check_command            => "check_nrpe!check_bacula!30 ${name}",
         service_description      => "check_bacula_${name}",
         target                   => '/etc/nagios3/conf.d/nagios_service.cfg',

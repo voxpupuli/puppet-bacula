@@ -80,6 +80,7 @@ class bacula::director (
     '/etc/bacula/conf.d/storage.conf',
     '/etc/bacula/conf.d/pools.conf',
     '/etc/bacula/conf.d/job.conf',
+    '/etc/bacula/conf.d/jobdefs.conf',
     '/etc/bacula/conf.d/client.conf',
     '/etc/bacula/conf.d/fileset.conf',
   ]

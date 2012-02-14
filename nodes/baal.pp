@@ -66,7 +66,7 @@ node baal {
   bacula::jobdefs {
     "PuppetLabsOps":
       type     => "Backup",
-      schedule => "WeeklyCycle",
+      sched    => "WeeklyCycle",
       messages => "Standard",
       priority => "10",
   }

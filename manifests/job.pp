@@ -28,6 +28,7 @@
 define bacula::job (
     $files    = '',
     $excludes = '',
+    $jobtype  = 'Backup',
     $fileset  = true
   ) {
 

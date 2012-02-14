@@ -238,9 +238,10 @@ class forge::packages {
   }
 
   exec { "bundle install" :
-    cwd     => '/opt/forge',
-    path    => '/bin:/usr/bin:/var/lib/gems/1.8/bin',
-    require => Package['bundler'],
+    cwd       => '/opt/forge',
+    path      => '/bin:/usr/bin:/var/lib/gems/1.8/bin',
+    unless    => 'bundle check',
+    require   => Package['bundler'],
     logoutput => on_failure,
   }
 }

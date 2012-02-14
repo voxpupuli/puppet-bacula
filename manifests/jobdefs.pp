@@ -20,11 +20,10 @@ define bacula::jobdefs (
   if defined(Class["bacula"]) {
     # if the fileset is not defined, we fall back to one called "Common"
 
-    @@concat::fragment {
+    concat::fragment {
       "bacula-jobdefs-${name}":
         target  => '/etc/bacula/conf.d/jobdefs.conf',
         content => template("bacula/jobdefs.conf.erb"),
-        tag     => "bacula-${::bacula::bacula_director}";
     }
 
   } else {

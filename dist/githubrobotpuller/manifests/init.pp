@@ -54,6 +54,7 @@ class githubrobotpuller (
     minute  => '*/15',
     user    => $githubrobotpuller::user,
     require => File[ "$githubrobotpuller::path/config.yaml" ],
+    environment => 'MAILTO=""',
   }
 
 }

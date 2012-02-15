@@ -7,6 +7,8 @@ node syn {
 
   metric_fu::codebase { "puppet" : repo_url => "https://github.com/puppetlabs/puppet.git", repo_rev => "origin/master"}
   metric_fu::codebase { "facter" : repo_url => "https://github.com/puppetlabs/facter.git", repo_rev => "origin/master"}
+  metric_fu::codebase { "puppet-dashboard" : repo_url => "https://github.com/puppetlabs/puppet-dashboard.git", repo_rev => "origin/master"}
+  metric_fu::codebase { "marionette-collective" : repo_url => "https://github.com/puppetlabs/marionette-collective.git", repo_rev => "origin/master"}
 
   ssh::allowgroup  { "interns": }
   sudo::allowgroup { "interns": }

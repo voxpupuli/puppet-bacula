@@ -23,7 +23,7 @@ class metric_fu ( $site_alias = $fqdn )
   $web_root     = "$parent_dir/www"
   $owner        = "www-data"
   $group        = "www-data"
-  $metricfu_cmd = "/usr/bin/rake metrics:all"
+  $metricfu_cmd = "/usr/bin/metrical"
   $port         = 80
   
   apache::vhost{"$site_alias":
@@ -38,18 +38,10 @@ class metric_fu ( $site_alias = $fqdn )
   package { ["bison"]:
     ensure => present,
   }
-  package { ["metric_fu","rspec","mocha","zaml","ripper"]:
+  package { ["metrical","rspec","mocha","zaml","ripper","haml"]:
     ensure => present,
     provider => gem,
-    require => [Package["main"],Package["ruby_parser"],Package["bison"]],
-  }
-  package { ["main"]:
-    ensure => "4.7.1", # chronic dependency breaks starting in 4.7.2
-    provider => gem,
-  }
-  package { ["ruby_parser"]:
-    ensure => "2.0.4",
-    provider => gem,
+    require => [Package["bison"]],
   }
 
   file { $parent_dir:

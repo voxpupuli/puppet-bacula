@@ -17,10 +17,10 @@
 
 define metric_fu::codebase ($repo_url, $repo_rev) {
   include metric_fu
-  $timeout       = 0
+  $timeout       = 900
   
   $repo_base     = "$metric_fu::parent_dir/$title"
-  $rakefile_path = "$repo_base/tasks/rake/metrics.rake"
+  $cfg_path      = "$repo_base/.metrics"
   
   vcsrepo { $repo_base:
 ## you would think this should be latest, but "present" actually always gets the latest rev of desired branch
@@ -33,13 +33,13 @@ define metric_fu::codebase ($repo_url, $repo_rev) {
   }
   
   exec { "metric_fu_$title":
-    command     => "${metric_fu::metricfu_cmd} </dev/null",
+    command     => "${metric_fu::metricfu_cmd}",
 #    user       => $metric_fu::owner,
     cwd         => $repo_base,
     subscribe   => Vcsrepo[$repo_base],
     refreshonly => true,
     timeout     => $timeout,
-    require     => [Package["main"],Package["metric_fu","rspec","mocha","zaml"],File[$rakefile_path]],
+    require     => [Package["metrical","rspec","mocha","zaml"],File[$cfg_path]],
   }
 
   file { "$metric_fu::web_root/$title":
@@ -50,11 +50,11 @@ define metric_fu::codebase ($repo_url, $repo_rev) {
     require => [Exec["metric_fu_$title"], File[$metric_fu::web_root]],
   }
 
-  file { "$rakefile_path":
+  file { "$cfg_path":
     group   => $group,
     owner   => $owner,  
     ensure  => present,
-    source  => "puppet:///modules/metric_fu/metrics.rake",
+    source  => "puppet:///modules/metric_fu/.metrics",
     require => [Vcsrepo["$repo_base"]],
   }
 }

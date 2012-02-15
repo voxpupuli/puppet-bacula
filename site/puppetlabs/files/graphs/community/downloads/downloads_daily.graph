@@ -1,0 +1,27 @@
+title       "Daily downloads of puppet and facter"
+vtitle      "Daily downloads"
+from        "-6month"
+description "Daily download counts for each rubygem over the past 6 months"
+linewidth   2
+ymin        0
+
+field :puppetall,
+               :color => "blue",
+               :alias => "Downloads per day of all Puppet gems",
+               :data  => "rubygems.puppet.total.daily_downloads"
+
+field :puppetcurr,
+               :color => "cyan",
+               :alias => "Downloads per day of the current-version Puppet gem",
+               :data  => "rubygems.puppet.current.daily_downloads"
+
+field :facterall,
+               :color => "red",
+               :alias => "Downloads per day of all Facter gems",
+               :data  => "rubygems.facter.total.daily_downloads"
+
+field :factercurr,
+               :color => "orange",
+               :alias => "Downloads per day of the current-version Facter gem",
+               :data  => "rubygems.facter.current.daily_downloads"
+

@@ -19,10 +19,10 @@ class monitoring {
   nagios_host { "eir.dc1.puppetlabs.net":     alias => "eir",     address => "10.0.42.33",    hostgroups => "dc1", }
 
   Nagios_service {
-    use     => 'generic-service',
-    notify  => Service[$nagios::params::nagios_service],
-    target  => '/etc/nagios3/conf.d/nagios_service.cfg',
-    command => 'check_ping!100.0,20%!500.0,60%',
+    use           => 'generic-service',
+    target        => '/etc/nagios3/conf.d/nagios_service.cfg',
+    check_command => 'check_ping!100.0,20%!500.0,60%',
+    notify        => Service[$nagios::params::nagios_service],
   }
 
   nagios_service { "check_ping_imana":   host_name => "imana.puppetlabs.lan",       service_description => "check_ping_imana.puppetlabs.lan", } 

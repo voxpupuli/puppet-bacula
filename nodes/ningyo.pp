@@ -109,10 +109,15 @@ node ningyo {
       minute => '0',
       hour => '2';
     "clean_dashboard_reports":
-      user => root,
-      command => '(cd /usr/share/puppet-dashboard/; rake RAILS_ENV=production reports:prune -s upto=1 unit=mon > /dev/null)',
-      minute => '20',
-      hour => '2';
+      user    => root,
+      command => '(cd /usr/share/puppet-dashboard/ && rake --silent RAILS_ENV=production reports:prune upto=1 unit=mon >/dev/null)',
+      minute  => '20',
+      hour    => '2';
+    'optimise_dashboard_db':
+      user    => root,
+      command => '(cd /usr/share/puppet-dashboard/ && rake --silent RAILS_ENV=production db:raw:optimize >/dev/null )',
+      minute  => '42',
+      hour    => '2';
     "Puppet: puppet_deploy.rb":
       user    => root,
       command => '/usr/local/bin/puppet_deploy.rb 2>/dev/null',

@@ -37,13 +37,11 @@ class os::freebsd {
   file{ '/bin/bash':
     ensure  => link,
     target  => '/usr/local/bin/bash',
-    require => Package['bash'],
   }
 
   file{ '/bin/zsh':
     ensure  => link,
     target  => '/usr/local/bin/zsh',
-    require => Package['zsh'],
   }
 
   # This just makes our lives easier.

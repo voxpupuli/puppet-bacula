@@ -31,6 +31,7 @@ node burji {
   # Server stuff
   #
   Package <| title == 'mlocate' |>
+  package{ 's3cmd': ensure => installed }
 
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 

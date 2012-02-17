@@ -51,8 +51,7 @@ define mysql::db (
     }
   }
 
-  if defined(Class['bacula']) {
-    bacula::mysql { $name: }
-  }
+  if defined(Class['bacula']) { bacula::mysql { $name: } }
+  if defined(Class['munin'])  { include munin::dbservices }
 
 }

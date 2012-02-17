@@ -1,5 +1,9 @@
 class os::freebsd {
 
+  if $haszfs == true {
+    include zfs
+  }
+
   #Package { source => "http://ftp4.freebsd.org/pub/FreeBSD/ports/${architecture}/packages-${kernelmajversion}-release/", provider => portupgrade }
   Package { provider => portupgrade }
 
@@ -12,7 +16,6 @@ class os::freebsd {
                             'security/ca_root_nss',
                             'sysutils/lsof',
                             'textproc/p5-ack',
-                            'sysutils/zfs-stats',
                             'editors/vim-lite' ]
 
   # Install some basic packages. Nothing too spicy.

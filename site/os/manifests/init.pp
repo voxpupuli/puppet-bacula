@@ -3,6 +3,6 @@ class os {
     linux:   { include os::linux }
     darwin:  { include os::darwin }
     freebsd: { include os::freebsd }
-    default: { notify { "OS ${operatingsystem} hos no love": } }
+    default: { notify { "OS ${operatingsystem} has no love": } }
   }
 }

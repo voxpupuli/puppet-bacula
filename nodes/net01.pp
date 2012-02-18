@@ -611,7 +611,7 @@ node net01 {
 
   # Virtual Center Server
   dhcp::host { "vc01":
-    mac => '00:0c:29:69:d2:c4',
+    mac => '00:50:56:a1:4c:83',
     ip  => '192.168.100.99',
   }
 

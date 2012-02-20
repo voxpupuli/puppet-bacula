@@ -432,4 +432,14 @@ class virtual::users {
     key     => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAum4MBPLi+toenr/bmdyswftrF8FMT4AB1O9ej5wXriJyzXuF/GWSaqlilVxX4kul2nn6F6QGh/XL+y3O0gJMDheAKFZjPO0qP67FqemVkAxFI79nz9QWCLax8WMCHY0BdRkB3p8KQh2jimQVxhmApXZQuGdSsCMf+KZZFnLTYcUQRcvStcZbUGF6sGyoTLCmIFxHlGFkEmy3l8xDQ5aof3POUdF5bHj9tyTYcpuKsKdeXYKURpyikW0k2WMsNagHIrkevWjv4J/ODRK/xy+mhT/N6qGTThf35rXjM0b/K3ebiwlA4jSqxkrmy7TaqyJ1LQ9hfwVzZwF1VQdxIdLrWQ==',
     keytype => 'ssh-rsa',
   }
+
+  # (#12009) support engineer
+  @account::user{'david':
+    comment => 'David Gwilliam',
+    uid     => '1167',
+    group   => 'allstaff',
+    shell   => '/bin/zsh',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDdzTYmsNyaOjf9EctrLEv2UOAA0oYTKhTMtloDt/iCjdR2JGKF4+TDZsk3GHrWYoNUCgdt5acXUOl/G9fX1Mz2UwtkIt3U+DaXxaPJoq2wCtah9pAlLaXLDsX6wV/7+jP+v3zqslZFMk2IhFVK2xUyEsh8w0MgeGJ8UKVSkzeBt0GtqBukFm0Itwsk9zERq0y79RiS5bkSxe+Z7eeq/5LMDMoFf0jMAYgrZalTuh0SfxQZjYg0ECfYZPbgm96g8ESoXZjUcdP5U9w/9I/9xN1yIi3WWOAO4BPYXbrTrnXs3RRoikRlpB+G5pj5dEPi6dwc9mohe91ZH5UhFvBMFh3T',
+    keytype => 'ssh-rsa',
+  }
 }

@@ -7,7 +7,7 @@ class zfs::munin {
     ensure  => directory,
     recurse => true,
     owner   => 'root',
-    group   => 'root',
+    group   => 0, # wheel or root.
     mode    => '0755',
     source  => 'puppet:///modules/zfs/muninplugins/',
   }

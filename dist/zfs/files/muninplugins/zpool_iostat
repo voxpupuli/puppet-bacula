@@ -5,6 +5,8 @@ if [ "$1" = "autoconf" ]; then
                 exit 0
 fi
 
+PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+
 zlines=`/sbin/zpool iostat -v| wc -l|sed 's/ //g'`
 ztail=`echo "-"$zlines`
 ztmp=/var/run/munin/zpool_iostat

@@ -13,7 +13,6 @@ class zfs::munin {
   }
 
 	$plugins = [  'zfs-filesystem-graph',
-                'zfs-statistics-for-freebsd',
                 'zfs-stats-for-freebsd-arc-efficiency',
                 'zfs-stats-for-freebsd-arc-utilization',
                 'zfs-stats-for-freebsd-cache-hits-by-cache-list',

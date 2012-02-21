@@ -23,6 +23,8 @@
 
 myname=`basename $0 | sed 's/^zfs_fs_//g' | sed -e 's/_/\//g'`
 
+PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+
 if [ "$1" = "autoconf" ]; then
     # Makes little sense to autoconf if you can't suggest
     echo no

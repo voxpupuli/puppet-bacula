@@ -39,14 +39,13 @@ node baal {
 
   bacula::director::pool {
     "PuppetLabsPool-Full":
-      #volret      => "1 months",
-      volret      => "30 days",
+      volret      => "21 days",
       maxvolbytes => '2000000000',
       maxvoljobs  => '2',
       maxvols     => "20",
       label       => "Full-";
     "PuppetLabsPool-Inc":
-      volret      => "14 days",
+      volret      => "8 days",
       maxvolbytes => '4000000000',
       maxvoljobs  => '50',
       maxvols     => "10",

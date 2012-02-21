@@ -4,8 +4,6 @@ class munin::plugins {
   # Am dirty hardcoding this for freebsd to start with, to scratch my
   # itch.
 
-  $munin_plugin_path = '/usr/local/share/munin/plugins/'
-
 	$plugins = [ 'cpu', 'cupsys_pages',
 	#' dev_cpu_',
 	'df', 'df_inode', 'env', 'extinfo_tester',
@@ -29,16 +27,18 @@ class munin::plugins {
 }
 
 define munin::pluginer (
-  $toname = undef,
+  $fromname = undef,
   $ensure = present,
-  $pluginpath = '/usr/local/share/munin/plugins/',
-  $plugindest = '/usr/local/etc/munin/plugins/'
+  $pluginpath = "${munin::params::plugin_source}/",
+  $plugindest = "${munin::params::plugin_dest}/"
 ) {
 
-  if $toname == undef {
-    $destname = $name
+  include munin::params
+
+  if $fromname == undef {
+    $sourcename = $name
   } else {
-    $destname = $toname
+    $sourcename = $fromname
   }
 
   $realensure = $ensure ? {
@@ -50,9 +50,11 @@ define munin::pluginer (
     "absent"  => absent,
   }
 
-  file{ "${plugindest}/$destname":
-    ensure => $ensure,
-    target => $realensure,
+  file{ "${plugindest}/${sourcwname}":
+    ensure => $realensure,
+    target => "${pluginpath}/${name}",
+    notify => Service['munin-node'],
   }
 
 }
+

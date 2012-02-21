@@ -8,7 +8,7 @@
 #   include nginx::server
 #
 define nginx::vhost(
-  $port,
+  $port           = '80',
   #$dest,
   $priority       = '10',
   $template       = 'nginx/vhost-default.conf.erb',

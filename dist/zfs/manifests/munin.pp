@@ -4,12 +4,12 @@ class zfs::munin {
 
   # install the files, then use them.
   file{ "${munin::params::plugin_source}/zfs":
-    ensure => directory,
-    recuse => true,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-    source => 'puppet:///module/zfs/muninplugins/',
+    ensure  => directory,
+    recurse => true,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///module/zfs/muninplugins/',
   }
 
 	$plugins = [  'zfs-filesystem-graph',

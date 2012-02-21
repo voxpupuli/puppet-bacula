@@ -1,0 +1,4 @@
+[<%= confname %>]
+<% envs.keys.sort.each do |e| -%>
+env.<%= e %> <%= envs[e] %>
+<% end -%>

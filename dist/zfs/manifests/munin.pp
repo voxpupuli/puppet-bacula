@@ -9,7 +9,7 @@ class zfs::munin {
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => 'puppet:///module/zfs/muninplugins/',
+    source  => 'puppet:///modules/zfs/muninplugins/',
   }
 
 	$plugins = [  'zfs-filesystem-graph',

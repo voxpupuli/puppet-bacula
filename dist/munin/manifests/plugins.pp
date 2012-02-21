@@ -24,12 +24,11 @@ class munin::plugins {
 	'swap', 'systat', 'uptime',
 	'users', 'vmstat']
 
-  munin::plugin{ $plugins: }
+  munin::pluginer{ $plugins: }
 
 }
 
-define munin::plugin(
-  $name,
+define munin::pluginer (
   $toname = undef,
   $ensure = present,
   $pluginpath = '/usr/local/share/munin/plugins/',

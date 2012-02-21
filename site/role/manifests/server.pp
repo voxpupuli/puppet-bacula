@@ -15,6 +15,12 @@ class role::server {
     include nagios
     include munin
     include bacula
+
+    # Throw in some ordering, so the automatic things in, say, munin,
+    # happen in the right order.
+    Class['munin'] -> Class['role::base']
+    # Class['role::base'] -> Class['nagios']
+    # Class['role::base'] -> Class['bacula']
   }
 
   class { "ntp": server => hiera("ntpserver"); }

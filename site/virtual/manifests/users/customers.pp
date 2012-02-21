@@ -102,5 +102,14 @@ class virtual::users::customers {
     usekey  => 'false',
     expire  => "2012-02-28",
   }
+
+  @account::user {'jbarton':
+    uid     => '21004',
+    group   => 'suddenlink',
+    comment => 'Support ticket 773',
+    key     => 'AAAAB3NzaC1kc3MAAAEBAN+JQvgC7toRwmCuohoM0ueawFyk832RE+gFwiGo3qpBaNkFgz7zghBdT4HnsXGDClEkKSoHWPaNhpGlzCE0MAXXjQMZHrrMpdr11c/msPu8OVCvVoEk3G/VabwIrUh3Mw2oElWJrBSxXvfDyHK9TmZ0oElEl8bKKHIOSQDuHG0nXN+KoxwuOsB4ohRERMICWi2ZVbpgyVJZRutFpwQHm5z5Rfbg31lzCUEsyTgEF56He+v1NTVV6W4Z9NAusS4iQl30r1gX1D2ymVGGcbN22/0VRqPpaAkpdlmtXuYEwWF3CY32RCIannCEAjJ9NyPcQB1Y5IGYaYBY8gzgFux1LacAAAAVAJ+o+AK77yt0Q70Eq/cPocdtggVjAAABAAMAngPbIw6HwpcXzZzeQ9CqIPw+AQCQvAMGL4e6eQc18kswsdvZFAqNunJsN9zUrSelvu5PsluS5XEf4ZJBE6irjcSux0wNJFUatiKhI4Iwjjutak+qbhPh2UoIVPsZCOerZhyZj3ctZA9XkseF8dBedcvDZTXIy5bnXTeunJFWIWUompKkOEW+LsNcWz7U5FlUpRmjZTTSnaMEJZxzJkKnrKvXwr3bgQfs4HGgiXjsh5rrh81pQ+9iB4JEm+xrWKiGx7ZzECeTitSM5mAMGcbfuGgsrlZ+uyPTCcZuqnuLsviuJl8TU8zL5PEZOkcNsMbjyeSP3tCBVA08CHe5TkoAAAEADMpc4/GRIAeE07CJLuXYU95WuMGxo/7sOiENkMsNYB1SCNfKRPi1cR/0laMS7ifrVIVn7EWN4cEgc/1FBePUaV92qAbvx+NnPSowoC7R40d7Lfb4Hk+kJMbZo7vDmv/c8ttyFXxZaspklWDIeHjcdxJIIcoTRblcC4IFNqK9xAnQmz5jd0ii2RizdYa/7lfL9R0Gc8NQli3N9LLcxrnkhY9mvyqJUIvUH1kX0CWbrDOon5b9uKPEji7R9xHFbZx4biW7XcFpe53hnlFMyFTdECIw7uwl9dgQeAJQgZJDQy7Z0KlWQViw/cntZntnpM7hpkcRwo+fp+fRV21XUsNpzg==',
+    keytype => 'ssh-dss',
+    expire  => "2012-02-28",
+  }
 }
 

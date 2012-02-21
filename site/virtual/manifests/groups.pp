@@ -155,6 +155,12 @@ class virtual::groups {
     tag    => customer,
   }
 
+  @group { 'suddenlink':
+    ensure => present,
+    gid    => 1060,
+    tag    => customer,
+  }
+
 #
 # Functional
 #

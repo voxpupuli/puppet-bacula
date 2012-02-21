@@ -7,6 +7,7 @@ node odin {
 
   $ssh_customer = [
     "mcgraw", # (#12410)
+    "suddenlink", # support:733
   ]
 
   ssh::allowgroup { "prosvc": }

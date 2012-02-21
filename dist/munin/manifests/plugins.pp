@@ -50,7 +50,7 @@ define munin::pluginer (
     "absent"  => absent,
   }
 
-  file{ "${plugindest}/${sourcwname}":
+  file{ "${plugindest}/${sourcename}":
     ensure => $realensure,
     target => "${pluginpath}/${name}",
     notify => Service['munin-node'],

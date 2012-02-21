@@ -13,7 +13,18 @@ node syn {
   ssh::allowgroup  { "interns": }
   sudo::allowgroup { "interns": }
 
-  package { ["rest-client","mime-types","httparty","nokogiri"]: provider => gem, ensure => present, }
+  package { 
+    ["rest-client","mime-types","httparty"]: 
+      provider => gem, 
+      ensure => present, 
+  }
+  package { 
+    ["nokogiri"]: 
+      ensure => present, 
+      provider => gem, 
+      require => Package["libxml2-dev","libxslt-dev"]
+  }
+  package { ["libxml2-dev","libxslt-dev"]: ensure => present, }
   package { "ii": ensure => present, }
 
   file { "/var/lib/gather":

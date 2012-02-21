@@ -1,7 +1,7 @@
 #!/bin/sh
 # -*- sh -*-
 #
-# $Id: zfs_arc_efficiency 11 2010-11-25 07:10:14Z patpro $
+# $Id: zfs_arc_utilization 11 2010-11-25 07:10:14Z patpro $
 #
 # Parameters:
 #
@@ -35,14 +35,14 @@ fi
 
 # config
 if [ "$1" = "config" ]; then
-    echo 'graph_title ZFS ARC Efficiency'
+    echo 'graph_title ZFS ARC Size'
     echo 'graph_args -l 0'
-    echo 'graph_vlabel %'
+    echo 'graph_vlabel Size in MB'
     echo 'graph_category ZFS'
-    echo 'graph_info This graph shows the ARC Efficiency'
+    echo 'graph_info This graph shows the ARC Size utilization'
 
-/usr/local/bin/zfs-stats -A | awk 'BEGIN { RS = "" ; FS = "\n" } /Efficiency/ {print}' | \
-awk '/^\t.*%/ {sub("\t","");sub(/:.*/,""); displayname = $0; gsub(/[ .]/,"_",$0); print $0".label "displayname"\n"$0".min 0"}' 
+/usr/local/bin/zfs-stats -E | awk 'BEGIN { RS = "" ; FS = "\n" } /^ARC Size/ {print}' | \
+awk '/^\t/ {sub("\t","");sub(/ \(.*\):.*/,""); displayname = $0; gsub(/[ .]/,"_",$0); print $0".label "displayname"\n"$0".min 0"}' 
 	
 	exit 0
 fi
@@ -50,5 +50,5 @@ fi
 # This is the main part of the script, basically it calls
 # /usr/local/bin/zfs-stats and processes its output
 
-/usr/local/bin/zfs-stats -A | awk 'BEGIN { RS = "" ; FS = "\n" } /Efficiency/ {print}' | \
-awk '/^\t.*%/ {sub("\t","");sub(/:/,""); gsub(/[ .]/,"_",$0); sub(/%/,""); sub(/_/,".",$2); print $1".value "$2}'
+/usr/local/bin/zfs-stats -E | awk 'BEGIN { RS = "" ; FS = "\n" } /^ARC Size/ {print}' | \
+sed -e 's,	,,' -e 's, ,_,g' -e 's,\._,__,' -e 's,_(.*):., ,' -e 's,	, ,g' -e 's,\([A-Za-z_]*\)  *[^ ]* \([0-9.]*\)M,\1.value \2,' | grep value

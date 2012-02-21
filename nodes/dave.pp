@@ -4,6 +4,7 @@
 
 node 'dave.dc1.puppetlabs.net' {
   include role::server
+  include munin::pf
 
   class{ 'ipsec':
     my_ip         => $::ipaddress,

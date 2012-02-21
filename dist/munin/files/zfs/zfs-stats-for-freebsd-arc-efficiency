@@ -1,7 +1,7 @@
 #!/bin/sh
 # -*- sh -*-
 #
-# $Id: zfs_arc_cache_hits_by_cache_list 11 2010-11-25 07:10:14Z patpro $
+# $Id: zfs_arc_efficiency 11 2010-11-25 07:10:14Z patpro $
 #
 # Parameters:
 #
@@ -35,20 +35,20 @@ fi
 
 # config
 if [ "$1" = "config" ]; then
-    echo 'graph_title ZFS ARC Cache Hits by Cache List'
-    echo 'graph_args  -l 0'
+    echo 'graph_title ZFS ARC Efficiency'
+    echo 'graph_args -l 0'
     echo 'graph_vlabel %'
     echo 'graph_category ZFS'
-    echo 'graph_info This graph shows the ARC cache hits by cache list'
+    echo 'graph_info This graph shows the ARC Efficiency'
 
-/usr/local/bin/zfs-stats -A | awk 'BEGIN { RS = "" ; FS = "\n" } /CACHE HITS BY CACHE LIST/ {print}' | \
-awk '/^\t.*%/ {sub(/[\t ]*/,"");sub(/ \(.*\):/,":");sub(/:.*/,""); displayname = $0; gsub(/[ .]/,"_",$0); print $0".label "displayname"\n"$0".min 0"}'	
-
+/usr/local/bin/zfs-stats -E | awk 'BEGIN { RS = "" ; FS = "\n" } /Efficiency/ {print}' | \
+awk '/^\t.*%/ {sub("\t","");sub(/:.*/,""); displayname = $0; gsub(/[ .]/,"_",$0); print $0".label "displayname"\n"$0".min 0"}' 
+	
 	exit 0
 fi
 
 # This is the main part of the script, basically it calls
 # /usr/local/bin/zfs-stats and processes its output
 
-/usr/local/bin/zfs-stats -A | awk 'BEGIN { RS = "" ; FS = "\n" } /CACHE HITS BY CACHE LIST/ {print}' | \
-awk '/^\t.*%/ {sub(/[\t ]*/,"");sub(/ \(.*\):/,":");sub(/:/,""); gsub(/[ .]/,"_",$0); sub(/%/,""); sub(/_/,".",$2); print $1".value "$2}'
+/usr/local/bin/zfs-stats -E | awk 'BEGIN { RS = "" ; FS = "\n" } /Efficiency/ {print}' | \
+awk '/^\t.*%/ {sub("\t","");sub(/:/,""); gsub(/[ .]/,"_",$0); sub(/%/,""); sub(/_/,".",$2); print $1".value "$2}'

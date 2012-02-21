@@ -62,6 +62,10 @@ class virtual::groups {
     ensure => present,
     gid    => 682,
   }
+  @group { 'support': # Support engineering
+    ensure => present,
+    gid    => 683,
+  }
 
 #
 # Service Groups

@@ -111,7 +111,7 @@ class virtual::users {
     uid     => '1123',
     shell   => '/bin/zsh',
     group   => allstaff,
-    groups  => ["sysadmin","operations","techops","infra"],
+    groups  => ["sysadmin","operations","techops","infra","support"],
     tag     => allstaff,
  }
 
@@ -212,7 +212,7 @@ class virtual::users {
     uid     => '1025',
     group   => allstaff,
     shell   => '/bin/zsh',
-    groups  => ["sysadmin","operations","techops","infra"],
+    groups  => ["sysadmin","operations","techops","infra","support"],
     tag     => allstaff,
   }
 
@@ -231,7 +231,7 @@ class virtual::users {
     comment => 'Adrien Thebo',
     uid     => '1026',
     group   => allstaff,
-    groups  => ["sysadmin","operations","techops","infra"],
+    groups  => ["sysadmin","operations","techops","infra","support"],
     shell   => '/bin/bash',
     key     => "AAAAB3NzaC1yc2EAAAABIwAAAQEAr/PYSBs0degY8/NxTZAsidGG+9Wnqb6RQxqm+HRK+Jc4toetKOvXVfwCKQczTwpuKlS3bT0MREv2Ur4boFm7jWGy01y0cJBLjBQEsefWjb3jlQIuYZcaYBlzSq1PlzeuTHcc86k34gvL0uKojYmc43kX/ao3o3yIp4/7SlKJVpYikWNB0NDOokeGEr440GwAGUzybgur/Vfm+aYa9k0wigCC386S1/l4MQ3dDI8D83fOZnyHVOmyjBFL/Nz2Q3Xy4P/Sey8g40SoO4UjNtGmZRmwmdUaF1p1i1BDW7wqsFBYwKeLKv8ZjNo+zy0Mflm2KFnrHBd1FOzymYV3g1biyw==",
     keytype => "ssh-rsa",
@@ -415,6 +415,7 @@ class virtual::users {
     comment => 'Celia Cottle',
     uid     => '1165',
     group   => 'allstaff',
+    groups  => ["support"],
     shell   => '/bin/bash',
     tag     => 'allstaff',
     key     => 'AAAAB3NzaC1kc3MAAACBAKpvSzmjm4u1N4HHhwAmCa3f59O8ae1jDYPHRNbSy6w0Ln9en0+wcJuKRu9ya0xnGSF7VAyQActySYJPO78lb3KiwCOtMBflapUqhTB9wN6B+OEeQbG7zXN0gl3rzW+atWUPav29cYO6wtk/fYPd2XpmTCtABPow9VbwaA5n/i+rAAAAFQDODO+yzkMFOjiGHjnJ5ID9NTwkVwAAAIEAi6dPl7CXPbUPT9xCrZ2n4wewCXtkhX6ZgQggi4+mp3dfOjO2b9ZswOcY3pudrAbwLlOn5H6DZLef2xk8HSkEDzLQv49aQWLIJHDQrnhIDAjqebt6obUQsUxFXwDBannzo49LyfxAxWbzCrTwVU88zyX57QInldXYmVuL4lum+nsAAACBAIEUqATog7A6qJAlbRHw6zoY/hqWiFGHYe9M6qWug7iZylYjDKPsdWOa1mvE57Ffk/R93LYX2/rM7aGFvKiWZUWeb+madTqOAnv2RpE3dSMe2CwKDp73hbqgvchSXPjqnOdtvF4YUlz/V7B6DmPJzXtLji83dxSws1726rvpsBTY',
@@ -438,6 +439,7 @@ class virtual::users {
     comment => 'David Gwilliam',
     uid     => '1167',
     group   => 'allstaff',
+    groups  => ["support"],
     shell   => '/bin/zsh',
     key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDdzTYmsNyaOjf9EctrLEv2UOAA0oYTKhTMtloDt/iCjdR2JGKF4+TDZsk3GHrWYoNUCgdt5acXUOl/G9fX1Mz2UwtkIt3U+DaXxaPJoq2wCtah9pAlLaXLDsX6wV/7+jP+v3zqslZFMk2IhFVK2xUyEsh8w0MgeGJ8UKVSkzeBt0GtqBukFm0Itwsk9zERq0y79RiS5bkSxe+Z7eeq/5LMDMoFf0jMAYgrZalTuh0SfxQZjYg0ECfYZPbgm96g8ESoXZjUcdP5U9w/9I/9xN1yIi3WWOAO4BPYXbrTrnXs3RRoikRlpB+G5pj5dEPi6dwc9mohe91ZH5UhFvBMFh3T',
     keytype => 'ssh-rsa',

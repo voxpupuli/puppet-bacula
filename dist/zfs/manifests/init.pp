@@ -4,4 +4,8 @@ class zfs {
 
   package{ 'sysutils/zfs-stats': ensure => present, }
 
+  if defined( Class['munin'] ) {
+    include zfs::munin
+  }
+
 }

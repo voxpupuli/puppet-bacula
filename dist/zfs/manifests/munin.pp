@@ -19,11 +19,6 @@ class zfs::munin {
                 'zfs-stats-for-freebsd-cache-hits-by-cache-list',
                 'zfs-stats-for-freebsd-cache-hits-by-data-type',
                 'zfs-stats-for-freebsd-dmu-prefetch',
-                'zfs_arc_cache_hits_by_cache_list',
-                'zfs_arc_cache_hits_by_data_type',
-                'zfs_arc_efficiency',
-                'zfs_arc_utilization',
-                'zfs_dmu_prefetch',
                 'zlist',
                 'zpool_iostat' ]
 

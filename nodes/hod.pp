@@ -4,4 +4,5 @@ node 'hod.dc1.puppetlabs.net' {
   include role::server
 
   include munin::plugins
+  include zfs::munin
 }

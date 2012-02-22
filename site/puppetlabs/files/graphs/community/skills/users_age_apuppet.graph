@@ -1,0 +1,35 @@
+title       "Age distribution of skills"
+vtitle      "percentage"
+from        "-6months"
+description "Percentage, according to LinkedIn, within each age group that lists Puppet as a skill."
+linewidth   2
+
+field :one,
+               :color => "red",
+               :alias => "Percentage of Puppet-skilled users age 18-24",
+               :data  => "linkedin.skills.puppet.age.18-24"
+
+field :two,
+               :color => "blue",
+               :alias => "Percentage of Puppet-skilled users age 25-34",
+               :data  => "linkedin.skills.puppet.age.25-34"
+               
+field :three,
+               :color => "indigo",
+               :alias => "Percentage of Puppet-skilled users age 35-44",
+               :data  => "linkedin.skills.puppet.age.35-44"
+               
+field :four,
+               :color => "green",
+               :alias => "Percentage of Puppet-skilled users age 45-54",
+               :data  => "linkedin.skills.puppet.age.45-54"
+               
+field :five,
+               :color => "yellow",
+               :alias => "Percentage of Puppet-skilled users age 55-64",
+               :data  => "linkedin.skills.puppet.age.55-64"
+               
+field :six,
+               :color => "gray",
+               :alias => "Percentage of Puppet-skilled users age 65-120",
+               :data  => "linkedin.skills.puppet.age.65-120"

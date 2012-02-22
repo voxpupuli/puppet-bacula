@@ -1,0 +1,15 @@
+title       "Comparison of skills on LinkedIn"
+vtitle      "User profiles"
+from        "-6months"
+description "Total people listing Puppet or an alternative as a skill on LinkedIn."
+linewidth   2
+
+field :puppet,
+               :color => "blue",
+               :alias => "Total Puppet skilled users",
+               :data  => "linkedin.skills.puppet.total"
+
+field :cfengine,
+               :color => "aqua",
+               :alias => "Total CFengine skilled users",
+               :data  => "linkedin.skills.cfengine.total"

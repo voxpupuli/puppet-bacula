@@ -1,0 +1,15 @@
+title       "Comparison of skill growth rates on LinkedIn"
+vtitle      "User profiles"
+from        "-6months"
+description "Linkedin's listed growth rate for the respective skills. It is not clear how often this value is updated."
+linewidth   2
+
+field :puppet,
+               :color => "blue",
+               :alias => "Growth in Puppet skilled users",
+               :data  => "linkedin.skills.puppet.growth"
+
+field :cfengine,
+               :color => "aqua",
+               :alias => "Growth in CFengine skilled users",
+               :data  => "linkedin.skills.cfengine.growth"

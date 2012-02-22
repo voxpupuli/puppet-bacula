@@ -1,5 +1,5 @@
 title       "Comparison of skill growth rates on LinkedIn"
-vtitle      "User profiles"
+vtitle      "Percentage"
 from        "-6months"
 description "Linkedin's listed growth rate for the respective skills. It is not clear how often this value is updated."
 linewidth   2

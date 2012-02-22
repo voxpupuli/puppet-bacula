@@ -15,7 +15,7 @@ field :two,
                :data  => "linkedin.skills.puppet.age.25-34"
                
 field :three,
-               :color => "indigo",
+               :color => "aqua",
                :alias => "Percentage of Puppet-skilled users age 35-44",
                :data  => "linkedin.skills.puppet.age.35-44"
                

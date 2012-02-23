@@ -1,0 +1,10 @@
+title       "Forge uptime from New Relic"
+vtitle      "Percentage"
+from        "-1week"
+description "Forge uptime percentage reported by New Relic."
+linewidth   2
+
+field :redmine,
+               :color => "green",
+               :alias => "Forge uptime",
+               :data  => "newrelic.forge"

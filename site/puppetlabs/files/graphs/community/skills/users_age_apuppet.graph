@@ -1,4 +1,4 @@
-title       "Age distribution of skills"
+title       "Puppet age distribution of skills"
 vtitle      "percentage"
 from        "-6months"
 description "Percentage, according to LinkedIn, within each age group that lists Puppet as a skill."

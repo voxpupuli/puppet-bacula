@@ -31,7 +31,7 @@ node clippy {
   duplicity::cron { "/home/git":
     user           => "git",
     target         => "ssh://gitbackups@bacula01.puppetlabs.lan:22//bacula/duplicity/git.puppetlabs.net",
-    gpg_agent_info => "/home/git/.gpg-agent-info",
+    home           => "/home/git",
     mailto         => '""',
     options        => [
       "--encrypt-key 409D0688",

@@ -77,6 +77,7 @@ class bacula::director (
   }
 
   $sub_confs = [
+    '/etc/bacula/conf.d/schedule.conf',
     '/etc/bacula/conf.d/storage.conf',
     '/etc/bacula/conf.d/pools.conf',
     '/etc/bacula/conf.d/job.conf',

@@ -1,7 +1,7 @@
 # $confname is the name of the configuration to put in the file
-# $envs is the hash of env.plugin entries to put
+# $confs is the hash of env.plugin entries to put
 
-define munin::pluginconf ($envs,$confname){
+define munin::pluginconf ($confs,$confname){
 
   include munin::params
 

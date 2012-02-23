@@ -9,12 +9,12 @@ field :members,
                :alias => "puppet-users members",
                :data  => "groups.puppet-users.members"
                
-field :members,
+field :msgs,
                :color => "green",
                :alias => "puppet-users messages (reset every month)",
                :data  => "groups.puppet-users.messages"
 
-field :messages,
+field :msgsavg,
                :color => "blue",
                :alias => "puppet-users messages per month",
                :data  => 'summarize(groups.puppet-users.messages,"1month","max")'

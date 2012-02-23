@@ -1,7 +1,7 @@
-title       "Social media growth, past half-year"
+title       "Social media growth"
 vtitle      "followers"
 from        "-6months"
-description "Twitter and Facebook followers over the past 6 months"
+description "Twitter and Facebook followers"
 linewidth   2
 
 field :fb,

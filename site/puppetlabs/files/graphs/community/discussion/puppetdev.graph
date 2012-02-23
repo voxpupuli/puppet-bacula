@@ -1,15 +1,20 @@
-title       "puppet-dev list activity, past 6 months"
+title       "puppet-dev list activity"
 from        "-6months"
-description "puppet-dev members and messages over the past 6 months"
+description "puppet-dev members and messages."
 linewidth   2
 ymin        0
 
 field :members,
-               :color => "blue",
+               :color => "red",
                :alias => "puppet-dev members",
                :data  => "groups.puppet-dev.members"
 
+field :members,
+               :color => "blue",
+               :alias => "puppet-dev messages (reset every month)",
+               :data  => "groups.puppet-dev.messages"
+
 field :messages,
-               :color => "red",
+               :color => "green",
                :alias => "puppet-dev messages per month",
                :data  => 'summarize(groups.puppet-dev.messages,"1month","max")'

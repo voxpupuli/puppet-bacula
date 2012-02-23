@@ -1,7 +1,7 @@
-title       "Github time since push by project over the past month"
+title       "Github time since push by project"
 vtitle      "Days"
 from        "-1month"
-description "Time (in days) since the last push by project over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+description "Time (in days) since the last push by project. This is at the github level and does not include any subprojects (so puppet is just puppet)."
 linewidth   2
 ymin        0
 

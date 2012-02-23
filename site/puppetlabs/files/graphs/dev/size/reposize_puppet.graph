@@ -1,6 +1,6 @@
-title       "Puppet repo size over the past month"
+title       "Puppet repo size"
 from        "-1month"
-description "Repository size of puppet as reported by Github over the past month."
+description "Repository size of puppet as reported by Github."
 linewidth   2
 ymin        0
 

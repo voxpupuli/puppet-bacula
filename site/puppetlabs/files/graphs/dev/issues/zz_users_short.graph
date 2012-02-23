@@ -1,7 +1,7 @@
-title       "New account registrations over the past 6 months"
+title       "New account registrations"
 vtitle      "New user registrations"
 from        "-6months"
-description "New users registered per day in Redmine over the past 6 months."
+description "New users registered per day in Redmine."
 linewidth   2
 ymin        0
 

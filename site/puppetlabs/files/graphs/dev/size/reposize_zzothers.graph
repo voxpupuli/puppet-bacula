@@ -1,6 +1,6 @@
-title       "Repo size by project over the past month"
+title       "Repo size by project"
 from        "-1month"
-description "Secondary projects' repository sizes as reported by Github over the past month."
+description "Secondary projects' repository sizes as reported by Github."
 linewidth   2
 ymin        0
 

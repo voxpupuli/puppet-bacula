@@ -1,7 +1,7 @@
-title       "Puppet file count over the past month"
+title       "Puppet file count"
 vtitle      "Files"
 from        "-1month"
-description "File counts over the past month"
+description "File counts"
 linewidth   2
 ymin        0
 

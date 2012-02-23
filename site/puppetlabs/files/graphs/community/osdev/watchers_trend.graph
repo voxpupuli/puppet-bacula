@@ -1,6 +1,6 @@
 title       "Community development interest: Github watchers"
 from        "-6months"
-description "Watchers by project on Github over the past half-year"
+description "Watchers by project on Github"
 linewidth   2
 
 field :puppet,

@@ -1,7 +1,7 @@
-title       "Age of average pull request by project over the past month"
+title       "Age of average pull request by project"
 vtitle      "Number of days old"
 from        "-1month"
-description "Average age of open pull requests, in days, over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+description "Average age of open pull requests, in days. This is at the github level and does not include any subprojects (so puppet is just puppet)."
 linewidth   2
 ymin        0
 

@@ -1,4 +1,4 @@
-title       "Puppet unreviewed issues (including subprojects) over the past 6 months"
+title       "Puppet unreviewed issues (including subprojects)"
 vtitle      "Redmine tickets"
 from        "-6months"
 description "Open issues marked unreviewed over the past month. As above, includes all of the open-source subprojects in Redmine."

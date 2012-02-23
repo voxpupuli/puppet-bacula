@@ -1,7 +1,7 @@
-title       "Facter code stats over the past month"
+title       "Facter code stats"
 vtitle      "Lines"
 from        "-1month"
-description "Lines of code over the past month"
+description "Lines of code"
 linewidth   2
 ymin        0
 

@@ -1,7 +1,7 @@
-title       "Puppet issues needing action (including subprojects) over the past 6 months"
+title       "Puppet issues needing action (including subprojects)"
 vtitle      "Redmine tickets"
 from        "-6months"
-description "Open issues marked with a status requiring further action over the past 6 months. As above, includes all of the open-source subprojects in Redmine."
+description "Open issues marked with a status requiring further action. As above, includes all of the open-source subprojects in Redmine."
 linewidth   2
 ymin        0
 

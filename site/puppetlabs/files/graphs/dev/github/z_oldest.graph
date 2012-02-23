@@ -1,7 +1,7 @@
-title       "Age of oldest pull request by project over the past month"
+title       "Age of oldest pull request by project"
 vtitle      "Number of days old"
 from        "-1month"
-description "Age of the oldest open pull request, in days, over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+description "Age of the oldest open pull request, in days. This is at the github level and does not include any subprojects (so puppet is just puppet)."
 linewidth   2
 ymin        0
 

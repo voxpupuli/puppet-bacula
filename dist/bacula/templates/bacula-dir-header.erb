@@ -12,12 +12,6 @@ Director {                # define myself
   DirAddress              = 127.0.0.1
 }
 
-Schedule {
-  Name = "WeeklyCycle"
-  Run  = Level=Full sun at 2:05
-  Run  = Level=Incremental mon-sat at 2:05
-}
-
 Pool {
   Name            = Default
   Pool Type       = Backup
@@ -62,6 +56,7 @@ Console {
   CommandACL = status, .status
 }
 
+@/etc/bacula/conf.d/schedule.conf
 @/etc/bacula/conf.d/storage.conf
 @/etc/bacula/conf.d/pools.conf
 @/etc/bacula/conf.d/client.conf

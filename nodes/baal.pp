@@ -60,6 +60,16 @@ node baal {
       priority => "10",
   }
 
+  bacula::schedule {
+    "WeeklyCycle":
+      runs => [
+        "Level=Full sun at 1:05",
+        "Level=Incremental mon-sat at 1:05"
+      ];
+    "WeeklyCycleAfterBackup":
+      runs => [ "Full sun-sat at 3:10 ", ]
+  }
+
   ###
   # Monitoring
   #

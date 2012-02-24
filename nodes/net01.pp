@@ -126,6 +126,12 @@ node net01 {
   # Jenkins acceptance testbed hosts
   ##############################################################################
 
+  # Win2008r2 testbed (#12472)
+  dhcp::host { "win2008r2-acceptance":
+    mac => '00:50:56:b2:00:1e',
+    ip  => '192.168.100.24',
+  }
+
   # testbed
   dhcp::host { "sles-11-x64-2":
     mac => '00:50:56:b2:00:69',

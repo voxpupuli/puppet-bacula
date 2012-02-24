@@ -17,6 +17,14 @@ class nginx::server {
     ensure => present,
   }
 
+  if $operatingsystem == "Debian" {
+    apt::pin{
+      "nginx":
+        release  => 'squeeze-backports',
+        priority => '1001'
+    }
+  }
+
   service{ 'nginx':
     name       => $nginx::params::service,
     ensure     => running,

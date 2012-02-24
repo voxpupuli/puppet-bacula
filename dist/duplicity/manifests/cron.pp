@@ -9,7 +9,7 @@ define duplicity::cron(
 
   include duplicity::install
 
-  $gpg_agent_info = "${home}/.gpg_agent-info"
+  $gpg_agent_info = "${home}/.gpg-agent-info"
   $lastrun        = "${home}/.lastrun"
 
   $duplicity_command = inline_template("/usr/bin/duplicity <%= options.join(' ') %> ${name} ${target}")

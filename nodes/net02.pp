@@ -121,9 +121,8 @@ node 'net02.dc1.puppetlabs.net' {
   }
 
   dhcp::host {
-    'ran':
-      mac => "00:50:56:b2:00:ab",
-      ip  => "10.0.1.50",
+    'ran':      mac => "00:50:56:b2:00:ab", ip => "10.0.1.50";
+    'bacula02': mac => "00:50:56:a1:4c:87", ip => "10.0.1.51";
   }
 
 }

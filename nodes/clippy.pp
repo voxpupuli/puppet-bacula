@@ -32,7 +32,7 @@ node clippy {
     user           => "git",
     target         => "ssh://gitbackups@bacula01.puppetlabs.lan:22//bacula/duplicity/git.puppetlabs.net",
     home           => "/home/git",
-    mailto         => '""',
+    mailto         => '',
     options        => [
       "--encrypt-key 409D0688",
       "--sign-key 409D0688",

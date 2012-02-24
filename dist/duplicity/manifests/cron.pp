@@ -22,7 +22,7 @@ define duplicity::cron(
     user    => $user,
     hour    => 0,
     minute  => 0,
-    environment => [ "MAILTO=$mailto" ],
+    environment => [ "MAILTO=\"$mailto\"" ],
   }
 
   @@nagios_service { "duplicity_${name}_${hostname}":

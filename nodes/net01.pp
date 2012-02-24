@@ -128,7 +128,7 @@ node net01 {
 
   # Win2008r2 testbed (#12472)
   dhcp::host { "win2008r2-acceptance":
-    mac => '00:50:56:b2:00:1e',
+    mac => '00:50:56:b2:00:2a',
     ip  => '192.168.100.24',
   }
 

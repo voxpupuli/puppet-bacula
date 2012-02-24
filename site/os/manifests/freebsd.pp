@@ -53,6 +53,11 @@ class os::freebsd {
     target  => '/usr/local/etc/puppet',
   }
 
+  file{ '/usr/bin/ruby':
+    ensure => link,
+    target => '/usr/local/bin/ruby',
+  }
+
   file { "/root/ports-supfile":
     source => "puppet:///modules/puppetlabs/ports-supfile",
   }

@@ -28,7 +28,7 @@ define duplicity::cron(
   @@nagios_service { "duplicity_${name}_${hostname}":
     use                      => 'generic-service',
     host_name                => $fqdn,
-    check_command            => "check_nrpe!check_file_age 86400 172800 ${lastrun}"
+    check_command            => "check_nrpe!check_file_age 86400 172800 ${lastrun}",
     service_description      => "check_duplicity-${name}-${hostname}",
     first_notification_delay => '120',
     target                   => '/etc/nagios3/conf.d/nagios_service.cfg',

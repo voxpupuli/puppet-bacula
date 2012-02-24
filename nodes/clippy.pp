@@ -2,12 +2,9 @@
 #
 # == Description
 #
-# This node hosts downloads for puppet products, so such things as
-# yum.puppetlabs.com, apt.puppetlabs.com, downloads.puppetlabs.com, and other
-# roles.
+# This host provides a general purpose gitolite instance with secure backups.
 #
-# This host should be accessible to anyone that needs to administer releases,
-# such as the enterprise release team, solutions, and professional services.
+# To view accessible git repositories, run `ssh git@git.puppetlabs.net info`
 #
 # == Other names
 #

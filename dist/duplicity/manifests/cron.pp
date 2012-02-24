@@ -27,8 +27,8 @@ define duplicity::cron(
 
   $environment_command = "source ${gpg_agent_info}; export GPG_AGENT_INFO;"
 
-  $incr_cmd = "/bin/bash -c '${environment_command} ${cmd_prefix} incremental ${cmd_suffix}' && touch ${lastrun}"
-  $full_cmd = "/bin/bash -c '${environment_command} ${cmd_prefix} full ${cmd_suffix}' && touch ${lastrun}"
+  $incr_cmd = "/bin/bash -c '${environment_command} ${cmd_prefix} incremental ${cmd_suffix}' && echo date > ${lastrun}"
+  $full_cmd = "/bin/bash -c '${environment_command} ${cmd_prefix} full ${cmd_suffix}' && echo date > ${lastrun}"
 
   $clean_cmd = "/bin/bash -c '${environment_command} ${cmd_prefix} remove-older-than 2W ${target}'"
 
@@ -73,6 +73,8 @@ define duplicity::cron(
   # Add monitoring for backups
   ##############################################################################
 
+  # Generate warning when backups have not run for 24 hours, generate critical
+  # after backups have not run for 48 hours
   @@nagios_service { "duplicity_${name}_${hostname}":
     use                      => 'generic-service',
     host_name                => $fqdn,

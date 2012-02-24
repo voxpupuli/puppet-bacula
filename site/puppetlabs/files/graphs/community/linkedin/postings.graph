@@ -1,0 +1,18 @@
+title       "Comparison of job postings on LinkedIn"
+vtitle      "User profiles"
+from        "-6months"
+description "Total job postings listing Puppet or a related keyword on LinkedIn."
+linewidth   2
+
+field :puppet,
+               :color => "purple",
+               :alias => "Total postings for keyword puppet",
+               :data  => "linkedin.postings.puppet"
+
+field :cfengine,
+               :alias => "Total postings for keyword cfengine",
+               :data  => "linkedin.postings.cfengine"
+
+field :devops,
+               :alias => "Total postings for keyword devops",
+               :data  => "linkedin.postings.devops"

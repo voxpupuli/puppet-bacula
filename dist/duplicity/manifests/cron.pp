@@ -23,7 +23,7 @@ define duplicity::cron(
   ##############################################################################
 
   $cmd_prefix = inline_template("/usr/bin/duplicity <%= options.join(' ') %>")
-  $cmd_suffix = inline_template("${name} ${target}")
+  $cmd_suffix = "${name} ${target}"
 
   $environment_command = "source ${gpg_agent_info}; export GPG_AGENT_INFO;"
 

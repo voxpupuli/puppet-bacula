@@ -30,7 +30,7 @@ define duplicity::cron(
   $incr_cmd = "/bin/bash -c '${environment_command} ${cmd_prefix} incremental ${cmd_suffix}' && echo date > ${lastrun}"
   $full_cmd = "/bin/bash -c '${environment_command} ${cmd_prefix} full ${cmd_suffix}' && echo date > ${lastrun}"
 
-  $clean_cmd = "/bin/bash -c '${environment_command} ${cmd_prefix} remove-older-than 2W ${target}'"
+  $clean_cmd = "/bin/bash -c '${environment_command} ${cmd_prefix} remove-older-than 2W --force ${target}'"
 
   ##############################################################################
   # Install crons

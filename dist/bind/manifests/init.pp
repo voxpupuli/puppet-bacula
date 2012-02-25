@@ -60,6 +60,7 @@ class bind (
   $bind_group                  = $bind::params::bind_group,
   $bind_restart                = $bind::params::bind_restart,
   $bind_log_dir                = $bind::params::bind_log_dir,
+  $bind_stats                  = $bind::params::bind_stats,
   $bind_disable_v6             = "false",
   $customoptions               = undef
 

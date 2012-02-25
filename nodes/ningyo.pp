@@ -131,5 +131,7 @@ node ningyo {
     mode   => 0700,
   }
 
+  include grayskull
+
 }
 

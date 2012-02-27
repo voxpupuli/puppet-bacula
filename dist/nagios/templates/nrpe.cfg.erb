@@ -27,7 +27,7 @@ command[check_mysql]=<%= nagios_plugins_path %>/check_mysql
 #command[check_disk]=<%= nagios_plugins_path %>/check_disk -w $ARG1$ -c $ARG2$ -p $ARG3$
 command[check_procs]=<%= nagios_plugins_path %>/check_procs -w $ARG1$ -c $ARG2$ -s $ARG3$
 command[check_proc]=<%= nagios_plugins_path %>/check_procs -c $ARG1$ -C $ARG2$
-command[check_file_age]=<%= nagios_plugins_path %>/check_file_age -w $ARG1$ -c $ARG2$ -f $ARG3$
+command[file_age]=<%= nagios_plugins_path %>/check_file_age -w $ARG1$ -c $ARG2$ -f $ARG3$
 
 
 # Ones we have made should go in the artisan-plugins dir and referenced

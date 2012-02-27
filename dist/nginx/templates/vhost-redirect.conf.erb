@@ -9,7 +9,7 @@ server {
 <% if has_variable?( 'ipaddress6' ) -%>
   # Listen on an ipv6 version of this port too, but only do v6 on it, so we
   # don't get strange v4 mapped IPs in v6.
-  listen   [::]:<%= port %><% if isdefaultvhost == true %> default ipv6only=on<% end %>;
+  listen   [::]:<%= port %><% if isdefaultvhost == true %> default<% end %> ipv6only=on;
 <% end -%>
 
 <% if ssl == true -%>

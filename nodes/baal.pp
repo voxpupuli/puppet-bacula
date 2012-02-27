@@ -133,9 +133,6 @@ node baal {
     "node_${hostname}_office":
       server => "office.puppetlabs.com",
       cert   => "node_${hostname}",
-  }
-
-  openvpn::client {
     "node_${hostname}_dc1":
       server => "vpn.puppetlabs.net",
       cert   => "node_${hostname}",

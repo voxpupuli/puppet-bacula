@@ -27,15 +27,37 @@ node enkal {
   Group <| tag == 'developers' |>
 
   openvpn::client {
-    "node_$hostname":
+    "node_${hostname}_office":
       server => "office.puppetlabs.com",
+      cert   => "node_${hostname}",
+    "node_${hostname}_dc1":
+      server => "vpn.puppetlabs.net",
+      cert   => "node_${hostname}",
   }
 
+
+  # DNS resolution to internal hosts
   include unbound
   unbound::stub { "puppetlabs.lan":
     address  => '192.168.100.8',
     insecure => true,
   }
+
+  unbound::stub { "100.168.192.in-addr.arpa.":
+    address  => '192.168.100.8',
+    insecure => true,
+  }
+
+  unbound::stub { "dc1.puppetlabs.net":
+    address  => '10.0.1.20',
+    insecure => true,
+  }
+
+  unbound::stub { "42.0.10.in-addr.arpa.":
+    address  => '10.0.1.20',
+    insecure => true,
+  }
+
 
   # zleslie: stop dhclient from updating resolve.conf
   file { "/etc/dhcp3/dhclient-enter-hooks.d/nodnsupdate":

@@ -76,7 +76,6 @@ define duplicity::cron(
   # Generate warning when backups have not run for 24 hours, generate critical
   # after backups have not run for 48 hours
   @@nagios_service { "duplicity_${name}_${hostname}":
-    ensure                   => absent,
     use                      => 'generic-service',
     host_name                => $fqdn,
     check_command            => "check_nrpe!file_age!108000 216000 ${lastrun}",

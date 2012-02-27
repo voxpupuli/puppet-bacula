@@ -26,7 +26,7 @@
 #  }
 #
 define apache::vhost(
-    $port,
+    $port          = '80',
     $docroot,
     $ssl           = true,
     $template      = 'apache/vhost-default.conf.erb',

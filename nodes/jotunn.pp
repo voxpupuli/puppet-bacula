@@ -36,4 +36,23 @@ node jotunn {
     app_root => '/opt/freddy',
     require  => Class['freddy'],
   }
+
+  # 12806 - Docs needs some scratch vhosts
+  apache::vhost {
+    'docspreview1.puppetlabs.lan': docroot => '/opt/docspreview1';
+    'docspreview2.puppetlabs.lan': docroot => '/opt/docspreview2';
+    'docspreview3.puppetlabs.lan': docroot => '/opt/docspreview3';
+  }
+
+  Account::User <| tag == 'deploy' |>
+  ssh::allowgroup { "www-data": }
+
+  file {
+    ['/opt/docspreview3','/opt/docspreview2','/opt/docspreview1']:
+      ensure => directory,
+      mode   => '0755',
+      owner  => deploy,
+      group  => root;
+  }
+
 }

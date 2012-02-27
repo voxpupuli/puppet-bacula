@@ -29,10 +29,10 @@ node enkal {
   openvpn::client {
     "node_${hostname}_office":
       server => "office.puppetlabs.com",
-      cert   => "node_${hostname}",
+      cert   => "node_${hostname}";
     "node_${hostname}_dc1":
       server => "vpn.puppetlabs.net",
-      cert   => "node_${hostname}",
+      cert   => "node_${hostname}";
   }
 
 

@@ -23,7 +23,7 @@ class bacula (
     $file_retention = "45 days",
     $job_retention  = "6 months",
     $autoprune      = "yes",
-    $monitor        = true
+    $monitor        = "yes"
   ){
 
   include bacula::params
@@ -31,48 +31,15 @@ class bacula (
   $bacula_director   = hiera('bacula_director')
   $bacula_password   = genpass('bacula_password')
   $bacula_is_storage = hiera('bacula_is_storage')
-
-  if $bacula_is_storage == "yes" {
-    include bacula::storage
-  }
-
+  $listen_address    = hiera('bacula_client_listen')
   $working_directory = $bacula::params::working_directory
   $pid_directory     = $bacula::params::pid_directory
 
-  $listen_address    = hiera('bacula_client_listen')
 
-  if $monitor == true {
-    @@nagios_service { "check_baculafd_${hostname}":
-      use                 => 'generic-service',
-      host_name           => "$fqdn",
-      check_command       => 'check_nrpe!check_proc!1:1 bacula-fd',
-      service_description => "check_baculafd_${hostname}",
-      target              => '/etc/nagios3/conf.d/nagios_service.cfg',
-      notify              => Service[$nagios::params::nagios_service],
-      require             => Service[$bacula::params::bacula_client_services],
-    }
-  }
+  if $bacula_is_storage == "yes" { include bacula::storage }
+  if $monitor           == "yes" { include bacula::client::monitor }
 
-  package { $bacula::params::bacula_client_packages:
-    ensure => present,
-  }
-
-  service { $bacula::params::bacula_client_services:
-    ensure  => running,
-    enable  => true,
-    require => Package[$bacula::params::bacula_client_packages],
-  }
-
-  file { $bacula::params::client_config:
-    require => Package[$bacula::params::bacula_client_packages],
-    content => template('bacula/bacula-fd.conf.erb'),
-    notify  => Service[$bacula::params::bacula_client_services],
-  }
-
-  file { $bacula::params::working_directory:
-    ensure  => directory,
-    require => Package[$bacula::params::bacula_client_packages],
-  }
+  include bacula::common
 
   @@concat::fragment {
     "bacula-client-$hostname":

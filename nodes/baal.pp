@@ -11,7 +11,13 @@
 # Sample Usage:
 #
 node baal {
+
+  ###
+  # Base
+  #
   include role::server
+  include puppetlabs_ssl
+  include vim
 
   ssh::allowgroup { "techops": }
   ssh::allowgroup { "interns": }
@@ -23,52 +29,9 @@ node baal {
   include mysql::server
 
   ###
-  # Base
-  #
-  include puppetlabs_ssl
-  #include account::master
-  include vim
-
-  ###
   # Bacula
   #
-  class { "bacula::director":
-    db_user => 'bacula',
-    db_pw   => 'qhF4M6TADEkl',
-  }
-
-  bacula::director::pool {
-    "PuppetLabsPool-Full":
-      volret      => "21 days",
-      maxvolbytes => '2000000000',
-      maxvoljobs  => '2',
-      maxvols     => "20",
-      label       => "Full-";
-    "PuppetLabsPool-Inc":
-      volret      => "8 days",
-      maxvolbytes => '4000000000',
-      maxvoljobs  => '50',
-      maxvols     => "10",
-      label       => "Inc-";
-  }
-
-  bacula::jobdefs {
-    "PuppetLabsOps":
-      jobtype  => "Backup",
-      sched    => "WeeklyCycle",
-      messages => "Standard",
-      priority => "10",
-  }
-
-  bacula::schedule {
-    "WeeklyCycle":
-      runs => [
-        "Level=Full sun at 1:05",
-        "Level=Incremental mon-sat at 1:05"
-      ];
-    "WeeklyCycleAfterBackup":
-      runs => [ "Full sun-sat at 3:10 ", ]
-  }
+  include service::baculaserver
 
   ###
   # Monitoring

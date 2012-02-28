@@ -132,8 +132,8 @@ node 'net02.dc1.puppetlabs.net' {
     'ran':      mac => "00:50:56:b2:00:ab", ip => "10.0.1.50";
     'bacula02': mac => "00:50:56:a1:4c:87", ip => "10.0.1.51";
 
-    # Jenkins Slaves
-    'slave-win2k8r2': mac => "00:50:56:a1:4c:93", ip => "10.0.10.20";
+    # Jenkins spectest Slaves
+    'slave-windows2008r2': mac => "00:50:56:a1:4c:99", ip => "10.0.10.20";
   }
 
 }

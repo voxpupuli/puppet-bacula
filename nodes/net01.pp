@@ -403,7 +403,7 @@ node net01 {
 
   # Windows 2003 R2 SP2 testbed (#12284)
   dhcp::host { 'win2003r2-acceptance':
-    mac => '00:50:56:b2:00:3a',
+    mac => '00:50:56:3f:11:3a',
     ip  => '192.168.100.65',
   }
 

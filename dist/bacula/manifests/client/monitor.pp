@@ -1,5 +1,6 @@
 class bacula::client::monitor {
   include bacula::params
+  include nagios::params
 
   @@nagios_service { "check_baculafd_${hostname}":
     use                 => 'generic-service',

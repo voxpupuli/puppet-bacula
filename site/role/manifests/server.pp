@@ -21,6 +21,8 @@ class role::server (
     Class['role::base'] -> Class['nagios']
     Class['role::base'] -> Class['bacula']
     Class['role::base'] -> Class['munin']
+    Class['nagios']     -> Class['munin']
+    Class['nagios']     -> Class['bacula']
 
     if ( $nagios == true ) { include nagios }
     if ( $bacula == true ) { include bacula }

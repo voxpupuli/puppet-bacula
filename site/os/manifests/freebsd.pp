@@ -15,6 +15,7 @@ class os::freebsd {
                             'net/netcat',
                             'security/ca_root_nss',
                             'sysutils/lsof',
+                            'sysutils/smartmontools',
                             'textproc/p5-ack',
                             'editors/vim-lite' ]
 

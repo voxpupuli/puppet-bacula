@@ -18,9 +18,10 @@ class role::server {
 
     # Throw in some ordering, so the automatic things in, say, munin,
     # happen in the right order.
-    Class['munin'] -> Class['role::base']
+    # Class['munin'] -> Class['role::base']
     # Class['role::base'] -> Class['nagios']
     # Class['role::base'] -> Class['bacula']
+    Class['role::base'] -> Class['munin']
   }
 
   class { "ntp": server => hiera("ntpserver"); }

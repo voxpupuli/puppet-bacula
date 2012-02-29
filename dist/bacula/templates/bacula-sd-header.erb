@@ -1,19 +1,16 @@
-#
-# Define this Storage Daemon
 Storage {
   Name             = <%= fqdn %>-sd
   WorkingDirectory = <%= working_directory %>
   Pid Directory    = <%= pid_directory %>
-  SDPort           = 9103
-  Maximum Concurrent Jobs = 20
+  SDPort           = <%= port %>
 }
 
 #
 # List the devices for this Storage Daemon
 Device {
-  Name           = FileStorage
-  Media Type     = File
-  Archive Device = /bacula
+  Name           = <%= device_name %>
+  Media Type     = <%= media_type %>
+  Archive Device = <%= device %>
   LabelMedia     = yes; # lets Bacula label unlabeled media
   Random Access  = Yes;
   AutomaticMount = yes;
@@ -25,6 +22,6 @@ Device {
 # Send all messages to the Director,
 Messages {
   Name     = Standard
-  director = <%= fqdn %>-dir = all
+  director = <%= bacula_director %>-dir = all
 }
 

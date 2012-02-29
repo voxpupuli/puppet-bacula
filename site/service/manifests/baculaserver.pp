@@ -38,10 +38,10 @@ class service::baculaserver {
       runs => [ "Full sun-sat at 3:10" ]
   }
 
-  bacula::job {
-    "BackupCatalog":
-      template => "bacula/catalogjob.conf.erb"
-  }
+  #bacula::job {
+  #  "BackupCatalog":
+  #    template => "bacula/catalogjob.conf.erb"
+  #}
 
 }
 

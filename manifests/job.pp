@@ -30,7 +30,8 @@ define bacula::job (
     $excludes = '',
     $jobtype  = 'Backup',
     $fileset  = true,
-    $template = 'bacula/job.conf.erb'
+    $template = 'bacula/job.conf.erb',
+    $storage  = hiera('bacula_storage')
   ) {
 
   if defined(Class["bacula"]) {

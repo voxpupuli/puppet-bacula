@@ -1,7 +1,7 @@
 title       "Daily downloads of puppet and facter"
 vtitle      "Daily downloads"
 from        "-6month"
-description "Daily download counts for each rubygem over the past 6 months"
+description "Daily download counts for each rubygem."
 linewidth   2
 ymin        0
 

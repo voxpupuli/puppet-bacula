@@ -1,6 +1,6 @@
 title       "Community development interest: Github forks"
 from        "-6months"
-description "Forks by project on Github over the past 6 months"
+description "Forks by project on Github"
 linewidth   2
 
 field :puppet,

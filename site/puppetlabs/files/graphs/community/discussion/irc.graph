@@ -1,7 +1,7 @@
-title       "IRC activity, past 6 months"
+title       "IRC activity"
 vtitle      "participants"
 from        "-6months"
-description "IRC participants over the past half-year"
+description "IRC participants in #puppet."
 linewidth   2
 ymin        0
 

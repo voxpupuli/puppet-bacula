@@ -3,6 +3,7 @@ vtitle      "Percentage"
 from        "-1week"
 description "Redmine uptime percentage reported by New Relic."
 linewidth   2
+ymax        100
 
 field :redmine,
                :color => "red",

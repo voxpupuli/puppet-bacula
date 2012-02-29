@@ -1,0 +1,10 @@
+title       "Forge users"
+vtitle      "modules"
+from        "-6months"
+description "Forge new users per day"
+linewidth   2
+ymin        0
+
+field :forge,
+               :alias => "Forge new users daily",
+               :data  => 'derivative(summarize(forge.users.total,"1day","avg"))'

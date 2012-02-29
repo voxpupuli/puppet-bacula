@@ -1,7 +1,7 @@
-title       "Puppet code stats over the past month"
+title       "Puppet code stats"
 vtitle      "Lines"
 from        "-1month"
-description "Lines of code over the past month"
+description "Lines of code"
 linewidth   2
 
 field :code,

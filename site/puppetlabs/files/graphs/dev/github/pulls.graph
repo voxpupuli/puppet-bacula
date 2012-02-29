@@ -1,7 +1,7 @@
-title       "Pull requests by project over the past month"
+title       "Pull requests by project"
 vtitle      "Pull requests"
 from        "-1month"
-description "Open pull requests over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+description "Open pull requests. This is at the github level and does not include any subprojects (so puppet is just puppet)."
 linewidth   2
 ymin        0
 

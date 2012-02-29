@@ -1,7 +1,7 @@
-title       "Average time since last pull request response by project over the past month"
+title       "Average time since last pull request response by project"
 vtitle      "Number of days old"
 from        "-1month"
-description "Average time since last response to each open pull request, in days, over the past month. This is at the github level and does not include any subprojects (so puppet is just puppet)."
+description "Average time since last response to each open pull request, in days. This is at the github level and does not include any subprojects (so puppet is just puppet)."
 linewidth   2
 ymin        0
 

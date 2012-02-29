@@ -1,0 +1,31 @@
+title       "Currently unsuccessful tests by project"
+vtitle      "Unsuccesses"
+from        "-1week"
+description "Number of currently unsuccessful Jenkins tests in each project."
+linewidth   2
+ymin        0
+
+field :puppetdashboard,
+               :alias => "Currently unsuccessful Jenkins tests in Puppet Dashboard",
+               :data  => "jenkins.puppet-dashboard.currently-unsuccessful"
+
+field :pe12,
+               :alias => "Currently unsuccessful Jenkins tests in PE 1.2",
+               :data  => "jenkins.puppet.currently-unsuccessful"
+
+field :pe20,
+               :alias => "Currently unsuccessful Jenkins tests in PE 2.0",
+               :data  => "jenkins.puppet.currently-unsuccessful"
+
+field :marionettecollective,
+               :alias => "Currently unsuccessful Jenkins tests in MCollective",
+               :data  => "jenkins.marionette-collective.currently-unsuccessful"
+
+field :facter,
+               :alias => "Currently unsuccessful Jenkins tests in Facter",
+               :data  => "jenkins.facter.currently-unsuccessful"
+
+field :puppet,
+               :alias => "Currently unsuccessful Jenkins tests in Puppet",
+               :data  => "jenkins.puppet.currently-unsuccessful"
+

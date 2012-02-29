@@ -1,0 +1,46 @@
+title       "Forge modules"
+vtitle      "modules"
+from        "-6months"
+description "Forge module development over time"
+linewidth   2
+ymin        0
+
+field :webservers,
+               :alias => "Forge modules: webservers",
+               :data  => "forge.modules.webservers"
+
+field :applications,
+               :alias => "Forge modules: applications",
+               :data  => "forge.modules.applications"
+
+field :packaging,
+               :alias => "Forge modules: package management",
+               :data  => "forge.modules.packaging"
+
+field :os,
+               :alias => "Forge modules: operating systems",
+               :data  => "forge.modules.os"
+
+field :languages,
+               :alias => "Forge modules: programming langauges",
+               :data  => "forge.modules.languages"
+
+field :networking,
+               :alias => "Forge modules: networking",
+               :data  => "forge.modules.networking"
+
+field :utilities,
+               :alias => "Forge modules: utilities",
+               :data  => "forge.modules.utilitiess"
+
+field :monitoring,
+               :alias => "Forge modules: monitoring and trending",
+               :data  => "forge.modules.monitoring"
+
+field :security,
+               :alias => "Forge modules: security",
+               :data  => "forge.modules.security"
+
+field :virtualization,
+               :alias => "Forge modules: virtualization",
+               :data  => "forge.modules.virtualization"

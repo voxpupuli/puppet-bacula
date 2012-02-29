@@ -1,0 +1,10 @@
+title       "www uptime from uptime-robot"
+vtitle      "Percentage"
+from        "-1week"
+description "WWW site uptime percentage reported by uptimerobot.com."
+linewidth   2
+ymax        100
+
+field :www,
+               :alias => "WWW site uptime",
+               :data  => "uptime-robot.www.alltime"

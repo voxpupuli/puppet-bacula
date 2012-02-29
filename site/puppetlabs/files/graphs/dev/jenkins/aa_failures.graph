@@ -1,0 +1,31 @@
+title       "Currently failing tests by project"
+vtitle      "Failures"
+from        "-1week"
+description "Number of currently failing Jenkins tests in each project."
+linewidth   2
+ymin        0
+
+field :puppetdashboard,
+               :alias => "Currently failing Jenkins tests in Puppet Dashboard",
+               :data  => "jenkins.puppet-dashboard.currently-failing"
+
+field :pe12,
+               :alias => "Currently failing Jenkins tests in PE 1.2",
+               :data  => "jenkins.puppet.currently-failing"
+
+field :pe20,
+               :alias => "Currently failing Jenkins tests in PE 2.0",
+               :data  => "jenkins.puppet.currently-failing"
+
+field :marionettecollective,
+               :alias => "Currently failing Jenkins tests in MCollective",
+               :data  => "jenkins.marionette-collective.currently-failing"
+
+field :facter,
+               :alias => "Currently failing Jenkins tests in Facter",
+               :data  => "jenkins.facter.currently-failing"
+
+field :puppet,
+               :alias => "Currently failing Jenkins tests in Puppet",
+               :data  => "jenkins.puppet.currently-failing"
+

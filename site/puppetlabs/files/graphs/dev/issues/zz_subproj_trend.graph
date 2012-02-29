@@ -1,7 +1,7 @@
-title       "Subproject issues over the past 6 months"
+title       "Subproject issues"
 vtitle      "Redmine tickets"
 from        "-6months"
-description "Open issues for each given subproject over the past 6 months."
+description "Open issues for each subproject."
 linewidth   2
 ymin        0
 

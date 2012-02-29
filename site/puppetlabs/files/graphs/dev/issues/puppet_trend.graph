@@ -1,7 +1,7 @@
-title       "Puppet issues (including subprojects) over the past 6 months"
+title       "Puppet issues (including subprojects)"
 vtitle      "Redmine tickets"
 from        "-6months"
-description "Open issues over the past 6 months. Total includes all Redmine subprojects: Puppet, Facter, dashboard, docs, modules, acceptance, cloud-pack, etc."
+description "Open issues. Total includes all Redmine subprojects: Puppet, Facter, dashboard, docs, modules, acceptance, cloud-pack, etc."
 linewidth   2
 ymin        0
 

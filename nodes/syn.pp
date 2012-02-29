@@ -22,9 +22,9 @@ node syn {
     ["nokogiri"]: 
       ensure => present, 
       provider => gem, 
-      require => Package["libxml2-dev","libxslt-dev"]
+      require => Package["libxml2-dev","libxslt1-dev"]
   }
-  package { ["libxml2-dev","libxslt-dev"]: ensure => present, }
+  package { ["libxml2-dev","libxslt1-dev"]: ensure => present, }
   package { "ii": ensure => present, }
 
   file { "/var/lib/gather":

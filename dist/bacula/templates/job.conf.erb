@@ -3,7 +3,7 @@ Job {
     Type             = <%= jobtype %>
     Client           = <%= fqdn %>-fd
     FileSet          = <%= fileset_real %>
-    Storage          = File
+    Storage          = <%= storage %>-sd
     Pool             = Default
     Messages         = Standard
 <% if jobtype == "Restore" -%>

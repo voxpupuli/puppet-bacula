@@ -37,7 +37,7 @@ class bacula::storage (
 
   # Export this here so the director can realize the storage resource and know how to talk to us
   @@concat::fragment {
-    "bacula-director-storage":
+    "bacula-director-storage-${fqdn}":
       target  => '/etc/bacula/conf.d/storage.conf',
       content => template("bacula/bacula-dir-storage.erb"),
       tag     => "bacula-${bacula_director}",

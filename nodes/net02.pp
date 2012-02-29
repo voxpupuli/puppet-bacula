@@ -120,9 +120,20 @@ node 'net02.dc1.puppetlabs.net' {
     gateway => '10.0.5.1',
   }
 
+  dhcp::pool{ 'spectest.dc1.puppetlabs.net':
+    network => '10.0.10.0',
+    mask    => '255.255.255.0',
+    range   => '10.0.10.175 10.0.10.200',
+    gateway => '10.0.10.1',
+  }
+
   dhcp::host {
+    # Ops systems
     'ran':      mac => "00:50:56:b2:00:ab", ip => "10.0.1.50";
     'bacula02': mac => "00:50:56:a1:4c:87", ip => "10.0.1.51";
+
+    # Jenkins spectest Slaves
+    'slave-windows2008r2': mac => "00:50:56:a1:4c:99", ip => "10.0.10.20";
   }
 
 }

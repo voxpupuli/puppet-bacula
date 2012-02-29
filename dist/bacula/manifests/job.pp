@@ -29,7 +29,9 @@ define bacula::job (
     $files    = '',
     $excludes = '',
     $jobtype  = 'Backup',
-    $fileset  = true
+    $fileset  = true,
+    $template = 'bacula/job.conf.erb',
+    $storage  = hiera('bacula_storage')
   ) {
 
   if defined(Class["bacula"]) {
@@ -49,7 +51,7 @@ define bacula::job (
     @@concat::fragment {
       "bacula-job-${name}":
         target  => '/etc/bacula/conf.d/job.conf',
-        content => template("bacula/job.conf.erb"),
+        content => template("${template}"),
         tag     => "bacula-${::bacula::bacula_director}";
     }
 

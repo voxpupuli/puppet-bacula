@@ -1,5 +1,3 @@
-# This is the header of the configuration file that lives on the director.
-
 Director {                # define myself
   Name                    = <%= fqdn %>-dir
   DIRport                 = <%= port %>  # where we listen for UA connections
@@ -10,12 +8,6 @@ Director {                # define myself
   Password                = "<%= password %>"  # Console password
   Messages                = Daemon
   DirAddress              = 127.0.0.1
-}
-
-Schedule {
-  Name = "WeeklyCycle"
-  Run  = Level=Full sun at 2:05
-  Run  = Level=Incremental mon-sat at 2:05
 }
 
 Pool {
@@ -30,16 +22,8 @@ Catalog {
   dbname = "bacula"; dbuser = "<%= db_user %>"; dbpassword = "<%= db_pw %>"
 }
 
-# Reasonable message delivery -- send most everything to email address
-#  and to the console
-
-# zleslie: We are monitoring everything with nagios, who cares about reading email.
 Messages {
   Name             = Standard
-  #mailcommand     = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \%r\" -s \"Bacula: %t %e of %c %l\" %r"
-  #operatorcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \%r\" -s \"Bacula: Intervention needed for %j\" %r"
-  #mail            = root@localhost = all, !skipped
-  #operator        = root@localhost = mount
   console          = all, !skipped, !saved
   append           = "/var/lib/bacula/log" = all, !skipped
   catalog          = all
@@ -47,8 +31,6 @@ Messages {
 
 Messages {
   Name         = Daemon
-  #mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) %r\" -s \"Bacula daemon message\" %r"
-  #mail        = root@localhost = all, !skipped
   console      = all, !skipped, !saved
   append       = "/var/lib/bacula/log" = all, !skipped
 }
@@ -62,11 +44,11 @@ Console {
   CommandACL = status, .status
 }
 
+@/etc/bacula/conf.d/schedule.conf
 @/etc/bacula/conf.d/storage.conf
 @/etc/bacula/conf.d/pools.conf
 @/etc/bacula/conf.d/client.conf
 @/etc/bacula/conf.d/fileset.conf
 @/etc/bacula/conf.d/jobdefs.conf
 @/etc/bacula/conf.d/job.conf
-
 

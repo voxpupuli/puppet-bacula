@@ -13,10 +13,5 @@
 # Sample Usage:
 #
 class apache::php {
-	include php
-#  include apache::params
-
-#  package { $apache::params::php_package:
-#    ensure => present,
-#  }
+  include php
 }

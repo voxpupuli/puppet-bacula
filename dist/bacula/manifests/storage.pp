@@ -12,7 +12,10 @@
 # Sample Usage:
 #
 class bacula::storage (
-    $device = '/bacula'
+    $port        = '9103',
+    $device_name = 'FileStorage',
+    $device      = '/bacula',
+    $media_type  = 'File'
   ) {
 
   include bacula::params
@@ -22,9 +25,7 @@ class bacula::storage (
   $bacula_director         = $bacula_director
   $bacula_storage_password = genpass('bacula_storage_password')
 
-  package { $bacula::params::bacula_storage_packages:
-    ensure => present,
-  }
+  package { $bacula::params::bacula_storage_packages: ensure => present; }
 
   service { $bacula::params::bacula_storage_services:
     ensure     => running,
@@ -34,15 +35,9 @@ class bacula::storage (
     require    => Package[$bacula::params::bacula_storage_packages],
   }
 
-  #bacula::storage::device {
-  #  "${fqdn}FileStorage":
-  #    device => $device,
-  #}
-
-
   # Export this here so the director can realize the storage resource and know how to talk to us
   @@concat::fragment {
-    "bacula-director-storage":
+    "bacula-director-storage-${fqdn}":
       target  => '/etc/bacula/conf.d/storage.conf',
       content => template("bacula/bacula-dir-storage.erb"),
       tag     => "bacula-${bacula_director}",
@@ -64,7 +59,6 @@ class bacula::storage (
   # Realize the clause the director is exporting here so we can allow access to the storage daemon
   # Adds an entry to /etc/bacula/bacula-sd.conf
   Concat::Fragment <<| tag == "bacula-storage-dir-${bacula_director}" |>>
-
   concat {
     "/etc/bacula/bacula-sd.conf":
       owner   => root,
@@ -73,8 +67,7 @@ class bacula::storage (
       notify  => Service[$bacula::params::bacula_storage_services],
   }
 
-
-  file { "/bacula":
+  file { $device:
     owner   => bacula,
     group   => bacula,
     ensure  => directory,

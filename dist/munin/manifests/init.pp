@@ -87,10 +87,12 @@ class munin {
   # "just work" without having to fix things in munin. See the vile
   # use of "$MUNIN_PLUGSTSTE" and the likes. (Some are even more
   # obscured in the CPAN libraries.
-  file { '/var/munin/plugin-state':
-    ensure  => link,
-    target  => $piddir,
-    require => File[$piddir];
+  if $kernel == "FreeBSD" {
+    file { '/var/munin/plugin-state':
+      ensure  => link,
+      target  => $piddir,
+      require => File[$piddir];
+    }
   }
 
   service { $munin::params::node_service:

@@ -15,7 +15,8 @@ class nagios::gearman (
         "mod-gearman-doc",
         "mod-gearman-module",
         "mod-gearman-tools",
-        "mod-gearman-worker"
+        "mod-gearman-worker",
+        "gearman-job-server",
       ]
     }
     false: {

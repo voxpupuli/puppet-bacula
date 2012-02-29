@@ -65,27 +65,5 @@ node bacula01 {
   duplicity::drop { "git.puppetlabs.net":
     owner => "gitbackups"
   }
-
-  ####
-  # Gearman
-  #
-  apt::source {
-    "wheezy.list":
-      distribution => "wheezy",
-  }
-
-  apt::pin{ 'wheey_repo_pin':
-    release  => 'testing',
-    priority => '200',
-    filename => 'testingforgearman',
-    wildcard => true
-  }
-
-  class {
-    "nagios::gearman":
-      key           => hiera("gearman_key"),
-      nagios_server => hiera("nagios_server")
-  }
-
 }
 

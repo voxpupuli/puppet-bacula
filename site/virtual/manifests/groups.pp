@@ -106,7 +106,7 @@ class virtual::groups {
   }
 
   @group { 'motorola':
-    ensure => absent,
+    ensure => present,
     gid    => 1051,
     tag    => customer,
   }
@@ -168,7 +168,5 @@ class virtual::groups {
 #
 # Functional
 #
-
-
 }
 

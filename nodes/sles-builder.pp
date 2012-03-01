@@ -28,7 +28,8 @@ node sles-builder {
 
   include motd  # update /etc/motd, use motd::register for more.
 
-  include nagios
+  # stop managing nagios here
+  #include nagios
   include munin
   class { "ntp": server => hiera("ntpserver"); }
 

@@ -1,4 +1,8 @@
-class role::server {
+class role::server (
+  $bacula = true,
+  $munin  = true,
+  $bacula = true
+) {
   include role::base
 
   include postfix
@@ -12,26 +16,26 @@ class role::server {
   # and nagios by default. We can go do this in a node if we really
   # really must, but I suspect this will very rarely happen.
   if $virtual != virtualbox {
-    include nagios
-    include munin
-    include bacula
-
     # Throw in some ordering, so the automatic things in, say, munin,
     # happen in the right order.
-    # Class['munin'] -> Class['role::base']
-    # Class['role::base'] -> Class['nagios']
-    # Class['role::base'] -> Class['bacula']
+    Class['role::base'] -> Class['nagios']
+    Class['role::base'] -> Class['bacula']
     Class['role::base'] -> Class['munin']
+    Class['nagios']     -> Class['munin']
+    Class['nagios']     -> Class['bacula']
+
+    if ( $nagios == true ) { include nagios }
+    if ( $bacula == true ) { include bacula }
+    if ( $munin  == true ) { include munin  }
+
   }
 
   class { "ntp": server => hiera("ntpserver"); }
 
   # SSH
-  include ssh::server
   ssh::allowgroup  { "sysadmin": }
 
   # Sudo
-  include sudo
   sudo::allowgroup { "sysadmin": }
 
   # Accounts

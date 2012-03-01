@@ -73,8 +73,8 @@ define duplicity::cron(
   # Add monitoring for backups
   ##############################################################################
 
-  # Generate warning when backups have not run for 24 hours, generate critical
-  # after backups have not run for 48 hours
+  # Generate warning when backups have not run for 30 hours, generate critical
+  # after backups have not run for 60 hours
   @@nagios_service { "duplicity_${name}_${hostname}":
     use                      => 'generic-service',
     host_name                => $fqdn,

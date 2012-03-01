@@ -18,16 +18,24 @@ class role::server (
   if $virtual != virtualbox {
     # Throw in some ordering, so the automatic things in, say, munin,
     # happen in the right order.
-    Class['role::base'] -> Class['nagios']
-    Class['role::base'] -> Class['bacula']
-    Class['role::base'] -> Class['munin']
-    Class['nagios']     -> Class['munin']
-    Class['nagios']     -> Class['bacula']
 
-    if ( $nagios == true ) { include nagios }
-    if ( $bacula == true ) { include bacula }
-    if ( $munin  == true ) { include munin  }
+    if ( $nagios == true ) {
+      include nagios
+      Class['role::base'] -> Class['nagios']
+    }
 
+    if ( $bacula == true ) {
+      include bacula
+      Class['role::base'] -> Class['bacula']
+    }
+
+    if ( $munin  == true ) {
+      include munin
+      Class['role::base'] -> Class['munin']
+    }
+
+    if ( $nagios == true and $munin == true ) { Class['nagios'] -> Class['munin'] }
+    if ( $nagios == true and $bacula == true ) { Class['nagios'] -> Class['bacula'] }
   }
 
   class { "ntp": server => hiera("ntpserver"); }

@@ -1,7 +1,8 @@
 class role::server (
-  $bacula = true,
-  $munin  = true,
-  $bacula = true
+  $nagios         = true,
+  $munin          = true,
+  $bacula         = true,
+  $bacula_monitor = true
 ) {
   include role::base
 
@@ -18,14 +19,13 @@ class role::server (
   if $virtual != virtualbox {
     # Throw in some ordering, so the automatic things in, say, munin,
     # happen in the right order.
-
     if ( $nagios == true ) {
       include nagios
       Class['role::base'] -> Class['nagios']
     }
 
     if ( $bacula == true ) {
-      include bacula
+      class { "bacula": monitor => $bacula_monitor; }
       Class['role::base'] -> Class['bacula']
     }
 

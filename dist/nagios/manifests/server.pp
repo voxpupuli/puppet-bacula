@@ -21,7 +21,6 @@ class nagios::server (
     $brokers = undef
   ) {
 
-  include apache
   include nagios
   include nagios::commands
   include nagios::contacts
@@ -151,16 +150,6 @@ class nagios::server (
     template      => 'nagios/nagios-apache.conf.erb',
     require       => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 
   }
-
-  #apache::vhost { 'nagios.puppetlabs.com_ssl':
-  #  port => '443',
-  #  priority => '31',
-  #	ssl      => 'true',
-  #  docroot => '/usr/share/nagios3/htdocs',
-  #  template => 'nagios/nagios-apache.conf.erb',
-  #  require => [ File['/etc/nagios/apache2.conf'], Package[$nagios::params::nagios_packages] ], 
-  #}
-
 
   # Recreate some of debian's default config formats, namely
   # services_nagios2.cfg and it's ssh group testing.

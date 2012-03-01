@@ -23,7 +23,7 @@ class bacula (
     $file_retention = "45 days",
     $job_retention  = "6 months",
     $autoprune      = "yes",
-    $monitor        = "yes"
+    $monitor        = true,
   ){
 
   include bacula::params
@@ -37,7 +37,7 @@ class bacula (
 
 
   if $bacula_is_storage == "yes" { include bacula::storage }
-  if $monitor           == "yes" { include bacula::client::monitor }
+  if $monitor           == true  { include bacula::client::monitor }
 
   include bacula::common
 

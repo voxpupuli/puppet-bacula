@@ -59,6 +59,7 @@ class bind (
   $bind_user                   = $bind::params::bind_user,
   $bind_group                  = $bind::params::bind_group,
   $bind_restart                = $bind::params::bind_restart,
+  $bind_log_dir                = $bind::params::bind_log_dir,
   $bind_disable_v6             = "false",
   $customoptions               = undef
 
@@ -106,6 +107,13 @@ class bind (
     mode    => "0644",
     require => Package[$bind_package],
     notify  => Service[$bind_service],
+  }
+
+  file { $bind_log_dir:
+    ensure => directory,
+    owner  => $bind_user,
+    group  => $bind_group,
+    mode   => 750,
   }
 
   ########################

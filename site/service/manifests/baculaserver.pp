@@ -8,13 +8,13 @@ class service::baculaserver {
   bacula::director::pool {
     "PuppetLabsPool-Full":
       volret      => "21 days",
-      maxvolbytes => '2000000000',
-      maxvoljobs  => '2',
+      maxvolbytes => '4g',
+      maxvoljobs  => '10',
       maxvols     => "20",
       label       => "Full-";
     "PuppetLabsPool-Inc":
       volret      => "8 days",
-      maxvolbytes => '4000000000',
+      maxvolbytes => '4g',
       maxvoljobs  => '50',
       maxvols     => "10",
       label       => "Inc-";

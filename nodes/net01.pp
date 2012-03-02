@@ -529,6 +529,11 @@ node net01 {
   # Selenium testing
   ##############################################################################
 
+  dhcp::host { 'selenium-win7-legacy':
+    mac => '00:50:56:a1:4c:9b',
+    ip  => '192.168.100.94',
+  }
+
   # ticket #9022
   dhcp::host { "selenium-test":
     mac => '00:50:56:b2:00:9a',

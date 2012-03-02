@@ -12,4 +12,5 @@ node odin {
   ssh::allowgroup { "prosvc": }
   ssh::allowgroup { "support": }
   ssh::allowgroup { $ssh_customer: chroot => true; }
+  ssh::allowgroup { "developers": }
 }

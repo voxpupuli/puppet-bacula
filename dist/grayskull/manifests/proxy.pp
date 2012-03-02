@@ -10,7 +10,7 @@ class grayskull::proxy ($servername = $fqdn, $port = 8080) {
       ssl_port       => 8080,
       sslonly        => true,
       isdefaultvhost => true, # default for SSL.
-      tempalte       => 'grayskull/vhost-unicorn.conf.erb',
+      template       => 'grayskull/vhost-unicorn.conf.erb',
       magic          => inline_template( "ssl_verify_client on;\nssl_client_certificate '${grayskull::installdir}/ssl/ca_crt.pem'\nssl_certificate '${grayskull::installdir}/ssl/crt.pem'\nssl_certificate_key '${grayskull::installdir}/ssl/key.pem'\n" ),
   }
 

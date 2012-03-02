@@ -13,7 +13,7 @@
 #
 class bacula::storage (
     $port        = '9103',
-    $device_name = 'FileStorage',
+    $device_name = "${fqdn}-device",
     $device      = '/bacula',
     $media_type  = 'File'
   ) {

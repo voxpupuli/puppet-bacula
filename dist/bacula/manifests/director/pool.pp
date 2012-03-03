@@ -35,7 +35,8 @@ define bacula::director::pool (
     $maxvolbytes = '1000000000',
     $maxvols     = '30',
     $purgeaction = "Truncate",
-    $label       = ''
+    $label       = '',
+    $storage     = hiera('bacula_storage')
   ) {
 
   concat::fragment {

@@ -66,6 +66,7 @@ class bacula::director (
       content => template("bacula/bacula-dir-header.erb")
   }
 
+  Bacula::Director::Pool <<||>>
   Concat::Fragment <<| tag == "bacula-${fqdn}" |>>
 
   concat {

@@ -3,15 +3,14 @@ Job {
     Type             = <%= jobtype %>
     Client           = <%= fqdn %>-fd
     FileSet          = <%= fileset_real %>
-    Storage          = <%= storage %>-sd
     Pool             = Default
-    Messages         = Standard
 <% if jobtype == "Restore" -%>
     Where            = /tmp/bacula-restores
+    Messages         = Standard
 <% end -%>
 <% if jobtype == "Backup" -%>
-    Full Backup Pool        = PuppetLabsPool-Full
-    Incremental Backup Pool = PuppetLabsPool-Inc
+    Full Backup Pool        = <%= storage %>-Pool-Full
+    Incremental Backup Pool = <%= storage %>-Pool-Inc
     JobDefs                 = "PuppetLabsOps"
 <% end -%>
 }

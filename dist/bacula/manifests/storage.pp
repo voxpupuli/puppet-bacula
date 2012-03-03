@@ -12,18 +12,15 @@
 # Sample Usage:
 #
 class bacula::storage (
-    $port        = '9103',
-    $device_name = "${fqdn}-device",
-    $device      = '/bacula',
-    $media_type  = 'File'
-  ) {
-
-  include bacula::params
-
-  $working_directory       = $bacula::params::working_directory
-  $pid_directory           = $bacula::params::pid_directory
-  $bacula_director         = $bacula_director
-  $bacula_storage_password = genpass('bacula_storage_password')
+    $port                    = '9103',
+    $device_name             = "${fqdn}-device",
+    $device                  = '/bacula',
+    $media_type              = 'File',
+    $working_directory       = $bacula::params::working_directory,
+    $pid_directory           = $bacula::params::pid_directory,
+    $bacula_director         = $bacula_director,
+    $bacula_storage_password = genpass('bacula_storage_password')
+) inherits bacula::params {
 
   package { $bacula::params::bacula_storage_packages: ensure => present; }
 
@@ -71,6 +68,24 @@ class bacula::storage (
     owner   => bacula,
     group   => bacula,
     ensure  => directory,
+  }
+
+  # Each storage daemon should get its own pool(s)
+  @@bacula::director::pool {
+    "${fqdn}-Pool-Full":
+      volret      => "21 days",
+      maxvolbytes => '4g',
+      maxvoljobs  => '10',
+      maxvols     => "20",
+      label       => "Full-",
+      storage     => hiera('bacula_storage');
+    "${fqdn}-Pool-Inc":
+      volret      => "8 days",
+      maxvolbytes => '4g',
+      maxvoljobs  => '50',
+      maxvols     => "10",
+      label       => "Inc-",
+      storage     => hiera('bacula_storage');
   }
 
 }

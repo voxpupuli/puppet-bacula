@@ -20,5 +20,7 @@ Device {
 Messages {
   Name     = Standard
   director = <%= bacula_director %>-dir = all
+  syslog   = all, !skipped
+  #append   = "/var/log/bacula/log" = all, !skipped
 }
 

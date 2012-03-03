@@ -15,12 +15,13 @@ class bacula::director::monitor {
   include nagios::params
 
   @@nagios_service { "check_baculadir_${hostname}":
-    use                 => 'generic-service',
-    host_name           => "$fqdn",
-    check_command       => 'check_nrpe!check_proc!1:1 bacula-dir',
-    service_description => "check_baculadir_${hostname}",
-    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify              => Service[$nagios::params::nagios_service],
+    use                      => 'generic-service',
+    host_name                => "$fqdn",
+    check_command            => 'check_nrpe!check_proc!1:1 bacula-dir',
+    service_description      => "check_baculadir_${hostname}",
+    target                   => '/etc/nagios3/conf.d/nagios_service.cfg',
+    notify                   => Service[$nagios::params::nagios_service],
+    first_notification_delay => '120',
   }
 
   @@nagios_service { "check_baculasd_${hostname}":

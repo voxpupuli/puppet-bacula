@@ -35,7 +35,8 @@ class Puppet::Resource::Grayskull < Puppet::Indirector::REST
     rescue => e
       raise Puppet::Error, "Could not retrieve resources from the Grayskull server: #{e}"
     end
-
+    p response.code
+    p response.body
     resources = PSON.load(response.body)
     resources.map do |res|
       params = res['parameters'] || {}
@@ -74,6 +75,6 @@ class Puppet::Resource::Grayskull < Puppet::Indirector::REST
   end
 
   def headers
-    {'Accept' => 'application/vnd.com.puppetlabs.cmdb.resource-list+json'}
+    {'Accept' => 'application/json'}
   end
 end

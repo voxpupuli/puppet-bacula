@@ -13,8 +13,7 @@ class Puppet::Resource::Grayskull < Puppet::Indirector::REST
   end
 
   def search(request)
-    p request
-    type   = canonicalize_type(request.key)
+    type   = request.key
     host   = request.options[:host]
     filter = request.options[:filter]
     scope  = request.options[:scope]

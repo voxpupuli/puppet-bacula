@@ -3,6 +3,7 @@ vtitle      "Percentage"
 from        "-1week"
 description "WWW site uptime percentage reported by uptimerobot.com."
 linewidth   2
+ymin        99.975
 ymax        100
 
 field :www,

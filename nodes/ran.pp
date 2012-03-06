@@ -16,19 +16,6 @@ node ran {
   ####
   # Gearman
   #
-  apt::source {
-    "wheezy.list":
-      distribution => "wheezy",
-  }
-
-
-  apt::pin{ 'wheey_repo_pin':
-    release  => 'testing',
-    priority => '200',
-    filename => 'testingforgearman',
-    wildcard => true
-  }
-
   class {
     "nagios::gearman":
       key           => hiera("gearman_key"),

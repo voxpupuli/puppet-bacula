@@ -16,5 +16,6 @@ node bacula01 {
   duplicity::drop { "git.puppetlabs.net":
     owner => "gitbackups"
   }
+
 }
 

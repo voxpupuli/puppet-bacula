@@ -36,18 +36,6 @@ node baal {
   ###
   # Monitoring
   #
-  apt::source {
-    "wheezy.list":
-      distribution => "wheezy",
-  }
-
-  apt::pin{ 'wheey_repo_pin':
-    release  => 'testing',
-    priority => '200',
-    filename => 'testingforgearman',
-    wildcard => true
-  }
-
   class {
     "nagios::gearman":
       server        => true,

@@ -27,14 +27,7 @@ class nagios::gearman (
     default: { }
   }
 
-  # remove once wheezy is everywhere
-  if $lsbdistcodename != "wheezy" {
-    package {
-      $packages:
-        ensure  => installed,
-        require => Apt::Source["wheezy.list"];
-    }
-  }
+  package { $packages: ensure => installed; }
 
   user { "nagios":
     shell => "/bin/bash",

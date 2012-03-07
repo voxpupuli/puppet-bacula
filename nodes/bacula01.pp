@@ -1,5 +1,6 @@
 node bacula01 {
   include role::server
+  include role::gearman
 
   ssh::allowgroup  { "techops": }
   sudo::allowgroup { "techops": }
@@ -16,5 +17,6 @@ node bacula01 {
   duplicity::drop { "git.puppetlabs.net":
     owner => "gitbackups"
   }
+
 }
 

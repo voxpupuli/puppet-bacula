@@ -63,7 +63,7 @@ node pluto {
       recurse => true;
   }
 
-  class { 'freight':
+  freight::repo { 'release':
     freight_vhost_name      => 'freight.puppetlabs.lan',
     freight_docroot         => '/opt/enterprise/repos/debian',
     freight_gpgkey          => 'pluto@puppetlabs.lan',
@@ -73,4 +73,16 @@ node pluto {
     freight_manage_libdir   => true,
     freight_manage_vhost    => true,
   }
+
+  freight::repo { 'operations':
+    freight_vhost_name      => 'pkgs.puppetlabs.lan',
+    freight_docroot         => '/opt/ops/repos/debian',
+    freight_gpgkey          => 'pluto@puppetlabs.lan',
+    freight_group           => 'techops',
+    freight_libdir          => '/opt/tools/freight.ops',
+    freight_manage_docroot  => true,
+    freight_manage_libdir   => true,
+    freight_manage_vhost    => true,
+  }
+
 }

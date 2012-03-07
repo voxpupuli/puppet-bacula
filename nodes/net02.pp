@@ -1,15 +1,10 @@
 node 'net02.dc1.puppetlabs.net' {
 
   include role::server
+  include role::gearman
 
   ssh::allowgroup   { "techops": }
   sudo::allowgroup  { "techops": }
-
-  class {
-    "nagios::gearman":
-      key           => hiera("gearman_key"),
-      nagios_server => hiera("nagios_server")
-  }
 
   class { 'bind':
     customoptions => "check-names master ignore;\nallow-recursion {192.168.100.0/23; 10.0.0.0/16; };\n",

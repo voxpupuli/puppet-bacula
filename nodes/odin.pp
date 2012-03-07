@@ -7,11 +7,14 @@ node odin {
   Ssh_authorized_key <| tag == customer |>
 
   $ssh_customer = [
-    "motorola", # support:767
+    "thompsonreuters", # (#13003)
   ]
+
 
   ssh::allowgroup { "prosvc": }
   ssh::allowgroup { "support": }
-  ssh::allowgroup { $ssh_customer: chroot => true, tcpforwarding => true }
+  ssh::allowgroup { $ssh_customer: chroot => true }
   ssh::allowgroup { "developers": }
+
+  ssh::allowgroup { 'motorola': chroot => true, tcpforwarding => true } # support:767
 }

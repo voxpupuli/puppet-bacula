@@ -165,6 +165,12 @@ class virtual::groups {
     tag    => customer,
   }
 
+  @group { 'thompsonreuters':
+    ensure => present,
+    gid    => 1061,
+    tag    => customer,
+  }
+
 #
 # Functional
 #

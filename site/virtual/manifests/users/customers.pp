@@ -115,6 +115,7 @@ class virtual::users::customers {
     tag     => 'customer',
   }
 
+  # Keys managed in virtual::ssh_authorized_keys
   @account::user {'motorola':
     uid     => '21005',
     group   => 'motorola',
@@ -123,5 +124,16 @@ class virtual::users::customers {
     expire  => "2012-04-01",
     tag     => 'customer',
     shell   => '/usr/sbin/nologin',
+  }
+
+  @account::user {'syedhamza':
+    ensure  => 'present',
+    uid     => '21006',
+    group   => 'thompsonreuters',
+    comment => '(#13003)',
+    expiry  => '2012-04-07',
+    tag     => 'customer',
+    key     => 'AAAAB3NzaC1yc2EAAAABJQAAAIBt2OzrLd5sYy1zjv7vyP+4fAmBqM6PwHBYxKXPRJXahs5S82nMAp3lcyRE8344+7+I/XEht5KDI9a2Hi162PXl/t+P8ffc7Ff/FTdwCqfbI4askKTWVtVuAVlceCitr3oA90FDrtYml3repMrA3TP2sxGwwLpsMwPa1Dt/cHphLQ==',
+    keytype => 'rsa',
   }
 }

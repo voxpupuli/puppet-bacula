@@ -539,6 +539,16 @@ node net01 {
     ip  => '192.168.101.1',
   }
 
+  dhcp::host { 'selenium-winxp-ie7':
+    mac => '00:50:56:a1:4c:a3',
+    ip  => '192.168.101.2',
+  }
+
+  dhcp::host { 'selenium-winxp-ie8':
+    mac => '00:50:56:a1:4c:a4',
+    ip  => '192.168.101.3',
+  }
+
   # ticket #9022
   dhcp::host { "selenium-test":
     mac => '00:50:56:b2:00:9a',

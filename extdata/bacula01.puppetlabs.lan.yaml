@@ -1,3 +1,3 @@
 ---
 bacula_is_storage: "yes"
-nrpe_server: %{ipaddress},192.168.124.9
+nrpe_server: %{ipaddress},192.168.100.76,192.168.124.9

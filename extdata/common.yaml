@@ -18,6 +18,7 @@ allowhosts: - "sshd: 74.85.255.0/27"
             - "sshd: 74.85.247.184/29"
             - "sshd: 10.0.0.0/16"
             - "sshd: 192.168.100.0/23"
+            - "sshd: 173.255.196.32"
 bacula_director: 'baal.puppetlabs.com'
 bacula_client_listen: %{ipaddress}
 bacula_is_storage: "no"

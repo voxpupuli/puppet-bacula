@@ -1,12 +1,8 @@
 node wyrd {
 
   include role::server
+  include role::gearman
 
-  class {
-    "nagios::gearman":
-      key           => hiera("gearman_key"),
-      nagios_server => hiera("nagios_server")
-  }
 
   # DNS resolution to internal hosts
   class {

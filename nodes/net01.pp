@@ -771,7 +771,7 @@ node net01 {
   }
 
   # Postgres box for dev work.
-  dhcp::host { "vor.puppetlabs.lan":
+  dhcp::host { "vor":
     mac => '00:50:56:b2:00:98',
     ip  => '192.168.100.46',
   }

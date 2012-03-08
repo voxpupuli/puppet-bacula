@@ -36,7 +36,8 @@ class nagios::gearman (
   service { "mod-gearman-worker":
     ensure    => running,
     enable    => true,
-    hasstatus => true,
+    hasstatus => false,
+    pattern   => 'mod_gearman_worker',
   }
 
   file { "/etc/mod-gearman/worker.conf":

@@ -172,7 +172,7 @@ node burji {
     mode      => 0775,
   }
 
-  class { 'freight':
+  freight::repo { 'community':
     freight_vhost_name       => 'apt.puppetlabs.com',
     freight_docroot          => '/opt/repository/apt',
     freight_gpgkey           => 'info@puppetlabs.com',

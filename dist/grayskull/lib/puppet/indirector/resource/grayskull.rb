@@ -23,7 +23,9 @@ class Puppet::Resource::Grayskull < Puppet::Indirector::REST
     # At minimum, we want to filter to the right type of exported resources.
     expr = ['and',
              ['=', 'type', type],
-             ['=', 'exported', true]]
+             ['=', 'exported', true],
+             ['not',
+               ['=', 'node', host]]]
 
     filter_expr = build_filter_expression(filter)
     expr << filter_expr if filter_expr
@@ -35,8 +37,7 @@ class Puppet::Resource::Grayskull < Puppet::Indirector::REST
     rescue => e
       raise Puppet::Error, "Could not retrieve resources from the Grayskull server: #{e}"
     end
-    p response.code
-    p response.body
+
     resources = PSON.load(response.body)
     resources.map do |res|
       params = res['parameters'] || {}
@@ -46,12 +47,6 @@ class Puppet::Resource::Grayskull < Puppet::Indirector::REST
       attrs = {:parameters => params, :scope => scope}
       Puppet::Parser::Resource.new(res['type'], res['title'], attrs)
     end
-  end
-
-  def canonicalize_type(typename)
-    type = Puppet::Type.type(typename)
-    raise Puppet::Error, "Could not find type #{typename}" unless type
-    type.name.to_s.capitalize
   end
 
   def validate_filter(filter)

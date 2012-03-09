@@ -1,0 +1,9 @@
+title       "Graphite stats (Gather scripts) that are failing"
+vtitle      "Statistics"
+from        "-1week"
+description "Graphite stats that feed this dashboard whose last value is more than half an hour old, indicating they may no longer be logging successfully. See tools/health-check.rb in Gather to find out which ones they are."
+linewidth   2
+
+field :www,
+               :alias => "Stale data points",
+               :data  => "meta.failing-stats"

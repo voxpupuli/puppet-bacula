@@ -620,7 +620,7 @@ node net01 {
   # Zach building a new Puppet master
   # also allegedly backup DNS
   dhcp::host { "wyrd":
-    mac => '00:50:56:b2:00:1c',
+    mac => '00:50:56:a1:4c:a6',
     ip  => '192.168.100.76',
   }
 

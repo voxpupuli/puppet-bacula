@@ -49,6 +49,8 @@ class Puppet::Resource::Catalog::Grayskull < Puppet::Indirector::REST
   def save(request)
     catalog = munge_catalog(request.instance)
 
+    File.open("/tmp/#{request.instance.name}", 'w') {|f| f.print(catalog)}
+
     msg = self.class.utf8_string(message(catalog).to_pson)
 
     checksum = Digest::SHA1.hexdigest(msg)

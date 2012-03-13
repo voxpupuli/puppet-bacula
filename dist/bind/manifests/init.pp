@@ -187,5 +187,9 @@ class bind (
     hasrestart => true,
     restart    => $bind_restart,
   }
+  # ------------
+  # Monitoring
+  # ------------
+  if $::monitor == "yes" { include munin::bind }
 
 }

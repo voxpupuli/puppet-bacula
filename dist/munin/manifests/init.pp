@@ -15,6 +15,7 @@ class munin {
 
   include munin::params
 
+  $::monitor          = "yes"
   $munin_server       = hiera("munin_server")
   $munin_node_address = hiera('munin_node_address',$ipaddress)
   $log_file           = $munin::params::log_file

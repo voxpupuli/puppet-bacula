@@ -4,6 +4,12 @@ class munin::dhcp {
   include munin::extra
   include dhcp::params
 
+  $packages = [
+    "libnet-netmask-perl",
+    "libnet-ip-perl",
+    "libhttp-date-perl",
+  ]
+
   munin::plugin { "dhcpd3": }
   munin::pluginconf { "dhcpd3":
       confname => 'dhcpd3',

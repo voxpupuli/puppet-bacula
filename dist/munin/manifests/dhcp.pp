@@ -1,4 +1,4 @@
-munin::dhcp {
+class munin::dhcp {
 
   include munin::params
   include munin::extra

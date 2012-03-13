@@ -44,26 +44,25 @@
 # Copyright 2011 Puppetlabs Inc, unless otherwise noted.
 #
 class bind (
-
-  $bind_package                = $bind::params::bind_package,
-  $bind_service                = $bind::params::bind_service,
-  $bind_config_dir             = $bind::params::bind_config_dir,
-  $bind_config_local           = $bind::params::bind_config_local,
-  $bind_config_local_content   = $bind::params::bind_config_local_content,
-  $bind_config_options         = $bind::params::bind_config_options,
-  $bind_config_options_content = $bind::params::bind_config_options_content,
-  $bind_config_zones           = $bind::params::bind_config_zones,
-  $bind_config_zones_dir       = $bind::params::bind_config_zones_dir,
-  $bind_config_keys            = $bind::params::bind_config_keys,
-  $bind_config_keys_dir        = $bind::params::bind_config_keys_dir,
-  $bind_user                   = $bind::params::bind_user,
-  $bind_group                  = $bind::params::bind_group,
-  $bind_restart                = $bind::params::bind_restart,
-  $bind_log_dir                = $bind::params::bind_log_dir,
-  $bind_stats                  = $bind::params::bind_stats,
-  $bind_disable_v6             = "false",
-  $customoptions               = undef
-
+    $bind_package                = $bind::params::bind_package,
+    $bind_service                = $bind::params::bind_service,
+    $bind_config_dir             = $bind::params::bind_config_dir,
+    $bind_config_local           = $bind::params::bind_config_local,
+    $bind_config_local_content   = $bind::params::bind_config_local_content,
+    $bind_config_options         = $bind::params::bind_config_options,
+    $bind_config_options_content = $bind::params::bind_config_options_content,
+    $bind_config_zones           = $bind::params::bind_config_zones,
+    $bind_config_zones_dir       = $bind::params::bind_config_zones_dir,
+    $bind_config_keys            = $bind::params::bind_config_keys,
+    $bind_config_keys_dir        = $bind::params::bind_config_keys_dir,
+    $bind_user                   = $bind::params::bind_user,
+    $bind_group                  = $bind::params::bind_group,
+    $bind_restart                = $bind::params::bind_restart,
+    $bind_log_dir                = $bind::params::bind_log_dir,
+    $bind_stats                  = $bind::params::bind_stats,
+    $bind_disable_v6             = "false",
+    $customoptions               = undef,
+    $bind_monitor                = true
   ) inherits bind::params {
 
   # Allow not binding to IPv6 if you don't want it.
@@ -177,9 +176,9 @@ class bind (
     notify      => Service[$bind_service],
   }
 
-  ############
-  # Services #
-  ############
+  # -------------------------
+  # Services
+  # -------------------------
   service { $bind_service:
     ensure     => running,
     enable     => true,
@@ -187,9 +186,9 @@ class bind (
     hasrestart => true,
     restart    => $bind_restart,
   }
-  # ------------
+  # -------------------------
   # Monitoring
-  # ------------
-  if $::monitor == "yes" { include munin::bind }
+  # -------------------------
+  if $bind_monitor == true { include bind::monitor }
 
 }

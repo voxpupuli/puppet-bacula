@@ -2,7 +2,7 @@ munin::dhcp {
 
   include munin::params
   include munin::extra
-  include munin
+  include dhcp::params
 
   munin::plugin { "dhcpd3": }
   munin::pluginconf { "dhcpd3":

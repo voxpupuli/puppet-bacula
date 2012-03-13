@@ -4,8 +4,8 @@ class munin::bind {
   include munin::extra
   include bind::params
 
-  @munin::plugin     { "bind_rndc": }
-  @munin::pluginconf { "bind_rndc":
+  @munin::plugin     { "bind9_rndc": }
+  @munin::pluginconf { "bind9_rndc":
       confname => 'bind_rndc',
       confs => {
         "env.rndc"       => "/usr/sbin/rndc",

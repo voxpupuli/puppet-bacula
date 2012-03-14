@@ -186,21 +186,24 @@ node burji {
   s3cmd::backup_dir {'burji_opt_pm': 
     bucket        => "burji",
     config_file   => "/root/.s3cfg",
-    schedule      => 'burji_backup',
     dir_to_backup => '/opt/pm',
-  }
+    user          => 'root',
+    ensure        => 'present',
+    minute        => 0,
+    hour          => 0,
+    weekday       => 0,
+ }
 
   s3cmd::backup_dir {'burji_opt_downloads':
     bucket        => "burji",
     config_file   => "/root/.s3cfg",
-    schedule      => 'burji_backup',
-    dir_to_backup => '/opt/downloads', 
+    dir_to_backup => '/opt/downloads',
+    user          => 'root',
+    ensure        => 'present',
+    minute        => 0,
+    hour          => 4,
+    weekday       => 0, 
  }
-
-  schedule { 'burji_backup':
-    period  => 'weekly',
-    range   => '2 - 4',
-  }   
 
 }
 

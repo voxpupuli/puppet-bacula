@@ -1,5 +1,6 @@
 class zendesk($root = '/opt/zendesk') {
 
+  require ruby::dev
   require sinatra
 
   vcsrepo { $root:

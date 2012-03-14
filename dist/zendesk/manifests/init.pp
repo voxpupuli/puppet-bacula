@@ -6,7 +6,7 @@ class zendesk($root = '/opt/zendesk') {
     ensure   => present,
     provider => git,
     source   => 'https://github.com/jamtur01/zendesk-populator',
-    revision => '8c0695513eea438c68c4df95dc9379514b5cce48',
+    revision => '3233df53addec054f1118c081122583c5b3f9f8b',
   }
 
   file { "${root}/public":

@@ -25,7 +25,7 @@ node jotunn {
     docroot  => '/var/www',
     template => 'apache/vhost-passenger.conf.erb',
     template_options => {
-      rack_base_uris => ["/jsonp"],
+      rack_base_uris => ["/jsonp", "/zendesk"],
     }
   }
 
@@ -35,6 +35,14 @@ node jotunn {
     doc_root => '/var/www',
     app_root => '/opt/freddy',
     require  => Class['freddy'],
+  }
+
+  include zendesk
+  rack::app { 'zendesk':
+    ensure => present,
+    doc_root => '/var/www',
+    app_root => '/opt/zendesk',
+    require  => Class['zendesk'],
   }
 
   # 12806 - Docs needs some scratch vhosts

@@ -1,0 +1,29 @@
+title       "Successes (passing tests) triggered by source changes"
+vtitle      "Count"
+from        "-1month"
+description "Total number of commits that resulted in tests passing"
+linewidth   2
+
+field :puppet27xspecs,
+               :alias => "Good commits for Puppet 2.7.x Specs",
+               :data  => "jenkins.jobs.Puppet_Specs_2_7_x.passed.scm"
+
+field :puppetmasterspecs,
+               :alias => "Good commits for Puppet Master Specs",
+               :data  => "jenkins.jobs.Puppet_Specs_master.passed.scm"
+               
+field :puppet27xunit,
+               :alias => "Good commits for Puppet 2.7.x Unit",
+               :data  => "jenkins.jobs.Puppet_2_7_x_Unit.passed.scm"
+
+field :puppetmasterunit,
+               :alias => "Good commits for Puppet Master Unit",
+               :data  => "jenkins.jobs.Puppet_Master_Unit.passed.scm"
+
+field :puppet27xwin,
+               :alias => "Good commits for Puppet 2.7.x Windows",
+               :data  => "jenkins.jobs.Puppet_Windows_2_7_x.passed.scm"
+
+field :puppetmasterwin,
+               :alias => "Good commits for Puppet Master Windows",
+               :data  => "jenkins.jobs.Puppet_Windows_master.passed.scm"

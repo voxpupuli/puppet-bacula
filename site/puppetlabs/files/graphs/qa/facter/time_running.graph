@@ -1,0 +1,21 @@
+title       "Average time to run the specs"
+vtitle      "Seconds"
+from        "-1month"
+description "Average time to run the given job"
+linewidth   2
+
+field :facter16x,
+               :alias => "Average test time for Facter 1.6.x",
+               :data  => "scale(jenkins.jobs.Facter_1_6_x.job_time.avg,0.0002777)"
+
+field :facter16rc,
+               :alias => "Average test time for Facter 1.6rc",
+               :data  => "scale(jenkins.jobs.Facter_1.6rc.job_time.avg,0.0002777)"
+               
+field :factermaster,
+               :alias => "Average test time for Facter Master",
+               :data  => "scale(jenkins.jobs.Facter_Master.job_time.avg,0.0002777)"
+
+field :facter16xwin,
+               :alias => "Average test time for Facter 1.6.x Windows",
+               :data  => "scale(jenkins.jobs.Facter_Windows_1_6_x.job_time.avg,0.0002777)"

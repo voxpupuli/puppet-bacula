@@ -1,0 +1,21 @@
+title       "Test failures triggered by source changes"
+vtitle      "Count"
+from        "-1month"
+description "Total number of commits that broke the build"
+linewidth   2
+
+field :facter16x,
+               :alias => "Bad commits for Facter 1.6.x",
+               :data  => "jenkins.jobs.Facter_1_6_x.failed.scm"
+
+field :facter16rc,
+               :alias => "Bad commits for Facter 1.6rc",
+               :data  => "jenkins.jobs.Facter_1.6rc.failed.scm"
+               
+field :factermaster,
+               :alias => "Bad commits for Facter Master",
+               :data  => "jenkins.jobs.Facter_Master.failed.scm"
+
+field :facter16xwin,
+               :alias => "Bad commits for Facter 1.6.x Windows",
+               :data  => "jenkins.jobs.Facter_Windows_1_6_x.failed.scm"

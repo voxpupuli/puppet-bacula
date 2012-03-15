@@ -1,0 +1,29 @@
+title       "Average time that build is broken"
+vtitle      "Hours"
+from        "-1month"
+description "Average time period between build breaking and fixing for the given job"
+linewidth   2
+
+field :puppet27xspecs,
+               :alias => "Average time failed for Puppet 2.7.x Specs",
+               :data  => "scale(jenkins.jobs.Puppet_Specs_2_7_x.failed_time.avg,0.0002777)"
+
+field :puppetmasterspecs,
+               :alias => "Average time failed for Puppet Master Specs",
+               :data  => "scale(jenkins.jobs.Puppet_Specs_master.failed_time.avg,0.0002777)"
+               
+field :puppet27xunit,
+               :alias => "Average time failed for Puppet 2.7.x Unit",
+               :data  => "scale(jenkins.jobs.Puppet_2_7_x_Unit.failed_time.avg,0.0002777)"
+
+field :puppetmasterunit,
+               :alias => "Average time failed for Puppet Master Unit",
+               :data  => "scale(jenkins.jobs.Puppet_Master_Unit.failed_time.avg,0.0002777)"
+
+field :puppet27xwin,
+               :alias => "Average time failed for Puppet 2.7.x Windows",
+               :data  => "scale(jenkins.jobs.Puppet_Windows_2_7_x.failed_time.avg,0.0002777)"
+
+field :puppetmasterwin,
+               :alias => "Average time failed for Puppet Master Windows",
+               :data  => "scale(jenkins.jobs.Puppet_Windows_master.failed_time.avg,0.0002777)"

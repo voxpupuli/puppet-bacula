@@ -1,0 +1,29 @@
+title       "Average time to run the specs"
+vtitle      "Seconds"
+from        "-1month"
+description "Average time to run the given job"
+linewidth   2
+
+field :puppet27xspecs,
+               :alias => "Average test time for Puppet 2.7.x Specs",
+               :data  => "scale(jenkins.jobs.Puppet_Specs_2_7_x.job_time.avg,0.0002777)"
+
+field :puppetmasterspecs,
+               :alias => "Average test time for Puppet Master Specs",
+               :data  => "scale(jenkins.jobs.Puppet_Specs_master.job_time.avg,0.0002777)"
+               
+field :puppet27xunit,
+               :alias => "Average test time for Puppet 2.7.x Unit",
+               :data  => "scale(jenkins.jobs.Puppet_2_7_x_Unit.job_time.avg,0.0002777)"
+
+field :puppetmasterunit,
+               :alias => "Average test time for Puppet Master Unit",
+               :data  => "scale(jenkins.jobs.Puppet_Master_Unit.job_time.avg,0.0002777)"
+
+field :puppet27xwin,
+               :alias => "Average test time for Puppet 2.7.x Windows",
+               :data  => "scale(jenkins.jobs.Puppet_Windows_2_7_x.job_time.avg,0.0002777)"
+
+field :puppetmasterwin,
+               :alias => "Average test time for Puppet Master Windows",
+               :data  => "scale(jenkins.jobs.Puppet_Windows_master.job_time.avg,0.0002777)"

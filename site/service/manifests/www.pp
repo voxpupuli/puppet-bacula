@@ -157,5 +157,22 @@ class service::www {
       seturl     => true,
   }
 
+  wordpress::instance {
+    'dev.puppetlabs.com':
+      db_pw    => 'wyWuAnyesk',
+      db_user  => 'devpl',
+      template => 'puppetlabs/puppetlabs_vhost.conf.erb',
+      priority => '98',
+      seturl   => true, # what does this even do?
+  }
+
+  wordpress::instance {
+    'malice.puppetlabs.com':
+      db_pw    => 'wyWuAnyeskypoos',
+      db_user  => 'malicepl',
+      template => 'puppetlabs/puppetlabs_vhost.conf.erb',
+      priority => '97',
+      seturl   => true, # what does this even do?
+  }
 }
 

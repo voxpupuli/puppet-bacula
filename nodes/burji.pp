@@ -30,11 +30,7 @@ node burji {
   # Server stuff
   #
   Package <| title == 'mlocate' |>
-  package{ 's3cmd': ensure => installed }
   
-  # Backup burji with s3cmd	
-	class { 'burji_s3cmd': require => Package['s3cmd'] }
-
   $ssl_path = $puppetlabs_ssl::params::ssl_path
 
   include service::pkgrepo
@@ -185,6 +181,28 @@ node burji {
     freight_manage_vhost     => true,
     freight_manage_ssl_vhost => true,
   }
+  
+  s3cmd::backup_dir {'burji_opt_pm': 
+    bucket        => "burji",
+    config_file   => "/root/.s3cfg",
+    dir_to_backup => '/opt/pm',
+    user          => 'root',
+    ensure        => 'present',
+    minute        => 0,
+    hour          => 0,
+    weekday       => 0,
+ }
+
+  s3cmd::backup_dir {'burji_opt_downloads':
+    bucket        => "burji",
+    config_file   => "/root/.s3cfg",
+    dir_to_backup => '/opt/downloads',
+    user          => 'root',
+    ensure        => 'present',
+    minute        => 0,
+    hour          => 4,
+    weekday       => 0, 
+ }
 
 }
 

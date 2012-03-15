@@ -47,5 +47,13 @@ class gitolite::instance(
     require     => File[$gitolite_initial_key],
   }
 
-  include gitolite::rc
+  $gl_adc_path = hiera('gitolite_rc_gl_adc_path', undef)
+  if $gl_adc_path {
+    file { $gl_adc_path:
+      ensure => directory,
+      user   => $user,
+      group  => $group,
+      mode   => '0700',
+    }
+  }
 }

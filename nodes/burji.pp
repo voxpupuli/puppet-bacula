@@ -16,15 +16,14 @@
 # - yum.puppetlabs.com
 node burji {
   include role::server
+  include service::docs
   include puppetlabs_ssl
 
   # User Stuff
   #
-  Account::User <| tag == deploy |>
   ssh::allowgroup  { "release":    }
   ssh::allowgroup  { "prosvc":     }
   ssh::allowgroup  { "enterprise": }
-  ssh::allowgroup  { "www-data": }
 
   sudo::allowgroup { "release":    }
 

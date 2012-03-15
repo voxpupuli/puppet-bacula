@@ -7,7 +7,7 @@
 #
 node jotunn {
   include role::server
-
+  include service::docs
 
   # https://projects.puppetlabs.com/issues/7849
   # github pull request robot
@@ -51,9 +51,6 @@ node jotunn {
     'docspreview2.puppetlabs.lan': docroot => '/opt/docspreview2';
     'docspreview3.puppetlabs.lan': docroot => '/opt/docspreview3';
   }
-
-  Account::User <| tag == 'deploy' |>
-  ssh::allowgroup { "www-data": }
 
   file {
     ['/opt/docspreview3','/opt/docspreview2','/opt/docspreview1']:

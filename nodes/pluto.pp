@@ -1,4 +1,5 @@
 node pluto {
+  include service::docs
   include role::server
 
   ssh::allowgroup { "developers": }
@@ -6,13 +7,6 @@ node pluto {
   ssh::allowgroup { "builder": }
 
   sudo::allowgroup { "builder": }
-
-  # The deploy user is used for the automated deployment of documentation.
-  # see https://github.com/puppetlabs/puppet-docs/blob/master/config/deploy.rb
-  # for the Rest of the Story (TM)
-  ssh::allowgroup { "www-data": }
-  Account::User <| tag == deploy |>
-  Ssh_authorized_key <| tag == deploy |>
 
   # (#11435) jenkins user for QA/release automation
   Account::User <| tag == 'jenkins' |>

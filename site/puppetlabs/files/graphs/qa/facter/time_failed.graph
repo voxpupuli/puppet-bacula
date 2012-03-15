@@ -1,0 +1,21 @@
+title       "Average time that build is broken"
+vtitle      "Hours"
+from        "-1month"
+description "Average time period between build breaking and fixing for the given job"
+linewidth   2
+
+field :facter16x,
+               :alias => "Average time failed for Facter 1.6.x",
+               :data  => "scale(jenkins.jobs.Facter_1_6_x.failed_time.avg,0.0002777)"
+
+field :facter16rc,
+               :alias => "Average time failed for Facter 1.6rc",
+               :data  => "scale(jenkins.jobs.Facter_1.6rc.failed_time.avg,0.0002777)"
+               
+field :factermaster,
+               :alias => "Average time failed for Facter Master",
+               :data  => "scale(jenkins.jobs.Facter_Master.failed_time.avg,0.0002777)"
+
+field :facter16xwin,
+               :alias => "Average time failed for Facter 1.6.x Windows",
+               :data  => "scale(jenkins.jobs.Facter_Windows_1_6_x.failed_time.avg,0.0002777)"

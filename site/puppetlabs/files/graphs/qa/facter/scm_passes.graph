@@ -1,0 +1,21 @@
+title       "Successes (passing tests) triggered by source changes"
+vtitle      "Count"
+from        "-1month"
+description "Total number of commits that resulted in tests passing"
+linewidth   2
+
+field :facter16x,
+               :alias => "Good commits for Facter 1.6.x",
+               :data  => "jenkins.jobs.Facter_1_6_x.passed.scm"
+
+field :facter16rc,
+               :alias => "Good commits for Facter 1.6rc",
+               :data  => "jenkins.jobs.Facter_1.6rc.passed.scm"
+               
+field :factermaster,
+               :alias => "Good commits for Facter Master",
+               :data  => "jenkins.jobs.Facter_Master.passed.scm"
+
+field :facter16xwin,
+               :alias => "Good commits for Facter 1.6.x Windows",
+               :data  => "jenkins.jobs.Facter_Windows_1_6_x.passed.scm"

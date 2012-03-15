@@ -1,0 +1,29 @@
+title       "Test failures triggered by source changes"
+vtitle      "Count"
+from        "-1month"
+description "Total number of commits that broke the build"
+linewidth   2
+
+field :puppet27xspecs,
+               :alias => "Bad commits for Puppet 2.7.x Specs",
+               :data  => "jenkins.jobs.Puppet_Specs_2_7_x.failed.scm"
+
+field :puppetmasterspecs,
+               :alias => "Bad commits for Puppet Master Specs",
+               :data  => "jenkins.jobs.Puppet_Specs_master.failed.scm"
+               
+field :puppet27xunit,
+               :alias => "Bad commits for Puppet 2.7.x Unit",
+               :data  => "jenkins.jobs.Puppet_2_7_x_Unit.failed.scm"
+
+field :puppetmasterunit,
+               :alias => "Bad commits for Puppet Master Unit",
+               :data  => "jenkins.jobs.Puppet_Master_Unit.failed.scm"
+
+field :puppet27xwin,
+               :alias => "Bad commits for Puppet 2.7.x Windows",
+               :data  => "jenkins.jobs.Puppet_Windows_2_7_x.failed.scm"
+
+field :puppetmasterwin,
+               :alias => "Bad commits for Puppet Master Windows",
+               :data  => "jenkins.jobs.Puppet_Windows_master.failed.scm"

@@ -1,0 +1,23 @@
+title       "Build stability score"
+vtitle      "Percentage"
+from        "-1month"
+description "Build stability/health score (calculated by Jenkins as the percentage of recent builds that succeeded)."
+linewidth   2
+ymin        0
+ymax        100
+
+field :facter16x,
+               :alias => "Health score for Facter 1.6.x",
+               :data  => "jenkins.jobs.Facter_1_6_x.health_score"
+
+field :facter16rc,
+               :alias => "Health score for Facter 1.6rc",
+               :data  => "jenkins.jobs.Facter_1.6rc.health_score"
+               
+field :factermaster,
+               :alias => "Health score for Facter Master",
+               :data  => "jenkins.jobs.Facter_Master.health_score"
+
+field :facter16xwin,
+               :alias => "Health score for Facter 1.6.x Windows",
+               :data  => "jenkins.jobs.Facter_Windows_1_6_x.health_score"

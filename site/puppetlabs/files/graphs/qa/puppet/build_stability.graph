@@ -1,0 +1,31 @@
+title       "Build stability score"
+vtitle      "Percentage"
+from        "-1month"
+description "Build stability/health score (calculated by Jenkins as the percentage of recent builds that succeeded)."
+linewidth   2
+ymin        0
+ymax        100
+
+field :puppet27xspecs,
+               :alias => "Health score for Puppet 2.7.x Specs",
+               :data  => "jenkins.jobs.Puppet_Specs_2_7_x.health_score"
+
+field :puppetmasterspecs,
+               :alias => "Health score for Puppet Master Specs",
+               :data  => "jenkins.jobs.Puppet_Specs_master.health_score"
+               
+field :puppet27xunit,
+               :alias => "Health score for Puppet 2.7.x Unit",
+               :data  => "jenkins.jobs.Puppet_2_7_x_Unit.health_score"
+
+field :puppetmasterunit,
+               :alias => "Health score for Puppet Master Unit",
+               :data  => "jenkins.jobs.Puppet_Master_Unit.health_score"
+
+field :puppet27xwin,
+               :alias => "Health score for Puppet 2.7.x Windows",
+               :data  => "jenkins.jobs.Puppet_Windows_2_7_x.health_score"
+
+field :puppetmasterwin,
+               :alias => "Health score for Puppet Master Windows",
+               :data  => "jenkins.jobs.Puppet_Windows_master.health_score"

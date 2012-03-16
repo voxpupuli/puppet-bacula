@@ -114,7 +114,7 @@ node 'net02.dc1.puppetlabs.net' {
     # Ops systems
     'ran':      mac => "00:50:56:b2:00:ab", ip => "10.0.1.50";
     'bacula02': mac => "00:50:56:a1:4c:87", ip => "10.0.1.51";
-    'loki':     mac => "00:50:56:a1:4c:9a", ip => "10.0.1.52";
+    'loki':     mac => "00:50:56:a1:4c:ab", ip => "10.0.1.52";
 
     # Jenkins spectest Slaves
     'slave-windows2008r2': mac => "00:50:56:a1:4c:99", ip => "10.0.10.20";

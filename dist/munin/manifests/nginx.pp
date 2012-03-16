@@ -7,6 +7,6 @@ class munin::nginx {
   munin::plugin { [ 'nginx_status', 'nginx_request']: }
   munin::pluginconf { "nginx":
       confname => 'nginx*',
-      envs => { "url" => "http://127.0.0.1/nginx_status" }
+      confs    => { "env.url" => "http://127.0.0.1/nginx_status" }
   }
 }

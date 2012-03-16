@@ -126,4 +126,8 @@ class munin {
   include munin::interfaces
   # Class['munin::automagical'] -> Class['munin']
   Class['munin'] -> Class['munin::automagical']
+
+  Munin::Plugin <||>
+  Munin::Pluginconf <||>
+
 }

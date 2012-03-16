@@ -54,6 +54,7 @@ class bind::params {
       $bind_zone_dir         = '/var/lib/bind/'
       $bind_log_dir          = '/var/log/bind/'
       $bind_restart          = '/usr/sbin/named-checkconf -jz /etc/bind/named.conf && /etc/init.d/bind9 reload'
+      $bind_stats            = '/var/run/named/named.stats'
     }
     default: {
       fail("Operating system ${operatingsystem} is not supported")

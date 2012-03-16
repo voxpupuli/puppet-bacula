@@ -43,6 +43,7 @@ class munin::params {
       $pid_file            = '/var/run/munin/munin-node.pid'
       $group               = 'root'
       $munin_base_packages = 'munin-node'
+      $extra_packages      = 'munin-plugins-extra'
       $plugin_source       = '/usr/share/munin/plugins'
       $plugin_dest         = '/etc/munin/plugins'
       $node_service        = 'munin-node'

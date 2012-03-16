@@ -1,22 +1,22 @@
-define gitolite::adc($ensure = present, $source){
+define gitolite::adc($ensure = present, $source = "puppet:///modules/gitolite/adc/${name}", $mode = '0700'){
 
-  require gitolite::instance
+  require gitolite
 
   validate_re('^present$|^absent$')
   $gl_adc_path = hiera('gitolite_rc_gl_adc_path', undef)
   $user        = hiera('gitolite_instance_user')
   $group       = hiera('gitolite_instance_group')
 
-  if ! $gl_adc_path {
-    notify {'Gitolite ADC warning':
-      message => "The ${module_name}::${name} ADC ensure is present but ADCs are disabled; this will do nothink!";
-    }
+  if $gl_adc_path == undef {
+    err("${module_name}::Adc[${name}] ensure is present but ADCs are disabled; this will do nothing!")
   }
-
-  file { "${gl_adc_path}/${name}":
-    ensure => $ensure,
-    user   => $user,
-    group  => $group,
-    source => $source,
+  else {
+    file { "${gl_adc_path}/${name}":
+      ensure   => $ensure,
+      owner    => $user,
+      group    => $group,
+      source   => $source,
+      mode     => $mode,
+    }
   }
 }

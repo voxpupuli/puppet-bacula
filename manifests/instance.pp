@@ -37,7 +37,7 @@ class gitolite::instance(
     },
   }
 
-  exec { "gl-setup -q ${gitolite_initial_key}":
+  exec { "gl-setup ${gitolite_initial_key} -q":
     path        => ["/usr/bin", "/bin"],
     environment => ["HOME=${home}"],
     user        => $user,
@@ -48,10 +48,10 @@ class gitolite::instance(
   }
 
   $gl_adc_path = hiera('gitolite_rc_gl_adc_path', undef)
-  if $gl_adc_path {
+  if defined($gl_adc_path) {
     file { $gl_adc_path:
       ensure => directory,
-      user   => $user,
+      owner  => $user,
       group  => $group,
       mode   => '0700',
     }

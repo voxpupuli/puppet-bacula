@@ -54,6 +54,7 @@ class gitolite::instance(
       owner  => $user,
       group  => $group,
       mode   => '0700',
+      purge  => true,
     }
   }
 }

@@ -18,6 +18,13 @@
 #   s3cmd::backup_dir {'a_dir_to_backup':
 #     bucket        => "s3://a_bucket",
 #     config_file   => "/somewhere/.s3cfg",
+#     user          => "a_guy",
+#     ensure        => "present",
+#     minute        => "0",
+#     hour          => "0",
+#     monthday      => "*",
+#     month         => "*",
+#     weekday       => "0",
 #   }  
 
 define s3cmd::backup_dir (
@@ -25,12 +32,12 @@ define s3cmd::backup_dir (
     $config_file,
     $dir_to_backup = $title,
     $user,
-    $ensure   = "present",
-    $minute   = '*',
-    $hour     = '*',
-    $monthday = '*',
-    $month    = '*',
-    $weekday  = '*',
+    $ensure = "present",
+    $minute,
+    $hour,
+    $monthday,
+    $month,
+    $weekday,
 ) {
 
   cron { $title:

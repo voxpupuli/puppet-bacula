@@ -190,6 +190,8 @@ node burji {
     ensure        => 'present',
     minute        => 0,
     hour          => 0,
+    monthday      => '*',
+    month         => '*',
     weekday       => 0,
  }
 
@@ -201,6 +203,8 @@ node burji {
     ensure        => 'present',
     minute        => 0,
     hour          => 4,
+    monthday      => '*',
+    month         => '*',
     weekday       => 0, 
  }
 

@@ -3,6 +3,8 @@ class gitolite::instance(
   $key         = hiera('gitolite_instance_key')
 ){
 
+  require gitolite::package
+
   $user        = hiera('gitolite_instance_user')
   $group       = hiera('gitolite_instance_group')
   $home        = hiera('gitolite_instance_home')

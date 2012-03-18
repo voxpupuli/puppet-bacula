@@ -5,6 +5,9 @@ class gitolite::rc (
   $projects_list          = hiera('gitolite_rc_projects_list'),
   $repo_umask             = hiera('gitolite_rc_repo_umask'),
 ) {
+
+  require gitolite::instance
+
   $gl_adc_path           = hiera('gitolite_rc_gl_adc_path', undef)
 
   $user  = hiera('gitolite_instance_user')

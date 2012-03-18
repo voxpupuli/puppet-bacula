@@ -1,6 +1,6 @@
 define gitolite::adc($ensure = present, $source = "puppet:///modules/gitolite/adc/${name}", $mode = '0700'){
 
-  require gitolite
+  require gitolite::instance
 
   validate_re('^present$|^absent$', $ensure)
   $gl_adc_path = $gitolite::data::gitolite_rc_gl_adc_path

@@ -5,9 +5,10 @@ class gitolite::instance(
 
   require gitolite::package
 
-  $user        = hiera('gitolite_instance_user')
-  $group       = hiera('gitolite_instance_group')
-  $home        = hiera('gitolite_instance_home')
+  $user  = hiera('gitolite_instance_user')
+  $group = hiera('gitolite_instance_group')
+  $home  = hiera('gitolite_instance_home')
+
   $gitolite_initial_key = "${home}/admin.pub"
 
   if $manage_user == true {
@@ -26,8 +27,7 @@ class gitolite::instance(
 
   }
 
-  file { "gitolite_initial_key":
-    path    => $gitolite_initial_key,
+  file { $gitolite_initial_key:
     ensure  => present,
     content => $key,
     owner   => $user,

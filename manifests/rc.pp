@@ -8,7 +8,8 @@ class gitolite::rc (
 
   require gitolite::instance
 
-  $gl_adc_path           = hiera('gitolite_rc_gl_adc_path', undef)
+  $gl_adc_path      = hiera('gitolite_rc_gl_adc_path', 'UNSET')
+  $gl_htpasswd_file = hiera('gitolite_rc_gl_htpasswd_file', 'UNSET')
 
   $user  = hiera('gitolite_instance_user')
   $group = hiera('gitolite_instance_group')

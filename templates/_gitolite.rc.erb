@@ -49,12 +49,12 @@ $GL_GITCONFIG_KEYS = "";
 $GL_NO_CREATE_REPOS = 0;
 $GL_NO_SETUP_AUTHKEYS = 0;
 $GL_WILDREPOS_DEFPERMS = '<%= gl_wildrepos_defperms %>';
-$HTPASSWD_FILE = "";
+$HTPASSWD_FILE = "<%= gl_htpasswd_file unless gl_htpasswd_file == 'UNSET' %>";
 $RSYNC_BASE = "";
 $SVNSERVE = "";
 # $UPDATE_CHAINS_TO = "hooks/update.secondary";
 # $ADMIN_POST_UPDATE_CHAINS_TO = "hooks/post-update.secondary";
-$GL_ADC_PATH = '<%= gl_adc_path %>';
+$GL_ADC_PATH = '<%= gl_adc_path unless gl_adc_path == "UNSET" %>';
 # $GL_GET_MEMBERSHIPS_PGM = "/usr/local/bin/expand-ldap-user-to-groups"
 # $GL_HTTP_ANON_USER = "mob";
 

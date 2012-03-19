@@ -447,6 +447,7 @@ class virtual::users {
   }
 
   @account::user{'jeff.weiss':
+    comment => 'Jeff Weiss',
     uid     => 1168,
     group   => 'allstaff',
     groups  => ["developers"],

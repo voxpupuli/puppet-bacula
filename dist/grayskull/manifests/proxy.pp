@@ -1,8 +1,11 @@
-class grayskull::proxy ($servername = $fqdn, $port = 8080) {
-  include nginx
+class grayskull::proxy (
+    $servername = $fqdn, 
+    $port       = 8080
+) {
+  include grayskull::params
 
   nginx::unicorn {
-    'grayskull.puppetlabs.com':
+    "grayskull.${domain}":
       priority       => 8,
       unicorn_socket => 'http://localhost:8081',
       path           => '/dev/null',
@@ -14,12 +17,12 @@ class grayskull::proxy ($servername = $fqdn, $port = 8080) {
       magic          => inline_template( "ssl_verify_client on;\nssl_client_certificate '${grayskull::installdir}/ssl/ca_crt.pem';\nssl_certificate '${grayskull::installdir}/ssl/crt.pem';\nssl_certificate_key '${grayskull::installdir}/ssl/key.pem';\n" ),
   }
 
-
   file { "${grayskull::installdir}/ssl":
     ensure  => directory,
-    owner   => 'www-data',
-    group   => 'www-data',
+    owner   => $grayskull::params::wwwuser,
+    group   => $grayskull::params::wwwgroup,
     mode    => 0600,
     recurse => true;
   }
+
 }

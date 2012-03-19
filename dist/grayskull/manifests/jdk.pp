@@ -1,5 +1,3 @@
-class grayskull::jdk {
-  package { "openjdk-6-jdk":
-    ensure => installed;
-  }
+class grayskull::jdk inherits grayskull::params {
+  package { $grayskull::params::jdkpkg: ensure => installed; }
 }

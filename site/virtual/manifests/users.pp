@@ -445,4 +445,13 @@ class virtual::users {
     key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDdzTYmsNyaOjf9EctrLEv2UOAA0oYTKhTMtloDt/iCjdR2JGKF4+TDZsk3GHrWYoNUCgdt5acXUOl/G9fX1Mz2UwtkIt3U+DaXxaPJoq2wCtah9pAlLaXLDsX6wV/7+jP+v3zqslZFMk2IhFVK2xUyEsh8w0MgeGJ8UKVSkzeBt0GtqBukFm0Itwsk9zERq0y79RiS5bkSxe+Z7eeq/5LMDMoFf0jMAYgrZalTuh0SfxQZjYg0ECfYZPbgm96g8ESoXZjUcdP5U9w/9I/9xN1yIi3WWOAO4BPYXbrTrnXs3RRoikRlpB+G5pj5dEPi6dwc9mohe91ZH5UhFvBMFh3T',
     keytype => 'ssh-rsa',
   }
+
+  @account::user{'jeff.weiss':
+    uid     => 1168,
+    group   => 'allstaff',
+    groups  => ["developers"],
+    shell   => '/bin/bash',
+    tag     => 'allstaff',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDN9gpon0rOq00Vm7zWMpkib166aX+//8QsvF+3pKmF/si5XgMThGya98xUoofc+aMyumcKlPU/CGFod5syau6t8753Y3s5O8OgqnINbEQ5ykqDmQ7uPTwUC3PLre4pdd3CSEyIcjvCZh4tH27FyDW59YQdLluhb9Bb+fETUUzjNz/D0mLfx07qqIVcwgTQ5lqWaWdiKKCf0QXf7KyjDXMyp8kjrEhDlIe1jzY4QQgsdqPMsuShGdphLUwxomafIRbkDplJkW30HVgSYIRisCBvNPFRhgKE5+fBhCy+wAMZYGaJ2oFM++Zm2r5Tol5+p82X8zhQSHZbnYvkOT2NkrVB',
+    keytype => 'ssh-rsa',
 }

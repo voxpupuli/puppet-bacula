@@ -14,7 +14,6 @@ class grayskull::proxy (
       sslonly        => true,
       isdefaultvhost => true, # default for SSL.
       template       => 'grayskull/vhost-unicorn.conf.erb',
-      magic          => inline_template( "ssl_verify_client on;\nssl_client_certificate '${grayskull::installdir}/ssl/ca_crt.pem';\nssl_certificate '${grayskull::installdir}/ssl/crt.pem';\nssl_certificate_key '${grayskull::installdir}/ssl/key.pem';\n" ),
   }
 
   file { "${grayskull::installdir}/ssl":

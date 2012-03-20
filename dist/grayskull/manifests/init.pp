@@ -12,10 +12,13 @@
 #
 # [Remember: No empty lines between comments and class definition]
 class grayskull(
-  $port = 8081,
+  $port       = 8081,
   $installdir = "/var/lib/grayskull"
 ) {
+
+  motd::register { "grayskul;": }
   include grayskull::jdk
   include grayskull::users
   include grayskull::proxy
+
 }

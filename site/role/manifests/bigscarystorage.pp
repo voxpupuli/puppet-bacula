@@ -13,6 +13,8 @@ class role::bigscarystorage {
   # how we roll.
   include role::server
 
+  motd::register{ 'Big Scary Storage box!'}
+
   file { '/etc/sysctl.conf':
     ensure  => 'file',
     group   => '0',

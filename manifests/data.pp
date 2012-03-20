@@ -1,9 +1,9 @@
 class gitolite::data {
 
   ##############################################################################
-  # gitolite::package
+  # gitolite::install
   ##############################################################################
-  $gitolite_package_source = 'backports'
+  $gitolite_install_source = 'backports'
 
   ##############################################################################
   # gitolite::instance

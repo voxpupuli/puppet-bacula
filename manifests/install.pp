@@ -1,7 +1,7 @@
-# = Class: gitolite::package
+# = Class: gitolite::install
 #
 # Backports requires the backports repo available. Fo shizzle.
-class gitolite::package($source = hiera('gitolite_package_source')) {
+class gitolite::install($source = hiera('gitolite_install_source')) {
 
   case $source {
     'backports': {

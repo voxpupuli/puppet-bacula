@@ -1,0 +1,143 @@
+# This vhost is managed by puppet, do not mess with it, terrible terrible things
+# will happen.
+#
+#
+# May be lifted from http://unicorn.bogomips.org/examples/nginx.conf
+
+# this can be any application server, not just Unicorn/Rainbows!
+upstream up_<%= appname %> {
+  # fail_timeout=0 means we always retry an upstream even if it failed
+  # to return a good HTTP response (in case the Unicorn master nukes a
+  # single worker for timing out).
+
+  server <%= unicorn_upstream %> fail_timeout=0 max_fails=0;
+}
+
+server {
+
+<% if sslonly != true -%>
+  listen   <%= port %><% if isdefaultvhost == true %> default<% end %>; ## listen for ipv4, sorry no IPv6 for now.
+<%   if has_variable?( 'ipaddress6' ) -%>
+  # Listen on an ipv6 version of this port too, but only do v6 on it, so we
+  # don't get strange v4 mapped IPs in v6.
+  listen   [::]:<%= port %><% if isdefaultvhost == true %> default ipv6only=on<% end %>;
+<%   end -%>
+<% end -%>
+
+<% if ssl == true -%>
+  # Do SSL, and don't do it terribly.  
+  listen    <%= ssl_port %><% if isdefaultvhost == true %> default ssl<% end %>;
+<%   if has_variable?( 'ipaddress6' ) -%>
+  # Listen on an ipv6 version of this port too, but only do v6 on it, so we
+  # don't get strange v4 mapped IPs in v6.
+  listen   [::]:<%= ssl_port %><% if isdefaultvhost == true %> default ssl ipv6only=on<% end %>;
+<%   end -%>
+  ssl_verify_client on;
+  ssl_client_certificate '<%= scope.lookupvar('grayskull::installdir') %>/ssl/ca_crt.pem';
+  ssl_certificate        '<%= scope.lookupvar('grayskull::installdir') %>/ssl/crt.pem';
+  ssl_certificate_key    '<%= scope.lookupvar('grayskull::installdir') %>/ssl/key.pem';
+  ssl_ciphers            ALL:!aNULL:!ADH:!eNULL:!MEDIUM:!LOW:!EXP:RC4:RSA:HIGH:!kEDH;  # use decent and non-crap ciphers.
+  ssl_session_timeout    10m;
+  ssl_protocols          TLSv1 SSLv3;
+  ssl_session_cache      shared:SSL_<%= appname %>:1m;
+
+  # Redirect non-SSL on SSL port to SSL..
+  # http://www.ruby-forum.com/topic/193781#844520
+  error_page  497  https://$host$request_uri;
+<% end -%>
+
+  server_name <%= srvname %><% if has_variable?( 'serveralias' )%> <%= serveraliases %><% end %>;
+
+  root <%= rootpath %>/public;
+
+  access_log  /var/log/nginx/<%= srvname %>.access.log;
+  error_log   /var/log/nginx/<%= srvname %>.error.log;
+
+
+  # tcp_nopush on; # off may be better for *some* Comet/long-poll stuff
+  # tcp_nodelay off; # on may be better for some Comet/long-poll stuff
+
+  # we haven't checked to see if Rack::Deflate on the app server is
+  # faster or not than doing compression via nginx.  It's easier
+  # to configure it all in one place here for static files and also
+  # to disable gzip for clients who don't get gzip/deflate right.
+  # There are other other gzip settings that may be needed used to deal with
+  # bad clients out there, see http://wiki.nginx.org/NginxHttpGzipModule
+  gzip on;
+  gzip_http_version 1.0;
+  gzip_proxied any;
+  gzip_min_length 500;
+  gzip_disable "MSIE [1-6]\.";
+  gzip_types text/plain text/xml text/css
+             text/comma-separated-values
+             text/javascript application/x-javascript
+             application/atom+xml;
+
+
+  client_max_body_size 128m;
+
+  # Prefer to serve static files directly from nginx to avoid unnecessary
+  # data copies from the application server.
+  #
+  # try_files directive appeared in in nginx 0.7.27 and has stabilized
+  # over time.  Older versions of nginx (e.g. 0.6.x) requires
+  # "if (!-f $request_filename)" which was less efficient:
+  # http://bogomips.org/unicorn.git/tree/examples/nginx.conf?id=v3.3.1#n127
+  try_files $uri/index.html $uri.html $uri @app;
+
+  location @app {
+    # an HTTP header important enough to have its own Wikipedia entry:
+    #   http://en.wikipedia.org/wiki/X-Forwarded-For
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    # enable this if and only if you use HTTPS, this helps Rack
+    # set the proper protocol for doing redirects:
+    # proxy_set_header X-Forwarded-Proto https;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    # pass the Host: header from the client right along so redirects
+    # can be set properly within the Rack application
+    proxy_set_header Host $http_host;
+
+    # we don't want nginx trying to do something clever with
+    # redirects, we set the Host: header above already.
+    proxy_redirect off;
+
+    # set "proxy_buffering off" *only* for Rainbows! when doing
+    # Comet/long-poll/streaming.  It's also safe to set if you're using
+    # only serving fast clients with Unicorn + nginx, but not slow
+    # clients.  You normally want nginx to buffer responses to slow
+    # clients, even with Rails 3.1 streaming because otherwise a slow
+    # client can become a bottleneck of Unicorn.
+    #
+    # The Rack application may also set "X-Accel-Buffering (yes|no)"
+    # in the response headers do disable/enable buffering on a
+    # per-response basis.
+    # proxy_buffering off;
+
+    # Crazed auth section:
+<% if auth['allowfrom'] != nil -%>
+  satisfy any;
+  <% auth['allowfrom'].split(',').each do |allowip| -%>
+  allow <%= allowip %>;
+  <% end -%>
+<% end -%>
+<% if auth['auth'] == true or auth['auth'] == 'true' -%>
+    auth_basic            "Credentials please";
+    auth_basic_user_file  <%= auth['auth_file'] %>;
+<% end -%>
+
+    proxy_pass http://up_<%= appname %>;
+  }
+
+  # Rails error pages
+  error_page 500 502 503 504 /500.html;
+  location = /500.html {
+    root <%= rootpath %>/public;
+  }
+
+
+  # Anything here is added by use of "magic" so is pretty jazzy.
+  <%= magic %>
+}
+

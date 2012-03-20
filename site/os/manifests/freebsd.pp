@@ -2,6 +2,7 @@ class os::freebsd {
 
   if $haszfs == true {
     include zfs
+    include zfs::snapshots
   }
 
   #Package { source => "http://ftp4.freebsd.org/pub/FreeBSD/ports/${architecture}/packages-${kernelmajversion}-release/", provider => portupgrade }
@@ -59,15 +60,35 @@ class os::freebsd {
     target => '/usr/local/bin/ruby',
   }
 
-  file { "/root/ports-supfile":
-    source => "puppet:///modules/puppetlabs/ports-supfile",
+
+  # See http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/cvsup.html#CVSUP-MIRRORS
+  $csuphostnum = fqdn_rand( 16 )
+  $csuphost    = "cvsup${csuphostnum}.freebsd.org"
+  file {
+    '/etc/ports-supfile':
+      source => template( "puppetlabs/ports-supfile.erb" ),
+      owner  => 'root',
+      mode   => '0444';
+    "/root/ports-supfile":
+      ensure => absent;
   }
 
   cron { "update ports":
-    minute  => 20,
+    minute  => fqdn_rand( 60 ),
     hour    => 20,
     user    => root,
-    command => "/usr/bin/csup /root/ports-supfile > /dev/null || echo \$?",
+    command => "/usr/bin/csup -l /var/run/csup.lockfile -L 0 -z /etc/ports-supfile",
+  }
+
+
+  # Set periodic, so we can control a bit more what we get emailed
+  # about.
+  file{ '/etc/periodic.conf':
+    ensure => file,
+    owner  => 'root',
+    group  => 'wheel',
+    mode   => '0644',
+    source => 'puppet:///modules/puppetlabs/os/freebsd/periodic.conf',
   }
 
 }

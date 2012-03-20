@@ -18,7 +18,6 @@ class role::bigscarystorage {
     group   => '0',
     mode    => '0644',
     owner   => '0',
-    type    => 'file',
     source  => 'puppet:///modules/role/bigscarystorage/etc/sysctl.conf',
   }
 
@@ -32,7 +31,6 @@ class role::bigscarystorage {
     group   => '0',
     mode    => '0644',
     owner   => '0',
-    type    => 'file',
     source  => 'puppet:///modules/role/bigscarystorage/boot/loader.conf',
   }
 
@@ -41,7 +39,6 @@ class role::bigscarystorage {
     group   => '0',
     mode    => '0644',
     owner   => '0',
-    type    => 'file',
     source  => 'puppet:///modules/role/bigscarystorage/etc/ttys',
   }
 

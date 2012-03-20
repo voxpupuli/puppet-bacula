@@ -66,9 +66,9 @@ class os::freebsd {
   $csuphost    = "cvsup${csuphostnum}.freebsd.org"
   file {
     '/etc/ports-supfile':
-      source => template( "puppetlabs/ports-supfile.erb" ),
-      owner  => 'root',
-      mode   => '0444';
+      content => template( "puppetlabs/ports-supfile.erb" ),
+      owner   => 'root',
+      mode    => '0444';
     "/root/ports-supfile":
       ensure => absent;
   }

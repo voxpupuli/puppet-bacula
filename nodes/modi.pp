@@ -20,17 +20,13 @@ node modi {
   include squid
   include squid::cache
   include munin::squid
-  #      ^
-  #    /   \
-  #    \   /
-  #    |   |
-  #    |   |
-  #    | 0 |
-  #   // ||\\
-  #  (( // ||
-  #   \\))  \\
-  # //||    ))
-  # ( ))   //
-  #  //   ((
-
+  #   __
+  #  (    )
+  #   Oo
+  #  (    )
+  #   ||||||
+  #   ||||||
+  #   ||||||
+  #
+  # IT'S A SQUID. NO, REALLY.
 }

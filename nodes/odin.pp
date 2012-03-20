@@ -2,8 +2,10 @@ node odin {
   include role::server
 
   # Customer Groups
+  Account::User <| title == 'jamesfryman' |>
   Account::User <| tag == customer |>
   Group <| tag == customer |>
+  Group <| title == 'contractors' |>
   Ssh_authorized_key <| tag == customer |>
 
   $ssh_customer = [

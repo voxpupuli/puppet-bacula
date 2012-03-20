@@ -46,7 +46,7 @@ node ningyo {
     modulepath   => inline_template("<%= modulepath.join(':') %>"),
     storeconfigs => "grayskull",
     reporturl    => "https://dashboard.puppetlabs.com/reports",
-    servertype   => "unicorn",,
+    servertype   => "unicorn",
     manifest     => '$confdir/environments/$environment/site.pp',
     reports      => ["store", "https", "xmpp"],
   }

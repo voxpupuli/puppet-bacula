@@ -456,4 +456,15 @@ class virtual::users {
     key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDN9gpon0rOq00Vm7zWMpkib166aX+//8QsvF+3pKmF/si5XgMThGya98xUoofc+aMyumcKlPU/CGFod5syau6t8753Y3s5O8OgqnINbEQ5ykqDmQ7uPTwUC3PLre4pdd3CSEyIcjvCZh4tH27FyDW59YQdLluhb9Bb+fETUUzjNz/D0mLfx07qqIVcwgTQ5lqWaWdiKKCf0QXf7KyjDXMyp8kjrEhDlIe1jzY4QQgsdqPMsuShGdphLUwxomafIRbkDplJkW30HVgSYIRisCBvNPFRhgKE5+fBhCy+wAMZYGaJ2oFM++Zm2r5Tol5+p82X8zhQSHZbnYvkOT2NkrVB',
     keytype => 'ssh-rsa',
   }
+
+  @account::user{'andy':
+    comment => 'Andy Parker',
+    uid     => 1169,
+    group   => 'allstaff',
+    groups  => ["developers"],
+    shell   => '/bin/bash',
+    tag     => 'allstaff',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDAWN8xjLlYpZgyAb3T8bgvKMuIXlcedephhfjbMD6tyzTu9X7cPCQknuxme2r5OGJimza7uVRIx9p/MboF+xe6qPE5rXZ1k87w4pCwug7hIUcAAqwSFAL4TmOZ2cUiDOT/Lz1reoMSEsIwbtYU8Tl5nAA+xz+KwMFul1+0Nc7tsJqeBJWcpc7sjp1ouxkf/zxoR0GBLrwhBtIP8cynq61cakF/SWONsJVAobZhAYHcEnOODF3F0oU+Z71QSWoz0Ogd+bQDTjLXLI7WvKHRsI567+9K7vFRRCHpzeflOjKJbBfH7pzTErQKo9GvtJHpCdk5POObT1YNsNQ1dnUolJFH',
+    keytype => 'ssh-rsa',
+  }
 }

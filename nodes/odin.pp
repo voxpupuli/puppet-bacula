@@ -12,10 +12,10 @@ node odin {
     "thompsonreuters", # (#13003)
   ]
 
-
   ssh::allowgroup { "prosvc": }
   ssh::allowgroup { "support": }
   ssh::allowgroup { $ssh_customer: chroot => true }
+  ssh::allowgroup { 'contractors': chroot => true }
   ssh::allowgroup { "developers": }
 
   ssh::allowgroup { 'motorola': chroot => true, tcpforwarding => true } # support:767

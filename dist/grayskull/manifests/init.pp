@@ -16,7 +16,7 @@ class grayskull(
   $installdir = "/var/lib/grayskull"
 ) {
 
-  motd::register { "grayskul;": }
+  motd::register { "grayskull": }
   include grayskull::jdk
   include grayskull::users
   include grayskull::proxy

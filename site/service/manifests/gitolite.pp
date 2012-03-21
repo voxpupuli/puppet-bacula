@@ -17,7 +17,7 @@ class service::gitolite {
   ssh::allowgroup { "git": }
 
 
-  include gitolite
+  class {'::gitolite': }
 
   gpg::agent { "git":
     options => [

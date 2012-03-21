@@ -159,6 +159,7 @@ class service::mrepo {
     ensure    => present,
     repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
     arch      => "i386",
+    release   => "4",
     update    => "never",
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",

@@ -39,6 +39,7 @@ class virtual::users::service {
     comment => 'Git User',
     group   => git,
     tag     => git,
+    usekey  => false,
   }
 
   @account::user { 'hudson':

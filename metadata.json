@@ -1,0 +1,49 @@
+{
+  "name": "Analytical Labs-sysctl",
+  "author": "Tom Barber",
+  "description": "",
+  "license": "",
+  "project_page": "",
+  "source": "",
+  "summary": "",
+  "version": "1.0",
+  "checksums": {
+    "Modulefile": "7a49162807f97aaf70c6af85068d9bb7",
+    "README": "01a2968cc83cf259893ac95fa6a4bc85",
+    "lib/puppet/provider/sysctl/parsed.rb": "f1ad6c1cd610b6fe33fcd245759c09d1",
+    "lib/puppet/type/sysctl.rb": "65fe3deaf4e245b7a5f031dac3d73f4d",
+    "manifests/init.pp": "12de57429ac4caac7f63e2ab43e7b834",
+    "manifests/value.pp": "f0f4852c8abff140f86fab4081c15070",
+    "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
+    "tests/init.pp": "c37e60752d6d23d542b366fe25d03e52"
+  },
+  "types": [
+    {
+      "parameters": [
+        {
+          "name": "name",
+          "doc": "Name of the parameter"
+        }
+      ],
+      "properties": [
+        {
+          "name": "val",
+          "doc": "Value the parameter should be set to"
+        },
+        {
+          "name": "target",
+          "doc": "Name of the file to store parameters in"
+        }
+      ],
+      "providers": [
+        {
+          "name": "parsed"
+        }
+      ],
+      "name": "sysctl",
+      "doc": "Manages kernel parameters in /etc/sysctl.conf.  By default this will\n                only edit the configuration file, and not change any of the runtime\n                values.  If you wish changes to be activated right away, you can do\n                so with an exec like so:\n\n                        exec { load-sysctl:\n                            command \u003d\u003e \"/sbin/sysctl -p /etc/sysctl.conf\",\n                            refreshonly \u003d\u003e true\n                        }\n\n                Set any changes you want to happen right away to notify this command,\n                or you can set it as the default:\n\n                        Sysctl {\n                            notify \u003d\u003e Exec[load-sysctl]\n                        }"
+    }
+  ],
+  "dependencies": []
+}

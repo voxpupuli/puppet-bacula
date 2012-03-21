@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "this command no longer exists.  Please run the 'help' adc for more info."
+exit 1

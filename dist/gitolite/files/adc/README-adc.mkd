@@ -1,0 +1,52 @@
+# F=shipped_ADCs brief descriptions of the shipped ADCs (admin-defined commands)
+
+(...with pointers to further information where needed)
+
+----
+
+**able**: enable/disable push access temporarily (such as for taking backups
+or other admin chores); details [here][able].  This ADC is meant only for
+admins.
+
+**delete-branch**: allow someone to delete a branch that they themselves
+created. (i.e., when the user had RWC, but not RWCD, permissions).  Details on
+this ADC are [here][dbsha]; details on RWC/RWD/RWCD etc are [here][rwcd].
+
+[dbsha]: https://github.com/sitaramc/gitolite/commit/89b68bf5ca99508caaa768c60ce910d7e0a29ccf
+
+**fork**: Think of it as a server-side clone; details [here][fork].
+
+**get-rights-and-owner.in-perl**:  Most of the ADCs are in shell, so this is a
+sample of how to write an ADC in perl.
+
+**git-annex-shell**: allows git-annex to store and retrieve annexed file content in
+repositories. To use, install in `$GL_ADC_PATH/ua/git-annex-shell`
+
+**gl-reflog**: show a fake "reflog" from the server, and allow recovery from
+deleted branches and bad force pushes; details in source.
+
+**help**: not all shipped ADCs may be enabled by the site admin.  Conversely
+the admin may create and install his own ADCs that dont ship with gitolite
+itself.  This ADC displays site-local help, if the site admin enabled it.
+
+**hub**: allow "pull requests" a la github; details [here][hub].
+
+**rm**, **lock**, and **unlock**:<br>
+**trash**, **list-trash**, and **restore**:
+
+>   two families of repo deletion commands; details [here][wild_repodel]
+
+**sudo**: allow admin to run ADCs on behalf of a user.  Useful in support
+situations I guess.  Details in source.
+
+Note: the Unix "sudo" and "su" programs are most often used to acquire
+*higher* privileges, although they're actually designed to go the other way
+also.  In gitolite we do not do the former, only the latter (i.e., a normal
+gitolite user cannot do admin-stuff using this ADC).
+
+**su-expand**, **su-getperms**, **su-setperms**: as above, but for the
+internal commands 'expand', 'getperms', and 'setperms'.  (These commands are
+not ADCs so you cannot simply use the 'sudo' ADC described above).
+
+**who-pushed**: find the last person to push a given commit; details in
+source.

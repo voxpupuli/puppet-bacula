@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. $(dirname $0)/adc.common-functions
+
+is_admin || die "just *what* are you trying to pull, young man?"
+
+# and here you let them do the dangerous stuff
+echo "+rm -rf $GL_REPO_BASE_ABS"
+sleep 2
+echo ...just kidding!

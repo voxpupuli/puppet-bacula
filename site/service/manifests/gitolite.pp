@@ -7,8 +7,9 @@
 #  - Sets up and runs secure backups with duplicity
 
 class service::gitolite {
-  include git::gitolite
+  #include git::gitolite
 
+  include gitolite
 
   gpg::agent { "git":
     options => [

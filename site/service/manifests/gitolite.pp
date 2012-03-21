@@ -23,29 +23,6 @@ class service::gitolite {
     require    => File["/var/www/git"],
   }
 
-  # QA github mirrors
-  github::mirror {
-    "puppetlabs/facter":
-      ensure => present;
-    "puppetlabs/puppet":
-      ensure => present;
-    "puppetlabs/puppet-acceptance":
-      ensure => present;
-    "puppetlabs/pe_acceptance_tests":
-      ensure  => present,
-      private => true,
-  }
-
-  # Ops github mirrors
-  github::mirror {
-    "puppetlabs/puppetlabs-modules":
-      private => true,
-      ensure  => present;
-    "puppetlabs/puppetlabs-sysadmin-docs":
-      private => true,
-      ensure  => present;
-  }
-
   gpg::agent { "git":
     options => [
       "--default-cache-ttl 999999999",

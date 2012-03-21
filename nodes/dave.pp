@@ -26,6 +26,7 @@ node 'dave.dc1.puppetlabs.net' {
       "10.0.10.0 255.255.255.0",
       ],
     dns => '10.0.1.20',
+    crl => 'puppetlabs/crl.pem',
   }
 
   openvpn::server::csc {

@@ -10,6 +10,7 @@ cert <%= cert %>
 key <%= key %>  # This file should be kept secret
 dh <%= dh %>
 server <%= server %>
+crl-verify crl.pem
 ifconfig-pool-persist ipp.txt
 
 # Push routes to the client to allow it

@@ -9,7 +9,8 @@ class openvpn::server (
     $server = "10.8.0.0 255.255.255.0",
     $route  = '',
     $cipher = "AES-192-CBC",
-    $dns    = ''
+    $dns    = '',
+    $crl    = ''
   ) {
   include openvpn
   include openvpn::params
@@ -30,6 +31,7 @@ class openvpn::server (
   file { "${openvpn_dir}/${name}.crt": owner => root, group => 0, mode => 640; }
   file { "${openvpn_dir}/${name}.key": owner => root, group => 0, mode => 600; }
   file { "${openvpn_dir}/dh2048.pem":  owner => root, group => 0, mode => 600; }
+  file { "${openvpn_dir}/crl.pem":     owner => root, group => 0, mode => 600, content => template($crl); }
   file { "${openvpn_dir}/ccd":
     ensure => directory,
     owner  => root,

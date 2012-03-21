@@ -88,7 +88,17 @@ class os::freebsd {
     owner  => 'root',
     group  => 'wheel',
     mode   => '0644',
-    source => 'puppet:///modules/puppetlabs/os/freebsd/periodic.conf',
+    source => 'puppet:///modules/os/freebsd/etc/periodic.conf',
+  }
+
+  # https://projects.puppetlabs.com/issues/10681
+  # Manage /etc/make.conf for building things.
+  file { '/etc/make.conf':
+    ensure  => 'file',
+    group   => 'wheel',
+    mode    => '0644',
+    owner   => 'root',
+    source => 'puppet:///modules/os/freebsd/etc/make.conf',
   }
 
 }

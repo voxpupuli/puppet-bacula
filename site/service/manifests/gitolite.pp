@@ -9,6 +9,14 @@
 class service::gitolite {
   #include git::gitolite
 
+  # Resources for gitolite user
+  # Gitolite keys are self contained - adding keys here will break key
+  # management within gitolite itself.
+  Account::User <| title == 'git' |>
+  Group         <| title == 'git' |>
+  ssh::allowgroup { "git": }
+
+
   include gitolite
 
   gpg::agent { "git":

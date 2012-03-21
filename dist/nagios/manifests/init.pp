@@ -95,10 +95,12 @@ class nagios {
     notify              => Service[$nagios::params::nagios_service],
   }
 
+  # For this, use a regex on the munin-node name, so it works on
+  # FreeBSD too (different path, and it has perl in the command name).
   @@nagios_service { "check_munin-node_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
-    check_command       => 'check_nrpe!check_proc!1:1 munin-node',
+    check_command       => 'check_nrpe!check_proc_re!1:1 "^/usr/(local/)?sbin/munin-node"',
     service_description => "check_munin-node_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify              => Service[$nagios::params::nagios_service],

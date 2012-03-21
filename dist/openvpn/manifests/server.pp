@@ -31,7 +31,7 @@ class openvpn::server (
   file { "${openvpn_dir}/${name}.crt": owner => root, group => 0, mode => 640; }
   file { "${openvpn_dir}/${name}.key": owner => root, group => 0, mode => 600; }
   file { "${openvpn_dir}/dh2048.pem":  owner => root, group => 0, mode => 600; }
-  file { "${openvpn_dir}/crl.pem":     owner => root, group => 0, mode => 600, content => template($crl); }
+  file { "${openvpn_dir}/crl.pem":     owner => root, group => 0, mode => 644, content => template($crl); }
   file { "${openvpn_dir}/ccd":
     ensure => directory,
     owner  => root,

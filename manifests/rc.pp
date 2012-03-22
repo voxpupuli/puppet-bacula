@@ -1,3 +1,19 @@
+# = Class: gitolite::rc
+#
+# == Purpose
+#
+# This class generates the gitolite configuration file. It performs basic
+# variable munging that cannot be done through hiera and templates the
+# aforementioned config file.
+#
+# == Parameters
+#
+# The following variables are pulled from hiera.
+#
+# * gitolite_instance_user          - The name of the gitolite user
+# * gitolite_instance_group         - The name of the gitolite group
+# * gitolite_instance_home          - The name of the gitolite home directory
+#
 class gitolite::rc (
   $gl_wildrepos           = hiera('gitolite_rc_gl_wildrepos'),
   $gl_wildrepos_defperms  = hiera('gitolite_rc_gl_wildrepos_defperms'),

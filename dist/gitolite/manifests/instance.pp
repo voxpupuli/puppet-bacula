@@ -26,20 +26,21 @@ class gitolite::instance(
 
   $gitolite_initial_key = "${home}/admin.pub"
 
-  if $manage_user == true {
-    group { $group:
-      ensure => present,
-      before => User[$user],
-    }
+  notify { "manageuser: ${manage_user}": }
+  #if $manage_user == true {
+  #  group { $group:
+  #    ensure => present,
+  #    before => User[$user],
+  #  }
 
-    user { $user:
-      ensure     => present,
-      gid        => $group,
-      home       => $home,
-      managehome => true,
-      comment    => 'Gitolite system account',
-    }
-  }
+  #  user { $user:
+  #    ensure     => present,
+  #    gid        => $group,
+  #    home       => $home,
+  #    managehome => true,
+  #    comment    => 'Gitolite system account',
+  #  }
+  #}
 
   file { $gitolite_initial_key:
     ensure  => present,

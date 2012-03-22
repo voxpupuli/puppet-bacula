@@ -1,0 +1,56 @@
+#!/bin/sh
+
+. $(dirname $0)/adc.common-functions
+
+is_admin || die "just *what* are you trying to pull, young man?"
+
+op=$1
+shift
+
+locs=
+while [ -n "$1" ]
+do
+    case $1 in
+        '@all' )
+            locs="$locs $HOME"
+            ;;
+        * )
+            loc="$GL_REPO_BASE_ABS/$1.git"
+            [ -d $loc ] && locs="$locs $GL_REPO_BASE_ABS/$1.git"
+            [ -d $loc ] || echo "ignoring $1..."
+            ;;
+    esac
+    shift
+done
+
+[ -z "$locs" ] && die "give me '@all' or some reponame"
+
+case $op in
+    en|enable )
+        for l in $locs
+        do
+            rm -fv $l/.gitolite.down
+        done
+        ;;
+    dis|disable )
+
+        TEMPDIR=$(mktemp -d -t tmp.XXXXXXXXXX)
+        export TEMPDIR
+        trap "/bin/rm -rf $TEMPDIR" 0
+
+        echo 'type the message to be shown to users when they try to push; end with Ctrl-D:'
+        echo > $TEMPDIR/msg
+        cat >> $TEMPDIR/msg
+        echo disabling following locations with message:
+        cat $TEMPDIR/msg
+        echo
+        for l in $locs
+        do
+            cat $TEMPDIR/msg > $l/.gitolite.down
+            echo $l
+        done
+        ;;
+    * )
+        die "argument 1 must be 'en' or 'dis'"
+        ;;
+esac

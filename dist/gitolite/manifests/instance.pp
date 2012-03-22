@@ -15,7 +15,7 @@
 # * gitolite_instance_key           - The full ssh public key to use to initialize the gitolite-admin repo.
 #
 class gitolite::instance(
-  $manage_user = hiera('gitolite_instance_manage_user'),
+  $manage_user = hiera('gitolite_instance_manage_user', false),
   $key         = hiera('gitolite_instance_key'),
   $user        = hiera('gitolite_instance_user'),
   $group       = hiera('gitolite_instance_group'),

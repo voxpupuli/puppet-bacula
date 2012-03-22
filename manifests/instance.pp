@@ -1,3 +1,19 @@
+# = Class: gitolite::instance
+#
+# == Purpose
+#
+# This class creates a gitolite instance and the necessary prerequisite files
+#
+# == Parameters
+#
+# The following variables are pulled from hiera.
+#
+# * gitolite_instance_manage_user   - Whether or not to manage the gitolite user
+# * gitolite_instance_user          - The name of the gitolite user
+# * gitolite_instance_group         - The name of the gitolite group
+# * gitolite_instance_home          - The name of the gitolite home directory
+# * gitolite_instance_key           - The full ssh public key to use to initialize the gitolite-admin repo.
+#
 class gitolite::instance(
   $manage_user = hiera('gitolite_instance_manage_user'),
   $key         = hiera('gitolite_instance_key')

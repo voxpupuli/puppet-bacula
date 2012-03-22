@@ -17,7 +17,20 @@ class service::gitolite {
 
 
   class {'::gitolite': }
-  include gitolite::gitweb
+  gitolite::adc { 'adc.common-functions': mode => '0600'}
+
+  gitolite::adc { 'fork': }
+  gitolite::adc { 'getdesc': }
+  gitolite::adc { 'help': }
+  gitolite::adc { 'hub': }
+  gitolite::adc { 'list-trash': }
+  gitolite::adc { 'lock': }
+  gitolite::adc { 'perms': }
+  gitolite::adc { 'restore': }
+  gitolite::adc { 'setdesc': }
+  gitolite::adc { 'sskm': }
+  gitolite::adc { 'trash': }
+  gitolite::adc { 'unlock': }
 
   gpg::agent { "git":
     options => [

@@ -130,27 +130,5 @@ node ningyo {
     mode   => 0700,
   }
 
-  include grayskull
-
-
-  # VPN for internal monitoring and DNS Resolution
-  openvpn::client {
-    "node_${hostname}_dc1":
-      server => "vpn.puppetlabs.net",
-      cert   => "node_${hostname}";
-  }
-
-  # DNS resolution to internal hosts
-  include unbound
-  unbound::stub { "dc1.puppetlabs.net":
-    address  => '10.0.1.20',
-    insecure => true,
-  }
-
-  unbound::stub { "42.0.10.in-addr.arpa.":
-    address  => '10.0.1.20',
-    insecure => true,
-  }
-
 }
 

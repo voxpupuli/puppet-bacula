@@ -100,7 +100,7 @@ class nagios {
   @@nagios_service { "check_munin-node_${hostname}":
     use                 => 'generic-service',
     host_name           => "$fqdn",
-    check_command       => 'check_nrpe!check_proc_re!1:1 "^/usr/(local/)?sbin/munin-node"',
+    check_command       => 'check_nrpe!check_munin_node!1:1',
     service_description => "check_munin-node_${hostname}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
     notify              => Service[$nagios::params::nagios_service],

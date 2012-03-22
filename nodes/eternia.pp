@@ -1,4 +1,4 @@
-node 'eternia' {
+node 'eternia.dc1.puppetlabs.net' {
   include role::server
   include grayskull
 

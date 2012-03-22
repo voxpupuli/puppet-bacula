@@ -7,7 +7,6 @@
 #  - Sets up and runs secure backups with duplicity
 
 class service::gitolite {
-  #include git::gitolite
 
   # Resources for gitolite user
   # Gitolite keys are self contained - adding keys here will break key
@@ -18,6 +17,7 @@ class service::gitolite {
 
 
   class {'::gitolite': }
+  include gitolite::gitweb
 
   gpg::agent { "git":
     options => [

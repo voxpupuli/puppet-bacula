@@ -4,7 +4,6 @@ class gitolite {
   include gitolite::rc
 
   anchor { 'gitolite::begin': } ->
-  Class['gitolite::install'] ->
   Class['gitolite::instance'] ->
   Class['gitolite::rc'] ->
   anchor { 'gitolite::end': }

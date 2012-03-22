@@ -75,5 +75,22 @@ class graphite (
       files => ["/opt/graphite"],
   }
 
+  cron { "remove ancient graphite log files":
+    command => "/usr/bin/find /opt/graphite/storage/log -type f -mtime +14 | /usr/bin/xargs -I {} rm {}",
+    user    => root,
+    minute  => 18,
+    hour    => 4,
+    weekday => 3;
+  }
+
+  cron { "compress oldish graphite log files":
+    command => '/usr/bin/find /opt/graphite/storage/log -type f -mtime +3 -regex ".*[^.gz$]" | /usr/bin/xargs -I {} /usr/bin/nice -n 19 /usr/bin/ionice -c3 gzip {}',
+    user    => root,
+    minute  => 41,
+    hour    => 4,
+    weekday => 3;
+  }
+
+
 }
 

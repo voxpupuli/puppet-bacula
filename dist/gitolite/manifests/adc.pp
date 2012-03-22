@@ -10,6 +10,10 @@ define gitolite::adc($ensure = present, $source = "puppet:///modules/gitolite/ad
   $user  = $gitolite::data::gitolite_instance_user
   $group = $gitolite::data::gitolite_instance_group
 
+  # This would be the preferred approach
+  #$user = hiera('gitolite_instance_user')
+  #$group = hiera('gitolite_instance_group')
+
   if $adc_path == 'UNSET' {
     err("${module_name}::Adc[${name}] ensure is present but ADCs are disabled; this will do nothing!")
   }

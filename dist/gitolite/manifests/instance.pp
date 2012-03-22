@@ -1,13 +1,28 @@
+# = Class: gitolite::instance
+#
+# == Purpose
+#
+# This class creates a gitolite instance and the necessary prerequisite files
+#
+# == Parameters
+#
+# The following parameters can be tuned as parameters or through hiera
+#
+# * gitolite_instance_manage_user   - Whether or not to manage the gitolite user
+# * gitolite_instance_user          - The name of the gitolite user
+# * gitolite_instance_group         - The name of the gitolite group
+# * gitolite_instance_home          - The name of the gitolite home directory
+# * gitolite_instance_key           - The full ssh public key to use to initialize the gitolite-admin repo.
+#
 class gitolite::instance(
   $manage_user = hiera('gitolite_instance_manage_user'),
-  $key         = hiera('gitolite_instance_key')
+  $key         = hiera('gitolite_instance_key'),
+  $user        = hiera('gitolite_instance_user'),
+  $group       = hiera('gitolite_instance_group'),
+  $home        = hiera('gitolite_instance_home')
 ){
+  include gitolite::install
 
-  require gitolite::package
-
-  $user  = hiera('gitolite_instance_user')
-  $group = hiera('gitolite_instance_group')
-  $home  = hiera('gitolite_instance_home')
 
   $gitolite_initial_key = "${home}/admin.pub"
 
@@ -24,7 +39,6 @@ class gitolite::instance(
       managehome => true,
       comment    => 'Gitolite system account',
     }
-
   }
 
   file { $gitolite_initial_key:
@@ -46,6 +60,9 @@ class gitolite::instance(
     group       => $group,
     logoutput   => on_failure,
     creates     => "${home}/.gitolite",
-    require     => File[$gitolite_initial_key],
+    require     => [
+      File[$gitolite_initial_key],
+      Class['gitolite::install'],
+    ],
   }
 }

@@ -60,6 +60,9 @@ class gitolite::instance(
     group       => $group,
     logoutput   => on_failure,
     creates     => "${home}/.gitolite",
-    require     => File[$gitolite_initial_key],
+    require     => [
+      File[$gitolite_initial_key],
+      Class['gitolite::install'],
+    ],
   }
 }

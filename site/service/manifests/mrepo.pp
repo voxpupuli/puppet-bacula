@@ -1,5 +1,7 @@
 class service::mrepo {
 
+  motd::register {'mrepo': }
+
   class { 'mrepo::params':
     rhn           => true,
     user          => "root",

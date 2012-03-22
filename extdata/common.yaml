@@ -23,3 +23,4 @@ bacula_director: 'baal.puppetlabs.com'
 bacula_client_listen: %{ipaddress}
 bacula_is_storage: "no"
 bacula_storage: 'bacula01.puppetlabs.lan'
+gitolite_instance_manage_user: false

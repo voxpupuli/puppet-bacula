@@ -6,7 +6,7 @@
 #
 # == Parameters
 #
-# The following variables are pulled from hiera.
+# The following parameters can be tuned as parameters or through hiera
 #
 # * gitolite_instance_manage_user   - Whether or not to manage the gitolite user
 # * gitolite_instance_user          - The name of the gitolite user

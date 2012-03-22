@@ -15,8 +15,9 @@ class gitolite::gitweb($site_alias = hiera('gitolite_gitweb_site_alias')){
   }
 
   file { "/home/git/.htpasswd":
-    owner => 'git',
-    group => 'www-data',
-    mode  => '0640',
+    ensure => file,
+    owner  => 'git',
+    group  => 'git',
+    mode   => '0640',
   }
 }

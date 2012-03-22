@@ -4,19 +4,17 @@ node ningyo {
 
   ssh::allowgroup { "techops": }
   sudo::allowgroup { "techops": }
-  ssh::allowgroup { "interns": }
   ssh::allowgroup { "infra": }
 
-  ###
+  # ---
   # Mysql
-  #
+  # --
   $mysql_root_pw = 'Vrs4ZnacNhr41v'
   include mysql::server
 
-  ###
+  # ---
   # Puppet
-  #
-  sudo::entry { "mkincaid": entry => "mkincaid ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n"; }
+  # ---
   sudo::entry { "ssvarma": entry => "ssvarma ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n"; }
   sudo::entry { "infra": entry => "%infra ALL=(ALL) NOPASSWD: /usr/local/bin/puppet_deploy.rb\n"; }
 
@@ -29,12 +27,14 @@ node ningyo {
   ]
 
   # Hiera configuration
-  package { "hiera": ensure => installed, provider => gem; }
+  package { "hiera":        ensure => installed, provider => gem; }
   package { "hiera-puppet": ensure => installed, provider => gem; }
+
   file {
     "/etc/puppet/hiera.yaml":
       source => "puppet:///modules/puppetlabs/hiera.yaml";
   }
+
   file {
     "/etc/hiera.yaml":
       ensure  => link,
@@ -43,13 +43,12 @@ node ningyo {
   }
 
   class { "puppet::server":
-    modulepath => inline_template("<%= modulepath.join(':') %>"),
-    dbadapter  => "mysql",
-    dbuser     => "puppet",
-    dbpassword => "M@gickF$ck!ngP@$$w0rddd!",
-    dbsocket   => "/var/run/mysqld/mysqld.sock",
-    reporturl  => "https://dashboard.puppetlabs.com/reports",
-    servertype => "unicorn",
+    modulepath   => inline_template("<%= modulepath.join(':') %>"),
+    storeconfigs => "grayskull",
+    reporturl    => "https://dashboard.puppetlabs.com/reports",
+    servertype   => "unicorn",
+    manifest     => '$confdir/environments/$environment/site.pp',
+    reports      => ["store", "https", "xmpp"],
   }
 
   class { "puppet::dashboard":
@@ -129,6 +128,28 @@ node ningyo {
     ensure => directory,
     owner  => puppet,
     mode   => 0700,
+  }
+
+  include grayskull
+
+
+  # VPN for internal monitoring and DNS Resolution
+  openvpn::client {
+    "node_${hostname}_dc1":
+      server => "vpn.puppetlabs.net",
+      cert   => "node_${hostname}";
+  }
+
+  # DNS resolution to internal hosts
+  include unbound
+  unbound::stub { "dc1.puppetlabs.net":
+    address  => '10.0.1.20',
+    insecure => true,
+  }
+
+  unbound::stub { "42.0.10.in-addr.arpa.":
+    address  => '10.0.1.20',
+    insecure => true,
   }
 
 }

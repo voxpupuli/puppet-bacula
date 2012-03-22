@@ -105,29 +105,6 @@ class service::mrepo {
     },
   }
 
-  mrepo::repo { "cent4latestserver-x86_64":
-    ensure    => present,
-    repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
-    arch      => "x86_64",
-    release   => "4",
-    hour      => 4,
-    urls      => {
-      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
-      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
-    },
-  }
-
-  mrepo::repo { "cent4latestserver-i386":
-    ensure    => present,
-    repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
-    arch      => "i386",
-    release   => "4",
-    hour      => 5,
-    urls      => {
-      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
-      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
-    },
-  }
 
   mrepo::repo { "cent6latestserver-i386":
     ensure    => present,
@@ -147,6 +124,43 @@ class service::mrepo {
     arch      => "x86_64",
     release   => "6",
     hour      => 6,
+    urls      => {
+      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+    },
+  }
+
+  ##############################################################################
+  # CentOS 4 mirrors are also frozen since CentOS 4 is EOL
+  ##############################################################################
+
+  #This directory (and version of CentOS) is depreciated.
+  #
+  #CentOS-4 is now past EOL
+  #
+  #You can get the last released version of centos 4.9 here:
+  #
+  #http://vault.centos.org/4.9/
+
+
+  mrepo::repo { "cent4latestserver-x86_64":
+    ensure    => present,
+    repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
+    arch      => "x86_64",
+    release   => "4",
+    update    => "never",
+    urls      => {
+      os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+      updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",
+    },
+  }
+
+  mrepo::repo { "cent4latestserver-i386":
+    ensure    => present,
+    repotitle => 'CentOS Enterprise Linux $release ($arch) LATEST',
+    arch      => "i386",
+    release   => "4",
+    update    => "never",
     urls      => {
       os      => "$centos_mirror/centos/\$release/\$repo/\$arch/",
       updates => "$centos_mirror/centos/\$release/\$repo/\$arch/",

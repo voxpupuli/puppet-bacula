@@ -8,7 +8,7 @@ class gitolite::data {
   ##############################################################################
   # gitolite::instance
   ##############################################################################
-  $gitolite_instance_manage_user = true
+  $gitolite_instance_manage_user = false
   $gitolite_instance_user  = 'git'
   $gitolite_instance_group = 'git'
   $gitolite_instance_home  = '/home/git'

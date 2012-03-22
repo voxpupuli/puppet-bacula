@@ -16,14 +16,13 @@
 #
 class gitolite::instance(
   $manage_user = hiera('gitolite_instance_manage_user'),
-  $key         = hiera('gitolite_instance_key')
+  $key         = hiera('gitolite_instance_key'),
+  $user        = hiera('gitolite_instance_user'),
+  $group       = hiera('gitolite_instance_group'),
+  $home        = hiera('gitolite_instance_home')
 ){
+  include gitolite::install
 
-  require gitolite::install
-
-  $user  = hiera('gitolite_instance_user')
-  $group = hiera('gitolite_instance_group')
-  $home  = hiera('gitolite_instance_home')
 
   $gitolite_initial_key = "${home}/admin.pub"
 
@@ -40,7 +39,6 @@ class gitolite::instance(
       managehome => true,
       comment    => 'Gitolite system account',
     }
-
   }
 
   file { $gitolite_initial_key:

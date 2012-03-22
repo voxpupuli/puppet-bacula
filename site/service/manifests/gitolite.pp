@@ -7,30 +7,44 @@
 #  - Sets up and runs secure backups with duplicity
 
 class service::gitolite {
+  include git::gitolite
 
-  # Resources for gitolite user
-  # Gitolite keys are self contained - adding keys here will break key
-  # management within gitolite itself.
-  Account::User <| title == 'git' |>
-  Group         <| title == 'git' |>
-  ssh::allowgroup { "git": }
+  file { "/var/www/git":
+    ensure => directory,
+    owner  => "root",
+    group  => "root",
+    mode   => "0755",
+  }
 
+  class { 'github::params':
+    wwwroot    => "/var/www/git",
+    basedir    => "/home/git/repositories",
+    vhost_name => "git.puppetlabs.lan",
+    require    => File["/var/www/git"],
+  }
 
-  class {'::gitolite': }
-  gitolite::adc { 'adc.common-functions': mode => '0600'}
+  # QA github mirrors
+  github::mirror {
+    "puppetlabs/facter":
+      ensure => present;
+    "puppetlabs/puppet":
+      ensure => present;
+    "puppetlabs/puppet-acceptance":
+      ensure => present;
+    "puppetlabs/pe_acceptance_tests":
+      ensure  => present,
+      private => true,
+  }
 
-  gitolite::adc { 'fork': }
-  gitolite::adc { 'getdesc': }
-  gitolite::adc { 'help': }
-  gitolite::adc { 'hub': }
-  gitolite::adc { 'list-trash': }
-  gitolite::adc { 'lock': }
-  gitolite::adc { 'perms': }
-  gitolite::adc { 'restore': }
-  gitolite::adc { 'setdesc': }
-  gitolite::adc { 'sskm': }
-  gitolite::adc { 'trash': }
-  gitolite::adc { 'unlock': }
+  # Ops github mirrors
+  github::mirror {
+    "puppetlabs/puppetlabs-modules":
+      private => true,
+      ensure  => present;
+    "puppetlabs/puppetlabs-sysadmin-docs":
+      private => true,
+      ensure  => present;
+  }
 
   gpg::agent { "git":
     options => [

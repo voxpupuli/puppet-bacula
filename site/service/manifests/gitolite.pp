@@ -16,7 +16,7 @@ class service::gitolite {
   ssh::allowgroup { "git": }
 
 
-  class {'::gitolite': }
+  class {'::gitolite': manage_user => false,}
   gitolite::adc { 'adc.common-functions': mode => '0600'}
 
   gitolite::adc { 'fork': }

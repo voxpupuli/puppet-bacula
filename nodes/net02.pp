@@ -119,7 +119,7 @@ node 'net02.dc1.puppetlabs.net' {
     'anthracite':  mac => "00:50:56:a1:4c:b3", ip => "10.0.1.54";
 
     # Jenkins spectest Slaves
-    'slave-windows2008r2': mac => "00:50:56:a1:4c:99", ip => "10.0.10.20";
+    'ci-win2008r2': mac => "00:50:56:a1:4c:99", ip => "10.0.10.20";
   }
 
 }

@@ -16,7 +16,7 @@ node forge-dev {
       do_ssh_keys  => true,
       appserver    => 'unicorn',
       github_url   => 'git@github.com:puppetlabs/puppet-forge.git',
-      git_revision => '16169c9',
+      git_revision => 'c6e85f987d5fb7caef7adfa9e0f7a13bae381459',
   }
 
 }

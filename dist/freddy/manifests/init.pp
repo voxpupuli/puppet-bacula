@@ -5,8 +5,8 @@ class freddy($root = '/opt/freddy') {
   vcsrepo { $root:
     ensure   => present,
     provider => git,
-    source   => 'https://github.com/stepchange/freddy',
-    revision => 'd30a0e3dd9588a0fdbc312139c544d2223c07485',
+    source   => 'https://github.com/djsauble2/freddy',
+    revision => '6b494e6b29378f52cb2b081cf7e1efc2e180423f',
   }
 
   file { "${root}/public":

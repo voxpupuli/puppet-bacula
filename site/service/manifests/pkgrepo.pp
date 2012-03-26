@@ -41,8 +41,7 @@ class service::pkgrepo (
     "packages":
       comment => "Puppet Labs Package Repository",
       path    => "/opt/repository",
-      exclude => "apt/dists/*-*/*** apt/dists/*/.*/*** apt/*/logs/*** apt/*/conf/*** apt/*/db/***",
-
+      exclude => "apt/incoming/*** apt/enterprise/*** apt/debian/*** apt/ubuntu/*** apt/dists/*-*/*** apt/dists/*/.*/*** apt/*/logs/*** apt/*/conf/*** apt/*/db/*** apt/prosvc/***",
   }
 
 }

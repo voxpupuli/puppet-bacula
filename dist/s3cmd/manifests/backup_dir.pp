@@ -41,7 +41,7 @@ define s3cmd::backup_dir (
 ) {
 
   cron { $title:
-    command   => "/usr/bin/s3cmd -c ${config_file} sync ${dir_to_backup}/ s3://${bucket}${dir_to_backup}/",
+    command   => "/usr/bin/s3cmd -c ${config_file} sync ${dir_to_backup}/ s3://${bucket}${dir_to_backup}/ | mail -s 'Output of s3 backup on ${hostname}' releng@puppetlabs.com",
     user      => "${user}", 
     ensure    => "${ensure}",
     minute    => "${minute}",

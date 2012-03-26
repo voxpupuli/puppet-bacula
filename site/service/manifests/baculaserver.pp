@@ -5,20 +5,20 @@ class service::baculaserver {
     db_pw   => 'qhF4M6TADEkl',
   }
 
-  bacula::director::pool {
-    "PuppetLabsPool-Full":
-      volret      => "21 days",
-      maxvolbytes => '4g',
-      maxvoljobs  => '10',
-      maxvols     => "20",
-      label       => "Full-";
-    "PuppetLabsPool-Inc":
-      volret      => "8 days",
-      maxvolbytes => '4g',
-      maxvoljobs  => '50',
-      maxvols     => "10",
-      label       => "Inc-";
-  }
+  # bacula::director::pool {
+  #   "PuppetLabsPool-Full":
+  #     volret      => "21 days",
+  #     maxvolbytes => '4g',
+  #     maxvoljobs  => '10',
+  #     maxvols     => "20",
+  #     label       => "Full-";
+  #   "PuppetLabsPool-Inc":
+  #     volret      => "8 days",
+  #     maxvolbytes => '4g',
+  #     maxvoljobs  => '50',
+  #     maxvols     => "10",
+  #     label       => "Inc-";
+  # }
 
   bacula::jobdefs {
     "PuppetLabsOps":

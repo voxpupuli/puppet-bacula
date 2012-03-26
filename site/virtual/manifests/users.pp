@@ -403,7 +403,7 @@ class virtual::users {
     comment => 'Moses Mendoza',
     uid     => '1164',
     group   => 'allstaff',
-    groups  => ["developers","release","builder"],
+    groups  => ["developers","release","builder","enterprise"],
     shell   => '/bin/bash',
     tag     => 'allstaff',
     key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDC+2o3IIBRPPE1iS8OqTvd0A091Utb6XMnIzz7yfgv02N0LyAHbc4vFPPXpt3kORuGTdRuLZ3SOP2VuIiua2eo2kHHKGYKSj7rheRNvbZTuaCXyC9jiLGgA3X+QNHzg33uDK1ygAgyKBWGlJ+CgPsr6tVdLZ4xg/4vJP9eV/Z4DQ6LvENi2pZl1+zDZp9jgEFo3ELNZInhybd52Hy4mKkC6HcgJflRgPf5m05uLT98pjOo/t8/wJ6A98e/p8oVPFT8KCm2EXtXeoq11s1bChR94sig8DFHXiKbfjjkaWz84f+VdoOqltUksicmHAi+DvP4+2VxPN1kOg6Tdoi/eEfz',

@@ -9,30 +9,17 @@
 class service::gitolite {
   include git::gitolite
 
-  file { "/var/www/git":
-    ensure => directory,
-    owner  => "root",
-    group  => "root",
-    mode   => "0755",
-  }
-
-  class { 'github::params':
-    wwwroot    => "/var/www/git",
-    basedir    => "/home/git/repositories",
-    vhost_name => "git.puppetlabs.lan",
-    require    => File["/var/www/git"],
-  }
 
   # QA github mirrors
   github::mirror {
     "puppetlabs/facter":
-      ensure => present;
+      ensure => absent;
     "puppetlabs/puppet":
-      ensure => present;
+      ensure => absent;
     "puppetlabs/puppet-acceptance":
-      ensure => present;
+      ensure => absent;
     "puppetlabs/pe_acceptance_tests":
-      ensure  => present,
+      ensure  => absent,
       private => true,
   }
 
@@ -40,10 +27,10 @@ class service::gitolite {
   github::mirror {
     "puppetlabs/puppetlabs-modules":
       private => true,
-      ensure  => present;
+      ensure  => absent;
     "puppetlabs/puppetlabs-sysadmin-docs":
       private => true,
-      ensure  => present;
+      ensure  => absent;
   }
 
   gpg::agent { "git":

@@ -9,30 +9,6 @@
 class service::gitolite {
   include git::gitolite
 
-
-  # QA github mirrors
-  github::mirror {
-    "puppetlabs/facter":
-      ensure => absent;
-    "puppetlabs/puppet":
-      ensure => absent;
-    "puppetlabs/puppet-acceptance":
-      ensure => absent;
-    "puppetlabs/pe_acceptance_tests":
-      ensure  => absent,
-      private => true,
-  }
-
-  # Ops github mirrors
-  github::mirror {
-    "puppetlabs/puppetlabs-modules":
-      private => true,
-      ensure  => absent;
-    "puppetlabs/puppetlabs-sysadmin-docs":
-      private => true,
-      ensure  => absent;
-  }
-
   gpg::agent { "git":
     options => [
       "--default-cache-ttl 999999999",

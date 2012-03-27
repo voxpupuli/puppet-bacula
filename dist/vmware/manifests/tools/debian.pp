@@ -21,7 +21,7 @@ class vmware::tools::debian {
       user     => 'root',
       path     => '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin',
       creates  => "/lib/modules/${kernelreleasea}/misc/vmmemctl.ko",
-      requires => [ Package['open-vm-tools'], Package['open-vm-source'], Package['module-assistant'] ],
+      require  => [ Package['open-vm-tools'], Package['open-vm-source'], Package['module-assistant'] ],
     }
 
 }

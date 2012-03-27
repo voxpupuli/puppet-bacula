@@ -1,6 +1,8 @@
 node syn {
   include role::server
 
+  include vmware  # See if this helps this machine.
+
   class { "graphite" : site_alias => "graphite.puppetlabs.lan" }
 
   class { "metric_fu" : site_alias => "metrics.puppetlabs.lan" }

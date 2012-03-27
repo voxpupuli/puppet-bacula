@@ -7,13 +7,13 @@ class vmware::tools::debian {
 
     package {
       'open-vm-tools':
-        require => Apt::Source['contrib'],
+        require => Apt::Source['contrib.list'],
         ensure  => installed;
       'open-vm-source':
-        require => Apt::Source['contrib'],
+        require => Apt::Source['contrib.list'],
         ensure  => installed;
       'module-assistant':
-        require => Apt::Source['contrib'],
+        require => Apt::Source['contrib.list'],
         ensure  => installed;
     }
 

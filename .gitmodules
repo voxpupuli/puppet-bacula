@@ -1,6 +1,3 @@
-[submodule "dist/pxe"]
-	path = dist/pxe
-	url = git@github.com:puppetlabs/puppet-pxe.git
 [submodule "dist/tftp"]
 	path = dist/tftp
 	url = git@github.com:puppetlabs/puppet-tftp.git

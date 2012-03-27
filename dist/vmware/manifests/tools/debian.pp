@@ -1,6 +1,6 @@
 class vmware::tools::debian {
 
-    apt::source{ 'contrib':
+    apt::source{ 'contrib.list':
       uri       => 'http://ftp.us.debian.org/debian',
       component => 'main contrib'
     }

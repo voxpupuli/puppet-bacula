@@ -36,6 +36,7 @@ node sles-builder {
   # SSH
   include ssh::server
   ssh::allowgroup  { "sysadmin": }
+  ssh::allowgroup  { "developers": } # Allow dev to share the pain.
 
   # Sudo
   include sudo

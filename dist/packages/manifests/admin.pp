@@ -4,7 +4,7 @@ class packages::admin {
     "rsync",
     "htop",
     "screen",
-    "tmux"
+    "tmux",
   ]
 
   package { $admin_packages: ensure => installed; }

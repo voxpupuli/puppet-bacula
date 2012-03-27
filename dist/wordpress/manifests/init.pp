@@ -20,7 +20,7 @@ class wordpress {
   exec { "wp_unzip":
     cwd     => "/usr/local/src",
     creates => "/usr/local/src/wordpress",
-    command => "/usr/bin/unzip latest.zip";
+    command => "/usr/bin/unzip latest.zip",
   }
 
 

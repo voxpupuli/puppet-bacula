@@ -40,6 +40,12 @@ define wordpress::instance(
 #      creates => "$vhost_dir/wp-admin";
 #  }
 
+  exec {
+    'install_wordpress':
+      command => "/usr/bin/rsync -a /usr/local/src/wordpress/ $vhost_dir/ && /usr/bin/touch ${vhost_dir}/../.${dbname}_installed",
+      creates => "${vhost_dir}/../.${dbname}_installed",
+  }
+
   file {
     "$vhost_dir/wp-config.php":
       mode    => 644,

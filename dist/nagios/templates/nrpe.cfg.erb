@@ -17,7 +17,7 @@ command[check_users]=<%= nagios_plugins_path %>/check_users -w 5 -c 10
 command[check_load]=<%= nagios_plugins_path %>/check_load -w 15,10,5 -c 30,25,20
 command[check_xvda]=<%= nagios_plugins_path %>/check_disk -w 20% -c 10% -p /dev/xvda
 command[check_xvdc]=<%= nagios_plugins_path %>/check_disk -w 20% -c 10% -p /dev/xvdc
-command[check_alldisks]=<%= nagios_plugins_path %>/check_disk -w 20% -c 10% -l -X devfs -X tmpfs -X sysfs -X udev -X linprocfs
+command[check_alldisks]=<%= nagios_plugins_path %>/check_disk -w 20% -c 10% -l -X devfs -X tmpfs -X sysfs -X udev -X linprocfs -X devpts -X devtmpfs
 command[check_zombie_procs]=<%= nagios_plugins_path %>/check_procs -w 5 -c 10 -s Z
 command[check_total_procs]=<%= nagios_plugins_path %>/check_procs -w 150 -c 200
 command[check_mysql]=<%= nagios_plugins_path %>/check_mysql

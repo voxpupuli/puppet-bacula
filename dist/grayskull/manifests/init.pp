@@ -21,5 +21,6 @@ class grayskull(
   include grayskull::users
   include grayskull::proxy
   include grayskull::service
+  include grayskull::tools
 
 }

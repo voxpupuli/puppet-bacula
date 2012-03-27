@@ -7,9 +7,6 @@
 [submodule "dist/inetd"]
 	path = dist/inetd
 	url = git@github.com:puppetlabs/puppet-inetd.git
-[submodule "dist/concat"]
-	path = dist/concat
-	url = https://github.com/ripienaar/puppet-concat.git
 [submodule "dist/vcsrepo"]
 	path = dist/vcsrepo
 	url = git@github.com:puppetlabs/puppet-vcsrepo.git

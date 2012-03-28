@@ -575,6 +575,12 @@ node net01 {
   # Operations production
   ##############################################################################
 
+  # Storage box
+  dhcp::host { 'fulla':
+    ip  => '192.168.100.13',
+    mac => '00:25:90:65:83:be',
+  }
+
   # Mrepo Machine
   dhcp::host { "yo":
     mac => '00:50:56:b2:00:1b',

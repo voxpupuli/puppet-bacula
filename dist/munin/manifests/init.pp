@@ -122,9 +122,9 @@ class munin {
   }
 
   # put this here, not that ordering matters, but I'd like it to.
+  include munin::plugins
   include munin::automagical
   include munin::interfaces
-  # Class['munin::automagical'] -> Class['munin']
   Class['munin'] -> Class['munin::automagical']
 
   Munin::Plugin <||>

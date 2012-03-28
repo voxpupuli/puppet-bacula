@@ -8,7 +8,7 @@ class munin::plugins {
     #' ipmi_sensor_',
     #' smart_',
 
-	$plugins = [ 'cpu', 'cupsys_pages',
+	$plugins = [ 'cpu',
     'df', 'df_inode', 'env',
     'hddtemp_smartctl', 'id',
     'iostat', 'load', 'memory', 'netstat',

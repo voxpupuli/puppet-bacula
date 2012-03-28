@@ -10,19 +10,7 @@ class munin::freebsd {
     #' ipmi_sensor_',
     #' smart_',
 
-  # Installed from ports/pkg munin-node/common.
-	$plugins_ports_base = [ 'cpu', 'cupsys_pages',
-                          'df', 'df_inode', 'env',
-                          'hddtemp_smartctl', 'id',
-                          'iostat', 'load', 'memory', 'netstat',
-                          'open_files', 'postfix_mailqueue',
-                          'postfix_mailstats', 'postfix_mailvolume',
-                          'processes',
-                          'swap', 'systat', 'uptime',
-                          'users', 'vmstat']
-
-  munin::plugin{ $plugins_ports_base: }
-
+  include munin::plugins
 
   # Installed from puppet.
   $plugins_freebsd    = [  'kmemsum', ]

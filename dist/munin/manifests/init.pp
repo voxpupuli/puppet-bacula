@@ -37,6 +37,15 @@ class munin {
     require => Package[$munin::params::munin_base_packages],
   }
 
+
+  # mmm special casing for munin plugins. The postfix log for stats
+  # (which we don't really use) varies between OS.
+  case $::kernel {
+    'freebsd': { $postfixlog = "maillog"  }
+    'linux':   { $postfixlog = "mail.log" }
+    default:   { $postfixlog = "mail.log" }
+  }
+
   file {
     $munin::params::plugins_conf:
       content => template('munin/munin-plugins.conf.erb'),

@@ -40,7 +40,7 @@ user root
 
 [postfix*]
 user root
-env.logfile maillog
+env.logfile <%= postfixlog %>
 
 [sendmail*]
 env.mspqueue /var/spool/clientmqueue

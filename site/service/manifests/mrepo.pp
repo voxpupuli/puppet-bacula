@@ -223,6 +223,10 @@ class service::mrepo {
     },
   }
 
+  ##############################################################################
+  # SLES
+  ##############################################################################
+
   mrepo::repo { "sles-11-sp1-i386":
     ensure    => present,
     update    => "never",
@@ -239,5 +243,20 @@ class service::mrepo {
     arch      => "x86_64",
     release   => "11",
     iso       => "SLE-11-SP1-SDK-DVD-x86_64-GM-DVD1.iso SLES-11-SP1-DVD-x86_64-GM-DVD1.iso",
+  }
+
+  mrepo::repo { "sles-11-sp1-i586-latest":
+    ensure    => present,
+    repotitle => 'Suse Linux Enterprise Server $release SP1 ($arch) LATEST',
+    arch      => 'i586',
+    release   => '11',
+    hour      => '4',
+    iso       => "SLE-11-SP1-SDK-DVD-i586-GM-DVD1.iso SLES-11-SP1-DVD-i586-GM-DVD?.iso",
+    urls      => {
+      'pool'              => 'you://nu.novell.com/repo/$RCE/SLES11-SP1-Pool/sle-11-i586',
+      'updates'           => 'you://nu.novell.com/repo/$RCE/SLES11-SP1-Updates/sle-11-i586',
+      'sdk-pool'          => 'you://nu.novell.com/repo/$RCE/SLE11-SDK-SP1-Pool/sle-11-i586',
+      'sdk-updates'       => 'you://nu.novell.com/repo/$RCE/SLE11-SDK-SP1-Updates/sle-11-i586',
+    },
   }
 }

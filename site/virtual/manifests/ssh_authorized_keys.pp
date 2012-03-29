@@ -36,4 +36,12 @@ class virtual::ssh_authorized_keys {
     type => 'ssh-rsa',
     tag  => 'deploy',
   }
+
+  @ssh_authorized_key { 'fred@puppetlabs.com':
+    user => 'deploy',
+    key  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCkgQmrxXEcRSqiKKmtEf4dtPWB3tzP4DD2biuPKt6LtZ8bGnh0O95fFtSoG/WN4mvSwDbjq9MDHY1K0nfz0XSz1tFiB0BPSlwZ4Hf3NvQubAu3FmQFUsv0qlRUd5vAYp/9/XHDy9CKJkS4tCiypgezFDNkG8XE7x2kpNoZ9pIJoxzrFA9uj6JjB1HSAAyIi+QzIpi0o91OTJZEEeST/KAc834cv6Z5ecImFAOgY25CbTLVCA1wesFedr2M4mICoQhfGuO7y5OkdiQASuHIFD3O2tqVOqoG8p+za39mZiyl55m0hNjTGdtXAB+gJ5qztXmM78u+b/lfpViXo3mP39Pd',
+    type => 'ssh-rsa',
+    tag  => 'deploy',
+  }
+
 }

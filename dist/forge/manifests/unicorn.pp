@@ -48,31 +48,15 @@ class forge::unicorn(
   # do nginx..
   # It carries the SSL, which if true, will default to port 443, so
   # and if not, will just be the default of port 80.
-  # We also redirect HTTP to HTTPS if we're doing SSL, so we have some
-  # security!
   #
   # We, somewhat rudely, assume that this machine _just_ does forge.
   # So become the default vhost. Which I think is reasonable.
-
-  if $ssl == true {
-    nginx::vhost::redirect{
-      'forge_to_ssl':
-        servername => $vhost,
-        priority   => 77,
-        port       => 80,
-        ssl        => false,
-        dest       => "https://${vhost}",
-    }
-  }
-
   nginx::unicorn {
     $vhost:
       priority       => 66,
       ssl            => $ssl,
       isdefaultvhost => true,
-      sslonly        => $ssl,   # reuse $ssl, as we can.
   }
-
 
   # Rotation job, so production.log doesn't get out of control!
   logrotate::job {

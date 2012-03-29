@@ -67,8 +67,7 @@ class munin {
     },
     mode    => '0755',
     recurse => true,
-#    purge   => true, # Leave this out, then we can remove it later.
-## See https://projects.puppetlabs.com/issues/12701 for this.
+    purge   => true,
     notify  => Service[$munin::params::node_service],
     require => Package[$munin::params::munin_base_packages],
   }

@@ -11,9 +11,11 @@ class munin::plugins {
 	$plugins = [ 'cpu',
     'df', 'df_inode', 'env', 'id',
     'iostat', 'load', 'memory', 'netstat',
-    'open_files', 'postfix_mailqueue',
-    'postfix_mailstats', 'postfix_mailvolume',
-    'processes',
+    'open_files', 'open_inodes', 'postfix_mailqueue',
+    'entropy', 'forks', 'irqstats', 'threads',
+    'diskstats', 'proc_pri', 'iostat_ios',
+    'interrupts', 'postfix_mailstats',
+    'postfix_mailvolume', 'processes', 'puppet_runs',
     'swap', 'systat', 'uptime',
     'users', 'vmstat']
 

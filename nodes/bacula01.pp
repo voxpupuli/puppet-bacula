@@ -18,5 +18,11 @@ node bacula01 {
     owner => "gitbackups"
   }
 
+  include sysctl
+  Sysctl {
+    notify => Exec[load-sysctl]
+  }
+  sysctl { "vm.swappiness": val => '25'; }
+
 }
 

@@ -282,7 +282,7 @@ class virtual::users {
     comment => 'Deepak Giridharagopal',
     uid     => '1151',
     group   => allstaff,
-    groups  => ["developers"],
+    groups  => ["developers","release"],
     tag     => allstaff,
   }
 

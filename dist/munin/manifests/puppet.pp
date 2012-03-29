@@ -32,21 +32,14 @@ class munin::puppet {
     require => [ File['/usr/share/munin/plugins/puppet_runs'], File['/etc/munin/plugin-conf.d/puppet_runs'] ],
   }
 
-  file { '/etc/munin/plugin-conf.d/puppet_memory':
-    source => 'puppet:///modules/munin/puppet_memory',
-    ensure => present,
-  }
 
-  file { '/usr/share/munin/plugins/puppet_memory':
-    owner => 'root',
-    group => 'root',
-    mode => '0755',
-    source => 'puppet:///modules/munin/puppet_memory_plugin',
-    ensure => present,
-  }
+  # Replaced, as the old plugin stopped working with.. ooh 2.6.x
+  $plugins = [ 'puppet_agent_memory']
 
-  munin::plugin { 'puppet_memory':
-    require => [ File['/usr/share/munin/plugins/puppet_memory'], File['/etc/munin/plugin-conf.d/puppet_memory'] ],
-  }
+  munin::plugins::install{ puppet: }
 
+  munin::plugin{ $plugins: ,
+    pluginpath => "${munin::params::plugin_source}/puppet",
+    require    => Munin::Plugins::Install['puppet'],
+  }
 }

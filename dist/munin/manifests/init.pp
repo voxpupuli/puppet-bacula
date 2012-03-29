@@ -131,6 +131,7 @@ class munin {
 
   # put this here, not that ordering matters, but I'd like it to.
   include munin::plugins
+  include munin::puppet
   include munin::automagical
   include munin::interfaces
   Class['munin'] -> Class['munin::automagical']

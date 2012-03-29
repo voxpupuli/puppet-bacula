@@ -638,7 +638,7 @@ node net01 {
 
   # New Graphite Box
   dhcp::host { "syn":
-    mac => '00:50:56:b2:01:09',
+    mac => '00:50:56:a1:4c:b9',
     ip  => '192.168.100.77',
   }
 

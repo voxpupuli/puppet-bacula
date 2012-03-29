@@ -38,7 +38,7 @@ define munin::plugin (
   file{ "${plugindest}/${name}":
     ensure => $realensure,
     target => "${pluginpath}/${sourcename}",
-    notify => Service['munin-node'],
+    notify => Service[$munin::params::node_service],
   }
 
 }

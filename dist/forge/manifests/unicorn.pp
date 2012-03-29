@@ -57,11 +57,11 @@ class forge::unicorn(
   if $ssl == true {
     nginx::vhost::redirect{
       'forge_to_ssl':
-        servername => 'forge.puppetlabs.com',
+        servername => $vhost,
         priority   => 77,
         port       => 80,
         ssl        => false,
-        dest       => 'https://forge.puppetlabs.com/',
+        dest       => "https://${vhost}",
     }
   }
 

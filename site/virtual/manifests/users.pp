@@ -152,7 +152,7 @@ class virtual::users {
     comment => 'Nick Fagerlund',
     uid     => '1130',
     group   => allstaff,
-    groups  => ["developers","operations","release"],
+    groups  => ["developers","release"],
     tag     => allstaff,
  }
 
@@ -465,6 +465,17 @@ class virtual::users {
     shell   => '/bin/bash',
     tag     => 'allstaff',
     key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDAWN8xjLlYpZgyAb3T8bgvKMuIXlcedephhfjbMD6tyzTu9X7cPCQknuxme2r5OGJimza7uVRIx9p/MboF+xe6qPE5rXZ1k87w4pCwug7hIUcAAqwSFAL4TmOZ2cUiDOT/Lz1reoMSEsIwbtYU8Tl5nAA+xz+KwMFul1+0Nc7tsJqeBJWcpc7sjp1ouxkf/zxoR0GBLrwhBtIP8cynq61cakF/SWONsJVAobZhAYHcEnOODF3F0oU+Z71QSWoz0Ogd+bQDTjLXLI7WvKHRsI567+9K7vFRRCHpzeflOjKJbBfH7pzTErQKo9GvtJHpCdk5POObT1YNsNQ1dnUolJFH',
+    keytype => 'ssh-rsa',
+  }
+
+  @account::user{'fred':
+    comment => 'Fred Lifton',
+    uid     => 1170,
+    group   => 'allstaff',
+    groups  => ["developers","release'],
+    shell   => '/bin/bash',
+    tag     => 'allstaff',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCkgQmrxXEcRSqiKKmtEf4dtPWB3tzP4DD2biuPKt6LtZ8bGnh0O95fFtSoG/WN4mvSwDbjq9MDHY1K0nfz0XSz1tFiB0BPSlwZ4Hf3NvQubAu3FmQFUsv0qlRUd5vAYp/9/XHDy9CKJkS4tCiypgezFDNkG8XE7x2kpNoZ9pIJoxzrFA9uj6JjB1HSAAyIi+QzIpi0o91OTJZEEeST/KAc834cv6Z5ecImFAOgY25CbTLVCA1wesFedr2M4mICoQhfGuO7y5OkdiQASuHIFD3O2tqVOqoG8p+za39mZiyl55m0hNjTGdtXAB+gJ5qztXmM78u+b/lfpViXo3mP39Pd',
     keytype => 'ssh-rsa',
   }
 }

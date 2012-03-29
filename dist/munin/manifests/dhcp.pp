@@ -10,8 +10,8 @@ class munin::dhcp {
     "libhttp-date-perl",
   ]
 
-  munin::plugin { "dhcpd3": }
-  munin::pluginconf { "dhcpd3":
+  @munin::plugin { "dhcpd3": }
+  @munin::pluginconf { "dhcpd3":
       confname => 'dhcpd3',
       confs => {
         "user"           => "root",

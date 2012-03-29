@@ -189,6 +189,6 @@ class bind (
   # -------------------------
   # Monitoring
   # -------------------------
-  if $bind_monitor == true { include bind::monitor }
+  include bind::monitor
 
 }

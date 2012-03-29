@@ -77,6 +77,8 @@ Facter.add("virtual") do
         result = "xen0"
       elsif FileTest.exists?("/proc/xen/capabilities")
         result = "xenu"
+      elsif Dir.glob("/proc/irq/*/xenbus").length >= 1
+        result = "xenu"
       end
     end
 

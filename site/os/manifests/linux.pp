@@ -39,4 +39,8 @@ class os::linux {
       source => "puppet:///modules/puppetlabs/usr/local/bin/weigh",
   }
 
+  if $is_virtual == 'true' {
+    sysctl::value { "vm.swappiness": value => '25'; }
+  }
+
 }

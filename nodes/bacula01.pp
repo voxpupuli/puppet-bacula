@@ -19,7 +19,7 @@ node bacula01 {
   }
 
   Sysctl { notify => Exec[reload-sysctl] }
-  sysctl::value { "vm.swappiness": val => '25'; }
+  sysctl::value { "vm.swappiness": value => '25'; }
 
 }
 

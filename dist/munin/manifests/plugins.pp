@@ -9,8 +9,7 @@ class munin::plugins {
     #' smart_',
 
 	$plugins = [ 'cpu',
-    'df', 'df_inode', 'env',
-    'hddtemp_smartctl', 'id',
+    'df', 'df_inode', 'env', 'id',
     'iostat', 'load', 'memory', 'netstat',
     'open_files', 'postfix_mailqueue',
     'postfix_mailstats', 'postfix_mailvolume',
@@ -18,7 +17,11 @@ class munin::plugins {
     'swap', 'systat', 'uptime',
     'users', 'vmstat']
 
-  munin::plugin{ $plugins: }
+  @munin::plugin{ $plugins: }
+
+  if $::is_virtual == false {
+    @munin::plugin{ 'hddtemp_smartctl': }
+  }
 
 }
 

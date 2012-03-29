@@ -15,7 +15,7 @@ class munin::plugins {
     'entropy', 'forks', 'irqstats', 'threads',
     'diskstats', 'proc_pri', 'iostat_ios',
     'interrupts', 'postfix_mailstats',
-    'postfix_mailvolume', 'processes', 'puppet_runs',
+    'postfix_mailvolume', 'processes',
     'swap', 'systat', 'uptime',
     'users', 'vmstat']
 

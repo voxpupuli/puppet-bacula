@@ -4,6 +4,8 @@ node forge-dev {
   include postfix
   include vim
 
+  include puppetlabs_ssl
+
   # Devs have full access as it's a staging/dev/warground.
   ssh::allowgroup { "developers": }
   sudo::allowgroup { "developers": }
@@ -11,7 +13,7 @@ node forge-dev {
   # Puppet Forge
   class { 'forge':
       vhost        => 'forge-dev.puppetlabs.com',
-      ssl          => false,
+      ssl          => true,
       newrelic     => false,
       do_ssh_keys  => true,
       appserver    => 'unicorn',

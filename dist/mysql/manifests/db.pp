@@ -52,6 +52,9 @@ define mysql::db (
   }
 
   if defined(Class['bacula']) { bacula::mysql { $name: } }
-  if defined(Class['munin'])  { include munin::dbservices }
+
+  # This will just make the virtual resources, to be realised if we
+  # have class['munin'].
+  include munin::dbservices
 
 }

@@ -13,7 +13,7 @@ end
 # Find the mem usage of a given process
 def plist(psname)
   counter = 0
-  %x{ps h -o rss,size,vsize,pcpu -C #{psname}}.each do |ps|
+  %x{ps h -o rss,size,vsize,pcpu -C '#{psname}'}.each do |ps|
     rss,size,vsize,cpu = ps.split
     counter += 1
     puts "#{psname}_#{counter}.value #{rss}"
@@ -25,6 +25,6 @@ end
 if ARGV[0] == "config"
   config
 else
-  plist("puppet agent")
+  plist("puppet agen[t]")   # work around usual escaping of command names.
 end
 

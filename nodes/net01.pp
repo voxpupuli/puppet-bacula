@@ -669,7 +669,7 @@ node net01 {
 
   # PXE Builder
   dhcp::host { "urd":
-    mac => '00:50:56:b2:00:0c',
+    mac => '00:50:56:a1:4c:bc',
     ip  => '192.168.100.129',
   }
 

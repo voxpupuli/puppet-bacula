@@ -7,7 +7,7 @@ class service::bootserver {
 
   $ubuntu = {
     "arch" => ["amd64","i386"],
-    "ver"  => ["karmic","lucid","maverick","natty","oneiric","precise"],
+    "ver"  => ["lucid","maverick","natty","oneiric","precise"],
     "os"   => "ubuntu"
   }
 

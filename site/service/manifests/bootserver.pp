@@ -7,7 +7,7 @@ class service::bootserver {
 
   $ubuntu = {
     "arch" => ["amd64","i386"],
-    "ver"  => ["hardy","karmic","lucid","maverick","natty","oneiric"],
+    "ver"  => ["karmic","lucid","maverick","natty","oneiric","precise"],
     "os"   => "ubuntu"
   }
 
@@ -31,7 +31,7 @@ class service::bootserver {
 
   $centos = {
     "arch" => ["x86_64","i386"],
-    "ver"  => [4,5,6],
+    "ver"  => [5,6],
     "os"   => "centos"
   }
 

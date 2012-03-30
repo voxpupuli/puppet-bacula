@@ -111,7 +111,7 @@ node net01 {
     interfaces   => ['eth0'],
     dnsupdatekey => "/etc/bind/keys.d/$ddnskeyname",
     require      => Bind::Key[ $ddnskeyname ],
-    pxeserver    => '10.0.1.50',
+    pxeserver    => '192.168.100.129',
     pxefilename  => 'pxelinux.0',
   }
 

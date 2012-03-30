@@ -25,7 +25,7 @@ class munin::puppet {
       }
   }
 
-  @munin::plugins::install{ 'puppet': }
+  munin::plugins::install{ 'puppet': }
 
   @munin::plugin{ $plugins: ,
     pluginpath => "${munin::params::plugin_source}/puppet",

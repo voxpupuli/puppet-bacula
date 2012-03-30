@@ -19,7 +19,7 @@ class service::bootserver {
 
   $debian = {
     "arch" => ["amd64","i386"],
-    "ver"  => ["lenny","squeeze","wheezy"],
+    "ver"  => ["squeeze","wheezy"],
     "os"   => "debian"
   }
 

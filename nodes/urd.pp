@@ -8,12 +8,10 @@ node urd {
       port => 80,
   }
 
-  Preseed {
-    proxy => hiera("proxy")
-  }
-
   preseed { "/var/www/${fqdn}/d-i/debian_base.cfg": }
-  preseed { "/var/www/${fqdn}/d-i/debian_ops.cfg": }
+  preseed { "/var/www/${fqdn}/d-i/debian_ops.cfg": 
+    proxy => hiera("proxy"),
+  }
 
   $debian = {
     "arch" => ["amd64"],
@@ -31,3 +29,4 @@ node urd {
   resource_permute('pxe::menu::installentry', $debian, $debian_common)
 
 }
+

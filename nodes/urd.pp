@@ -22,10 +22,10 @@ node urd {
   }
 
   $debian_common = {
-    "file"    => "os_<%= os %>",
-    "kernel"  => "images/<%= os %>/<%= ver %>/<%= arch %>/linux",
-    "append"  => "initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-keymaps-at/keymap=us hostname=<%= os %> domain=unknown url=http://<%= fqdn %>/d-i/debian_base.cfg text",
-    "label"   => "Random Ops Shit <%= os %> <%= ver %> <= arch %>",
+    "file"      => "os_<%= os %>",
+    "kernel"    => "images/<%= os %>/<%= ver %>/<%= arch %>/linux",
+    "append"    => "initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-keymaps-at/keymap=us hostname=<%= os %> domain=unknown url=http://<%= fqdn %>/d-i/debian_base.cfg text",
+    "menutitle" => "Random Ops Shit <%= os %> <%= ver %> <= arch %>",
   }
 
   resource_permute('pxe::menu::installentry', $debian, $debian_common)

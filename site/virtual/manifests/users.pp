@@ -84,7 +84,7 @@ class virtual::users {
     comment => 'Cody Herriges',
     uid     => '1119',
     group   => allstaff,
-    groups  => ["prosvc"],
+    groups  => ["sysadmin","operations","techops","infra","support","prosvc"],
     tag     => allstaff,
  }
 

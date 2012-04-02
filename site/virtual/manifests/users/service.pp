@@ -35,12 +35,6 @@ class virtual::users::service {
     keytype => 'ssh-rsa',
   }
 
-  @account::user { 'git':
-    comment => 'Git User',
-    group   => git,
-    tag     => git,
-  }
-
   @account::user { 'hudson':
     comment => 'Hudson User',
     group   => hudson,
@@ -74,4 +68,13 @@ class virtual::users::service {
     groups  => ["enterprise", "release"],
     usekey  => false, # Keys are managed outside of the account::user class.
   }
+
+  @account::user { 'git':
+    comment => 'Git User',
+    uid     => 22003
+    group   => git,
+    tag     => git,
+    usekey  => false, # Keys are self-managed
+  }
+
 }

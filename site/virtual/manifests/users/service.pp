@@ -71,7 +71,7 @@ class virtual::users::service {
 
   @account::user { 'git':
     comment => 'Git User',
-    uid     => 22003
+    uid     => 22003,
     group   => git,
     tag     => git,
     usekey  => false, # Keys are self-managed

@@ -70,7 +70,6 @@ d-i mirror/http/hostname string http.us.debian.org
 d-i mirror/http/directory string /debian
 <% if proxy != '' %>d-i mirror/http/proxy string <%= proxy %><%end%>
 
-
 # Suite to install.
 #d-i mirror/suite string testing
 # Suite to use for loading installer components (optional).
@@ -294,9 +293,10 @@ d-i partman/confirm_nooverwrite boolean true
 
 # Individual additional packages to install
 #d-i pkgsel/include string openssh-server build-essential
+d-i pkgsel/include string lsb-release
 # Whether to upgrade packages after debootstrap.
 # Allowed values: none, safe-upgrade, full-upgrade
-#d-i pkgsel/upgrade select none
+d-i pkgsel/upgrade select <%= upgrade %>
 
 # Some versions of the installer can report back on what software you have
 # installed, and what software you use. The default is not to report back,

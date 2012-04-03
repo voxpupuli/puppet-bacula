@@ -10,7 +10,8 @@ node urd {
 
   preseed { "/var/www/${fqdn}/d-i/debian_base.cfg": }
   preseed { "/var/www/${fqdn}/d-i/debian_ops.cfg": 
-    proxy => hiera("proxy"),
+    proxy   => hiera("proxy"),
+    upgrade => 'full-upgrade',
   }
 
   $debian = {

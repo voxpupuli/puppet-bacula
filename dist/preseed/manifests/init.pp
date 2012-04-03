@@ -3,7 +3,9 @@ define preseed (
     $locale           = 'en_US',
     $keymap           = 'us',
     $netcfg_interface = 'auto',
-    $proxy            = ''
+    $proxy            = '',
+    $apt_install      = '',
+    $upgrade          = 'none'
 ) {
 
   file { $name:

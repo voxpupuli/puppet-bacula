@@ -20,7 +20,7 @@ class vmware::tools::debian {
     exec{ 'module-assistant auto-install open-vm -i':
       user     => 'root',
       path     => '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin',
-      creates  => "/lib/modules/${kernelreleasea}/misc/vmmemctl.ko",
+      creates  => "/lib/modules/${kernelrelease}/misc/vmmemctl.ko",
       require  => [ Package['open-vm-tools'], Package['open-vm-source'], Package['module-assistant'] ],
     }
 

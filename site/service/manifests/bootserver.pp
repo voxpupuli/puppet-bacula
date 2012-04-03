@@ -7,7 +7,7 @@ class service::bootserver {
 
   $ubuntu = {
     "arch" => ["amd64","i386"],
-    "ver"  => ["hardy","karmic","lucid","maverick","natty","oneiric"],
+    "ver"  => ["lucid","maverick","natty","oneiric","precise"],
     "os"   => "ubuntu"
   }
 
@@ -19,19 +19,19 @@ class service::bootserver {
 
   $debian = {
     "arch" => ["amd64","i386"],
-    "ver"  => ["lenny","squeeze","wheezy"],
+    "ver"  => ["squeeze","wheezy"],
     "os"   => "debian"
   }
 
   $debian_common = {
     "file"    => "os_<%= os %>",
     "kernel"  => "images/<%= os %>/<%= ver %>/<%= arch %>/linux",
-    "append"  => "vga=normal initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-keymaps-at/keymap=us hostname=<%= os %> url=http://ran.dc1.puppetlabs.net/d-i/debian_base.cfg text",
+    "append"  => "vga=normal initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-keymaps-at/keymap=us hostname=<%= os %> domain=unknown url=http://<%= fqdn %>/d-i/debian_base.cfg text",
   }
 
   $centos = {
     "arch" => ["x86_64","i386"],
-    "ver"  => [4,5,6],
+    "ver"  => [5,6],
     "os"   => "centos"
   }
 

@@ -5,7 +5,8 @@ define preseed (
     $netcfg_interface = 'auto',
     $proxy            = '',
     $apt_install      = '',
-    $upgrade          = 'none'
+    $upgrade          = 'none',
+    $root_pw          = 'toor'
 ) {
 
   file { $name:

@@ -83,8 +83,8 @@ d-i mirror/http/proxy string <% if proxy != '' %><%= proxy %><% end %>
 #d-i passwd/make-user boolean false
 
 # Root password, either in clear text
-#d-i passwd/root-password password r00tme
-#d-i passwd/root-password-again password r00tme
+d-i passwd/root-password password <%= root_pw %>
+d-i passwd/root-password-again password <%= root_pw %>
 # or encrypted using an MD5 hash.
 #d-i passwd/root-password-crypted password [MD5 hash]
 

@@ -68,7 +68,7 @@ d-i netcfg/wireless_wep string
 d-i mirror/country string manual
 d-i mirror/http/hostname string http.us.debian.org
 d-i mirror/http/directory string /debian
-<% if proxy != '' %>d-i mirror/http/proxy string <%= proxy %><%end%>
+d-i mirror/http/proxy string <% if proxy != '' %><%= proxy %><% end %>
 
 # Suite to install.
 #d-i mirror/suite string testing

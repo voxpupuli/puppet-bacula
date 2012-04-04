@@ -10,8 +10,7 @@ node urd {
 
   preseed { "/var/www/${fqdn}/d-i/debian_base.cfg": }
   preseed { "/var/www/${fqdn}/d-i/debian_ops.cfg": 
-    proxy   => hiera("proxy"),
-    upgrade => 'full-upgrade',
+    #proxy => hiera("proxy"),
   }
 
   $debian = {
@@ -23,7 +22,7 @@ node urd {
   $debian_common = {
     "file"      => "os_<%= os %>",
     "kernel"    => "images/<%= os %>/<%= ver %>/<%= arch %>/linux",
-    "append"    => "initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-keymaps-at/keymap=us hostname=<%= os %> domain=unknown url=http://<%= fqdn %>/d-i/debian_ops.cfg text",
+    "append"    => "initrd=images/<%= os %>/<%= ver %>/<%= arch %>/initrd.gz auto locale=en_US console-keymaps-at/keymap=us hostname=<%= os %> domain=unknown url=http://<%= fqdn %>/d-i/debian_ops.cfg text suite=<%= ver %>",
     "menutitle" => "Operations auto-deployment <%= os %> <%= ver %> <%= arch %>",
   }
 

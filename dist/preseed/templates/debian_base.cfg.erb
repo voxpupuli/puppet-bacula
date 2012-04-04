@@ -68,7 +68,7 @@ d-i netcfg/wireless_wep string
 d-i mirror/country string manual
 d-i mirror/http/hostname string http.us.debian.org
 d-i mirror/http/directory string /debian
-<% if proxy != '' %>d-i mirror/http/proxy string <%= proxy %><%end%>
+d-i mirror/http/proxy string <% if proxy != '' %><%= proxy %><% end %>
 
 # Suite to install.
 #d-i mirror/suite string testing
@@ -80,11 +80,11 @@ d-i mirror/http/directory string /debian
 # use sudo).
 #d-i passwd/root-login boolean false
 # Alternatively, to skip creation of a normal user account.
-#d-i passwd/make-user boolean false
+d-i passwd/make-user boolean <%= make_user %>
 
 # Root password, either in clear text
-#d-i passwd/root-password password r00tme
-#d-i passwd/root-password-again password r00tme
+d-i passwd/root-password password <%= root_pw %>
+d-i passwd/root-password-again password <%= root_pw %>
 # or encrypted using an MD5 hash.
 #d-i passwd/root-password-crypted password [MD5 hash]
 
@@ -109,7 +109,7 @@ d-i clock-setup/utc boolean true
 
 # You may set this to any valid setting for $TZ; see the contents of
 # /usr/share/zoneinfo/ for valid values.
-d-i time/zone string US/Vancouver
+d-i time/zone string <%= tz %>
 
 # Controls whether to use NTP to set the clock during the install
 d-i clock-setup/ntp boolean true
@@ -143,6 +143,7 @@ d-i partman-lvm/device_remove_lvm boolean true
 d-i partman-md/device_remove_md boolean true
 # And the same goes for the confirmation to write the lvm partitions.
 d-i partman-lvm/confirm boolean true
+d-i partman-lvm/confirm_nooverwrite boolean true
 
 # You can choose one of the three predefined partitioning recipes:
 # - atomic: all files in one partition
@@ -286,14 +287,15 @@ d-i partman/confirm_nooverwrite boolean true
 #d-i debian-installer/allow_unauthenticated boolean true
 
 ### Package selection
+tasksel tasksel/first multiselect none
 #tasksel tasksel/first multiselect standard, web-server
 # If the desktop task is selected, install the kde and xfce desktops
 # instead of the default gnome desktop.
-#tasksel tasksel/desktop multiselect kde, xfce
+#tasksel tasksel/desktop multiselect none
 
 # Individual additional packages to install
 #d-i pkgsel/include string openssh-server build-essential
-d-i pkgsel/include string lsb-release
+d-i pkgsel/include string lsb-release openssh-server
 # Whether to upgrade packages after debootstrap.
 # Allowed values: none, safe-upgrade, full-upgrade
 d-i pkgsel/upgrade select <%= upgrade %>
@@ -302,7 +304,7 @@ d-i pkgsel/upgrade select <%= upgrade %>
 # installed, and what software you use. The default is not to report back,
 # but sending reports helps the project determine what software is most
 # popular and include it on CDs.
-#popularity-contest popularity-contest/participate boolean false
+popularity-contest popularity-contest/participate boolean false
 
 ### Finishing up the installation
 # During installations from serial console, the regular virtual consoles
@@ -356,3 +358,12 @@ d-i finish-install/reboot_in_progress note
 # packages and run commands in the target system.
 #d-i preseed/late_command string apt-install zsh; in-target chsh -s /bin/zsh
 
+
+### Boot loader installation
+# This is fairly safe to set, it makes grub install automatically to the MBR
+# if no other operating system is detected on the machine.
+d-i grub-installer/only_debian boolean true
+
+# This one makes grub-installer install to the MBR if it also finds some other
+# OS, which is less safe as it might not be able to boot that other OS.
+d-i grub-installer/with_other_os boolean true

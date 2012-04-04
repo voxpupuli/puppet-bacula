@@ -71,9 +71,9 @@ d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string <% if proxy != '' %><%= proxy %><% end %>
 
 # Suite to install.
-d-i mirror/suite string <%= ver %>
+#d-i mirror/suite string testing
 # Suite to use for loading installer components (optional).
-d-i mirror/udeb/suite string <%= ver %>
+#d-i mirror/udeb/suite string testing
 
 ### Account setup
 # Skip creation of a root account (normal user account will be able to

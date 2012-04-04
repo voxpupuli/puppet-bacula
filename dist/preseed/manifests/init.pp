@@ -6,7 +6,9 @@ define preseed (
     $proxy            = '',
     $apt_install      = '',
     $upgrade          = 'none',
-    $root_pw          = 'toor'
+    $root_pw          = 'toor',
+    $make_user        = 'false',
+    $tz               = 'US/Vancouver'
 ) {
 
   file { $name:

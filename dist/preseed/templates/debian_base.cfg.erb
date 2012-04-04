@@ -71,16 +71,16 @@ d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string <% if proxy != '' %><%= proxy %><% end %>
 
 # Suite to install.
-#d-i mirror/suite string testing
+d-i mirror/suite string <%= ver %>
 # Suite to use for loading installer components (optional).
-#d-i mirror/udeb/suite string testing
+d-i mirror/udeb/suite string <%= ver %>
 
 ### Account setup
 # Skip creation of a root account (normal user account will be able to
 # use sudo).
 #d-i passwd/root-login boolean false
 # Alternatively, to skip creation of a normal user account.
-#d-i passwd/make-user boolean false
+d-i passwd/make-user boolean <%= make_user %>
 
 # Root password, either in clear text
 d-i passwd/root-password password <%= root_pw %>
@@ -109,7 +109,7 @@ d-i clock-setup/utc boolean true
 
 # You may set this to any valid setting for $TZ; see the contents of
 # /usr/share/zoneinfo/ for valid values.
-d-i time/zone string US/Vancouver
+d-i time/zone string <%= tz %>
 
 # Controls whether to use NTP to set the clock during the install
 d-i clock-setup/ntp boolean true

@@ -37,18 +37,26 @@ class os::linux::debian  {
     }
   }
 
-  ####
+  # ----------
   # Apt Configuration
-  #
+  # ----------
   apt::conf {
     "norecommends":
       priority => '00',
       content  => "Apt::Install-Recommends 0;\nApt::AutoRemove::InstallRecommends 1;\n",
   }
 
-  ####
+  cron { "apt-get update":
+    ensure  => $apt_get_update_ensure,
+    command => "/usr/bin/apt-get -qq update",
+    user    => root,
+    minute  => 20, 
+    hour    => 1,
+  }
+
+  # ----------
   # Apt Repo Sources
-  #
+  # ----------
   apt::source {
     "security.list":
       uri       => $lsbdistid ? {
@@ -84,6 +92,8 @@ class os::linux::debian  {
       "ubuntu" => "universe",
     },
   }
+
+
 
   # Debian Specific things
   case $operatingsystem {

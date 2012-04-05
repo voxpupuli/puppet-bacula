@@ -3,7 +3,7 @@ class apt {
   case $operatingsystem {
     debian,ubuntu: {
 
-      $apt_dir = "/etc/apt"
+      $apt_dir         = "/etc/apt"
       $sources_dir     = "${apt_dir}/sources.list.d"
       $aptconf_dir     = "${apt_dir}/apt.conf.d"
       $preferences_dir = "${apt_dir}/preferences.d"
@@ -18,14 +18,6 @@ class apt {
           user        => root,
           command     => "/usr/bin/apt-get -qq update",
           refreshonly => true;
-      }
-
-      cron { "apt-get update":
-        ensure  => $apt_get_update_ensure,
-        command => "/usr/bin/apt-get -qq update",
-        user    => root,
-        minute  => 20,
-        hour    => 1,
       }
 
       file {

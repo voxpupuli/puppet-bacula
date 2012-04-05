@@ -1,5 +1,6 @@
 node faro {
   include role::base
+  include service::printserver
 
   # DNS resolution to internal hosts
   class {

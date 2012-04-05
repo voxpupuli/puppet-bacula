@@ -117,6 +117,7 @@ node 'net02.dc1.puppetlabs.net' {
     'loki':        mac => "00:50:56:a1:4c:ab", ip => "10.0.1.52";
     'eternia':     mac => "00:50:56:a1:4c:b2", ip => "10.0.1.53";
     'anthracite':  mac => "00:50:56:a1:4c:b3", ip => "10.0.1.54";
+    'mundilfari':  mac => '00:14:4f:eb:51:4c', ip => '10.0.1.55';
 
     # Jenkins spectest Slaves
     'ci-win2008r2': mac => "00:50:56:a1:4c:b4", ip => "10.0.10.20";

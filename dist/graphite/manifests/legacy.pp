@@ -1,8 +1,8 @@
-class graphite (
+class graphite::legacy (
     $site_alias = $fqdn
   ) {
 
-  include graphite::install
+  include graphite::legacy::install
 
   include apache::mod::wsgi
   include apache::mod::python
@@ -30,7 +30,7 @@ class graphite (
   }
 
   file { "/opt/graphite/storage":
-    owner     => $graphite::params::web_user,
+    owner     => $graphite::legacy::params::web_user,
     subscribe => Exec["install graphite"],
     recurse   => true
   }

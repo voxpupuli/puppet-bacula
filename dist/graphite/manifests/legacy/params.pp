@@ -1,4 +1,4 @@
-class graphite::params {
+class graphite::legacy::params {
   $build_dir = "/tmp/graphite_build_root"
 
   $series = "0.9"

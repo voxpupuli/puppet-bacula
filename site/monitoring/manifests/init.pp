@@ -17,6 +17,7 @@ class monitoring {
   nagios_host { "vali.dc1.puppetlabs.net":    alias => "vali",    address => "10.0.42.31",    hostgroups => "dc1", }
   nagios_host { "balder.dc1.puppetlabs.net":  alias => "balder",  address => "10.0.42.32",    hostgroups => "dc1", }
   nagios_host { "eir.dc1.puppetlabs.net":     alias => "eir",     address => "10.0.42.33",    hostgroups => "dc1", }
+  nagios_host { "rind.dc1.puppetlabs.net":    alias => "rind",    address => "10.0.42.34",    hostgroups => "dc1", }
 
   Nagios_service {
     use           => 'generic-service',
@@ -35,5 +36,6 @@ class monitoring {
   nagios_service { "check_ping_vali":    host_name => "vali.dc1.puppetlabs.net",    service_description => "check_ping_vali.dc1.puppetlabs.net", } 
   nagios_service { "check_ping_balder":  host_name => "balder.dc1.puppetlabs.net",  service_description => "check_ping_balder.dc1.puppetlabs.net", } 
   nagios_service { "check_ping_eir":     host_name => "eir.dc1.puppetlabs.net",     service_description => "check_ping_eir.dc1.puppetlabs.net", } 
+  nagios_service { "check_ping_rind":    host_name => "rind.dc1.puppetlabs.net",    service_description => "check_ping_rind.dc1.puppetlabs.net", } 
 
 }

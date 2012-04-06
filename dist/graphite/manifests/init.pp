@@ -116,13 +116,6 @@ class graphite (
       files => ["${graphitedir}"],
   }
 
-  user{ $graphiteuser:
-    system     => true,
-    ensure     => present,
-    managehome => false,
-    home       => $graphitedir,
-  }
-
   cron { "remove ancient graphite log files":
     command => "/usr/bin/find /opt/graphite/storage/log -type f -mtime +14 | /usr/bin/xargs -I {} rm {}",
     user    => root,

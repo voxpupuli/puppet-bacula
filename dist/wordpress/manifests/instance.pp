@@ -41,7 +41,7 @@ define wordpress::instance(
 #  }
 
   exec {
-    'install_wordpress':
+    "install_wordpress_${name}":
       command => "/usr/bin/rsync -a /usr/local/src/wordpress/ $vhost_dir/ && /usr/bin/touch ${vhost_dir}/../.${dbname}_installed",
       creates => "${vhost_dir}/../.${dbname}_installed",
   }

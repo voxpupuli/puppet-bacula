@@ -106,7 +106,7 @@ node net01 {
       'puppetlabs.lan',
       '100.168.192.in-addr.arpa',
       ],
-    nameservers  => ['192.168.100.8'],
+    nameservers  => ['192.168.100.8','192.168.100.7'],
     ntpservers   => ['us.pool.ntp.org'],
     interfaces   => ['eth0'],
     dnsupdatekey => "/etc/bind/keys.d/$ddnskeyname",

@@ -34,7 +34,7 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
   mk_resource_methods
 
   # A hash of possible parameters to their command-line equivalents.
-  Cups_Options = {
+  @Cups_Options = {
       :class       => '-c%s', # Not fully supported yet, but left here for the adventurous.
       :model       => '-m%s',
       :uri         => '-v%s', # lpadmin wont accept a quoted value for device-uri
@@ -155,8 +155,8 @@ Puppet::Type.type(:printer).provide :cups, :parent => Puppet::Provider do
     options = Array.new
 
     # Handle most parameters via string substitution
-    Cups_Options.keys.each do |k|
-      options.unshift Cups_Options[k] % @resource[k] if @resource.parameters.key?(k)
+    @Cups_Options.keys.each do |k|
+      options.unshift @Cups_Options[k] % @resource[k] if @resource.parameters.key?(k)
     end
 
     options.push '-o printer-is-shared=true' if @resource[:shared]

@@ -20,7 +20,7 @@ class graphite::legacy (
     docroot  => '/var/www',
     ssl      => false,
     priority => 10,
-    template => 'graphite/apache.conf.erb',
+    template => 'graphite/legacy/apache.conf.erb',
     require  => Exec["install graphite"],
   }
 
@@ -36,17 +36,17 @@ class graphite::legacy (
   }
 
   file { "/opt/graphite/conf/carbon.conf":
-    source    => "puppet:///modules/graphite/carbon.conf",
+    source    => "puppet:///modules/graphite/legacy/carbon.conf",
     subscribe => Exec["install carbon"],
   }
 
   file { "/opt/graphite/conf/storage-schemas.conf":
-    source    => "puppet:///modules/graphite/storage-schemas.conf",
+    source    => "puppet:///modules/graphite/legacy/storage-schemas.conf",
     subscribe => Exec["install carbon"],
   }
 
   file { "/opt/graphite/conf/dashboard.conf":
-    source    => "puppet:///modules/graphite/dashboard.conf",
+    source    => "puppet:///modules/graphite/legacy/dashboard.conf",
     subscribe => Exec["install graphite"],
   }
 

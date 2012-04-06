@@ -1,5 +1,5 @@
 class apache::mod::python {
-  include apache
+  require apache
 
   package { "python":
     name => $operatingsystem ? {

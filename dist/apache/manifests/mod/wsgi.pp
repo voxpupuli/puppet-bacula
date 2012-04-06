@@ -1,5 +1,5 @@
 class apache::mod::wsgi {
-  include apache
+  require apache
 
   package { "wsgi":
     name => $operatingsystem ? {

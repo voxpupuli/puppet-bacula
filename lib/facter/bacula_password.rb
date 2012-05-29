@@ -15,7 +15,7 @@ Facter.add(:bacula_password) do
   confine :id => 'root'
 
   setcode do
-    regex = %r[.*Password\s*=\s*(.+)]
+    regex = %r[.*Password\s*=\s*"(.+)"]
     begin
       File.open(client_config) do |fd|
 

@@ -16,14 +16,17 @@ Facter.add(:bacula_password) do
 
   setcode do
     regex = %r[.*Password\s*=\s*(.+)]
+    begin
+      File.open(client_config) do |fd|
 
-    File.open(client_config) do |fd|
-
-      # Find the first line with Password =
-      if pass_line = fd.find {|line| line.match(regex) }
-        match = pass_line.match(regex)
-        match[1]
+        # Find the first line with Password =
+        if pass_line = fd.find {|line| line.match(regex) }
+          match = pass_line.match(regex)
+          match[1]
+        end
       end
+    rescue Errno::ENOENT => e
+      Facter.debug e
     end
   end
 end

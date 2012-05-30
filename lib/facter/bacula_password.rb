@@ -3,10 +3,7 @@
 # == Resolutions
 #
 # If a bacula client configuration exists, extract the password from that.
-# Else create a new password
 #
-
-client_config = '/etc/bacula/bacula-fd.conf'
 
 Facter.add(:bacula_password) do
   confine :id => 'root'
@@ -14,6 +11,7 @@ Facter.add(:bacula_password) do
   setcode do
     regex = %r[.*Password\s*=\s*"(.+)"]
     begin
+      client_config = Facter.value(:bacula_config)
       File.open(client_config) do |fd|
 
         # Find the first line with Password =

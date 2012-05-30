@@ -29,7 +29,7 @@ class bacula (
   include bacula::params
 
   $bacula_director   = hiera('bacula_director')
-  $bacula_password   = genpass('bacula_password')
+  $bacula_password   = $::bacula_password
   $bacula_is_storage = hiera('bacula_is_storage')
   $listen_address    = hiera('bacula_client_listen')
   $working_directory = $bacula::params::working_directory

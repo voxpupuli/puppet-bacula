@@ -38,7 +38,7 @@ class bacula::params {
         $bacula_storage_services  = [ "bacula-sd" ]
         $bacula_client_packages   = "bacula-client"
         $bacula_client_services   = "bacula-fd"
-        $client_config            = $::bacula_config
+        $client_config            = '/etc/bacula/bacula-fd.conf'
         $working_directory        = "/var/lib/bacula"
         $pid_directory            = "/var/run/bacula"
      }
@@ -49,14 +49,14 @@ class bacula::params {
         $bacula_storage_services  = [ "bacula-sd" ]
         $bacula_client_packages   = "bacula-client"
         $bacula_client_services   = "bacula-fd"
-        $client_config            = $::bacula_config
+        $client_config            = '/etc/bacula/bacula-fd.conf'
         $working_directory        = "/var/lib/bacula"
         $pid_directory            = "/var/run"
      }
      "freebsd": {
         $bacula_client_packages = "sysutils/bacula-client"
         $bacula_client_services = "bacula-fd"
-        $client_config          = $::bacula_config
+        $client_config          = '/usr/local/etc/bacula/bacula-fd.conf'
         $pid_directory          = "/var/run"
         $working_directory      = "/var/db/bacula"
      }

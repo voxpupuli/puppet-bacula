@@ -19,7 +19,7 @@ class bacula::storage (
     $working_directory       = $bacula::params::working_directory,
     $pid_directory           = $bacula::params::pid_directory,
     $bacula_director         = $bacula_director,
-    $bacula_storage_password = genpass('bacula_storage_password')
+    $bacula_storage_password = genpass({store_key => 'bacula_storage_password'})
 ) inherits bacula::params {
 
   package { $bacula::params::bacula_storage_packages: ensure => present; }

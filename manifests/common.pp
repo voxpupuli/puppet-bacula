@@ -15,6 +15,7 @@ class bacula::common {
   $working_directory = $bacula::params::working_directory
   $pid_directory     = $bacula::params::pid_directory
   $bacula_password   = $bacula::params::bacula_password
+  $client_config     = $bacula::params::client_config
 
   package { $bacula::params::bacula_client_packages:
     ensure => present,

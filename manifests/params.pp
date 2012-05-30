@@ -19,8 +19,10 @@ class bacula::params {
   $monitor        = true
 
   # If there is a bacula_password fact, use that. Else generate a new password.
+  # HAY GUISE, GUESS WHAT VARIABLE GOT STRINGIFIED FROM NIL TO AN EMPTY STRING?
+  # haet.
   $bacula_password = $::bacula_password ? {
-    undef   => genpass(),
+    ""      => genpass(),
     default => $::bacula_password,
   }
 

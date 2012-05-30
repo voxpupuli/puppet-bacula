@@ -26,7 +26,7 @@ class bacula::params {
   # HAY GUISE, GUESS WHAT VARIABLE GOT STRINGIFIED FROM NIL TO AN EMPTY STRING?
   # haet.
   $bacula_password = $::bacula_password ? {
-    ""      => genpass(),
+    ""      => genpass({}),
     default => $::bacula_password,
   }
 

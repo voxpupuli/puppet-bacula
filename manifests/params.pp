@@ -18,6 +18,10 @@ class bacula::params {
   $autoprune      = "yes"
   $monitor        = true
 
+  $bacula_director   = hiera('bacula_director')
+  $bacula_is_storage = hiera('bacula_is_storage')
+  $listen_address    = hiera('bacula_client_listen')
+
   # If there is a bacula_password fact, use that. Else generate a new password.
   # HAY GUISE, GUESS WHAT VARIABLE GOT STRINGIFIED FROM NIL TO AN EMPTY STRING?
   # haet.

@@ -9,6 +9,13 @@
 class bacula::common {
   include bacula::params
 
+  $bacula_director   = $bacula::params::bacula_director
+  $bacula_is_storage = $bacula::params::bacula_is_storage
+  $listen_address    = $bacula::params::listen_address
+  $working_directory = $bacula::params::working_directory
+  $pid_directory     = $bacula::params::pid_directory
+  $bacula_password   = $bacula::params::bacula_password
+
   package { $bacula::params::bacula_client_packages:
     ensure => present,
   }

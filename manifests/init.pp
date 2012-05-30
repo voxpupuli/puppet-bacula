@@ -19,22 +19,22 @@
 #   include bacula
 #
 class bacula (
-    $port           = '9102',
-    $file_retention = "45 days",
-    $job_retention  = "6 months",
-    $autoprune      = "yes",
-    $monitor        = true,
-  ){
+    $port           = $bacula::params::port,
+    $file_retention = $bacula::params::file_retention,
+    $job_retention  = $bacula::params::job_retention,
+    $autoprune      = $bacula::params::autoprune,
+    $monitor        = $bacula::params::monitor,
+  ) inherits bacula::params {
 
   include bacula::params
 
   $bacula_director   = hiera('bacula_director')
-  $bacula_password   = $::bacula_password
   $bacula_is_storage = hiera('bacula_is_storage')
   $listen_address    = hiera('bacula_client_listen')
   $working_directory = $bacula::params::working_directory
   $pid_directory     = $bacula::params::pid_directory
 
+  $bacula_password   = $bacula::params::bacula_password
 
   if $bacula_is_storage == "yes" { include bacula::storage }
   if $monitor           == true  { include bacula::client::monitor }

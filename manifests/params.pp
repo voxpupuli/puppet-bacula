@@ -12,6 +12,17 @@
 #
 class bacula::params {
 
+  $port           = '9102'
+  $file_retention = "45 days"
+  $job_retention  = "6 months"
+  $autoprune      = "yes"
+  $monitor        = true
+
+  $bacula_password = $::bacula_password ? {
+    undef   => genpass(),
+    default => $::bacula__password,
+  }
+
   case $operatingsystem {
      "ubuntu","debian": {
         $bacula_director_packages = [ "bacula-director-common", "bacula-director-mysql", "bacula-console" ]

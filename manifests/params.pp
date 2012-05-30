@@ -18,9 +18,10 @@ class bacula::params {
   $autoprune      = "yes"
   $monitor        = true
 
+  # If there is a bacula_password fact, use that. Else generate a new password.
   $bacula_password = $::bacula_password ? {
     undef   => genpass(),
-    default => $::bacula__password,
+    default => $::bacula_password,
   }
 
   case $operatingsystem {

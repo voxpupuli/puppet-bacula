@@ -18,10 +18,10 @@ class bacula::storage (
     $media_type              = 'File',
     $working_directory       = $bacula::params::working_directory,
     $pid_directory           = $bacula::params::pid_directory,
-    $bacula_director         = $bacula::params::bacula_director,
-    $bacula_storage_password = genpass({store_key => 'bacula_storage_password'})
+    $bacula_director         = $bacula::params::bacula_director
 ) inherits bacula::params {
 
+  $bacula_storage_password = genpass({store_key => 'bacula_storage_password'})
   $listen_address = hiera('bacula_client_listen')
 
   package { $bacula::params::bacula_storage_packages: ensure => present; }

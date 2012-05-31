@@ -56,7 +56,7 @@ class bacula::params {
      "freebsd": {
         $bacula_client_packages = "sysutils/bacula-client"
         $bacula_client_services = "bacula-fd"
-        $client_config          = '/usr/local/etc/bacula/bacula-fd.conf'
+        $client_config          = '/usr/local/etc/bacula-fd.conf'
         $pid_directory          = "/var/run"
         $working_directory      = "/var/db/bacula"
      }

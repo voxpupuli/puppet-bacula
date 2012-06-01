@@ -13,7 +13,7 @@ Director {
 FileDaemon {
   Name                    = <%= hostname %>-fd
   FDAddress               = <%= listen_address %>
-  FDport                  = <%= port %>
+  FDport                  = <%= scope.lookupvar('bacula::params::file_port') %>
   WorkingDirectory        = <%= working_directory %>
   Pid Directory           = <%= pid_directory %>
   Maximum Concurrent Jobs = 2

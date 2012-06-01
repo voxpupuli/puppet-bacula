@@ -1,9 +1,9 @@
 Director {                # define myself
     Name                    = <%= fqdn %>-dir
-    DIRport                 = <%= scope.lookupvar('bacula::params::director_port') %>  # where we listen for UA connections
+    DIRport                 = <%= port %>  # where we listen for UA connections
     QueryFile               = "/etc/bacula/scripts/query.sql"
-    WorkingDirectory        = "<%= scope.lookupvar('bacula::params::working_directory') %>"
-    PidDirectory            = "<%= scope.lookupvar('bacula::params::pid_directory') %>"
+    WorkingDirectory        = "<%= working_directory %>"
+    PidDirectory            = "<%= pid_directory %>"
     Maximum Concurrent Jobs = 20
     Password                = "<%= password %>"  # Console password
     Messages                = Daemon

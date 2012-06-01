@@ -1,8 +1,8 @@
 Storage {
   Name                    = <%= fqdn %>-sd
-  WorkingDirectory        = <%= scope.lookupvar('bacula::params::working_directory') %>
-  Pid Directory           = <%= scope.lookupvar('bacula::params::pid_directory') %>
-  SDPort                  = <%= scope.lookupvar('bacula::params::storage_port') %>
+  WorkingDirectory        = <%= working_directory %>
+  Pid Directory           = <%= pid_directory %>
+  SDPort                  = <%= port %>
 }
 
 Device {
@@ -19,7 +19,7 @@ Device {
 # Send all messages to the Director,
 Messages {
   Name     = Standard
-  director = <%= scope.lookupvar('bacula::params::bacula_director') %>-dir = all
+  director = <%= bacula_director %>-dir = all
   syslog   = all, !skipped
   #append   = "/var/log/bacula/log" = all, !skipped
 }

@@ -5,6 +5,7 @@
 # Parameters:
 # * db_user: the database user
 # * db_pw: the database user's password
+# * port: the port to connect to the director on
 # * monitor: should nagios be checking bacula backups, and I should hope so
 # * password: password to connect to the director
 # * sd_pass: the password to connect to the storage daemon
@@ -23,12 +24,16 @@
 class bacula::director (
     $db_user  = 'bacula',
     $db_pw    = 'ch@ng3me',
+    $port     = '9101',
     $monitor  = true,
     $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
     $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ'
   ) {
 
   include bacula::params
+
+  $working_directory = $bacula::params::working_directory
+  $pid_directory     = $bacula::params::pid_directory
 
   if $monitor == true { include bacula::director::monitor }
 

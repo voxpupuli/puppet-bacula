@@ -1,26 +1,26 @@
 
 Director {
-  Name     = <%= scope.lookupvar('bacula::params::bacula_director') %>-dir
-  Password = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
+  Name     = <%= bacula_director %>-dir
+  Password = "<%= bacula_password %>"
 }
 
 Director {
-  Name     = <%= scope.lookupvar('bacula::params::bacula_director') %>-mon
-  Password = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
+  Name     = <%= bacula_director %>-mon
+  Password = "<%= bacula_password %>"
   Monitor  = yes
 }
 
 FileDaemon {
   Name                    = <%= hostname %>-fd
   FDAddress               = <%= listen_address %>
-  FDport                  = <%= scope.lookupvar('bacula::params::file_port') %>
-  WorkingDirectory        = <%= scope.lookupvar('bacula::params::working_directory') %>
-  Pid Directory           = <%= scope.lookupvar('bacula::params::pid_directory') %>
+  FDport                  = <%= port %>
+  WorkingDirectory        = <%= working_directory %>
+  Pid Directory           = <%= pid_directory %>
   Maximum Concurrent Jobs = 2
 }
 
 Messages {
   Name     = Standard
-  director = <%= scope.lookupvar('bacula::params::bacula_director') %>-dir = all, !skipped, !restored
+  director = <%= bacula_director %>-dir = all, !skipped, !restored
 }
 

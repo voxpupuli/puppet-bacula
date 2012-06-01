@@ -19,7 +19,7 @@ Device {
 # Send all messages to the Director,
 Messages {
   Name     = Standard
-  director = <%= bacula_director %>-dir = all
+  director = <%= scope.lookupvar('bacula::params::bacula_director') %>-dir = all
   syslog   = all, !skipped
   #append   = "/var/log/bacula/log" = all, !skipped
 }

@@ -12,7 +12,11 @@
 #
 class bacula::params {
 
-  $port           = '9102'
+  # Port information
+  $director_port = '9101'
+  $file_port     = '9102'
+  $storage_port  = '9103'
+
   $file_retention = "45 days"
   $job_retention  = "6 months"
   $autoprune      = "yes"

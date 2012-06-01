@@ -4,7 +4,7 @@
 
 Director {
   Name = localhost-dir
-  DIRport  = 9101
+  DIRport  = <%= scope.lookupvar('bacula::params::director_port') %>
   address  = localhost
   Password = "<%= password %>"
 }

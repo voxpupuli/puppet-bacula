@@ -1,7 +1,7 @@
 Storage {
   Name       = <%= fqdn %>-sd
   Address    = <%= fqdn %>
-  SDPort     = <%= port %>
+  SDPort     = <%= scope.lookupvar('bacula::params::storage_port') %>
   Password   = "<%= bacula_storage_password %>"
   Device     = <%= device_name %>
   Media Type = <%= media_type %>

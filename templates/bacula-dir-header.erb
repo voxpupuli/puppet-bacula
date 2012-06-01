@@ -1,6 +1,6 @@
 Director {                # define myself
     Name                    = <%= fqdn %>-dir
-    DIRport                 = <%= port %>  # where we listen for UA connections
+    DIRport                 = <%= scope.lookupvar('bacula::params::director_port') %>  # where we listen for UA connections
     QueryFile               = "/etc/bacula/scripts/query.sql"
     WorkingDirectory        = "<%= working_directory %>"
     PidDirectory            = "<%= pid_directory %>"

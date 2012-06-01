@@ -1,12 +1,12 @@
 
 Director {
   Name     = <%= bacula_director %>-dir
-  Password = "<%= bacula_password %>"
+  Password = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
 }
 
 Director {
   Name     = <%= bacula_director %>-mon
-  Password = "<%= bacula_password %>"
+  Password = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
   Monitor  = yes
 }
 

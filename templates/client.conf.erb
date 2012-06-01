@@ -3,7 +3,7 @@ Client {
   Address        = <%= fqdn %>
   FDPort         = <%= scope.lookupvar('bacula::params::file_port') %>
   Catalog        = MyCatalog
-  Password       = "<%= bacula_password %>"
+  Password       = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
   File Retention = <%= file_retention %>
   Job Retention  = <%= job_retention %>
   AutoPrune      = <%= autoprune %>

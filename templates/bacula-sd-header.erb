@@ -2,7 +2,7 @@ Storage {
   Name                    = <%= fqdn %>-sd
   WorkingDirectory        = <%= working_directory %>
   Pid Directory           = <%= pid_directory %>
-  SDPort                  = <%= port %>
+  SDPort                  = <%= scope.lookupvar('bacula::params::storage_port') %>
 }
 
 Device {

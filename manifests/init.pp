@@ -18,21 +18,12 @@
 #   include bacula
 #
 class bacula (
-    $file_retention = $bacula::params::file_retention,
-    $job_retention  = $bacula::params::job_retention,
-    $autoprune      = $bacula::params::autoprune,
-    $monitor        = $bacula::params::monitor,
+    $monitor        = $bacula::params::monitor
   ) inherits bacula::params {
 
   include bacula::params
 
-  $bacula_director   = $bacula::params::bacula_director
   $bacula_is_storage = $bacula::params::bacula_is_storage
-  $listen_address    = $bacula::params::listen_address
-  $working_directory = $bacula::params::working_directory
-  $pid_directory     = $bacula::params::pid_directory
-  $bacula_password   = $bacula::params::bacula_password
-
   if $bacula_is_storage == "yes" { include bacula::storage }
   if $monitor           == true  { include bacula::client::monitor }
 

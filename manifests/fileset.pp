@@ -6,7 +6,7 @@ define bacula::fileset (
   if ! defined(Class["bacula"]) {
     err("need class bacula for this to be useful")
   }
-  $director = $bacula::bacula_director
+  $director = $bacula::params::bacula_director
 
   @@concat::fragment {
     "bacula-fileset-$name":

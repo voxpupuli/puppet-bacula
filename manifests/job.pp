@@ -52,14 +52,14 @@ define bacula::job (
       "bacula-job-${name}":
         target  => '/etc/bacula/conf.d/job.conf',
         content => template("${template}"),
-        tag     => "bacula-${::bacula::bacula_director}";
+        tag     => "bacula-${::bacula::params::bacula_director}";
     }
 
     if $bacula::monitor == true {
       if $jobtype == 'Backup' {
         @@nagios_service { "check_bacula_${name}":
           use                      => 'generic-service',
-          host_name                => $::bacula::bacula_director,
+          host_name                => $::bacula::params::bacula_director,
           check_command            => "check_nrpe!check_bacula!30 ${name}",
           service_description      => "check_bacula_${name}",
           target                   => '/etc/nagios3/conf.d/nagios_service.cfg',

@@ -34,7 +34,7 @@ define bacula::job (
     $storage  = hiera('bacula_storage')
   ) {
 
-  require bacula
+  include bacula
 
   # if the fileset is not defined, we fall back to one called "Common"
   if $fileset == true {

@@ -13,12 +13,12 @@ class bacula::client::monitor {
     first_notification_delay => '120',
   }
 
-  @@nagios_servicedependency {"check_bacula_${hostname}":
+  @@nagios_servicedependency {"check_baculafd_${hostname}":
     host_name                      => "$fqdn",
     service_description            => "check_ping_${hostname}",
 
     dependent_host_name            => "$fqdn",
-    dependent_service_description  => "check_bacula_${hostname}",
+    dependent_service_description  => "check_baculafd_${hostname}",
 
     execution_failure_criteria     => "n",
     notification__failure_criteria => "w,u,c",

@@ -32,7 +32,7 @@ class bacula::director::monitor {
     dependent_service_description => "check_baculadir_${hostname}",
 
     execution_failure_criteria => "n",
-    notification__failure_criteria => "w,u,c",
+    notification_failure_criteria => "w,u,c",
 
     ensure => present,
     target => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
@@ -55,7 +55,7 @@ class bacula::director::monitor {
     dependent_service_description => "check_baculasd_${hostname}",
 
     execution_failure_criteria => "n",
-    notification__failure_criteria => "w,u,c",
+    notification_failure_criteria => "w,u,c",
 
     ensure => present,
     target => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
@@ -80,7 +80,7 @@ class bacula::director::monitor {
     dependent_service_description => "check_baculadisk_${hostname}",
 
     execution_failure_criteria => "n",
-    notification__failure_criteria => "w,u,c",
+    notification_failure_criteria => "w,u,c",
 
     ensure => present,
     target => '/etc/nagios3/conf.d/nagios_servicedep.cfg',

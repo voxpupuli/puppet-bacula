@@ -21,7 +21,7 @@ class bacula::client::monitor {
     dependent_service_description  => "check_baculafd_${hostname}",
 
     execution_failure_criteria     => "n",
-    notification__failure_criteria => "w,u,c",
+    notification_failure_criteria => "w,u,c",
 
     ensure                         => present,
     target                         => '/etc/nagios3/conf.d/nagios_servicedep.cfg',

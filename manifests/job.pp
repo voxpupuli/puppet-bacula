@@ -68,7 +68,7 @@ define bacula::job (
         first_notification_delay => '120',
       }
 
-      nagios_servicedependency {"check_bacula_${name}":
+      @@nagios_servicedependency {"check_bacula_${name}":
         host_name => "$fqdn",
         service_description => "check_ping_${hostname}",
 

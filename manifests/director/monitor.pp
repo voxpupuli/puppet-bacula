@@ -48,17 +48,14 @@ class bacula::director::monitor {
   }
 
   @@nagios_servicedependency {"check_baculasd_${hostname}":
-    host_name => "$fqdn",
-    service_description => "check_ping_${hostname}",
-
-    dependent_host_name => "$fqdn",
+    host_name                     => "$fqdn",
+    service_description           => "check_ping_${hostname}",
+    dependent_host_name           => "$fqdn",
     dependent_service_description => "check_baculasd_${hostname}",
-
-    execution_failure_criteria => "n",
+    execution_failure_criteria    => "n",
     notification_failure_criteria => "w,u,c",
-
-    ensure => present,
-    target => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
+    ensure                        => present,
+    target                        => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
   }
 
   @@nagios_service { "check_baculadisk_${hostname}":
@@ -73,17 +70,14 @@ class bacula::director::monitor {
   }
 
   @@nagios_servicedependency {"check_baculadisk_${hostname}":
-    host_name => "$fqdn",
-    service_description => "check_ping_${hostname}",
-
-    dependent_host_name => "$fqdn",
+    host_name                     => "$fqdn",
+    service_description           => "check_ping_${hostname}",
+    dependent_host_name           => "$fqdn",
     dependent_service_description => "check_baculadisk_${hostname}",
-
-    execution_failure_criteria => "n",
+    execution_failure_criteria    => "n",
     notification_failure_criteria => "w,u,c",
-
-    ensure => present,
-    target => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
+    ensure                        => present,
+    target                        => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
   }
 
   $nagios_plugins_path = $::nagios::params::nagios_plugins_path

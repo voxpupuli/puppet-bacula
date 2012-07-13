@@ -73,10 +73,10 @@ class bacula::director::monitor {
     host_name                     => "$fqdn",
     service_description           => "check_ping_${hostname}",
     dependent_host_name           => "$fqdn",
-    dependent_service_description => "check_baculadisk_${hostname}",
+    dependent_service_description => "check_bacula_disk_${hostname}",
     execution_failure_criteria    => "n",
     notification_failure_criteria => "w,u,c",
-    ensure                        => present,
+    ensure                        => absent,
     target                        => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
   }
 

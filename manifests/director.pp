@@ -105,8 +105,7 @@ class bacula::director (
   #bacula::mysql { 'bacula': }
 
   mysql::db { "bacula":
-    db_user => $db_user,
-    db_pw   => $db_pw,
+    user     => $db_user,
+    password => $db_pw,
   }
-
 }

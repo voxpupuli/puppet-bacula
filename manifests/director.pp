@@ -108,4 +108,6 @@ class bacula::director (
     user     => $db_user,
     password => $db_pw,
   }
+
+  bacula::mysql { 'bacula': }
 }

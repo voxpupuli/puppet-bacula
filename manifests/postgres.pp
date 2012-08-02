@@ -19,7 +19,7 @@ define bacula::postgres {
   include bacula::postgres::resources
 
   cron { "bacula_postgres_${name}":
-    command => "/bin/su postgres -c '/usr/bin/pg_dump ${name} --blobs --format=plain --create' | /bin/cat > /var/lib/bacula/postgres/${name}.sql",
+    command => "/bin/su -l postgres -c '/usr/bin/pg_dump ${name} --blobs --format=plain --create' | /bin/cat > /var/lib/bacula/postgres/${name}.sql",
     user    => 'root',
     hour    => 0,
     minute  => 35,

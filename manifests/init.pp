@@ -51,5 +51,7 @@ class bacula (
     }
   }
 
+  Bacula::Job <||>
+
 }
 

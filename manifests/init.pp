@@ -18,26 +18,27 @@
 #   include bacula
 #
 class bacula (
-    $monitor        = $bacula::params::monitor
+    $monitor = $bacula::params::monitor
   ) inherits bacula::params {
 
   include bacula::params
 
+  # We all have are part, what is mine?
   $bacula_is_storage = $bacula::params::bacula_is_storage
   if $bacula_is_storage == "yes" { include bacula::storage }
   if $monitor           == true  { include bacula::client::monitor }
 
   include bacula::common
 
-  @@concat::fragment {
-    "bacula-client-$hostname":
+  # Insert information about this host into the director's config
+  @@concat::fragment { "bacula-client-$hostname":
       target  => '/etc/bacula/conf.d/client.conf',
       content => template("bacula/client.conf.erb"),
       tag     => "bacula-${bacula_director}";
   }
 
-  bacula::job {
-    "${fqdn}-common":
+  # Define a common job
+  bacula::job { "${fqdn}-common":
       fileset => "Common",
   }
 
@@ -51,6 +52,7 @@ class bacula (
     }
   }
 
+  # Realize any virtual jobs that may or may not exist.
   Bacula::Job <||>
 
 }

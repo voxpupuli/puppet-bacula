@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class bacula::director::monitor {
+class bacula::director::monitor($db_user, $db_pw) {
 
   include nagios::params
 

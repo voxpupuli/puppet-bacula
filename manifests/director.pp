@@ -30,7 +30,12 @@ class bacula::director (
 
   include bacula::params
 
-  if $monitor == true { include bacula::director::monitor }
+  if $monitor == true {
+    class { 'bacula::director::monitor':
+      db_user => $db_user,
+      db_pw   => $db_pw,
+    }
+  }
 
   package { $bacula::params::bacula_director_packages:
     ensure => present,

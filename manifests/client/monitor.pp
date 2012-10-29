@@ -3,7 +3,7 @@ class bacula::client::monitor {
   include nagios::params
 
   @@nagios_service { "check_baculafd_${hostname}":
-    service_description      => 'Is the bacula File Daemon running?',
+    service_description      => "Bacula File Daemon for ${hostname}",
     use                      => 'generic-service',
     host_name                => "$fqdn",
     check_command            => 'check_nrpe!check_proc!1:1 bacula-fd',

@@ -59,6 +59,7 @@ define bacula::job (
   if $bacula::monitor == true {
     if $jobtype == 'Backup' {
       @@nagios_service { "check_bacula_${name}":
+        service_description      => "Is there ar recent bacula job for ${name}?",
         use                      => 'generic-service',
         host_name                => $::bacula::params::bacula_director,
         check_command            => "check_nrpe!check_bacula!72 2 1 ${name}",
@@ -80,5 +81,6 @@ define bacula::job (
       }
     }
   }
+
 }
 

@@ -58,25 +58,13 @@ define bacula::job (
 
   if $bacula::monitor == true {
     if $jobtype == 'Backup' {
-      @@nagios_service { "check_bacula_${name}":
-        service_description      => "Bacula job for ${name}",
-        use                      => 'generic-service',
-        host_name                => $::bacula::params::bacula_director,
-        check_command            => "check_nrpe!check_bacula!72 2 1 ${name}",
-        target                   => '/etc/nagios3/conf.d/nagios_service.cfg',
-        notify                   => Service[$nagios::params::nagios_service],
-        first_notification_delay => '120',
-      }
-
-      @@nagios_servicedependency {"check_bacula_${name}":
-        host_name                     => "${fqdn}",
-        service_description           => "check_env_${hostname}",
-        dependent_host_name           => $::bacula::params::bacula_director,
-        dependent_service_description => "check_bacula_${name}",
-        execution_failure_criteria    => "n",
-        notification_failure_criteria => "w,u,c",
-        ensure                        => present,
-        target                        => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
+      icinga::service { "check_bacula_${name}":
+        check_command      => "check_nrpe!check_bacula!72 2 1 ${name}",
+        escalate           => true,
+        first_escalation   => '3',
+        dependency_service => "check_env_${hostname}",
+        dependency_host    => $::bacula::params::bacula_director,
+        notification_delay => '120',
       }
     }
   }

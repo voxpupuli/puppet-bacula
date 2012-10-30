@@ -70,7 +70,7 @@ define bacula::job (
 
       @@nagios_servicedependency {"check_bacula_${name}":
         host_name                     => "${fqdn}",
-        service_description           => "check_ping_${hostname}",
+        service_description           => "check_env_${hostname}",
         dependent_host_name           => $::bacula::params::bacula_director,
         dependent_service_description => "check_bacula_${name}",
         execution_failure_criteria    => "n",

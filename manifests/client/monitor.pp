@@ -7,6 +7,7 @@ class bacula::client::monitor {
     notification_delay => '120',
     first_escalation   => '3',
     require            => Service[$bacula::params::bacula_client_services],
+    servicegroups      => hiera('location')
   }
 
 }

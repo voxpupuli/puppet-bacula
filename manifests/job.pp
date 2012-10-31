@@ -65,6 +65,7 @@ define bacula::job (
         dependency_service => "check_env_${hostname}",
         dependency_host    => $::bacula::params::bacula_director,
         notification_delay => '120',
+        servicegroups      => 'world',
       }
     }
   }

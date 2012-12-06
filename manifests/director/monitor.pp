@@ -89,9 +89,10 @@ class bacula::director::monitor($db_user, $db_pw) {
     ensure  => present,
   }
 
-  nagios::nrpe::command { "check_bacula":
+  nrpe::command { "check_bacula":
     path    => "${nagios_plugins_path}/check_bacula.pl",
     args    => '-H $ARG1$ -w $ARG2$ -c $ARG3$ -j $ARG4$',
     require => File["/usr/lib/nagios/plugins/check_bacula.pl"],
   }
+
 }

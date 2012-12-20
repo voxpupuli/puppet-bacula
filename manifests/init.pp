@@ -42,18 +42,7 @@ class bacula (
       fileset => "Common",
   }
 
-  # realize the firewall rules exported from the director
-  if defined (Class["firewall"]) {
-    firewall { "0175-INPUT allow tcp ${bacula::params::file_port}":
-        proto  => 'tcp',
-        dport  => $bacula::params::file_port,
-        source => $bacula_director,
-        jump   => 'ACCEPT',
-    }
-  }
-
   # Realize any virtual jobs that may or may not exist.
   Bacula::Job <||>
 
 }
-

@@ -31,7 +31,7 @@ class bacula (
   include bacula::common
 
   # Insert information about this host into the director's config
-  @@concat::fragment { "bacula-client-$hostname":
+  @@concat::fragment { "bacula-client-$fqdn":
       target  => '/etc/bacula/conf.d/client.conf',
       content => template("bacula/client.conf.erb"),
       tag     => "bacula-${bacula_director}";

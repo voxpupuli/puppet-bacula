@@ -62,7 +62,7 @@ define bacula::job (
         check_command      => "check_nrpe!check_bacula!72 2 1 ${name}",
         escalate           => true,
         first_escalation   => '3',
-        dependency_service => "check_env_${hostname}",
+        dependency_service => "check_env_${fqdn}",
         dependency_host    => $::bacula::params::bacula_director,
         notification_delay => '120',
         servicegroups      => 'world',

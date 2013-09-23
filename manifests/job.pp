@@ -59,13 +59,14 @@ define bacula::job (
   if $bacula::monitor == true {
     if $jobtype == 'Backup' {
       icinga::service { "check_bacula_${name}":
-        check_command      => "check_nrpe!check_bacula!72 2 1 ${name}",
-        escalate           => true,
-        first_escalation   => '3',
-        dependency_service => "check_env_${fqdn}",
-        dependency_host    => $::bacula::params::bacula_director,
-        notification_delay => '120',
-        servicegroups      => 'world',
+        check_command         => "check_nrpe!check_bacula!72 2 1 ${name}",
+        escalate              => true,
+        first_escalation      => '3',
+        dependency_service    => "check_env_${fqdn}",
+        dependency_host       => $::bacula::params::bacula_director,
+        notification_delay    => '120',
+        notifications_enabled => 'n',
+        servicegroups         => 'world',
       }
     }
   }

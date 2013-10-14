@@ -11,7 +11,7 @@
 #
 # Sample Usage:
 #
-# bacula::openldap { 'puppetlabs-config': 
+# bacula::openldap { 'puppetlabs-config':
 #   suffix => 'cn=config',
 # }
 #
@@ -29,7 +29,7 @@ define bacula::openldap( $suffix ) {
     require => File['/var/lib/bacula/openldap'],
   }
 
-  bacula::job { "${fqdn}-openldap-${name}":
+  bacula::job { "${::fqdn}-openldap-${name}":
     files => "/var/lib/bacula/openldap/${name}.ldif",
   }
 }

@@ -13,7 +13,7 @@
 #
 class bacula::storage (
     $port                    = '9103',
-    $device_name             = "${fqdn}-device",
+    $device_name             = "${::fqdn}-device",
     $device                  = '/bacula',
     $media_type              = 'File',
     $working_directory       = $bacula::params::working_directory,
@@ -36,30 +36,30 @@ class bacula::storage (
 
   # Export this here so the director can realize the storage resource and know how to talk to us
   @@concat::fragment {
-    "bacula-director-storage-${fqdn}":
+    "bacula-director-storage-${::fqdn}":
       target  => '/etc/bacula/conf.d/storage.conf',
-      content => template("bacula/bacula-dir-storage.erb"),
+      content => template('bacula/bacula-dir-storage.erb'),
       tag     => "bacula-${bacula_director}",
   }
 
   concat::fragment {
-    "bacula-storage-header":
+    'bacula-storage-header':
       order   => 00,
       target  => '/etc/bacula/bacula-sd.conf',
-      content => template("bacula/bacula-sd-header.erb"),
+      content => template('bacula/bacula-sd-header.erb'),
   }
 
   concat::fragment {
-    "bacula-storage-dir":
+    'bacula-storage-dir':
       target  => '/etc/bacula/bacula-sd.conf',
-      content => template("bacula/bacula-sd-dir.erb"),
+      content => template('bacula/bacula-sd-dir.erb'),
   }
 
   # Realize the clause the director is exporting here so we can allow access to the storage daemon
   # Adds an entry to /etc/bacula/bacula-sd.conf
   Concat::Fragment <<| tag == "bacula-storage-dir-${bacula_director}" |>>
   concat {
-    "/etc/bacula/bacula-sd.conf":
+    '/etc/bacula/bacula-sd.conf':
       owner   => root,
       group   => bacula,
       mode    => 640,
@@ -67,26 +67,26 @@ class bacula::storage (
   }
 
   file { $device:
+    ensure  => directory,
     owner   => bacula,
     group   => bacula,
-    ensure  => directory,
   }
 
   # Each storage daemon should get its own pool(s)
   @@bacula::director::pool {
-    "${fqdn}-Pool-Full":
-      volret      => "21 days",
+    "${::fqdn}-Pool-Full":
+      volret      => '21 days',
       maxvolbytes => '4g',
       maxvoljobs  => '10',
-      maxvols     => "20",
-      label       => "Full-",
+      maxvols     => '20',
+      label       => 'Full-',
       storage     => hiera('bacula_storage');
-    "${fqdn}-Pool-Inc":
-      volret      => "8 days",
+    "${::fqdn}-Pool-Inc":
+      volret      => '8 days',
       maxvolbytes => '4g',
       maxvoljobs  => '50',
-      maxvols     => "10",
-      label       => "Inc-",
+      maxvols     => '10',
+      label       => 'Inc-',
       storage     => hiera('bacula_storage');
   }
 

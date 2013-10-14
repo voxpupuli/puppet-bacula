@@ -38,7 +38,7 @@ define bacula::job (
 
   # if the fileset is not defined, we fall back to one called "Common"
   if $fileset == true {
-    if $files == '' { err("you tell me to create a fileset, but no files given") }
+    if $files == '' { err('you tell me to create a fileset, but no files given') }
     $fileset_real = $name
     bacula::fileset {
       $name:
@@ -46,13 +46,13 @@ define bacula::job (
         excludes => $excludes
       }
   } else {
-    $fileset_real = "Common"
+    $fileset_real = 'Common'
   }
 
   @@concat::fragment {
     "bacula-job-${name}":
       target  => '/etc/bacula/conf.d/job.conf',
-      content => template("${template}"),
+      content => template($template),
       tag     => "bacula-${::bacula::params::bacula_director}";
   }
 
@@ -62,7 +62,7 @@ define bacula::job (
         check_command         => "check_nrpe!check_bacula!72 2 1 ${name}",
         escalate              => true,
         first_escalation      => '3',
-        dependency_service    => "check_env_${fqdn}",
+        dependency_service    => "check_env_${::fqdn}",
         dependency_host       => $::bacula::params::bacula_director,
         notification_delay    => '120',
         notification_options  => 'n',
@@ -70,6 +70,5 @@ define bacula::job (
       }
     }
   }
-
 }
 

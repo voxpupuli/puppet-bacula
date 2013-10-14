@@ -17,7 +17,7 @@ define bacula::schedule (
   concat::fragment {
     "bacula-schedule-${name}":
       target  => '/etc/bacula/conf.d/schedule.conf',
-      content => template("bacula/schedule.conf.erb"),
+      content => template('bacula/schedule.conf.erb'),
   }
 
 }

@@ -34,15 +34,15 @@ define bacula::director::pool (
     $maxvoljobs  = '1',
     $maxvolbytes = '1000000000',
     $maxvols     = '30',
-    $purgeaction = "Truncate",
+    $purgeaction = 'Truncate',
     $label       = '',
     $storage     = hiera('bacula_storage')
   ) {
 
   concat::fragment {
-    "bacula-director-pool-$name":
+    "bacula-director-pool-${name}":
       target  => '/etc/bacula/conf.d/pools.conf',
-      content => template("bacula/pool.conf.erb");
+      content => template('bacula/pool.conf.erb');
   }
 
 }

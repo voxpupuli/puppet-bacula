@@ -26,7 +26,7 @@ define bacula::mysql {
     require => File['/var/lib/bacula/mysql'],
   }
 
-  bacula::job { "${fqdn}-mysql-${name}":
+  bacula::job { "${::fqdn}-mysql-${name}":
     files => "/var/lib/bacula/mysql/${name}.sql",
   }
 }

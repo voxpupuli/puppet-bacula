@@ -25,21 +25,21 @@ class bacula (
 
   # We all have are part, what is mine?
   $bacula_is_storage = $bacula::params::bacula_is_storage
-  if $bacula_is_storage == "yes" { include bacula::storage }
+  if $bacula_is_storage == 'yes' { include bacula::storage }
   if $monitor           == true  { include bacula::client::monitor }
 
   include bacula::common
 
   # Insert information about this host into the director's config
-  @@concat::fragment { "bacula-client-$fqdn":
+  @@concat::fragment { "bacula-client-${::fqdn}":
       target  => '/etc/bacula/conf.d/client.conf',
-      content => template("bacula/client.conf.erb"),
-      tag     => "bacula-${bacula_director}";
+      content => template('bacula/client.conf.erb'),
+      tag     => "bacula-${bacula_director}",
   }
 
   # Define a common job
-  bacula::job { "${fqdn}-common":
-      fileset => "Common",
+  bacula::job { "${::fqdn}-common":
+      fileset => 'Common',
   }
 
   # Realize any virtual jobs that may or may not exist.

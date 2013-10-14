@@ -11,23 +11,23 @@
 # Sample Usage:
 #
 define bacula::jobdefs (
-    $jobtype  = "Backup",
-    $sched    = "WeeklyCycle",
-    $messages = "Standard",
-    $priority = "10"
+    $jobtype  = 'Backup',
+    $sched    = 'WeeklyCycle',
+    $messages = 'Standard',
+    $priority = '10'
   ) {
 
-  if defined(Class["bacula"]) {
+  if defined(Class['bacula']) {
     # if the fileset is not defined, we fall back to one called "Common"
 
     concat::fragment {
       "bacula-jobdefs-${name}":
         target  => '/etc/bacula/conf.d/jobdefs.conf',
-        content => template("bacula/jobdefs.conf.erb"),
+        content => template('bacula/jobdefs.conf.erb'),
     }
 
   } else {
-    err("need Class['bacula'] for this to be useful")
+    err('need Class[\'bacula\'] for this to be useful')
   }
 }
 

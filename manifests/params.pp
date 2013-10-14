@@ -17,9 +17,9 @@ class bacula::params {
   $file_port     = '9102'
   $storage_port  = '9103'
 
-  $file_retention = "45 days"
-  $job_retention  = "6 months"
-  $autoprune      = "yes"
+  $file_retention = '45 days'
+  $job_retention  = '6 months'
+  $autoprune      = 'yes'
   $monitor        = true
 
   $bacula_director   = hiera('bacula_director')
@@ -30,41 +30,41 @@ class bacula::params {
   # HAY GUISE, GUESS WHAT VARIABLE GOT STRINGIFIED FROM NIL TO AN EMPTY STRING?
   # haet.
   $bacula_password = $::bacula_password ? {
-    ""      => genpass({}),
+    ''      => genpass({}),
     default => $::bacula_password,
   }
 
-  case $operatingsystem {
-     "ubuntu","debian": {
-        $bacula_director_packages = [ "bacula-director-common", "bacula-director-mysql", "bacula-console" ]
-        $bacula_director_services = [ "bacula-director" ]
-        $bacula_storage_packages  = [ "bacula-sd", "bacula-sd-mysql" ]
-        $bacula_storage_services  = [ "bacula-sd" ]
-        $bacula_client_packages   = "bacula-client"
-        $bacula_client_services   = "bacula-fd"
+  case $::operatingsystem {
+    'ubuntu','debian': {
+        $bacula_director_packages = [ 'bacula-director-common', 'bacula-director-mysql', 'bacula-console' ]
+        $bacula_director_services = [ 'bacula-director' ]
+        $bacula_storage_packages  = [ 'bacula-sd', 'bacula-sd-mysql' ]
+        $bacula_storage_services  = [ 'bacula-sd' ]
+        $bacula_client_packages   = 'bacula-client'
+        $bacula_client_services   = 'bacula-fd'
         $client_config            = '/etc/bacula/bacula-fd.conf'
-        $working_directory        = "/var/lib/bacula"
-        $pid_directory            = "/var/run/bacula"
-     }
-     "centos","fedora","sles": {
-        $bacula_director_packages = [ "bacula-director-common", "bacula-director-mysql", "bacula-console" ]
-        $bacula_director_services = [ "bacula-dir" ]
-        $bacula_storage_packages  = [ "bacula-sd", "bacula-sd-mysql" ]
-        $bacula_storage_services  = [ "bacula-sd" ]
-        $bacula_client_packages   = "bacula-client"
-        $bacula_client_services   = "bacula-fd"
+        $working_directory        = '/var/lib/bacula'
+        $pid_directory            = '/var/run/bacula'
+    }
+    'centos','fedora','sles': {
+        $bacula_director_packages = [ 'bacula-director-common', 'bacula-director-mysql', 'bacula-console' ]
+        $bacula_director_services = [ 'bacula-dir' ]
+        $bacula_storage_packages  = [ 'bacula-sd', 'bacula-sd-mysql' ]
+        $bacula_storage_services  = [ 'bacula-sd' ]
+        $bacula_client_packages   = 'bacula-client'
+        $bacula_client_services   = 'bacula-fd'
         $client_config            = '/etc/bacula/bacula-fd.conf'
-        $working_directory        = "/var/lib/bacula"
-        $pid_directory            = "/var/run"
-     }
-     "freebsd": {
-        $bacula_client_packages = "sysutils/bacula-client"
-        $bacula_client_services = "bacula-fd"
+        $working_directory        = '/var/lib/bacula'
+        $pid_directory            = '/var/run'
+    }
+    'freebsd': {
+        $bacula_client_packages = 'sysutils/bacula-client'
+        $bacula_client_services = 'bacula-fd'
         $client_config          = '/usr/local/etc/bacula-fd.conf'
-        $pid_directory          = "/var/run"
-        $working_directory      = "/var/db/bacula"
-     }
-     default: { fail("bacula::params has no love for $operatingsystem") }
+        $pid_directory          = '/var/run'
+        $working_directory      = '/var/db/bacula'
+    }
+    default: { fail("bacula::params has no love for ${::operatingsystem}") }
   }
 
 }

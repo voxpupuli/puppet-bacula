@@ -14,7 +14,7 @@
 #  - Installs the bacula-director packages
 #  - Installs the bacula storage daemon packages
 #  - Starts the Bacula services
-#  - Creates the /bacula mount point 
+#  - Creates the /bacula mount point
 #
 # Requires:
 #
@@ -25,7 +25,7 @@ class bacula::director (
     $db_pw    = 'ch@ng3me',
     $monitor  = true,
     $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
-    $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ'
+    $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ',
   ) {
 
   include bacula::params
@@ -49,25 +49,25 @@ class bacula::director (
     require    => Package[$bacula::params::bacula_director_packages],
   }
 
-  file { "/etc/bacula/conf.d": ensure  => directory; }
+  file { '/etc/bacula/conf.d': ensure  => directory; }
 
   file {
-    "/etc/bacula/bconsole.conf":
-      owner   => root,
-      group   => bacula,
-      mode    => 640,
-      content => template("bacula/bconsole.conf.erb");
+    '/etc/bacula/bconsole.conf':
+      owner   => 'root',
+      group   => 'bacula',
+      mode    => '0640',
+      content => template('bacula/bconsole.conf.erb');
   }
 
   concat::fragment {
-    "bacula-director-header":
+    'bacula-director-header':
       order   => '00',
       target  => '/etc/bacula/bacula-dir.conf',
-      content => template("bacula/bacula-dir-header.erb")
+      content => template('bacula/bacula-dir-header.erb')
   }
 
   Bacula::Director::Pool <<||>>
-  Concat::Fragment <<| tag == "bacula-${fqdn}" |>>
+  Concat::Fragment <<| tag == "bacula-${::fqdn}" |>>
 
   concat {
     '/etc/bacula/bacula-dir.conf':
@@ -96,12 +96,12 @@ class bacula::director (
   }
 
   bacula::fileset {
-    "Common":
-      files => ["/etc"],
+    'Common':
+      files => ['/etc'],
   }
 
   bacula::job {
-    "RestoreFiles":
+    'RestoreFiles':
       jobtype => 'Restore',
       fileset => false,
   }
@@ -109,7 +109,7 @@ class bacula::director (
   ## backup the bacula database  -- database are being backed up by being created in mysql::db
   #bacula::mysql { 'bacula': }
 
-  mysql::db { "bacula":
+  mysql::db { 'bacula':
     user     => $db_user,
     password => $db_pw,
   }

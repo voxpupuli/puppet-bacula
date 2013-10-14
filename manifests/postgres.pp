@@ -26,7 +26,7 @@ define bacula::postgres {
     require => File['/var/lib/bacula/postgres'],
   }
 
-  bacula::job { "${fqdn}-postgres-${name}":
+  bacula::job { "${::fqdn}-postgres-${name}":
     files => "/var/lib/bacula/postgres/${name}.sql",
   }
 }

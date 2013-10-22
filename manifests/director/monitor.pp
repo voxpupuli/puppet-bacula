@@ -12,7 +12,7 @@
 #
 class bacula::director::monitor($db_user, $db_pw) {
 
-  include nagios::params
+  include icinga::params
 
   @@nagios_service { "check_baculadir_${::fqdn}":
     use                      => 'generic-service',
@@ -20,7 +20,7 @@ class bacula::director::monitor($db_user, $db_pw) {
     check_command            => 'check_nrpe!check_proc!1:1 bacula-dir',
     service_description      => "check_baculadir_${::fqdn}",
     target                   => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify                   => Service[$nagios::params::nagios_service],
+    notify                   => Service[$icinga::params::nagios_service],
     first_notification_delay => '120',
   }
 
@@ -41,7 +41,7 @@ class bacula::director::monitor($db_user, $db_pw) {
     check_command       => 'check_nrpe!check_proc!1:1 bacula-sd',
     service_description => "check_baculasd_${::fqdn}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify              => Service[$nagios::params::nagios_service],
+    notify              => Service[$icinga::params::nagios_service],
   }
 
   @@nagios_servicedependency {"check_baculasd_${::fqdn}":
@@ -63,7 +63,7 @@ class bacula::director::monitor($db_user, $db_pw) {
     check_command       => 'check_nrpe_1arg!check_xvdc',
     service_description => "check_bacula_disk_${::fqdn}",
     target              => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify              => Service[$nagios::params::nagios_service],
+    notify              => Service[$icinga::params::nagios_service],
   }
 
   @@nagios_servicedependency {"check_baculadisk_${::fqdn}":
@@ -77,12 +77,12 @@ class bacula::director::monitor($db_user, $db_pw) {
     target                        => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
   }
 
-  $nagios_plugins_path = $::nagios::params::nagios_plugins_path
+  $nagios_plugins_path = $::icinga::params::nagios_plugins_path
   # put here because it needs the database password from the
   file { "${nagios_plugins_path}/check_bacula.pl":
     ensure  => present,
     content => template('nagios/check_bacula.pl.erb'),
-    group   => $::nagios::params::nrpe_group,
+    group   => $::icinga::params::nrpe_group,
     mode    => '0750',
   }
 

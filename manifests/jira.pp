@@ -26,6 +26,6 @@ define bacula::jira {
   }
 
   bacula::job { "${::fqdn}-jira-${name}":
-    files => hiera('jirabackup::backup_dir'),
+    files => $jirabackup::backup_dir,
   }
 }

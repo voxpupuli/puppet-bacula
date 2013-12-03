@@ -81,7 +81,7 @@ class bacula::director::monitor($db_user, $db_pw) {
   # put here because it needs the database password from the
   file { "${nagios_plugins_path}/check_bacula.pl":
     ensure  => present,
-    content => template('nagios/check_bacula.pl.erb'),
+    content => template('icinga/check_bacula.pl.erb'),
     group   => $::icinga::params::nrpe_group,
     mode    => '0750',
   }

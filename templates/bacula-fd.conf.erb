@@ -2,21 +2,42 @@
 Director {
   Name     = <%= scope.lookupvar('bacula::params::bacula_director') %>-dir
   Password = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
+  <%- if scope.lookupvar('bacula::params::ssl') %>
+  TLS Enable              = yes
+  TLS Require             = yes
+  TLS Certificate         = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_cert.pem
+  TLS Key                 = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_key.pem
+  TLS CA Certificate File = /etc/bacula/ssl/ca.pem
+  <%- end %>
 }
 
 Director {
   Name     = <%= scope.lookupvar('bacula::params::bacula_director') %>-mon
   Password = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
   Monitor  = yes
+  <%- if scope.lookupvar('bacula::params::ssl') %>
+  TLS Enable              = yes
+  TLS Require             = yes
+  TLS Certificate         = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_cert.pem
+  TLS Key                 = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_key.pem
+  TLS CA Certificate File = /etc/bacula/ssl/ca.pem
+  <%- end %>
 }
 
 FileDaemon {
-  Name                    = <%= hostname %>-fd
+  Name                    = <%= @fqdn %>-fd
   FDAddress               = <%= scope.lookupvar('bacula::params::listen_address') %>
   FDport                  = <%= scope.lookupvar('bacula::params::file_port') %>
   WorkingDirectory        = <%= scope.lookupvar('bacula::params::working_directory') %>
   Pid Directory           = <%= scope.lookupvar('bacula::params::pid_directory') %>
   Maximum Concurrent Jobs = 2
+  <%- if scope.lookupvar('bacula::params::ssl') %>
+  TLS Enable              = yes
+  TLS Require             = yes
+  TLS Certificate         = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_cert.pem
+  TLS Key                 = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_key.pem
+  TLS CA Certificate File = /etc/bacula/ssl/ca.pem
+  <%- end %>
 }
 
 Messages {

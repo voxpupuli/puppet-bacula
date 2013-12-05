@@ -5,5 +5,12 @@ Storage {
   Password   = "<%= bacula_storage_password %>"
   Device     = <%= device_name %>
   Media Type = <%= media_type %>
+  <%- if scope.lookupvar('bacula::params::ssl') %>
+  TLS Enable              = yes
+  TLS Require             = yes
+  TLS Certificate         = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_cert.pem
+  TLS Key                 = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_key.pem
+  TLS CA Certificate File = /etc/bacula/ssl/ca.pem
+  <%- end %>
 }
 

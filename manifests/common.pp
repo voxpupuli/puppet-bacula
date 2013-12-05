@@ -11,7 +11,8 @@ class bacula::common {
 
   package { $bacula::params::bacula_client_packages:
     ensure => present,
-  }
+  } ->
+  class { 'bacula::ssl': }
 
   service { $bacula::params::bacula_client_services:
     ensure  => running,

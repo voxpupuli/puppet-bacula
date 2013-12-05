@@ -22,6 +22,8 @@ class bacula::params {
   $autoprune      = 'yes'
   $monitor        = true
 
+  $ssl            = true
+
   $bacula_director   = hiera('bacula_director')
   $bacula_is_storage = hiera('bacula_is_storage')
   $listen_address    = hiera('bacula_client_listen')

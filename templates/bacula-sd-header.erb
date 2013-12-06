@@ -21,6 +21,6 @@ Messages {
   Name     = Standard
   director = <%= scope.lookupvar('bacula::params::bacula_director') %>-dir = all
   syslog   = all, !skipped
-  #append   = "/var/log/bacula/log" = all, !skipped
+  append   = "/var/log/bacula/bacula-sd.log" = all, !skipped
 }
 

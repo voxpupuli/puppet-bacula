@@ -30,6 +30,10 @@ class bacula::director (
 
   include bacula::params
 
+  if $ssl == true {
+    include bacula::dhkey
+  }
+
   if $monitor == true {
     class { 'bacula::director::monitor':
       db_user => $db_user,

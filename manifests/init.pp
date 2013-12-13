@@ -37,11 +37,6 @@ class bacula (
       tag     => "bacula-${bacula_director}",
   }
 
-  # Define a common job
-  bacula::job { "${::fqdn}-common":
-      fileset => 'Common',
-  }
-
   # Realize any virtual jobs that may or may not exist.
   Bacula::Job <||>
 

@@ -1,19 +1,19 @@
 Director {                # define myself
-    Name                    = <%= fqdn %>-dir
-    DIRport                 = <%= scope.lookupvar('bacula::params::director_port') %>  # where we listen for UA connections
+    Name                    = <%= @clientcert %>-dir
+    DIRport                 = <%= @director_port %>  # where we listen for UA connections
     QueryFile               = "/etc/bacula/scripts/query.sql"
-    WorkingDirectory        = "<%= scope.lookupvar('bacula::params::working_directory') %>"
-    PidDirectory            = "<%= scope.lookupvar('bacula::params::pid_directory') %>"
+    WorkingDirectory        = "<%= @working_directory %>"
+    PidDirectory            = "<%= @pid_directory %>"
     Maximum Concurrent Jobs = 20
-    Password                = "<%= password %>"  # Console password
+    Password                = "<%= @password %>"  # Console password
     Messages                = Daemon
     <%- if scope.lookupvar('bacula::params::ssl') %>
     TLS Enable              = yes
     TLS Require             = yes
-    TLS Certificate         = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_cert.pem
-    TLS Key                 = /etc/bacula/ssl/<%= scope.lookupvar('::fqdn') %>_key.pem
-    TLS CA Certificate File = /etc/bacula/ssl/ca.pem
-    TLS DH File             = /etc/bacula/ssl/dh1024.pem
+    TLS Certificate         = <%= @bacula_dir %>/<%= @clientcert %>_cert.pem
+    TLS Key                 = <%= @bacula_dir %>/<%= @clientcert %>_key.pem
+    TLS CA Certificate File = <%= @bacula_dir %>/ca.pem
+    TLS DH File             = <%= @bacula_dir %>/dh1024.pem
     <%- end %>
 }
 
@@ -22,13 +22,13 @@ Pool {
     Pool Type       = Backup
     Action On Purge = Truncate
     Label Format    = Default-
-    Storage         = <%= fqdn %>-sd
+    Storage         = <%= @clientcert %>-sd
 }
 
 # Generic catalog service
 Catalog {
     Name   = MyCatalog
-    dbname = "bacula"; dbuser = "<%= db_user %>"; dbpassword = "<%= db_pw %>"
+    dbname = "bacula"; dbuser = "<%= @db_user %>"; dbpassword = "<%= @db_pw %>"
 }
 
 Messages {
@@ -48,7 +48,7 @@ Messages {
 # Restricted console used by tray-monitor to get the status of the director
 #
 Console {
-    Name       = <%= fqdn %>-mon
+    Name       = <%= @clientcert %>-mon
     Password   = "EWDjRkucylqjSjwtX_y2UKlS-Ihr4E01V"
     CommandACL = status, .status
 }

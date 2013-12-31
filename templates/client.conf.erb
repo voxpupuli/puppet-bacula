@@ -1,19 +1,19 @@
 Client {
-  Name           = <%= scope.lookupvar('::fqdn') %>-fd
-  Address        = <%= scope.lookupvar('::fqdn') %>
+  Name           = <%= @clientcert %>-fd
+  Address        = <%= @clientcert %>
   FDPort         = <%= scope.lookupvar('bacula::params::file_port') %>
   Catalog        = MyCatalog
   Password       = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
-  File Retention = <%= file_retention %>
-  Job Retention  = <%= job_retention %>
-  AutoPrune      = <%= autoprune %>
+  File Retention = <%= @file_retention %>
+  Job Retention  = <%= @job_retention %>
+  AutoPrune      = <%= @autoprune %>
 
   <%- if scope.lookupvar('bacula::params::ssl') %>
   TLS Enable              = yes
   TLS Require             = yes
-  TLS Certificate         = /etc/bacula/ssl/<%= scope.lookupvar('bacula_director') %>_cert.pem
-  TLS Key                 = /etc/bacula/ssl/<%= scope.lookupvar('bacula_director') %>_key.pem
-  TLS CA Certificate File = /etc/bacula/ssl/ca.pem
+  TLS Certificate         = <%= @bacula_dir %>/<%= scope.lookupvar('bacula_director') %>_cert.pem
+  TLS Key                 = <%= @bacula_dir %>/<%= scope.lookupvar('bacula_director') %>_key.pem
+  TLS CA Certificate File = <%= @bacula_dir %>/ca.pem
   <%- end %>
 }
 

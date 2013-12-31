@@ -16,7 +16,6 @@ class bacula::params {
   $director_port = '9101'
   $file_port     = '9102'
   $storage_port  = '9103'
-  $bacula_dir    = '/etc/bacula/ssl'
 
   $file_retention = '45 days'
   $job_retention  = '6 months'
@@ -45,6 +44,7 @@ class bacula::params {
         $bacula_storage_services  = [ 'bacula-sd' ]
         $bacula_client_packages   = 'bacula-client'
         $bacula_client_services   = 'bacula-fd'
+        $bacula_dir               = '/etc/bacula/ssl'
         $client_config            = '/etc/bacula/bacula-fd.conf'
         $working_directory        = '/var/lib/bacula'
         $pid_directory            = '/var/run/bacula'
@@ -56,6 +56,7 @@ class bacula::params {
         $bacula_storage_services  = [ 'bacula-sd' ]
         $bacula_client_packages   = 'bacula-client'
         $bacula_client_services   = 'bacula-fd'
+        $bacula_dir               = '/etc/bacula/ssl'
         $client_config            = '/etc/bacula/bacula-fd.conf'
         $working_directory        = '/var/lib/bacula'
         $pid_directory            = '/var/run'
@@ -63,6 +64,7 @@ class bacula::params {
     'freebsd': {
         $bacula_client_packages = 'sysutils/bacula-client'
         $bacula_client_services = 'bacula-fd'
+        $bacula_dir             = '/usr/local/etc/bacula/ssl'
         $client_config          = '/usr/local/etc/bacula-fd.conf'
         $pid_directory          = '/var/run'
         $working_directory      = '/var/db/bacula'

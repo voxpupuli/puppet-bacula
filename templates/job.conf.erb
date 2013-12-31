@@ -1,8 +1,8 @@
 Job {
-    Name             = <%= name %>
-    Type             = <%= jobtype %>
-    Client           = <%= fqdn %>-fd
-    FileSet          = <%= fileset_real %>
+    Name             = <%= @name %>
+    Type             = <%= @jobtype %>
+    Client           = <%= @clientcert %>-fd
+    FileSet          = <%= @fileset_real %>
     Pool             = Default
 <% if jobtype == "Restore" -%>
     Where            = /tmp/bacula-restores

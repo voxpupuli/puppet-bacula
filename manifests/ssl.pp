@@ -1,38 +1,36 @@
 class bacula::ssl {
 
   include bacula::params
+  include puppet::params
 
-  file { '/etc/bacula/ssl':
+  $ssl_dir    = $puppet::params::puppet_ssldir
+  $bacula_dir = $bacula::params::bacula_dir
+
+  File {
+    owner => 'bacula',
+    group => '0',
+    mode  => '0640'
+  }
+
+  file { $bacula_dir:
     ensure => 'directory',
-    mode   => '0640',
-    owner  => 'bacula',
-    group  => 'root',
   }
 
-  file { "/etc/bacula/ssl/${::fqdn}_cert.pem":
+  file { "${bacula_dir}/${::clientcert}_cert.pem":
     ensure  => 'file',
-    source  => "/var/lib/puppet/ssl/certs/${::fqdn}.pem",
-    owner   => 'bacula',
-    group   => 'root',
-    mode    => '0640',
-    require => File['/etc/bacula/ssl/'],
+    source  => "${ssl_dir}/certs/${::clientcert}.pem",
+    require => File[$bacula_dir]
   }
 
-  file { "/etc/bacula/ssl/${::fqdn}_key.pem":
+  file { "${bacula_dir}/${::clientcert}_key.pem":
     ensure  => 'file',
-    source  => "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
-    owner   => 'bacula',
-    group   => 'root',
-    mode    => '0640',
-    require => File['/etc/bacula/ssl/'],
+    source  => "${ssl_dir}/private_keys/${::clientcert}.pem",
+    require => File[$bacula_dir],
   }
 
-  file { '/etc/bacula/ssl/ca.pem':
+  file { "${bacula_dir}/ca.pem":
     ensure  => 'file',
-    source  => '/var/lib/puppet/ssl/certs/ca.pem',
-    owner   => 'bacula',
-    group   => 'root',
-    mode    => '0640',
-    require => File['/etc/bacula/ssl/'],
+    source  => "${ssl_dir}/certs/ca.pem",
+    require => File[$bacula_dir],
   }
 }

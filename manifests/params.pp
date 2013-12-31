@@ -16,6 +16,7 @@ class bacula::params {
   $director_port = '9101'
   $file_port     = '9102'
   $storage_port  = '9103'
+  $bacula_dir    = '/etc/bacula/ssl'
 
   $file_retention = '45 days'
   $job_retention  = '6 months'

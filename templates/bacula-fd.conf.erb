@@ -5,9 +5,9 @@ Director {
   <%- if scope.lookupvar('bacula::params::ssl') %>
   TLS Enable              = yes
   TLS Require             = yes
-  TLS Certificate         = <%= @bacula_dir %>/<%= scope.lookupvar('::clientcert') %>_cert.pem
-  TLS Key                 = <%= @bacula_dir %>/<%= scope.lookupvar('::clientcert') %>_key.pem
-  TLS CA Certificate File = <%= @bacula_dir %>/ca.pem
+  TLS Certificate         = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_cert.pem
+  TLS Key                 = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_key.pem
+  TLS CA Certificate File = <%= scope.lookupvar('bacula::params::bacula_dir') %>/ca.pem
   <%- end %>
 }
 
@@ -18,9 +18,9 @@ Director {
   <%- if scope.lookupvar('bacula::params::ssl') %>
   TLS Enable              = yes
   TLS Require             = yes
-  TLS Certificate         = <%= @bacula_dir %>/<%= scope.lookupvar('::clientcert') %>_cert.pem
-  TLS Key                 = <%= @bacula_dir %>/<%= scope.lookupvar('::clientcert') %>_key.pem
-  TLS CA Certificate File = <%= @bacula_dir %>/ca.pem
+  TLS Certificate         = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_cert.pem
+  TLS Key                 = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_key.pem
+  TLS CA Certificate File = <%= scope.lookupvar('bacula::params::bacula_dir') %>/ca.pem
   <%- end %>
 }
 
@@ -34,9 +34,9 @@ FileDaemon {
   <%- if scope.lookupvar('bacula::params::ssl') %>
   TLS Enable              = yes
   TLS Require             = yes
-  TLS Certificate         = <%= @bacula_dir %>/<%= scope.lookupvar('::clientcert') %>_cert.pem
-  TLS Key                 = <%= @bacula_dir %>/<%= scope.lookupvar('::clientcert') %>_key.pem
-  TLS CA Certificate File = <%= @bacula_dir %>/ca.pem
+  TLS Certificate         = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_cert.pem
+  TLS Key                 = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_key.pem
+  TLS CA Certificate File = <%= scope.lookupvar('bacula::params::bacula_dir') %>/ca.pem
   <%- end %>
 }
 

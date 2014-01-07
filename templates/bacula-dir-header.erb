@@ -1,19 +1,19 @@
 Director {                # define myself
     Name                    = <%= @clientcert %>-dir
-    DIRport                 = <%= @director_port %>  # where we listen for UA connections
+    DIRport                 = <%= scope.lookupvar('bacula::params::director_port') %>  # where we listen for UA connections
     QueryFile               = "/etc/bacula/scripts/query.sql"
-    WorkingDirectory        = "<%= @working_directory %>"
-    PidDirectory            = "<%= @pid_directory %>"
+    WorkingDirectory        = <%= scope.lookupvar('bacula::params::working_directory') %>
+    Pid Directory           = <%= scope.lookupvar('bacula::params::pid_directory') %>
     Maximum Concurrent Jobs = 20
     Password                = "<%= @password %>"  # Console password
     Messages                = Daemon
     <%- if scope.lookupvar('bacula::params::ssl') %>
     TLS Enable              = yes
     TLS Require             = yes
-    TLS Certificate         = <%= @bacula_dir %>/<%= @clientcert %>_cert.pem
-    TLS Key                 = <%= @bacula_dir %>/<%= @clientcert %>_key.pem
-    TLS CA Certificate File = <%= @bacula_dir %>/ca.pem
-    TLS DH File             = <%= @bacula_dir %>/dh1024.pem
+    TLS Certificate         = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= @clientcert %>_cert.pem
+    TLS Key                 = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= @clientcert %>_key.pem
+    TLS CA Certificate File = <%= scope.lookupvar('bacula::params::bacula_dir') %>/ca.pem
+    TLS DH File             = <%= scope.lookupvar('bacula::params::bacula_dir') %>/dh1024.pem
     <%- end %>
 }
 

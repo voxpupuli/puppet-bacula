@@ -19,8 +19,6 @@ class bacula::director::monitor($db_user, $db_pw) {
     host_name                => $::fqdn,
     check_command            => 'check_nrpe!check_proc!1:1 bacula-dir',
     service_description      => "check_baculadir_${::fqdn}",
-    target                   => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify                   => Service[$icinga::params::nagios_service],
     first_notification_delay => '120',
   }
 
@@ -32,7 +30,6 @@ class bacula::director::monitor($db_user, $db_pw) {
     dependent_service_description => "check_baculadir_${::fqdn}",
     execution_failure_criteria    => 'n',
     notification_failure_criteria => 'w,u,c',
-    target                        => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
   }
 
   @@nagios_service { "check_baculasd_${::fqdn}":
@@ -40,8 +37,6 @@ class bacula::director::monitor($db_user, $db_pw) {
     host_name           => $::fqdn,
     check_command       => 'check_nrpe!check_proc!1:1 bacula-sd',
     service_description => "check_baculasd_${::fqdn}",
-    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify              => Service[$icinga::params::nagios_service],
   }
 
   @@nagios_servicedependency {"check_baculasd_${::fqdn}":
@@ -52,7 +47,6 @@ class bacula::director::monitor($db_user, $db_pw) {
     dependent_service_description => "check_baculasd_${::fqdn}",
     execution_failure_criteria    => 'n',
     notification_failure_criteria => 'w,u,c',
-    target                        => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
   }
 
   @@nagios_service { "check_baculadisk_${::fqdn}":
@@ -62,8 +56,6 @@ class bacula::director::monitor($db_user, $db_pw) {
     host_name           => $::fqdn,
     check_command       => 'check_nrpe_1arg!check_xvdc',
     service_description => "check_bacula_disk_${::fqdn}",
-    target              => '/etc/nagios3/conf.d/nagios_service.cfg',
-    notify              => Service[$icinga::params::nagios_service],
   }
 
   @@nagios_servicedependency {"check_baculadisk_${::fqdn}":
@@ -74,7 +66,6 @@ class bacula::director::monitor($db_user, $db_pw) {
     dependent_service_description => "check_bacula_disk_${::fqdn}",
     execution_failure_criteria    => 'n',
     notification_failure_criteria => 'w,u,c',
-    target                        => '/etc/nagios3/conf.d/nagios_servicedep.cfg',
   }
 
   $nagios_plugins_path = $::icinga::params::nagios_plugins_path

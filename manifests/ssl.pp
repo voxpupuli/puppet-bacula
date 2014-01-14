@@ -3,8 +3,9 @@ class bacula::ssl {
   include bacula::params
   include puppet::params
 
-  $ssl_dir    = $puppet::params::puppet_ssldir
-  $bacula_dir = $bacula::params::bacula_dir
+  $ssl_dir           = $puppet::params::puppet_ssldir
+  $bacula_parent_dir = $bacula::params::bacula_parent_dir
+  $bacula_dir        = $bacula::params::bacula_dir
 
   File {
     owner => 'bacula',
@@ -12,8 +13,12 @@ class bacula::ssl {
     mode  => '0640'
   }
 
+  file { $bacula_parent_dir:
+    ensure => 'directory'
+  } ->
+
   file { $bacula_dir:
-    ensure => 'directory',
+    ensure => 'directory'
   }
 
   file { "${bacula_dir}/${::clientcert}_cert.pem":

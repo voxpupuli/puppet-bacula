@@ -21,12 +21,13 @@
 # Sample Usage:
 #
 class bacula::director (
-    $db_user  = 'bacula',
-    $db_pw    = 'ch@ng3me',
-    $monitor  = true,
-    $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
-    $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ',
-  ) {
+  $db_user  = 'bacula',
+  $db_pw    = 'ch@ng3me',
+  $monitor  = true,
+  $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
+  $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ',
+  $ssl      = $bacula::params::ssl,
+) inherits bacula::director::params {
 
   include bacula::params
 
@@ -53,32 +54,31 @@ class bacula::director (
     require    => Package[$bacula::params::bacula_director_packages],
   }
 
-  file { '/etc/bacula/conf.d': ensure  => directory; }
-
-  file {
-    '/etc/bacula/bconsole.conf':
-      owner   => 'root',
-      group   => 'bacula',
-      mode    => '0640',
-      content => template('bacula/bconsole.conf.erb');
+  file { '/etc/bacula/conf.d':
+    ensure  => directory,
   }
 
-  concat::fragment {
-    'bacula-director-header':
-      order   => '00',
-      target  => '/etc/bacula/bacula-dir.conf',
-      content => template('bacula/bacula-dir-header.erb')
+  file { '/etc/bacula/bconsole.conf':
+    owner   => 'root',
+    group   => 'bacula',
+    mode    => '0640',
+    content => template('bacula/bconsole.conf.erb');
+  }
+
+  concat::fragment { 'bacula-director-header':
+    order   => '00',
+    target  => '/etc/bacula/bacula-dir.conf',
+    content => template('bacula/bacula-dir-header.erb')
   }
 
   Bacula::Director::Pool <<||>>
   Concat::Fragment <<| tag == "bacula-${::fqdn}" |>>
 
-  concat {
-    '/etc/bacula/bacula-dir.conf':
-      owner  => root,
-      group  => bacula,
-      mode   => 640,
-      notify => Service[$bacula::params::bacula_director_services];
+  concat { '/etc/bacula/bacula-dir.conf':
+    owner  => root,
+    group  => bacula,
+    mode   => 640,
+    notify => Service[$bacula::params::bacula_director_services];
   }
 
   $sub_confs = [
@@ -91,23 +91,20 @@ class bacula::director (
     '/etc/bacula/conf.d/fileset.conf',
   ]
 
-  concat {
-    $sub_confs:
-      owner  => root,
-      group  => bacula,
-      mode   => 640,
-      notify => Service[$bacula::params::bacula_director_services];
+  concat { $sub_confs:
+    owner  => root,
+    group  => bacula,
+    mode   => '0640',
+    notify => Service[$bacula::params::bacula_director_services];
   }
 
-  bacula::fileset {
-    'Common':
-      files => ['/etc'],
+  bacula::fileset { 'Common':
+    files => ['/etc'],
   }
 
-  bacula::job {
-    'RestoreFiles':
-      jobtype => 'Restore',
-      fileset => false,
+  bacula::job { 'RestoreFiles':
+    jobtype => 'Restore',
+    fileset => false,
   }
 
   ## backup the bacula database  -- database are being backed up by being created in mysql::db

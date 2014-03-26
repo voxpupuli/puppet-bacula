@@ -18,10 +18,8 @@
 #   include bacula
 #
 class bacula (
-    $monitor = $bacula::params::monitor
-  ) inherits bacula::params {
-
-  include bacula::params
+  $monitor = $bacula::params::monitor
+) inherits bacula::params {
 
   # We all have are part, what is mine?
   $bacula_is_storage = $bacula::params::bacula_is_storage
@@ -34,7 +32,7 @@ class bacula (
   @@concat::fragment { "bacula-client-${::fqdn}":
       target  => '/etc/bacula/conf.d/client.conf',
       content => template('bacula/client.conf.erb'),
-      tag     => "bacula-${bacula_director}",
+      tag     => "bacula-${bacula::director::bacula_director}",
   }
 
   # Realize any virtual jobs that may or may not exist.

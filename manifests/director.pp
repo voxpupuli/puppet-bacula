@@ -27,7 +27,7 @@ class bacula::director (
   $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
   $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ',
   $ssl      = $bacula::params::ssl,
-) inherits bacula::director::params {
+) inherits bacula::params {
 
   include bacula::params
 

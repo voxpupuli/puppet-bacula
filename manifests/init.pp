@@ -32,7 +32,7 @@ class bacula (
   @@concat::fragment { "bacula-client-${::fqdn}":
       target  => '/etc/bacula/conf.d/client.conf',
       content => template('bacula/client.conf.erb'),
-      tag     => "bacula-${bacula::director::bacula_director}",
+      tag     => "bacula-${bacula::params::bacula_director}",
   }
 
   # Realize any virtual jobs that may or may not exist.

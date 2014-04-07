@@ -33,7 +33,7 @@ define bacula::director::pool (
     $volret      = '4 months', # Volume Retention
     $maxvoljobs  = '1',
     $maxvolbytes = '1000000000',
-    $maxvols     = '50',
+    $maxvols     = '100',
     $purgeaction = 'Truncate',
     $label       = '',
     $storage     = hiera('bacula_storage')

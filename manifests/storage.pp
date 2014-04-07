@@ -78,14 +78,14 @@ class bacula::storage (
       volret      => '21 days',
       maxvolbytes => '4g',
       maxvoljobs  => '10',
-      maxvols     => '50',
+      maxvols     => '100',
       label       => 'Full-',
       storage     => hiera('bacula_storage');
     "${::fqdn}-Pool-Inc":
       volret      => '8 days',
       maxvolbytes => '4g',
       maxvoljobs  => '50',
-      maxvols     => '50',
+      maxvols     => '100',
       label       => 'Inc-',
       storage     => hiera('bacula_storage');
   }

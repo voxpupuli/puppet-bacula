@@ -20,13 +20,6 @@ $backup_dir = '/var/atlassian/backup/jira-home'
 
   include bacula::params
 
-  cron { "bacula_jira_${name}":
-    command => '/usr/local/bin/jira-backup >/dev/null',
-    user    => root,
-    hour    => [0, 4, 8, 12, 16, 20],
-    minute  => 15,
-  }
-
   cron { "bacula_jira_homedir_${name}":
     command => '/var/atlassian/application-data/jira/sync-jira-home.sh >/dev/null',
     user    => root,

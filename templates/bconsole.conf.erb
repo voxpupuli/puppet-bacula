@@ -3,9 +3,9 @@
 #
 
 Director {
-  Name     = baal.puppetlabs.com-dir
+  Name     = frigga.ops.puppetlabs.net-dir
   DIRport  = <%= scope.lookupvar('bacula::params::director_port') %>
-  address  = baal.puppetlabs.com
+  address  = frigga.ops.puppetlabs.net
   Password = "<%= @password %>"
   <%- if scope.lookupvar('bacula::params::ssl') %>
   TLS Enable              = yes

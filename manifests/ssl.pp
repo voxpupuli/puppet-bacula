@@ -24,18 +24,21 @@ class bacula::ssl {
   file { "${bacula_dir}/${::clientcert}_cert.pem":
     ensure  => 'file',
     source  => "${ssl_dir}/certs/${::clientcert}.pem",
-    require => File[$bacula_dir]
+    require => File[$bacula_dir],
+    notify  => Service[$bacula::params::bacula_client_services],
   }
 
   file { "${bacula_dir}/${::clientcert}_key.pem":
     ensure  => 'file',
     source  => "${ssl_dir}/private_keys/${::clientcert}.pem",
     require => File[$bacula_dir],
+    notify  => Service[$bacula::params::bacula_client_services],
   }
 
   file { "${bacula_dir}/ca.pem":
     ensure  => 'file',
     source  => "${ssl_dir}/certs/ca.pem",
     require => File[$bacula_dir],
+    notify  => Service[$bacula::params::bacula_client_services],
   }
 }

@@ -21,6 +21,8 @@ class bacula::storage (
     $bacula_director         = $bacula::params::bacula_director
 ) inherits bacula::params {
 
+  include bacula::common
+
   $bacula_storage_password = genpass({store_key => 'bacula_storage_password'})
   $listen_address = hiera('bacula_client_listen')
 
@@ -70,6 +72,7 @@ class bacula::storage (
     ensure  => directory,
     owner   => bacula,
     group   => bacula,
+    require => Package[$bacula::params::bacula_storage_packages],
   }
 
   # Each storage daemon should get its own pool(s)

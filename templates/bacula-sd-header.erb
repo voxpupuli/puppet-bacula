@@ -1,5 +1,5 @@
 Storage {
-  Name                    = <%= clientcert %>-sd
+  Name                    = <%= @clientcert %>-sd
   WorkingDirectory        = <%= scope.lookupvar('bacula::params::working_directory') %>
   Pid Directory           = <%= scope.lookupvar('bacula::params::pid_directory') %>
   SDPort                  = <%= scope.lookupvar('bacula::params::storage_port') %>
@@ -13,9 +13,9 @@ Storage {
 }
 
 Device {
-  Name           = <%= device_name %>
-  Media Type     = <%= media_type %>
-  Archive Device = <%= device %>
+  Name           = <%= @device_name %>
+  Media Type     = <%= @media_type %>
+  Archive Device = <%= @device %>
   LabelMedia     = yes; # lets Bacula label unlabeled media
   Random Access  = yes;
   AutomaticMount = yes;

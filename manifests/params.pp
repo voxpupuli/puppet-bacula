@@ -21,10 +21,24 @@ class bacula::params {
   $job_retention  = '6 months'
   $autoprune      = 'yes'
   $monitor        = true
+  $pe_ssl_dir     = '/etc/puppetlabs/puppet/ssl'
 
   $ssl            = true
+  if $is_pe == 'true' {
+    $bacula_director  = hiera('pe_bacula_director')
+    $bacula_storage   = hiera('pe_bacula_storage')
+    $ssl_dir          = hiera('pe_ssl_dir', $pe_ssl_dir)
+    $director_name    = hiera('pe_director_name', $bacula_director)
+    $director_address = hiera('pe_director_address', $director_name)
+  }
+  else {
+    $bacula_director  = hiera('bacula_director')
+    $bacula_storage   = hiera('bacula_storage')
+    $ssl_dir          = $puppet::params::puppet_ssldir
+    $director_name    = hiera('director_name', $bacula_director)
+    $director_address = hiera('director_address', $director_name)
+}
 
-  $bacula_director   = hiera('bacula_director')
   $bacula_is_storage = hiera('bacula_is_storage')
   $listen_address    = hiera('bacula_client_listen')
 

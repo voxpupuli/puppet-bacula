@@ -24,6 +24,7 @@ class bacula::storage (
   include bacula::common
 
   $bacula_storage_password = genpass({store_key => 'bacula_storage_password'})
+  $bacula_storage = $bacula::params::bacula_storage
   $listen_address = hiera('bacula_client_listen')
 
   package { $bacula::params::bacula_storage_packages: ensure => present; }
@@ -42,6 +43,7 @@ class bacula::storage (
       target  => '/etc/bacula/conf.d/storage.conf',
       content => template('bacula/bacula-dir-storage.erb'),
       tag     => "bacula-${bacula_director}",
+      require => Package[$bacula::params::bacula_storage_packages]
   }
 
   concat::fragment {
@@ -66,6 +68,7 @@ class bacula::storage (
       group   => bacula,
       mode    => 640,
       notify  => Service[$bacula::params::bacula_storage_services],
+      require => Package[$bacula::params::bacula_storage_packages],
   }
 
   file { $device:
@@ -83,14 +86,14 @@ class bacula::storage (
       maxvoljobs  => '10',
       maxvols     => '100',
       label       => 'Full-',
-      storage     => hiera('bacula_storage');
+      storage     => $bacula_storage;
     "${::fqdn}-Pool-Inc":
       volret      => '8 days',
       maxvolbytes => '4g',
       maxvoljobs  => '50',
       maxvols     => '100',
       label       => 'Inc-',
-      storage     => hiera('bacula_storage');
+      storage     => $bacula_storage;
   }
 
 }

@@ -1,5 +1,5 @@
 Schedule {
-  Name = <%= name %>
+  Name = <%= @name %>
 <% if runs.is_a? Array -%>
 <%   runs.each do |r| -%>
 <%=    "    Run = #{r}\n" -%>

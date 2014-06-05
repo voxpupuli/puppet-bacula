@@ -9,8 +9,8 @@ Job {
     Messages         = Standard
 <% end -%>
 <% if jobtype == "Backup" -%>
-    Full Backup Pool        = <%= storage %>-Pool-Full
-    Incremental Backup Pool = <%= storage %>-Pool-Inc
+    Full Backup Pool        = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Full
+    Incremental Backup Pool = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Inc
     JobDefs                 = "PuppetLabsOps"
 <% end -%>
 }

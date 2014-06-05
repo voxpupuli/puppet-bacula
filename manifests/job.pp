@@ -31,10 +31,11 @@ define bacula::job (
     $jobtype  = 'Backup',
     $fileset  = true,
     $template = 'bacula/job.conf.erb',
-    $storage  = hiera('bacula_storage')
+    $storage  = $bacula_storage
   ) {
 
   include bacula
+  include bacula::params
 
   # if the fileset is not defined, we fall back to one called "Common"
   if $fileset == true {

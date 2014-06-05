@@ -22,7 +22,7 @@ Pool {
     Pool Type       = Backup
     Action On Purge = Truncate
     Label Format    = Default-
-    Storage         = bacula01.ops.puppetlabs.net-sd
+    Storage         = <%= scope.lookupvar('bacula::params::bacula_storage') %>-sd
 }
 
 # Generic catalog service

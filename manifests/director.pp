@@ -43,7 +43,7 @@ class bacula::director (
     }
   }
 
-  package { $bacula::params::bacula_director_packages:
+  package { [ $bacula::params::bacula_director_packages, $bacula_storage_packages ]:
     ensure => present,
   }
 

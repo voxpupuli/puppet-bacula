@@ -1,12 +1,12 @@
 FileSet {
-  Name = <%= name %>
+  Name = <%= @name %>
   Include {
     Options {
       signature   = MD5
       compression = GZIP
     }
 <% if files.is_a? Array -%>
-<%   files.each do |f| %>
+<%   [files].flatten.each do |f| %>
 <%=    "    File = #{f}\n" %>
 <%   end -%>
 <% elsif files != '' -%>
@@ -15,11 +15,11 @@ FileSet {
   }
   Exclude {
 <% if files.is_a? Array -%>
-<%   excludes.each do |exclude| %>
+  <%   [excludes].reject { |x| x.empty? }.flatten.each do |exclude| %>
 <%=    "    File = #{exclude}\n" %>
 <%   end -%>
 <% elsif excludes != '' -%>
-<%=    "    File = #{exclude}" %>
+# <%=    "    File = #{exclude}" %>
 <% end -%>
   }
 }

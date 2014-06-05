@@ -3,7 +3,7 @@ class bacula::ssl {
   include bacula::params
   include puppet::params
 
-  $ssl_dir           = $puppet::params::puppet_ssldir
+  $ssl_dir           = $bacula::params::ssl_dir
   $bacula_parent_dir = $bacula::params::bacula_parent_dir
   $bacula_dir        = $bacula::params::bacula_dir
 

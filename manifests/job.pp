@@ -49,11 +49,10 @@ define bacula::job (
     $fileset_real = 'Common'
   }
 
-  @@concat::fragment {
-    "bacula-job-${name}":
-      target  => '/etc/bacula/conf.d/job.conf',
-      content => template($template),
-      tag     => "bacula-${::bacula::params::bacula_director}";
+  @@concat::fragment { "bacula-job-${name}":
+    target  => '/etc/bacula/conf.d/job.conf',
+    content => template($template),
+    tag     => "bacula-${::bacula::params::bacula_director}";
   }
 
   if $bacula::monitor == true {

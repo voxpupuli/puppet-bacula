@@ -28,14 +28,15 @@ class bacula (
 
   include bacula::common
 
+  include concat::setup
+
   # Insert information about this host into the director's config
   @@concat::fragment { "bacula-client-${::fqdn}":
-      target  => '/etc/bacula/conf.d/client.conf',
-      content => template('bacula/client.conf.erb'),
-      tag     => "bacula-${bacula::params::bacula_director}",
+    target  => '/etc/bacula/conf.d/client.conf',
+    content => template('bacula/client.conf.erb'),
+    tag     => "bacula-${bacula::params::bacula_director}",
   }
 
   # Realize any virtual jobs that may or may not exist.
   Bacula::Job <||>
-
 }

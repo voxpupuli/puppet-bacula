@@ -29,6 +29,7 @@ class bacula::director (
   $ssl      = $bacula::params::ssl,
 ) inherits bacula::params {
 
+  include mysql::server
   include bacula::params
 
   if $ssl == true {

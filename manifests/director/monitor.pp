@@ -13,6 +13,7 @@
 class bacula::director::monitor($db_user, $db_pw) {
 
   include icinga::params
+  require ::monitoring
 
   @@nagios_service { "check_baculadir_${::fqdn}":
     use                      => 'generic-service',
@@ -20,6 +21,8 @@ class bacula::director::monitor($db_user, $db_pw) {
     check_command            => 'check_nrpe!check_proc!1:1 bacula-dir',
     service_description      => "check_baculadir_${::fqdn}",
     first_notification_delay => '120',
+    target                   => "${icinga::params::confd}/service/check_baculadir_${::fqdn}.cfg",
+    tag                      => [$monitoring::export_tag],
   }
 
   @@nagios_servicedependency {"check_baculadir_${::fqdn}":
@@ -30,13 +33,17 @@ class bacula::director::monitor($db_user, $db_pw) {
     dependent_service_description => "check_baculadir_${::fqdn}",
     execution_failure_criteria    => 'n',
     notification_failure_criteria => 'w,u,c',
+    target                        => "${icinga::params::confd}/servicedependency/check_baculadir_${::fqdn}.cfg",
+    tag                           => [$monitoring::export_tag],
   }
 
   @@nagios_service { "check_baculasd_${::fqdn}":
-    use                 => 'generic-service',
-    host_name           => $::fqdn,
-    check_command       => 'check_nrpe!check_proc!1:1 bacula-sd',
-    service_description => "check_baculasd_${::fqdn}",
+    use                      => 'generic-service',
+    host_name                => $::fqdn,
+    check_command            => 'check_nrpe!check_proc!1:1 bacula-sd',
+    service_description      => "check_baculasd_${::fqdn}",
+    target                   => "${icinga::params::confd}/service/check_baculasd_${::fqdn}.cfg",
+    tag                      => [$monitoring::export_tag],
   }
 
   @@nagios_servicedependency {"check_baculasd_${::fqdn}":
@@ -47,15 +54,19 @@ class bacula::director::monitor($db_user, $db_pw) {
     dependent_service_description => "check_baculasd_${::fqdn}",
     execution_failure_criteria    => 'n',
     notification_failure_criteria => 'w,u,c',
+    target                        => "${icinga::params::confd}/servicedependency/check_baculasd_${::fqdn}.cfg",
+    tag                           => [$monitoring::export_tag],
   }
 
   @@nagios_service { "check_baculadisk_${::fqdn}":
     # nagios is now monitoring all disks, so no need here
-    ensure              => absent,
-    use                 => 'generic-service',
-    host_name           => $::fqdn,
-    check_command       => 'check_nrpe_1arg!check_xvdc',
-    service_description => "check_bacula_disk_${::fqdn}",
+    ensure                   => absent,
+    use                      => 'generic-service',
+    host_name                => $::fqdn,
+    check_command            => 'check_nrpe_1arg!check_xvdc',
+    service_description      => "check_bacula_disk_${::fqdn}",
+    target                   => "${icinga::params::confd}/service/check_baculadisk_${::fqdn}.cfg",
+    tag                      => [$monitoring::export_tag],
   }
 
   @@nagios_servicedependency {"check_baculadisk_${::fqdn}":
@@ -66,6 +77,8 @@ class bacula::director::monitor($db_user, $db_pw) {
     dependent_service_description => "check_bacula_disk_${::fqdn}",
     execution_failure_criteria    => 'n',
     notification_failure_criteria => 'w,u,c',
+    target                   => "${icinga::params::confd}/servicedependency/check_baculadisk_${::fqdn}.cfg",
+    tag                      => [$monitoring::export_tag],
   }
 
   $nagios_plugins_path = $::icinga::params::nagios_plugins_path

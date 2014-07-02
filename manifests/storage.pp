@@ -18,7 +18,16 @@ class bacula::storage (
     $media_type              = 'File',
     $working_directory       = $bacula::params::working_directory,
     $pid_directory           = $bacula::params::pid_directory,
-    $bacula_director         = $bacula::params::bacula_director
+    $bacula_director         = $bacula::params::bacula_director,
+    $volret_full             = $bacula::params::volret,
+    $maxvolbytes_full        = $bacula::params::maxvolbytes,
+    $maxvoljobs_full         = $bacula::params::maxvoljobs,
+    $maxvols_full            = $bacula::params::maxvols_full,
+    $volret_incremental      = $bacula::params::volret_incremental,
+    $maxvolbytes_incremental = $bacula::params::maxvolbytes_incremental,
+    $maxvoljobs_incremental  = $bacula::params::maxvoljobs_incremental,
+    $maxvols_incremental     = $bacula::params::maxvols_incremental
+
 ) inherits bacula::params {
 
   include bacula::common
@@ -81,17 +90,17 @@ class bacula::storage (
   # Each storage daemon should get its own pool(s)
   @@bacula::director::pool {
     "${::fqdn}-Pool-Full":
-      volret      => '21 days',
-      maxvolbytes => '4g',
-      maxvoljobs  => '10',
-      maxvols     => '100',
+      volret      => $bacula::params::volret_full,
+      maxvolbytes => $bacula::params::maxvolbytes_full,
+      maxvoljobs  => $bacula::params::maxvoljobs_full,
+      maxvols     => $bacula::params::maxvols_full,
       label       => 'Full-',
       storage     => $bacula_storage;
     "${::fqdn}-Pool-Inc":
-      volret      => '8 days',
-      maxvolbytes => '4g',
-      maxvoljobs  => '50',
-      maxvols     => '100',
+      volret      => $bacula::params::volret_incremental,
+      maxvolbytes => $bacula::params::maxvolbytes_incremental,
+      maxvoljobs  => $bacula::params::maxvoljobs_incremental,
+      maxvols     => $bacula::params::maxvols_incremental,
       label       => 'Inc-',
       storage     => $bacula_storage;
   }

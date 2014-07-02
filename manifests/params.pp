@@ -24,7 +24,7 @@ class bacula::params {
   $pe_ssl_dir     = '/etc/puppetlabs/puppet/ssl'
 
   $ssl            = true
-  if $is_pe == 'true' {
+  if $is_pe {
     $bacula_director  = hiera('pe_bacula_director')
     $bacula_storage   = hiera('pe_bacula_storage')
     $ssl_dir          = hiera('pe_ssl_dir', $pe_ssl_dir)
@@ -39,8 +39,23 @@ class bacula::params {
     $director_address = hiera('director_address', $director_name)
 }
 
-  $bacula_is_storage = hiera('bacula_is_storage')
-  $listen_address    = hiera('bacula_client_listen')
+  $bacula_is_storage  = hiera('bacula_is_storage')
+  $listen_address     = hiera('bacula_client_listen')
+ 
+   # Pool parameters for full backups
+  $volret_full        = hiera('bacula::params::volret_full', '21 days')
+  $maxvolbytes_full   = hiera('bacula::params::maxvolbytes_full', '4g')
+  $maxvoljobs_full    = hiera('bacula::params::maxvoljobs_full', '10')
+  $maxvols_full       = hiera('bacula::params::maxvols_full', '100')
+
+  # Pool parameters for incremental backups
+  $volret_incremental      = hiera('bacula::params::volret_incremental', '8 days')
+  $maxvolbytes_incremental = hiera('bacula::params::maxvolbytes_incremental', '4g')
+  $maxvoljobs_incremental  = hiera('bacula::params::maxvoljobs_incremental', '50')
+  $maxvols_incremental     = hiera('bacula::params::maxvols_incremental', '100')
+
+  $job_pool           = hiera('bacula::params::job_pool', 'Default')
+  $job_defs           = hiera('bacula::params::job_defs', 'PuppetLabsOps')
 
   # If there is a bacula_password fact, use that. Else generate a new password.
   # HAY GUISE, GUESS WHAT VARIABLE GOT STRINGIFIED FROM NIL TO AN EMPTY STRING?

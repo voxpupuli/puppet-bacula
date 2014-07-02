@@ -3,7 +3,7 @@ Job {
     Type             = <%= @jobtype %>
     Client           = <%= @clientcert %>-fd
     FileSet          = <%= @fileset_real %>
-    Pool             = Default
+    Pool             = <%= @pool %>
 <% if jobtype == "Restore" -%>
     Where            = /tmp/bacula-restores
     Messages         = Standard
@@ -11,7 +11,7 @@ Job {
 <% if jobtype == "Backup" -%>
     Full Backup Pool        = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Full
     Incremental Backup Pool = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Inc
-    JobDefs                 = "PuppetLabsOps"
+    JobDefs                 = "<%= scope.lookupvar('bacula::params::job_defs') %>"
 <% end -%>
 }
 

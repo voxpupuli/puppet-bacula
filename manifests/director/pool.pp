@@ -30,10 +30,10 @@ define bacula::director::pool (
     $pooltype    = 'Backup',
     $recycle     = 'Yes',
     $autoprune   = 'Yes',
-    $volret      = '4 months', # Volume Retention
-    $maxvoljobs  = '1',
-    $maxvolbytes = '1000000000',
-    $maxvols     = '100',
+    $volret, # Volume Retention
+    $maxvoljobs,
+    $maxvolbytes,
+    $maxvols,
     $purgeaction = 'Truncate',
     $label       = '',
     $storage     = $bacula_storage
@@ -46,6 +46,4 @@ define bacula::director::pool (
       target  => '/etc/bacula/conf.d/pools.conf',
       content => template('bacula/pool.conf.erb');
   }
-
 }
-

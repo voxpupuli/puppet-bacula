@@ -23,13 +23,58 @@
 class bacula::director (
   $db_user  = 'bacula',
   $db_pw    = 'ch@ng3me',
+  $db_name  = $db_user,
   $monitor  = true,
   $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
   $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ',
   $ssl      = $bacula::params::ssl,
 ) inherits bacula::params {
 
-  include mysql::server
+  if $bacula::params::db_type == 'mysql' {
+    include mysql::server
+
+    ## backup the bacula database  -- database are being backed up by being created in mysql::db
+    #bacula::mysql { 'bacula': }
+
+    mysql::db { 'bacula':
+      user     => $db_user,
+      password => $db_pw,
+    }
+    bacula::mysql { 'bacula': }
+  }
+
+  elsif $bacula::params::db_type == 'pgsql' {
+
+    $make_bacula_tables = '/var/lib/bacula/make_bacula_tables'
+
+    include profile::postgresql::install
+    include profile::postgresql::configuration
+    include profile::postgresql::pg_hba_rules
+
+    postgresql::server::db { $db_name:
+      user     => $db_user,
+      password => postgresql_password($db_user, $db_pw),
+      encoding => 'SQL_ASCII',
+      require  => [ Class['profile::postgresql::install'], Package[$bacula_director_packages] ],
+      before   => File[$make_bacula_tables]
+    }
+
+    file { $make_bacula_tables:
+      content => template('bacula/make_bacula_postgresql_tables.erb'),
+      owner   => 'bacula',
+      mode    => '0777',
+      before  => Exec["/bin/sh $make_bacula_tables"]
+    }
+
+    exec { "/bin/sh $make_bacula_tables":
+      user        => 'bacula',
+      refreshonly => true,
+      subscribe   => Postgresql::Server::Db[$db_name],
+      notify      => Service[bacula-director],
+      require     => File[$make_bacula_tables]
+    }
+  }
+
   include bacula::params
 
   if $ssl == true {
@@ -108,13 +153,6 @@ class bacula::director (
     fileset => false,
   }
 
-  ## backup the bacula database  -- database are being backed up by being created in mysql::db
-  #bacula::mysql { 'bacula': }
 
-  mysql::db { 'bacula':
-    user     => $db_user,
-    password => $db_pw,
-  }
 
-  bacula::mysql { 'bacula': }
 }

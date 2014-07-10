@@ -22,6 +22,7 @@ class bacula::params {
   $autoprune      = 'yes'
   $monitor        = true
   $pe_ssl_dir     = '/etc/puppetlabs/puppet/ssl'
+  $db_type        = hiera('bacula::params::db_type', 'mysql') # Postresql also supported with name pgsql
 
   $ssl            = true
   if $is_pe {
@@ -67,9 +68,9 @@ class bacula::params {
 
   case $::operatingsystem {
     'ubuntu','debian': {
-        $bacula_director_packages = [ 'bacula-director-common', 'bacula-director-mysql', 'bacula-console' ]
+        $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
         $bacula_director_services = [ 'bacula-director' ]
-        $bacula_storage_packages  = [ 'bacula-sd', 'bacula-sd-mysql' ]
+        $bacula_storage_packages  = [ 'bacula-sd', "bacula-sd-${db_type}" ]
         $bacula_storage_services  = [ 'bacula-sd' ]
         $bacula_client_packages   = 'bacula-client'
         $bacula_client_services   = 'bacula-fd'
@@ -80,9 +81,9 @@ class bacula::params {
         $pid_directory            = '/var/run/bacula'
     }
     'centos','fedora','sles': {
-        $bacula_director_packages = [ 'bacula-director-common', 'bacula-director-mysql', 'bacula-console' ]
+        $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
         $bacula_director_services = [ 'bacula-dir' ]
-        $bacula_storage_packages  = [ 'bacula-sd', 'bacula-sd-mysql' ]
+        $bacula_storage_packages  = [ 'bacula-sd', "bacula-sd-${db_type}" ]
         $bacula_storage_services  = [ 'bacula-sd' ]
         $bacula_client_packages   = 'bacula-client'
         $bacula_client_services   = 'bacula-fd'

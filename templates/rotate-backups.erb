@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+count=<%= @count %>
+backups='<%= @backup_dir %>'
+list=$(ls -t $backups | grep <%= @backup_name %> | wc -l)
+
+remove_backups() {
+if [[ $list -gt $count ]]; then
+  echo "There are more than $count backups. Removing old backup files."
+  cd $backups
+  ls -t $backups | grep <%= @backup_name %> | tail -n +<%= @count %> | xargs rm
+else
+echo "There are less than $count backups of <%= @backup_name %> stored locally. No backups will be removed at this time."
+fi
+}
+
+main() {
+  remove_backups
+}
+
+main

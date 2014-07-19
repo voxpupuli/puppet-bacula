@@ -6,8 +6,6 @@
 #   db_host     => my_host_or_ip,
 #   db_pass     => db_password,
 #   db_user     => db_user,
-#   db_name     => my_db,
-#   backup_path => '/path/to/your/backup'
 # }
 #
 define bacula::backup_postgresql_db (

@@ -19,6 +19,8 @@ define bacula::backup_postgresql_db (
   $db_name     = $title
 ) {
 
+  $files = "${backup_path}/${title}"
+
   include bacula
 
   cron { "backup_postgresql_db_${title}":
@@ -29,7 +31,7 @@ define bacula::backup_postgresql_db (
   }
 
   bacula::rotate { $title:
-    backup_dir  => $backup_path,
+    backup_dir  => $files,
     backup_name => $title,
     count       => $keep
   }
@@ -39,13 +41,15 @@ define bacula::backup_postgresql_db (
     db_pass     => $db_pass,
     db_user     => $db_user,
     db_name     => $db_name,
-    backup_path => $backup_path
+    backup_path => $files
   }
 
+  file { $files:
+    ensure => directory
+  }
 
-  if ! Bacula::Job["${::fqdn}-backup_postgresql-db"] {
-    bacula::job { "${::fqdn}-backup_postgresql_db":
-      files => $backup_path
-    }
+  bacula::job { "${::fqdn}-backup_postgresql_db_${title}":
+    files   => $files,
+    require => File[$files]
   }
 }

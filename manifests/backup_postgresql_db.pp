@@ -42,7 +42,10 @@ define bacula::backup_postgresql_db (
     backup_path => $backup_path
   }
 
-  bacula::job { "${::fqdn}-backup_postgresql_db_${title}":
-    files => $backup_path
+
+  if ! Bacula::Job["${::fqdn}-backup_postgresql-db"] {
+    bacula::job { "${::fqdn}-backup_postgresql_db":
+      files => $backup_path
+    }
   }
 }

@@ -82,8 +82,6 @@ class bacula::storage (
 
   file { $device:
     ensure  => directory,
-    owner   => bacula,
-    group   => bacula,
     require => Package[$bacula::params::bacula_storage_packages],
   }
 

@@ -36,7 +36,7 @@ define bacula::director::pool (
     $maxvols,
     $purgeaction = 'Truncate',
     $label       = '',
-    $storage     = $bacula_storage
+    $storage     = $bacula::params::bacula_storage
   ) {
 
   include bacula::params

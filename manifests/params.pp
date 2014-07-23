@@ -28,19 +28,23 @@ class bacula::params {
   $db_pw          = hiera('bacula::params::db_pw')
 
   $ssl            = true
-  if ( $is_pe == true ) {
+
+  if ( $is_pe == 'true' ) {
     $bacula_director  = hiera('bacula::params::pe_bacula_director')
     $bacula_storage   = hiera('bacula::params::pe_bacula_storage')
     $ssl_dir          = hiera('bacula::params::pe_ssl_dir', $pe_ssl_dir)
     $director_name    = hiera('bacula::params::pe_director_name', $bacula_director)
     $director_address = hiera('bacula::params::pe_director_address', $director_name)
   }
-  else {
+  elsif ( $is_pe == 'false' ) {
     $bacula_director  = hiera('bacula::params::bacula_director')
     $bacula_storage   = hiera('bacula::params::bacula_storage')
     $ssl_dir          = $puppet::params::puppet_ssldir
     $director_name    = hiera('bacula::params::director_name', $bacula_director)
     $director_address = hiera('bacula::params::director_address', $director_name)
+  }
+  else {
+    notify { "Value of is_pe = $is_pe. Something went wrong": }
   }
 
   $bacula_is_storage  = hiera('bacula::params::bacula_is_storage')

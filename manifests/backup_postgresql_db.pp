@@ -16,7 +16,8 @@ define bacula::backup_postgresql_db (
   $db_host,
   $db_pass,
   $db_user,
-  $db_name     = $title
+  $db_name     = $title,
+  $bacula      = true
 ) {
 
   $files = "${backup_path}/${title}"
@@ -47,9 +48,10 @@ define bacula::backup_postgresql_db (
   file { $files:
     ensure => directory
   }
-
-  bacula::job { "${::fqdn}-backup_postgresql_db_${title}":
-    files   => $files,
-    require => File[$files]
+  if ( $bacula == true ) {
+    bacula::job { "${::fqdn}-backup_postgresql_db_${title}":
+      files   => $files,
+      require => File[$files]
+    }
   }
 }

@@ -123,7 +123,4 @@ class bacula::director (
     jobtype => 'Restore',
     fileset => false,
   }
-
-
-
 }

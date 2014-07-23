@@ -46,7 +46,7 @@ class bacula::params {
   $bacula_is_storage  = hiera('bacula::params::bacula_is_storage')
   $listen_address     = hiera('bacula::params::bacula_client_listen')
 
-   # Pool parameters for full backups
+  # Pool parameters for full backups
   $volret_full        = hiera('bacula::params::volret_full', '21 days')
   $maxvolbytes_full   = hiera('bacula::params::maxvolbytes_full', '4g')
   $maxvoljobs_full    = hiera('bacula::params::maxvoljobs_full', '10')

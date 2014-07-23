@@ -34,7 +34,7 @@ class bacula::storage (
 
   $bacula_storage_password = genpass({store_key => 'bacula_storage_password'})
   $bacula_storage = $bacula::params::bacula_storage
-  $listen_address = hiera('bacula_client_listen')
+  $listen_address = $bacula::params::bacula_client_listen
 
   package { $bacula::params::bacula_storage_packages: ensure => present; }
 

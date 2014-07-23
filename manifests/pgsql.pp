@@ -1,9 +1,9 @@
 class bacula::pgsql {
 
   $make_bacula_tables = '/var/lib/bacula/make_bacula_tables'
-  $db_name            = bacula::params::db_name
-  $db_pw              = bacula::params::db_pw
-  $db_user            = bacula::params::db_user
+  $db_name            = $bacula::director::db_name
+  $db_pw              = $bacula::director::db_pw
+  $db_user            = $bacula::director::db_user
 
   postgresql::server::db { $db_name:
     user     => $db_user,

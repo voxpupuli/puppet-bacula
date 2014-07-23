@@ -23,12 +23,12 @@ class bacula::params {
   $monitor        = true
   $pe_ssl_dir     = '/etc/puppetlabs/puppet/ssl'
   $db_type        = hiera('bacula::params::db_type', 'mysql') # Postresql also supported with name pgsql
-  $db_name        = hiera('bacula::params::db_name', $db_user)
   $db_user        = hiera('bacula::params::db_user', 'bacula')
+  $db_name        = hiera('bacula::params::db_name', $db_user)
   $db_pw          = hiera('bacula::params::db_pw')
 
   $ssl            = true
-  if $is_pe {
+  if ( $is_pe == true ) {
     $bacula_director  = hiera('bacula::params::pe_bacula_director')
     $bacula_storage   = hiera('bacula::params::pe_bacula_storage')
     $ssl_dir          = hiera('bacula::params::pe_ssl_dir', $pe_ssl_dir)
@@ -41,7 +41,7 @@ class bacula::params {
     $ssl_dir          = $puppet::params::puppet_ssldir
     $director_name    = hiera('bacula::params::director_name', $bacula_director)
     $director_address = hiera('bacula::params::director_address', $director_name)
-}
+  }
 
   $bacula_is_storage  = hiera('bacula::params::bacula_is_storage')
   $listen_address     = hiera('bacula::params::bacula_client_listen')

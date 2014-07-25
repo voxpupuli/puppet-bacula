@@ -25,9 +25,8 @@ class bacula::director (
   $db_pw    = $bacula::params::db_pw,
   $db_name  = $bacula::params::db_name,
   $monitor  = true,
-  $password = 'HoiuxVzotfxKC0o6bZeOTWM80KKdhCGNl4Iqflzwnr5pdSOgDKye9PmUxgupsgI',
-  $sd_pass  = '52PbfrCejKZyemyT89NgCOKvLBXFebMcDBc2eNQt4UogyCbVp8KnIXESGHfqZCJ',
-  $ssl      = $bacula::params::ssl,
+  $password = $bacula::params::bacula_password,
+  $ssl      = $bacula::params::ssl
 ) inherits bacula::params {
 
   if $bacula::params::db_type == 'mysql' {
@@ -59,7 +58,7 @@ class bacula::director (
     }
   }
 
-  package { [ $bacula::params::bacula_director_packages, $bacula_storage_packages ]:
+  package { $bacula::params::bacula_director_packages:
     ensure => present,
   }
 

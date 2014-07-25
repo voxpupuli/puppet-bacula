@@ -27,7 +27,7 @@ class bacula::params {
   $db_name        = hiera('bacula::params::db_name', $db_user)
   $db_pw          = hiera('bacula::params::db_pw')
 
-  $ssl            = true
+  $ssl            = hiera('bacula::params::ssl', true)
 
   if ( $is_pe == 'true' ) {
     $bacula_director  = hiera('bacula::params::pe_bacula_director')

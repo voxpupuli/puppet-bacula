@@ -1,7 +1,7 @@
 #
 # List Directors who are permitted to contact Storage Daemon
 Director {
-  Name     = <%= scope.lookupvar('bacula::params::bacula_director') %>-dir
+  Name     = <%= @bacula_director %>-dir
   Password = "<%= @bacula_storage_password %>"
   <%- if scope.lookupvar('bacula::params::ssl') %>
   TLS Enable              = yes

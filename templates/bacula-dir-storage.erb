@@ -1,5 +1,5 @@
 Storage {
-  Name       = <%= scope.lookupvar('bacula::params::bacula_storage') %>-sd
+  Name       = <%= @bacula_storage %>-sd
   Address    = <%= scope.lookupvar('bacula::params::bacula_storage') %>
   SDPort     = <%= scope.lookupvar('bacula::params::storage_port') %>
   Password   = "<%= @bacula_storage_password %>"

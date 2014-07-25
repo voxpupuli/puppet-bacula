@@ -19,6 +19,7 @@ class bacula::storage (
     $working_directory       = $bacula::params::working_directory,
     $pid_directory           = $bacula::params::pid_directory,
     $bacula_director         = $bacula::params::bacula_director,
+    $bacula_storage          = $bacula::params::bacula_storage,
     $volret_full             = $bacula::params::volret,
     $maxvolbytes_full        = $bacula::params::maxvolbytes,
     $maxvoljobs_full         = $bacula::params::maxvoljobs,
@@ -33,7 +34,6 @@ class bacula::storage (
   include bacula::common
 
   $bacula_storage_password = genpass({store_key => 'bacula_storage_password'})
-  $bacula_storage = $bacula::params::bacula_storage
   $listen_address = $bacula::params::bacula_client_listen
 
   package { $bacula::params::bacula_storage_packages: ensure => present; }
@@ -43,7 +43,6 @@ class bacula::storage (
     enable     => true,
     hasrestart => true,
     hasstatus  => true,
-    require    => Package[$bacula::params::bacula_storage_packages],
   }
 
   # Export this here so the director can realize the storage resource and know how to talk to us
@@ -52,7 +51,6 @@ class bacula::storage (
       target  => '/etc/bacula/conf.d/storage.conf',
       content => template('bacula/bacula-dir-storage.erb'),
       tag     => "bacula-${bacula_director}",
-      require => Package[$bacula::params::bacula_storage_packages]
   }
 
   concat::fragment {
@@ -77,12 +75,10 @@ class bacula::storage (
       group   => bacula,
       mode    => 640,
       notify  => Service[$bacula::params::bacula_storage_services],
-      require => Package[$bacula::params::bacula_storage_packages],
   }
 
   file { $device:
     ensure  => directory,
-    require => Package[$bacula::params::bacula_storage_packages],
   }
 
   # Each storage daemon should get its own pool(s)

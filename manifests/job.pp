@@ -31,8 +31,7 @@ define bacula::job (
     $jobtype  = 'Backup',
     $fileset  = true,
     $template = 'bacula/job.conf.erb',
-    $storage  = $bacula::params::bacula_storage,
-    $pool     = $bacula::params::job_pool
+    $pool     = 'Default'
   ) {
 
   include bacula

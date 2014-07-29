@@ -62,7 +62,6 @@ class bacula::params {
   $maxvoljobs_incremental  = hiera('bacula::params::maxvoljobs_incremental', '50')
   $maxvols_incremental     = hiera('bacula::params::maxvols_incremental', '100')
 
-  $job_pool           = hiera('bacula::params::job_pool', 'Default')
   $job_defs           = hiera('bacula::params::job_defs', 'PuppetLabsOps')
 
   # If there is a bacula_password fact, use that. Else generate a new password.

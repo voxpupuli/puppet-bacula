@@ -1,48 +1,30 @@
 
 Director {
-  Name     = <%= scope.lookupvar('bacula::params::bacula_director') %>-dir
-  Password = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
-  <%- if scope.lookupvar('bacula::params::ssl') %>
-  TLS Enable              = yes
-  TLS Require             = yes
-  TLS Certificate         = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_cert.pem
-  TLS Key                 = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_key.pem
-  TLS CA Certificate File = <%= scope.lookupvar('bacula::params::bacula_dir') %>/ca.pem
-  <%- end %>
+  Name     = <%= @director %>-dir
+  Password = "<%= @password %>"
+  <%= scope.function_template(['bacula/_ssl.erb']) %>
 }
 
 Director {
-  Name     = <%= scope.lookupvar('bacula::params::bacula_director') %>-mon
-  Password = "<%= scope.lookupvar('bacula::params::bacula_password') %>"
+  Name     = <%= @director %>-mon
+  Password = "<%= @password %>"
   Monitor  = yes
-  <%- if scope.lookupvar('bacula::params::ssl') %>
-  TLS Enable              = yes
-  TLS Require             = yes
-  TLS Certificate         = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_cert.pem
-  TLS Key                 = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_key.pem
-  TLS CA Certificate File = <%= scope.lookupvar('bacula::params::bacula_dir') %>/ca.pem
-  <%- end %>
+  <%= scope.function_template(['bacula/_ssl.erb']) %>
 }
 
 FileDaemon {
   Name                    = <%= @clientcert %>-fd
-  FDAddress               = <%= scope.lookupvar('bacula::params::listen_address') %>
-  FDport                  = <%= scope.lookupvar('bacula::params::file_port') %>
-  WorkingDirectory        = <%= scope.lookupvar('bacula::params::working_directory') %>
-  Pid Directory           = <%= scope.lookupvar('bacula::params::pid_directory') %>
-  Maximum Concurrent Jobs = 2
-  <%- if scope.lookupvar('bacula::params::ssl') %>
-  TLS Enable              = yes
-  TLS Require             = yes
-  TLS Certificate         = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_cert.pem
-  TLS Key                 = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= scope.lookupvar('::clientcert') %>_key.pem
-  TLS CA Certificate File = <%= scope.lookupvar('bacula::params::bacula_dir') %>/ca.pem
-  <%- end %>
+  FDAddress               = <%= @listen_address %>
+  FDport                  = <%= @port %>
+  WorkingDirectory        = <%= @homedir %>
+  Pid Directory           = <%= @rundir %>
+  Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>
+  <%= scope.function_template(['bacula/_ssl.erb']) %>
 }
 
 Messages {
   Name     = Standard
-  director = <%= scope.lookupvar('bacula::params::bacula_director') %>-dir = all, !skipped, !restored
+  director = <%= @director %>-dir = all, !skipped, !restored
   append   = "/var/log/bacula/bacula-fd.log" = all, !skipped
 }
 

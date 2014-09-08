@@ -1,11 +1,7 @@
 Schedule {
   Name = <%= @name %>
-<% if runs.is_a? Array -%>
-<%   runs.each do |r| -%>
+<% [@runs].flatten.each do |r| -%>
 <%=    "    Run = #{r}\n" -%>
-<%   end -%>
-<% elsif runs != '' -%>
-<%=    "    Run = #{runs}\n" -%>
 <% end -%>
 }
 

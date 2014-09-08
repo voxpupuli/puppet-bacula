@@ -1,14 +1,7 @@
-#
-# List Directors who are permitted to contact Storage Daemon
+# Permit the Director to contact this SD
 Director {
-  Name     = <%= @bacula_director %>-dir
-  Password = "<%= @bacula_storage_password %>"
-  <%- if scope.lookupvar('bacula::params::ssl') %>
-  TLS Enable              = yes
-  TLS Require             = yes
-  TLS Certificate         = <%= scope.lookupvar('bacula_dir') %>/<%= @clientcert %>_cert.pem
-  TLS Key                 = <%= scope.lookupvar('bacula_dir') %>/<%= @clientcert %>_key.pem
-  TLS CA Certificate File = <%= scope.lookupvar('bacula_dir') %>/ca.pem
-  <%- end %>
+  Name     = <%= @director %>-dir
+  Password = "<%= @password %>"
+  <%= scope.function_template(['bacula/_ssl.erb']) %>
 }
 

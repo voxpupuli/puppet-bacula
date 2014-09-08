@@ -5,21 +5,13 @@ FileSet {
       signature   = MD5
       compression = GZIP
     }
-<% if files.is_a? Array -%>
-<%   [files].flatten.each do |f| %>
+<% [@files].flatten.each do |f| %>
 <%=    "    File = #{f}\n" %>
-<%   end -%>
-<% elsif files != '' -%>
-<%=    "    File = #{files}" %>
 <% end -%>
   }
   Exclude {
-<% if files.is_a? Array -%>
-  <%   [excludes].reject { |x| x.empty? }.flatten.each do |exclude| %>
+<%   [@excludes].flatten.reject { |x| x.empty? }.flatten.each do |exclude| %>
 <%=    "    File = #{exclude}\n" %>
-<%   end -%>
-<% elsif excludes != '' -%>
-# <%=    "    File = #{exclude}" %>
 <% end -%>
   }
 }

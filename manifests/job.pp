@@ -26,25 +26,28 @@
 #  }
 #
 define bacula::job (
-    $files    = '',
-    $excludes = '',
-    $jobtype  = 'Backup',
-    $fileset  = true,
-    $template = 'bacula/job.conf.erb',
-    $pool     = 'Default'
-  ) {
+  $files    = [],
+  $excludes = [],
+  $jobtype  = 'Backup',
+  $fileset  = true,
+  $template = 'bacula/job.conf.erb',
+  $pool     = 'Default',
+  $jobdef   = 'Default'
+) {
 
-  include bacula
+  validate_array($files)
+  validate_array($excludes)
+
+  include bacula::common
   include bacula::params
 
   # if the fileset is not defined, we fall back to one called "Common"
   if $fileset == true {
     if $files == '' { err('you tell me to create a fileset, but no files given') }
     $fileset_real = $name
-    bacula::fileset {
-      $name:
-        files    => $files,
-        excludes => $excludes
+    bacula::fileset { $name:
+      files    => $files,
+      excludes => $excludes
       }
   } else {
     $fileset_real = 'Common'
@@ -54,20 +57,5 @@ define bacula::job (
     target  => '/etc/bacula/conf.d/job.conf',
     content => template($template),
     tag     => "bacula-${::bacula::params::bacula_director}";
-  }
-
-  if $bacula::monitor == true {
-    if $jobtype == 'Backup' {
-      icinga::service { "check_bacula_${name}":
-        check_command         => "check_nrpe!check_bacula!72 2 1 ${name}",
-        escalate              => true,
-        first_escalation      => '3',
-        dependency_service    => "check_env_${::fqdn}",
-        dependency_host       => $::bacula::params::bacula_director,
-        notification_delay    => '120',
-        notification_options  => 'n',
-        servicegroups         => 'world',
-      }
-    }
   }
 }

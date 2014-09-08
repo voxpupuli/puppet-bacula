@@ -1,0 +1,42 @@
+# Bacula
+
+[![Build Status](https://travis-ci.org/xaque208/puppet-bacula.png)](https://travis-ci.org/xaque208/puppet-bacula)
+
+A puppet module for the Bacula backup system.
+
+## Supported Platforms
+
+* Linux
+  * Debian, Ubuntu, Centos, Fedora, SLES
+* FreeBSD
+
+# Requirements
+
+## Usage
+
+### Director Setup
+
+The director component handles coordination of backups and databasing of
+transactions.  In its simplest form, the director can be configured with a
+simple include.
+
+```Puppet
+include bacula::director
+```
+
+### Storage Setup
+
+The storage component allocates disk storage for pools that can be used for
+holding backup data.
+
+```Puppet
+include bacula::storage
+```
+
+### Client Setup
+
+The client component is run on each system that needs something backed up.
+
+```Puppet
+include bacula::client
+```

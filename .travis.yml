@@ -13,5 +13,6 @@ rvm:
   - 1.9.3
 script:
   - bundle exec rake ci:all
+  - echo "$TESTCASE"
   - sudo puppet apply -e "$TESTCASE"
 

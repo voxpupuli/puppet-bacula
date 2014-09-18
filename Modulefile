@@ -1,0 +1,8 @@
+name    'xaque208-bacula'
+version '0.1.0'
+source 'https://github.com/xaque208/puppet-bacula'
+author 'xaque208'
+license 'Apache License, Version 2.0'
+summary 'A bacula module stolen from the Puppet Labs Operations team'
+description 'UNKNOWN'
+project_page 'https://github.com/xaque208/puppet-bacula'

@@ -1,5 +1,18 @@
-script: bundle exec rake ci:all
+---
 language: ruby
+bundler_args: --without development
+before_install:
+  - curl getpuppet.whilefork.com | sudo bash
+  - puppet module build
+  - sudo puppet module install pkg/xaque208-bacula-*.tar.gz
+env:
+  - TESTCASE='include bacula::director'
+  - TESTCASE='include bacula::storage'
+  - TESTCASE='include bacula::client'
 rvm:
-  - "1.9.3"
+  - 1.9.3
+script:
+  - bundle exec rake ci:all
+  - echo "$TESTCASE"
+  - sudo puppet apply -e "$TESTCASE"
 

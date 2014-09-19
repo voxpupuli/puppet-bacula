@@ -33,10 +33,6 @@ class bacula::director (
   include bacula::director::database
   include bacula::director::defaults
 
-  # Variables for templates
-  $homedir = $bacula::params::homedir
-  $rundir  = $bacula::params::rundir
-
   package { $packages:
     ensure => present,
   }

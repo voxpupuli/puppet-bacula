@@ -1,0 +1,22 @@
+---
+language: ruby
+bundler_args: --without development
+before_install:
+ - rm Gemfile.lock || true
+ - curl getpuppet.whilefork.com | sudo bash
+ - puppet module build
+ - sudo puppet module install pkg/xaque208-bacula-*.tar.gz
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
+script: 
+  - bundle exec rake test
+  - echo "$TESTCASE"
+  - sudo puppet apply -e "$TESTCASE"
+env:
+  - TESTCASE='include bacula::director'
+  - TESTCASE='include bacula::storage'
+  - TESTCASE='include bacula::client'
+  - PUPPET_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
+  - PUPPET_VERSION="~> 3.7.0" STRICT_VARIABLES=yes

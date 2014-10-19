@@ -4,15 +4,9 @@
 
 Director {
   Name     = <%= scope.lookupvar('bacula::params::director_name') %>-dir
-  DIRport  = <%= scope.lookupvar('bacula::params::director_port') %>
+  DIRport  = <%= @port %>
   address  = <%= scope.lookupvar('bacula::params::director_address') %>
   Password = "<%= @password %>"
-  <%- if scope.lookupvar('bacula::params::ssl') %>
-  TLS Enable              = yes
-  TLS Require             = yes
-  TLS Certificate         = /etc/bacula/ssl/<%= @clientcert %>_cert.pem
-  TLS Key                 = /etc/bacula/ssl/<%= @clientcert %>_key.pem
-  TLS CA Certificate File = /etc/bacula/ssl/ca.pem
-  <%- end %>
+  <%= scope.function_template(['bacula/_ssl.erb']) %>
 }
 

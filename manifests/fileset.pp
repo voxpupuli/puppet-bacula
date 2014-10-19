@@ -3,7 +3,7 @@ define bacula::fileset (
     $excludes = ''
   ) {
 
-  include bacula
+  include bacula::common
 
   @@concat::fragment { "bacula-fileset-${name}":
     target  => '/etc/bacula/conf.d/fileset.conf',

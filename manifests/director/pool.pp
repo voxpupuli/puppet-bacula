@@ -41,9 +41,8 @@ define bacula::director::pool (
 
   include bacula::params
 
-  concat::fragment {
-    "bacula-director-pool-${name}":
-      target  => '/etc/bacula/conf.d/pools.conf',
-      content => template('bacula/pool.conf.erb');
+  concat::fragment { "bacula-director-pool-${name}":
+    target  => '/etc/bacula/conf.d/pools.conf',
+    content => template('bacula/pool.conf.erb');
   }
 }

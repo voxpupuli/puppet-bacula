@@ -1,20 +1,16 @@
 Director {                # define myself
     Name                    = <%= @clientcert %>-dir
-    DIRport                 = <%= scope.lookupvar('bacula::params::director_port') %>  # where we listen for UA connections
+    DIRport                 = <%= @port %>  # where we listen for UA connections
     QueryFile               = "/etc/bacula/scripts/query.sql"
-    WorkingDirectory        = <%= scope.lookupvar('bacula::params::working_directory') %>
-    Pid Directory           = <%= scope.lookupvar('bacula::params::pid_directory') %>
-    Maximum Concurrent Jobs = 20
+    WorkingDirectory        = <%= @homedir %>
+    Pid Directory           = <%= @rundir %>
+    Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>
     Password                = "<%= @password %>"  # Console password
     Messages                = Daemon
-    <%- if scope.lookupvar('bacula::params::ssl') %>
-    TLS Enable              = yes
-    TLS Require             = yes
-    TLS Certificate         = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= @clientcert %>_cert.pem
-    TLS Key                 = <%= scope.lookupvar('bacula::params::bacula_dir') %>/<%= @clientcert %>_key.pem
-    TLS CA Certificate File = <%= scope.lookupvar('bacula::params::bacula_dir') %>/ca.pem
-    TLS DH File             = <%= scope.lookupvar('bacula::params::bacula_dir') %>/dh1024.pem
-    <%- end %>
+    <% if scope.lookupvar('bacula::ssl') -%>
+    <%= scope.function_template(['bacula/_ssl.erb']) %>
+    TLS DH File             = <%= @conf_dir %>/ssl/dh1024.pem
+    <% end -%>
 }
 
 Pool {
@@ -22,7 +18,7 @@ Pool {
     Pool Type       = Backup
     Action On Purge = Truncate
     Label Format    = Default-
-    Storage         = <%= scope.lookupvar('bacula::params::bacula_storage') %>-sd
+    Storage         = <%= @storage %>-sd
 }
 
 # Generic catalog service
@@ -32,25 +28,16 @@ Catalog {
 }
 
 Messages {
-    Name             = Standard
-    console          = all, !skipped, !saved
-    append           = "/var/log/bacula/log" = all, !skipped
-    catalog          = all
+    Name    = Standard
+    console = all, !skipped, !saved
+    append  = "/var/log/bacula/log" = all, !skipped
+    catalog = all
 }
 
 Messages {
-    Name         = Daemon
-    console      = all, !skipped, !saved
-    append       = "/var/log/bacula/log" = all, !skipped
-}
-
-#
-# Restricted console used by tray-monitor to get the status of the director
-#
-Console {
-    Name       = <%= @clientcert %>-mon
-    Password   = "EWDjRkucylqjSjwtX_y2UKlS-Ihr4E01V"
-    CommandACL = status, .status
+    Name    = Daemon
+    console = all, !skipped, !saved
+    append  = "/var/log/bacula/log" = all, !skipped
 }
 
 @/etc/bacula/conf.d/schedule.conf

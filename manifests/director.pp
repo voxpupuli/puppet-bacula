@@ -5,97 +5,73 @@
 # Parameters:
 # * db_user: the database user
 # * db_pw: the database user's password
-# * monitor: should nagios be checking bacula backups, and I should hope so
+# * db_name: the database name
 # * password: password to connect to the director
-# * sd_pass: the password to connect to the storage daemon
-#
-#
-# Actions:
-#  - Installs the bacula-director packages
-#  - Installs the bacula storage daemon packages
-#  - Starts the Bacula services
-#  - Creates the /bacula mount point
-#
-# Requires:
 #
 # Sample Usage:
 #
+#   include bacula::director
+#
 class bacula::director (
-  $db_user  = $bacula::params::db_user,
-  $db_pw    = $bacula::params::db_pw,
-  $db_name  = $bacula::params::db_name,
-  $monitor  = true,
-  $password = $bacula::params::bacula_password,
-  $ssl      = $bacula::params::ssl
+  $port                = '9101',
+  $db_user             = 'bacula',
+  $db_pw               = 'notverysecret',
+  $db_name             = 'bacula',
+  $password            = 'secret',
+  $max_concurrent_jobs = '20',
+  $packages            = $bacula::params::bacula_director_packages,
+  $services            = $bacula::params::bacula_director_services,
+  $homedir             = $bacula::params::homedir,
+  $rundir              = $bacula::params::rundir,
+  $conf_dir            = $bacula::params::conf_dir,
+  $storage             = $bacula::params::bacula_storage,
 ) inherits bacula::params {
 
-  if $bacula::params::db_type == 'mysql' {
-    include mysql::server
+  include bacula::common
+  include bacula::client
+  include bacula::ssl
+  include bacula::director::database
+  include bacula::director::defaults
 
-    ## backup the bacula database  -- database are being backed up by being created in mysql::db
-    #bacula::mysql { 'bacula': }
-
-    mysql::db { 'bacula':
-      user     => $db_user,
-      password => $db_pw,
-    }
-    bacula::mysql { 'bacula': }
-  }
-  elsif $bacula::params::db_type == 'pgsql' {
-    include bacula::pgsql
-  }
-
-  include bacula::params
-
-  if $ssl == true {
-    include bacula::dhkey
-  }
-
-  if $monitor == true {
-    class { 'bacula::director::monitor':
-      db_user => $db_user,
-      db_pw   => $db_pw,
-    }
-  }
-
-  package { $bacula::params::bacula_director_packages:
+  package { $packages:
     ensure => present,
   }
 
-  service { $bacula::params::bacula_director_services:
+  service { $services:
     ensure     => running,
     enable     => true,
-    hasrestart => true,
-    hasstatus  => true,
-    require    => Package[$bacula::params::bacula_director_packages],
+    subscribe  => File[$bacula::ssl::ssl_files],
+    require    => Package[$packages],
   }
 
-  file { '/etc/bacula/conf.d':
-    ensure  => directory,
+  file { "${conf_dir}/conf.d":
+    ensure => directory,
   }
 
-  file { '/etc/bacula/bconsole.conf':
+  file { "${conf_dir}/bconsole.conf":
     owner   => 'root',
     group   => 'bacula',
     mode    => '0640',
     content => template('bacula/bconsole.conf.erb');
   }
 
+  Concat {
+    owner  => 'root',
+    group  => 'bacula',
+    mode   => '0640',
+    notify => Service[$services],
+  }
+
   concat::fragment { 'bacula-director-header':
     order   => '00',
-    target  => '/etc/bacula/bacula-dir.conf',
+    target  => "${conf_dir}/bacula-dir.conf",
     content => template('bacula/bacula-dir-header.erb')
   }
 
   Bacula::Director::Pool <<||>>
   Concat::Fragment <<| tag == "bacula-${::fqdn}" |>>
 
-  concat { '/etc/bacula/bacula-dir.conf':
-    owner  => root,
-    group  => bacula,
-    mode   => 640,
-    notify => Service[$bacula::params::bacula_director_services];
-  }
+  concat { "${conf_dir}/bacula-dir.conf": }
 
   $sub_confs = [
     '/etc/bacula/conf.d/schedule.conf',
@@ -107,12 +83,7 @@ class bacula::director (
     '/etc/bacula/conf.d/fileset.conf',
   ]
 
-  concat { $sub_confs:
-    owner  => root,
-    group  => bacula,
-    mode   => '0640',
-    notify => Service[$bacula::params::bacula_director_services];
-  }
+  concat { $sub_confs: }
 
   bacula::fileset { 'Common':
     files => ['/etc'],

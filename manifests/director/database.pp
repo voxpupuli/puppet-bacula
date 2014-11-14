@@ -4,6 +4,7 @@ class bacula::director::database(
   $db_pw              = $bacula::director::db_pw,
   $db_user            = $bacula::director::db_user,
   $services           = $bacula::params::bacula_director_services,
+  $user               = $bacula::params::bacula_user,
 ) inherits bacula::params {
 
   require postgresql::server
@@ -16,13 +17,13 @@ class bacula::director::database(
 
   file { $make_bacula_tables:
     content => template('bacula/make_bacula_postgresql_tables.erb'),
-    owner   => 'bacula',
+    owner   => $user,
     mode    => '0750',
     before  => Exec["/bin/sh ${make_bacula_tables}"]
   }
 
   exec { "/bin/sh ${make_bacula_tables}":
-    user        => 'bacula',
+    user        => $user,
     refreshonly => true,
     subscribe   => Postgresql::Server::Db[$db_name],
     notify      => Service[$services],

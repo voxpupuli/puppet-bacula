@@ -8,6 +8,7 @@ class bacula::ssl (
   $keyfile  = $bacula::params::keyfile,
   $cafile   = $bacula::params::cafile,
   $packages = $bacula::params::bacula_client_packages,
+  $user     = $bacula::params::bacula_user,
 ) inherits bacula::params {
 
   $ssl_files = [
@@ -17,7 +18,7 @@ class bacula::ssl (
   ]
 
   File {
-    owner   => 'bacula',
+    owner   => $user,
     group   => '0',
     mode    => '0640',
     require => Package[$packages],

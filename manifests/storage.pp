@@ -16,6 +16,8 @@ class bacula::storage (
   $rundir                  = $bacula::params::rundir,
   $conf_dir                = $bacula::params::conf_dir,
   $director                = $bacula::params::bacula_director,
+  $user                    = $bacula::params::bacula_user,
+  $group                   = $bacula::params::bacula_group,
   $volret_full             = '21 days',
   $maxvolbytes_full        = '4g',
   $maxvoljobs_full         = '10',
@@ -64,7 +66,7 @@ class bacula::storage (
 
   concat { "${conf_dir}/bacula-sd.conf":
     owner  => 'root',
-    group  => 'bacula',
+    group  => $group,
     mode   => '0640',
     notify => Service[$services],
   }
@@ -72,8 +74,8 @@ class bacula::storage (
   if $media_type == 'File' {
     file { $device:
       ensure => directory,
-      owner  => 'bacula',
-      group  => 'bacula',
+      owner  => $user,
+      group  => $group,
       mode   => '0750',
     }
   }

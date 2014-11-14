@@ -13,7 +13,6 @@ class bacula::common (
 
   include bacula::ssl
   include bacula::client
-  include concat::setup
 
   file { $homedir:
     ensure  => directory,

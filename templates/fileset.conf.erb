@@ -2,8 +2,9 @@ FileSet {
   Name = <%= @name %>
   Include {
     Options {
-      signature   = MD5
-      compression = GZIP
+<% @options.each do |option,value| -%>
+<%=    "      #{option} = #{value}"%>
+<% end -%>
     }
 <% [@files].flatten.each do |f| %>
 <%=    "    File = #{f}\n" %>

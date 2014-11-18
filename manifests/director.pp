@@ -25,6 +25,7 @@ class bacula::director (
   $rundir              = $bacula::params::rundir,
   $conf_dir            = $bacula::params::conf_dir,
   $storage             = $bacula::params::bacula_storage,
+  $group               = $bacula::params::bacula_group,
 ) inherits bacula::params {
 
   include bacula::common
@@ -50,14 +51,14 @@ class bacula::director (
 
   file { "${conf_dir}/bconsole.conf":
     owner   => 'root',
-    group   => 'bacula',
+    group   => $group,
     mode    => '0640',
     content => template('bacula/bconsole.conf.erb');
   }
 
   Concat {
     owner  => 'root',
-    group  => 'bacula',
+    group  => $group,
     mode   => '0640',
     notify => Service[$services],
   }

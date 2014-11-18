@@ -9,6 +9,8 @@
 class bacula::common (
   $homedir  = $bacula::params::homedir,
   $packages = $bacula::params::bacula_client_packages,
+  $user     = $bacula::params::bacula_user,
+  $group    = $bacula::params::bacula_group,
 ) inherits bacula::params {
 
   include bacula::ssl
@@ -16,8 +18,8 @@ class bacula::common (
 
   file { $homedir:
     ensure  => directory,
-    owner   => 'bacula',
-    group   => 'bacula',
+    owner   => $user,
+    group   => $group,
     mode    => '0700',
     require => Package[$packages],
   }

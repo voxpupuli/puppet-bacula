@@ -38,6 +38,8 @@ class bacula::params {
       $client_config            = '/etc/bacula/bacula-fd.conf'
       $homedir                  = '/var/lib/bacula'
       $rundir                   = '/var/run/bacula'
+      $bacula_user              = 'bacula'
+      $bacula_group             = $bacula_user
     }
     'centos','fedora','sles': {
       $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
@@ -51,6 +53,8 @@ class bacula::params {
       $client_config            = '/etc/bacula/bacula-fd.conf'
       $homedir                  = '/var/lib/bacula'
       $rundir                   = '/var/run'
+      $bacula_user              = 'bacula'
+      $bacula_group             = $bacula_user
     }
     'freebsd': {
       $bacula_client_packages = 'sysutils/bacula-client'
@@ -60,6 +64,8 @@ class bacula::params {
       $client_config          = '/usr/local/etc/bacula/bacula-fd.conf'
       $rundir                 = '/var/run'
       $homedir                = '/var/db/bacula'
+      $bacula_user            = 'bacula'
+      $bacula_group           = $bacula_user
     }
     default: { fail("bacula::params has no love for ${::operatingsystem}") }
   }

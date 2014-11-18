@@ -1,7 +1,9 @@
 define bacula::fileset (
     $files,
-    $excludes = ''
+    $excludes = '',
+    $options  = {'signature' => 'MD5', 'compression' => 'GZIP'},
   ) {
+  validate_hash($options)
 
   include bacula::common
 

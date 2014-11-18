@@ -21,6 +21,7 @@ class bacula::storage (
   $volret_full             = '21 days',
   $maxvolbytes_full        = '4g',
   $maxvoljobs_full         = '10',
+  $maxconcurjobs           = '5',
   $maxvols_full            = '10',
   $volret_incremental      = '8 days',
   $maxvolbytes_incremental = '4g',

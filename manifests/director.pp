@@ -17,6 +17,7 @@ class bacula::director (
   $db_user             = 'bacula',
   $db_pw               = 'notverysecret',
   $db_name             = 'bacula',
+  $db_type             = $bacula::params::db_type,
   $password            = 'secret',
   $max_concurrent_jobs = '20',
   $packages            = $bacula::params::bacula_director_packages,
@@ -31,8 +32,12 @@ class bacula::director (
   include bacula::common
   include bacula::client
   include bacula::ssl
-  include bacula::director::database
   include bacula::director::defaults
+
+  case $db_type {
+    /^(pgsql|postgresql)$/: { include bacula::director::postgresql }
+    default:                { fail("No db_type set") }
+  }
 
   package { $packages:
     ensure => present,

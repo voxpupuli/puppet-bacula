@@ -1,4 +1,4 @@
-class bacula::director::database(
+class bacula::director::postgresql(
   $make_bacula_tables = '/var/lib/bacula/make_bacula_tables',
   $db_name            = $bacula::director::db_name,
   $db_pw              = $bacula::director::db_pw,

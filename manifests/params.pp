@@ -10,17 +10,17 @@ class bacula::params {
   $monitor        = true
 
   $db_type          = hiera('bacula::params::db_type', 'pgsql')
-  $bacula_director  = hiera('bacula::params::bacula_director')
-  $bacula_storage   = hiera('bacula::params::bacula_storage')
+  $bacula_director  = hiera('bacula::params::bacula_director', undef)
+  $bacula_storage   = hiera('bacula::params::bacula_storage', undef)
   $director_name    = hiera('bacula::params::director_name', $bacula_director)
   $director_address = hiera('bacula::params::director_address', $director_name)
 
   case $::is_pe {
-    'false': {
+    'false',false: {
       include puppet::params
       $ssl_dir = $puppet::params::puppet_ssldir
     }
-    'true': {
+    'true',true: {
       $ssl_dir = '/etc/puppetlabs/puppet/ssl'
     }
   }

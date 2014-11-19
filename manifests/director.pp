@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-#   include bacula::director
+#   class { 'bacula::director': storage => 'mystorage.example.com' }
 #
 class bacula::director (
   $port                = '9101',
@@ -36,7 +36,7 @@ class bacula::director (
 
   case $db_type {
     /^(pgsql|postgresql)$/: { include bacula::director::postgresql }
-    default:                { fail("No db_type set") }
+    default:                { fail('No db_type set') }
   }
 
   package { $packages:
@@ -44,10 +44,10 @@ class bacula::director (
   }
 
   service { $services:
-    ensure     => running,
-    enable     => true,
-    subscribe  => File[$bacula::ssl::ssl_files],
-    require    => Package[$packages],
+    ensure    => running,
+    enable    => true,
+    subscribe => File[$bacula::ssl::ssl_files],
+    require   => Package[$packages],
   }
 
   file { "${conf_dir}/conf.d":

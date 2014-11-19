@@ -1,3 +1,12 @@
+# Class: bacula::director::postgresql
+#
+# Deploys a postgres database server for hosting the Bacula director
+# database.
+#
+# Sample Usage:
+#
+#   none
+#
 class bacula::director::postgresql(
   $make_bacula_tables = '/var/lib/bacula/make_bacula_tables',
   $db_name            = $bacula::director::db_name,

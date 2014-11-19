@@ -21,7 +21,7 @@ transactions.  In its simplest form, the director can be configured with a
 simple include.
 
 ```Puppet
-include bacula::director
+class { 'bacula::director': storage => 'mystorage.example.com' }
 ```
 
 ### Storage Setup
@@ -30,7 +30,7 @@ The storage component allocates disk storage for pools that can be used for
 holding backup data.
 
 ```Puppet
-include bacula::storage
+class { 'bacula::storage': director => 'mydirector.example.com' }
 ```
 
 ### Client Setup
@@ -38,5 +38,5 @@ include bacula::storage
 The client component is run on each system that needs something backed up.
 
 ```Puppet
-include bacula::client
+class { 'bacula::client': director => 'mydirector.example.com' }
 ```

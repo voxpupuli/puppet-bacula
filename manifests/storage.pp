@@ -31,10 +31,9 @@ class bacula::storage (
 
   include bacula::common
   include bacula::ssl
+  include bacula::virtual
 
-  package { $packages:
-    ensure => present,
-  }
+  realize(Package[$packages])
 
   service { $services:
     ensure    => running,

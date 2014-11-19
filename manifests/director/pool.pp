@@ -27,13 +27,13 @@
 # }
 #
 define bacula::director::pool (
-    $pooltype    = 'Backup',
-    $recycle     = 'Yes',
-    $autoprune   = 'Yes',
     $volret, # Volume Retention
     $maxvoljobs,
     $maxvolbytes,
     $maxvols,
+    $pooltype    = 'Backup',
+    $recycle     = 'Yes',
+    $autoprune   = 'Yes',
     $purgeaction = 'Truncate',
     $label       = '',
     $storage     = $bacula::params::bacula_storage

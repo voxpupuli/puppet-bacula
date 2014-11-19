@@ -1,3 +1,7 @@
+# Define: bacula::fileset
+#
+# A grouping of files to backup.
+#
 define bacula::fileset (
     $files,
     $excludes = '',

@@ -16,11 +16,11 @@ class bacula::params {
   $director_address = hiera('bacula::params::director_address', $director_name)
 
   case $::is_pe {
-    'false': {
+    'false',false: {
       include puppet::params
       $ssl_dir = $puppet::params::puppet_ssldir
     }
-    'true': {
+    'true',true: {
       $ssl_dir = '/etc/puppetlabs/puppet/ssl'
     }
   }

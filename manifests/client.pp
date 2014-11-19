@@ -1,3 +1,11 @@
+# Class: bacula::client
+#
+# This class installs and configures the File Daemon to backup a client system.
+#
+# Sample Usage:
+#
+#   class { 'bacula::client': director => 'mydirector.example.com' }
+#
 class bacula::client (
   $port                = '9102',
   $listen_address      = $::ipaddress,

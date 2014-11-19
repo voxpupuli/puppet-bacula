@@ -1,5 +1,8 @@
-class bacula::director::defaults (
-){
+#: Class bacul::director::defaults
+#
+# Some default valuse for the bacula director
+#
+class bacula::director::defaults {
 
   bacula::jobdefs { 'Default': }
 

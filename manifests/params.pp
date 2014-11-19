@@ -10,8 +10,8 @@ class bacula::params {
   $monitor        = true
 
   $db_type          = hiera('bacula::params::db_type', 'pgsql')
-  $bacula_director  = hiera('bacula::params::bacula_director')
-  $bacula_storage   = hiera('bacula::params::bacula_storage')
+  $bacula_director  = hiera('bacula::params::bacula_director', undef)
+  $bacula_storage   = hiera('bacula::params::bacula_storage', undef)
   $director_name    = hiera('bacula::params::director_name', $bacula_director)
   $director_address = hiera('bacula::params::director_address', $director_name)
 

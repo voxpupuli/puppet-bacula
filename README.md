@@ -18,7 +18,7 @@ A puppet module for the Bacula backup system.
 
 The director component handles coordination of backups and databasing of
 transactions.  In its simplest form, the director can be configured with a
-simple include.
+simple declaration:
 
 ```Puppet
 class { 'bacula::director': storage => 'mystorage.example.com' }

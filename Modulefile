@@ -1,5 +1,5 @@
 name    'zleslie-bacula'
-version '1.1.1'
+version '1.1.2'
 source 'https://github.com/xaque208/puppet-bacula'
 author 'zleslie'
 license 'Apache License, Version 2.0'

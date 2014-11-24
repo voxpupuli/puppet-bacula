@@ -34,15 +34,14 @@ class bacula::director (
   include bacula::client
   include bacula::ssl
   include bacula::director::defaults
+  include bacula::virtual
 
   case $db_type {
     /^(pgsql|postgresql)$/: { include bacula::director::postgresql }
     default:                { fail('No db_type set') }
   }
 
-  package { $packages:
-    ensure => present,
-  }
+  realize(Package[$packages])
 
   service { $services:
     ensure    => running,

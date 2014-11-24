@@ -44,7 +44,7 @@ class bacula::storage (
   }
 
   # Inform the director how to communicate with the storage daemon
-  @@concat::fragment { "bacula-director-storage-${::fqdn}":
+  @@concat::fragment { "bacula-director-storage-${bacula_storage}":
     target  => "${conf_dir}/conf.d/storage.conf",
     content => template('bacula/bacula-dir-storage.erb'),
     tag     => "bacula-${director}",
@@ -82,7 +82,7 @@ class bacula::storage (
   }
 
   # Each storage daemon should get its own pool(s)
-  @@bacula::director::pool { "${::fqdn}-Pool-Full":
+  @@bacula::director::pool { "${bacula_storage}-Pool-Full":
     volret      => $volret_full,
     maxvolbytes => $maxvolbytes_full,
     maxvoljobs  => $maxvoljobs_full,
@@ -91,7 +91,7 @@ class bacula::storage (
     storage     => $bacula_storage;
   }
 
-  @@bacula::director::pool { "${::fqdn}-Pool-Inc":
+  @@bacula::director::pool { "${bacula_storage}-Pool-Inc":
     volret      => $volret_incremental,
     maxvolbytes => $maxvolbytes_incremental,
     maxvoljobs  => $maxvoljobs_incremental,

@@ -25,6 +25,7 @@ class bacula::director (
   $homedir             = $bacula::params::homedir,
   $rundir              = $bacula::params::rundir,
   $conf_dir            = $bacula::params::conf_dir,
+  $director_name       = $bacula::params::director_name,
   $storage             = $bacula::params::bacula_storage,
   $group               = $bacula::params::bacula_group,
 ) inherits bacula::params {
@@ -75,7 +76,7 @@ class bacula::director (
   }
 
   Bacula::Director::Pool <<||>>
-  Concat::Fragment <<| tag == "bacula-${::fqdn}" |>>
+  Concat::Fragment <<| tag == "bacula-${director_name}" |>>
 
   concat { "${conf_dir}/bacula-dir.conf": }
 

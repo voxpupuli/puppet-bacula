@@ -5,7 +5,7 @@ before_install:
  - rm Gemfile.lock || true
  - curl getpuppet.whilefork.com | sudo bash
  - puppet module build
- - sudo puppet module install pkg/xaque208-bacula-*.tar.gz
+ - sudo puppet module install pkg/zleslie-bacula-*.tar.gz
 rvm:
   - 1.9.3
   - 2.0.0

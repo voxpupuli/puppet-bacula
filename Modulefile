@@ -1,7 +1,7 @@
 name    'zleslie-bacula'
 version '1.1.1'
 source 'https://github.com/xaque208/puppet-bacula'
-author 'xaque208'
+author 'zleslie'
 license 'Apache License, Version 2.0'
 summary 'A bacula module stolen from the Puppet Labs Operations team'
 description 'UNKNOWN'

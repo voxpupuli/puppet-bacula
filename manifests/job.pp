@@ -9,7 +9,6 @@
 #
 # Actions:
 #   * Exports job fragment for consuption on the director
-#   * Exports nagios service for consumption on nagios server
 #
 # Requires:
 #   * Class::Bacula {}

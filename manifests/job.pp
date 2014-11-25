@@ -13,6 +13,7 @@
 #     else, provided it's a String, that named fileset will be used.
 #     NOTE: the fileset Common or the defined fileset must be declared elsewhere
 #     for this to work. See Class::Bacula for details.
+#   * runscript - Array of hash(es) containing RunScript directives.
 #
 # Actions:
 #   * Exports job fragment for consuption on the director
@@ -32,17 +33,19 @@
 #  }
 #
 define bacula::job (
-  $files    = [],
-  $excludes = [],
-  $jobtype  = 'Backup',
-  $fileset  = true,
-  $template = 'bacula/job.conf.erb',
-  $pool     = 'Default',
-  $jobdef   = 'Default'
+  $files     = [],
+  $excludes  = [],
+  $jobtype   = 'Backup',
+  $fileset   = true,
+  $template  = 'bacula/job.conf.erb',
+  $pool      = 'Default',
+  $jobdef    = 'Default',
+  $runscript = [],
 ) {
   validate_array($files)
   validate_array($excludes)
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
+  validate_array($runscript)
 
   include bacula::common
   include bacula::params

@@ -3,9 +3,16 @@
 # This class installs a bacula job on the director.  This can be used for specific applications as well as general host backups
 #
 # Parameters:
-#   * files - An array of files that you wish to get backed up on this job for this host.  ie: ["/etc","/usr/local"]
-#   * excludes - An array of files to skip for the given job.  ie: ["/usr/local/src"]
-#   * fileset - If set to true, a fileset will be genereated based on the files and exclides paramaters specified above.  Of set to anything but true, the job will attempt to use the fileset named "Common".  NOTE:  the fileset common must be declared elsewhere for this to work.  See Class::Bacula for details.
+#   * files - An array of files that you wish to get backed up on this job for
+#     this host.  ie: ["/etc","/usr/local"]
+#   * excludes - An array of files to skip for the given job.
+#     ie: ["/usr/local/src"]
+#   * fileset - If set to true, a fileset will be genereated based on the files
+#     and exclides paramaters specified above. If set to false, the
+#     job will attempt to use the fileset named "Common". If set to anything
+#     else, provided it's a String, that named fileset will be used.
+#     NOTE: the fileset Common or the defined fileset must be declared elsewhere
+#     for this to work. See Class::Bacula for details.
 #
 # Actions:
 #   * Exports job fragment for consuption on the director
@@ -16,7 +23,7 @@
 # Sample Usage:
 #  bacula::job {
 #    "${fqdn}-common":
-#      fileset => "Common",
+#      fileset => "Root",
 #  }
 #  bacula::job {
 #    "${fqdn}-mywebapp":
@@ -41,7 +48,9 @@ define bacula::job (
   include bacula::params
 
   # if the fileset is not defined, we fall back to one called "Common"
-  if $fileset == true {
+  if is_string($fileset) {
+    $fileset_real = $fileset
+  } elsif $fileset == true {
     if $files == '' { err('you tell me to create a fileset, but no files given') }
     $fileset_real = $name
     bacula::fileset { $name:

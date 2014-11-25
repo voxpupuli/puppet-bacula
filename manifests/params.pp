@@ -67,6 +67,21 @@ class bacula::params {
       $bacula_user            = 'bacula'
       $bacula_group           = $bacula_user
     }
+    'openbsd': {
+      $bacula_director_packages = [ 'bacula-server', "bacula-${db_type}" ]
+      $bacula_director_services = [ 'bacula_dir' ]
+      $bacula_storage_packages  = [ 'bacula-server', "bacula-${db_type}" ]
+      $bacula_storage_services  = [ 'bacula_sd' ]
+      $bacula_client_packages   = 'bacula-client'
+      $bacula_client_services   = 'bacula_fd'
+      $conf_dir                 = '/etc/bacula'
+      $bacula_dir               = '/etc/bacula/ssl'
+      $client_config            = '/etc/bacula/bacula-fd.conf'
+      $rundir                   = '/var/run'
+      $homedir                  = '/var/bacula'
+      $bacula_user              = '_bacula'
+      $bacula_group             = '_bacula'
+    }
     default: { fail("bacula::params has no love for ${::operatingsystem}") }
   }
 

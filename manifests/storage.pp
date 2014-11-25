@@ -9,6 +9,7 @@ class bacula::storage (
   $bacula_storage          = $::fqdn,
   $device_name             = "${::fqdn}-device",
   $device                  = '/bacula',
+  $device_owner            = $bacula::params::bacula_user,
   $media_type              = 'File',
   $packages                = $bacula::params::bacula_storage_packages,
   $services                = $bacula::params::bacula_storage_services,
@@ -74,7 +75,7 @@ class bacula::storage (
   if $media_type == 'File' {
     file { $device:
       ensure => directory,
-      owner  => $user,
+      owner  => $device_owner,
       group  => $group,
       mode   => '0750',
     }

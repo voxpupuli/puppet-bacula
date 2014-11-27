@@ -114,6 +114,33 @@ Define a Bacula [JobDefs](http://www.bacula.org/7.0.x-manuals/en/main/Configurin
 - `priority`: priority of the job.
   Defaults to `10`. Bacula `Priority` directive.
 
+### bacula::mesages
+
+Define a Bacul [Messages]() resource. Parameters are:
+
+- `mname`: name of the `Messages` resource.
+  Defaults to `Standard`. Bacula `Name` directive.
+- `daemon`:
+  Defaults to `dir`.
+- `director`:
+  Bacula `Director` directive.
+- `append`:
+  Bacula `Append` directive.
+- `Catalog`:
+  Bacula `Catalog` directive.
+- `syslog`:
+  Bacula `Syslog` directive.
+- `Console`:
+  Bacula `Console` directive.
+- `mail`:
+  Bacula `Mail` directive.
+- `Operator`:
+  Bacula `Operator` directive.
+- `mailcmd`:
+  Bacula `Mail Command` directive.
+- `operatorcmd`:
+  Bacula `Operator Command` directive.
+
 ### bacula::schedule
 
 Define a Bacula [Schedule](http://www.bacula.org/7.0.x-manuals/en/main/Configuring_Director.html#SECTION001550000000000000000) resource. Parameter is:

@@ -26,25 +26,3 @@ Catalog {
     Name   = MyCatalog
     dbname = "bacula"; dbuser = "<%= @db_user %>"; dbpassword = "<%= @db_pw %>"
 }
-
-Messages {
-    Name    = Standard
-    console = all, !skipped, !saved
-    append  = "/var/log/bacula/log" = all, !skipped
-    catalog = all
-}
-
-Messages {
-    Name    = Daemon
-    console = all, !skipped, !saved
-    append  = "/var/log/bacula/log" = all, !skipped
-}
-
-@/etc/bacula/conf.d/schedule.conf
-@/etc/bacula/conf.d/storage.conf
-@/etc/bacula/conf.d/pools.conf
-@/etc/bacula/conf.d/client.conf
-@/etc/bacula/conf.d/fileset.conf
-@/etc/bacula/conf.d/jobdefs.conf
-@/etc/bacula/conf.d/job.conf
-

@@ -42,6 +42,31 @@ The client component is run on each system that needs something backed up.
 class { 'bacula::client': director => 'mydirector.example.com' }
 ```
 
+## Exporting resources from clients to the director
+
+In order for clients to be able to define jobs on the director, exported
+resources are used. In the client manifest the `bacula::job` can be declared as:
+
+```puppet
+@@bacula::job { 'obsidian_logs':
+  files => ['/var/log'],
+}
+```
+
+Will create a new `Job` entry in `/etc/bacula/conf.d/job.conf` the next time
+the director applies it's catalog.
+
+The other type that can be exported is the `bacula::fileset`:
+
+```puppet
+@@bacula::fileset { 'Puppet':
+  files   => ['/etc/puppet'],
+  options => {'compression' => 'LZO' }
+}
+```
+
+This requires that [exported resources](https://docs.puppetlabs.com/puppet/latest/reference/lang_exported.html) have been setup (e.g. with [PuppetDB](https://docs.puppetlabs.com/puppetdb/)).
+
 ## Available types
 
 ### bacula::fileset

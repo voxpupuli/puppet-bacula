@@ -27,7 +27,7 @@
 # }
 #
 define bacula::director::pool (
-    $volret, # Volume Retention
+    $volret,
     $maxvoljobs,
     $maxvolbytes,
     $maxvols,

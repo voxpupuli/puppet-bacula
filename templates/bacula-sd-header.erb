@@ -18,11 +18,3 @@ Device {
   Maximum Concurrent Jobs = <%= @maxconcurjobs %>
 }
 
-# Send all messages to the Director,
-Messages {
-  Name     = Standard
-  director = <%= @director %>-dir = all
-  syslog   = all, !skipped
-  append   = "/var/log/bacula/bacula-sd.log" = all, !skipped
-}
-

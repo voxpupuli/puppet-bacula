@@ -1,0 +1,29 @@
+
+Messages {
+  Name     = <%= @mname %>
+<% if @director -%>
+  Director = <%= @director %>
+<% end -%>
+  Append   = <%= @append %>
+<% if @syslog -%>
+  Syslog  = <%= @syslog %>
+<% end -%>
+<% if @catalog -%>
+  Catalog  = <%= @catalog %>
+<% end -%>
+<% if @console -%>
+  Console  = <%= @console %>
+<% end -%>
+<% if @mail -%>
+  Mail  = <%= @mail %>
+<% end -%>
+<% if @operator -%>
+  Operator  = <%= @operator %>
+<% end -%>
+<% if @mailcmd -%>
+  Mail Command  = <%= @mailcmd %>
+<% end -%>
+<% if @operatorcmd -%>
+  Operator Command = <%= @operatorcmd %>
+<% end -%>
+}

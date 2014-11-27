@@ -74,6 +74,24 @@ class bacula::director (
     content => template('bacula/bacula-dir-header.erb')
   }
 
+  concat::fragment { 'bacula-director-tail':
+    order   => '99999',
+    target  => "${conf_dir}/bacula-dir.conf",
+    content => template('bacula/bacula-dir-tail.erb')
+  }
+
+  bacula::messages { 'Standard-dir':
+    console => 'all, !skipped, !saved',
+    append  => '"/var/log/bacula/log" = all, !skipped',
+    catalog => 'all',
+  }
+
+  bacula::messages { 'Daemon':
+    mname   => 'Daemon',
+    console => 'all, !skipped, !saved',
+    append  => '"/var/log/bacula/log" = all, !skipped',
+  }
+
   Bacula::Director::Pool <<||>>
   Concat::Fragment <<| tag == "bacula-${director_name}" |>>
 

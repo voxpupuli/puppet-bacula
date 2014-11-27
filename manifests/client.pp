@@ -31,10 +31,23 @@ class bacula::client (
     require   => Package[$packages],
   }
 
-  file { $bacula::params::client_config:
+  concat { $bacula::params::client_config:
+    owner  => 'root',
+    group  => $group,
+    mode   => '0640',
     require => Package[$bacula::params::bacula_client_packages],
-    content => template('bacula/bacula-fd.conf.erb'),
     notify  => Service[$bacula::params::bacula_client_services],
+  }
+
+  concat::fragment { 'bacula-client-header':
+    target  => $bacula::params::client_config,
+    content => template('bacula/bacula-fd-header.erb'),
+  }
+
+  bacula::messages { 'Standard-fd':
+    daemon   => 'fd',
+    director => "${director}-dir = all, !skipped, !restored",
+    append   => '"/var/log/bacula/bacula-fd.log" = all, !skipped',
   }
 
   # Insert information about this host into the director's config

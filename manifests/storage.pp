@@ -61,6 +61,13 @@ class bacula::storage (
     content => template('bacula/bacula-sd-dir.erb'),
   }
 
+  bacula::messages { 'Standard-sd':
+    daemon   => 'sd',
+    director => "${director}-dir = all",
+    syslog   => 'all, !skipped',
+    append   => '"/var/log/bacula/bacula-sd.log" = all, !skipped',
+  }
+
   # Realize the clause the director is exporting here so we can allow access to
   # the storage daemon Adds an entry to ${conf_dir}/bacula-sd.conf
   Concat::Fragment <<| tag == "bacula-storage-dir-${director}" |>>

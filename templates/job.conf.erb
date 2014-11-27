@@ -14,5 +14,15 @@ Job {
 <% if @jobdef -%>
     JobDefs          = "<%= @jobdef %>"
 <% end -%>
+<% @runscript.each do |script| -%>
+    RunScript {
+      RunsWhen = <%= script.fetch('runs_when') %>
+      FailJobOnError = <%= (script['fail_job_on_error'] != false) ? 'yes' : 'no' %>
+      RunsOnSuccess = <%= (script['runs_on_success'] != false) ? 'yes' : 'no' %>
+      RunsOnFailure = <%= script['runs_on_failure'] ? 'yes' : 'no' %>
+      RunsOnClient = <%= script['runs_on_client'] ? 'yes' : 'no' %>
+      Command = <%= script.fetch('command').inspect %>
+    }
+<% end -%>
 }
 

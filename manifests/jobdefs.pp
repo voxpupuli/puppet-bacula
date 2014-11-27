@@ -16,6 +16,7 @@ define bacula::jobdefs (
   $messages = 'Standard',
   $priority = '10'
 ) {
+  validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
 
   concat::fragment { "bacula-jobdefs-${name}":
     target  => '/etc/bacula/conf.d/jobdefs.conf',

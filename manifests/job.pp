@@ -40,9 +40,9 @@ define bacula::job (
   $pool     = 'Default',
   $jobdef   = 'Default'
 ) {
-
   validate_array($files)
   validate_array($excludes)
+  validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
 
   include bacula::common
   include bacula::params

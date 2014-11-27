@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'spec_helper' 
 
-describe 'bacula::storage' do
+describe 'bacula::client' do
   let(:facts) {
     {
       :operatingsystem => 'Debian',
@@ -8,6 +8,6 @@ describe 'bacula::storage' do
     }
   }
   let(:params) { {:director => 'mydirector.lan'} }
-  it { should contain_class('bacula::storage') }
+  it { should contain_class('bacula::client') }
 end
 

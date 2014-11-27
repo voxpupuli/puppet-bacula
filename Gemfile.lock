@@ -37,6 +37,7 @@ GEM
     launchy (2.4.3)
       addressable (~> 2.3)
     metaclass (0.0.4)
+    metadata-json-lint (0.0.2)
     method_source (0.8.2)
     mime-types (2.4.3)
     mocha (1.1.0)
@@ -110,6 +111,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  metadata-json-lint
   puppet (~> 3.6.0)
   puppet-blacksmith
   puppet-lint

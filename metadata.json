@@ -1,0 +1,17 @@
+{
+  "name": "zleslie-bacula",
+  "version": "1.1.2",
+  "author": "zleslie",
+  "summary": "A bacula module stolen from the Puppet Labs Operations team",
+  "license": "Apache License, Version 2.0",
+  "source": "https://github.com/xaque208/puppet-bacula",
+  "project_page": "https://github.com/xaque208/puppet-bacula",
+  "issues_url": "https://github.com/xaque208/puppet-bacula/issues",
+  "description": "It comes in the night...",
+  "dependencies": [
+    {"name":"puppetlabs/concat","version_requirement":">=1.0.0"},
+    {"name":"puppetlabs/stdlib","version_requirement":">=4.4.0"},
+    {"name":"ploperations/puppet","version_requirement":">=0.12.0"},
+    {"name":"puppetlabs/postgresql","version_requirement":">=4.1.0"}
+  ]
+}

@@ -100,6 +100,11 @@ Define a Bacula [Job](http://www.bacula.org/7.0.x-manuals/en/main/Configuring_Di
   Defaults to `Default`. Bacula `Pool` directive.
 - `jobdef`: name of the `bacula::jobdef` to use.
   Defaults to `Default`. Bacula `JobDefs` directive.
+- `level`: default job level to run the job as.
+  Bacula `Level` directive.
+- `accurate`: wether to enable accurate mode. NB, can be memory intensive
+  on the client.
+  Defaults to 'no'. Bacula 'Accurate' directive.
 
 ### bacula::jobdefs
 

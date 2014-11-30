@@ -15,6 +15,7 @@ class bacula::client (
   $services            = $bacula::params::bacula_client_services,
   $conf_dir            = $bacula::params::conf_dir,
   $director            = $bacula::params::bacula_director,
+  $group               = $bacula::params::bacula_group,
   ) inherits bacula::params {
 
   include bacula::common

@@ -7,10 +7,11 @@
 # manifest.
 #
 class bacula::common (
-  $homedir  = $bacula::params::homedir,
-  $packages = $bacula::params::bacula_client_packages,
-  $user     = $bacula::params::bacula_user,
-  $group    = $bacula::params::bacula_group,
+  $homedir      = $bacula::params::homedir,
+  $homedir_mode = '0700',
+  $packages     = $bacula::params::bacula_client_packages,
+  $user         = $bacula::params::bacula_user,
+  $group        = $bacula::params::bacula_group,
 ) inherits bacula::params {
 
   include bacula::ssl
@@ -20,7 +21,7 @@ class bacula::common (
     ensure  => directory,
     owner   => $user,
     group   => $group,
-    mode    => '0700',
+    mode    => $homedir_mode,
     require => Package[$packages],
   }
 }

@@ -2,13 +2,15 @@
 #
 # Manage the SSL deployment for bacula components, Director, Storage, and File.
 class bacula::ssl (
-  $ssl_dir  = $bacula::params::ssl_dir,
-  $conf_dir = $bacula::params::conf_dir,
-  $certfile = $bacula::params::certfile,
-  $keyfile  = $bacula::params::keyfile,
-  $cafile   = $bacula::params::cafile,
-  $packages = $bacula::params::bacula_client_packages,
-  $user     = $bacula::params::bacula_user,
+  $ssl_dir    = $bacula::params::ssl_dir,
+  $conf_dir   = $bacula::params::conf_dir,
+  $certfile   = $bacula::params::certfile,
+  $keyfile    = $bacula::params::keyfile,
+  $cafile     = $bacula::params::cafile,
+  $packages   = $bacula::params::bacula_client_packages,
+  $user       = $bacula::params::bacula_user,
+  $conf_user  = $user,
+  $conf_group = $bacula::params::bacula_group,
 ) inherits bacula::params {
 
   $ssl_files = [
@@ -25,6 +27,8 @@ class bacula::ssl (
   }
 
   file { $conf_dir:
+    owner  => $conf_user,
+    group  => $conf_group,
     ensure => 'directory'
   } ->
 

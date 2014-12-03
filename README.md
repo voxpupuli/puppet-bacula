@@ -67,6 +67,25 @@ The other type that can be exported is the `bacula::fileset`:
 
 This requires that [exported resources](https://docs.puppetlabs.com/puppet/latest/reference/lang_exported.html) have been setup (e.g. with [PuppetDB](https://docs.puppetlabs.com/puppetdb/)).
 
+## TLS encryption
+
+By default no TLS encryption is enabled, enabling it can be done through Hiera with:
+
+```yaml
+bacula::params::ssl: yes
+```
+
+It will then use the Puppet agent certificates to establish secured connections.
+However in order for the client to export it's keys back to the director the
+following Hiera keys must contain the agent's certificate and keyfile:
+
+```puppet
+bacula_ssl_keyfile_${::clientcert}
+bacula_ssl_certfile_${::clientcert}
+```
+
+For example by using [hiera-file](https://github.com/adrienthebo/hiera-file)
+
 ## Available types
 
 ### bacula::fileset

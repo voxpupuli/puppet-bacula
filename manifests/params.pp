@@ -8,6 +8,7 @@ class bacula::params {
   $job_retention  = '6 months'
   $autoprune      = 'yes'
   $monitor        = true
+  $ssl            = hiera('bacula::params::ssl', false)
 
   $db_type          = hiera('bacula::params::db_type', 'pgsql')
   $bacula_director  = hiera('bacula::params::bacula_director', undef)

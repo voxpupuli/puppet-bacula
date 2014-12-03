@@ -46,6 +46,14 @@ class bacula::ssl (
     require => File["${conf_dir}/ssl"],
   }
 
+  # Now export our key and cert files so the director can collect them,
+  # while we've still realized the actual files, except when we're on
+  # the director already.
+  unless ($::fqdn == $bacula::params::director_name) {
+    @@bacula::ssl::certfile { $::clientcert: }
+    @@bacula::ssl::keyfile  { $::clientcert: }
+  }
+
   file { $cafile:
     ensure  => 'file',
     source  => "${ssl_dir}/certs/ca.pem",

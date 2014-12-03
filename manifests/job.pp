@@ -41,11 +41,14 @@ define bacula::job (
   $pool      = 'Default',
   $jobdef    = 'Default',
   $runscript = [],
+  $level     = undef,
+  $accurate  = 'no',
 ) {
   validate_array($files)
   validate_array($excludes)
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
   validate_array($runscript)
+  validate_re($accurate, ['^yes', '^no'])
 
   include bacula::common
   include bacula::params

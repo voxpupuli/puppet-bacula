@@ -33,9 +33,9 @@ class bacula::client (
   }
 
   concat { $bacula::params::client_config:
-    owner  => 'root',
-    group  => $group,
-    mode   => '0640',
+    owner   => 'root',
+    group   => $group,
+    mode    => '0640',
     require => Package[$bacula::params::bacula_client_packages],
     notify  => Service[$bacula::params::bacula_client_services],
   }

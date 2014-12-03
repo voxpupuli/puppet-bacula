@@ -5,7 +5,7 @@
 #
 class bacula::virtual(
   $director_packages = $bacula::params::bacula_director_packages,
-  $storage_packages  = $bacula::params::storage_director_packages,
+  $storage_packages  = $bacula::params::bacula_storage_packages,
 ) inherits bacula::params {
   @package { $director_packages:
     ensure => present

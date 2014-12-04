@@ -27,13 +27,13 @@ class bacula::ssl (
   }
 
   file { $conf_dir:
+    ensure => 'directory',
     owner  => $conf_user,
     group  => $conf_group,
-    ensure => 'directory'
   } ->
 
   file { "${conf_dir}/ssl":
-    ensure => 'directory'
+    ensure => 'directory',
   }
 
   file { $certfile:

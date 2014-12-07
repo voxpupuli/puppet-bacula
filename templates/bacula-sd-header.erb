@@ -3,7 +3,7 @@ Storage {
   WorkingDirectory        = <%= @homedir %>
   Pid Directory           = <%= @rundir %>
   SDPort                  = <%= @port %>
-  <%= scope.function_template(['bacula/_ssl.erb']) %>
+<%= scope.function_template(['bacula/_ssl.erb']) %>
 }
 
 Device {

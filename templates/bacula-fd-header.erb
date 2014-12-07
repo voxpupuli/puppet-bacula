@@ -1,15 +1,14 @@
-
 Director {
   Name     = <%= @director %>-dir
   Password = "<%= @password %>"
-  <%= scope.function_template(['bacula/_ssl.erb']) %>
+<%= scope.function_template(['bacula/_ssl.erb']) %>
 }
 
 Director {
   Name     = <%= @director %>-mon
   Password = "<%= @password %>"
   Monitor  = yes
-  <%= scope.function_template(['bacula/_ssl.erb']) %>
+<%= scope.function_template(['bacula/_ssl.erb']) %>
 }
 
 FileDaemon {
@@ -19,5 +18,5 @@ FileDaemon {
   WorkingDirectory        = <%= @homedir %>
   Pid Directory           = <%= @rundir %>
   Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>
-  <%= scope.function_template(['bacula/_ssl.erb']) %>
+<%= scope.function_template(['bacula/_ssl.erb']) %>
 }

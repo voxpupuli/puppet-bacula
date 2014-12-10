@@ -3,16 +3,16 @@ FileSet {
   Include {
     Options {
 <% @options.each do |option,value| -%>
-<%=    "      #{option} = #{value}"%>
+<%=    "      #{option} = #{value}" %>
 <% end -%>
     }
-<% [@files].flatten.each do |f| %>
-<%=    "    File = #{f}\n" %>
+<% [@files].flatten.each do |f| -%>
+<%=    "    File = #{f}" %>
 <% end -%>
   }
   Exclude {
-<%   [@excludes].flatten.reject { |x| x.empty? }.flatten.each do |exclude| %>
-<%=    "    File = #{exclude}\n" %>
+<%   [@excludes].flatten.reject { |x| x.empty? }.flatten.each do |exclude| -%>
+<%=    "    File = #{exclude}" %>
 <% end -%>
   }
 }

@@ -1,6 +1,6 @@
 # Bacula
 
-[![Build Status](https://travis-ci.org/xaque208/puppet-bacula.png)](https://travis-ci.org/xaque208/puppet-bacula)
+[![Build Status](https://travis-ci.org/xaque208/puppet-bacula.svg?branch=master)](https://travis-ci.org/xaque208/puppet-bacula.svg?branch=master)
 
 A puppet module for the Bacula backup system.
 

@@ -94,8 +94,8 @@ class bacula::director (
 
   Bacula::Director::Pool <<||>>
   Concat::Fragment <<| tag == "bacula-${director_name}" |>>
-  Bacula::Ssl::Keyfile <<||>>
-  Bacula::Ssl::Certfile <<||>>
+  #Bacula::Ssl::Keyfile <<||>>
+  #Bacula::Ssl::Certfile <<||>>
 
   concat { "${conf_dir}/bacula-dir.conf": }
 

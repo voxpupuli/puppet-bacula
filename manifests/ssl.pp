@@ -49,10 +49,10 @@ class bacula::ssl (
   # Now export our key and cert files so the director can collect them,
   # while we've still realized the actual files, except when we're on
   # the director already.
-  unless ($::fqdn == $bacula::params::director_name) {
-    @@bacula::ssl::certfile { $::clientcert: }
-    @@bacula::ssl::keyfile  { $::clientcert: }
-  }
+  #unless ($::fqdn == $bacula::params::director_name) {
+  #  @@bacula::ssl::certfile { $::clientcert: }
+  #  @@bacula::ssl::keyfile  { $::clientcert: }
+  #}
 
   file { $cafile:
     ensure  => 'file',

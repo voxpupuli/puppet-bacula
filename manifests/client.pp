@@ -33,7 +33,7 @@ class bacula::client (
     require   => Package[$packages],
   }
 
-  concat { $client_config,
+  concat { $client_config:
     owner   => 'root',
     group   => $group,
     mode    => '0640',

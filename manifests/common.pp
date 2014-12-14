@@ -8,7 +8,7 @@
 #
 class bacula::common (
   $homedir      = $bacula::params::homedir,
-  $homedir_mode = '0700',
+  $homedir_mode = '0770',
   $packages     = $bacula::params::bacula_client_packages,
   $user         = $bacula::params::bacula_user,
   $group        = $bacula::params::bacula_group,

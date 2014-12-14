@@ -21,7 +21,7 @@ define bacula::messages (
   include bacula::params
 
   concat::fragment { "bacula-messages-${daemon}-${name}":
-    target  => "/etc/bacula/bacula-${daemon}.conf",
+    target  => "${bacula::params::conf_dir}/bacula-${daemon}.conf",
     content => template('bacula/messages.erb'),
   }
 }

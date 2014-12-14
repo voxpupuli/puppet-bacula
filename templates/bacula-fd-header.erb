@@ -1,22 +1,31 @@
 Director {
-  Name     = <%= @director %>-dir
-  Password = "<%= @password %>"
+    Name     = <%= @director %>-dir
+    Password = "<%= @password %>"
 <%= scope.function_template(['bacula/_ssl.erb']) %>
+<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
+<% if scope.lookupvar('bacula::params::ssl') -%>
+    TLS Verify Peer         = no
+<% end -%>
 }
 
 Director {
-  Name     = <%= @director %>-mon
-  Password = "<%= @password %>"
-  Monitor  = yes
-<%= scope.function_template(['bacula/_ssl.erb']) %>
+    Name     = <%= @director %>-mon
+    Password = "<%= @password %>"
+    Monitor  = yes
+<%= scope.function_template(['bacula/_ssl.erb']) -%>
+<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
+<% if scope.lookupvar('bacula::params::ssl') -%>
+    TLS Verify Peer         = no
+<% end -%>
 }
 
 FileDaemon {
-  Name                    = <%= @clientcert %>-fd
-  FDAddress               = <%= @listen_address %>
-  FDport                  = <%= @port %>
-  WorkingDirectory        = <%= @homedir %>
-  Pid Directory           = <%= @rundir %>
-  Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>
+    Name                    = <%= @clientcert %>-fd
+    FDAddress               = <%= @listen_address %>
+    FDport                  = <%= @port %>
+    WorkingDirectory        = <%= @homedir %>
+    Pid Directory           = <%= @rundir %>
+    Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>
 <%= scope.function_template(['bacula/_ssl.erb']) %>
+<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
 }

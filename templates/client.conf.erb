@@ -1,11 +1,12 @@
 Client {
-  Name           = <%= @clientcert %>-fd
-  Address        = <%= @listen_address %>
-  FDPort         = <%= @port %>
-  Catalog        = MyCatalog
-  Password       = "<%= @password %>"
-  File Retention = <%= @file_retention %>
-  Job Retention  = <%= @job_retention %>
-  AutoPrune      = <%= @autoprune %>
+    Name           = <%= @clientcert %>-fd
+    Address        = <%= @clientcert %>
+    FDPort         = <%= @port %>
+    Catalog        = MyCatalog
+    Password       = "<%= @password %>"
+    File Retention = <%= @file_retention %>
+    Job Retention  = <%= @job_retention %>
+    AutoPrune      = <%= @autoprune %>
+<%= scope.function_template(['bacula/_ssl.erb']) %>
 }
 

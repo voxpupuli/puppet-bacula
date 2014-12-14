@@ -14,9 +14,9 @@
 #
 class bacula::director (
   $port                = '9101',
-  $db_user             = 'bacula',
+  $db_user             = $bacula::params::bacula_user,
   $db_pw               = 'notverysecret',
-  $db_name             = 'bacula',
+  $db_name             = $bacula::params::bacula_user,
   $db_type             = $bacula::params::db_type,
   $password            = 'secret',
   $max_concurrent_jobs = '20',

@@ -16,6 +16,7 @@ class bacula::client (
   $conf_dir            = $bacula::params::conf_dir,
   $director            = $bacula::params::bacula_director,
   $group               = $bacula::params::bacula_group,
+  $client_config       = $bacula::params::client_config,
   ) inherits bacula::params {
 
   include bacula::common
@@ -32,7 +33,7 @@ class bacula::client (
     require   => Package[$packages],
   }
 
-  concat { $bacula::params::client_config:
+  concat { $client_config,
     owner   => 'root',
     group   => $group,
     mode    => '0640',
@@ -41,7 +42,7 @@ class bacula::client (
   }
 
   concat::fragment { 'bacula-client-header':
-    target  => $bacula::params::client_config,
+    target  => $client_config,
     content => template('bacula/bacula-fd-header.erb'),
   }
 

@@ -1,8 +1,12 @@
 JobDefs {
   Name     = <%= @name %>
   Type     = <%= @jobtype %>
+  Pool     = <%= @pool %>
   Schedule = <%= @sched %>
   Messages = <%= @messages %>
   Priority = <%= @priority %>
+  Accurate = <%= @accurate %>
+<% if @level -%>
+  Level    = <%= @level %>
+<% end -%>
 }
-

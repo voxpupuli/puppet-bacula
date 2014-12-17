@@ -14,7 +14,10 @@ define bacula::jobdefs (
   $jobtype  = 'Backup',
   $sched    = 'Default',
   $messages = 'Standard',
-  $priority = '10'
+  $priority = '10',
+  $pool     = 'Default',
+  $level    = undef,
+  $accurate = 'no',
 ) {
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
 

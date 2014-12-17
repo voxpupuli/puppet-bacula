@@ -192,6 +192,6 @@ Define a Bacula [Pool]() resource. Parameters are:
   Bacula `Action On Purge` directive.
   Defaults to `Truncate`.
 - `label`:
-  Defaults to `''`. Bacula `Label Format` directive.
+  Bacula `Label Format` directive.
 - `storage`: name of the `Storage` resource backing the pool.
   Defaults to `$bacula::params::bacula_storage`. Bacula `Storage` directive.

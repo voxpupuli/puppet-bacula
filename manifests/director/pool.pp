@@ -31,11 +31,11 @@ define bacula::director::pool (
     $maxvoljobs,
     $maxvolbytes,
     $maxvols,
+    $label,
     $pooltype    = 'Backup',
     $recycle     = 'Yes',
     $autoprune   = 'Yes',
     $purgeaction = 'Truncate',
-    $label       = '',
     $storage     = $bacula::params::bacula_storage
   ) {
 

@@ -58,7 +58,4 @@ class bacula::client (
     content => template('bacula/client.conf.erb'),
     tag     => "bacula-${bacula::params::bacula_director}",
   }
-
-  # Realize any virtual jobs that may or may not exist.
-  Bacula::Job <||>
 }

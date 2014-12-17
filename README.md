@@ -137,6 +137,13 @@ Define a Bacula [JobDefs](http://www.bacula.org/7.0.x-manuals/en/main/Configurin
   Defaults to `Standard`. Bacula `Messages` directive.
 - `priority`: priority of the job.
   Defaults to `10`. Bacula `Priority` directive.
+- `pool`: name of the `bacula::director::pool` to use.
+  Defaults to `Default`. Bacula `Pool` directive.
+- `level`: default job level for jobs using this JobDefs.
+  Bacula `Level` directive.
+- `accurate`: wether to enable accurate mode. NB, can be memory intensive
+  on the client.
+  Defaults to 'no'. Bacula 'Accurate' directive.
 
 ### bacula::mesages
 

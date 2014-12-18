@@ -17,7 +17,7 @@ class bacula::client (
   $director            = $bacula::params::bacula_director,
   $group               = $bacula::params::bacula_group,
   $client_config       = $bacula::params::client_config,
-  ) inherits bacula::params {
+) inherits bacula::params {
 
   include bacula::common
   include bacula::ssl
@@ -52,7 +52,7 @@ class bacula::client (
     append   => '"/var/log/bacula/bacula-fd.log" = all, !skipped',
   }
 
-  # Insert information about this host into the director's config
+  # Tell the director about this client config
   @@concat::fragment { "bacula-client-${::fqdn}":
     target  => '/etc/bacula/conf.d/client.conf',
     content => template('bacula/client.conf.erb'),

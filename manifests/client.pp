@@ -16,7 +16,8 @@ class bacula::client (
   $conf_dir            = $bacula::params::conf_dir,
   $director            = $bacula::params::bacula_director,
   $group               = $bacula::params::bacula_group,
-  ) inherits bacula::params {
+  $client_config       = $bacula::params::client_config,
+) inherits bacula::params {
 
   include bacula::common
   include bacula::ssl
@@ -32,7 +33,7 @@ class bacula::client (
     require   => Package[$packages],
   }
 
-  concat { $bacula::params::client_config:
+  concat { $client_config:
     owner   => 'root',
     group   => $group,
     mode    => '0640',
@@ -41,7 +42,7 @@ class bacula::client (
   }
 
   concat::fragment { 'bacula-client-header':
-    target  => $bacula::params::client_config,
+    target  => $client_config,
     content => template('bacula/bacula-fd-header.erb'),
   }
 
@@ -51,13 +52,10 @@ class bacula::client (
     append   => '"/var/log/bacula/bacula-fd.log" = all, !skipped',
   }
 
-  # Insert information about this host into the director's config
+  # Tell the director about this client config
   @@concat::fragment { "bacula-client-${::fqdn}":
     target  => '/etc/bacula/conf.d/client.conf',
     content => template('bacula/client.conf.erb'),
     tag     => "bacula-${bacula::params::bacula_director}",
   }
-
-  # Realize any virtual jobs that may or may not exist.
-  Bacula::Job <||>
 }

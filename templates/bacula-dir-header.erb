@@ -7,8 +7,10 @@ Director {                # define myself
     Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>
     Password                = "<%= @password %>"  # Console password
     Messages                = Daemon
-<% if scope.lookupvar('bacula::params::ssl') -%>
 <%= scope.function_template(['bacula/_ssl.erb']) %>
+<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
+<% if scope.lookupvar('bacula::params::ssl') -%>
+    TLS Verify Peer         = yes
     TLS DH File             = <%= @conf_dir %>/ssl/dh1024.pem
 <% end -%>
 }
@@ -24,5 +26,5 @@ Pool {
 # Generic catalog service
 Catalog {
     Name   = MyCatalog
-    dbname = "bacula"; dbuser = "<%= @db_user %>"; dbpassword = "<%= @db_pw %>"
+    dbname = "<%= @db_name %>"; dbuser = "<%= @db_user %>"; dbpassword = "<%= @db_pw %>"
 }

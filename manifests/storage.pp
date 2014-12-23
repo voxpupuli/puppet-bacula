@@ -84,7 +84,7 @@ class bacula::storage (
       ensure => directory,
       owner  => $device_owner,
       group  => $group,
-      mode   => '0750',
+      mode   => '0770',
     }
   }
 

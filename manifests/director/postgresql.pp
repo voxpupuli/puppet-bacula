@@ -8,7 +8,7 @@
 #   none
 #
 class bacula::director::postgresql(
-  $make_bacula_tables = '/var/lib/bacula/make_bacula_tables',
+  $make_bacula_tables = "${bacula::params::homedir}/make_bacula_tables",
   $db_name            = $bacula::director::db_name,
   $db_pw              = $bacula::director::db_pw,
   $db_user            = $bacula::director::db_user,

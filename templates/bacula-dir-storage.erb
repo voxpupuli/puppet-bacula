@@ -1,10 +1,11 @@
 Storage {
-  Name       = <%= @bacula_storage %>-sd
-  Address    = <%= scope.lookupvar('bacula::params::bacula_storage') %>
-  SDPort     = <%= @port %>
-  Password   = "<%= @password %>"
-  Device     = <%= @device_name %>
-  Media Type = <%= @media_type %>
+    Name       = <%= @bacula_storage %>-sd
+    Address    = <%= scope.lookupvar('bacula::params::bacula_storage') %>
+    SDPort     = <%= @port %>
+    Password   = "<%= @password %>"
+    Device     = <%= @device_name %>
+    Media Type = <%= @media_type %>
 <%= scope.function_template(['bacula/_ssl.erb']) %>
+<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
 }
 

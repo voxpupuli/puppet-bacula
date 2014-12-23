@@ -66,7 +66,7 @@ class bacula::params {
       $rundir                 = '/var/run'
       $homedir                = '/var/db/bacula'
       $bacula_user            = 'bacula'
-      $bacula_group           = $bacula_user
+      $bacula_group           = 'bacula'
     }
     'openbsd': {
       $bacula_director_packages = [ 'bacula-server', "bacula-${db_type}" ]

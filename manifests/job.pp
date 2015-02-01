@@ -14,6 +14,9 @@
 #     NOTE: the fileset Common or the defined fileset must be declared elsewhere
 #     for this to work. See Class::Bacula for details.
 #   * runscript - Array of hash(es) containing RunScript directives.
+#   * reshedule_on_error - boolean for enableing disabling job option "Reschedule On Error"
+#   * reshedule_interval - string time-spec for job option "Reschedule Interval"
+#   * reshedule_times - string count for job option "Reschedule Times"
 #
 # Actions:
 #   * Exports job fragment for consuption on the director
@@ -22,27 +25,29 @@
 #   * Class::Bacula {}
 #
 # Sample Usage:
-#  bacula::job {
-#    "${fqdn}-common":
-#      fileset => "Root",
+#  bacula::job { "${fqdn}-common":
+#    fileset => "Root",
 #  }
-#  bacula::job {
-#    "${fqdn}-mywebapp":
-#      files    => ["/var/www/mywebapp","/etc/mywebapp"],
-#      excludes => ["/var/www/mywebapp/downloads"],
+#
+#  bacula::job { "${fqdn}-mywebapp":
+#    files    => ["/var/www/mywebapp","/etc/mywebapp"],
+#    excludes => ["/var/www/mywebapp/downloads"],
 #  }
 #
 define bacula::job (
-  $files     = [],
-  $excludes  = [],
-  $jobtype   = 'Backup',
-  $fileset   = true,
-  $template  = 'bacula/job.conf.erb',
-  $pool      = 'Default',
-  $jobdef    = 'Default',
-  $runscript = [],
-  $level     = undef,
-  $accurate  = 'no',
+  $files               = [],
+  $excludes            = [],
+  $jobtype             = 'Backup',
+  $fileset             = true,
+  $template            = 'bacula/job.conf.erb',
+  $pool                = 'Default',
+  $jobdef              = 'Default',
+  $runscript           = [],
+  $level               = undef,
+  $accurate            = 'no',
+  $reschedule_on_error = false,
+  $reschedule_interval = '1 hour',
+  $reschedule_times    = '10',
 ) {
   validate_array($files)
   validate_array($excludes)

@@ -58,6 +58,10 @@ class bacula::params {
       $bacula_group             = $bacula_user
     }
     'freebsd': {
+      $bacula_director_packages = [ 'bacula-server' ]
+      $bacula_director_services = [ 'bacula-dir' ]
+      $bacula_storage_packages  = [ 'bacula-server' ]
+      $bacula_storage_services  = [ 'bacula-sd' ]
       $bacula_client_packages = 'sysutils/bacula-client'
       $bacula_client_services = 'bacula-fd'
       $conf_dir               = '/usr/local/etc/bacula'

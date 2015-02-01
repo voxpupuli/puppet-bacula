@@ -124,25 +124,32 @@ resources if needed. Parameters are:
   on the client.
   Defaults to 'no'. Bacula 'Accurate' directive.
 
+See also `bacula::jobdefs`.
+
 ### bacula::jobdefs
 
 Define a Bacula [JobDefs resource] resource. Parameters are:
 
-- `jobtype`: one of `Backup`, `Restore`, `Admin` or `Verify`.
-  Defaults to `Backup`. Bacula `Type` directive.
-- `sched`: name of the `bacula::schedule` to use.
-  Defaults to `Default`. Bacula `Schedule` directive.
-- `messages`: which messages resource to deliver to.
-  Defaults to `Standard`. Bacula `Messages` directive.
-- `priority`: priority of the job.
-  Defaults to `10`. Bacula `Priority` directive.
-- `pool`: name of the `bacula::director::pool` to use.
-  Defaults to `Default`. Bacula `Pool` directive.
-- `level`: default job level for jobs using this JobDefs.
-  Bacula `Level` directive.
-- `accurate`: whether to enable accurate mode. NB, can be memory intensive
-  on the client.
-  Defaults to 'no'. Bacula 'Accurate' directive.
+- `jobtype`: one of `Backup`, `Restore`, `Admin` or `Verify`.  Defaults to
+  `Backup`. Bacula `Type` directive.
+- `sched`: name of the `bacula::schedule` to use.  Defaults to `Default`.
+  Bacula `Schedule` directive.
+- `messages`: which messages resource to deliver to.  Defaults to `Standard`.
+  Bacula `Messages` directive.
+- `priority`: priority of the job.  Defaults to `10`. Bacula `Priority`
+  directive.
+- `pool`: name of the `bacula::director::pool` to use.  Defaults to `Default`.
+  Bacula `Pool` directive.
+- `level`: default job level for jobs using this JobDefs.  Bacula `Level`
+  directive.
+- `accurate`: whether to enable accurate mode. NB, can be memory intensive on
+  the client.  Defaults to 'no'. Bacula 'Accurate' directive.
+- `reschedule_on_error`: Enable rescheduling of failed jobs.  Default: false.
+  Bacula `Reschedule On Error` directive.
+- `reschedule_interval`: The time between retries for failed jobs.  Bacula
+  `Reschedule Interval` directive.
+- `reschedule_times`: The number of retries  for failed jobs.  Bacula
+  `Reschedule Times` directive.
 
 ### bacula::messages
 

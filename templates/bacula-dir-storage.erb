@@ -1,6 +1,6 @@
 Storage {
-    Name       = <%= @bacula_storage %>-sd
-    Address    = <%= scope.lookupvar('bacula::params::bacula_storage') %>
+    Name       = <%= @storage %>-sd
+    Address    = <%= @storage %>
     SDPort     = <%= @port %>
     Password   = "<%= @password %>"
     Device     = <%= @device_name %>

@@ -10,7 +10,9 @@
 #
 # Sample Usage:
 #
-#   class { 'bacula::director': storage => 'mystorage.example.com' }
+#   class { 'bacula::director':
+#     storage => 'mystorage.example.com'
+#   }
 #
 class bacula::director (
   $port                = '9101',
@@ -92,7 +94,9 @@ class bacula::director (
     append  => '"/var/log/bacula/log" = all, !skipped',
   }
 
-  Bacula::Director::Pool <<||>>
+  Bacula::Director::Pool <<||>> { conf_dir => $conf_dir }
+  Bacula::Director::Storage <<||>> { conf_dir => $conf_dir }
+
   Concat::Fragment <<| tag == "bacula-${director_name}" |>>
 
   concat { "${conf_dir}/bacula-dir.conf": }

@@ -62,15 +62,15 @@ class bacula::params {
       $bacula_director_services = [ 'bacula-dir' ]
       $bacula_storage_packages  = [ 'bacula-server' ]
       $bacula_storage_services  = [ 'bacula-sd' ]
-      $bacula_client_packages = 'sysutils/bacula-client'
-      $bacula_client_services = 'bacula-fd'
-      $conf_dir               = '/usr/local/etc/bacula'
-      $bacula_dir             = '/usr/local/etc/bacula/ssl'
-      $client_config          = '/usr/local/etc/bacula/bacula-fd.conf'
-      $rundir                 = '/var/run'
-      $homedir                = '/var/db/bacula'
-      $bacula_user            = 'bacula'
-      $bacula_group           = 'bacula'
+      $bacula_client_packages   = 'sysutils/bacula-client'
+      $bacula_client_services   = 'bacula-fd'
+      $conf_dir                 = '/usr/local/etc/bacula'
+      $bacula_dir               = '/usr/local/etc/bacula/ssl'
+      $client_config            = '/usr/local/etc/bacula/bacula-fd.conf'
+      $rundir                   = '/var/run'
+      $homedir                  = '/var/db/bacula'
+      $bacula_user              = 'bacula'
+      $bacula_group             = 'bacula'
     }
     'openbsd': {
       $bacula_director_packages = [ 'bacula-server', "bacula-${db_type}" ]

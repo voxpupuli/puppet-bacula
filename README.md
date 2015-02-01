@@ -7,9 +7,8 @@ A puppet module for the Bacula backup system.
 ## Supported Platforms
 
 * OpenBSD
-* FreeBSD (client only)
-* Linux
-  * Debian, Ubuntu, Centos, Fedora, SLES
+* FreeBSD
+* Linux (Debian, Ubuntu, Centos, Fedora, SLES)
 
 # Requirements
 

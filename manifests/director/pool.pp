@@ -1,6 +1,8 @@
 # Define: bacula::director::pool
 #
-# This define adds a pool to the bacula director configuration in the conf.d method
+# This define adds a pool to the bacula director configuration in the conf.d
+# method.  This resources is intended to be used from bacula::storage as a way
+# to export the pool resources to the director.
 #
 # Parameters:
 # *  pooltype    - Bacula pool configuration option "Pool Type"
@@ -27,22 +29,23 @@
 # }
 #
 define bacula::director::pool (
-    $volret,
-    $maxvoljobs,
-    $maxvolbytes,
-    $maxvols,
-    $label,
-    $pooltype    = 'Backup',
-    $recycle     = 'Yes',
-    $autoprune   = 'Yes',
-    $purgeaction = 'Truncate',
-    $storage     = $bacula::params::bacula_storage
-  ) {
+  $volret,
+  $maxvoljobs,
+  $maxvolbytes,
+  $maxvols,
+  $label,
+  $storage     = $::fqdn,
+  $pooltype    = 'Backup',
+  $recycle     = 'Yes',
+  $autoprune   = 'Yes',
+  $purgeaction = 'Truncate',
+  $conf_dir    = $bacula::params::conf_dir, # Overridden at realize
+) {
 
   include bacula::params
 
   concat::fragment { "bacula-director-pool-${name}":
-    target  => '/etc/bacula/conf.d/pools.conf',
+    target  => "${conf_dir}/conf.d/pools.conf",
     content => template('bacula/pool.conf.erb');
   }
 }

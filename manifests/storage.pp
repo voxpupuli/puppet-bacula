@@ -6,7 +6,7 @@ class bacula::storage (
   $port                    = '9103',
   $password                = 'secret',
   $listen_address          = $::ipaddress,
-  $bacula_storage          = $::fqdn,
+  $storage                 = $::fqdn,
   $device_name             = "${::fqdn}-device",
   $device                  = '/bacula',
   $device_owner            = $bacula::params::bacula_user,
@@ -41,13 +41,6 @@ class bacula::storage (
     enable    => true,
     subscribe => File[$bacula::ssl::ssl_files],
     require   => Package[$packages],
-  }
-
-  # Inform the director how to communicate with the storage daemon
-  @@concat::fragment { "bacula-director-storage-${bacula_storage}":
-    target  => "${conf_dir}/conf.d/storage.conf",
-    content => template('bacula/bacula-dir-storage.erb'),
-    tag     => "bacula-${director}",
   }
 
   concat::fragment { 'bacula-storage-header':
@@ -88,22 +81,30 @@ class bacula::storage (
     }
   }
 
+  @@bacula::director::storage { "${storage}-sd":
+    port        => $port,
+    password    => $password,
+    device_name => $device_name,
+    media_type  => $media_type,
+    storage     => $storage,
+  }
+
   # Each storage daemon should get its own pool(s)
-  @@bacula::director::pool { "${bacula_storage}-Pool-Full":
+  @@bacula::director::pool { "${storage}-Pool-Full":
     volret      => $volret_full,
     maxvolbytes => $maxvolbytes_full,
     maxvoljobs  => $maxvoljobs_full,
     maxvols     => $maxvols_full,
     label       => 'Full-',
-    storage     => $bacula_storage;
+    storage     => $storage;
   }
 
-  @@bacula::director::pool { "${bacula_storage}-Pool-Inc":
+  @@bacula::director::pool { "${storage}-Pool-Inc":
     volret      => $volret_incremental,
     maxvolbytes => $maxvolbytes_incremental,
     maxvoljobs  => $maxvoljobs_incremental,
     maxvols     => $maxvols_incremental,
     label       => 'Inc-',
-    storage     => $bacula_storage;
+    storage     => $storage;
   }
 }

@@ -28,5 +28,6 @@ Job {
 <% if @level -%>
     Level            = <%= @level %>
 <% end -%>
+<%= scope.function_template(['bacula/_job_reschedule.erb']) -%>
 }
 

@@ -1,12 +1,13 @@
 JobDefs {
-  Name     = <%= @name %>
-  Type     = <%= @jobtype %>
-  Pool     = <%= @pool %>
-  Schedule = <%= @sched %>
-  Messages = <%= @messages %>
-  Priority = <%= @priority %>
-  Accurate = <%= @accurate %>
+    Name     = <%= @name %>
+    Type     = <%= @jobtype %>
+    Pool     = <%= @pool %>
+    Schedule = <%= @sched %>
+    Messages = <%= @messages %>
+    Priority = <%= @priority %>
+    Accurate = <%= @accurate %>
 <% if @level -%>
-  Level    = <%= @level %>
+    Level    = <%= @level %>
 <% end -%>
+<%= scope.function_template(['bacula/_job_reschedule.erb']) -%>
 }

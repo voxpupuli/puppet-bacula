@@ -11,13 +11,16 @@
 # Sample Usage:
 #
 define bacula::jobdefs (
-  $jobtype  = 'Backup',
-  $sched    = 'Default',
-  $messages = 'Standard',
-  $priority = '10',
-  $pool     = 'Default',
-  $level    = undef,
-  $accurate = 'no',
+  $jobtype             = 'Backup',
+  $sched               = 'Default',
+  $messages            = 'Standard',
+  $priority            = '10',
+  $pool                = 'Default',
+  $level               = undef,
+  $accurate            = 'no',
+  $reschedule_on_error = false,
+  $reschedule_interval = '1 hour',
+  $reschedule_times    = '10',
 ) {
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
 

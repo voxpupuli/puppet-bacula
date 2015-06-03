@@ -1,6 +1,13 @@
 Director {                # define myself
     Name                    = <%= @clientcert %>-dir
-    DIRport                 = <%= @port %>  # where we listen for UA connections
+    DirAddresses            = { ip = {
+<% if @listen_address -%>
+                                addr = <%= @listen_address %>;
+<% end -%>
+<% if @port -%>
+                                port = <%= @port %>;
+<% end -%>
+                              } }
     QueryFile               = "/etc/bacula/scripts/query.sql"
     WorkingDirectory        = <%= @homedir %>
     Pid Directory           = <%= @rundir %>

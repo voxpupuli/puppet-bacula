@@ -16,6 +16,7 @@
 #
 class bacula::director (
   $port                = '9101',
+  $listen_address      = $::ipaddress,
   $db_user             = $bacula::params::bacula_user,
   $db_pw               = 'notverysecret',
   $db_name             = $bacula::params::bacula_user,

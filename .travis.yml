@@ -7,10 +7,10 @@ before_install:
  - puppet module build
  - sudo puppet module install pkg/zleslie-bacula-*.tar.gz
 rvm:
-  - 1.9.3
   - 2.0.0
   - 2.1.0
-script: 
+script:
   - bundle exec rake test
-  - PUPPET_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
+env:
   - PUPPET_VERSION="~> 3.7.0" STRICT_VARIABLES=yes
+  - PUPPET_VERSION="~> 3.7.0" STRICT_VARIABLES=yes FUTURE_PARSER=yes

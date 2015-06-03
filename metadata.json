@@ -3,7 +3,7 @@
   "version": "1.2.2",
   "author": "zleslie",
   "summary": "A bacula module stolen from the Puppet Labs Operations team",
-  "license": "Apache License, Version 2.0",
+  "license": "Apache-2.0",
   "source": "https://github.com/xaque208/puppet-bacula",
   "project_page": "https://github.com/xaque208/puppet-bacula",
   "issues_url": "https://github.com/xaque208/puppet-bacula/issues",

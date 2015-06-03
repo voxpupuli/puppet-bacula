@@ -16,18 +16,15 @@ class bacula::params {
   $director_name    = hiera('bacula::params::director_name', $bacula_director)
   $director_address = hiera('bacula::params::director_address', $director_name)
 
-  case $::is_pe {
-    'false',false: {
-      include puppet::params
-      $ssl_dir = $puppet::params::puppet_ssldir
-    }
-    'true',true: {
-      $ssl_dir = '/etc/puppetlabs/puppet/ssl'
-    }
+  if $::is_pe == true {
+    $ssl_dir = '/etc/puppetlabs/puppet/ssl'
+  } else {
+    include puppet::params
+    $ssl_dir = $puppet::params::puppet_ssldir
   }
 
   case $::operatingsystem {
-    'ubuntu','debian': {
+    'Ubuntu','Debian': {
       $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
       $bacula_director_services = [ 'bacula-director' ]
       $bacula_storage_packages  = [ 'bacula-sd', "bacula-sd-${db_type}" ]
@@ -42,7 +39,7 @@ class bacula::params {
       $bacula_user              = 'bacula'
       $bacula_group             = $bacula_user
     }
-    'centos','fedora','sles': {
+    'CentOS','Fedora','SLES': {
       $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
       $bacula_director_services = [ 'bacula-dir' ]
       $bacula_storage_packages  = [ 'bacula-sd', "bacula-sd-${db_type}" ]
@@ -57,7 +54,7 @@ class bacula::params {
       $bacula_user              = 'bacula'
       $bacula_group             = $bacula_user
     }
-    'freebsd': {
+    'FreeBSD': {
       $bacula_director_packages = [ 'bacula-server' ]
       $bacula_director_services = [ 'bacula-dir' ]
       $bacula_storage_packages  = [ 'bacula-server' ]
@@ -72,7 +69,7 @@ class bacula::params {
       $bacula_user              = 'bacula'
       $bacula_group             = 'bacula'
     }
-    'openbsd': {
+    'OpenBSD': {
       $bacula_director_packages = [ 'bacula-server', "bacula-${db_type}" ]
       $bacula_director_services = [ 'bacula_dir' ]
       $bacula_storage_packages  = [ 'bacula-server', "bacula-${db_type}" ]

@@ -10,6 +10,7 @@ group :test do
   gem 'rspec-mocks'
   gem 'rspec-expectations'
   gem "rspec-puppet", :git => 'https://github.com/rodjek/rspec-puppet.git'
+  gem "metadata-json-lint"
   gem "puppet-syntax"
   gem "puppetlabs_spec_helper"
 end

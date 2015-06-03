@@ -1,6 +1,6 @@
 {
   "name": "zleslie-bacula",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "author": "zleslie",
   "summary": "A bacula module stolen from the Puppet Labs Operations team",
   "license": "Apache-2.0",

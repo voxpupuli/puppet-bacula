@@ -19,8 +19,7 @@ class bacula::params {
   if $::is_pe == true {
     $ssl_dir = '/etc/puppetlabs/puppet/ssl'
   } else {
-    include puppet::params
-    $ssl_dir = $puppet::params::puppet_ssldir
+    $ssl_dir = $::settings::ssldir
   }
 
   case $::operatingsystem {

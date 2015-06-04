@@ -38,7 +38,7 @@ class bacula::params {
       $bacula_user              = 'bacula'
       $bacula_group             = $bacula_user
     }
-    'CentOS','Fedora','SLES': {
+    'CentOS','Fedora', 'RedHat', 'SLES': {
       $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
       $bacula_director_services = [ 'bacula-dir' ]
       $bacula_storage_packages  = [ 'bacula-sd', "bacula-sd-${db_type}" ]

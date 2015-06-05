@@ -85,7 +85,7 @@ class bacula::params {
           $bacula_user              = 'bacula'
           $bacula_group             = $bacula_user
         }
-        default: { fail("bacula::params has no love for  ${::operatingsystem} ${::operatingsystemmajversion") }
+        default: { fail("bacula::params has no love for  ${::operatingsystem} ${::operatingsystemmajversion}") }
       }
     }
     'FreeBSD': {

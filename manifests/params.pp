@@ -54,7 +54,7 @@ class bacula::params {
       $bacula_group             = $bacula_user
     }
     'CentOS','RedHat': {
-      case $::operatingsystemmajversion {
+      case $::operatingsystemmajrelease {
         '6': {
           $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
           $bacula_director_services = [ 'bacula-dir' ]
@@ -85,7 +85,7 @@ class bacula::params {
           $bacula_user              = 'bacula'
           $bacula_group             = $bacula_user
         }
-        default: { fail("bacula::params has no love for  ${::operatingsystem} ${::operatingsystemmajversion}") }
+        default: { fail("bacula::params has no love for  ${::operatingsystem} ${::operatingsystemmajrelease}") }
       }
     }
     'FreeBSD': {

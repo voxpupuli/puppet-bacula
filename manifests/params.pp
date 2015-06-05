@@ -69,7 +69,7 @@ class bacula::params {
           $rundir                   = '/var/run'
           $bacula_user              = 'bacula'
           $bacula_group             = $bacula_user
-      }
+        }
         '7': {   
           $bacula_director_packages = [ 'bacula-director', 'bacula-console' ]
           $bacula_director_services = [ 'bacula-dir' ]
@@ -84,6 +84,8 @@ class bacula::params {
           $rundir                   = '/var/run'
           $bacula_user              = 'bacula'
           $bacula_group             = $bacula_user
+        }
+        default: { fail("bacula::params has no love for  ${::operatingsystem} ${::operatingsystemmajversion") }
       }
     }
     'FreeBSD': {

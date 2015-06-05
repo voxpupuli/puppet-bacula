@@ -55,7 +55,7 @@ class bacula::params {
     }
     'CentOS','RedHat': {
       case $::operatingsystemmajversion {
-        '6': {   
+        '6': {
           $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
           $bacula_director_services = [ 'bacula-dir' ]
           $bacula_storage_packages  = [ 'bacula-sd', "bacula-sd-${db_type}" ]
@@ -70,7 +70,7 @@ class bacula::params {
           $bacula_user              = 'bacula'
           $bacula_group             = $bacula_user
         }
-        '7': {   
+        '7': {
           $bacula_director_packages = [ 'bacula-director', 'bacula-console' ]
           $bacula_director_services = [ 'bacula-dir' ]
           $bacula_storage_packages  = [ 'bacula-storage' ]

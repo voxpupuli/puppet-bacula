@@ -9,7 +9,7 @@
 class bacula::client (
   $port                = '9102',
   $listen_address      = $::ipaddress,
-  $password            = 'secret',
+  $password            = $bacula::params::password,
   $max_concurrent_jobs = '2',
   $packages            = $bacula::params::bacula_client_packages,
   $services            = $bacula::params::bacula_client_services,

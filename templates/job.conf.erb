@@ -9,6 +9,7 @@ Job {
     Messages         = Standard
 <% elsif @jobtype == "Backup" -%>
     Full Backup Pool        = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Full
+    Differential Backup Pool        = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Diff
     Incremental Backup Pool = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Inc
 <% end -%>
 <% if @jobdef -%>

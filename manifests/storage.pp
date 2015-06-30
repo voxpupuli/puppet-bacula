@@ -3,35 +3,31 @@
 # Configures bacula storage daemon
 #
 class bacula::storage (
-  $port                    	= '9103',
-  $listen_address          	= $::ipaddress,
-  $storage                 	= $::fqdn,
-  $password                	= 'secret',
-  $device_name             	= "${::fqdn}-device",
-  $device                  	= '/bacula',
-  $device_owner            	= $bacula::params::bacula_user,
-  $media_type              	= 'File',
-  $packages                	= $bacula::params::bacula_storage_packages,
-  $services                	= $bacula::params::bacula_storage_services,
-  $homedir                 	= $bacula::params::homedir,
-  $rundir                  	= $bacula::params::rundir,
-  $conf_dir                	= $bacula::params::conf_dir,
-  $director                	= $bacula::params::bacula_director,
-  $user                    	= $bacula::params::bacula_user,
-  $group                   	= $bacula::params::bacula_group,
-  $volret_full             	= '21 days',
-  $volret_differential     	= '14 days',
-  $volret_incremental      	= '8 days',
-  $maxconcurjobs           	= '5',
-  $maxvolbytes_full        	= '4g',
-  $maxvoljobs_full         	= '10',
-  $maxvols_full            	= '10',
-  $maxvolbytes_differential	= '4g',
-  $maxvoljobs_differential 	= '25',
-  $maxvols_differential    	= '10',
-  $maxvolbytes_incremental 	= '4g',
-  $maxvoljobs_incremental  	= '50',
-  $maxvols_incremental     	= '10',
+  $port                    = '9103',
+  $listen_address          = $::ipaddress,
+  $storage                 = $::fqdn,
+  $password                = 'secret',
+  $device_name             = "${::fqdn}-device",
+  $device                  = '/bacula',
+  $device_owner            = $bacula::params::bacula_user,
+  $media_type              = 'File',
+  $packages                = $bacula::params::bacula_storage_packages,
+  $services                = $bacula::params::bacula_storage_services,
+  $homedir                 = $bacula::params::homedir,
+  $rundir                  = $bacula::params::rundir,
+  $conf_dir                = $bacula::params::conf_dir,
+  $director                = $bacula::params::bacula_director,
+  $user                    = $bacula::params::bacula_user,
+  $group                   = $bacula::params::bacula_group,
+  $volret_full             = '21 days',
+  $volret_incremental      = '8 days',
+  $maxconcurjobs           = '5',
+  $maxvolbytes_full        = '4g',
+  $maxvoljobs_full         = '10',
+  $maxvols_full            = '10',
+  $maxvolbytes_incremental = '4g',
+  $maxvoljobs_incremental  = '50',
+  $maxvols_incremental     = '10',
 ) inherits bacula::params {
 
   include bacula::common
@@ -103,14 +99,6 @@ class bacula::storage (
     storage     => $storage;
   }
 
-  @@bacula::director::pool { "${storage}-Pool-Diff":
-    volret      => $volret_differential,
-    maxvolbytes => $maxvolbytes_differential,
-    maxvoljobs  => $maxvoljobs_differential,
-    maxvols     => $maxvols_differential,
-    label       => 'Diff-',
-    storage     => $storage;
-  }
   @@bacula::director::pool { "${storage}-Pool-Inc":
     volret      => $volret_incremental,
     maxvolbytes => $maxvolbytes_incremental,

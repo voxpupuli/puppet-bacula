@@ -5,7 +5,7 @@ Job {
     FileSet          = <%= @fileset_real %>
     Pool             = <%= @pool %>
 <% if @jobtype == "Restore" -%>
-    Where            = /tmp/bacula-restores
+    Where            = <%= scope.lookupvar('bacula::params::restore_dir') %>
     Messages         = Standard
 <% elsif @jobtype == "Backup" -%>
     Full Backup Pool        = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Full

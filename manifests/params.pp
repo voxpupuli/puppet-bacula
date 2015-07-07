@@ -15,6 +15,7 @@ class bacula::params {
   $bacula_storage   = hiera('bacula::params::bacula_storage', undef)
   $director_name    = hiera('bacula::params::director_name', $bacula_director)
   $director_address = hiera('bacula::params::director_address', $director_name)
+  $restore_dir      = hiera('bacula::params::restore_dir','/tmp/bacula-restores')
 
   if $::is_pe == true {
     $ssl_dir = '/etc/puppetlabs/puppet/ssl'

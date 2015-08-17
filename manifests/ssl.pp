@@ -62,6 +62,7 @@ class bacula::ssl (
 
   exec { 'generate_bacula_dhkey':
     command => 'openssl dhparam -out dh1024.pem -5 1024',
+    path    => '/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/bin:/usr/local/sbin',
     cwd     => "${conf_dir}/ssl",
     creates => "${conf_dir}/ssl/dh1024.pem",
     require => File["${conf_dir}/ssl"],

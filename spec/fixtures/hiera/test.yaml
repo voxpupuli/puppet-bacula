@@ -1,0 +1,3 @@
+---
+bacula::params::bacula_director: mydirector.lan
+bacula::params::bacula_storage: mystorage.lan

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'bacula::storage' do
+  require 'hiera'
   context 'Debian' do
     let(:facts) {
       {
@@ -8,7 +9,6 @@ describe 'bacula::storage' do
         :concat_basedir => '/dne'
       }
     }
-    let(:params) { {:director => 'mydirector.lan'} }
     it { should contain_class('bacula::storage') }
   end
   context 'RedHat' do
@@ -21,7 +21,6 @@ describe 'bacula::storage' do
         :concat_basedir => '/dne'
       }
     }
-    let(:params) { {:director => 'mydirector.lan'} }
     it { should contain_class('bacula::storage') }
     context 'New packages' do
       it { should contain_package('bacula-storage').with(

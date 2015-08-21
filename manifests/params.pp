@@ -59,7 +59,7 @@ class bacula::params {
       $bacula_group             = $bacula_user
     }
     'RedHat','CentOS','Fedora': {
-      if $::operatingsystemmajrelease < 7 or ($::operatingsystem == 'Fedora' and $::operatingsystemmajrelease < 17) {
+      if 0 + $::operatingsystemmajrelease < 7 or ($::operatingsystem == 'Fedora' and 0 + $::operatingsystemmajrelease < 17) {
         $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
         $bacula_storage_packages  = [ 'bacula-storage-common', "bacula-storage-${db_type}" ]
       } else {

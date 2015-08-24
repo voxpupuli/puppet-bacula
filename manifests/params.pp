@@ -10,7 +10,11 @@ class bacula::params {
   $monitor        = true
   $ssl            = hiera('bacula::params::ssl', false)
 
-  $db_type          = hiera('bacula::params::db_type', 'pgsql')
+  if $::operatingsystem in ['RedHat', 'CentOS', 'Fedora'] {
+    $db_type        = hiera('bacula::params::db_type', 'postgresql')
+  } else {
+    $db_type        = hiera('bacula::params::db_type', 'pgsql')
+  }
   $bacula_director  = hiera('bacula::params::bacula_director', undef)
   $bacula_storage   = hiera('bacula::params::bacula_storage', undef)
   $director_name    = hiera('bacula::params::director_name', $bacula_director)
@@ -39,7 +43,7 @@ class bacula::params {
       $bacula_user              = 'bacula'
       $bacula_group             = $bacula_user
     }
-    'CentOS','Fedora','SLES': {
+    'SLES': {
       $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
       $bacula_director_services = [ 'bacula-dir' ]
       $bacula_storage_packages  = [ 'bacula-sd', "bacula-sd-${db_type}" ]
@@ -50,6 +54,26 @@ class bacula::params {
       $bacula_dir               = '/etc/bacula/ssl'
       $client_config            = '/etc/bacula/bacula-fd.conf'
       $homedir                  = '/var/lib/bacula'
+      $rundir                   = '/var/run'
+      $bacula_user              = 'bacula'
+      $bacula_group             = $bacula_user
+    }
+    'RedHat','CentOS','Fedora': {
+      if 0 + $::operatingsystemmajrelease < 7 or ($::operatingsystem == 'Fedora' and 0 + $::operatingsystemmajrelease < 17) {
+        $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
+        $bacula_storage_packages  = [ 'bacula-storage-common', "bacula-storage-${db_type}" ]
+      } else {
+        $bacula_director_packages = [ 'bacula-director', 'bacula-console' ]
+        $bacula_storage_packages  = [ 'bacula-storage' ]
+      }
+      $bacula_director_services = [ 'bacula-dir' ]
+      $bacula_storage_services  = [ 'bacula-sd' ]
+      $bacula_client_packages   = 'bacula-client'
+      $bacula_client_services   = 'bacula-fd'
+      $conf_dir                 = '/etc/bacula'
+      $bacula_dir               = '/etc/bacula/ssl'
+      $client_config            = '/etc/bacula/bacula-fd.conf'
+      $homedir                  = '/var/spool/bacula'
       $rundir                   = '/var/run'
       $bacula_user              = 'bacula'
       $bacula_group             = $bacula_user

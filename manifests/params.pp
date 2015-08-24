@@ -73,7 +73,7 @@ class bacula::params {
       $conf_dir                 = '/etc/bacula'
       $bacula_dir               = '/etc/bacula/ssl'
       $client_config            = '/etc/bacula/bacula-fd.conf'
-      $homedir                  = '/var/lib/bacula'
+      $homedir                  = '/var/spool/bacula'
       $rundir                   = '/var/run'
       $bacula_user              = 'bacula'
       $bacula_group             = $bacula_user

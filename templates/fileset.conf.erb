@@ -2,8 +2,10 @@ FileSet {
   Name = <%= @name %>
   Include {
     Options {
-<% @options.each do |option,value| -%>
+<% @options.each do |option,optval| -%>
+<%   [optval].flatten.each do |value| -%>
 <%=    "      #{option} = #{value}" %>
+<%   end -%>
 <% end -%>
     }
 <% [@files].flatten.each do |f| -%>

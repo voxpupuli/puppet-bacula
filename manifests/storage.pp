@@ -78,6 +78,7 @@ class bacula::storage (
       owner  => $device_owner,
       group  => $group,
       mode   => '0770',
+      require   => Package[$packages],
     }
   }
 

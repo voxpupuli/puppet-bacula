@@ -123,6 +123,10 @@ resources if needed. Parameters are:
 - `accurate`: whether to enable accurate mode. NB, can be memory intensive
   on the client.
   Defaults to 'no'. Bacula 'Accurate' directive.
+- `messages`: the name of the message resource to use for this job.
+  Defaults to `Standard`. Bacula `Message` directive.
+- `restoredir`: the prefix for restore jobs.
+  Defaults to `/tmp/bacula-restores`.
 
 See also `bacula::jobdefs`.
 

@@ -17,6 +17,8 @@
 #   * reshedule_on_error - boolean for enableing disabling job option "Reschedule On Error"
 #   * reshedule_interval - string time-spec for job option "Reschedule Interval"
 #   * reshedule_times - string count for job option "Reschedule Times"
+#   * messages - string containing the name of the message resource to use for this job
+#   * restoredir - string containing the prefix for restore jobs
 #
 # Actions:
 #   * Exports job fragment for consuption on the director
@@ -48,6 +50,8 @@ define bacula::job (
   $reschedule_on_error = false,
   $reschedule_interval = '1 hour',
   $reschedule_times    = '10',
+  $messages            = 'Standard',
+  $restoredir          = '/tmp/bacula-restores',
 ) {
   validate_array($files)
   validate_array($excludes)

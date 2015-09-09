@@ -5,8 +5,8 @@ Job {
     FileSet          = <%= @fileset_real %>
     Pool             = <%= @pool %>
 <% if @jobtype == "Restore" -%>
-    Where            = /tmp/bacula-restores
-    Messages         = Standard
+    Where            = <%= @restoredir %>
+    Messages         = <%= @messages %>
 <% elsif @jobtype == "Backup" -%>
     Full Backup Pool        = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Full
     Incremental Backup Pool = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Inc

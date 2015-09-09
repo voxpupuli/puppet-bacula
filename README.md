@@ -124,9 +124,9 @@ resources if needed. Parameters are:
   on the client.
   Defaults to 'no'. Bacula 'Accurate' directive.
 - `messages`: the name of the message resource to use for this job.
-  Defaults to `Standard`. Bacula `Message` directive.
+  Defaults to `Standard`. Bacula `Messages` directive.
 - `restoredir`: the prefix for restore jobs.
-  Defaults to `/tmp/bacula-restores`.
+  Defaults to `/tmp/bacula-restores`. Bacula `Where` directive.
 
 See also `bacula::jobdefs`.
 

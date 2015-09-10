@@ -119,8 +119,9 @@ class bacula::director (
   }
 
   bacula::job { 'RestoreFiles':
-    jobtype => 'Restore',
-    fileset => false,
-    jobdef  => false,
+    jobtype  => 'Restore',
+    fileset  => false,
+    jobdef   => false,
+    messages => 'Standard',
   }
 }

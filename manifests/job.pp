@@ -18,7 +18,12 @@
 #   * reshedule_interval - string time-spec for job option "Reschedule Interval"
 #   * reshedule_times - string count for job option "Reschedule Times"
 #   * messages - string containing the name of the message resource to use for this job
+#     set to false to disable this option
 #   * restoredir - string containing the prefix for restore jobs
+#   * sched - string containing the name of the scheduler
+#     set to false to disable this option
+#   * priority - string containing the priority number for the job
+#     set to false to disable this option
 #
 # Actions:
 #   * Exports job fragment for consuption on the director
@@ -50,8 +55,10 @@ define bacula::job (
   $reschedule_on_error = false,
   $reschedule_interval = '1 hour',
   $reschedule_times    = '10',
-  $messages            = 'Standard',
+  $messages            = false,
   $restoredir          = '/tmp/bacula-restores',
+  $sched               = false,
+  $priority            = false,
 ) {
   validate_array($files)
   validate_array($excludes)

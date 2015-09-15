@@ -22,6 +22,7 @@ class bacula::director::postgresql(
     user     => $db_user,
     password => postgresql_password($db_user, $db_pw),
     encoding => 'SQL_ASCII',
+    locale   => 'C',
   }
 
   file { $make_bacula_tables:

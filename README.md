@@ -123,6 +123,17 @@ resources if needed. Parameters are:
 - `accurate`: whether to enable accurate mode. NB, can be memory intensive
   on the client.
   Defaults to 'no'. Bacula 'Accurate' directive.
+- `messages`: the name of the message resource to use for this job.
+  Defaults to `false` which disables this directive. Bacula `Messages` directive.
+  To ensure compatibility with existing installations, the Bacula `Messages`
+  directive is set to `Standard` when `Jobtype` is `Restore` and the `messages`
+  parameter is `false`.
+- `restoredir`: the prefix for restore jobs.
+  Defaults to `/tmp/bacula-restores`. Bacula `Where` directive.
+- `sched`: the name of the scheduler resource to use for this job.
+  Defaults to `false` which disables this directive. Bacula `Schedule` directive.
+- `priority`: the priority of the job.
+  Defaults to `false` which disables this directive. Bacula `Priority` directive.
 
 See also `bacula::jobdefs`.
 

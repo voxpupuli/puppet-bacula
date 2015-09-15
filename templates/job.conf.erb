@@ -5,8 +5,10 @@ Job {
     FileSet          = <%= @fileset_real %>
     Pool             = <%= @pool %>
 <% if @jobtype == "Restore" -%>
-    Where            = /tmp/bacula-restores
+    Where            = <%= @restoredir %>
+<%   if !@messages -%>
     Messages         = Standard
+<%   end -%>
 <% elsif @jobtype == "Backup" -%>
     Full Backup Pool        = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Full
     Incremental Backup Pool = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Inc
@@ -27,6 +29,15 @@ Job {
     Accurate         = <%= @accurate %>
 <% if @level -%>
     Level            = <%= @level %>
+<% end -%>
+<% if @messages -%>
+    Messages         = <%= @messages %>
+<% end -%>
+<% if @sched -%>
+    Schedule         = <%= @sched %>
+<% end -%>
+<% if @priority -%>
+    Priority         = <%= @priority %>
 <% end -%>
 <%= scope.function_template(['bacula/_job_reschedule.erb']) -%>
 }

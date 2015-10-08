@@ -97,19 +97,22 @@ class bacula::director (
 
   Bacula::Director::Pool <<||>> { conf_dir => $conf_dir }
   Bacula::Director::Storage <<||>> { conf_dir => $conf_dir }
+  Bacula::Director::Client <<||>> { conf_dir => $conf_dir }
+
+  Bacula::Fileset <<||>> { conf_dir => $conf_dir }
 
   Concat::Fragment <<| tag == "bacula-${director_name}" |>>
 
   concat { "${conf_dir}/bacula-dir.conf": }
 
   $sub_confs = [
-    '/etc/bacula/conf.d/schedule.conf',
-    '/etc/bacula/conf.d/storage.conf',
-    '/etc/bacula/conf.d/pools.conf',
-    '/etc/bacula/conf.d/job.conf',
-    '/etc/bacula/conf.d/jobdefs.conf',
-    '/etc/bacula/conf.d/client.conf',
-    '/etc/bacula/conf.d/fileset.conf',
+    "${conf_dir}/conf.d/schedule.conf",
+    "${conf_dir}/conf.d/storage.conf",
+    "${conf_dir}/conf.d/pools.conf",
+    "${conf_dir}/conf.d/job.conf",
+    "${conf_dir}/conf.d/jobdefs.conf",
+    "${conf_dir}/conf.d/client.conf",
+    "${conf_dir}/conf.d/fileset.conf",
   ]
 
   concat { $sub_confs: }

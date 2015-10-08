@@ -68,6 +68,7 @@ define bacula::job (
 
   include bacula::common
   include bacula::params
+  $conf_dir = $bacula::params::conf_dir
 
   # if the fileset is not defined, we fall back to one called "Common"
   if is_string($fileset) {
@@ -84,7 +85,7 @@ define bacula::job (
   }
 
   @@concat::fragment { "bacula-job-${name}":
-    target  => '/etc/bacula/conf.d/job.conf',
+    target  => "${conf_dir}/conf.d/job.conf",
     content => template($template),
     tag     => "bacula-${::bacula::params::bacula_director}";
   }

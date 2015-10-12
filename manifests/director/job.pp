@@ -1,6 +1,6 @@
 define bacula::director::job (
+  $content,
   $conf_dir = $bacula::params::conf_dir, # Overridden at realize
-  $content
 ) {
 
   concat::fragment { "bacula-director-job-${name}":

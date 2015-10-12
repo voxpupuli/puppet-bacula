@@ -74,11 +74,11 @@ class bacula::storage (
 
   if $media_type == 'File' {
     file { $device:
-      ensure => directory,
-      owner  => $device_owner,
-      group  => $group,
-      mode   => '0770',
-      require   => Package[$packages],
+      ensure  => directory,
+      owner   => $device_owner,
+      group   => $group,
+      mode    => '0770',
+      require => Package[$packages],
     }
   }
 

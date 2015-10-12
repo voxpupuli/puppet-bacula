@@ -98,6 +98,7 @@ class bacula::director (
   Bacula::Director::Pool <<||>> { conf_dir => $conf_dir }
   Bacula::Director::Storage <<||>> { conf_dir => $conf_dir }
   Bacula::Director::Client <<||>> { conf_dir => $conf_dir }
+  Bacula::Director::Job <<||>> { conf_dir => $conf_dir }
 
   Bacula::Fileset <<||>> { conf_dir => $conf_dir }
 

@@ -17,6 +17,7 @@ class bacula::client (
   $director            = $bacula::params::bacula_director,
   $group               = $bacula::params::bacula_group,
   $client_config       = $bacula::params::client_config,
+  $client              = $::fqdn,
 ) inherits bacula::params {
 
   include bacula::common
@@ -53,9 +54,9 @@ class bacula::client (
   }
 
   # Tell the director about this client config
-  @@concat::fragment { "bacula-client-${::fqdn}":
-    target  => '/etc/bacula/conf.d/client.conf',
-    content => template('bacula/client.conf.erb'),
-    tag     => "bacula-${bacula::params::bacula_director}",
+  @@bacula::director::client { $client:
+    port     => $port,
+    client   => $client,
+    password => $password,
   }
 }

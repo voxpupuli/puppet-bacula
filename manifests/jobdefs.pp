@@ -22,10 +22,14 @@ define bacula::jobdefs (
   $reschedule_interval = '1 hour',
   $reschedule_times    = '10',
 ) {
+
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
 
+  include bacula::params
+  $conf_dir = $bacula::params::conf_dir
+
   concat::fragment { "bacula-jobdefs-${name}":
-    target  => '/etc/bacula/conf.d/jobdefs.conf',
+    target  => "${conf_dir}/conf.d/jobdefs.conf",
     content => template('bacula/jobdefs.conf.erb'),
   }
 }

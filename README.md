@@ -27,6 +27,33 @@ of Bacula (Director, Storage, and Client) all run on three separate nodes.  If
 desired, there is no reason this setup can not be build up on a single node,
 just updating the hostnames used below to all point to the same system.
 
+#### SSL
+
+To enable SSL for the communication between the various components of Bacula,
+the hiera data for SSL must be set.
+
+```yaml
+bacula::params::ssl: true
+```
+
+This will ensure that SSL values are processed in the various templates that
+are capable of SSL communication.  An item of note: this module expects to be
+using the SSL directory for Puppet.  The default value for the Puppet SSL
+directory this module will use is `/etc/puppetlabs/puppet/ssl` to support the
+future unified Puppet deployment.
+
+To change the SSL directory, simply set `bacula::params::ssl_dir`.  For
+example, to use another module for the data source of which SSL directory to
+use for Puppet, something like the following is in order.
+
+```yaml
+bacula::params::ssl_dir: "%{scope('puppet::params::puppet_ssldir')}"
+```
+
+This example assumes that you are using the [ploperations/puppet] module, but
+this has been removed as a requirement as a dependency.  Users may also wish to
+look at [theforeman/puppet].
+
 #### Director Setup
 
 The director component handles coordination of backups and databasing of
@@ -229,4 +256,7 @@ Define a Bacula [Pool resource]. Parameters are:
 [Pool resource]: http://www.bacula.org/7.0.x-manuals/en/main/Configuring_Director.html#SECTION0015150000000000000000
 [Schedule resource]: http://www.bacula.org/7.0.x-manuals/en/main/Configuring_Director.html#SECTION001550000000000000000
 [Job resource]: http://www.bacula.org/7.0.x-manuals/en/main/Configuring_Director.html#SECTION001530000000000000000
-[Messages resource]:http://www.bacula.org/7.0.x-manuals/en/main/Configuring_Director.html#SECTION001530000000000000000
+[Messages resource]: http://www.bacula.org/7.0.x-manuals/en/main/Configuring_Director.html#SECTION001530000000000000000
+[ploperations/puppet]: https://forge.puppetlabs.com/ploperations/puppet
+[theforeman/puppet]: https://forge.puppetlabs.com/theforeman/puppet
+

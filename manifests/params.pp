@@ -9,6 +9,9 @@ class bacula::params {
   $autoprune      = 'yes'
   $monitor        = true
   $ssl            = hiera('bacula::params::ssl', false)
+  $ssl_dir        = hiera('bacula::params::ssl_dir', '/etc/puppetlabs/puppet/ssl')
+
+  validate_bool($ssl)
 
   if $::operatingsystem in ['RedHat', 'CentOS', 'Fedora'] {
     $db_type        = hiera('bacula::params::db_type', 'postgresql')
@@ -19,13 +22,6 @@ class bacula::params {
   $bacula_storage   = hiera('bacula::params::bacula_storage', undef)
   $director_name    = hiera('bacula::params::director_name', $bacula_director)
   $director_address = hiera('bacula::params::director_address', $director_name)
-
-  if $::is_pe == true {
-    $ssl_dir = '/etc/puppetlabs/puppet/ssl'
-  } else {
-    include puppet::params
-    $ssl_dir = $puppet::params::puppet_ssldir
-  }
 
   case $::operatingsystem {
     'Ubuntu','Debian': {

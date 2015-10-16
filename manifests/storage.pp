@@ -83,11 +83,12 @@ class bacula::storage (
   }
 
   @@bacula::director::storage { "${storage}-sd":
-    port        => $port,
-    password    => $password,
-    device_name => $device_name,
-    media_type  => $media_type,
-    storage     => $storage,
+    port          => $port,
+    password      => $password,
+    device_name   => $device_name,
+    media_type    => $media_type,
+    storage       => $storage,
+    maxconcurjobs => $maxconcurjobs
   }
 
   # Each storage daemon should get its own pool(s)

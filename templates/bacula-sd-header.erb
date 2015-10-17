@@ -2,14 +2,11 @@ Storage {
     Name                    = <%= @clientcert %>-sd
     WorkingDirectory        = <%= @homedir %>
     Pid Directory           = <%= @rundir %>
-    SDAddresses            = { ip = {
 <% if @listen_address -%>
-                                addr = <%= @listen_address.downcase %>;
+    SDAddresses             = {
+<%= scope.function_template(['bacula/_listen.erb']) %>
+    }
 <% end -%>
-<% if @port -%>
-                                port = <%= @port %>;
-<% end -%>
-                              } }
 <%= scope.function_template(['bacula/_ssl.erb']) %>
 <%= scope.function_template(['bacula/_sslkeypair.erb']) %>
 <% if scope.lookupvar('bacula::params::ssl') -%>

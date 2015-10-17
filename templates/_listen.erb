@@ -1,0 +1,13 @@
+<% require 'ipaddr'
+   addr = IPAddr.new(@listen_address)
+   if addr.ipv4? -%>
+        ipv4 = {
+            addr = <%= @listen_address.downcase %>;
+<% elsif addr.ipv6? -%>
+        ipv6 = {
+            addr = <%= @listen_address.downcase %>;
+<% end -%>
+<% if @port -%>
+            port = <%= @port %>;
+<% end -%>
+        }

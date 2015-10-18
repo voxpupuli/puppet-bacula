@@ -34,7 +34,7 @@ define bacula::director::pool (
   $maxvolbytes = undef,
   $maxvols     = undef,
   $label       = undef,
-  $storage     = $::fqdn,
+  $storage     = $bacula::director::storage,
   $pooltype    = 'Backup',
   $recycle     = 'Yes',
   $autoprune   = 'Yes',

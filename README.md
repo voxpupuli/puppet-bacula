@@ -64,6 +64,14 @@ simple declaration:
 class { 'bacula::director': storage => 'mystorage.example.com' }
 ```
 
+The `storage` parameter here defines which storage server should be used for 
+all default jobs.  If left empty, it will default to the `::fqdn` of the 
+director.
+  
+This is not a problem for all in one installations, but in scenarios where 
+directors to not have the necessary storage devices attached, default jobs 
+can be pointed elsewhere.
+
 #### Storage Setup
 
 The storage component allocates disk storage for pools that can be used for

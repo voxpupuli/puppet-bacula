@@ -6,7 +6,7 @@ Storage {
     Device     = <%= @device_name %>
     Media Type = <%= @media_type %>
     Maximum Concurrent Jobs = <%= @maxconcurjobs %>
-<%= scope.function_template(['bacula/_ssl.erb']) %>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
+<%= scope.function_template(['bacula/_ssl.erb']) -%>
+<%= scope.function_template(['bacula/_sslkeypair.erb']) -%>
 }
 

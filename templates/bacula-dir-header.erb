@@ -19,13 +19,13 @@ Director {                # define myself
 <% end -%>
 }
 
-Pool {
-    Name            = Default
-    Pool Type       = Backup
-    Action On Purge = Truncate
-    Label Format    = Default-
-    Storage         = <%= @storage %>-sd
-}
+#Pool {
+#    Name            = Default
+#    Pool Type       = Backup
+#    Action On Purge = Truncate
+#    Label Format    = Default-
+#    Storage         = <%= @storage %>-sd
+#}
 
 # Generic catalog service
 Catalog {

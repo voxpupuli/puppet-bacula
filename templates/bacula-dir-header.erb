@@ -1,13 +1,10 @@
 Director {                # define myself
     Name                    = <%= @clientcert %>-dir
-    DirAddresses            = { ip = {
 <% if @listen_address -%>
-                                addr = <%= @listen_address.downcase %>;
+    DirAddresses            = {
+<%= scope.function_template(['bacula/_listen.erb']) %>
+    }
 <% end -%>
-<% if @port -%>
-                                port = <%= @port %>;
-<% end -%>
-                              } }
     QueryFile               = "/etc/bacula/scripts/query.sql"
     WorkingDirectory        = <%= @homedir %>
     Pid Directory           = <%= @rundir %>

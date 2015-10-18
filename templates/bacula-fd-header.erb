@@ -21,14 +21,11 @@ Director {
 
 FileDaemon {
     Name                    = <%= @clientcert %>-fd
-    FDAddresses            = { ip = {
 <% if @listen_address -%>
-                                addr = <%= @listen_address.downcase %>;
+    FDAddresses             = {
+<%= scope.function_template(['bacula/_listen.erb']) %>
+    }
 <% end -%>
-<% if @port -%>
-                                port = <%= @port %>;
-<% end -%>
-                              } }
     WorkingDirectory        = <%= @homedir %>
     Pid Directory           = <%= @rundir %>
     Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>

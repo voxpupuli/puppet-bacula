@@ -1,9 +1,8 @@
-<% require 'ipaddr'
-   addr = IPAddr.new(@listen_address)
-   if addr.ipv4? -%>
+<% family = scope.function_address_family([@listen_address])
+   if family == 'INET' -%>
         ipv4 = {
             addr = <%= @listen_address.downcase %>;
-<% elsif addr.ipv6? -%>
+<% elsif family == 'INET6' -%>
         ipv6 = {
             addr = <%= @listen_address.downcase %>;
 <% end -%>

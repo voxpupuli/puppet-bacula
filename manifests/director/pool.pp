@@ -29,11 +29,11 @@
 # }
 #
 define bacula::director::pool (
-  $volret,
-  $maxvoljobs,
-  $maxvolbytes,
-  $maxvols,
-  $label,
+  $volret      = undef,
+  $maxvoljobs  = undef,
+  $maxvolbytes = undef,
+  $maxvols     = undef,
+  $label       = undef,
   $storage     = $::fqdn,
   $pooltype    = 'Backup',
   $recycle     = 'Yes',

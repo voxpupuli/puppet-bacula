@@ -128,4 +128,8 @@ class bacula::director (
     jobdef   => false,
     messages => 'Standard',
   }
+
+  bacula::director::pool { 'Default':
+    label => 'Default-',
+  }
 }

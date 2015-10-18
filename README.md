@@ -72,6 +72,9 @@ This is not a problem for all in one installations, but in scenarios where
 directors to not have the necessary storage devices attached, default jobs 
 can be pointed elsewhere.
 
+Note that if you expect an SD to be located on the Director, you will 
+also need to include the `bacula::storage` class as follows.
+
 #### Storage Setup
 
 The storage component allocates disk storage for pools that can be used for

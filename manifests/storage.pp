@@ -10,7 +10,7 @@ class bacula::storage (
   $device_name             = "${::fqdn}-device",
   $device                  = '/bacula',
   $device_owner            = $bacula::params::bacula_user,
-  $media_type              = 'File',
+  $device_type             = 'File',
   $packages                = $bacula::params::bacula_storage_packages,
   $services                = $bacula::params::bacula_storage_services,
   $homedir                 = $bacula::params::homedir,
@@ -52,6 +52,11 @@ class bacula::storage (
   concat::fragment { 'bacula-storage-dir':
     target  => "${conf_dir}/bacula-sd.conf",
     content => template('bacula/bacula-sd-dir.erb'),
+  }
+
+  bacula::storage::device { $device_name:
+    device      => $device,
+    device_type => $device_type,
   }
 
   bacula::messages { 'Standard-sd':

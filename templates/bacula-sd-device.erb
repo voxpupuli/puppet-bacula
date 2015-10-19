@@ -1,0 +1,12 @@
+Device {
+    Name           = <%= @name %>
+    Device Type    = <%= @device_type %>
+    Archive Device = <%= @device %>
+    LabelMedia     = yes; # lets Bacula label unlabeled media
+    Random Access  = yes;
+    AutomaticMount = yes;
+    RemovableMedia = no;
+    AlwaysOpen     = no;
+    Maximum Concurrent Jobs = <%= @maxconcurjobs %>
+}
+

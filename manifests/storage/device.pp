@@ -1,8 +1,8 @@
 define bacula::storage::device (
   $device, # The path to the device or storage directory
-  $device_type = 'File',
-  $media_type = 'File',
-  $conf_dir = $bacula::params::conf_dir,
+  $device_type   = 'File',
+  $media_type    = 'File',
+  $conf_dir      = $bacula::params::conf_dir,
   $maxconcurjobs = undef,
 ) {
   validate_re($device_type, ['^File', '^Tape', '^Fifo'])

@@ -1,6 +1,6 @@
 # Permit the Director to contact this SD
 Director {
-    Name                    = <%= @director %>-dir
+    Name                    = <%= @director %>
     Password                = "<%= @password %>"
 <%= scope.function_template(['bacula/_ssl.erb']) %>
 <%= scope.function_template(['bacula/_sslkeypair.erb']) %>
@@ -8,3 +8,4 @@ Director {
     TLS Verify Peer         = yes
 <% end -%>
 }
+

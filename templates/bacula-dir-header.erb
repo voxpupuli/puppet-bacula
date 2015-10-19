@@ -1,5 +1,5 @@
 Director {                # define myself
-    Name                    = <%= @clientcert %>-dir
+    Name                    = <%= @clientcert %>
 <% if @listen_address -%>
     DirAddresses            = {
 <%= scope.function_template(['bacula/_listen.erb']) %>
@@ -17,14 +17,6 @@ Director {                # define myself
     TLS Verify Peer         = yes
     TLS DH File             = <%= @conf_dir %>/ssl/dh1024.pem
 <% end -%>
-}
-
-Pool {
-    Name            = Default
-    Pool Type       = Backup
-    Action On Purge = Truncate
-    Label Format    = Default-
-    Storage         = <%= @storage %>-sd
 }
 
 # Generic catalog service

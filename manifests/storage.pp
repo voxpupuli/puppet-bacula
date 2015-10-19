@@ -5,18 +5,19 @@
 class bacula::storage (
   $port                    = '9103',
   $listen_address          = $::ipaddress,
-  $storage                 = $::fqdn,
+  $storage                 = $::fqdn, # storage here is not params::storage
   $password                = 'secret',
   $device_name             = "${::fqdn}-device",
   $device                  = '/bacula',
   $device_owner            = $bacula::params::bacula_user,
+  $device_type             = 'File',
   $media_type              = 'File',
   $packages                = $bacula::params::bacula_storage_packages,
   $services                = $bacula::params::bacula_storage_services,
   $homedir                 = $bacula::params::homedir,
   $rundir                  = $bacula::params::rundir,
   $conf_dir                = $bacula::params::conf_dir,
-  $director                = $bacula::params::bacula_director,
+  $director                = $bacula::params::director,
   $user                    = $bacula::params::bacula_user,
   $group                   = $bacula::params::bacula_group,
   $volret_full             = '21 days',
@@ -54,9 +55,16 @@ class bacula::storage (
     content => template('bacula/bacula-sd-dir.erb'),
   }
 
+  bacula::storage::device { $device_name:
+    device        => $device,
+    device_type   => $device_type,
+    media_type    => $media_type,
+    maxconcurjobs => $maxconcurjobs,
+  }
+
   bacula::messages { 'Standard-sd':
     daemon   => 'sd',
-    director => "${director}-dir = all",
+    director => "${director} = all",
     syslog   => 'all, !skipped',
     append   => '"/var/log/bacula/bacula-sd.log" = all, !skipped',
   }
@@ -82,7 +90,7 @@ class bacula::storage (
     }
   }
 
-  @@bacula::director::storage { "${storage}-sd":
+  @@bacula::director::storage { $storage:
     port          => $port,
     password      => $password,
     device_name   => $device_name,

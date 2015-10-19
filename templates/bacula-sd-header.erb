@@ -1,28 +1,16 @@
 Storage {
-    Name                    = <%= @clientcert %>-sd
+    Name                    = <%= @clientcert %>
     WorkingDirectory        = <%= @homedir %>
     Pid Directory           = <%= @rundir %>
 <% if @listen_address -%>
     SDAddresses             = {
-<%= scope.function_template(['bacula/_listen.erb']) %>
+<%= scope.function_template(['bacula/_listen.erb']) -%>
     }
 <% end -%>
-<%= scope.function_template(['bacula/_ssl.erb']) %>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
+<%= scope.function_template(['bacula/_ssl.erb']) -%>
+<%= scope.function_template(['bacula/_sslkeypair.erb']) -%>
 <% if scope.lookupvar('bacula::params::ssl') -%>
     TLS Verify Peer         = no
 <% end -%>
-}
-
-Device {
-    Name           = <%= @device_name %>
-    Media Type     = <%= @media_type %>
-    Archive Device = <%= @device %>
-    LabelMedia     = yes; # lets Bacula label unlabeled media
-    Random Access  = yes;
-    AutomaticMount = yes;
-    RemovableMedia = no;
-    AlwaysOpen     = no;
-    Maximum Concurrent Jobs = <%= @maxconcurjobs %>
 }
 

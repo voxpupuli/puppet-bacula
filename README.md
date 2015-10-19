@@ -27,6 +27,39 @@ of Bacula (Director, Storage, and Client) all run on three separate nodes.  If
 desired, there is no reason this setup can not be build up on a single node,
 just updating the hostnames used below to all point to the same system.
 
+#### Defaults
+
+Bacula's functionality depends on connecting several components.  Due to the 
+numebr of moving pieces in this module, the you will likely want to set some 
+site defaults, and tune more specifically where desired.
+
+As such, it is reasonable to set the following hiera data that will allow 
+many of the classes in this module to use those defaults sanely.
+
+```
+bacula::params::storage: 'mydirector.example.com'
+bacula::params::director: 'mydirector.example.com'
+```
+
+This may be on the same host, or different hosts.  The Director will require
+the classification of `bacula::director`, and the Storage node will require 
+the classification of `bacula::storage`.
+
+##### ** A NOTE FOR UPGRADERS **
+
+Several params have been removed and replaced with the default names.  Update
+your hiera data and parameters.
+
+The following have been replaced with simply `bacula::params::director`.
+
+* `bacula::params::director_name`
+* `bacula::params::bacula_director`
+ 
+The following have been replaced with simply `bacula::params::storage`.
+
+* `bacula::params::bacula_storage`
+* `bacula::params::storage_name`
+
 #### SSL
 
 To enable SSL for the communication between the various components of Bacula,
@@ -64,6 +97,19 @@ simple declaration:
 class { 'bacula::director': storage => 'mystorage.example.com' }
 ```
 
+The `storage` parameter here defines which storage server should be used for 
+all default jobs.  If left empty, it will default to the `::fqdn` of the 
+director.
+  
+This is not a problem for all in one installations, but in scenarios where 
+directors to not have the necessary storage devices attached, default jobs 
+can be pointed elsewhere.
+
+Note that if you expect an SD to be located on the Director, you will 
+also need to include the `bacula::storage` class as follows.
+
+By default a 'Common' fielset is created.
+
 #### Storage Setup
 
 The storage component allocates disk storage for pools that can be used for
@@ -73,6 +119,20 @@ holding backup data.
 class { 'bacula::storage': director => 'mydirector.example.com' }
 ```
 
+You will also want a storage pool that defines the retention.  You can define
+ this in the Director catalog without exporting it, or you can use an 
+ exported resource.
+
+```Puppet
+  @@bacula::director::pool { $::fqdn:
+    volret      => '14 days',
+    maxvolbytes => '5g',
+    maxvols     => '200',
+    label       => 'Main-',
+    storage     => $::fqdn;
+  }
+```
+
 #### Client Setup
 
 The client component is run on each system that needs something backed up.
@@ -80,6 +140,15 @@ The client component is run on each system that needs something backed up.
 ```Puppet
 class { 'bacula::client': director => 'mydirector.example.com' }
 ```
+
+To direct all jobs to a specific pool, 
+
+```Puppet
+bacula::client::default_pool: 'mystorage.example.com'
+```
+
+This assumes that you have a `bacula::director::pool` with the name 
+`mystorage.example.com`.
 
 ## Creating Backup Jobs
 
@@ -198,7 +267,10 @@ Define a Bacula [Messages resource]. Parameters are:
 - `daemon`:
   Defaults to `dir`.
 - `director`:
-  Bacula `Director` directive.
+  Bacula `Director` directive.  Note this is not just the name of a director,
+   but director string as found in the documentation for [Messages resource] 
+   under the director option.  The message type must be included with the 
+   proper formatting.
 - `append`:
   Bacula `Append` directive.
 - `Catalog`:
@@ -245,7 +317,7 @@ Define a Bacula [Pool resource]. Parameters are:
 - `label`:
   Bacula `Label Format` directive.
 - `storage`: name of the `Storage` resource backing the pool.
-  Defaults to `$bacula::params::bacula_storage`. Bacula `Storage` directive.
+  Defaults to `$bacula::params::storage`. Bacula `Storage` directive.
 
 
 [Component Overview]: http://www.bacula.org/7.0.x-manuals/en/main/What_is_Bacula.html#SECTION00220000000000000000

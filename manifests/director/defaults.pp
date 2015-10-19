@@ -12,4 +12,8 @@ class bacula::director::defaults {
       'Level=Incremental mon-sat at 2:05'
     ]
   }
+
+  bacula::director::pool { 'Default':
+    label => 'Default-',
+  }
 }

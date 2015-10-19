@@ -47,7 +47,11 @@ define bacula::job (
   $jobtype             = 'Backup',
   $fileset             = true,
   $template            = 'bacula/job.conf.erb',
-  $pool                = 'Default',
+  $pool                = $bacula::client::default_pool,
+  $pool_full           = undef,
+  $pool_inc            = undef,
+  $pool_diff           = undef,
+  $storage             = $bacula::params::storage,
   $jobdef              = 'Default',
   $runscript           = [],
   $level               = undef,
@@ -86,6 +90,6 @@ define bacula::job (
 
   @@bacula::director::job { $name:
     content => template($template),
-    tag     => "bacula-${::bacula::params::bacula_director}";
+    tag     => "bacula-${::bacula::params::director}";
   }
 }

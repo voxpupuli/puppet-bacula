@@ -3,7 +3,7 @@
 #
 
 Director {
-    Name     = <%= scope.lookupvar('bacula::params::director_name') %>-dir
+    Name     = <%= scope.lookupvar('bacula::params::director') %>
     DIRport  = <%= @port %>
     address  = <%= scope.lookupvar('bacula::params::director_address') %>
     Password = "<%= @password %>"

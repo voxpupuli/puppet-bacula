@@ -11,7 +11,7 @@ class bacula::storage (
   $device                  = '/bacula',
   $device_owner            = $bacula::params::bacula_user,
   $device_type             = 'File',
-  $media_type              = 'Path',
+  $media_type              = 'File',
   $packages                = $bacula::params::bacula_storage_packages,
   $services                = $bacula::params::bacula_storage_services,
   $homedir                 = $bacula::params::homedir,

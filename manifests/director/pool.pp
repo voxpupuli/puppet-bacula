@@ -29,17 +29,18 @@
 # }
 #
 define bacula::director::pool (
-  $volret      = undef,
-  $maxvoljobs  = undef,
-  $maxvolbytes = undef,
-  $maxvols     = undef,
-  $label       = undef,
-  $storage     = $bacula::director::storage,
-  $pooltype    = 'Backup',
-  $recycle     = 'Yes',
-  $autoprune   = 'Yes',
-  $purgeaction = 'Truncate',
-  $conf_dir    = $bacula::params::conf_dir, # Overridden at realize
+  $volret         = undef,
+  $maxvoljobs     = undef,
+  $maxvolbytes    = undef,
+  $maxvols        = undef,
+  $label          = undef,
+  $voluseduration = undef,
+  $storage        = $bacula::director::storage,
+  $pooltype       = 'Backup',
+  $recycle        = 'Yes',
+  $autoprune      = 'Yes',
+  $purgeaction    = 'Truncate',
+  $conf_dir       = $bacula::params::conf_dir, # Overridden at realize
 ) {
 
   include bacula::params

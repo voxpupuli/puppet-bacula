@@ -45,7 +45,7 @@ This may be on the same host, or different hosts.  The Director will require
 the classification of `bacula::director`, and the Storage node will require 
 the classification of `bacula::storage`.
 
-** A NOTE FOR UPGRADERS **
+##### ** A NOTE FOR UPGRADERS **
 
 Several params have been removed and replaced with the default names.  Update
 your hiera data and parameters.

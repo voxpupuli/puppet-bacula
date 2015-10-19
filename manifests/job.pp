@@ -51,7 +51,7 @@ define bacula::job (
   $pool_full           = undef,
   $pool_inc            = undef,
   $pool_diff           = undef,
-  $storage             = 'Default',
+  $storage             = $bacula::params::storage,
   $jobdef              = 'Default',
   $runscript           = [],
   $level               = undef,

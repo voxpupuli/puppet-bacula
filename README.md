@@ -256,7 +256,7 @@ Define a Bacula [Pool resource]. Parameters are:
 - `label`:
   Bacula `Label Format` directive.
 - `storage`: name of the `Storage` resource backing the pool.
-  Defaults to `$bacula::params::bacula_storage`. Bacula `Storage` directive.
+  Defaults to `$bacula::params::storage`. Bacula `Storage` directive.
 
 
 [Component Overview]: http://www.bacula.org/7.0.x-manuals/en/main/What_is_Bacula.html#SECTION00220000000000000000

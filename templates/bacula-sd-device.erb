@@ -3,11 +3,11 @@ Device {
     Device Type    = <%= @device_type %>
     Media Type     = <%= @media_type %>
     Archive Device = <%= @device %>
-    LabelMedia     = yes; # lets Bacula label unlabeled media
-    Random Access  = yes;
-    AutomaticMount = yes;
-    RemovableMedia = no;
-    AlwaysOpen     = no;
+    LabelMedia     = yes
+    Random Access  = yes
+    AutomaticMount = yes
+    RemovableMedia = no
+    AlwaysOpen     = no
 <% if @maxconcurjobs -%>
     Maximum Concurrent Jobs = <%= @maxconcurjobs %>
 <% end %>

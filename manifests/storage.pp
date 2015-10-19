@@ -58,7 +58,7 @@ class bacula::storage (
   bacula::storage::device { $device_name:
     device        => $device,
     device_type   => $device_type,
-    media_type    => $media_type
+    media_type    => $media_type,
     maxconcurjobs => $maxconcurjobs,
   }
 

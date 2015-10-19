@@ -242,7 +242,10 @@ Define a Bacula [Messages resource]. Parameters are:
 - `daemon`:
   Defaults to `dir`.
 - `director`:
-  Bacula `Director` directive.
+  Bacula `Director` directive.  Note this is not just the name of a director,
+   but director string as found in the documentation for [Messages resource] 
+   under the director option.  The message type must be included with the 
+   proper formatting.
 - `append`:
   Bacula `Append` directive.
 - `Catalog`:

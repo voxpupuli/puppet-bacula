@@ -5,7 +5,7 @@
 define bacula::messages (
   $mname       = 'Standard',
   $daemon      = 'dir',
-  $director    = undef,
+  $director    = $bacula::params::director,
   $append      = undef,
   $catalog     = undef,
   $syslog      = undef,

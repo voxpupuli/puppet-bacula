@@ -27,6 +27,24 @@ of Bacula (Director, Storage, and Client) all run on three separate nodes.  If
 desired, there is no reason this setup can not be build up on a single node,
 just updating the hostnames used below to all point to the same system.
 
+#### Defaults
+
+Bacula's functionality depends on connecting several components.  Due to the 
+numebr of moving pieces in this module, the you will likely want to set some 
+site defaults, and tune more specifically where desired.
+
+As such, it is reasonable to set the following hiera data that will allow 
+many of the classes in this module to use those defaults sanely.
+
+```
+bacula::params::storage: 'mydirector.example.com'
+bacula::params::director: 'mydirector.example.com'
+```
+
+This may be on the same host, or different hosts.  The Director will require
+the classification of `bacula::director`, and the Storage node will require 
+the classification of `bacula::storage`.
+
 #### SSL
 
 To enable SSL for the communication between the various components of Bacula,

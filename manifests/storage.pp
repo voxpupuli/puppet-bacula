@@ -16,7 +16,7 @@ class bacula::storage (
   $homedir                 = $bacula::params::homedir,
   $rundir                  = $bacula::params::rundir,
   $conf_dir                = $bacula::params::conf_dir,
-  $director                = $bacula::params::bacula_director,
+  $director                = $bacula::params::director,
   $user                    = $bacula::params::bacula_user,
   $group                   = $bacula::params::bacula_group,
   $volret_full             = '21 days',

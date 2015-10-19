@@ -1,6 +1,7 @@
 define bacula::storage::device (
-  $device_type = 'File',
   $device, # The path to the device or storage directory
+  $device_type = 'File',
+  $media_type = 'File',
   $conf_dir = $bacula::params::conf_dir,
   $maxconcurjobs = undef,
 ) {

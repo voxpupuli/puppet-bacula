@@ -11,6 +11,7 @@ class bacula::storage (
   $device                  = '/bacula',
   $device_owner            = $bacula::params::bacula_user,
   $device_type             = 'File',
+  $media_type              = 'Path',
   $packages                = $bacula::params::bacula_storage_packages,
   $services                = $bacula::params::bacula_storage_services,
   $homedir                 = $bacula::params::homedir,
@@ -57,7 +58,8 @@ class bacula::storage (
   bacula::storage::device { $device_name:
     device        => $device,
     device_type   => $device_type,
-    maxconcurjobs => $maxconcurjobs
+    media_type    => $media_type
+    maxconcurjobs => $maxconcurjobs,
   }
 
   bacula::messages { 'Standard-sd':

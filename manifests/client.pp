@@ -16,6 +16,7 @@ class bacula::client (
   $conf_dir            = $bacula::params::conf_dir,
   $director            = $bacula::params::director,
   $storage             = $bacula::params::storage,
+  $default_pool        = 'Default',
   $group               = $bacula::params::bacula_group,
   $client_config       = $bacula::params::client_config,
   $client              = $::fqdn,

@@ -108,6 +108,8 @@ can be pointed elsewhere.
 Note that if you expect an SD to be located on the Director, you will 
 also need to include the `bacula::storage` class as follows.
 
+By default a 'Common' fielset is created.
+
 #### Storage Setup
 
 The storage component allocates disk storage for pools that can be used for
@@ -117,6 +119,20 @@ holding backup data.
 class { 'bacula::storage': director => 'mydirector.example.com' }
 ```
 
+You will also want a storage pool that defines the retention.  You can define
+ this in the Director catalog without exporting it, or you can use an 
+ exported resource.
+
+```Puppet
+  @@bacula::director::pool { $::fqdn:
+    volret      => '14 days',
+    maxvolbytes => '5g',
+    maxvols     => '200',
+    label       => 'Main-',
+    storage     => $::fqdn;
+  }
+```
+
 #### Client Setup
 
 The client component is run on each system that needs something backed up.
@@ -124,6 +140,15 @@ The client component is run on each system that needs something backed up.
 ```Puppet
 class { 'bacula::client': director => 'mydirector.example.com' }
 ```
+
+To direct all jobs to a specific pool, 
+
+```Puppet
+bacula::client::default_pool: 'mystorage.example.com'
+```
+
+This assumes that you have a `bacula::director::pool` with the name 
+`mystorage.example.com`.
 
 ## Creating Backup Jobs
 

@@ -82,7 +82,7 @@ class bacula::storage (
     }
   }
 
-  @@bacula::director::storage { "${storage}":
+  @@bacula::director::storage { $storage:
     port          => $port,
     password      => $password,
     device_name   => $device_name,

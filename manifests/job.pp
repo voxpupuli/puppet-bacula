@@ -47,7 +47,7 @@ define bacula::job (
   $jobtype             = 'Backup',
   $fileset             = true,
   $template            = 'bacula/job.conf.erb',
-  $pool                = 'Default',
+  $pool                = $bacula::client::default_pool,
   $pool_full           = undef,
   $pool_inc            = undef,
   $pool_diff           = undef,

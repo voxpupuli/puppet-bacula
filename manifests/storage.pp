@@ -55,8 +55,9 @@ class bacula::storage (
   }
 
   bacula::storage::device { $device_name:
-    device      => $device,
-    device_type => $device_type,
+    device        => $device,
+    device_type   => $device_type,
+    maxconcurjobs => $maxconcurjobs
   }
 
   bacula::messages { 'Standard-sd':

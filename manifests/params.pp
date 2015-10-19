@@ -18,10 +18,10 @@ class bacula::params {
   } else {
     $db_type        = hiera('bacula::params::db_type', 'pgsql')
   }
-  $director_address = hiera('bacula::params::director_address', $director_name)
 
-  $storage  = hiera('bacula::params::storage', $::fqdn)
-  $director = hiera('bacula::params::director', $::fqdn)
+  $storage          = hiera('bacula::params::storage', $::fqdn)
+  $director         = hiera('bacula::params::director', $::fqdn)
+  $director_address = hiera('bacula::params::director_address', $director)
 
   case $::operatingsystem {
     'Ubuntu','Debian': {

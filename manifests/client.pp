@@ -49,7 +49,7 @@ class bacula::client (
 
   bacula::messages { 'Standard-fd':
     daemon   => 'fd',
-    director => "${director}-dir = all, !skipped, !restored",
+    director => "${director} = all, !skipped, !restored",
     append   => '"/var/log/bacula/bacula-fd.log" = all, !skipped',
   }
 

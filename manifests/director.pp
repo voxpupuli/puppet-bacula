@@ -28,7 +28,7 @@ class bacula::director (
   $homedir             = $bacula::params::homedir,
   $rundir              = $bacula::params::rundir,
   $conf_dir            = $bacula::params::conf_dir,
-  $director            = $bacula::params::director,
+  $director            = $::fqdn, # director here is not params::director
   $storage             = $bacula::params::storage,
   $group               = $bacula::params::bacula_group,
 ) inherits bacula::params {

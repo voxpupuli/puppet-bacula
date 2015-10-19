@@ -1,5 +1,5 @@
 Director {                # define myself
-    Name                    = <%= @clientcert %>-dir
+    Name                    = <%= @clientcert %>
 <% if @listen_address -%>
     DirAddresses            = {
 <%= scope.function_template(['bacula/_listen.erb']) %>

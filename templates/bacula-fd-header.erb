@@ -1,5 +1,5 @@
 Director {
-    Name     = <%= @director %>-dir
+    Name     = <%= @director %>
     Password = "<%= @password %>"
 <%= scope.function_template(['bacula/_ssl.erb']) -%>
 <%= scope.function_template(['bacula/_sslkeypair.erb']) -%>
@@ -20,7 +20,7 @@ Director {
 }
 
 FileDaemon {
-    Name                    = <%= @clientcert %>-fd
+    Name                    = <%= @clientcert %>
 <% if @listen_address -%>
     FDAddresses             = {
 <%= scope.function_template(['bacula/_listen.erb']) -%>

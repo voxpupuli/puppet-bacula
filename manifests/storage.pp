@@ -64,7 +64,7 @@ class bacula::storage (
 
   bacula::messages { 'Standard-sd':
     daemon   => 'sd',
-    director => "${director}-dir = all",
+    director => "${director} = all",
     syslog   => 'all, !skipped',
     append   => '"/var/log/bacula/bacula-sd.log" = all, !skipped',
   }

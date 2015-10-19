@@ -7,6 +7,8 @@ Device {
     AutomaticMount = yes;
     RemovableMedia = no;
     AlwaysOpen     = no;
+<% if @maxconcurjobs -%>
     Maximum Concurrent Jobs = <%= @maxconcurjobs %>
+<% end %>
 }
 

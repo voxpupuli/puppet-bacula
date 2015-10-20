@@ -86,6 +86,6 @@ define bacula::job (
 
   @@bacula::director::job { $name:
     content => template($template),
-    tag     => "bacula-${::bacula::params::bacula_director}";
+    tag     => "bacula-${::bacula::params::director}";
   }
 }

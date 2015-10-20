@@ -28,8 +28,9 @@ class bacula::director (
   $homedir             = $bacula::params::homedir,
   $rundir              = $bacula::params::rundir,
   $conf_dir            = $bacula::params::conf_dir,
-  $director_name       = $bacula::params::director_name,
-  $storage             = $bacula::params::bacula_storage,
+  $director            = $::fqdn, # director here is not params::director
+  $director_address    = $bacula::params::director_address,
+  $storage             = $bacula::params::storage,
   $group               = $bacula::params::bacula_group,
 ) inherits bacula::params {
 
@@ -102,7 +103,7 @@ class bacula::director (
 
   Bacula::Fileset <<||>> { conf_dir => $conf_dir }
 
-  Concat::Fragment <<| tag == "bacula-${director_name}" |>>
+  Concat::Fragment <<| tag == "bacula-${director}" |>>
 
   concat { "${conf_dir}/bacula-dir.conf": }
 

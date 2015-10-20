@@ -20,7 +20,6 @@
 define bacula::director::storage (
   $port          = '9103',
   $password      = 'secret',
-  $storage       = $::fqdn,
   $device_name   = "${::fqdn}-device",
   $media_type    = 'File',
   $maxconcurjobs = '1',
@@ -29,7 +28,7 @@ define bacula::director::storage (
 
   include bacula::params
 
-  concat::fragment { "bacula-director-storage-${storage}":
+  concat::fragment { "bacula-director-storage-${name}":
     target  => "${conf_dir}/conf.d/storage.conf",
     content => template('bacula/bacula-dir-storage.erb'),
   }

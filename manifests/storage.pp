@@ -5,29 +5,21 @@
 class bacula::storage (
   $port                    = '9103',
   $listen_address          = $::ipaddress,
-  $storage                 = $::fqdn,
+  $storage                 = $::fqdn, # storage here is not params::storage
   $password                = 'secret',
   $device_name             = "${::fqdn}-device",
   $device                  = '/bacula',
   $device_owner            = $bacula::params::bacula_user,
   $media_type              = 'File',
+  $maxconcurjobs           = '5',
   $packages                = $bacula::params::bacula_storage_packages,
   $services                = $bacula::params::bacula_storage_services,
   $homedir                 = $bacula::params::homedir,
   $rundir                  = $bacula::params::rundir,
   $conf_dir                = $bacula::params::conf_dir,
-  $director                = $bacula::params::bacula_director,
+  $director                = $bacula::params::director,
   $user                    = $bacula::params::bacula_user,
   $group                   = $bacula::params::bacula_group,
-  $volret_full             = '21 days',
-  $volret_incremental      = '8 days',
-  $maxconcurjobs           = '5',
-  $maxvolbytes_full        = '4g',
-  $maxvoljobs_full         = '10',
-  $maxvols_full            = '10',
-  $maxvolbytes_incremental = '4g',
-  $maxvoljobs_incremental  = '50',
-  $maxvols_incremental     = '10',
 ) inherits bacula::params {
 
   include bacula::common
@@ -82,31 +74,11 @@ class bacula::storage (
     }
   }
 
-  @@bacula::director::storage { "${storage}-sd":
+  @@bacula::director::storage { $storage:
     port          => $port,
     password      => $password,
     device_name   => $device_name,
     media_type    => $media_type,
-    storage       => $storage,
-    maxconcurjobs => $maxconcurjobs
-  }
-
-  # Each storage daemon should get its own pool(s)
-  @@bacula::director::pool { "${storage}-Pool-Full":
-    volret      => $volret_full,
-    maxvolbytes => $maxvolbytes_full,
-    maxvoljobs  => $maxvoljobs_full,
-    maxvols     => $maxvols_full,
-    label       => 'Full-',
-    storage     => $storage;
-  }
-
-  @@bacula::director::pool { "${storage}-Pool-Inc":
-    volret      => $volret_incremental,
-    maxvolbytes => $maxvolbytes_incremental,
-    maxvoljobs  => $maxvoljobs_incremental,
-    maxvols     => $maxvols_incremental,
-    label       => 'Inc-',
-    storage     => $storage;
+    maxconcurjobs => $maxconcurjobs,
   }
 }

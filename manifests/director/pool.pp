@@ -29,23 +29,24 @@
 # }
 #
 define bacula::director::pool (
-  $volret,
-  $maxvoljobs,
-  $maxvolbytes,
-  $maxvols,
-  $label,
-  $storage     = $::fqdn,
-  $pooltype    = 'Backup',
-  $recycle     = 'Yes',
-  $autoprune   = 'Yes',
-  $purgeaction = 'Truncate',
-  $conf_dir    = $bacula::params::conf_dir, # Overridden at realize
+  $volret         = undef,
+  $maxvoljobs     = undef,
+  $maxvolbytes    = undef,
+  $maxvols        = undef,
+  $label          = undef,
+  $voluseduration = undef,
+  $storage        = $bacula::director::storage,
+  $pooltype       = 'Backup',
+  $recycle        = 'Yes',
+  $autoprune      = 'Yes',
+  $purgeaction    = 'Truncate',
+  $conf_dir       = $bacula::params::conf_dir, # Overridden at realize
 ) {
 
   include bacula::params
 
   concat::fragment { "bacula-director-pool-${name}":
     target  => "${conf_dir}/conf.d/pools.conf",
-    content => template('bacula/pool.conf.erb');
+    content => template('bacula/bacula-dir-pool.erb');
   }
 }

@@ -3,16 +3,29 @@ Job {
     Type             = <%= @jobtype %>
     Client           = <%= @clientcert %>-fd
     FileSet          = <%= @fileset_real %>
+<% if @pool -%>
     Pool             = <%= @pool %>
+<% end -%>
+<% if @storage -%>
+    Storage          = <%= @storage %>
+<% end -%>
 <% if @jobtype == "Restore" -%>
     Where            = <%= @restoredir %>
 <%   if !@messages -%>
     Messages         = Standard
 <%   end -%>
 <% elsif @jobtype == "Backup" -%>
-    Full Backup Pool        = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Full
-    Incremental Backup Pool = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Inc
+<% if @pool_full -%>
+    Full Backup Pool        = <%= scope.lookupvar('bacula::params::storage') %>-Pool-Full
 <% end -%>
+<% if @pool_inc -%>
+    Incremental Backup Pool  = <%= scope.lookupvar('bacula::params::storage') %>-Pool-Inc
+<% end -%>
+<% if @pool_diff -%>
+    Differential Backup Pool = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Diff
+<% end -%>
+<% end -%>
+
 <% if @jobdef -%>
     JobDefs          = "<%= @jobdef %>"
 <% end -%>

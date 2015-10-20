@@ -1,4 +1,4 @@
-# Class: bacula
+# Define: bacula::job
 #
 # This class installs a bacula job on the director.  This can be used for specific applications as well as general host backups
 #
@@ -47,7 +47,11 @@ define bacula::job (
   $jobtype             = 'Backup',
   $fileset             = true,
   $template            = 'bacula/job.conf.erb',
-  $pool                = 'Default',
+  $pool                = $bacula::client::default_pool,
+  $pool_full           = $bacula::client::default_pool_full,
+  $pool_inc            = $bacula::client::default_pool_inc,
+  $pool_diff           = $bacula::client::default_pool_diff,
+  $storage             = undef,
   $jobdef              = 'Default',
   $runscript           = [],
   $level               = undef,
@@ -86,6 +90,6 @@ define bacula::job (
 
   @@bacula::director::job { $name:
     content => template($template),
-    tag     => "bacula-${::bacula::params::bacula_director}";
+    tag     => "bacula-${::bacula::params::director}";
   }
 }

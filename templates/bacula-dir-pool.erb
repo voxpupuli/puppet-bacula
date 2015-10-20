@@ -1,0 +1,27 @@
+Pool {
+    Name                 = <%= @name %>
+    Pool Type            = <%= @pooltype %>
+    Recycle              = <%= @recycle %>
+    AutoPrune            = <%= @autoprune %>
+<% if @volret -%>
+    Volume Retention     = <%= @volret %>
+<% end -%>
+<% if @voluseduration -%>
+    Volume Use Duration = <%= @voluseduration %>
+<% end -%>
+<% if @label -%>
+    Label Format         = "<%= @label %>"
+<% end -%>
+<% if @maxvols -%>
+    Maximum Volumes      = <%= @maxvols %>
+<% end -%>
+<% if @maxvoljobs -%>
+    Maximum Volume Jobs  = <%= @maxvoljobs %>
+<% end -%>
+<% if @maxvolbytes -%>
+    Maximum Volume Bytes = <%= @maxvolbytes %>
+<% end -%>
+    Storage              = <%= @storage %>-sd
+    Action On Purge      = <%= @purgeaction %>
+}
+

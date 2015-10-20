@@ -14,10 +14,15 @@ class bacula::client (
   $packages            = $bacula::params::bacula_client_packages,
   $services            = $bacula::params::bacula_client_services,
   $conf_dir            = $bacula::params::conf_dir,
-  $director            = $bacula::params::bacula_director,
+  $director            = $bacula::params::director,
+  $storage             = $bacula::params::storage,
   $group               = $bacula::params::bacula_group,
   $client_config       = $bacula::params::client_config,
   $client              = $::fqdn,
+  $default_pool        = 'Default',
+  $default_pool_full   = undef,
+  $default_pool_inc    = undef,
+  $default_pool_diff   = undef,
 ) inherits bacula::params {
 
   include bacula::common

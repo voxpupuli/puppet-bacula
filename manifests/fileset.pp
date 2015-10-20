@@ -5,7 +5,7 @@
 define bacula::fileset (
     $files,
     $excludes = '',
-    $options  = {'signature' => 'MD5', 'compression' => 'GZIP'},
+    $options  = {'signature' => 'SHA1', 'compression' => 'GZIP9'},
     $conf_dir = $bacula::params::conf_dir, # Overridden at realize
   ) {
   validate_hash($options)
@@ -15,6 +15,6 @@ define bacula::fileset (
   @@concat::fragment { "bacula-fileset-${name}":
     target  => "${conf_dir}/conf.d/fileset.conf",
     content => template('bacula/fileset.conf.erb'),
-    tag     => "bacula-${bacula::params::bacula_director}";
+    tag     => "bacula-${bacula::params::director}";
   }
 }

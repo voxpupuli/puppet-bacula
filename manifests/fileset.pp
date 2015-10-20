@@ -5,7 +5,7 @@
 define bacula::fileset (
     $files,
     $excludes = '',
-    $options  = {'signature' => 'MD5', 'compression' => 'GZIP'},
+    $options  = {'signature' => 'SHA1', 'compression' => 'GZIP9'},
     $conf_dir = $bacula::params::conf_dir, # Overridden at realize
   ) {
   validate_hash($options)

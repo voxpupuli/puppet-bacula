@@ -19,6 +19,7 @@ class bacula::client (
   $group               = $bacula::params::bacula_group,
   $client_config       = $bacula::params::client_config,
   $client              = $::fqdn,
+  $default_pool        = 'Default',
 ) inherits bacula::params {
 
   include bacula::common

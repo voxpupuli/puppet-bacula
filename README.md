@@ -316,6 +316,8 @@ Define a Bacula [Pool resource]. Parameters are:
   Defaults to `Truncate`.
 - `label`:
   Bacula `Label Format` directive.
+- `voluseduration`:
+  Bacula `Volume Use Duration` directive.
 - `storage`: name of the `Storage` resource backing the pool.
   Defaults to `$bacula::params::storage`. Bacula `Storage` directive.
 

@@ -4,11 +4,11 @@ Storage {
     Pid Directory           = <%= @rundir %>
 <% if @listen_address -%>
     SDAddresses             = {
-<%= scope.function_template(['bacula/_listen.erb']) %>
+<%= scope.function_template(['bacula/_listen.erb']) -%>
     }
 <% end -%>
-<%= scope.function_template(['bacula/_ssl.erb']) %>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
+<%= scope.function_template(['bacula/_ssl.erb']) -%>
+<%= scope.function_template(['bacula/_sslkeypair.erb']) -%>
 <% if scope.lookupvar('bacula::params::ssl') -%>
     TLS Verify Peer         = no
 <% end -%>

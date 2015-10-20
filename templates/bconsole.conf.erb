@@ -3,9 +3,9 @@
 #
 
 Director {
-    Name     = <%= scope.lookupvar('bacula::params::director_name') %>-dir
+    Name     = <%= @director %>
     DIRport  = <%= @port %>
-    address  = <%= scope.lookupvar('bacula::params::director_address') %>
+    address  = <%= @director_address %>
     Password = "<%= @password %>"
 <%= scope.function_template(['bacula/_ssl.erb']) %>
 <%= scope.function_template(['bacula/_sslkeypair.erb']) %>

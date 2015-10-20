@@ -30,7 +30,7 @@ just updating the hostnames used below to all point to the same system.
 #### Defaults
 
 Bacula's functionality depends on connecting several components.  Due to the 
-numebr of moving pieces in this module, the you will likely want to set some 
+numebr of moving pieces in this module, you will likely want to set some 
 site defaults, and tune more specifically where desired.
 
 As such, it is reasonable to set the following hiera data that will allow 
@@ -41,14 +41,16 @@ bacula::params::storage: 'mydirector.example.com'
 bacula::params::director: 'mydirector.example.com'
 ```
 
-This may be on the same host, or different hosts.  The Director will require
-the classification of `bacula::director`, and the Storage node will require 
-the classification of `bacula::storage`.
+This may be on the same host, or different hosts, but the name you put here 
+should be the fqdn of the target system.  The Director will require the 
+classification of `bacula::director`, and the Storage node will require the 
+classification of `bacula::storage`.  All nodes will require classification of
+ `bacula::client`.
 
 ##### ** A NOTE FOR UPGRADERS **
 
 Several params have been removed and replaced with the default names.  Update
-your hiera data and parameters.
+your hiera data and parameters as follows.
 
 The following have been replaced with simply `bacula::params::director`.
 
@@ -59,6 +61,33 @@ The following have been replaced with simply `bacula::params::storage`.
 
 * `bacula::params::bacula_storage`
 * `bacula::params::storage_name`
+
+The default 'Full' and 'Inc' pools no longer get created.  Only the pool 
+called 'Default' is created.  As such, the following parameter have been 
+removed from the `bacula::storage` class.
+
+*  `$volret_full`
+*  `$volret_incremental`
+*  `$maxconcurjobs`
+*  `$maxvolbytes_full`
+*  `$maxvoljobs_full`
+*  `$maxvols_full`
+*  `$maxvolbytes_incremental`
+*  `$maxvoljobs_incremental`
+*  `$maxvols_incremental`
+
+This now means that Full jobs are not directed to a 'Full' pool, and 
+Incremental jobs are no longer directed to an 'Inc' pool.
+
+To gain the same functionality available in previous versions using a 
+default pool for a specific level of backup, create a pool as directed below,
+ and set any of the following parameters for your clients. 
+
+* `bacula::client::default_pool_full`
+* `bacula::client::default_pool_inc`
+* `bacula::client::default_pool_diff`
+
+The value of these parameters should be set to the resource name of the pool.
 
 #### SSL
 
@@ -84,8 +113,9 @@ bacula::params::ssl_dir: "%{scope('puppet::params::puppet_ssldir')}"
 ```
 
 This example assumes that you are using the [ploperations/puppet] module, but
-this has been removed as a requirement as a dependency.  Users may also wish to
-look at [theforeman/puppet].
+this has been removed as a dependency.  Users may also wish to look at 
+[theforeman/puppet] or just set it to the location known to house your ssl 
+data, like `/etc/puppetlabs/puppet/ssl`.
 
 #### Director Setup
 
@@ -98,17 +128,15 @@ class { 'bacula::director': storage => 'mystorage.example.com' }
 ```
 
 The `storage` parameter here defines which storage server should be used for 
-all default jobs.  If left empty, it will default to the `::fqdn` of the 
-director.
-  
-This is not a problem for all in one installations, but in scenarios where 
-directors to not have the necessary storage devices attached, default jobs 
-can be pointed elsewhere.
+all default jobs.  If left empty, it will default to the `$::fqdn` of the 
+director. This is not a problem for all in one installations, but in 
+scenarios where directors to not have the necessary storage devices attached,
+default jobs can be pointed elsewhere.  
 
 Note that if you expect an SD to be located on the Director, you will 
 also need to include the `bacula::storage` class as follows.
 
-By default a 'Common' fielset is created.
+By default a 'Common' fileset is created.
 
 #### Storage Setup
 
@@ -124,12 +152,12 @@ You will also want a storage pool that defines the retention.  You can define
  exported resource.
 
 ```Puppet
-  @@bacula::director::pool { $::fqdn:
+  bacula::director::pool { 'Corp':
     volret      => '14 days',
     maxvolbytes => '5g',
     maxvols     => '200',
-    label       => 'Main-',
-    storage     => $::fqdn;
+    label       => 'Corp-',
+    storage     => 'mystorage.example.com',
   }
 ```
 
@@ -141,21 +169,19 @@ The client component is run on each system that needs something backed up.
 class { 'bacula::client': director => 'mydirector.example.com' }
 ```
 
-To direct all jobs to a specific pool, 
+To direct all jobs to a specific pool like the one defined above set the 
+following data. 
 
 ```Puppet
-bacula::client::default_pool: 'mystorage.example.com'
+bacula::client::default_pool: 'Corp'
 ```
-
-This assumes that you have a `bacula::director::pool` with the name 
-`mystorage.example.com`.
 
 ## Creating Backup Jobs
 
 In order for clients to be able to define jobs on the director, exported
 resources are used, thus there was a reliance on PuppetDB availability in the
-environment. In the client manifest the `bacula::job` can be declared as
-follows:
+environment. In the client manifest the `bacula::job` exports a job 
+definition to the director. 
 
 ```puppet
 bacula::job { 'obsidian_logs':
@@ -163,9 +189,10 @@ bacula::job { 'obsidian_logs':
 }
 ```
 
-Will create a new `Job` entry in `/etc/bacula/conf.d/job.conf` the next time
-the director applies it's catalog that will instruct the system to backup the
-files or directories at the paths specified in the `files` parameter.
+This resource will create a new `Job` entry in `/etc/bacula/conf.d/job.conf` 
+the next time the director applies it's catalog that will instruct the system
+to backup the files or directories at the paths specified in the `files` 
+parameter.
 
 If a group of jobs will contain the same files, a [FileSet resource] can be
 used to simplify the `bacula::job` resource.  This can be exported from the
@@ -211,7 +238,16 @@ resources if needed. Parameters are:
 - `template`: template to use for the fragment.
   Defaults to `bacula/job.conf.erb`.
 - `pool`: name of the `bacula::director::pool` to use.
-  Defaults to `Default`. Bacula `Pool` directive.
+  Defaults to `bacula::client::default_pool`. Bacula `Pool` directive.
+- `pool_full`: name of the pool to be used for 'Full' jobs.
+  Defaults to `bacula::client::default_pool_full`. Bacula `Full Backup Pool`
+   directive. 
+- `pool_inc`: name of the pool to be used for 'Incremental' jobs.
+  Defaults to `bacula::client::default_pool_inc`. Bacula `Incremental Backup Pool`
+   directive. 
+- `pool_diff`: name of the pool to be used for 'Incremental' jobs.
+  Defaults to `bacula::client::default_pool_diff`. Bacula `Differential Backup Pool`
+   directive. 
 - `jobdef`: name of the `bacula::jobdef` to use.
   Defaults to `Default`. Bacula `JobDefs` directive.
 - `level`: default job level to run the job as.
@@ -307,6 +343,8 @@ Define a Bacula [Pool resource]. Parameters are:
    Defaults to `Yes`. Bacula `AutoPrune` directive.
 - `volret`:
   Bacula `Volume Retention` directive.
+- `maxvols`:
+  Bacula `Maximum Volumes` directive.
 - `maxvoljobs`:
   Bacula `Maximum Volume Jobs` directive.
 - `maxvolbytes`:

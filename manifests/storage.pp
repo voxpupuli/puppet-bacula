@@ -11,6 +11,7 @@ class bacula::storage (
   $device                  = '/bacula',
   $device_owner            = $bacula::params::bacula_user,
   $media_type              = 'File',
+  $maxconcurjobs           = '5',
   $packages                = $bacula::params::bacula_storage_packages,
   $services                = $bacula::params::bacula_storage_services,
   $homedir                 = $bacula::params::homedir,

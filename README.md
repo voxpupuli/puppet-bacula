@@ -68,7 +68,6 @@ removed from the `bacula::storage` class.
 
 *  `$volret_full`
 *  `$volret_incremental`
-*  `$maxconcurjobs`
 *  `$maxvolbytes_full`
 *  `$maxvoljobs_full`
 *  `$maxvols_full`

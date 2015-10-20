@@ -1,4 +1,4 @@
-# Class: bacula
+# Define: bacula::job
 #
 # This class installs a bacula job on the director.  This can be used for specific applications as well as general host backups
 #

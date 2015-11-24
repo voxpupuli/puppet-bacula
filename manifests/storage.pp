@@ -9,6 +9,7 @@ class bacula::storage (
   $password                = 'secret',
   $device_name             = "${::fqdn}-device",
   $device                  = '/bacula',
+  $device_mode             = '0770',
   $device_owner            = $bacula::params::bacula_user,
   $media_type              = 'File',
   $maxconcurjobs           = '5',
@@ -69,7 +70,7 @@ class bacula::storage (
       ensure  => directory,
       owner   => $device_owner,
       group   => $group,
-      mode    => '0770',
+      mode    => $device_mode,
       require => Package[$packages],
     }
   }

@@ -24,16 +24,24 @@ class bacula::storage (
 ) inherits bacula::params {
 
   include bacula::common
-  include bacula::ssl
   include bacula::virtual
 
   realize(Package[$packages])
 
-  service { $services:
-    ensure    => running,
-    enable    => true,
-    subscribe => File[$bacula::ssl::ssl_files],
-    require   => Package[$packages],
+  if $ssl {
+    service { $services:
+      ensure    => running,
+      enable    => true,
+      subscribe => File[$bacula::ssl::ssl_files],
+      require   => Package[$packages],
+    }
+  }
+  else {
+    service { $services:
+      ensure    => running,
+      enable    => true,
+      require   => Package[$packages],
+    }
   }
 
   concat::fragment { 'bacula-storage-header':

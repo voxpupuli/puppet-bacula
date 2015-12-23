@@ -14,8 +14,9 @@ class bacula::common (
   $group        = $bacula::params::bacula_group,
 ) inherits bacula::params {
 
-  include bacula::ssl
-  include bacula::client
+  if $ssl {
+    include bacula::ssl
+  }
 
   file { $homedir:
     ensure  => directory,

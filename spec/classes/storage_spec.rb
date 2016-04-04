@@ -6,7 +6,8 @@ describe 'bacula::storage' do
     let(:facts) {
       {
         :operatingsystem => 'Debian',
-        :concat_basedir => '/dne'
+        :concat_basedir => '/dne',
+        :ipaddress => '10.0.0.1'
       }
     }
     it { should contain_class('bacula::storage') }
@@ -18,7 +19,8 @@ describe 'bacula::storage' do
         :operatingsystem => 'RedHat',
         :operatingsystemrelease => '7.0',
         :operatingsystemmajrelease => '7',
-        :concat_basedir => '/dne'
+        :concat_basedir => '/dne',
+        :ipaddress => '10.0.0.1'
       }
     }
     it { should contain_class('bacula::storage') }

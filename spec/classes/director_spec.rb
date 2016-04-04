@@ -1,14 +1,15 @@
-require 'spec_helper' 
+require 'spec_helper'
 
 describe 'bacula::director' do
   require 'hiera'
-  context 'Debian' do 
+  context 'Debian' do
     let(:facts) {
       {
         :osfamily => 'Debian',
         :operatingsystem => 'Debian',
         :operatingsystemrelease => '7.0',
-        :concat_basedir => '/dne'
+        :concat_basedir => '/dne',
+        :ipaddress => '10.0.0.1'
       }
     }
     it { should contain_class('bacula::director') }
@@ -20,7 +21,8 @@ describe 'bacula::director' do
         :operatingsystem => 'RedHat',
         :operatingsystemrelease => '7.0',
         :operatingsystemmajrelease => '7',
-        :concat_basedir => '/dne'
+        :concat_basedir => '/dne',
+        :ipaddress => '10.0.0.1'
       }
     }
     it { should contain_class('bacula::director') }

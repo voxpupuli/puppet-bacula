@@ -5,7 +5,8 @@ describe 'bacula::client' do
   let(:facts) {
     {
       :operatingsystem => 'Debian',
-      :concat_basedir => '/dne'
+      :concat_basedir => '/dne',
+      :ipaddress => '10.0.0.1'
     }
   }
   it { should contain_class('bacula::client') }

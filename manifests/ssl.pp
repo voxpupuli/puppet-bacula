@@ -9,7 +9,7 @@ class bacula::ssl (
   $cafile     = $bacula::params::cafile,
   $packages   = $bacula::params::bacula_client_packages,
   $user       = $bacula::params::bacula_user,
-  $conf_user  = $user,
+  $conf_user  = $bacula::params::bacula_user,
   $conf_group = $bacula::params::bacula_group,
 ) inherits bacula::params {
 

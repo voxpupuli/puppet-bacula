@@ -1,0 +1,2 @@
+---
+bacula::director::postgresql::make_bacula_tables: '/usr/local/share/bacula/make_bacula_tables'

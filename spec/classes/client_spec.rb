@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'bacula::client' do
   require 'hiera'
+  let(:hiera_config) { 'hiera.yaml' }
   let(:facts) {
     {
       :operatingsystem => 'Debian',

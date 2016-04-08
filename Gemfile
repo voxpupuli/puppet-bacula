@@ -3,7 +3,7 @@ source "https://rubygems.org"
 
 group :test do
   gem "rake"
-  gem "puppet", ENV['PUPPET_VERSION'] || '~> 3.8.0'
+  gem "puppet", ENV['PUPPET_VERSION'] || '~> 4.5.0'
   gem "puppet-lint"
   gem 'rspec'
   gem 'rspec-core'
@@ -13,6 +13,7 @@ group :test do
   gem "metadata-json-lint"
   gem "puppet-syntax"
   gem "puppetlabs_spec_helper"
+  gem "rspec-puppet-facts"
   gem 'json', '~>1.0' if RUBY_VERSION == '1.9.3'
   gem 'json_pure', '~>1.0' if RUBY_VERSION == '1.9.3'
 end

@@ -1,0 +1,3 @@
+---
+bacula::director::postgresql::make_bacula_tables: '/usr/libexec/bacula/make_bacula_tables.postgresql'
+

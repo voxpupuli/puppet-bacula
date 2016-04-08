@@ -1,3 +1,5 @@
 Gemfile.lock
 .bundle
 pkg/
+spec/fixtures/manifests
+spec/fixtures/modules

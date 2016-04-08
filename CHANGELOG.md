@@ -1,6 +1,7 @@
 ## Unreleased
  - native puppet4
- - external database
+ - drop suppoort for puppet 3.x
+ - database maketables script has been removed in favor of packaged scripts
  - changelog
 
 ## 2016-04-04 3.0.1

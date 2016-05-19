@@ -15,7 +15,7 @@ class bacula::params {
 
   $db_host        = hiera('bacula::params::db_host', 'localhost')
 
-  if $::operatingsystem in ['RedHat', 'CentOS', 'Fedora'] {
+  if $::operatingsystem in ['RedHat', 'CentOS', 'Fedora', 'Scientific'] {
     $db_type        = hiera('bacula::params::db_type', 'postgresql')
   } else {
     $db_type        = hiera('bacula::params::db_type', 'pgsql')
@@ -56,7 +56,7 @@ class bacula::params {
       $bacula_user              = 'bacula'
       $bacula_group             = $bacula_user
     }
-    'RedHat','CentOS','Fedora': {
+    'RedHat','CentOS','Fedora','Scientific': {
       if 0 + $::operatingsystemmajrelease < 7 or ($::operatingsystem == 'Fedora' and 0 + $::operatingsystemmajrelease < 17) {
         $bacula_director_packages = [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
         $bacula_storage_packages  = [ 'bacula-storage-common', "bacula-storage-${db_type}" ]

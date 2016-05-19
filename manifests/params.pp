@@ -13,6 +13,8 @@ class bacula::params {
 
   validate_bool($ssl)
 
+  $db_host        = hiera('bacula::params::db_host', 'localhost')
+
   if $::operatingsystem in ['RedHat', 'CentOS', 'Fedora'] {
     $db_type        = hiera('bacula::params::db_type', 'postgresql')
   } else {

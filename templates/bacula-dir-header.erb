@@ -33,5 +33,10 @@ Catalog {
     dbname = "<%= @db_name %>";
     dbuser = "<%= @db_user %>";
     dbpassword = "<%= @db_pw %>";
-    DB Address = "<%= @db_host %>"
+<% if not @db_host.nil? -%>
+    DB Address = "<%= @db_host %>";
+<% end -%>
+<% if not @db_port.nil? -%>
+    DB Port = "<%= @db_port %>";
+<% end -%>
 }

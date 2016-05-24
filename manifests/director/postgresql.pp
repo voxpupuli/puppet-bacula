@@ -25,11 +25,24 @@ class bacula::director::postgresql(
     locale   => 'C',
   }
 
-  file { $make_bacula_tables:
-    content => template('bacula/make_bacula_postgresql_tables.erb'),
-    owner   => $user,
-    mode    => '0750',
-    before  => Exec["/bin/sh ${make_bacula_tables}"]
+  # Check if there's a make tables file that comes with the distro.
+  case $::operatingsystem {
+    'Ubuntu','Debian': {
+      $make_bacula_tables_file = '/usr/share/bacula-director/make_postgresql_tables'
+    }
+    'RedHat','CentOS','Fedora','Scientific': {
+      $make_bacula_tables_file = '/usr/libexec/bacula/make_postgresql_tables'
+    }
+
+    default: {
+      $make_bacula_tables_file = false
+      file { $make_bacula_tables:
+        content => template('bacula/make_bacula_postgresql_tables.erb'),
+        owner   => $user,
+        mode    => '0750',
+        before  => Exec["/bin/sh ${make_bacula_tables}"]
+      }
+    }
   }
 
   exec { "/bin/sh ${make_bacula_tables}":
@@ -40,6 +53,17 @@ class bacula::director::postgresql(
     require     => [
       File[$make_bacula_tables],
       Postgresql::Server::Db[$db_name],
-    ]
+    ],
+    unless      => "/usr/bin/test -f ${make_bacula_tables_file}",
   }
+
+  exec { "/bin/sh ${make_bacula_tables_file}":
+    user        => $user,
+    refreshonly => true,
+    subscribe   => Postgresql::Server::Db[$db_name],
+    notify      => Service[$services],
+    require     => Postgresql::Server::Db[$db_name],
+    onlyif      => "/usr/bin/test -f ${make_bacula_tables_file}",
+  }
+
 }

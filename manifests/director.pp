@@ -6,6 +6,8 @@
 # * db_user: the database user
 # * db_pw: the database user's password
 # * db_name: the database name
+# * db_host: the database host
+# * db_port: the database port
 # * password: password to connect to the director
 #
 # Sample Usage:
@@ -21,6 +23,8 @@ class bacula::director (
   $db_pw               = 'notverysecret',
   $db_name             = $bacula::params::bacula_user,
   $db_type             = $bacula::params::db_type,
+  $db_host             = $bacula::params::db_host,
+  $db_port             = $bacula::params::db_port,
   $password            = 'secret',
   $max_concurrent_jobs = '20',
   $packages            = $bacula::params::bacula_director_packages,
@@ -33,7 +37,6 @@ class bacula::director (
   $storage             = $bacula::params::storage,
   $group               = $bacula::params::bacula_group,
 ) inherits bacula::params {
-
   include bacula::common
   include bacula::client
   include bacula::ssl

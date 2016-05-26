@@ -36,13 +36,14 @@ class bacula::director::postgresql(
 
     default: {
       $make_bacula_tables_file = false
-      file { $make_bacula_tables:
-        content => template('bacula/make_bacula_postgresql_tables.erb'),
-        owner   => $user,
-        mode    => '0750',
-        before  => Exec["/bin/sh ${make_bacula_tables}"]
-      }
     }
+  }
+
+  file { $make_bacula_tables:
+    content => template('bacula/make_bacula_postgresql_tables.erb'),
+    owner   => $user,
+    mode    => '0750',
+    before  => Exec["/bin/sh ${make_bacula_tables}"]
   }
 
   exec { "/bin/sh ${make_bacula_tables}":

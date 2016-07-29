@@ -1,8 +1,13 @@
 ## Unreleased
- - native puppet4
- - drop suppoort for puppet 3.x
- - database maketables script has been removed in favor of packaged scripts
- - changelog
+
+## 2016-07-29 4.0.0
+### Summary
+This release contains backwards incompatible changes.
+
+#### Features
+ - Native Puppet4 module data and type validation
+ - Drop support for puppet 3.x
+ - database make-tables script has been removed in favor of packaged scripts
 
 ## 2016-04-04 3.0.1
 ### Summary

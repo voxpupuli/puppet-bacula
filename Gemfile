@@ -13,6 +13,8 @@ group :test do
   gem "metadata-json-lint"
   gem "puppet-syntax"
   gem "puppetlabs_spec_helper"
+  gem 'json', '~>1.0' if RUBY_VERSION == '1.9.3'
+  gem 'json_pure', '~>1.0' if RUBY_VERSION == '1.9.3'
 end
 
 group :development do

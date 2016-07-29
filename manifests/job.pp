@@ -91,8 +91,14 @@ define bacula::job (
     $fileset_real = 'Common'
   }
 
+  if empty($job_tag) {
+    $real_tags = "bacula-${::bacula::params::director}"
+  } else {
+    $real_tags = ["bacula-${::bacula::params::director}", $job_tag]
+  }
+
   @@bacula::director::job { $name:
     content => template($template),
-    tag     => ["bacula-${::bacula::params::director}", $job_tag];
+    tag     => $real_tags,
   }
 }

@@ -101,7 +101,7 @@ class bacula::director (
   Bacula::Director::Storage <<||>> { conf_dir => $conf_dir }
   Bacula::Director::Client <<||>> { conf_dir => $conf_dir }
 
-  if $job_tag {
+  if !empty($job_tag) {
     Bacula::Director::Job <<| tag == $job_tag |>> { conf_dir => $conf_dir }
   } else {
     Bacula::Director::Job <<||>> { conf_dir => $conf_dir }

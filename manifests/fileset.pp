@@ -3,12 +3,11 @@
 # A grouping of files to backup.
 #
 define bacula::fileset (
-    $files,
-    $excludes = '',
-    $options  = {'signature' => 'SHA1', 'compression' => 'GZIP9'},
-    $conf_dir = $bacula::params::conf_dir, # Overridden at realize
-  ) {
-  validate_hash($options)
+  $files,
+  $excludes                     = '',
+  Hash[String, String] $options = {'signature' => 'SHA1', 'compression' => 'GZIP9'},
+  $conf_dir                     = $bacula::params::conf_dir, # Overridden at realize
+) {
 
   include bacula::common
 

@@ -3,7 +3,7 @@
 # Creates a schedule to which jobs and jobdefs can adhere.
 #
 define bacula::schedule (
-  $runs,
+  Array $runs,
   $conf_dir = $bacula::params::conf_dir,
 ) {
 

@@ -44,8 +44,8 @@
 #  }
 #
 define bacula::job (
-  $files               = [],
-  $excludes            = [],
+  Array $files         = [],
+  Array $excludes      = [],
   $jobtype             = 'Backup',
   $fileset             = true,
   $template            = 'bacula/job.conf.erb',
@@ -55,7 +55,7 @@ define bacula::job (
   $pool_diff           = $bacula::client::default_pool_diff,
   $storage             = undef,
   $jobdef              = 'Default',
-  $runscript           = [],
+  Array $runscript     = [],
   $level               = undef,
   $accurate            = 'no',
   $reschedule_on_error = false,
@@ -67,10 +67,7 @@ define bacula::job (
   $priority            = false,
   $job_tag             = $bacula::params::job_tag,
 ) {
-  validate_array($files)
-  validate_array($excludes)
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
-  validate_array($runscript)
   validate_re($accurate, ['^yes', '^no'])
 
   include bacula::common

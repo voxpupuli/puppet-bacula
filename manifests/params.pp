@@ -22,6 +22,7 @@ class bacula::params {
   $storage          = hiera('bacula::params::storage', $::fqdn)
   $director         = hiera('bacula::params::director', $::fqdn)
   $director_address = hiera('bacula::params::director_address', $director)
+  $job_tag          = hiera('bacula::params::job_tag', undef)
 
   case $::operatingsystem {
     'Ubuntu','Debian': {

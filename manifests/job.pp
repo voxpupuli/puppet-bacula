@@ -24,6 +24,8 @@
 #     set to false to disable this option
 #   * priority - string containing the priority number for the job
 #     set to false to disable this option
+#   * job_tag - string that might be used for grouping of jobs. Pass this to
+#     bacula::director to only collect jobs that match this tag.
 #
 # Actions:
 #   * Exports job fragment for consuption on the director
@@ -63,6 +65,7 @@ define bacula::job (
   $restoredir          = '/tmp/bacula-restores',
   $sched               = false,
   $priority            = false,
+  $job_tag             = $bacula::params::job_tag,
 ) {
   validate_array($files)
   validate_array($excludes)
@@ -90,6 +93,6 @@ define bacula::job (
 
   @@bacula::director::job { $name:
     content => template($template),
-    tag     => "bacula-${::bacula::params::director}";
+    tag     => ["bacula-${::bacula::params::director}", $job_tag];
   }
 }

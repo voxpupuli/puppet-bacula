@@ -80,7 +80,7 @@ define bacula::job (
   } elsif $fileset == true {
     if $files == '' { err('you tell me to create a fileset, but no files given') }
     $fileset_real = $name
-    bacula::fileset { $name:
+    @@bacula::fileset { $name:
       files    => $files,
       excludes => $excludes
       }

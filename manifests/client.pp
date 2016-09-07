@@ -63,5 +63,6 @@ class bacula::client (
     port     => $port,
     client   => $client,
     password => $password,
+    tag      => "bacula-${::bacula::params::director}",
   }
 }

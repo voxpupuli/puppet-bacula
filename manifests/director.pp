@@ -100,15 +100,16 @@ class bacula::director (
 
   Bacula::Director::Pool <<||>> { conf_dir => $conf_dir }
   Bacula::Director::Storage <<||>> { conf_dir => $conf_dir }
-  Bacula::Director::Client <<||>> { conf_dir => $conf_dir }
+  Bacula::Director::Client <<| tag == "bacula-${director}" |>> { conf_dir => $conf_dir }
 
   if !empty($job_tag) {
+    Bacula::Fileset <<| tag == $job_tag |>> { conf_dir => $conf_dir }
     Bacula::Director::Job <<| tag == $job_tag |>> { conf_dir => $conf_dir }
   } else {
+    Bacula::Fileset <<||>> { conf_dir => $conf_dir }
     Bacula::Director::Job <<||>> { conf_dir => $conf_dir }
   }
 
-  Bacula::Fileset <<||>> { conf_dir => $conf_dir }
 
   Concat::Fragment <<| tag == "bacula-${director}" |>>
 

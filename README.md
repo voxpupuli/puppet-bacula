@@ -180,7 +180,9 @@ bacula::client::default_pool: 'Corp'
 In order for clients to be able to define jobs on the director, exported
 resources are used, thus there was a reliance on PuppetDB availability in the
 environment. In the client manifest the `bacula::job` exports a job 
-definition to the director. 
+definition to the director. If you deploy multiple directors that use the
+same PuppetDB and you don't want each director to collect every job, specify
+a job_tag to group them.
 
 ```puppet
 bacula::job { 'obsidian_logs':
@@ -194,7 +196,7 @@ to backup the files or directories at the paths specified in the `files`
 parameter.
 
 If a group of jobs will contain the same files, a [FileSet resource] can be
-used to simplify the `bacula::job` resource.  This can be exported from the
+used to simplify the `bacula::job` resource. This can be exported from the
 node (ensuring the resource title will be unique when realized) or a simple
 resource specified on the director using the `bacula::fileset` defined type as
 follows:
@@ -205,6 +207,8 @@ bacula::fileset { 'Puppet':
   options => {'compression' => 'LZO' }
 }
 ```
+If you set a job_tag on your `bacula::job`, make sure to also set the tag of
+the `bacula::fileset` to the same value.
 
 ## Available types
 

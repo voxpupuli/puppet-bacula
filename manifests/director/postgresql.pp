@@ -28,6 +28,7 @@ class bacula::director::postgresql(
   exec { "/bin/sh ${make_bacula_tables}":
     user        => $user,
     refreshonly => true,
+    environment => ["db_name=${db_name}"],
     subscribe   => Postgresql::Server::Db[$db_name],
     notify      => Service[$services],
     require     => [

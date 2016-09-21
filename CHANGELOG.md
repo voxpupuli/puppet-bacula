@@ -1,4 +1,5 @@
 ## Unreleased
+- Add support for multiple directors
 
 ## 2016-07-29 4.0.0
 ### Summary

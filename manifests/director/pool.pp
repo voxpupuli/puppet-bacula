@@ -41,6 +41,7 @@ define bacula::director::pool (
   $autoprune      = 'Yes',
   $purgeaction    = 'Truncate',
   $conf_dir       = $bacula::params::conf_dir, # Overridden at realize
+  $next_pool      = undef,
 ) {
 
   include bacula::params

@@ -361,6 +361,7 @@ Define a Bacula [Pool resource]. Parameters are:
   Bacula `Volume Use Duration` directive.
 - `storage`: name of the `Storage` resource backing the pool.
   Defaults to `$bacula::params::storage`. Bacula `Storage` directive.
+- `next_pool`: specifies that data from a `Copy` or `Migrate` job should go to the provided pool
 
 
 [Component Overview]: http://www.bacula.org/7.0.x-manuals/en/main/What_is_Bacula.html#SECTION00220000000000000000

@@ -24,6 +24,13 @@ Job {
 <% if @pool_diff -%>
     Differential Backup Pool = <%= scope.lookupvar('bacula::params::bacula_storage') %>-Pool-Diff
 <% end -%>
+<% elsif @jobtype == "Copy" or @jobtype == "Migrate" -%>
+<% if @selection_type -%>
+    Selection Type = <%= @selection_type %>
+<% end -%>
+<% if @selection_pattern -%>
+    Selection Type = <%= @selection_pattern %>
+<% end -%>
 <% end -%>
 
 <% if @jobdef -%>

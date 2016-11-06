@@ -232,7 +232,7 @@ resources if needed. Parameters are:
   Defaults to `[]`.
 - `excludes`: array of files to exclude in `Bacula::Fileset[$name]`
   Defaults to `[]`.
-- `jobtype`: one of `Backup` (default), `Restore`, `Admin` or `Verify`.
+- `jobtype`: one of `Backup` (default), `Restore`, `Admin`, `Verify`, `Copy` or `Migrate`.
   Defaults to `Backup`. Bacula `Type` directive.
 - `fileset`: determines whether to use the `Common` fileset (`false`), define a
    new `Bacula::Fileset[$name]` (`true`) or use a previously
@@ -276,7 +276,7 @@ See also `bacula::jobdefs`.
 
 Define a Bacula [JobDefs resource] resource. Parameters are:
 
-- `jobtype`: one of `Backup`, `Restore`, `Admin` or `Verify`.  Defaults to
+- `jobtype`: one of `Backup`, `Restore`, `Admin`, `Verify`, `Copy` or `Migrate`.  Defaults to
   `Backup`. Bacula `Type` directive.
 - `sched`: name of the `bacula::schedule` to use.  Defaults to `Default`.
   Bacula `Schedule` directive.

@@ -23,7 +23,7 @@ define bacula::jobdefs (
   $reschedule_times    = '10',
 ) {
 
-  validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
+  validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify', '^Copy', '^Migrate'])
 
   include bacula::params
   $conf_dir = $bacula::params::conf_dir

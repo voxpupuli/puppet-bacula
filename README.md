@@ -232,7 +232,7 @@ resources if needed. Parameters are:
   Defaults to `[]`.
 - `excludes`: array of files to exclude in `Bacula::Fileset[$name]`
   Defaults to `[]`.
-- `jobtype`: one of `Backup` (default), `Restore`, `Admin` or `Verify`.
+- `jobtype`: one of `Backup` (default), `Restore`, `Admin`, `Verify`, `Copy` or `Migrate`.
   Defaults to `Backup`. Bacula `Type` directive.
 - `fileset`: determines whether to use the `Common` fileset (`false`), define a
    new `Bacula::Fileset[$name]` (`true`) or use a previously
@@ -269,6 +269,8 @@ resources if needed. Parameters are:
   Defaults to `false` which disables this directive. Bacula `Schedule` directive.
 - `priority`: the priority of the job.
   Defaults to `false` which disables this directive. Bacula `Priority` directive.
+- `selection_type`: determines how a copy/migration job will go about selecting what JobIds to migrate
+- `selection_pattern`: gives you fine control over exactly what JobIds are selected for a copy/migration job.
 
 See also `bacula::jobdefs`.
 
@@ -276,7 +278,7 @@ See also `bacula::jobdefs`.
 
 Define a Bacula [JobDefs resource] resource. Parameters are:
 
-- `jobtype`: one of `Backup`, `Restore`, `Admin` or `Verify`.  Defaults to
+- `jobtype`: one of `Backup`, `Restore`, `Admin`, `Verify`, `Copy` or `Migrate`.  Defaults to
   `Backup`. Bacula `Type` directive.
 - `sched`: name of the `bacula::schedule` to use.  Defaults to `Default`.
   Bacula `Schedule` directive.
@@ -361,6 +363,7 @@ Define a Bacula [Pool resource]. Parameters are:
   Bacula `Volume Use Duration` directive.
 - `storage`: name of the `Storage` resource backing the pool.
   Defaults to `$bacula::params::storage`. Bacula `Storage` directive.
+- `next_pool`: specifies that data from a `Copy` or `Migrate` job should go to the provided pool
 
 
 [Component Overview]: http://www.bacula.org/7.0.x-manuals/en/main/What_is_Bacula.html#SECTION00220000000000000000

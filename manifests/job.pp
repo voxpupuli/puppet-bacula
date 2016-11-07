@@ -66,8 +66,10 @@ define bacula::job (
   $sched               = false,
   $priority            = false,
   $job_tag             = $bacula::params::job_tag,
+  $selection_type      = undef,
+  $selection_pattern   = undef,
 ) {
-  validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify'])
+  validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify', '^Copy', '^Migrate'])
   validate_re($accurate, ['^yes', '^no'])
 
   include bacula::common

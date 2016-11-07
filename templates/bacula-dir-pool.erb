@@ -23,5 +23,8 @@ Pool {
 <% end -%>
     Storage              = <%= @storage %>-sd
     Action On Purge      = <%= @purgeaction %>
+<% if @next_pool -%>
+    Next Pool            = <%= @next_pool %>
+<% end -%>
 }
 

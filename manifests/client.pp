@@ -18,6 +18,9 @@ class bacula::client (
   $storage             = $bacula::params::storage,
   $group               = $bacula::params::bacula_group,
   $client_config       = $bacula::params::client_config,
+  $autoprune           = $bacula::params::autoprune,
+  $file_retention      = $bacula::params::file_retention,
+  $job_retention       = $bacula::params::job_retention,
   $client              = $::fqdn,
   $default_pool        = 'Default',
   $default_pool_full   = undef,
@@ -61,9 +64,12 @@ class bacula::client (
 
   # Tell the director about this client config
   @@bacula::director::client { $client:
-    port     => $port,
-    client   => $client,
-    password => $password,
-    tag      => "bacula-${::bacula::params::director}",
+    port           => $port,
+    client         => $client,
+    password       => $password,
+    autoprune      => $autoprune,
+    file_retention => $file_retention,
+    job_retention  => $job_retention,
+    tag            => "bacula-${::bacula::params::director}",
   }
 }

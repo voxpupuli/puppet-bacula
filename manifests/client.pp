@@ -40,11 +40,12 @@ class bacula::client (
   }
 
   concat { $client_config:
-    owner   => 'root',
-    group   => $group,
-    mode    => '0640',
-    require => Package[$bacula::params::bacula_client_packages],
-    notify  => Service[$bacula::params::bacula_client_services],
+    owner     => 'root',
+    group     => $group,
+    mode      => '0640',
+    show_diff => false,
+    require   => Package[$bacula::params::bacula_client_packages],
+    notify    => Service[$bacula::params::bacula_client_services],
   }
 
   concat::fragment { 'bacula-client-header':

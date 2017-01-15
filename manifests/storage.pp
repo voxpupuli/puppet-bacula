@@ -59,10 +59,11 @@ class bacula::storage (
   Concat::Fragment <<| tag == "bacula-storage-dir-${director}" |>>
 
   concat { "${conf_dir}/bacula-sd.conf":
-    owner  => 'root',
-    group  => $group,
-    mode   => '0640',
-    notify => Service[$services],
+    owner     => 'root',
+    group     => $group,
+    mode      => '0640',
+    show_diff => false,
+    notify    => Service[$services],
   }
 
   if $media_type == 'File' {

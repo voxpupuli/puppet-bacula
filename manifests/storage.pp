@@ -11,6 +11,7 @@ class bacula::storage (
   $device                  = '/bacula',
   $device_mode             = '0770',
   $device_owner            = $bacula::params::bacula_user,
+  $device_seltype          = $bacula::params::device_seltype,
   $media_type              = 'File',
   $maxconcurjobs           = '5',
   $packages                = $bacula::params::bacula_storage_packages,
@@ -72,6 +73,7 @@ class bacula::storage (
       owner   => $device_owner,
       group   => $group,
       mode    => $device_mode,
+      seltype => $device_seltype,
       require => Package[$packages],
     }
   }

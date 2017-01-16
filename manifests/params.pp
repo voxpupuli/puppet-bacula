@@ -10,6 +10,7 @@ class bacula::params {
   $monitor        = true
   $ssl            = hiera('bacula::params::ssl', false)
   $ssl_dir        = hiera('bacula::params::ssl_dir', '/etc/puppetlabs/puppet/ssl')
+  $device_seltype = 'bacula_store_t'
 
   validate_bool($ssl)
 

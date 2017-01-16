@@ -61,10 +61,11 @@ class bacula::director (
   }
 
   file { "${conf_dir}/bconsole.conf":
-    owner   => 'root',
-    group   => $group,
-    mode    => '0640',
-    content => template('bacula/bconsole.conf.erb');
+    owner     => 'root',
+    group     => $group,
+    mode      => '0640',
+    show_diff => false,
+    content   => template('bacula/bconsole.conf.erb');
   }
 
   Concat {
@@ -113,19 +114,28 @@ class bacula::director (
 
   Concat::Fragment <<| tag == "bacula-${director}" |>>
 
-  concat { "${conf_dir}/bacula-dir.conf": }
+  concat { "${conf_dir}/bacula-dir.conf":
+    show_diff => false,
+  }
 
   $sub_confs = [
     "${conf_dir}/conf.d/schedule.conf",
-    "${conf_dir}/conf.d/storage.conf",
     "${conf_dir}/conf.d/pools.conf",
     "${conf_dir}/conf.d/job.conf",
     "${conf_dir}/conf.d/jobdefs.conf",
-    "${conf_dir}/conf.d/client.conf",
     "${conf_dir}/conf.d/fileset.conf",
   ]
 
+  $sub_confs_with_secrets = [
+    "${conf_dir}/conf.d/client.conf",
+    "${conf_dir}/conf.d/storage.conf",
+  ]
+
   concat { $sub_confs: }
+
+  concat { $sub_confs_with_secrets:
+    show_diff => false,
+  }
 
   bacula::fileset { 'Common':
     files => ['/etc'],

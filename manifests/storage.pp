@@ -11,6 +11,7 @@ class bacula::storage (
   $device                  = '/bacula',
   $device_mode             = '0770',
   $device_owner            = $bacula::params::bacula_user,
+  $device_seltype          = $bacula::params::device_seltype,
   $media_type              = 'File',
   $maxconcurjobs           = '5',
   $packages                = $bacula::params::bacula_storage_packages,
@@ -59,10 +60,11 @@ class bacula::storage (
   Concat::Fragment <<| tag == "bacula-storage-dir-${director}" |>>
 
   concat { "${conf_dir}/bacula-sd.conf":
-    owner  => 'root',
-    group  => $group,
-    mode   => '0640',
-    notify => Service[$services],
+    owner     => 'root',
+    group     => $group,
+    mode      => '0640',
+    show_diff => false,
+    notify    => Service[$services],
   }
 
   if $media_type == 'File' {
@@ -71,6 +73,7 @@ class bacula::storage (
       owner   => $device_owner,
       group   => $group,
       mode    => $device_mode,
+      seltype => $device_seltype,
       require => Package[$packages],
     }
   }

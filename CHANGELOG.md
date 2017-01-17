@@ -1,6 +1,18 @@
 ## Unreleased
 - Add support for multiple directors
 
+## 2017-01-17 4.0.1
+### Summary
+This release contains small bugfixes and a couple feature tweaks.
+
+#### Bugfixes
+ - Fix SELinux setype on file type storage devices
+ - Fix parameter pass through for client options
+
+#### Features
+ - Sort the jobs by name in config to be reflected in bconsole
+ - Disable diff for secret-containing files, keeping puppetdb clean
+
 ## 2016-07-29 4.0.0
 ### Summary
 This release contains backwards incompatible changes.

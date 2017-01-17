@@ -33,6 +33,7 @@ class bacula::director (
   $storage             = $bacula::params::storage,
   $group               = $bacula::params::bacula_group,
   $job_tag             = $bacula::params::job_tag,
+  $messages            = $bacula::params::dir_messages,
 ) inherits bacula::params {
 
   include bacula::common
@@ -87,17 +88,7 @@ class bacula::director (
     content => template('bacula/bacula-dir-tail.erb')
   }
 
-  bacula::messages { 'Standard-dir':
-    console => 'all, !skipped, !saved',
-    append  => '"/var/log/bacula/log" = all, !skipped',
-    catalog => 'all',
-  }
-
-  bacula::messages { 'Daemon':
-    mname   => 'Daemon',
-    console => 'all, !skipped, !saved',
-    append  => '"/var/log/bacula/log" = all, !skipped',
-  }
+  create_resources(bacula::messages, $messages)
 
   Bacula::Director::Pool <<||>> { conf_dir => $conf_dir }
   Bacula::Director::Storage <<| tag == "bacula-${storage}" |>> { conf_dir => $conf_dir }

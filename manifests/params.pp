@@ -11,6 +11,19 @@ class bacula::params {
   $ssl            = hiera('bacula::params::ssl', false)
   $ssl_dir        = hiera('bacula::params::ssl_dir', '/etc/puppetlabs/puppet/ssl')
   $device_seltype = 'bacula_store_t'
+  $dir_messages   = hiera('bacula::params::dir_messages', {
+    'Daemon' => {
+      mname   => 'Daemon',
+      console => 'all, !skipped, !saved',
+      append  => '"/var/log/bacula/log" = all, !skipped',
+    },
+    'Standard-dir' => {
+      mname   => 'Standard',
+      console => 'all, !skipped, !saved',
+      append  => '"/var/log/bacula/log" = all, !skipped',
+      catalog => 'all',
+    }
+  })
 
   validate_bool($ssl)
 

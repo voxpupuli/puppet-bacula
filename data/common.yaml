@@ -1,2 +1,12 @@
 ---
+bacula::director::messages:
+    Daemon:
+      mname:        'Daemon'
+      console:      'all, !skipped, !saved'
+      append:       '"/var/log/bacula/log" = all, !skipped'
+    Standard-dir:
+      mname:        'Standard'
+      console:      'all, !skipped, !saved'
+      append:       '"/var/log/bacula/log" = all, !skipped'
+      catalog:      'all'
 bacula::director::postgresql::make_bacula_tables: ''

@@ -33,7 +33,7 @@ class bacula::director (
   $storage             = $bacula::params::storage,
   $group               = $bacula::params::bacula_group,
   $job_tag             = $bacula::params::job_tag,
-  $messages            = $bacula::params::dir_messages,
+  $messages,
 ) inherits bacula::params {
 
   include bacula::common

@@ -8,7 +8,13 @@
 #   none
 #
 class bacula::director::postgresql(
-  String $make_bacula_tables = '',
+  String $make_bacula_tables = $facts['osfamily'] ? {
+    /(?i-mx:debian)/  => '/usr/share/bacula-director/make_postgresql_tables',
+    /(?i-mx:freebsd)/ => '/usr/local/share/bacula/make_postgresql_tables',
+    /(?i-mx:openbsd)/ => '/usr/local/libexec/bacula/make_postgresql_tables',
+    /(?i-mx:redhat)/  => '/usr/libexec/bacula/make_bacula_tables.postgresql',
+    default           => '',
+  },
   String $db_name            = $bacula::director::db_name,
   String $db_pw              = $bacula::director::db_pw,
   String $db_user            = $bacula::director::db_user,

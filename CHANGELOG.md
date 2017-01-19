@@ -1,6 +1,20 @@
 ## Unreleased
 - Add support for multiple directors
 
+## 2017-01-18 4.1.0
+### Summary
+Testing updates, bug fix, and more usage of hiera.
+
+### Bugfixes
+ - Only include an Append in messages when its been requested
+
+### Testing
+ - Drop puppet 4.2 from testing to allow data_provider from heira
+ - Include newer Puppet versions in testing
+
+### Features
+ - Allow the directory messages to be configurable using hiera
+
 ## 2017-01-17 4.0.1
 ### Summary
 This release contains small bugfixes and a couple feature tweaks.

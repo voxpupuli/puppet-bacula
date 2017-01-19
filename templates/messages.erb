@@ -4,7 +4,9 @@ Messages {
 <% if @director -%>
     Director = <%= @director %>
 <% end -%>
+<% if @append -%>
     Append   = <%= @append %>
+<% end -%>
 <% if @syslog -%>
     Syslog   = <%= @syslog %>
 <% end -%>

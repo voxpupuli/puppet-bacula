@@ -47,7 +47,13 @@ classification of `bacula::director`, and the Storage node will require the
 classification of `bacula::storage`.  All nodes will require classification of
  `bacula::client`.
 
-##### ** A NOTE FOR UPGRADERS **
+##### ** Upgrading to 5.x **
+
+The `bacula::params` class has been completely removed.  Any data in your
+primary hiera that used these values will need to be udpated.
+
+
+##### ** Upgrading to 4.x **
 
 Several params have been removed and replaced with the default names.  Update
 your hiera data and parameters as follows.

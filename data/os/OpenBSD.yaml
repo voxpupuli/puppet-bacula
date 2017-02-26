@@ -1,2 +1,13 @@
 ---
 bacula::director::postgresql::make_bacula_tables: '/usr/local/libexec/bacula/make_postgresql_tables'
+bacula::director::packages: [ 'bacula-server', "bacula-<%= $db_type %>" ]
+bacula::director::services: 'bacula_dir'
+bacula::storage::packages: [ 'bacula-server' ]
+bacula::storage::services: 'bacula_sd'
+bacula::client::packages: 'bacula-client'
+bacula::client::services: 'bacula_fd'
+bacula::conf_dir: '/etc/bacula'
+bacula::rundir: '/var/run'
+bacula::homedir: '/var/bacula'
+bacula::bacula_user: '_bacula'
+bacula::bacula_group: '_bacula'

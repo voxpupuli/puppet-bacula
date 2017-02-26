@@ -8,12 +8,12 @@ FileSet {
 <%   end -%>
 <% end -%>
     }
-<% [@files].flatten.each do |f| -%>
+<% @files.each do |f| -%>
 <%=    "    File = #{f}" %>
 <% end -%>
   }
   Exclude {
-<%   [@excludes].flatten.reject { |x| x.empty? }.flatten.each do |exclude| -%>
+<% @excludes.reject { |x| x.empty? }.each do |exclude| -%>
 <%=    "    File = #{exclude}" %>
 <% end -%>
   }

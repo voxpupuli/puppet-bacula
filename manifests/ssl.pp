@@ -1,58 +1,71 @@
-# Class: bacula::ssl
+# Manage the SSL deployment for bacula components, Director, Storage, and File
+# daemons.
 #
-# Manage the SSL deployment for bacula components, Director, Storage, and File.
+# @param certfile
+# @param keyfile
+# @param cafile
+# @param packages
+#
+# @example
+#   include bacula::ssl
+
+#bacula::ssl {
+#  certfile_source => '/etc/dehydrated/certfile.pem',
+#  keyfile_source  => '/etc/dehydrated/keyfile.pem',
+#  cafile_source   => '/etc/dehydrated/cafile.pem',
+#}
+#
+# @example in hiera
+#   TODO
+#
+# TODO make DH key length configurable
+#
 class bacula::ssl (
-  $ssl_dir    = $bacula::params::ssl_dir,
-  $conf_dir   = $bacula::params::conf_dir,
-  $certfile   = $bacula::params::certfile,
-  $keyfile    = $bacula::params::keyfile,
-  $cafile     = $bacula::params::cafile,
-  $packages   = $bacula::params::bacula_client_packages,
-  $user       = $bacula::params::bacula_user,
-  $conf_user  = $bacula::params::bacula_user,
-  $conf_group = $bacula::params::bacula_group,
-) inherits bacula::params {
+  #Optional[String] $certfile = undef,
+  #Optional[String] $keyfile  = undef,
+  #Optional[String] $cafile   = undef,
+  #Array $packages            = [],
+  String $ssl_dir,
+) {
+
+  include ::bacula
+  include ::bacula::client
+
+  $conf_dir     = $::bacula::conf_dir
+  $bacula_user  = $::bacula::bacula_user
+  $bacula_group = $::bacula::bacula_group
+
+  $certfile = "${conf_dir}/ssl/${trusted['certname']}_cert.pem"
+  $keyfile  = "${conf_dir}/ssl/${trusted['certname']}_key.pem"
+  $cafile   = "${conf_dir}/ssl/ca.pem"
 
   $ssl_files = [
     $certfile,
     $keyfile,
-    $cafile
+    $cafile,
   ]
 
   File {
-    owner   => $user,
+    owner   => $bacula_user,
     group   => '0',
     mode    => '0640',
-    require => Package[$packages],
+    require => Package[$bacula::client::packages],
   }
 
-  file { $conf_dir:
-    ensure => 'directory',
-    owner  => $conf_user,
-    group  => $conf_group,
-  } ->
-
   file { "${conf_dir}/ssl":
-    ensure => 'directory',
+    ensure  => 'directory',
+    require => File[$conf_dir],
   }
 
   file { $certfile:
-    source  => "${ssl_dir}/certs/${::clientcert}.pem",
+    source  => "${ssl_dir}/certs/${trusted['certname']}.pem",
     require => File["${conf_dir}/ssl"],
   }
 
   file { $keyfile:
-    source  => "${ssl_dir}/private_keys/${::clientcert}.pem",
+    source  => "${ssl_dir}/private_keys/${trusted['certname']}.pem",
     require => File["${conf_dir}/ssl"],
   }
-
-  # Now export our key and cert files so the director can collect them,
-  # while we've still realized the actual files, except when we're on
-  # the director already.
-  #unless ($::fqdn == $bacula::params::director_name) {
-  #  @@bacula::ssl::certfile { $::clientcert: }
-  #  @@bacula::ssl::keyfile  { $::clientcert: }
-  #}
 
   file { $cafile:
     ensure  => 'file',
@@ -61,10 +74,11 @@ class bacula::ssl (
   }
 
   exec { 'generate_bacula_dhkey':
-    command => 'openssl dhparam -out dh1024.pem -5 1024',
+    command => 'openssl dhparam -out dh2048.pem -5 2048',
     path    => '/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/bin:/usr/local/sbin',
     cwd     => "${conf_dir}/ssl",
-    creates => "${conf_dir}/ssl/dh1024.pem",
+    creates => "${conf_dir}/ssl/dh2048.pem",
+    timeout => '1800',
     require => File["${conf_dir}/ssl"],
   }
 }

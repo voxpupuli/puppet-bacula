@@ -12,7 +12,7 @@ A puppet module for the Bacula backup system.
 
 # Requirements
 
-This module requires that [exported resources] have been setup (e.g. with [PuppetDB])
+This module requires that [exported resources] have been setup (e.g. with [PuppetDB]).  Including manifests on the Bacula client, assumes that it can export bits of data to the director to end up with fully functional configs.  As such, to get the benefits of using this module, you should be using it on at least the director and client, and most likely the storage, though this might be gotten around, if one were so inclined.
 
 ## Usage
 
@@ -29,16 +29,16 @@ just updating the hostnames used below to all point to the same system.
 
 #### Defaults
 
-Bacula's functionality depends on connecting several components.  Due to the 
-numebr of moving pieces in this module, you will likely want to set some 
+Bacula's functionality depends on connecting several components, together.  Due
+to the number of moving pieces in this module, you will likely want to set some
 site defaults, and tune more specifically where desired.
 
 As such, it is reasonable to set the following hiera data that will allow 
 many of the classes in this module to use those defaults sanely.
 
 ```
-bacula::params::storage: 'mydirector.example.com'
-bacula::params::director: 'mydirector.example.com'
+bacula::storage_name: 'mystorage.example.com'
+bacula::director_name: 'mydirector.example.com'
 ```
 
 This may be on the same host, or different hosts, but the name you put here 
@@ -47,7 +47,42 @@ classification of `bacula::director`, and the Storage node will require the
 classification of `bacula::storage`.  All nodes will require classification of
  `bacula::client`.
 
-##### ** A NOTE FOR UPGRADERS **
+##### ** Upgrading to 5.x **
+
+The `bacula::params` class has been completely removed.  Any data in your
+primary hiera that used these values will need to be updated.
+
+The variables used to specify the Storage and Director host have been moved.
+Where previously, `bacula::params::director` and `bacula::params::storage`,
+replace them with `bacula::dirctor_name` and `bacula::storage_name`.
+
+Here are is the list of variables that have moved out of the params class.  If
+any of these are set in an environments hiera data, they will not be respected
+and should be moved as follows.
+
+- move bacula::params::file_retention to bacula::client::file_retention
+- move bacula::params::job_retention to bacula::client::job_retention
+- move bacula::params::autoprune to bacula::client::autoprune
+- move bacula::client::director to bacula::client::director_name
+
+- move bacula::params::monitor to bacula::monitor
+- move bacula::params::device_seltype to bacula::device_seltype
+- move bacula::params::ssl to bacula::use_ssl
+
+- move bacula::params::ssl_dir to bacula::ssl::ssl_dir
+- users are required to set baculs::ssl::ssl_dir
+
+The following classes have been relocated as well.  Please update any
+references of the former to reference the latter.
+
+- move class bacula::fileset to bacula::director::fileset
+
+Other data changes are as follows.
+
+- remove needless bacula::client::storage
+- Relocated many `params` variables to `bacula` class
+
+##### ** Upgrading to 4.x **
 
 Several params have been removed and replaced with the default names.  Update
 your hiera data and parameters as follows.

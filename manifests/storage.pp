@@ -1,44 +1,74 @@
-# Class: bacula::storage
+# This class configures the Bacula storage daemon.
 #
-# Configures bacula storage daemon
+# @param conf_dir
+# @param device
+# @param device_mode
+# @param device_password
+# @param device_seltype
+# @param director_name
+# @param group
+# @param homedir
+# @param listen_address INET or INET6 address to listen on
+# @param maxconcurjobs
+# @param media_type
+# @param packages
+# @param port The listening port for the Storage Daemon
+# @param rundir
+# @param rundir
+# @param services
+# @param storage
+# @param user
 #
 class bacula::storage (
-  $port                    = '9103',
-  $listen_address          = $::ipaddress,
-  $storage                 = $::fqdn, # storage here is not params::storage
-  $password                = 'secret',
-  $device_name             = "${::fqdn}-device",
-  $device                  = '/bacula',
-  $device_mode             = '0770',
-  $device_owner            = $bacula::params::bacula_user,
-  $device_seltype          = $bacula::params::device_seltype,
-  $media_type              = 'File',
-  $maxconcurjobs           = '5',
-  $packages                = $bacula::params::bacula_storage_packages,
-  $services                = $bacula::params::bacula_storage_services,
-  $homedir                 = $bacula::params::homedir,
-  $rundir                  = $bacula::params::rundir,
-  $conf_dir                = $bacula::params::conf_dir,
-  $director                = $bacula::params::director,
-  $user                    = $bacula::params::bacula_user,
-  $group                   = $bacula::params::bacula_group,
-) inherits bacula::params {
+  String $services,
+  Array $packages,
+  $conf_dir       = $bacula::conf_dir,
+  $device         = '/bacula',
+  $device_mode    = '0770',
+  $device_name    = "${trusted['fqdn']}-device",
+  $device_owner   = $bacula::bacula_user,
+  $device_seltype = $bacula::device_seltype,
+  $director_name  = $bacula::director_name,
+  $group          = $bacula::bacula_group,
+  $homedir        = $bacula::homedir,
+  $listen_address = $facts['ipaddress'],
+  $maxconcurjobs  = '5',
+  $media_type     = 'File',
+  $password       = 'secret',
+  String $port    = '9103',
+  $rundir         = $bacula::rundir,
+  $storage        = $facts['fqdn'], # storage here is not params::storage
+  $user           = $bacula::bacula_user,
+) inherits ::bacula {
 
-  include bacula::common
-  include bacula::ssl
-  include bacula::virtual
+  # Packages are virtual due to some platforms shipping the
+  # SD and Dir as part of the same package.
+  include ::bacula::virtual
 
-  realize(Package[$packages])
+  # Allow for package names to include EPP syntax for db_type
+  $db_type = lookup('bacula::director::db_type')
+  $package_names = $packages.map |$p| {
+    $package_name = inline_epp($p, {
+      'db_type' => $db_type
+    })
+  }
+  realize(Package[$package_names])
 
   service { $services:
-    ensure    => running,
-    enable    => true,
-    subscribe => File[$bacula::ssl::ssl_files],
-    require   => Package[$packages],
+    ensure  => running,
+    enable  => true,
+    require => Package[$package_names],
+  }
+
+  if $::bacula::use_ssl == true {
+    include ::bacula::ssl
+    Service[$services] {
+      subscribe => File[$::bacula::ssl::ssl_files],
+    }
   }
 
   concat::fragment { 'bacula-storage-header':
-    order   => 00,
+    order   => '00',
     target  => "${conf_dir}/bacula-sd.conf",
     content => template('bacula/bacula-sd-header.erb'),
   }
@@ -50,14 +80,14 @@ class bacula::storage (
 
   bacula::messages { 'Standard-sd':
     daemon   => 'sd',
-    director => "${director}-dir = all",
+    director => "${director_name}-dir = all",
     syslog   => 'all, !skipped',
     append   => '"/var/log/bacula/bacula-sd.log" = all, !skipped',
   }
 
   # Realize the clause the director is exporting here so we can allow access to
   # the storage daemon Adds an entry to ${conf_dir}/bacula-sd.conf
-  Concat::Fragment <<| tag == "bacula-storage-dir-${director}" |>>
+  Concat::Fragment <<| tag == "bacula-storage-dir-${director_name}" |>>
 
   concat { "${conf_dir}/bacula-sd.conf":
     owner     => 'root',
@@ -84,6 +114,6 @@ class bacula::storage (
     device_name   => $device_name,
     media_type    => $media_type,
     maxconcurjobs => $maxconcurjobs,
-    tag           => "bacula-${::bacula::params::storage}",
+    tag           => "bacula-${director_name}",
   }
 }

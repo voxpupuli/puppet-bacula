@@ -70,6 +70,6 @@ class bacula::client (
     autoprune      => $autoprune,
     file_retention => $file_retention,
     job_retention  => $job_retention,
-    tag            => "bacula-${::bacula::params::director}",
+    tag            => "bacula-${director}",
   }
 }

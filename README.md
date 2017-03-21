@@ -12,7 +12,7 @@ A puppet module for the Bacula backup system.
 
 # Requirements
 
-This module requires that [exported resources] have been setup (e.g. with [PuppetDB])
+This module requires that [exported resources] have been setup (e.g. with [PuppetDB]).  Including manifests on the Bacula client, assumes that it can export bits of data to the director to end up with fully functional configs.  As such, to get the benefits of using this module, you should be using it on at least the director and client, and most likely the storage, though this might be gotten around, if one were so inclined.
 
 ## Usage
 
@@ -37,8 +37,8 @@ As such, it is reasonable to set the following hiera data that will allow
 many of the classes in this module to use those defaults sanely.
 
 ```
-bacula::params::storage: 'mydirector.example.com'
-bacula::params::director: 'mydirector.example.com'
+bacula::storage_name: 'mydirector.example.com'
+bacula::director_name: 'mydirector.example.com'
 ```
 
 This may be on the same host, or different hosts, but the name you put here 
@@ -50,7 +50,13 @@ classification of `bacula::storage`.  All nodes will require classification of
 ##### ** Upgrading to 5.x **
 
 The `bacula::params` class has been completely removed.  Any data in your
-primary hiera that used these values will need to be udpated.
+primary hiera that used these values will need to be updated.
+
+The variables used to specify the Storage and Director host have been moved.
+Where previously, `bacula::params::director` and `bacula::params::storage`,
+replace them with `bacula::dirctor_name` and `bacula::storage_name`.
+
+
 
 
 ##### ** Upgrading to 4.x **

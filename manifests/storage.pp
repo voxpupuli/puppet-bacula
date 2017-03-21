@@ -1,6 +1,4 @@
-# Class: bacula::storage
-#
-# Configures bacula storage daemon
+# This class configures the Bacula storage daemon.
 #
 # @param conf_dir
 # @param device
@@ -30,7 +28,7 @@ class bacula::storage (
   $device_name    = "${trusted['fqdn']}-device",
   $device_owner   = $bacula::bacula_user,
   $device_seltype = $bacula::device_seltype,
-  $director_name  = $bacula::director,
+  $director_name  = $bacula::director_name,
   $group          = $bacula::bacula_group,
   $homedir        = $bacula::homedir,
   $listen_address = $facts['ipaddress'],

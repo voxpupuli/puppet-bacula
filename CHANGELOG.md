@@ -1,6 +1,4 @@
 ## Unreleased
-- Add support for multiple directors
-
 Params that need documenting:
 refactor ssl data
 rename bacula::params::ssl_dir to bacula::ssl::ssl_dir
@@ -19,6 +17,8 @@ remove needless bacula::client::storage
 * Test all primary classes with improved platform coverage
 * Relocated many `params` variables to `bacula` class
 * Lint ruby code for rubocop
+* Add support for multiple
+* Allow for multiple directors
 
 
 ## 2017-01-18 4.1.0
@@ -33,7 +33,7 @@ Testing updates, bug fix, and more usage of hiera.
  - Include newer Puppet versions in testing
 
 ### Features
- - Allow the directory messages to be configurable using hiera
+ - Allow the director messages to be configurable using hiera
 
 ## 2017-01-17 4.0.1
 ### Summary

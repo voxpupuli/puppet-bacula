@@ -6,24 +6,22 @@
 # @param bacula_user The posix user for bacula.
 # @param conf_dir The path to the bacula configuration directory.
 # @param device_seltype SELinux type for the device
-# @param director
+# @param director_name
 # @param director_address
 # @param homedir The bacula user's home directory path
 # @param homedir_mode The bacula user's home director mode
 # @param job_tag A tag to add to all job resources
 # @param monitor Enable the Bacula Monitor option
 # @param rundir The run dir for the daemons
-# @param storage
+# @param storage_name
 # @param use_ssl Configure SSL, see README
 #
 # @example
 #   include bacula
 #
 # TODO director_address is confusing, and is only used by the bconsole template
-# TODO Document the use of storage
-# TODO Document the use of director
-# TODO Consider renaming the director param to director_name to be more clear
-# TODO Consider renaming the storage param to storage_name to be more clear
+# TODO Document the use of storage_name
+# TODO Document the use of director_name
 #
 class bacula (
   String $conf_dir,
@@ -32,8 +30,8 @@ class bacula (
   String $homedir,
   String $rundir,
   String $director_address,
-  String $director,
-  String $storage,
+  String $director_name,
+  String $storage_name,
   String $homedir_mode      = '0770',
   Boolean $monitor          = true,
   String $device_seltype    = 'bacula_store_t',

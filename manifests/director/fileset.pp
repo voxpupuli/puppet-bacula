@@ -6,7 +6,7 @@
 # @param conf_dir The bacula configuration director.  Should not need adjusting.
 # @param excludes A list of paths to exclude from the filest
 # @param options A hash of options to include in the fileset
-# @param director The name of the director intended to receive this fileset.
+# @param director_name The name of the director intended to receive this fileset.
 #
 # @example
 #   bacula::director::fileset { 'Home':
@@ -16,7 +16,7 @@
 define bacula::director::fileset (
   Array $files,
   String $conf_dir                              = $::bacula::conf_dir,
-  String $director                              = $::bacula::director,
+  String $director_name                         = $::bacula::director_name,
   Optional[Array] $excludes                     = [],
   Hash[String, Variant[String, Array]] $options = {
     'signature'   => 'SHA1',
@@ -27,6 +27,6 @@ define bacula::director::fileset (
   concat::fragment { "bacula-fileset-${name}":
     target  => "${conf_dir}/conf.d/fileset.conf",
     content => template('bacula/fileset.conf.erb'),
-    tag     => "bacula-${director}",
+    tag     => "bacula-${director_name}",
   }
 }

@@ -26,7 +26,7 @@ class bacula::client (
   $listen_address      = $facts['ipaddress'],
   $password            = 'secret',
   $max_concurrent_jobs = '2',
-  $director_name       = $bacula::director,
+  $director_name       = $bacula::director_name,
   $autoprune           = 'yes',
   $file_retention      = '45 days',
   $job_retention       = '6 months',

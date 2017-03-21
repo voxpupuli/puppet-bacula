@@ -19,7 +19,7 @@
 # @param port The listening port for the Director
 # @param rundir
 # @param services
-# @param storage
+# @param storage_name
 # @param manage_db
 # @param db_address
 # @param db_port
@@ -53,7 +53,7 @@ class bacula::director (
   $password                   = 'secret',
   $port                       = '9101',
   $rundir                     = $bacula::rundir,
-  $storage                    = $bacula::storage,
+  $storage_name               = $bacula::storage_name,
 ) inherits ::bacula {
 
   include ::bacula::director::defaults

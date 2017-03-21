@@ -17,6 +17,6 @@ class bacula::director::defaults {
   bacula::director::pool { 'Default':
     pooltype => 'Backup',
     label    => 'Default-',
-    storage  => $bacula::director::storage,
+    storage  => $bacula::director::storage_name,
   }
 }

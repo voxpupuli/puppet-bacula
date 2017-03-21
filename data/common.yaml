@@ -18,9 +18,9 @@ keyfile: "%{conf_dir}/ssl/${::clientcert}_key.pem"
 cafile: "%{conf_dir}/ssl/ca.pem"
 
 bacula::storage::services: 'bacula-sd'
-bacula::storage: '%{trusted.certname}'
+bacula::storage_name: '%{trusted.certname}'
 
-bacula::director: '%{trusted.certname}'
+bacula::director_name: '%{trusted.certname}'
 bacula::director_address: '%{trusted.certname}'
 bacula::job_tag: ~
 

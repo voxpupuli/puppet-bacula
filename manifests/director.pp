@@ -38,7 +38,6 @@ class bacula::director (
 
   include bacula::common
   include bacula::client
-  include bacula::ssl
   include bacula::director::defaults
   include bacula::virtual
 
@@ -50,11 +49,20 @@ class bacula::director (
 
   realize(Package[$packages])
 
-  service { $services:
-    ensure    => running,
-    enable    => true,
-    subscribe => File[$bacula::ssl::ssl_files],
-    require   => Package[$packages],
+  if $ssl {
+    service { $services:
+      ensure    => running,
+      enable    => true,
+      subscribe => File[$bacula::ssl::ssl_files],
+      require   => Package[$packages],
+    }
+  }
+  else {
+    service { $services:
+      ensure    => running,
+      enable    => true,
+      require   => Package[$packages],
+    }
   }
 
   file { "${conf_dir}/conf.d":

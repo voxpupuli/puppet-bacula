@@ -29,17 +29,25 @@ class bacula::client (
 ) inherits bacula::params {
 
   include bacula::common
-  include bacula::ssl
 
   package { $packages:
     ensure => present,
   }
 
-  service { $services:
-    ensure    => running,
-    enable    => true,
-    subscribe => File[$bacula::ssl::ssl_files],
-    require   => Package[$packages],
+  if $ssl {
+    service { $services:
+      ensure    => running,
+      enable    => true,
+      subscribe => File[$bacula::ssl::ssl_files],
+      require   => Package[$packages],
+    }
+  }
+  else {
+    service { $services:
+      ensure    => running,
+      enable    => true,
+      require   => Package[$packages],
+    }
   }
 
   concat { $client_config:

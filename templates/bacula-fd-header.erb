@@ -1,5 +1,5 @@
 Director {
-    Name     = <%= @director %>-dir
+    Name     = <%= @director_name %>-dir
     Password = "<%= @password %>"
 <%= scope.function_template(['bacula/_ssl.erb']) -%>
 <%= scope.function_template(['bacula/_sslkeypair.erb']) -%>
@@ -9,7 +9,7 @@ Director {
 }
 
 Director {
-    Name     = <%= @director %>-mon
+    Name     = <%= @director_name %>-mon
     Password = "<%= @password %>"
     Monitor  = yes
 <%= scope.function_template(['bacula/_ssl.erb']) -%>

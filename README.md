@@ -29,15 +29,15 @@ just updating the hostnames used below to all point to the same system.
 
 #### Defaults
 
-Bacula's functionality depends on connecting several components.  Due to the 
-numebr of moving pieces in this module, you will likely want to set some 
+Bacula's functionality depends on connecting several components, together.  Due
+to the number of moving pieces in this module, you will likely want to set some
 site defaults, and tune more specifically where desired.
 
 As such, it is reasonable to set the following hiera data that will allow 
 many of the classes in this module to use those defaults sanely.
 
 ```
-bacula::storage_name: 'mydirector.example.com'
+bacula::storage_name: 'mystorage.example.com'
 bacula::director_name: 'mydirector.example.com'
 ```
 
@@ -55,6 +55,32 @@ primary hiera that used these values will need to be updated.
 The variables used to specify the Storage and Director host have been moved.
 Where previously, `bacula::params::director` and `bacula::params::storage`,
 replace them with `bacula::dirctor_name` and `bacula::storage_name`.
+
+Here are is the list of variables that have moved out of the params class.  If
+any of these are set in an environments hiera data, they will not be respected
+and should be moved as follows.
+
+- move bacula::params::file_retention to bacula::client::file_retention
+- move bacula::params::job_retention to bacula::client::job_retention
+- move bacula::params::autoprune to bacula::client::autoprune
+- move bacula::client::director to bacula::client::director_name
+
+- move bacula::params::monitor to bacula::monitor
+- move bacula::params::device_seltype to bacula::device_seltype
+- move bacula::params::ssl to bacula::use_ssl
+
+- move bacula::params::ssl_dir to bacula::ssl::ssl_dir
+- users are required to set baculs::ssl::ssl_dir
+
+The following classes have been relocated as well.  Please update any
+references of the former to reference the latter.
+
+- move class bacula::fileset to bacula::director::fileset
+
+Other data changes are as follows.
+
+- remove needless bacula::client::storage
+- Relocated many `params` variables to `bacula` class
 
 ##### ** Upgrading to 4.x **
 

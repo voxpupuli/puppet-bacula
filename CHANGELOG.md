@@ -2,6 +2,13 @@
 * Params that need documenting:
 refactor ssl data
 
+## UNRELEASED 5.0.0
+### Summary
+
+This update contains a data overhaul removing the params class entirely, some
+testing changes and a couple small features.  Please see the `Upgrading`
+section in the README.
+
 * rename bacula::params::ssl_dir to bacula::ssl::ssl_dir
 * move bacula::params::file_retention to bacula class
 * move bacula::params::job_retention to bacula class
@@ -13,14 +20,16 @@ refactor ssl data
 * users are required to set baculs::ssl::ssl_dir
 * rename bacula::client::director to bacula::client::director_name
 * remove needless bacula::client::storage
+* Relocated many `params` variables to `bacula` class
 
+### Features
+* Allow for multiple directors
+* Move to data in modules entirely dropping params class
+
+### Testing
 * Drop older versions of puppet and ruby from test matrix
 * Test all primary classes with improved platform coverage
-* Relocated many `params` variables to `bacula` class
-* Lint ruby code for rubocop
-* Add support for multiple
-* Allow for multiple directors
-
+* Lint ruby code for rubocop compliance
 
 ## 2017-01-18 4.1.0
 ### Summary

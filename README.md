@@ -56,9 +56,6 @@ The variables used to specify the Storage and Director host have been moved.
 Where previously, `bacula::params::director` and `bacula::params::storage`,
 replace them with `bacula::dirctor_name` and `bacula::storage_name`.
 
-
-
-
 ##### ** Upgrading to 4.x **
 
 Several params have been removed and replaced with the default names.  Update

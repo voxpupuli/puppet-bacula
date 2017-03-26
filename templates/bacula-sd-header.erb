@@ -9,7 +9,7 @@ Storage {
 <% end -%>
 <%= scope.function_template(['bacula/_ssl.erb']) -%>
 <%= scope.function_template(['bacula/_sslkeypair.erb']) -%>
-<% if scope.lookupvar('bacula::params::ssl') -%>
+<% if scope.lookupvar('bacula::use_ssl') -%>
     TLS Verify Peer         = no
 <% end -%>
 }

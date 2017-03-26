@@ -1,5 +1,22 @@
 ## Unreleased
-- Add support for multiple directors
+* Params that need documenting:
+refactor ssl data
+
+## UNRELEASED 5.0.0
+### Summary
+
+This update contains a data overhaul removing the params class entirely, some
+testing changes and a couple small features.  Please see the `Upgrading`
+section in the README.
+
+### Features
+* Allow for multiple directors
+* Move to data in modules entirely dropping params class
+
+### Testing
+* Drop older versions of puppet and ruby from test matrix
+* Test all primary classes with improved platform coverage
+* Lint ruby code for rubocop compliance
 
 ## 2017-01-18 4.1.0
 ### Summary
@@ -13,7 +30,7 @@ Testing updates, bug fix, and more usage of hiera.
  - Include newer Puppet versions in testing
 
 ### Features
- - Allow the directory messages to be configurable using hiera
+ - Allow the director messages to be configurable using hiera
 
 ## 2017-01-17 4.0.1
 ### Summary

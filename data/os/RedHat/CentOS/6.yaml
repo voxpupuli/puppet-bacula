@@ -1,0 +1,7 @@
+---
+bacula::storage::packages: [ 'bacula-storage-common' ]
+bacula::director::packages:
+  - 'bacula-director-common'
+  - 'bacula-director-<%= $db_type %>'
+  - 'bacula-console'
+

@@ -1,27 +1,37 @@
-# == Define: bacula::messages
-#
 # Create a Messages resource on the $daemon (director, storage or file).
 #
+# @param append
+# @param catalog
+# @param console
+# @param daemon
+# @param director
+# @param mailcmd
+# @param mail
+# @param mname
+# @param operatorcmd
+# @param operator
+# @param syslog
+#
 define bacula::messages (
-  $mname       = 'Standard',
-  $daemon      = 'dir',
-  $director    = undef,
   $append      = undef,
   $catalog     = undef,
-  $syslog      = undef,
   $console     = undef,
-  $mail        = undef,
-  $operator    = undef,
+  $daemon      = 'dir',
+  $director    = undef,
   $mailcmd     = undef,
+  $mail        = undef,
+  $mname       = 'Standard',
   $operatorcmd = undef,
+  $operator    = undef,
+  $syslog      = undef,
 ) {
   validate_re($daemon, ['^dir', '^sd', '^fd'])
 
-  include bacula::common
-  include bacula::params
+  include ::bacula
+  include ::bacula::common
 
   concat::fragment { "bacula-messages-${daemon}-${name}":
-    target  => "${bacula::params::conf_dir}/bacula-${daemon}.conf",
+    target  => "${bacula::conf_dir}/bacula-${daemon}.conf",
     content => template('bacula/messages.erb'),
   }
 }

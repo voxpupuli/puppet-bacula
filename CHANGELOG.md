@@ -1,5 +1,35 @@
 ## Unreleased
-- Add support for multiple directors
+* Params that need documenting:
+refactor ssl data
+
+## UNRELEASED 5.0.0
+### Summary
+
+This update contains a data overhaul removing the params class entirely, some
+testing changes and a couple small features.  Please see the `Upgrading`
+section in the README.
+
+* rename bacula::params::ssl_dir to bacula::ssl::ssl_dir
+* move bacula::params::file_retention to bacula class
+* move bacula::params::job_retention to bacula class
+* move bacula::params::autoprune to bacula::client class
+* move bacula::params::monitor to bacula class
+* move bacula::params::defive_seltype to bacula class
+* move bacula::params::ssl to bacula::use_ssl
+* move bacula::fileset to bacula::director::fileset
+* users are required to set baculs::ssl::ssl_dir
+* rename bacula::client::director to bacula::client::director_name
+* remove needless bacula::client::storage
+* Relocated many `params` variables to `bacula` class
+
+### Features
+* Allow for multiple directors
+* Move to data in modules entirely dropping params class
+
+### Testing
+* Drop older versions of puppet and ruby from test matrix
+* Test all primary classes with improved platform coverage
+* Lint ruby code for rubocop compliance
 
 ## 2017-01-18 4.1.0
 ### Summary
@@ -13,7 +43,7 @@ Testing updates, bug fix, and more usage of hiera.
  - Include newer Puppet versions in testing
 
 ### Features
- - Allow the directory messages to be configurable using hiera
+ - Allow the director messages to be configurable using hiera
 
 ## 2017-01-17 4.0.1
 ### Summary

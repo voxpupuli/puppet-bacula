@@ -2,7 +2,7 @@
 * Params that need documenting:
 refactor ssl data
 
-## UNRELEASED 5.0.0
+## 2017-04-16 5.0.0
 ### Summary
 
 This update contains a data overhaul removing the params class entirely, some

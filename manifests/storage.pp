@@ -37,7 +37,7 @@ class bacula::storage (
   $password       = 'secret',
   String $port    = '9103',
   $rundir         = $bacula::rundir,
-  $storage        = $facts['fqdn'], # storage here is not params::storage
+  $storage        = $facts['fqdn'], # storage here is not storage_name
   $user           = $bacula::bacula_user,
 ) inherits ::bacula {
 

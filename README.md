@@ -129,7 +129,7 @@ To enable SSL for the communication between the various components of Bacula,
 the hiera data for SSL must be set.
 
 ```yaml
-bacula::params::ssl: true
+bacula::use_ssl: true
 ```
 
 This will ensure that SSL values are processed in the various templates that
@@ -138,12 +138,12 @@ using the SSL directory for Puppet.  The default value for the Puppet SSL
 directory this module will use is `/etc/puppetlabs/puppet/ssl` to support the
 future unified Puppet deployment.
 
-To change the SSL directory, simply set `bacula::params::ssl_dir`.  For
+To change the SSL directory, simply set `bacula::ssl::ssl_dir`.  For
 example, to use another module for the data source of which SSL directory to
 use for Puppet, something like the following is in order.
 
 ```yaml
-bacula::params::ssl_dir: "%{scope('puppet::params::puppet_ssldir')}"
+bacula::ssl::ssl_dir: "%{scope('puppet::params::puppet_ssldir')}"
 ```
 
 This example assumes that you are using the [ploperations/puppet] module, but
@@ -397,7 +397,7 @@ Define a Bacula [Pool resource]. Parameters are:
 - `voluseduration`:
   Bacula `Volume Use Duration` directive.
 - `storage`: name of the `Storage` resource backing the pool.
-  Defaults to `$bacula::params::storage`. Bacula `Storage` directive.
+  Defaults to `$bacula::storage_name`. Bacula `Storage` directive.
 - `next_pool`: specifies that data from a `Copy` or `Migrate` job should go to the provided pool
 
 

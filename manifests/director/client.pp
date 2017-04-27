@@ -20,6 +20,7 @@
 #   }
 #
 define bacula::director::client (
+  $address,
   $port,
   $password,
   $file_retention,

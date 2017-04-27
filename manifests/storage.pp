@@ -38,6 +38,7 @@ class bacula::storage (
   String $port    = '9103',
   $rundir         = $bacula::rundir,
   $storage        = $facts['fqdn'], # storage here is not storage_name
+  $address        = $facts['fqdn'],
   $user           = $bacula::bacula_user,
 ) inherits ::bacula {
 
@@ -109,6 +110,7 @@ class bacula::storage (
   }
 
   @@bacula::director::storage { $storage:
+    address       => $address,
     port          => $port,
     password      => $password,
     device_name   => $device_name,

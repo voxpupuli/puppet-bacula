@@ -12,6 +12,7 @@
 # @param maxconcurjob - Bacula director configuration for Storage option 'Media Type'
 #
 define bacula::director::storage (
+  $address       = $name,
   $port          = '9103',
   $password      = 'secret',
   $device_name   = "${::fqdn}-device",

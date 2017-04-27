@@ -33,6 +33,15 @@ describe 'bacula::storage' do
       when 'FreeBSD'
         it { is_expected.to contain_package('bacula-server') }
       end
+
+      context 'storage with a custom address' do
+        let(:params) do
+          {
+            address: 'bar.example.com'
+          }
+        end
+        it { expect(exported_resources).to contain_bacula__director__storage('foo.example.com').with(address: 'bar.example.com') }
+      end
     end
   end
 end

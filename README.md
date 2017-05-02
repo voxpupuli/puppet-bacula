@@ -54,7 +54,7 @@ primary hiera that used these values will need to be updated.
 
 The variables used to specify the Storage and Director host have been moved.
 Where previously, `bacula::params::director` and `bacula::params::storage`,
-replace them with `bacula::dirctor_name` and `bacula::storage_name`.
+replace them with `bacula::director_name` and `bacula::storage_name`.
 
 Here are is the list of variables that have moved out of the params class.  If
 any of these are set in an environments hiera data, they will not be respected

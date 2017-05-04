@@ -5,6 +5,14 @@ describe 'bacula::storage' do
     context "on #{os}" do
       let(:node) { 'foo.example.com' }
       let(:facts) { facts }
+      let(:params) do
+        {
+          storage: param_storage,
+          address: param_address
+        }
+      end
+      let(:param_storage) { :undef }
+      let(:param_address) { :undef }
 
       it { is_expected.to contain_class('bacula::storage') }
 
@@ -35,13 +43,21 @@ describe 'bacula::storage' do
         it { is_expected.to contain_package('bacula-server') }
       end
 
-      context 'storage with a custom address' do
-        let(:params) do
-          {
-            address: 'bar.example.com'
-          }
+      context 'with default params' do
+        it { expect(exported_resources).to contain_bacula__director__storage('foo.example.com').with(address: 'foo.example.com') }
+      end
+
+      context 'with a custom name' do
+        let(:param_storage) { 'storage.example.com' }
+        it { expect(exported_resources).to contain_bacula__director__storage('storage.example.com').with(address: 'foo.example.com') }
+      end
+      context 'with a custom address' do
+        let(:param_address) { 'address.example.com' }
+        it { expect(exported_resources).to contain_bacula__director__storage('foo.example.com').with(address: 'address.example.com') }
+        context 'with a custom name' do
+          let(:param_storage) { 'storage.example.com' }
+          it { expect(exported_resources).to contain_bacula__director__storage('storage.example.com').with(address: 'address.example.com') }
         end
-        it { expect(exported_resources).to contain_bacula__director__storage('foo.example.com').with(address: 'bar.example.com') }
       end
     end
   end

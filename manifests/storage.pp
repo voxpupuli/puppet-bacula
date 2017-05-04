@@ -25,7 +25,7 @@ class bacula::storage (
   $conf_dir       = $bacula::conf_dir,
   $device         = '/bacula',
   $device_mode    = '0770',
-  $device_name    = "${trusted['fqdn']}-device",
+  $device_name    = "${trusted['certname']}-device",
   $device_owner   = $bacula::bacula_user,
   $device_seltype = $bacula::device_seltype,
   $director_name  = $bacula::director_name,

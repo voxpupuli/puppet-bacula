@@ -21,6 +21,7 @@ define bacula::jobdefs (
   $reschedule_on_error = false,
   $reschedule_interval = '1 hour',
   $reschedule_times    = '10',
+  $max_concurrent_jobs = '1',
 ) {
 
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify', '^Copy', '^Migrate'])

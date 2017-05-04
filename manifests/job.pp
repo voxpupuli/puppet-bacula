@@ -72,6 +72,7 @@ define bacula::job (
   $job_tag                  = $bacula::job_tag,
   $selection_type           = undef,
   $selection_pattern        = undef,
+  $max_concurrent_jobs      = '1',
 ) {
 
   include ::bacula

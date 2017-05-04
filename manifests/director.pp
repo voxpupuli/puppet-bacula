@@ -128,7 +128,7 @@ class bacula::director (
   Bacula::Director::Client <<| tag == "bacula-${director}" |>> { conf_dir => $conf_dir }
 
   if $job_tag {
-    Bacula::Director::Fileset <<| tag == "bacula-${director}" |>> { conf_dir => $conf_dir }
+    Bacula::Director::Fileset <<| tag == $job_tag |>> { conf_dir => $conf_dir }
     Bacula::Director::Job <<| tag == $job_tag |>> { conf_dir => $conf_dir }
     # TODO tag pool resources on export when job_tag is defined
     Bacula::Director::Pool <<|tag == $job_tag |>> { conf_dir => $conf_dir }
@@ -168,9 +168,10 @@ class bacula::director (
   }
 
   bacula::job { 'RestoreFiles':
-    jobtype  => 'Restore',
-    jobdef   => false,
-    messages => 'Standard',
-    fileset  => 'Common',
+    jobtype             => 'Restore',
+    jobdef              => false,
+    messages            => 'Standard',
+    fileset             => 'Common',
+    max_concurrent_jobs => $max_concurrent_jobs,
   }
 }

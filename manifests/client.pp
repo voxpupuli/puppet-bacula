@@ -30,7 +30,8 @@ class bacula::client (
   $autoprune           = 'yes',
   $file_retention      = '45 days',
   $job_retention       = '6 months',
-  $client              = $::fqdn,
+  $client              = $trusted['certname'],
+  $address             = $facts['fqdn'],
   $default_pool        = 'Default',
   $default_pool_full   = undef,
   $default_pool_inc    = undef,
@@ -80,8 +81,8 @@ class bacula::client (
 
   # Tell the director about this client config
   @@bacula::director::client { $client:
+    address        => $address,
     port           => $port,
-    client         => $client,
     password       => $password,
     autoprune      => $autoprune,
     file_retention => $file_retention,

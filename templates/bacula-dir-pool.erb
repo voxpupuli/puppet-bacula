@@ -21,7 +21,9 @@ Pool {
 <% if @maxvolbytes -%>
     Maximum Volume Bytes = <%= @maxvolbytes %>
 <% end -%>
+<% if @storage -%>
     Storage              = <%= @storage %>-sd
+<% end -%>
     Action On Purge      = <%= @purgeaction %>
 <% if @next_pool -%>
     Next Pool            = <%= @next_pool %>

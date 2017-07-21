@@ -1,6 +1,12 @@
 ## Unreleased
-* Params that need documenting:
-refactor ssl data
+* refactor ssl variable references
+* relocate default client pool and package data to hiera
+* Fix use pool name when job or client request pool_{full,inc, diff} by name
+* encourage hiera for class params
+* fix job_tag reference
+* Improve classification documentation in the README
+* Fix template name template reference fixes #87
+* Fix missing variable references fixes #95
 
 ## 2017-04-16 5.0.0
 ### Summary

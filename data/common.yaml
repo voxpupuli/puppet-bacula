@@ -22,4 +22,8 @@ bacula::director_address: '%{trusted.certname}'
 bacula::job_tag: ~
 
 bacula::client::services: 'bacula-fd'
-
+bacula::client::packages: ~
+bacula::client::default_pool: 'Default'
+bacula::client::default_pool_full: ~
+bacula::client::default_pool_inc: ~
+bacula::client::default_pool_diff: ~

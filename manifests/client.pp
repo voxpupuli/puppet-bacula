@@ -22,6 +22,10 @@
 class bacula::client (
   String $packages,
   String $services,
+  String $default_pool,
+  Optional[String] $default_pool_full,
+  Optional[String] $default_pool_inc,
+  Optional[String] $default_pool_diff,
   String $port         = '9102',
   $listen_address      = $facts['ipaddress'],
   $password            = 'secret',
@@ -32,10 +36,6 @@ class bacula::client (
   $job_retention       = '6 months',
   $client              = $trusted['certname'],
   $address             = $facts['fqdn'],
-  $default_pool        = 'Default',
-  $default_pool_full   = undef,
-  $default_pool_inc    = undef,
-  $default_pool_diff   = undef,
 ) inherits bacula {
 
   $group    = $::bacula::bacula_group

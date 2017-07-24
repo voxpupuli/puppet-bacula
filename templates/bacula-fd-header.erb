@@ -20,7 +20,7 @@ Director {
 }
 
 FileDaemon {
-    Name                    = <%= @clientcert %>-fd
+    Name                    = <%= @client %>-fd
 <% if @listen_address -%>
     FDAddresses             = {
 <%= scope.function_template(['bacula/_listen.erb']) -%>

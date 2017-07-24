@@ -12,16 +12,15 @@
 # TODO make DH key length configurable
 #
 class bacula::ssl (
-  #Array $packages            = [],
   String $ssl_dir,
 ) {
 
   include ::bacula
   include ::bacula::client
 
-  $conf_dir     = $::bacula::conf_dir
-  $bacula_user  = $::bacula::bacula_user
-  $bacula_group = $::bacula::bacula_group
+  $conf_dir        = $::bacula::conf_dir
+  $bacula_user     = $::bacula::bacula_user
+  $bacula_group    = $::bacula::bacula_group
 
   $certfile = "${conf_dir}/ssl/${trusted['certname']}_cert.pem"
   $keyfile  = "${conf_dir}/ssl/${trusted['certname']}_key.pem"
@@ -37,7 +36,6 @@ class bacula::ssl (
     owner   => $bacula_user,
     group   => '0',
     mode    => '0640',
-    require => Package[$bacula::client::packages],
   }
 
   file { "${conf_dir}/ssl":

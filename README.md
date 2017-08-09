@@ -12,7 +12,12 @@ A puppet module for the Bacula backup system.
 
 # Requirements
 
-This module requires that [exported resources] have been setup (e.g. with [PuppetDB]).  Including manifests on the Bacula client, assumes that it can export bits of data to the director to end up with fully functional configs.  As such, to get the benefits of using this module, you should be using it on at least the director and client, and most likely the storage, though this might be gotten around, if one were so inclined.
+This module requires that [exported resources] have been setup (e.g. with
+[PuppetDB]).  Including manifests on the Bacula client, assumes that it can
+export bits of data to the director to end up with fully functional configs.
+As such, to get the benefits of using this module, you should be using it on at
+least the director and client, and most likely the storage, though this might
+be gotten around, if one were so inclined.
 
 ## Usage
 
@@ -24,8 +29,8 @@ useful start to begin understanding the moving parts.
 What follows here is the bare minimum you would need to get a fully functional
 Bacula environment with Puppet.  This setup assumes that the three components
 of Bacula (Director, Storage, and Client) all run on three separate nodes.  If
-desired, there is no reason this setup can not be build up on a single node,
-just updating the hostnames used below to all point to the same system.
+desired, there is no reason this setup can not be built on a single node, just
+updating the hostnames used below to all point to the same system.
 
 #### Defaults
 
@@ -41,11 +46,19 @@ bacula::storage_name: 'mystorage.example.com'
 bacula::director_name: 'mydirector.example.com'
 ```
 
+##### Classification
+
 This may be on the same host, or different hosts, but the name you put here 
 should be the fqdn of the target system.  The Director will require the 
 classification of `bacula::director`, and the Storage node will require the 
-classification of `bacula::storage`.  All nodes will require classification of
- `bacula::client`.
+classification of `bacula::storage`.  **All nodes will require classification of
+ `bacula::client`.**
+
+##### Prefer hiera data
+
+Users should prefer setting hiera data to set class parameter values where
+possible.  A couple calls in this module rely on hiera data present to avoid
+scoping issues associated with defined types and default values.
 
 ##### ** Upgrading to 5.x **
 

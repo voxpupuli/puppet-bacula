@@ -9,7 +9,7 @@
 # @param director_address
 # @param group
 # @param homedir
-# @param job_tag
+# @param job_tag A string to use when realizing jobs and filesets
 # @param listen_address
 # @param max_concurrent_jobs
 # @param messages

@@ -1,19 +1,10 @@
 # Manage the SSL deployment for bacula components, Director, Storage, and File
 # daemons.
 #
-# @param certfile
-# @param keyfile
-# @param cafile
 # @param packages
 #
 # @example
 #   include bacula::ssl
-
-#bacula::ssl {
-#  certfile_source => '/etc/dehydrated/certfile.pem',
-#  keyfile_source  => '/etc/dehydrated/keyfile.pem',
-#  cafile_source   => '/etc/dehydrated/cafile.pem',
-#}
 #
 # @example in hiera
 #   TODO
@@ -21,19 +12,15 @@
 # TODO make DH key length configurable
 #
 class bacula::ssl (
-  #Optional[String] $certfile = undef,
-  #Optional[String] $keyfile  = undef,
-  #Optional[String] $cafile   = undef,
-  #Array $packages            = [],
   String $ssl_dir,
 ) {
 
   include ::bacula
   include ::bacula::client
 
-  $conf_dir     = $::bacula::conf_dir
-  $bacula_user  = $::bacula::bacula_user
-  $bacula_group = $::bacula::bacula_group
+  $conf_dir        = $::bacula::conf_dir
+  $bacula_user     = $::bacula::bacula_user
+  $bacula_group    = $::bacula::bacula_group
 
   $certfile = "${conf_dir}/ssl/${trusted['certname']}_cert.pem"
   $keyfile  = "${conf_dir}/ssl/${trusted['certname']}_key.pem"
@@ -49,7 +36,6 @@ class bacula::ssl (
     owner   => $bacula_user,
     group   => '0',
     mode    => '0640',
-    require => Package[$bacula::client::packages],
   }
 
   file { "${conf_dir}/ssl":

@@ -1,6 +1,29 @@
 ## Unreleased
-* Params that need documenting:
-refactor ssl data
+
+* 
+
+## 2017-07-24 5.1.0
+### Summary
+
+This update contains many small fixes, and clean up.  Thanks to the several
+people who sent in PRs for this work and filed issues.
+
+### Features
+* Encourage hiera for class params in documentation
+* Create bacula::storage::device define for greater flexibility
+* Add support for Max Concurrent Jobs tuning
+* Use trusted facts for node name references
+
+### Bugfixes
+* Refactor ssl variable references
+* Relocate default client pool and package data to hiera
+* Fix use pool name when job or client request pool_{full,inc, diff} by name
+* Fix job_tag reference
+* Improve classification documentation in the README
+* Fix template name template reference fixes #87
+* Fix missing variable references fixes #95
+* Change director's client address reference to use the node address, not name
+* Clean up old variable references and comments
 
 ## 2017-04-16 5.0.0
 ### Summary

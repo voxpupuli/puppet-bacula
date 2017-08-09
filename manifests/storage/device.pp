@@ -40,7 +40,7 @@ define bacula::storage::device (
     content => template('bacula/bacula-sd-device.erb'),
   }
 
-  if $media_type == 'File' {
+  if $media_type =~ '^File' {
     file { $device:
       ensure  => directory,
       owner   => $device_owner,

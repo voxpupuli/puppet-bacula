@@ -2,6 +2,10 @@
 
 * 
 
+## 2017-10-04 5.1.1
+### Summary
+Syntax fix for newer Puppet.
+
 ## 2017-07-24 5.1.0
 ### Summary
 

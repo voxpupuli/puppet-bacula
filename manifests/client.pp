@@ -36,6 +36,10 @@ class bacula::client (
   $job_retention       = '6 months',
   $client              = $trusted['certname'],
   $address             = $facts['fqdn'],
+  Optional[Boolean] $pki_signatures = undef,
+  Optional[Boolean] $pki_encryption = undef,
+  Optional[String]  $pki_keypair    = undef,
+  Optional[String]  $pki_master_key = undef,
 ) inherits bacula {
 
   $group    = $::bacula::bacula_group
@@ -58,6 +62,8 @@ class bacula::client (
       subscribe => File[$::bacula::ssl::ssl_files],
     }
   }
+
+  $use_pki = ($pki_signatures or $pki_encryption) and $pki_keypair
 
   concat { $config_file:
     owner     => 'root',

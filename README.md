@@ -234,10 +234,28 @@ The `pki_signatures` and `pki_encryption` parameters are boolean values
 indicating if backups should be encrypted and/or signed.
 
 The `pki_keypair` and `pki_master_key` parameters should contain the path to
-certificates files.  It's up to the user of the module to determine how to
-manage these certificates (e.g. using a `file` resource to distribute
-certificates through Puppet, or an `exec` resource to build the certificate on
-the node itself).
+certificates files.
+
+```
+bacula::client::pki_encryption: true
+bacula::client::pki_signatures: true
+bacula::client::pki_keypair: /etc/bacula/ssl/pki-keypair.pem
+```
+
+It's up to the user of the module to determine how to manage these certificates
+(e.g. using a `file` resource to distribute certificates through Puppet, or an
+`exec` resource to build the certificate on the node itself).  The following
+example assumes you distributes certificats with Puppet:
+
+```
+file { "/etc/bacula/ssl/pki-keypair.pem":
+  ensure => file,
+  owner  => 'bacula',
+  group  => 'bacula',
+  mode   => '0400',
+  source => "puppet://bacula-certificates/${trusted['certname']}.crt+key.pem",
+}
+```
 
 ## Creating Backup Jobs
 

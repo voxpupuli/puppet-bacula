@@ -223,6 +223,22 @@ following data.
 bacula::client::default_pool: 'Corp'
 ```
 
+#### Data Encryption
+
+Bacula [data encryption and signing
+feature](http://www.bacula.org/7.0.x-manuals/en/main/Data_Encryption.html) is
+available in the `bacula::client` class using the `pki_signatures`,
+`pki_encryption`, `pki_keypair` and `pki_master_key` parameters.
+
+The `pki_signatures` and `pki_encryption` parameters are boolean values
+indicating if backups should be encrypted and/or signed.
+
+The `pki_keypair` and `pki_master_key` parameters should contain the path to
+certificates files.  It's up to the user of the module to determine how to
+manage these certificates (e.g. using a `file` resource to distribute
+certificates through Puppet, or an `exec` resource to build the certificate on
+the node itself).
+
 ## Creating Backup Jobs
 
 In order for clients to be able to define jobs on the director, exported

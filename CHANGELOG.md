@@ -1,6 +1,9 @@
 ## Unreleased
-
 * 
+
+## 2017-10-22 5.2.0
+Introduce PKI support for encrypting and signing backups with a self-signed
+cert.  See the README for details.
 
 ## 2017-10-04 5.1.1
 ### Summary

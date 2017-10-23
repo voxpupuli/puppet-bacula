@@ -95,6 +95,9 @@ Other data changes are as follows.
 - remove needless bacula::client::storage
 - Relocated many `params` variables to `bacula` class
 
+If you are declaring your own `bacula::director::pool`, it is now necessary to
+specify the `storage` parameter.
+
 ##### ** Upgrading to 4.x **
 
 Several params have been removed and replaced with the default names.  Update

@@ -283,21 +283,21 @@ parameter.
 If a group of jobs will contain the same files, a [FileSet resource] can be
 used to simplify the `bacula::job` resource. This can be exported from the
 node (ensuring the resource title will be unique when realized) or a simple
-resource specified on the director using the `bacula::fileset` defined type as
-follows:
+resource specified on the director using the `bacula::director::fileset`
+defined type as follows:
 
 ```puppet
-bacula::fileset { 'Puppet':
+bacula::director::fileset { 'Puppet':
   files   => ['/etc/puppet'],
   options => {'compression' => 'LZO' }
 }
 ```
 If you set a job_tag on your `bacula::job`, make sure to also set the tag of
-the `bacula::fileset` to the same value.
+the `bacula::director::fileset` to the same value.
 
 ## Available types
 
-### bacula::fileset
+### bacula::director::fileset
 
 Defines a Bacula [FileSet resource]. Parameters are:
 
@@ -310,18 +310,18 @@ Defines a Bacula [FileSet resource]. Parameters are:
 
 ### bacula::job
 
-Define a Bacula [Job resource] resource which can create new `Bacula::Fileset`
-resources if needed. Parameters are:
+Define a Bacula [Job resource] resource which can create new
+`bacula::director::fileset` resources if needed. Parameters are:
 
-- `files`: array of files to backup as part of `Bacula::Fileset[$name]`
+- `files`: array of files to backup as part of `bacula::director::fileset[$name]`
   Defaults to `[]`.
-- `excludes`: array of files to exclude in `Bacula::Fileset[$name]`
+- `excludes`: array of files to exclude in `bacula::director::fileset[$name]`
   Defaults to `[]`.
 - `jobtype`: one of `Backup` (default), `Restore`, `Admin`, `Verify`, `Copy` or `Migrate`.
   Defaults to `Backup`. Bacula `Type` directive.
 - `fileset`: determines whether to use the `Common` fileset (`false`), define a
-   new `Bacula::Fileset[$name]` (`true`) or use a previously
-  defined `Bacula::Fileset` resource (any other string value).
+   new `bacula::director::fileset[$name]` (`true`) or use a previously defined
+   `bacula::director::fileset` resource (any other string value).
   Defaults to `true`. Bacula `FileSet` directive.
 - `template`: template to use for the fragment.
   Defaults to `bacula/job.conf.erb`.

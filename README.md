@@ -85,10 +85,10 @@ and should be moved as follows.
 - move bacula::params::ssl_dir to bacula::ssl::ssl_dir
 - users are required to set baculs::ssl::ssl_dir
 
-The following classes have been relocated as well.  Please update any
+The following classes/defines have been relocated as well.  Please update any
 references of the former to reference the latter.
 
-- move class bacula::fileset to bacula::director::fileset
+- move define bacula::fileset to bacula::director::fileset
 
 Other data changes are as follows.
 

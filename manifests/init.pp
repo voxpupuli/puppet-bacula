@@ -38,8 +38,4 @@ class bacula (
   Boolean $use_ssl          = false,
   Optional[String] $job_tag = undef,
 ){
-
-  if $use_ssl {
-    include ::bacula::ssl
-  }
 }

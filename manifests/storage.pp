@@ -61,13 +61,6 @@ class bacula::storage (
     require => Package[$package_names],
   }
 
-  if $::bacula::use_ssl == true {
-    include ::bacula::ssl
-    Service[$services] {
-      subscribe => File[$::bacula::ssl::ssl_files],
-    }
-  }
-
   concat::fragment { 'bacula-storage-header':
     order   => '00',
     target  => "${conf_dir}/bacula-sd.conf",

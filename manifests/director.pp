@@ -84,13 +84,6 @@ class bacula::director (
     require => Package[$package_names],
   }
 
-  if $::bacula::use_ssl == true {
-    include ::bacula::ssl
-    Service[$services] {
-      subscribe => File[$::bacula::ssl::ssl_files],
-    }
-  }
-
   file { "${conf_dir}/conf.d":
     ensure => directory,
   }

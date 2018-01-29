@@ -1,4 +1,6 @@
-<% if scope.lookupvar('bacula::use_ssl') -%>
-    TLS Certificate         = <%= @conf_dir %>/ssl/<%= @clientcert %>_cert.pem
-    TLS Key                 = <%= @conf_dir %>/ssl/<%= @clientcert %>_key.pem
+<% if @tls_certificate -%>
+    TLS Certificate         = <%= @tls_certificate %>
+<% end -%>
+<% if @tls_key -%>
+    TLS Key                 = <%= @tls_key %>
 <% end -%>

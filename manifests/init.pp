@@ -14,7 +14,15 @@
 # @param monitor Enable the Bacula Monitor option
 # @param rundir The run dir for the daemons
 # @param storage_name
-# @param use_ssl Configure SSL, see README
+# @param tls_enable Enable TLS support
+# @param tls_require Require TLS connections
+# @param tls_certificate The full path and filename of a PEM encoded TLS certificate
+# @param tls_key The full path and filename of a PEM encoded TLS private key
+# @param tls_verify_peer Verify peer certificate.
+# @param tls_allowed_cn Common name attribute of allowed peer certificates
+# @param tls_ca_certificate_file The full path and filename specifying a PEM encoded TLS CA certificate(s)
+# @param tls_ca_certificate_dir Full path to TLS CA certificate directory
+# @param tls_dh_file Path to PEM encoded Diffie-Hellman parameter file
 #
 # @example
 #   include bacula
@@ -35,7 +43,15 @@ class bacula (
   String $homedir_mode      = '0770',
   Boolean $monitor          = true,
   String $device_seltype    = 'bacula_store_t',
-  Boolean $use_ssl          = false,
+  Optional[Enum['yes', 'no']] $tls_enable = undef,
+  Optional[Enum['yes', 'no']] $tls_require = undef,
+  Optional[String]            $tls_certificate = undef,
+  Optional[String]            $tls_key = undef,
+  Optional[Enum['yes', 'no']] $tls_verify_peer = undef,
+  Array[String]               $tls_allowed_cn = [],
+  Optional[String]            $tls_ca_certificate_file = undef,
+  Optional[String]            $tls_ca_certificate_dir = undef,
+  Optional[String]            $tls_dh_file = undef,
   Optional[String] $job_tag = undef,
 ){
 }

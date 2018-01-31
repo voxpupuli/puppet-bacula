@@ -75,7 +75,8 @@ class bacula::storage (
   }
 
   bacula::storage::device { $device_name:
-    device => $device,
+    device        => $device,
+    maxconcurjobs => $maxconcurjobs,
   }
 
   concat::fragment { 'bacula-storage-dir':

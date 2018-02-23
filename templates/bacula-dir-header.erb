@@ -12,7 +12,6 @@ Director {                # define myself
     Password                = "<%= @password %>"  # Console password
     Messages                = Daemon
 <%= scope.function_template(['bacula/_ssl.erb']) %>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
 <% if @tls_dh_file %>
     TLS DH File             = <%= @tls_dh_file %>
 <% end -%>

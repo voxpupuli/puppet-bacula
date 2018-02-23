@@ -3,6 +3,5 @@ Director {
     Name                    = <%= @director_name %>-dir
     Password                = "<%= @password %>"
 <%= scope.function_template(['bacula/_ssl.erb']) %>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
 }
 

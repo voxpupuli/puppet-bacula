@@ -8,6 +8,5 @@ Director {
     address  = <%= @director_address %>
     Password = "<%= @password %>"
 <%= scope.function_template(['bacula/_ssl.erb']) %>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
 }
 

@@ -11,7 +11,7 @@ Director {                # define myself
     Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>
     Password                = "<%= @password %>"  # Console password
     Messages                = Daemon
-<%= scope.function_template(['bacula/_tls.erb']) %>
+<%= scope.function_template(['bacula/_tls_server.erb']) %>
 <% if @tls_dh_file %>
     TLS DH File             = <%= @tls_dh_file %>
 <% end -%>

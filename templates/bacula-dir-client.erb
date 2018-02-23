@@ -7,6 +7,6 @@ Client {
     File Retention = <%= @file_retention %>
     Job Retention  = <%= @job_retention %>
     AutoPrune      = <%= @autoprune %>
-<%= scope.function_template(['bacula/_tls.erb']) %>
+<%= scope.function_template(['bacula/_tls_client.erb']) %>
 }
 

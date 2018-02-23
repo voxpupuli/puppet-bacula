@@ -5,7 +5,7 @@
     TLS Require             = <%= @tls_require %>
 <% end -%>
 <% scope['bacula::tls_allowed_cn'].each do |allowed_cn| -%>
-    TLS Allowed CN          = <% allowed_cn %>
+    TLS Allowed CN          = <%= allowed_cn %>
 <% end -%>
 <% if @tls_ca_certificate_file -%>
     TLS CA Certificate File = <%= @tls_ca_certificate_file %>

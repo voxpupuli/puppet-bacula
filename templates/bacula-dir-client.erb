@@ -8,5 +8,6 @@ Client {
     Job Retention  = <%= @job_retention %>
     AutoPrune      = <%= @autoprune %>
 <%= scope.function_template(['bacula/_ssl.erb']) %>
+<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
 }
 

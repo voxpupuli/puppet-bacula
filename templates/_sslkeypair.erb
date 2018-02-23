@@ -1,6 +1,6 @@
-<% if @tls_certificate -%>
-    TLS Certificate         = <%= @tls_certificate %>
+<% if scope['bacula::tls_certificate'] -%>
+    TLS Certificate         = <%= scope['bacula::tls_certificate'] %>
 <% end -%>
-<% if @tls_key -%>
-    TLS Key                 = <%= @tls_key %>
+<% if scope['bacula::tls_key'] -%>
+    TLS Key                 = <%= scope['bacula::tls_key'] %>
 <% end -%>

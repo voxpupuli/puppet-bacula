@@ -1,18 +1,18 @@
-<% if @tls_enable -%>
-    TLS Enable              = <%= @tls_enable %>
+<% if scope['bacula::tls_enable'] -%>
+    TLS Enable              = <%= scope['bacula::tls_enable'] %>
 <% end -%>
-<% if @tls_require -%>
-    TLS Require             = <%= @tls_require %>
+<% if scope['bacula::tls_require'] -%>
+    TLS Require             = <%= scope['bacula::tls_require'] %>
 <% end -%>
 <% scope['bacula::tls_allowed_cn'].each do |allowed_cn| -%>
     TLS Allowed CN          = <%= allowed_cn %>
 <% end -%>
-<% if @tls_ca_certificate_file -%>
-    TLS CA Certificate File = <%= @tls_ca_certificate_file %>
+<% if scope['bacula::tls_ca_certificate_file'] -%>
+    TLS CA Certificate File = <%= scope['bacula::tls_ca_certificate_file'] %>
 <% end -%>
-<% if @tls_ca_certificate_dir -%>
-    TLS CA Certificate Dir = <%= @tls_ca_certificate_dir %>
+<% if scope['bacula::tls_ca_certificate_dir'] -%>
+    TLS CA Certificate Dir = <%= scope['bacula::tls_ca_certificate_dir'] %>
 <% end -%>
-<% if @tls_verify_peer -%>
-    TLS Verify Peer         = <%= @tls_verify_peer %>
+<% if scope['bacula::tls_verify_peer'] -%>
+    TLS Verify Peer         = <%= scope['bacula::tls_verify_peer'] %>
 <% end -%>

@@ -162,7 +162,7 @@ class bacula::director (
 
   bacula::job { 'RestoreFiles':
     jobtype             => 'Restore',
-    jobdef              => undef,
+    jobdef              => false,
     messages            => 'Standard',
     fileset             => 'Common',
     max_concurrent_jobs => $max_concurrent_jobs,

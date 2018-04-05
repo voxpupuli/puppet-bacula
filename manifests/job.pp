@@ -58,7 +58,7 @@ define bacula::job (
   Optional[String] $pool_inc       = lookup('bacula::client::default_pool_inc'),
   Optional[String] $pool_diff      = lookup('bacula::client::default_pool_diff'),
   Optional[String]  $storage             = undef,
-  Optional[String]  $jobdef              = 'Default',
+  Variant[Boolean, String]  $jobdef              = 'Default',
   Array $runscript                 = [],
   Optional[String]  $level               = undef,
   Enum['yes', 'no'] $accurate            = 'no', # FIXME: Change type to Boolean

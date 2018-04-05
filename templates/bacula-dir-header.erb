@@ -11,11 +11,9 @@ Director {                # define myself
     Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>
     Password                = "<%= @password %>"  # Console password
     Messages                = Daemon
-<%= scope.function_template(['bacula/_ssl.erb']) %>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) %>
-<% if scope.lookupvar('bacula::use_ssl') -%>
-    TLS Verify Peer         = yes
-    TLS DH File             = <%= @conf_dir %>/ssl/dh2048.pem
+<%= scope.function_template(['bacula/_tls_server.erb']) %>
+<% if @tls_dh_file %>
+    TLS DH File             = <%= @tls_dh_file %>
 <% end -%>
 }
 

@@ -1,5 +1,0 @@
-<% if scope.lookupvar('bacula::use_ssl') -%>
-    TLS Enable              = yes
-    TLS Require             = yes
-    TLS CA Certificate File = <%= @conf_dir %>/ssl/ca.pem
-<% end -%>

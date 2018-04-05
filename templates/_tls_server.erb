@@ -1,0 +1,7 @@
+<%= scope.function_template(['bacula/_tls_client.erb']) %>
+<% if scope['bacula::tls_verify_peer'] -%>
+    TLS Verify Peer         = <%= scope['bacula::tls_verify_peer'] %>
+<% end -%>
+<% scope['bacula::tls_allowed_cn'].each do |allowed_cn| -%>
+    TLS Allowed CN          = <%= allowed_cn %>
+<% end -%>

@@ -60,112 +60,17 @@ Users should prefer setting hiera data to set class parameter values where
 possible.  A couple calls in this module rely on hiera data present to avoid
 scoping issues associated with defined types and default values.
 
-##### ** Upgrading to 5.x **
+##### Upgrading from an older version
 
-The `bacula::params` class has been completely removed.  Any data in your
-primary hiera that used these values will need to be updated.
+Users of a previous version of this module should refer to the wiki for
+[upgrading
+instructions](https://github.com/xaque208/puppet-bacula/wiki/Upgrading).
 
-The variables used to specify the Storage and Director host have been moved.
-Where previously, `bacula::params::director` and `bacula::params::storage`,
-replace them with `bacula::director_name` and `bacula::storage_name`.
+#### Communication Encryption (TLS Setup)
 
-Here are is the list of variables that have moved out of the params class.  If
-any of these are set in an environments hiera data, they will not be respected
-and should be moved as follows.
-
-- move bacula::params::file_retention to bacula::client::file_retention
-- move bacula::params::job_retention to bacula::client::job_retention
-- move bacula::params::autoprune to bacula::client::autoprune
-- move bacula::client::director to bacula::client::director_name
-
-- move bacula::params::monitor to bacula::monitor
-- move bacula::params::device_seltype to bacula::device_seltype
-- move bacula::params::ssl to bacula::use_ssl
-
-- move bacula::params::ssl_dir to bacula::ssl::ssl_dir
-- users are required to set baculs::ssl::ssl_dir
-
-The following classes/defines have been relocated as well.  Please update any
-references of the former to reference the latter.
-
-- move define bacula::fileset to bacula::director::fileset
-
-Other data changes are as follows.
-
-- remove needless bacula::client::storage
-- Relocated many `params` variables to `bacula` class
-
-If you are declaring your own `bacula::director::pool`, it is now necessary to
-specify the `storage` parameter.
-
-##### ** Upgrading to 4.x **
-
-Several params have been removed and replaced with the default names.  Update
-your hiera data and parameters as follows.
-
-The following have been replaced with simply `bacula::params::director`.
-
-* `bacula::params::director_name`
-* `bacula::params::bacula_director`
- 
-The following have been replaced with simply `bacula::params::storage`.
-
-* `bacula::params::bacula_storage`
-* `bacula::params::storage_name`
-
-The default 'Full' and 'Inc' pools no longer get created.  Only the pool 
-called 'Default' is created.  As such, the following parameter have been 
-removed from the `bacula::storage` class.
-
-*  `$volret_full`
-*  `$volret_incremental`
-*  `$maxvolbytes_full`
-*  `$maxvoljobs_full`
-*  `$maxvols_full`
-*  `$maxvolbytes_incremental`
-*  `$maxvoljobs_incremental`
-*  `$maxvols_incremental`
-
-This now means that Full jobs are not directed to a 'Full' pool, and 
-Incremental jobs are no longer directed to an 'Inc' pool.
-
-To gain the same functionality available in previous versions using a 
-default pool for a specific level of backup, create a pool as directed below,
- and set any of the following parameters for your clients. 
-
-* `bacula::client::default_pool_full`
-* `bacula::client::default_pool_inc`
-* `bacula::client::default_pool_diff`
-
-The value of these parameters should be set to the resource name of the pool.
-
-#### SSL
-
-To enable SSL for the communication between the various components of Bacula,
-the hiera data for SSL must be set.
-
-```yaml
-bacula::use_ssl: true
-```
-
-This will ensure that SSL values are processed in the various templates that
-are capable of SSL communication.  An item of note: this module expects to be
-using the SSL directory for Puppet.  The default value for the Puppet SSL
-directory this module will use is `/etc/puppetlabs/puppet/ssl` to support the
-future unified Puppet deployment.
-
-To change the SSL directory, simply set `bacula::ssl::ssl_dir`.  For
-example, to use another module for the data source of which SSL directory to
-use for Puppet, something like the following is in order.
-
-```yaml
-bacula::ssl::ssl_dir: "%{scope('puppet::params::puppet_ssldir')}"
-```
-
-This example assumes that you are using the [ploperations/puppet] module, but
-this has been removed as a dependency.  Users may also wish to look at 
-[theforeman/puppet] or just set it to the location known to house your ssl 
-data, like `/etc/puppetlabs/puppet/ssl`.
+Refer to the [TLS
+Setup](https://github.com/xaque208/puppet-bacula/wiki/TLS-Setup) page on the
+wiki for instructions about configuring communication encryption.
 
 #### Director Setup
 
@@ -226,39 +131,11 @@ following data.
 bacula::client::default_pool: 'Corp'
 ```
 
-#### Data Encryption
+#### Data Encryption (PKI Setup)
 
-Bacula [data encryption and signing
-feature](http://www.bacula.org/7.0.x-manuals/en/main/Data_Encryption.html) is
-available in the `bacula::client` class using the `pki_signatures`,
-`pki_encryption`, `pki_keypair` and `pki_master_key` parameters.
-
-The `pki_signatures` and `pki_encryption` parameters are boolean values
-indicating if backups should be encrypted and/or signed.
-
-The `pki_keypair` and `pki_master_key` parameters should contain the path to
-certificates files.
-
-```
-bacula::client::pki_encryption: true
-bacula::client::pki_signatures: true
-bacula::client::pki_keypair: /etc/bacula/ssl/pki-keypair.pem
-```
-
-It's up to the user of the module to determine how to manage these certificates
-(e.g. using a `file` resource to distribute certificates through Puppet, or an
-`exec` resource to build the certificate on the node itself).  The following
-example assumes you distributes certificats with Puppet:
-
-```
-file { "/etc/bacula/ssl/pki-keypair.pem":
-  ensure => file,
-  owner  => 'bacula',
-  group  => 'bacula',
-  mode   => '0400',
-  source => "puppet://bacula-certificates/${trusted['certname']}.crt+key.pem",
-}
-```
+Refer to the [PKI
+Setup](https://github.com/xaque208/puppet-bacula/wiki/PKI-Setup) section of the
+wiki to configure data encryption on clients.
 
 ## Creating Backup Jobs
 

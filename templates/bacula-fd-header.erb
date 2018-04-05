@@ -1,22 +1,14 @@
 Director {
     Name     = <%= @director_name %>-dir
     Password = "<%= @password %>"
-<%= scope.function_template(['bacula/_ssl.erb']) -%>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) -%>
-<% if scope.lookupvar('bacula::use_ssl') -%>
-    TLS Verify Peer         = no
-<% end -%>
+<%= scope.function_template(['bacula/_tls_server.erb']) -%>
 }
 
 Director {
     Name     = <%= @director_name %>-mon
     Password = "<%= @password %>"
     Monitor  = yes
-<%= scope.function_template(['bacula/_ssl.erb']) -%>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) -%>
-<% if scope.lookupvar('bacula::use_ssl') -%>
-    TLS Verify Peer         = no
-<% end -%>
+<%= scope.function_template(['bacula/_tls_server.erb']) -%>
 }
 
 FileDaemon {
@@ -29,7 +21,6 @@ FileDaemon {
     WorkingDirectory        = <%= @homedir %>
     Pid Directory           = <%= @rundir %>
     Maximum Concurrent Jobs = <%= @max_concurrent_jobs %>
-<%= scope.function_template(['bacula/_ssl.erb']) -%>
-<%= scope.function_template(['bacula/_sslkeypair.erb']) -%>
+<%= scope.function_template(['bacula/_tls_client.erb']) -%>
 <%= scope.function_template(['bacula/_pki.erb']) -%>
 }

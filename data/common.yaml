@@ -12,7 +12,6 @@ bacula::director::messages:
 bacula::director::postgresql::make_bacula_tables: ''
 bacula::director::db_type: 'pgsql'
 bacula::director::packages: []
-#bacula::ssl::ssl_dir: '/etc/puppetlabs/puppet/ssl'
 
 bacula::storage::services: 'bacula-sd'
 bacula::storage_name: '%{trusted.certname}'

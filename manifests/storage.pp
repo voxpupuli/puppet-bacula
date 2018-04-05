@@ -22,24 +22,24 @@
 class bacula::storage (
   String $services,
   Array $packages,
-  $conf_dir       = $bacula::conf_dir,
-  $device         = '/bacula',
-  $device_mode    = '0770',
-  $device_name    = "${trusted['certname']}-device",
-  $device_owner   = $bacula::bacula_user,
-  $device_seltype = $bacula::device_seltype,
-  $director_name  = $bacula::director_name,
-  $group          = $bacula::bacula_group,
-  $homedir        = $bacula::homedir,
-  $listen_address = $facts['ipaddress'],
-  $maxconcurjobs  = '5',
-  $media_type     = 'File',
-  $password       = 'secret',
-  String $port    = '9103',
-  $rundir         = $bacula::rundir,
-  $storage        = $trusted['certname'], # storage here is not storage_name
-  $address        = $facts['fqdn'],
-  $user           = $bacula::bacula_user,
+  String             $conf_dir       = $bacula::conf_dir,
+  String             $device         = '/bacula',
+  Stdlib::Filemode   $device_mode    = '0770',
+  String             $device_name    = "${trusted['certname']}-device",
+  String             $device_owner   = $bacula::bacula_user,
+  String             $device_seltype = $bacula::device_seltype,
+  String             $director_name  = $bacula::director_name,
+  String             $group          = $bacula::bacula_group,
+  String             $homedir        = $bacula::homedir,
+  Stdlib::Ip_address $listen_address = $facts['ipaddress'],
+  String             $maxconcurjobs  = '5', # FIXME: Change to Integer
+  String             $media_type     = 'File',
+  String             $password       = 'secret',
+  String             $port           = '9103', # FIXME: Change to Integer
+  String             $rundir         = $bacula::rundir,
+  String             $storage        = $trusted['certname'], # storage here is not storage_name
+  String             $address        = $facts['fqdn'],
+  String             $user           = $bacula::bacula_user,
 ) inherits ::bacula {
 
   # Packages are virtual due to some platforms shipping the

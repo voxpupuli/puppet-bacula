@@ -33,7 +33,7 @@
 #
 class bacula::director (
   String $db_type,
-  $messages,
+  Hash[String, Bacula::Message] $messages,
   Array $packages,
   String $services,
   Boolean $manage_db          = true,
@@ -43,17 +43,17 @@ class bacula::director (
   String $db_user             = 'bacula',
   Optional[String] $db_address = undef,
   Optional[String] $db_port    = undef,
-  $director_address           = $bacula::director_address,
-  $director                   = $trusted['certname'], # director here is not bacula::director
-  $group                      = $bacula::bacula_group,
-  $homedir                    = $bacula::homedir,
-  $job_tag                    = $bacula::job_tag,
-  $listen_address             = $facts['ipaddress'],
-  $max_concurrent_jobs        = '20',
-  $password                   = 'secret',
-  $port                       = '9101',
-  $rundir                     = $bacula::rundir,
-  $storage_name               = $bacula::storage_name,
+  String                        $director_address    = $bacula::director_address,
+  String                        $director            = $trusted['certname'], # director here is not bacula::director
+  String                        $group               = $bacula::bacula_group,
+  String                        $homedir             = $bacula::homedir,
+  Optional[String]              $job_tag             = $bacula::job_tag,
+  Stdlib::Ip_address            $listen_address      = $facts['ipaddress'],
+  String                        $max_concurrent_jobs = '20', # FIXME: Change type to Integer
+  String                        $password            = 'secret',
+  String                        $port                = '9101', # FIXME: Change type to Integer
+  String                        $rundir              = $bacula::rundir,
+  String                        $storage_name        = $bacula::storage_name,
 ) inherits ::bacula {
 
   include ::bacula::director::defaults
@@ -162,7 +162,7 @@ class bacula::director (
 
   bacula::job { 'RestoreFiles':
     jobtype             => 'Restore',
-    jobdef              => false,
+    jobdef              => undef,
     messages            => 'Standard',
     fileset             => 'Common',
     max_concurrent_jobs => $max_concurrent_jobs,

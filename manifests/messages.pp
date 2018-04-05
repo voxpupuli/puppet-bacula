@@ -13,17 +13,17 @@
 # @param syslog
 #
 define bacula::messages (
-  $append      = undef,
-  $catalog     = undef,
-  $console     = undef,
-  $daemon      = 'dir',
-  $director    = undef,
-  $mailcmd     = undef,
-  $mail        = undef,
-  $mname       = 'Standard',
-  $operatorcmd = undef,
-  $operator    = undef,
-  $syslog      = undef,
+  Optional[String] $append      = undef,
+  Optional[String] $catalog     = undef,
+  Optional[String] $console     = undef,
+  String           $daemon      = 'dir',
+  Optional[String] $director    = undef,
+  Optional[String] $mailcmd     = undef,
+  Optional[String] $mail        = undef,
+  String           $mname       = 'Standard',
+  Optional[String] $operatorcmd = undef,
+  Optional[String] $operator    = undef,
+  Optional[String] $syslog      = undef,
 ) {
   validate_re($daemon, ['^dir', '^sd', '^fd'])
 

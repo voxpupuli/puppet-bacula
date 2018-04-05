@@ -18,21 +18,21 @@
 # @param group
 #
 define bacula::storage::device (
-  $device_name     = $name,
-  $media_type      = 'File',
-  $device          = '/bacula',
-  $label_media     = true,
-  $random_access   = true,
-  $automatic_mount = true,
-  $removable_media = false,
-  $always_open     = false,
-  $maxconcurjobs   = '1',
-  $conf_dir        = $::bacula::conf_dir,
-  $device_mode     = '0770',
-  $device_owner    = $bacula::bacula_user,
-  $device_seltype  = $bacula::device_seltype,
-  $director_name   = $bacula::director_name,
-  $group           = $bacula::bacula_group,
+  String           $device_name     = $name,
+  String           $media_type      = 'File',
+  String           $device          = '/bacula',
+  Boolean          $label_media     = true,
+  Boolean          $random_access   = true,
+  Boolean          $automatic_mount = true,
+  Boolean          $removable_media = false,
+  Boolean          $always_open     = false,
+  String           $maxconcurjobs   = '1',
+  String           $conf_dir        = $::bacula::conf_dir,
+  Stdlib::Filemode $device_mode     = '0770',
+  String           $device_owner    = $bacula::bacula_user,
+  String           $device_seltype  = $bacula::device_seltype,
+  String           $director_name   = $bacula::director_name,
+  String           $group           = $bacula::bacula_group,
 ) {
 
   concat::fragment { "bacula-storage-device-${name}":

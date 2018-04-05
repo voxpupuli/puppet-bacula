@@ -11,17 +11,17 @@
 # Sample Usage:
 #
 define bacula::jobdefs (
-  $jobtype             = 'Backup',
-  $sched               = 'Default',
-  $messages            = 'Standard',
-  $priority            = '10',
-  $pool                = 'Default',
-  $level               = undef,
-  $accurate            = 'no',
-  $reschedule_on_error = false,
-  $reschedule_interval = '1 hour',
-  $reschedule_times    = '10',
-  $max_concurrent_jobs = '1',
+  String           $jobtype             = 'Backup',
+  String           $sched               = 'Default',
+  String           $messages            = 'Standard',
+  String           $priority            = '10', # FIXME: Change to Integer
+  String           $pool                = 'Default',
+  Optional[String] $level               = undef,
+  String           $accurate            = 'no', # FIXME: Change to Boolean
+  Boolean          $reschedule_on_error = false,
+  Bacula::Time     $reschedule_interval = '1 hour',
+  String           $reschedule_times    = '10', # FIXME: Change to Integer
+  String           $max_concurrent_jobs = '1', # FIXME: Change to Integer
 ) {
 
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify', '^Copy', '^Migrate'])

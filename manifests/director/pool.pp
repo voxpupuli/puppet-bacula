@@ -24,19 +24,19 @@
 #   }
 #
 define bacula::director::pool (
-  $volret         = undef,
-  $maxvoljobs     = undef,
-  $maxvolbytes    = undef,
-  $maxvols        = undef,
-  $label          = undef,
-  $voluseduration = undef,
-  $storage        = $bacula::director::storage,
-  $pooltype       = 'Backup',
-  $recycle        = 'Yes',
-  $autoprune      = 'Yes',
-  $purgeaction    = 'Truncate',
-  $next_pool      = undef,
-  $conf_dir = $::bacula::conf_dir
+  Optional[String] $volret         = undef,
+  Optional[String] $maxvoljobs     = undef, # FIXME: Change type to Integer
+  Optional[String] $maxvolbytes    = undef, # FIXME: Change type to Integer
+  Optional[String] $maxvols        = undef, # FIXME: Change type to Integer
+  Optional[String] $label          = undef,
+  Optional[String] $voluseduration = undef,
+  String           $storage        = $bacula::director::storage,
+  String           $pooltype       = 'Backup',
+  String           $recycle        = 'Yes', # FIXME: Change type to Boolean
+  String           $autoprune      = 'Yes', # FIXME: Change type to Boolean
+  String           $purgeaction    = 'Truncate',
+  Optional[String] $next_pool      = undef,
+  String           $conf_dir       = $::bacula::conf_dir
 ) {
 
   concat::fragment { "bacula-director-pool-${name}":

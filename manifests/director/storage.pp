@@ -12,13 +12,13 @@
 # @param maxconcurjob - Bacula director configuration for Storage option 'Media Type'
 #
 define bacula::director::storage (
-  $address       = $name,
-  $port          = '9103',
-  $password      = 'secret',
-  $device_name   = "${::fqdn}-device",
-  $media_type    = 'File',
-  $maxconcurjobs = '1',
-  $conf_dir      = $::bacula::conf_dir
+  String $address       = $name,
+  String $port          = '9103', # FIXME: Change type to Integer
+  String $password      = 'secret',
+  String $device_name   = "${::fqdn}-device",
+  String $media_type    = 'File',
+  String $maxconcurjobs = '1', # FIXME: Change type to Integer
+  String $conf_dir      = $::bacula::conf_dir
 ) {
 
   concat::fragment { "bacula-director-storage-${name}":

@@ -20,13 +20,13 @@
 #   }
 #
 define bacula::director::client (
-  $address,
-  $port,
-  $password,
-  $file_retention,
-  $job_retention,
-  String $autoprune,
-  $conf_dir = $::bacula::conf_dir
+  String       $address,
+  String       $port, # FIXME: CHange type to Integer
+  String       $password,
+  Bacula::Time $file_retention,
+  Bacula::Time $job_retention,
+  String       $autoprune,
+  String       $conf_dir = $::bacula::conf_dir
 ) {
 
   concat::fragment { "bacula-director-client-${name}":

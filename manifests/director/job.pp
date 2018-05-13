@@ -15,8 +15,8 @@
 #   }
 #
 define bacula::director::job (
-  $content,
-  $conf_dir = $bacula::conf_dir,
+  String $content,
+  String $conf_dir = $bacula::conf_dir,
 ) {
 
   include ::bacula

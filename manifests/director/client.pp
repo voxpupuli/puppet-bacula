@@ -26,7 +26,7 @@ define bacula::director::client (
   Bacula::Time $file_retention,
   Bacula::Time $job_retention,
   String       $autoprune,
-  String       $conf_dir = $::bacula::conf_dir
+  String       $conf_dir = $::bacula::conf_dir,
 ) {
 
   concat::fragment { "bacula-director-client-${name}":

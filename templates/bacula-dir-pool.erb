@@ -1,8 +1,8 @@
 Pool {
     Name                 = <%= @name %>
     Pool Type            = <%= @pooltype %>
-    Recycle              = <%= @recycle %>
-    AutoPrune            = <%= @autoprune %>
+    Recycle              = <%= @recycle ? 'yes' : 'no' %>
+    AutoPrune            = <%= @autoprune ? 'yes' : 'no' %>
 <% if @volret -%>
     Volume Retention     = <%= @volret %>
 <% end -%>

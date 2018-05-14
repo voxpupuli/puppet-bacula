@@ -13,11 +13,11 @@
 #
 define bacula::director::storage (
   String $address       = $name,
-  String $port          = '9103', # FIXME: Change type to Integer
+  Integer $port          = 9103,
   String $password      = 'secret',
   String $device_name   = "${::fqdn}-device",
   String $media_type    = 'File',
-  String $maxconcurjobs = '1', # FIXME: Change type to Integer
+  Integer $maxconcurjobs = 1,
   String $conf_dir      = $::bacula::conf_dir
 ) {
 

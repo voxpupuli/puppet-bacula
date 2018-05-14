@@ -14,14 +14,14 @@ define bacula::jobdefs (
   String           $jobtype             = 'Backup',
   String           $sched               = 'Default',
   String           $messages            = 'Standard',
-  String           $priority            = '10', # FIXME: Change to Integer
+  Integer          $priority            = 10,
   String           $pool                = 'Default',
   Optional[String] $level               = undef,
-  String           $accurate            = 'no', # FIXME: Change to Boolean
+  Boolean          $accurate            = false,
   Boolean          $reschedule_on_error = false,
   Bacula::Time     $reschedule_interval = '1 hour',
-  String           $reschedule_times    = '10', # FIXME: Change to Integer
-  String           $max_concurrent_jobs = '1', # FIXME: Change to Integer
+  Integer          $reschedule_times    = 10,
+  Integer          $max_concurrent_jobs = 1,
 ) {
 
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify', '^Copy', '^Migrate'])

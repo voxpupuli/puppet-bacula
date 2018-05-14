@@ -26,12 +26,12 @@ class bacula::client (
   Optional[String] $default_pool_full,
   Optional[String] $default_pool_inc,
   Optional[String] $default_pool_diff,
-  String             $port                = '9102', # FIXME: Switch to Integer
+  Integer            $port                = 9102,
   Stdlib::Ip_address $listen_address      = $facts['ipaddress'],
   String             $password            = 'secret',
-  String             $max_concurrent_jobs = '2', # FIXME: Switch to Integer
+  Integer            $max_concurrent_jobs = 2,
   String             $director_name       = $bacula::director_name,
-  String             $autoprune           = 'yes', # FIXME: Switch to Boolean
+  Boolean            $autoprune           = true,
   Bacula::Time       $file_retention      = '45 days',
   Bacula::Time       $job_retention       = '6 months',
   String             $client              = $trusted['certname'],

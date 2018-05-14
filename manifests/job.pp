@@ -61,10 +61,10 @@ define bacula::job (
   Variant[Boolean, String]  $jobdef              = 'Default',
   Array $runscript                 = [],
   Optional[String]  $level               = undef,
-  Enum['yes', 'no'] $accurate            = 'no', # FIXME: Change type to Boolean
+  Boolean           $accurate            = false,
   Boolean           $reschedule_on_error = false,
   Bacula::Time      $reschedule_interval = '1 hour',
-  String            $reschedule_times    = '10', # FIXME: Change type to Integer
+  Integer           $reschedule_times    = 10,
   Optional[String]  $messages            = undef,
   String            $restoredir          = '/tmp/bacula-restores',
   Optional[String]  $sched               = undef,
@@ -72,7 +72,7 @@ define bacula::job (
   Optional[String] $job_tag        = undef,
   Optional[String]  $selection_type      = undef,
   Optional[String]  $selection_pattern   = undef,
-  String            $max_concurrent_jobs = '1', # FIXME: Change type to Integer
+  Integer           $max_concurrent_jobs = 1,
 ) {
 
   include ::bacula

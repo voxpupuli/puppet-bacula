@@ -49,9 +49,9 @@ class bacula::director (
   String                        $homedir             = $bacula::homedir,
   Optional[String]              $job_tag             = $bacula::job_tag,
   Stdlib::Ip_address            $listen_address      = $facts['ipaddress'],
-  String                        $max_concurrent_jobs = '20', # FIXME: Change type to Integer
+  Integer                       $max_concurrent_jobs = 20,
   String                        $password            = 'secret',
-  String                        $port                = '9101', # FIXME: Change type to Integer
+  Integer                       $port                = 9101,
   String                        $rundir              = $bacula::rundir,
   String                        $storage_name        = $bacula::storage_name,
 ) inherits ::bacula {

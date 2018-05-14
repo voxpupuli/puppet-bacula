@@ -46,7 +46,7 @@ Job {
       Command = <%= script.fetch('command').inspect %>
     }
 <% end -%>
-    Accurate         = <%= @accurate %>
+    Accurate         = <%= @accurate ? 'yes' : 'no' %>
 <% if @level -%>
     Level            = <%= @level %>
 <% end -%>

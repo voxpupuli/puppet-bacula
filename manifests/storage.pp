@@ -32,10 +32,10 @@ class bacula::storage (
   String             $group          = $bacula::bacula_group,
   String             $homedir        = $bacula::homedir,
   Stdlib::Ip_address $listen_address = $facts['ipaddress'],
-  String             $maxconcurjobs  = '5', # FIXME: Change to Integer
+  Integer            $maxconcurjobs  = 5,
   String             $media_type     = 'File',
   String             $password       = 'secret',
-  String             $port           = '9103', # FIXME: Change to Integer
+  Integer            $port           = 9103,
   String             $rundir         = $bacula::rundir,
   String             $storage        = $trusted['certname'], # storage here is not storage_name
   String             $address        = $facts['fqdn'],

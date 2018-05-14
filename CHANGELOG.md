@@ -1,5 +1,8 @@
 ## Unreleased
-* 
+
+## 2018-05-13 5.3.0
+Revamp TLS handling and Improve class/define parameter data types.  See the
+github wiki for details.
 
 ## 2017-10-22 5.2.0
 Introduce PKI support for encrypting and signing backups with a self-signed

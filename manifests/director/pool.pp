@@ -25,15 +25,15 @@
 #
 define bacula::director::pool (
   Optional[String] $volret         = undef,
-  Optional[Integer] $maxvoljobs     = undef,
+  Optional[Variant[String,Integer]] $maxvoljobs     = undef, # FIXME: Remove String
   Optional[Bacula::Size] $maxvolbytes    = undef,
-  Optional[Integer] $maxvols        = undef,
+  Optional[Variant[String,Integer]] $maxvols        = undef, # FIXME: Remove String
   Optional[String] $label          = undef,
   Optional[String] $voluseduration = undef,
   String           $storage        = $bacula::director::storage,
   String           $pooltype       = 'Backup',
-  Boolean           $recycle        = true,
-  Boolean           $autoprune      = true,
+  Variant[String,Boolean]           $recycle        = true, # FIXME: Remove String
+  Variant[String,Boolean]           $autoprune      = true, # FIXME: Remove String
   String           $purgeaction    = 'Truncate',
   Optional[String] $next_pool      = undef,
   String           $conf_dir       = $::bacula::conf_dir

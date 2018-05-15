@@ -21,11 +21,11 @@
 #
 define bacula::director::client (
   String       $address,
-  Integer      $port,
+  Variant[String,Integer]      $port, # FIXME: Remove String
   String       $password,
   Bacula::Time $file_retention,
   Bacula::Time $job_retention,
-  Boolean      $autoprune,
+  Variant[String,Boolean]      $autoprune, # FIXME: Remove String
   String       $conf_dir = $::bacula::conf_dir,
 ) {
 

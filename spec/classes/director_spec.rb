@@ -8,7 +8,12 @@ describe 'bacula::director' do
       case facts[:osfamily]
       when 'Debian'
         it { is_expected.to contain_class('bacula::director') }
-        it { is_expected.to contain_package('bacula-director-common') }
+        case facts[:operatingsystemmajrelease]
+        when '7', '8'
+          it { is_expected.to contain_package('bacula-director-common') }
+        when '9'
+          it { is_expected.to contain_package('bacula-director') }
+        end
         it { is_expected.to contain_package('bacula-director-pgsql') }
         it { is_expected.to contain_package('bacula-console') }
       when 'RedHat'

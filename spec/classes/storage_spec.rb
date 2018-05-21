@@ -19,7 +19,10 @@ describe 'bacula::storage' do
       case facts[:osfamily]
       when 'Debian'
         it { is_expected.to contain_package('bacula-sd') }
-        it { is_expected.to contain_package('bacula-sd-pgsql') }
+        case facts[:operatingsystemmajrelease]
+        when '7', '8'
+          it { is_expected.to contain_package('bacula-sd-pgsql') }
+        end
       when 'RedHat'
         case facts[:operatingsystemmajrelease]
         when '6'

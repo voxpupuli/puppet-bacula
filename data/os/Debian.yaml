@@ -1,7 +1,7 @@
 ---
 bacula::director::postgresql::make_bacula_tables: '/usr/share/bacula-director/make_postgresql_tables'
 bacula::director::packages:
-  - 'bacula-director-common'
+  - 'bacula-director'
   - 'bacula-director-<%= $db_type %>'
   - 'bacula-console'
 bacula::director::services: 'bacula-director'
@@ -9,7 +9,6 @@ bacula::director::services: 'bacula-director'
 bacula::client::packages: 'bacula-client'
 bacula::storage::packages:
   - 'bacula-sd'
-  - 'bacula-sd-<%= $db_type %>'
 bacula::storage::services: 'bacula-sd'
 
 bacula::conf_dir: '/etc/bacula'

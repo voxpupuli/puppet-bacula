@@ -1,4 +1,5 @@
 ## Unreleased
+Use the correct group (tape) for the bacula-sd configuration file on Debian.
 
 ## 2018-05-13 5.3.0
 Revamp TLS handling and Improve class/define parameter data types.  See the

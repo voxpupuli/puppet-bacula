@@ -1,5 +1,8 @@
 ## Unreleased
 
+## 2018-05-26 5.4.0
+Switch to more strict data types
+
 ## 2018-05-26 5.3.1
 Improve Debian support.  Use the correct group (tape) for the bacula-sd
 configuration file on Debian.

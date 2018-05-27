@@ -17,23 +17,23 @@
 #   bacula::director::pool {
 #     "PuppetLabsPool-Full":
 #       volret      => "2 months",
-#       maxvolbytes => '2000000000',
-#       maxvoljobs  => '10',
-#       maxvols     => "20",
+#       maxvolbytes => 2000000000,
+#       maxvoljobs  => 10,
+#       maxvols     => 20,
 #       label       => "Full-";
 #   }
 #
 define bacula::director::pool (
   Optional[String] $volret         = undef,
-  Optional[String] $maxvoljobs     = undef, # FIXME: Change type to Integer
-  Optional[String] $maxvolbytes    = undef, # FIXME: Change type to Integer
-  Optional[String] $maxvols        = undef, # FIXME: Change type to Integer
+  Optional[Variant[String,Integer]] $maxvoljobs     = undef, # FIXME: Remove String
+  Optional[Bacula::Size] $maxvolbytes    = undef,
+  Optional[Variant[String,Integer]] $maxvols        = undef, # FIXME: Remove String
   Optional[String] $label          = undef,
   Optional[String] $voluseduration = undef,
   String           $storage        = $bacula::director::storage,
   String           $pooltype       = 'Backup',
-  String           $recycle        = 'Yes', # FIXME: Change type to Boolean
-  String           $autoprune      = 'Yes', # FIXME: Change type to Boolean
+  Variant[String,Boolean]           $recycle        = true, # FIXME: Remove String
+  Variant[String,Boolean]           $autoprune      = true, # FIXME: Remove String
   String           $purgeaction    = 'Truncate',
   Optional[String] $next_pool      = undef,
   String           $conf_dir       = $::bacula::conf_dir

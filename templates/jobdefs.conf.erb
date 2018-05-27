@@ -5,7 +5,7 @@ JobDefs {
     Schedule = <%= @sched %>
     Messages = <%= @messages %>
     Priority = <%= @priority %>
-    Accurate = <%= @accurate %>
+    Accurate = <%= @accurate ? 'yes' : 'no' %>
 <% if @level -%>
     Level    = <%= @level %>
 <% end -%>

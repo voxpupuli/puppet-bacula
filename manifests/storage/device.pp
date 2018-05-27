@@ -26,7 +26,7 @@ define bacula::storage::device (
   Boolean          $automatic_mount = true,
   Boolean          $removable_media = false,
   Boolean          $always_open     = false,
-  String           $maxconcurjobs   = '1', # FIXME: Change type to Integer
+  Integer          $maxconcurjobs   = 1,
   String           $conf_dir        = $::bacula::conf_dir,
   Stdlib::Filemode $device_mode     = '0770',
   String           $device_owner    = $bacula::bacula_user,

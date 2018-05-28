@@ -65,18 +65,13 @@ class bacula::director (
     default:                { fail('No db_type set') }
   }
 
-  # Packages are virtual due to some platforms shipping the SD and Dir as
-  # part of the same package.
-  include ::bacula::virtual
-
   # Allow for package names to include EPP syntax for db_type
   $package_names = $packages.map |$p| {
     $package_name = inline_epp($p, {
       'db_type' => $db_type
     })
   }
-
-  realize(Package[$package_names])
+  ensure_packages($package_names)
 
   service { $services:
     ensure  => running,

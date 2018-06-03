@@ -49,13 +49,16 @@ describe 'bacula::storage' do
 
       context 'with a custom name' do
         let(:param_storage) { 'storage.example.com' }
+
         it { expect(exported_resources).to contain_bacula__director__storage('storage.example.com').with(address: 'foo.example.com') }
       end
       context 'with a custom address' do
         let(:param_address) { 'address.example.com' }
+
         it { expect(exported_resources).to contain_bacula__director__storage('foo.example.com').with(address: 'address.example.com') }
         context 'with a custom name' do
           let(:param_storage) { 'storage.example.com' }
+
           it { expect(exported_resources).to contain_bacula__director__storage('storage.example.com').with(address: 'address.example.com') }
         end
       end

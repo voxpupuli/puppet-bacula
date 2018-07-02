@@ -1,6 +1,6 @@
 type Bacula::Size = Variant[
   Integer,
   Pattern[
-    /(?i:\A\d+[mg]b?\Z)/,
+    /(?i:\A\d+\s*[mg]b?\Z)/,
   ],
 ]

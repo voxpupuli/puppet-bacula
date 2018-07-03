@@ -42,10 +42,6 @@ class bacula::storage (
   String             $user           = $bacula::bacula_user,
 ) inherits ::bacula {
 
-  # Packages are virtual due to some platforms shipping the
-  # SD and Dir as part of the same package.
-  include ::bacula::virtual
-
   # Allow for package names to include EPP syntax for db_type
   $db_type = lookup('bacula::director::db_type')
   $package_names = $packages.map |$p| {
@@ -53,7 +49,7 @@ class bacula::storage (
       'db_type' => $db_type
     })
   }
-  realize(Package[$package_names])
+  ensure_packages($package_names)
 
   service { $services:
     ensure  => running,

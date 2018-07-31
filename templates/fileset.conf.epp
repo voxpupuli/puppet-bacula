@@ -1,0 +1,29 @@
+<%
+  |
+    String $name,
+    Hash[String,Variant[String,Array[String]]] $options,
+    Array[String] $files,
+    Array[String] $excludes,
+  |
+-%>
+FileSet {
+  Name = <%= $name %>
+  Include {
+    Options {
+<% $options.each |$option, $optval| { -%>
+<%   any2array($optval).each |$value| { -%>
+      <%= $option %> = <%= $value %>
+<%   } -%>
+<% } -%>
+    }
+<% $files.each |$f| { -%>
+    File = <%= $f %>
+<% } -%>
+  }
+  Exclude {
+<% $excludes.each |$exclude| { -%>
+    File = <%= $exclude %>
+<% } -%>
+  }
+}
+

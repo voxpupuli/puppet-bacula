@@ -52,7 +52,7 @@ define bacula::job (
   Optional[Array[String]] $excludes = undef,
   Optional[String] $fileset        = undef,
   Bacula::JobType $jobtype         = 'Backup',
-  String            $template            = 'bacula/job.conf.erb',
+  String            $template            = 'bacula/job.conf.epp',
   Optional[String] $pool           = lookup('bacula::client::default_pool'),
   Optional[String] $pool_full      = lookup('bacula::client::default_pool_full'),
   Optional[String] $pool_inc       = lookup('bacula::client::default_pool_inc'),
@@ -66,7 +66,7 @@ define bacula::job (
   Bacula::Time      $reschedule_interval = '1 hour',
   Integer           $reschedule_times    = 10,
   Optional[String]  $messages            = undef,
-  String            $restoredir          = '/tmp/bacula-restores',
+  Optional[String]  $restoredir          = '/tmp/bacula-restores',
   Optional[String]  $sched               = undef,
   Optional[Variant[Integer,String]]  $priority   = undef,
   Optional[String] $job_tag        = undef,
@@ -109,8 +109,33 @@ define bacula::job (
     }
   }
 
+  $epp_job_variables = {
+    name                => $name,
+    jobtype             => $jobtype,
+    fileset_real        => $fileset_real,
+    pool                => $pool,
+    storage             => $storage,
+    restoredir          => $restoredir,
+    messages            => $messages,
+    pool_full           => $pool_full,
+    pool_inc            => $pool_inc,
+    pool_diff           => $pool_diff,
+    selection_type      => $selection_type,
+    selection_pattern   => $selection_pattern,
+    jobdef              => $jobdef,
+    runscript           => $runscript,
+    accurate            => $accurate,
+    level               => $level,
+    sched               => $sched,
+    priority            => $priority,
+    max_concurrent_jobs => $max_concurrent_jobs,
+    reschedule_on_error => $reschedule_on_error,
+    reschedule_interval => $reschedule_interval,
+    reschedule_times    => $reschedule_times,
+  }
+
   @@bacula::director::job { $name:
-    content => template($template),
+    content => epp($template, $epp_job_variables),
     tag     => $resource_tags,
   }
 }

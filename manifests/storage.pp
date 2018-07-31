@@ -60,7 +60,7 @@ class bacula::storage (
   concat::fragment { 'bacula-storage-header':
     order   => '00',
     target  => "${conf_dir}/bacula-sd.conf",
-    content => template('bacula/bacula-sd-header.erb'),
+    content => epp('bacula/bacula-sd-header.epp'),
   }
 
   bacula::storage::device { $device_name:
@@ -70,7 +70,7 @@ class bacula::storage (
 
   concat::fragment { 'bacula-storage-dir':
     target  => "${conf_dir}/bacula-sd.conf",
-    content => template('bacula/bacula-sd-dir.erb'),
+    content => epp('bacula/bacula-sd-dir.epp'),
   }
 
   bacula::messages { 'Standard-sd':

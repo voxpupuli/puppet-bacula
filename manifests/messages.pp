@@ -28,8 +28,21 @@ define bacula::messages (
   include bacula
   include bacula::common
 
+  $epp_messages_variables = {
+    mname       => $mname,
+    director    => $director,
+    append      => $append,
+    syslog      => $syslog,
+    catalog     => $catalog,
+    console     => $console,
+    mailcmd     => $mailcmd,
+    mail        => $mail,
+    operator    => $operator,
+    operatorcmd => $operatorcmd,
+  }
+
   concat::fragment { "bacula-messages-${daemon}-${name}":
     target  => "${bacula::conf_dir}/bacula-${daemon}.conf",
-    content => template('bacula/messages.erb'),
+    content => epp('bacula/messages.epp', $epp_messages_variables),
   }
 }

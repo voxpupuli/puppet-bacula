@@ -38,9 +38,24 @@ define bacula::director::pool (
   Optional[String] $next_pool      = undef,
   String           $conf_dir       = $bacula::conf_dir,
 ) {
+  $epp_pool_variables = {
+    name           => $name,
+    pooltype       => $pooltype,
+    recycle        => $recycle,
+    autoprune      => $autoprune,
+    volret         => $volret,
+    voluseduration => $voluseduration,
+    label          => $label,
+    maxvols        => $maxvols,
+    maxvoljobs     => $maxvoljobs,
+    maxvolbytes    => $maxvolbytes,
+    storage        => $storage,
+    purgeaction    => $purgeaction,
+    next_pool      => $next_pool,
+  }
 
   concat::fragment { "bacula-director-pool-${name}":
     target  => "${conf_dir}/conf.d/pools.conf",
-    content => template('bacula/bacula-dir-pool.erb'),
+    content => epp('bacula/bacula-dir-pool.epp', $epp_pool_variables),
   }
 }

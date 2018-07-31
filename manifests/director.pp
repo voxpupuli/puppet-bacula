@@ -88,7 +88,7 @@ class bacula::director (
     group     => $group,
     mode      => '0640',
     show_diff => false,
-    content   => template('bacula/bconsole.conf.erb');
+    content   => epp('bacula/bconsole.conf.epp');
   }
 
   Concat {
@@ -101,13 +101,13 @@ class bacula::director (
   concat::fragment { 'bacula-director-header':
     order   => '00',
     target  => "${conf_dir}/bacula-dir.conf",
-    content => template('bacula/bacula-dir-header.erb'),
+    content => epp('bacula/bacula-dir-header.epp'),
   }
 
   concat::fragment { 'bacula-director-tail':
     order   => '99999',
     target  => "${conf_dir}/bacula-dir.conf",
-    content => template('bacula/bacula-dir-tail.erb'),
+    content => epp('bacula/bacula-dir-tail.epp'),
   }
 
   create_resources(bacula::messages, $messages)

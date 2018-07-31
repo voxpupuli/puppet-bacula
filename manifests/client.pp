@@ -69,7 +69,7 @@ class bacula::client (
 
   concat::fragment { 'bacula-client-header':
     target  => $config_file,
-    content => template('bacula/bacula-fd-header.erb'),
+    content => epp('bacula/bacula-fd-header.epp'),
   }
 
   bacula::messages { 'Standard-fd':

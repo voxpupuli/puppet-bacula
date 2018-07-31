@@ -34,10 +34,21 @@ define bacula::storage::device (
   String           $director_name   = $bacula::director_name,
   String           $group           = $bacula::bacula_group,
 ) {
+  $epp_device_variables = {
+    device_name     => $device_name,
+    media_type      => $media_type,
+    device          => $device,
+    label_media     => $label_media,
+    random_access   => $random_access,
+    automatic_mount => $automatic_mount,
+    removable_media => $removable_media,
+    always_open     => $always_open,
+    maxconcurjobs   => $maxconcurjobs,
+  }
 
   concat::fragment { "bacula-storage-device-${name}":
     target  => "${conf_dir}/bacula-sd.conf",
-    content => template('bacula/bacula-sd-device.erb'),
+    content => epp('bacula/bacula-sd-device.epp', $epp_device_variables),
   }
 
   if $media_type =~ '^File' {

@@ -20,9 +20,18 @@ define bacula::director::storage (
   Integer $maxconcurjobs = 1,
   String $conf_dir      = $bacula::conf_dir,
 ) {
+  $epp_storage_variables = {
+    name          => $name,
+    address       => $address,
+    port          => $port,
+    password      => $password,
+    device_name   => $device_name,
+    media_type    => $media_type,
+    maxconcurjobs => $maxconcurjobs,
+  }
 
   concat::fragment { "bacula-director-storage-${name}":
     target  => "${conf_dir}/conf.d/storage.conf",
-    content => template('bacula/bacula-dir-storage.erb'),
+    content => epp('bacula/bacula-dir-storage.epp', $epp_storage_variables),
   }
 }

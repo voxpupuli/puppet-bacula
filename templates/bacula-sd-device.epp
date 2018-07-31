@@ -1,0 +1,24 @@
+<%
+  |
+    String $device_name,
+    String $media_type,
+    String $device,
+    Boolean $label_media,
+    Boolean $random_access,
+    Boolean $automatic_mount,
+    Boolean $removable_media,
+    Boolean $always_open,
+    Integer $maxconcurjobs,
+  |
+-%>
+Device {
+    Name           = <%= $device_name %>
+    Media Type     = <%= $media_type %>
+    Archive Device = <%= $device %>
+    LabelMedia     = <%= $label_media %>; # lets Bacula label unlabeled media
+    Random Access  = <%= $random_access %>;
+    AutomaticMount = <%= $automatic_mount %>;
+    RemovableMedia = <%= $removable_media %>;
+    AlwaysOpen     = <%= $always_open %>;
+    Maximum Concurrent Jobs = <%= $maxconcurjobs %>
+}

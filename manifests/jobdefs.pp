@@ -27,8 +27,23 @@ define bacula::jobdefs (
   include bacula
   $conf_dir = $bacula::conf_dir
 
+  $epp_jobdef_variables = {
+    name                => $name,
+    jobtype             => $jobtype,
+    pool                => $pool,
+    sched               => $sched,
+    messages            => $messages,
+    priority            => $priority,
+    accurate            => $accurate,
+    level               => $level,
+    max_concurrent_jobs => $max_concurrent_jobs,
+    reschedule_on_error => $reschedule_on_error,
+    reschedule_interval => $reschedule_interval,
+    reschedule_times    => $reschedule_times,
+  }
+
   concat::fragment { "bacula-jobdefs-${name}":
     target  => "${conf_dir}/conf.d/jobdefs.conf",
-    content => template('bacula/jobdefs.conf.erb'),
+    content => epp('bacula/jobdefs.conf.epp', $epp_jobdef_variables),
   }
 }

@@ -28,9 +28,18 @@ define bacula::director::client (
   Variant[String,Boolean]      $autoprune, # FIXME: Remove String
   String       $conf_dir = $bacula::conf_dir,
 ) {
+  $epp_client_variables = {
+    name           => $name,
+    address        => $address,
+    port           => $port,
+    password       => $password,
+    file_retention => $file_retention,
+    job_retention  => $job_retention,
+    autoprune      => $autoprune,
+  }
 
   concat::fragment { "bacula-director-client-${name}":
     target  => "${conf_dir}/conf.d/client.conf",
-    content => template('bacula/bacula-dir-client.erb'),
+    content => epp('bacula/bacula-dir-client.epp', $epp_client_variables),
   }
 }

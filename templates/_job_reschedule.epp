@@ -1,0 +1,12 @@
+<%
+  |
+    Boolean      $reschedule_on_error,
+    Bacula::Time $reschedule_interval,
+    Integer      $reschedule_times,
+  |
+-%>
+<% if $reschedule_on_error { -%>
+    Reschedule On Error = yes
+    Reschedule Interval = <%= $reschedule_interval %>
+    Reschedule Times    = <%= $reschedule_times %>
+<% } -%>

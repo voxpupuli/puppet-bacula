@@ -1,0 +1,22 @@
+<%
+  |
+    String $name,
+    String $address,
+    Integer $port,
+    String $password,
+    String $device_name,
+    String $media_type,
+    Integer $maxconcurjobs,
+  |
+-%>
+Storage {
+    Name       = <%= $name %>-sd
+    Address    = <%= $address %>
+    SDPort     = <%= $port %>
+    Password   = "<%= $password %>"
+    Device     = <%= $device_name %>
+    Media Type = <%= $media_type %>
+    Maximum Concurrent Jobs = <%= $maxconcurjobs %>
+<%= epp('bacula/_tls_client.epp') -%>
+}
+

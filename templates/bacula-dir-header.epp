@@ -1,0 +1,32 @@
+Director {                # define myself
+    Name                    = <%= $clientcert %>-dir
+<% if $bacula::director::listen_address { -%>
+    DirAddresses            = {
+<%= epp('bacula/_listen.epp', { listen_address => $bacula::director::listen_address, port => $bacula::director::port }) %>
+    }
+<% } -%>
+    QueryFile               = "/etc/bacula/scripts/query.sql"
+    WorkingDirectory        = <%= $bacula::director::homedir %>
+    Pid Directory           = <%= $bacula::director::rundir %>
+    Maximum Concurrent Jobs = <%= $bacula::director::max_concurrent_jobs %>
+    Password                = "<%= $bacula::director::password %>"  # Console password
+    Messages                = Daemon
+<%= epp('bacula/_tls_server.epp') %>
+<% if $bacula::director::tls_dh_file != undef { %>
+    TLS DH File             = <%= $bacula::director::tls_dh_file %>
+<% } -%>
+}
+
+# Generic catalog service
+Catalog {
+    Name   = MyCatalog
+    dbname = "<%= $bacula::director::db_name %>";
+    dbuser = "<%= $bacula::director::db_user %>";
+    dbpassword = "<%= $bacula::director::db_pw %>";
+<% if $bacula::director::db_address { -%>
+    DB Address = <%= $bacula::director::db_address %>
+<% } -%>
+<% if $bacula::director::db_port { -%>
+    DB Port = <%= $bacula::director::db_port %>
+<% } -%>
+}

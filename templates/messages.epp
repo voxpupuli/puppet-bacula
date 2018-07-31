@@ -1,0 +1,46 @@
+<%
+  |
+    String $mname,
+    Optional[String] $director,
+    Optional[String] $append,
+    Optional[String] $syslog,
+    Optional[String] $catalog,
+    Optional[String] $console,
+    Optional[String] $mailcmd,
+    Optional[String] $mail,
+    Optional[String] $operator,
+    Optional[String] $operatorcmd,
+  |
+-%>
+
+Messages {
+    Name     = <%= $mname %>
+<% if $director { -%>
+    Director = <%= $director %>
+<% } -%>
+<% if $append { -%>
+    Append   = <%= $append %>
+<% } -%>
+<% if $syslog { -%>
+    Syslog   = <%= $syslog %>
+<% } -%>
+<% if $catalog { -%>
+    Catalog  = <%= $catalog %>
+<% } -%>
+<% if $console { -%>
+    Console  = <%= $console %>
+<% } -%>
+<% if $mailcmd { -%>
+    Mail Command  = <%= $mailcmd %>
+<% } -%>
+<% if $mail { -%>
+    Mail  = <%= $mail %>
+<% } -%>
+<% if $operator { -%>
+    Operator  = <%= $operator %>
+<% } -%>
+<% if $operatorcmd { -%>
+    Operator Command = <%= $operatorcmd %>
+<% } -%>
+}
+

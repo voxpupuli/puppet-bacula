@@ -1,0 +1,12 @@
+<% if $bacula::client::use_pki { -%>
+  <%- if $bacula::client::pki_signatures { -%>
+    PKI Signatures          = <%= $bacula::client::pki_signatures %>
+  <%- } -%>
+  <%- if $bacula::client::pki_encryption { -%>
+    PKI Encryption          = <%= $bacula::client::pki_encryption %>
+  <%- } -%>
+    PKI Keypair             = <%= $bacula::client::pki_keypair %>
+  <%- if $bacula::client::pki_master_key { -%>
+    PKI Master Key          = <%= $bacula::client::pki_master_key %>
+  <%- } -%>
+<% } -%>

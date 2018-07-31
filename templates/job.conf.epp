@@ -1,0 +1,93 @@
+<%
+  |
+    String $name,
+    Bacula::JobType $jobtype,
+    String $fileset_real,
+    Optional[String] $pool,
+    Optional[String] $storage,
+    Optional[String] $restoredir,
+    Optional[String] $messages,
+    Optional[String] $pool_full,
+    Optional[String] $pool_inc,
+    Optional[String] $pool_diff,
+    Optional[String] $selection_type,
+    Optional[String] $selection_pattern,
+    Variant[Boolean,String] $jobdef,
+    Array[Hash] $runscript,
+    Boolean $accurate,
+    Optional[String] $level,
+    Optional[String] $sched,
+    Optional[Integer] $priority,
+    Optional[Integer] $max_concurrent_jobs,
+    Boolean $reschedule_on_error,
+    Bacula::Time $reschedule_interval,
+    Integer $reschedule_times,
+  |
+-%>
+Job {
+    Name             = <%= $name %>
+    Type             = <%= $jobtype %>
+    Client           = <%= $clientcert %>-fd
+    FileSet          = <%= $fileset_real %>
+<% if $pool { -%>
+    Pool             = <%= $pool %>
+<% } -%>
+<% if $storage { -%>
+    Storage          = <%= $storage %>
+<% } -%>
+<% if $jobtype == "Restore" { -%>
+    Where            = <%= $restoredir %>
+  <%- if !$messages { -%>
+    Messages         = Standard
+  <%- } -%>
+<% } elsif $jobtype == "Backup" { -%>
+  <%- if $pool_full { -%>
+    Full Backup Pool         = <%= $pool_full %>
+  <%- } -%>
+  <%- if $pool_inc { -%>
+    Incremental Backup Pool  = <%= $pool_inc %>
+  <%- } -%>
+  <%- if $pool_diff { -%>
+    Differential Backup Pool = <%= $pool_diff %>
+  <%- } -%>
+<% } elsif $jobtype == "Copy" or $jobtype == "Migrate" { -%>
+  <%- if $selection_type { -%>
+    Selection Type = <%= $selection_type %>
+  <%- } -%>
+  <%- if $selection_pattern { -%>
+    Selection Type = <%= $selection_pattern %>
+  <%- } -%>
+<% } -%>
+
+<% if $jobdef { -%>
+    JobDefs          = "<%= $jobdef %>"
+<% } -%>
+<% $runscript.each |$script| { -%>
+    RunScript {
+      RunsWhen = <%= $script['runs_when'] %>
+      FailJobOnError = <%= $script['fail_job_on_error'] %>
+      RunsOnSuccess = <%= $script['runs_on_success'] %>
+      RunsOnFailure = <%= $script['runs_on_failure'] %>
+      RunsOnClient = <%= $script['runs_on_client'] %>
+      Command = <%= $script['command'] %>
+    }
+<% } -%>
+    Accurate         = <%= $accurate %>
+<% if $level { -%>
+    Level            = <%= $level %>
+<% } -%>
+<% if $messages { -%>
+    Messages         = <%= $messages %>
+<% } -%>
+<% if $sched { -%>
+    Schedule         = <%= $sched %>
+<% } -%>
+<% if $priority { -%>
+    Priority         = <%= $priority %>
+<% } -%>
+<%= epp('bacula/_job_reschedule.epp', { reschedule_on_error => $reschedule_on_error, reschedule_interval => $reschedule_interval, reschedule_times => $reschedule_times }) -%>
+<% if $max_concurrent_jobs { -%>
+    Maximum Concurrent Jobs = <%= $max_concurrent_jobs %>
+<% } -%>
+}
+

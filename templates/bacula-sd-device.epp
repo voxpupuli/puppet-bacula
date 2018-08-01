@@ -15,10 +15,10 @@ Device {
     Name           = <%= $device_name %>
     Media Type     = <%= $media_type %>
     Archive Device = <%= $device %>
-    LabelMedia     = <%= $label_media %>; # lets Bacula label unlabeled media
-    Random Access  = <%= $random_access %>;
-    AutomaticMount = <%= $automatic_mount %>;
-    RemovableMedia = <%= $removable_media %>;
-    AlwaysOpen     = <%= $always_open %>;
+    LabelMedia     = <%= bacula::yesno2str($label_media) %>; # lets Bacula label unlabeled media
+    Random Access  = <%= bacula::yesno2str($random_access) %>;
+    AutomaticMount = <%= bacula::yesno2str($automatic_mount) %>;
+    RemovableMedia = <%= bacula::yesno2str($removable_media) %>;
+    AlwaysOpen     = <%= bacula::yesno2str($always_open) %>;
     Maximum Concurrent Jobs = <%= $maxconcurjobs %>
 }

@@ -22,7 +22,7 @@ JobDefs {
     Schedule = <%= $sched %>
     Messages = <%= $messages %>
     Priority = <%= $priority %>
-    Accurate = <%= $accurate %>
+    Accurate = <%= bacula::yesno2str($accurate) %>
 <% if $level { -%>
     Level    = <%= $level %>
 <% } -%>

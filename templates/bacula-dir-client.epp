@@ -17,7 +17,7 @@ Client {
     Password       = "<%= $password %>"
     File Retention = <%= $file_retention %>
     Job Retention  = <%= $job_retention %>
-    AutoPrune      = <%= $autoprune %>
+    AutoPrune      = <%= bacula::yesno2str($autoprune) %>
 <%= epp('bacula/_tls_client.epp') %>
 }
 

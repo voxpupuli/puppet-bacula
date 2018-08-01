@@ -65,14 +65,14 @@ Job {
 <% $runscript.each |$script| { -%>
     RunScript {
       RunsWhen = <%= $script['runs_when'] %>
-      FailJobOnError = <%= $script['fail_job_on_error'] %>
-      RunsOnSuccess = <%= $script['runs_on_success'] %>
-      RunsOnFailure = <%= $script['runs_on_failure'] %>
-      RunsOnClient = <%= $script['runs_on_client'] %>
+      FailJobOnError = <%= bacula::yesno2str($script['fail_job_on_error']) %>
+      RunsOnSuccess = <%= bacula::yesno2str($script['runs_on_success']) %>
+      RunsOnFailure = <%= bacula::yesno2str($script['runs_on_failure']) %>
+      RunsOnClient = <%= bacula::yesno2str($script['runs_on_client']) %>
       Command = <%= $script['command'] %>
     }
 <% } -%>
-    Accurate         = <%= $accurate %>
+    Accurate         = <%= bacula::yesno2str($accurate) %>
 <% if $level { -%>
     Level            = <%= $level %>
 <% } -%>

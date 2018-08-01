@@ -18,8 +18,8 @@
 Pool {
     Name                 = <%= $name %>
     Pool Type            = <%= $pooltype %>
-    Recycle              = <%= $recycle %>
-    AutoPrune            = <%= $autoprune %>
+    Recycle              = <%= bacula::yesno2str($recycle) %>
+    AutoPrune            = <%= bacula::yesno2str($autoprune) %>
 <% if $volret { -%>
     Volume Retention     = <%= $volret %>
 <% } -%>

@@ -27,8 +27,8 @@ define bacula::messages (
 ) {
   validate_re($daemon, ['^dir', '^sd', '^fd'])
 
-  include ::bacula
-  include ::bacula::common
+  include bacula
+  include bacula::common
 
   concat::fragment { "bacula-messages-${daemon}-${name}":
     target  => "${bacula::conf_dir}/bacula-${daemon}.conf",

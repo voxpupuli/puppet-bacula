@@ -75,7 +75,7 @@ define bacula::job (
   Integer           $max_concurrent_jobs = 1,
 ) {
 
-  include ::bacula
+  include bacula
   $conf_dir = $bacula::conf_dir
 
   if empty($files) and ! $fileset {
@@ -87,8 +87,8 @@ define bacula::job (
   if $job_tag {
     $resource_tags = $tag_defaults + [$job_tag]
   } else {
-    if $::bacula::job_tag {
-      $resource_tags = $tag_defaults + [$::bacula::job_tag]
+    if $bacula::job_tag {
+      $resource_tags = $tag_defaults + [$bacula::job_tag]
     } else {
       $resource_tags = $tag_defaults
     }

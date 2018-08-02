@@ -54,13 +54,13 @@ class bacula::director (
   Integer                       $port                = 9101,
   String                        $rundir              = $bacula::rundir,
   String                        $storage_name        = $bacula::storage_name,
-) inherits ::bacula {
+) inherits bacula {
 
-  include ::bacula::director::defaults
+  include bacula::director::defaults
 
   case $db_type {
-    /^(pgsql|postgresql)$/: { include ::bacula::director::postgresql }
-    /^(mysql)$/:            { include ::bacula::director::postgresql }
+    /^(pgsql|postgresql)$/: { include bacula::director::postgresql }
+    /^(mysql)$/:            { include bacula::director::postgresql }
     'none':                 { }
     default:                { fail('No db_type set') }
   }

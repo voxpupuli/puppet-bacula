@@ -26,7 +26,7 @@ define bacula::jobdefs (
 
   validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify', '^Copy', '^Migrate'])
 
-  include ::bacula
+  include bacula
   $conf_dir = $bacula::conf_dir
 
   concat::fragment { "bacula-jobdefs-${name}":

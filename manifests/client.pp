@@ -42,8 +42,8 @@ class bacula::client (
   Optional[String]  $pki_master_key = undef,
 ) inherits bacula {
 
-  $group    = $::bacula::bacula_group
-  $conf_dir = $::bacula::conf_dir
+  $group    = $bacula::bacula_group
+  $conf_dir = $bacula::conf_dir
   $config_file = "${conf_dir}/bacula-fd.conf"
 
   package { $packages:

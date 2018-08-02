@@ -6,7 +6,7 @@
     String $password,
     Bacula::Time $file_retention,
     Bacula::Time $job_retention,
-    Boolean $autoprune,
+    Bacula::Yesno $autoprune,
   |
 -%>
 Client {

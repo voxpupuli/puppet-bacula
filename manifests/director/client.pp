@@ -25,7 +25,7 @@ define bacula::director::client (
   String       $password,
   Bacula::Time $file_retention,
   Bacula::Time $job_retention,
-  Variant[String,Boolean]      $autoprune, # FIXME: Remove String
+  Bacula::Yesno $autoprune,
   String       $conf_dir = $bacula::conf_dir,
 ) {
   $epp_client_variables = {

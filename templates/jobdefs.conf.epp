@@ -6,11 +6,11 @@
     String $sched,
     String $messages,
     Integer $priority,
-    Boolean $accurate,
+    Bacula::Yesno $accurate,
     Optional[String] $level,
     Optional[Integer] $max_concurrent_jobs,
     # Used in bacula/_job_reschedule.epp
-    Boolean           $reschedule_on_error,
+    Bacula::Yesno     $reschedule_on_error,
     Bacula::Time      $reschedule_interval,
     Integer           $reschedule_times,
   |

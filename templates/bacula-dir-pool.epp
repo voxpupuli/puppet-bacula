@@ -2,8 +2,8 @@
   |
     String $name,
     String $pooltype,
-    Boolean $recycle,
-    Boolean $autoprune,
+    Bacula::Yesno $recycle,
+    Bacula::Yesno $autoprune,
     Optional[String] $volret,
     Optional[String] $voluseduration,
     Optional[String] $label,

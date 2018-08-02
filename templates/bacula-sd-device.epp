@@ -3,11 +3,11 @@
     String $device_name,
     String $media_type,
     String $device,
-    Boolean $label_media,
-    Boolean $random_access,
-    Boolean $automatic_mount,
-    Boolean $removable_media,
-    Boolean $always_open,
+    Bacula::Yesno $label_media,
+    Bacula::Yesno $random_access,
+    Bacula::Yesno $automatic_mount,
+    Bacula::Yesno $removable_media,
+    Bacula::Yesno $always_open,
     Integer $maxconcurjobs,
   |
 -%>

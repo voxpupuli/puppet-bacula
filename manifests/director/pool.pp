@@ -32,8 +32,8 @@ define bacula::director::pool (
   Optional[String] $voluseduration = undef,
   String           $storage        = $bacula::director::storage,
   String           $pooltype       = 'Backup',
-  Variant[String,Boolean]           $recycle        = true, # FIXME: Remove String
-  Variant[String,Boolean]           $autoprune      = true, # FIXME: Remove String
+  Bacula::Yesno    $recycle        = true,
+  Bacula::Yesno    $autoprune      = true,
   String           $purgeaction    = 'Truncate',
   Optional[String] $next_pool      = undef,
   String           $conf_dir       = $bacula::conf_dir,

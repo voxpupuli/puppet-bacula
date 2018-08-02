@@ -36,7 +36,7 @@ class bacula::director (
   Hash[String, Bacula::Message] $messages,
   Array[String] $packages,
   String $services,
-  Boolean $manage_db          = true,
+  Bacula::Yesno $manage_db    = true,
   String $conf_dir            = $bacula::conf_dir,
   String $db_name             = 'bacula',
   String $db_pw               = 'notverysecret',

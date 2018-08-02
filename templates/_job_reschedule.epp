@@ -1,6 +1,6 @@
 <%
   |
-    Boolean      $reschedule_on_error,
+    Bacula::Yesno $reschedule_on_error,
     Bacula::Time $reschedule_interval,
     Integer      $reschedule_times,
   |

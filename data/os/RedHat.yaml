@@ -6,7 +6,7 @@ bacula::storage::packages: [ 'bacula-storage' ]
 bacula::director::packages:
   - 'bacula-director'
   - 'bacula-console'
-bacula::client::packages: 'bacula-client'
+bacula::client::packages: [ 'bacula-client' ]
 
 bacula::director::services: 'bacula-dir'
 bacula::storage::services: 'bacula-sd'

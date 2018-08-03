@@ -20,7 +20,7 @@
 #   class { 'bacula::client': director_name => 'mydirector.example.com' }
 #
 class bacula::client (
-  String $packages,
+  Array[String] $packages,
   String $services,
   String $default_pool,
   Optional[String] $default_pool_full,

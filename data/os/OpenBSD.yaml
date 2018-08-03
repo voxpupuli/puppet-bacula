@@ -4,7 +4,7 @@ bacula::director::packages: [ 'bacula-server', "bacula-<%= $db_type %>" ]
 bacula::director::services: 'bacula_dir'
 bacula::storage::packages: [ 'bacula-server' ]
 bacula::storage::services: 'bacula_sd'
-bacula::client::packages: 'bacula-client'
+bacula::client::packages: [ 'bacula-client' ]
 bacula::client::services: 'bacula_fd'
 bacula::conf_dir: '/etc/bacula'
 bacula::rundir: '/var/run'

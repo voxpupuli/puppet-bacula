@@ -48,8 +48,8 @@
 #   }
 #
 define bacula::job (
-  Optional[Array] $files           = undef,
-  Optional[Array] $excludes        = undef,
+  Optional[Array[String]] $files    = undef,
+  Optional[Array[String]] $excludes = undef,
   Optional[String] $fileset        = undef,
   Bacula::JobType $jobtype         = 'Backup',
   String            $template            = 'bacula/job.conf.erb',
@@ -59,7 +59,7 @@ define bacula::job (
   Optional[String] $pool_diff      = lookup('bacula::client::default_pool_diff'),
   Optional[String]  $storage             = undef,
   Variant[Boolean, String]  $jobdef              = 'Default',
-  Array $runscript                 = [],
+  Array[Hash]       $runscript           = [],
   Optional[String]  $level               = undef,
   Boolean           $accurate            = false,
   Boolean           $reschedule_on_error = false,

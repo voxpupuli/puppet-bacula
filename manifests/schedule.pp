@@ -13,7 +13,7 @@
 #   }
 #
 define bacula::schedule (
-  Array $runs,
+  Array[String] $runs,
   String $conf_dir = $bacula::conf_dir,
 ) {
 

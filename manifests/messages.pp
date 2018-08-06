@@ -16,7 +16,7 @@ define bacula::messages (
   Optional[String] $append      = undef,
   Optional[String] $catalog     = undef,
   Optional[String] $console     = undef,
-  String           $daemon      = 'dir',
+  Enum['dir', 'fd', 'sd'] $daemon      = 'dir',
   Optional[String] $director    = undef,
   Optional[String] $mailcmd     = undef,
   Optional[String] $mail        = undef,
@@ -25,8 +25,6 @@ define bacula::messages (
   Optional[String] $operator    = undef,
   Optional[String] $syslog      = undef,
 ) {
-  validate_re($daemon, ['^dir', '^sd', '^fd'])
-
   include bacula
   include bacula::common
 

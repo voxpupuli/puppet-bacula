@@ -11,7 +11,7 @@
 # Sample Usage:
 #
 define bacula::jobdefs (
-  String           $jobtype             = 'Backup',
+  Bacula::JobType  $jobtype             = 'Backup',
   String           $sched               = 'Default',
   String           $messages            = 'Standard',
   Integer          $priority            = 10,
@@ -23,8 +23,6 @@ define bacula::jobdefs (
   Integer          $reschedule_times    = 10,
   Integer          $max_concurrent_jobs = 1,
 ) {
-
-  validate_re($jobtype, ['^Backup', '^Restore', '^Admin', '^Verify', '^Copy', '^Migrate'])
 
   include bacula
   $conf_dir = $bacula::conf_dir

@@ -36,11 +36,11 @@ define bacula::director::pool (
   Variant[String,Boolean]           $autoprune      = true, # FIXME: Remove String
   String           $purgeaction    = 'Truncate',
   Optional[String] $next_pool      = undef,
-  String           $conf_dir       = $::bacula::conf_dir
+  String           $conf_dir       = $bacula::conf_dir,
 ) {
 
   concat::fragment { "bacula-director-pool-${name}":
     target  => "${conf_dir}/conf.d/pools.conf",
-    content => template('bacula/bacula-dir-pool.erb');
+    content => template('bacula/bacula-dir-pool.erb'),
   }
 }

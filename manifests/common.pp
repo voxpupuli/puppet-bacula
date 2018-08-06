@@ -4,15 +4,15 @@
 #
 class bacula::common {
 
-  include ::bacula
-  include ::bacula::client
+  include bacula
+  include bacula::client
 
-  $conf_dir        = $::bacula::conf_dir
-  $bacula_user     = $::bacula::bacula_user
-  $bacula_group    = $::bacula::bacula_group
-  $homedir         = $::bacula::homedir
-  $homedir_mode    = $::bacula::homedir_mode
-  $client_package  = $::bacula::client::packages
+  $conf_dir        = $bacula::conf_dir
+  $bacula_user     = $bacula::bacula_user
+  $bacula_group    = $bacula::bacula_group
+  $homedir         = $bacula::homedir
+  $homedir_mode    = $bacula::homedir_mode
+  $client_package  = $bacula::client::packages
 
   File {
     ensure  => directory,

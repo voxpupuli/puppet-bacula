@@ -12,13 +12,13 @@ class bacula::director::postgresql (
   String $db_user            = $bacula::director::db_user,
 ) {
 
-  include ::bacula
+  include bacula
 
-  $services = $::bacula::director::services
-  $user     = $::bacula::bacula_user
+  $services = $bacula::director::services
+  $user     = $bacula::bacula_user
 
   if $bacula::director::manage_db {
-    require ::postgresql::server
+    require postgresql::server
     postgresql::server::db { $db_name:
       user     => $db_user,
       password => postgresql_password($db_user, $db_pw),

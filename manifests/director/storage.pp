@@ -18,7 +18,7 @@ define bacula::director::storage (
   String $device_name   = "${::fqdn}-device",
   String $media_type    = 'File',
   Integer $maxconcurjobs = 1,
-  String $conf_dir      = $::bacula::conf_dir
+  String $conf_dir      = $bacula::conf_dir,
 ) {
 
   concat::fragment { "bacula-director-storage-${name}":

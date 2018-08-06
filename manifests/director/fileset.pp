@@ -14,11 +14,11 @@
 #   }
 #
 define bacula::director::fileset (
-  Array[String] $files,
-  String $conf_dir                              = $bacula::conf_dir,
-  String $director_name                         = $bacula::director_name,
-  Array[String] $excludes                       = [],
-  Hash[String, Variant[String, Array[String]]] $options = {
+  Array[String]                                $files,
+  String                                       $conf_dir      = $bacula::conf_dir,
+  String                                       $director_name = $bacula::director_name,
+  Array[String]                                $excludes      = [],
+  Hash[String, Variant[String, Array[String]]] $options       = {
     'signature'   => 'SHA1',
     'compression' => 'GZIP9',
   },

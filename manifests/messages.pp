@@ -13,17 +13,17 @@
 # @param syslog
 #
 define bacula::messages (
-  Optional[String] $append      = undef,
-  Optional[String] $catalog     = undef,
-  Optional[String] $console     = undef,
+  Optional[String]        $append      = undef,
+  Optional[String]        $catalog     = undef,
+  Optional[String]        $console     = undef,
   Enum['dir', 'fd', 'sd'] $daemon      = 'dir',
-  Optional[String] $director    = undef,
-  Optional[String] $mailcmd     = undef,
-  Optional[String] $mail        = undef,
-  String           $mname       = 'Standard',
-  Optional[String] $operatorcmd = undef,
-  Optional[String] $operator    = undef,
-  Optional[String] $syslog      = undef,
+  Optional[String]        $director    = undef,
+  Optional[String]        $mailcmd     = undef,
+  Optional[String]        $mail        = undef,
+  String                  $mname       = 'Standard',
+  Optional[String]        $operatorcmd = undef,
+  Optional[String]        $operator    = undef,
+  Optional[String]        $syslog      = undef,
 ) {
   include bacula
   include bacula::common

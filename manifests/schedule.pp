@@ -14,7 +14,7 @@
 #
 define bacula::schedule (
   Array[String] $runs,
-  String $conf_dir = $bacula::conf_dir,
+  String        $conf_dir = $bacula::conf_dir,
 ) {
 
   concat::fragment { "bacula-schedule-${name}":

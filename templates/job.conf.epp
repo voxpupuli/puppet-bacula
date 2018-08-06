@@ -13,7 +13,7 @@
     Optional[String] $selection_type,
     Optional[String] $selection_pattern,
     Variant[Boolean,String] $jobdef,
-    Array[Hash] $runscript,
+    Array[Bacula::Runscript] $runscript,
     Bacula::Yesno $accurate,
     Optional[String] $level,
     Optional[String] $sched,
@@ -64,12 +64,22 @@ Job {
 <% } -%>
 <% $runscript.each |$script| { -%>
     RunScript {
+      <%- if $script['runs_when'] != undef { -%>
       RunsWhen = <%= $script['runs_when'] %>
+      <%- } -%>
+      <%- if $script['fail_job_on_error'] != undef { -%>
       FailJobOnError = <%= bacula::yesno2str($script['fail_job_on_error']) %>
+      <%- } -%>
+      <%- if $script['runs_on_success'] != undef { -%>
       RunsOnSuccess = <%= bacula::yesno2str($script['runs_on_success']) %>
+      <%- } -%>
+      <%- if $script['runs_on_failure'] != undef { -%>
       RunsOnFailure = <%= bacula::yesno2str($script['runs_on_failure']) %>
+      <%- } -%>
+      <%- if $script['runs_on_client'] != undef { -%>
       RunsOnClient = <%= bacula::yesno2str($script['runs_on_client']) %>
-      Command = <%= $script['command'] %>
+      <%- } -%>
+      Command = <%= bacula::escape($script['command']) %>
     }
 <% } -%>
     Accurate         = <%= bacula::yesno2str($accurate) %>

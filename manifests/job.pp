@@ -59,7 +59,7 @@ define bacula::job (
   Optional[String] $pool_diff      = lookup('bacula::client::default_pool_diff'),
   Optional[String]  $storage             = undef,
   Variant[Boolean, String]  $jobdef              = 'Default',
-  Array[Hash]       $runscript           = [],
+  Array[Bacula::Runscript] $runscript    = [],
   Optional[String]  $level               = undef,
   Bacula::Yesno     $accurate            = false,
   Bacula::Yesno     $reschedule_on_error = false,

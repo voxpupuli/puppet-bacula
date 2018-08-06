@@ -48,8 +48,8 @@
 #   }
 #
 define bacula::job (
-  Optional[Array[String]] $files    = undef,
-  Optional[Array[String]] $excludes = undef,
+  Array[String] $files             = [],
+  Array[String] $excludes          = [],
   Optional[String] $fileset        = undef,
   Bacula::JobType $jobtype         = 'Backup',
   String            $template            = 'bacula/job.conf.epp',

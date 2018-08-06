@@ -68,7 +68,7 @@ define bacula::job (
   Optional[String]  $messages            = undef,
   Optional[String]  $restoredir          = '/tmp/bacula-restores',
   Optional[String]  $sched               = undef,
-  Optional[Variant[Integer,String]]  $priority   = undef,
+  Optional[Integer] $priority            = undef,
   Optional[String] $job_tag        = undef,
   Optional[String]  $selection_type      = undef,
   Optional[String]  $selection_pattern   = undef,

@@ -1,7 +1,7 @@
 <%
   |
     String $name,
-    Hash[String,Variant[String,Array[String]]] $options,
+    Hash[String,Variant[String,Array[String],Bacula::Yesno]] $options,
     Array[String] $files,
     Array[String] $excludes,
   |
@@ -12,7 +12,10 @@ FileSet {
     Options {
 <% $options.each |$option, $optval| { -%>
 <%   any2array($optval).each |$value| { -%>
-      <%= $option %> = <%= $value %>
+      <%= $option %> = <%= $value ? {
+        Bacula::Yesno => bacula::yesno2str($value),
+        default       => $value,
+      } %>
 <%   } -%>
 <% } -%>
     }

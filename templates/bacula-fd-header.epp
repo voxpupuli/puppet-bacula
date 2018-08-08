@@ -1,0 +1,26 @@
+Director {
+    Name     = <%= $bacula::client::director_name %>-dir
+    Password = "<%= $bacula::client::password %>"
+<%= epp('bacula/_tls_server.epp') -%>
+}
+
+Director {
+    Name     = <%= $bacula::client::director_name %>-mon
+    Password = "<%= $bacula::client::password %>"
+    Monitor  = yes
+<%= epp('bacula/_tls_server.epp') -%>
+}
+
+FileDaemon {
+    Name                    = <%= $bacula::client::client %>-fd
+<% if $bacula::client::listen_address { -%>
+    FDAddresses             = {
+<%= epp('bacula/_listen.epp', { listen_address => $bacula::client::listen_address, port => $bacula::client::port }) -%>
+    }
+<% } -%>
+    WorkingDirectory        = <%= $bacula::client::homedir %>
+    Pid Directory           = <%= $bacula::client::rundir %>
+    Maximum Concurrent Jobs = <%= $bacula::client::max_concurrent_jobs %>
+<%= epp('bacula/_tls_client.epp') -%>
+<%= epp('bacula/_pki.epp') -%>
+}

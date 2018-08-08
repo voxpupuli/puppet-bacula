@@ -1,0 +1,12 @@
+#
+# Bacula User Agent (or Console) Configuration File
+#
+
+Director {
+    Name     = <%= $bacula::director_name %>
+    DIRport  = <%= $bacula::director::port %>
+    address  = <%= $bacula::director::director_address %>
+    Password = "<%= $bacula::director::password %>"
+<%= epp('bacula/_tls_client.epp') %>
+}
+

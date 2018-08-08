@@ -21,11 +21,11 @@ define bacula::storage::device (
   String           $device_name     = $name,
   String           $media_type      = 'File',
   String           $device          = '/bacula',
-  Boolean          $label_media     = true,
-  Boolean          $random_access   = true,
-  Boolean          $automatic_mount = true,
-  Boolean          $removable_media = false,
-  Boolean          $always_open     = false,
+  Bacula::Yesno    $label_media     = true,
+  Bacula::Yesno    $random_access   = true,
+  Bacula::Yesno    $automatic_mount = true,
+  Bacula::Yesno    $removable_media = false,
+  Bacula::Yesno    $always_open     = false,
   Integer          $maxconcurjobs   = 1,
   String           $conf_dir        = $bacula::conf_dir,
   Stdlib::Filemode $device_mode     = '0770',
@@ -34,10 +34,21 @@ define bacula::storage::device (
   String           $director_name   = $bacula::director_name,
   String           $group           = $bacula::bacula_group,
 ) {
+  $epp_device_variables = {
+    device_name     => $device_name,
+    media_type      => $media_type,
+    device          => $device,
+    label_media     => $label_media,
+    random_access   => $random_access,
+    automatic_mount => $automatic_mount,
+    removable_media => $removable_media,
+    always_open     => $always_open,
+    maxconcurjobs   => $maxconcurjobs,
+  }
 
   concat::fragment { "bacula-storage-device-${name}":
     target  => "${conf_dir}/bacula-sd.conf",
-    content => template('bacula/bacula-sd-device.erb'),
+    content => epp('bacula/bacula-sd-device.epp', $epp_device_variables),
   }
 
   if $media_type =~ '^File' {

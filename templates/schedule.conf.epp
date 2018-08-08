@@ -1,0 +1,13 @@
+<%
+  |
+    String $name,
+    Array[String] $runs,
+  |
+-%>
+Schedule {
+  Name = <%= $name %>
+<% $runs.each |$r| { -%>
+    Run = <%= $r %>
+<% } -%>
+}
+

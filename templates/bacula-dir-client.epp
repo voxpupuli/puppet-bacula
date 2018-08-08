@@ -1,0 +1,23 @@
+<%
+  |
+    String $name,
+    String $address,
+    Integer $port,
+    String $password,
+    Bacula::Time $file_retention,
+    Bacula::Time $job_retention,
+    Bacula::Yesno $autoprune,
+  |
+-%>
+Client {
+    Name           = <%= $name %>-fd
+    Address        = <%= $address %>
+    FDPort         = <%= $port %>
+    Catalog        = MyCatalog
+    Password       = "<%= $password %>"
+    File Retention = <%= $file_retention %>
+    Job Retention  = <%= $job_retention %>
+    AutoPrune      = <%= bacula::yesno2str($autoprune) %>
+<%= epp('bacula/_tls_client.epp') %>
+}
+

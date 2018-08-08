@@ -1,0 +1,49 @@
+<%
+  |
+    String $name,
+    String $pooltype,
+    Bacula::Yesno $recycle,
+    Bacula::Yesno $autoprune,
+    Optional[String] $volret,
+    Optional[String] $voluseduration,
+    Optional[String] $label,
+    Optional[Variant[String,Integer]] $maxvols,
+    Optional[Variant[String,Integer]] $maxvoljobs,
+    Optional[Bacula::Size] $maxvolbytes,
+    Optional[String] $storage,
+    String $purgeaction,
+    Optional[String] $next_pool,
+  |
+-%>
+Pool {
+    Name                 = <%= $name %>
+    Pool Type            = <%= $pooltype %>
+    Recycle              = <%= bacula::yesno2str($recycle) %>
+    AutoPrune            = <%= bacula::yesno2str($autoprune) %>
+<% if $volret { -%>
+    Volume Retention     = <%= $volret %>
+<% } -%>
+<% if $voluseduration { -%>
+    Volume Use Duration = <%= $voluseduration %>
+<% } -%>
+<% if $label { -%>
+    Label Format         = "<%= $label %>"
+<% } -%>
+<% if $maxvols { -%>
+    Maximum Volumes      = <%= $maxvols %>
+<% } -%>
+<% if $maxvoljobs { -%>
+    Maximum Volume Jobs  = <%= $maxvoljobs %>
+<% } -%>
+<% if $maxvolbytes { -%>
+    Maximum Volume Bytes = <%= $maxvolbytes %>
+<% } -%>
+<% if $storage { -%>
+    Storage              = <%= $storage %>-sd
+<% } -%>
+    Action On Purge      = <%= $purgeaction %>
+<% if $next_pool { -%>
+    Next Pool            = <%= $next_pool %>
+<% } -%>
+}
+

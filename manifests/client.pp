@@ -20,26 +20,26 @@
 #   class { 'bacula::client': director_name => 'mydirector.example.com' }
 #
 class bacula::client (
-  Array[String] $packages,
-  String $services,
-  String $default_pool,
-  Optional[String] $default_pool_full,
-  Optional[String] $default_pool_inc,
-  Optional[String] $default_pool_diff,
-  Integer            $port                = 9102,
-  Stdlib::Ip_address $listen_address      = $facts['ipaddress'],
-  String             $password            = 'secret',
-  Integer            $max_concurrent_jobs = 2,
-  String             $director_name       = $bacula::director_name,
-  Boolean            $autoprune           = true,
-  Bacula::Time       $file_retention      = '45 days',
-  Bacula::Time       $job_retention       = '6 months',
-  String             $client              = $trusted['certname'],
-  String             $address             = $facts['fqdn'],
-  Optional[Boolean] $pki_signatures = undef,
-  Optional[Boolean] $pki_encryption = undef,
-  Optional[String]  $pki_keypair    = undef,
-  Optional[String]  $pki_master_key = undef,
+  Array[String]           $packages,
+  String                  $services,
+  String                  $default_pool,
+  Optional[String]        $default_pool_full,
+  Optional[String]        $default_pool_inc,
+  Optional[String]        $default_pool_diff,
+  Integer                 $port                = 9102,
+  Stdlib::Ip_address      $listen_address      = $facts['ipaddress'],
+  String                  $password            = 'secret',
+  Integer                 $max_concurrent_jobs = 2,
+  String                  $director_name       = $bacula::director_name,
+  Bacula::Yesno           $autoprune           = true,
+  Bacula::Time            $file_retention      = '45 days',
+  Bacula::Time            $job_retention       = '6 months',
+  String                  $client              = $trusted['certname'],
+  String                  $address             = $facts['fqdn'],
+  Optional[Bacula::Yesno] $pki_signatures      = undef,
+  Optional[Bacula::Yesno] $pki_encryption      = undef,
+  Optional[String]        $pki_keypair         = undef,
+  Optional[String]        $pki_master_key      = undef,
 ) inherits bacula {
 
   $group    = $bacula::bacula_group
@@ -69,7 +69,7 @@ class bacula::client (
 
   concat::fragment { 'bacula-client-header':
     target  => $config_file,
-    content => template('bacula/bacula-fd-header.erb'),
+    content => epp('bacula/bacula-fd-header.epp'),
   }
 
   bacula::messages { 'Standard-fd':

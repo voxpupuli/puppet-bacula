@@ -1,0 +1,7 @@
+@<%= $bacula::conf_dir %>/conf.d/schedule.conf
+@<%= $bacula::conf_dir %>/conf.d/storage.conf
+@<%= $bacula::conf_dir %>/conf.d/pools.conf
+@<%= $bacula::conf_dir %>/conf.d/client.conf
+@<%= $bacula::conf_dir %>/conf.d/fileset.conf
+@<%= $bacula::conf_dir %>/conf.d/jobdefs.conf
+@<%= $bacula::conf_dir %>/conf.d/job.conf

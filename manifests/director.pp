@@ -32,17 +32,17 @@
 # TODO director_address is only used by bconsole, and is confusing as director is likely the same 
 #
 class bacula::director (
-  String $db_type,
+  String                        $db_type,
   Hash[String, Bacula::Message] $messages,
-  Array[String] $packages,
-  String $services,
-  Boolean $manage_db          = true,
-  String $conf_dir            = $bacula::conf_dir,
-  String $db_name             = 'bacula',
-  String $db_pw               = 'notverysecret',
-  String $db_user             = 'bacula',
-  Optional[String] $db_address = undef,
-  Optional[String] $db_port    = undef,
+  Array[String]                 $packages,
+  String                        $services,
+  Bacula::Yesno                 $manage_db           = true,
+  String                        $conf_dir            = $bacula::conf_dir,
+  String                        $db_name             = 'bacula',
+  String                        $db_pw               = 'notverysecret',
+  String                        $db_user             = 'bacula',
+  Optional[String]              $db_address          = undef,
+  Optional[String]              $db_port             = undef,
   String                        $director_address    = $bacula::director_address,
   String                        $director            = $trusted['certname'], # director here is not bacula::director
   String                        $group               = $bacula::bacula_group,
@@ -88,7 +88,7 @@ class bacula::director (
     group     => $group,
     mode      => '0640',
     show_diff => false,
-    content   => template('bacula/bconsole.conf.erb');
+    content   => epp('bacula/bconsole.conf.epp');
   }
 
   Concat {
@@ -101,13 +101,13 @@ class bacula::director (
   concat::fragment { 'bacula-director-header':
     order   => '00',
     target  => "${conf_dir}/bacula-dir.conf",
-    content => template('bacula/bacula-dir-header.erb'),
+    content => epp('bacula/bacula-dir-header.epp'),
   }
 
   concat::fragment { 'bacula-director-tail':
     order   => '99999',
     target  => "${conf_dir}/bacula-dir.conf",
-    content => template('bacula/bacula-dir-tail.erb'),
+    content => epp('bacula/bacula-dir-tail.epp'),
   }
 
   create_resources(bacula::messages, $messages)

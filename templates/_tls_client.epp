@@ -1,0 +1,18 @@
+<% if $bacula::tls_enable { -%>
+    TLS Enable              = <%= $bacula::tls_enable %>
+<% } -%>
+<% if $bacula::tls_require { -%>
+    TLS Require             = <%= $bacula::tls_require %>
+<% } -%>
+<% if $bacula::tls_ca_certificate_file { -%>
+    TLS CA Certificate File = <%= $bacula::tls_ca_certificate_file %>
+<% } -%>
+<% if $bacula::tls_ca_certificate_dir { -%>
+    TLS CA Certificate Dir = <%= $bacula::tls_ca_certificate_dir %>
+<% } -%>
+<% if $bacula::tls_certificate { -%>
+    TLS Certificate         = <%= $bacula::tls_certificate %>
+<% } -%>
+<% if $bacula::tls_key { -%>
+    TLS Key                 = <%= $bacula::tls_key %>
+<% } -%>

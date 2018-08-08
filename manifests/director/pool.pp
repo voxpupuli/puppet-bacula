@@ -24,23 +24,38 @@
 #   }
 #
 define bacula::director::pool (
-  Optional[String] $volret         = undef,
+  Optional[String]                  $volret         = undef,
   Optional[Variant[String,Integer]] $maxvoljobs     = undef, # FIXME: Remove String
-  Optional[Bacula::Size] $maxvolbytes    = undef,
+  Optional[Bacula::Size]            $maxvolbytes    = undef,
   Optional[Variant[String,Integer]] $maxvols        = undef, # FIXME: Remove String
-  Optional[String] $label          = undef,
-  Optional[String] $voluseduration = undef,
-  String           $storage        = $bacula::director::storage,
-  String           $pooltype       = 'Backup',
-  Variant[String,Boolean]           $recycle        = true, # FIXME: Remove String
-  Variant[String,Boolean]           $autoprune      = true, # FIXME: Remove String
-  String           $purgeaction    = 'Truncate',
-  Optional[String] $next_pool      = undef,
-  String           $conf_dir       = $bacula::conf_dir,
+  Optional[String]                  $label          = undef,
+  Optional[String]                  $voluseduration = undef,
+  String                            $storage        = $bacula::director::storage,
+  String                            $pooltype       = 'Backup',
+  Bacula::Yesno                     $recycle        = true,
+  Bacula::Yesno                     $autoprune      = true,
+  String                            $purgeaction    = 'Truncate',
+  Optional[String]                  $next_pool      = undef,
+  String                            $conf_dir       = $bacula::conf_dir,
 ) {
+  $epp_pool_variables = {
+    name           => $name,
+    pooltype       => $pooltype,
+    recycle        => $recycle,
+    autoprune      => $autoprune,
+    volret         => $volret,
+    voluseduration => $voluseduration,
+    label          => $label,
+    maxvols        => $maxvols,
+    maxvoljobs     => $maxvoljobs,
+    maxvolbytes    => $maxvolbytes,
+    storage        => $storage,
+    purgeaction    => $purgeaction,
+    next_pool      => $next_pool,
+  }
 
   concat::fragment { "bacula-director-pool-${name}":
     target  => "${conf_dir}/conf.d/pools.conf",
-    content => template('bacula/bacula-dir-pool.erb'),
+    content => epp('bacula/bacula-dir-pool.epp', $epp_pool_variables),
   }
 }

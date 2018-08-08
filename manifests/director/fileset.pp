@@ -14,19 +14,25 @@
 #   }
 #
 define bacula::director::fileset (
-  Array[String] $files,
-  String $conf_dir                              = $bacula::conf_dir,
-  String $director_name                         = $bacula::director_name,
-  Optional[Array[String]] $excludes             = [],
-  Hash[String, Variant[String, Array[String]]] $options = {
+  Array[String]                                $files,
+  String                                       $conf_dir      = $bacula::conf_dir,
+  String                                       $director_name = $bacula::director_name,
+  Array[String]                                $excludes      = [],
+  Hash[String, Variant[String, Array[String], Bacula::Yesno]] $options       = {
     'signature'   => 'SHA1',
     'compression' => 'GZIP9',
   },
 ) {
+  $epp_fileset_variables = {
+    name     => $name,
+    options  => $options,
+    files    => $files,
+    excludes => $excludes,
+  }
 
   concat::fragment { "bacula-fileset-${name}":
     target  => "${conf_dir}/conf.d/fileset.conf",
-    content => template('bacula/fileset.conf.erb'),
+    content => epp('bacula/fileset.conf.epp', $epp_fileset_variables),
     tag     => "bacula-${director_name}",
   }
 }

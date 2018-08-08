@@ -12,17 +12,26 @@
 # @param maxconcurjob - Bacula director configuration for Storage option 'Media Type'
 #
 define bacula::director::storage (
-  String $address       = $name,
+  String  $address       = $name,
   Integer $port          = 9103,
-  String $password      = 'secret',
-  String $device_name   = "${::fqdn}-device",
-  String $media_type    = 'File',
+  String  $password      = 'secret',
+  String  $device_name   = "${::fqdn}-device",
+  String  $media_type    = 'File',
   Integer $maxconcurjobs = 1,
-  String $conf_dir      = $bacula::conf_dir,
+  String  $conf_dir      = $bacula::conf_dir,
 ) {
+  $epp_storage_variables = {
+    name          => $name,
+    address       => $address,
+    port          => $port,
+    password      => $password,
+    device_name   => $device_name,
+    media_type    => $media_type,
+    maxconcurjobs => $maxconcurjobs,
+  }
 
   concat::fragment { "bacula-director-storage-${name}":
     target  => "${conf_dir}/conf.d/storage.conf",
-    content => template('bacula/bacula-dir-storage.erb'),
+    content => epp('bacula/bacula-dir-storage.epp', $epp_storage_variables),
   }
 }

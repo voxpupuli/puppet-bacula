@@ -1,0 +1,7 @@
+<%= epp('bacula/_tls_client.epp') %>
+<% if $bacula::tls_verify_peer { -%>
+    TLS Verify Peer         = <%= $bacula::tls_verify_peer %>
+<% } -%>
+<% $bacula::tls_allowed_cn.each |$allowed_cn| { -%>
+    TLS Allowed CN          = <%= $allowed_cn %>
+<% } -%>

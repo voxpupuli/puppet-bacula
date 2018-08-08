@@ -1,0 +1,33 @@
+<%
+  |
+    String $name,
+    Bacula::JobType $jobtype,
+    String $pool,
+    String $sched,
+    String $messages,
+    Integer $priority,
+    Bacula::Yesno $accurate,
+    Optional[String] $level,
+    Optional[Integer] $max_concurrent_jobs,
+    # Used in bacula/_job_reschedule.epp
+    Bacula::Yesno     $reschedule_on_error,
+    Bacula::Time      $reschedule_interval,
+    Integer           $reschedule_times,
+  |
+-%>
+JobDefs {
+    Name     = <%= $name %>
+    Type     = <%= $jobtype %>
+    Pool     = <%= $pool %>
+    Schedule = <%= $sched %>
+    Messages = <%= $messages %>
+    Priority = <%= $priority %>
+    Accurate = <%= bacula::yesno2str($accurate) %>
+<% if $level { -%>
+    Level    = <%= $level %>
+<% } -%>
+<% if $max_concurrent_jobs { -%>
+    Maximum Concurrent Jobs = <%= $max_concurrent_jobs %>
+<% } -%>
+<%= epp('bacula/_job_reschedule.epp', { reschedule_on_error => $reschedule_on_error, reschedule_interval => $reschedule_interval, reschedule_times => $reschedule_times }) -%>
+}

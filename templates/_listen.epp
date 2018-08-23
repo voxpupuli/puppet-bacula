@@ -1,7 +1,7 @@
 <%
   |
     Stdlib::Ip::Address $listen_address,
-    Optional[Integer] $port,
+    Optional[Integer]   $port,
   |
 -%>
 <% $family = address_family($listen_address)

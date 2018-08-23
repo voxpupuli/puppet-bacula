@@ -20,26 +20,26 @@
 # @param user
 #
 class bacula::storage (
-  String             $services,
-  Array[String]      $packages,
-  String             $conf_dir       = $bacula::conf_dir,
-  String             $device         = '/bacula',
-  Stdlib::Filemode   $device_mode    = '0770',
-  String             $device_name    = "${trusted['certname']}-device",
-  String             $device_owner   = $bacula::bacula_user,
-  String             $device_seltype = $bacula::device_seltype,
-  String             $director_name  = $bacula::director_name,
-  String             $group          = $bacula::bacula_group,
-  String             $homedir        = $bacula::homedir,
-  Stdlib::Ip_address $listen_address = $facts['ipaddress'],
-  Integer            $maxconcurjobs  = 5,
-  String             $media_type     = 'File',
-  String             $password       = 'secret',
-  Integer            $port           = 9103,
-  String             $rundir         = $bacula::rundir,
-  String             $storage        = $trusted['certname'], # storage here is not storage_name
-  String             $address        = $facts['fqdn'],
-  String             $user           = $bacula::bacula_user,
+  String              $services,
+  Array[String]       $packages,
+  String              $conf_dir       = $bacula::conf_dir,
+  String              $device         = '/bacula',
+  Stdlib::Filemode    $device_mode    = '0770',
+  String              $device_name    = "${trusted['certname']}-device",
+  String              $device_owner   = $bacula::bacula_user,
+  String              $device_seltype = $bacula::device_seltype,
+  String              $director_name  = $bacula::director_name,
+  String              $group          = $bacula::bacula_group,
+  String              $homedir        = $bacula::homedir,
+  Stdlib::Ip::Address $listen_address = $facts['ipaddress'],
+  Integer             $maxconcurjobs  = 5,
+  String              $media_type     = 'File',
+  String              $password       = 'secret',
+  Integer             $port           = 9103,
+  String              $rundir         = $bacula::rundir,
+  String              $storage        = $trusted['certname'], # storage here is not storage_name
+  String              $address        = $facts['fqdn'],
+  String              $user           = $bacula::bacula_user,
 ) inherits bacula {
 
   # Allow for package names to include EPP syntax for db_type

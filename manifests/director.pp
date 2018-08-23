@@ -48,7 +48,7 @@ class bacula::director (
   String                        $group               = $bacula::bacula_group,
   String                        $homedir             = $bacula::homedir,
   Optional[String]              $job_tag             = $bacula::job_tag,
-  Stdlib::Ip_address            $listen_address      = $facts['ipaddress'],
+  Stdlib::Ip::Address           $listen_address      = $facts['ipaddress'],
   Integer                       $max_concurrent_jobs = 20,
   String                        $password            = 'secret',
   Integer                       $port                = 9101,

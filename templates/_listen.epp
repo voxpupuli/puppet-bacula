@@ -1,6 +1,6 @@
 <%
   |
-    Stdlib::Ip_address $listen_address,
+    Stdlib::Ip::Address $listen_address,
     Optional[Integer] $port,
   |
 -%>

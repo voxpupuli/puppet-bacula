@@ -60,6 +60,14 @@ class bacula::director (
 
   if $include_defaults {
     include bacula::director::defaults
+
+    bacula::job { 'RestoreFiles':
+      jobtype             => 'Restore',
+      jobdef              => false,
+      messages            => 'Standard',
+      fileset             => 'Common',
+      max_concurrent_jobs => $max_concurrent_jobs,
+    }
   }
 
   case $db_type {
@@ -157,13 +165,5 @@ class bacula::director (
 
   bacula::director::fileset { 'Common':
     files => ['/etc'],
-  }
-
-  bacula::job { 'RestoreFiles':
-    jobtype             => 'Restore',
-    jobdef              => false,
-    messages            => 'Standard',
-    fileset             => 'Common',
-    max_concurrent_jobs => $max_concurrent_jobs,
   }
 }

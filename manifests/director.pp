@@ -9,6 +9,7 @@
 # @param director_address
 # @param group
 # @param homedir
+# @param include_defaults
 # @param job_tag A string to use when realizing jobs and filesets
 # @param listen_address
 # @param max_concurrent_jobs
@@ -47,6 +48,7 @@ class bacula::director (
   String                        $director            = $trusted['certname'], # director here is not bacula::director
   String                        $group               = $bacula::bacula_group,
   String                        $homedir             = $bacula::homedir,
+  Boolean                       $include_defaults    = true,
   Optional[String]              $job_tag             = $bacula::job_tag,
   Stdlib::Ip::Address           $listen_address      = $facts['ipaddress'],
   Integer                       $max_concurrent_jobs = 20,
@@ -56,7 +58,9 @@ class bacula::director (
   String                        $storage_name        = $bacula::storage_name,
 ) inherits bacula {
 
-  include bacula::director::defaults
+  if $include_defaults {
+    include bacula::director::defaults
+  }
 
   case $db_type {
     /^(pgsql|postgresql)$/: { include bacula::director::postgresql }

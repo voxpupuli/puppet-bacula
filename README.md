@@ -46,6 +46,12 @@ bacula::storage_name: 'mystorage.example.com'
 bacula::director_name: 'mydirector.example.com'
 ```
 
+When using the default settings from this module, some resources get provisioned. The provisioning of these default resources can be disabled with the following parameter.
+
+```
+bacula::director::manage_defaults: false
+```
+
 ##### Classification
 
 This may be on the same host, or different hosts, but the name you put here 

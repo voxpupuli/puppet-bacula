@@ -11,6 +11,7 @@
 # @param homedir
 # @param job_tag A string to use when realizing jobs and filesets
 # @param listen_address
+# @param manage_defaults
 # @param max_concurrent_jobs
 # @param messages
 # @param packages
@@ -50,13 +51,24 @@ class bacula::director (
   Optional[String]              $job_tag             = $bacula::job_tag,
   Stdlib::Ip::Address           $listen_address      = $facts['ipaddress'],
   Integer                       $max_concurrent_jobs = 20,
+  Boolean                       $manage_defaults     = true,
   String                        $password            = 'secret',
   Integer                       $port                = 9101,
   String                        $rundir              = $bacula::rundir,
   String                        $storage_name        = $bacula::storage_name,
 ) inherits bacula {
 
-  include bacula::director::defaults
+  if $manage_defaults {
+    include bacula::director::defaults
+
+    bacula::job { 'RestoreFiles':
+      jobtype             => 'Restore',
+      jobdef              => false,
+      messages            => 'Standard',
+      fileset             => 'Common',
+      max_concurrent_jobs => $max_concurrent_jobs,
+    }
+  }
 
   case $db_type {
     /^(pgsql|postgresql)$/: { include bacula::director::postgresql }
@@ -153,13 +165,5 @@ class bacula::director (
 
   bacula::director::fileset { 'Common':
     files => ['/etc'],
-  }
-
-  bacula::job { 'RestoreFiles':
-    jobtype             => 'Restore',
-    jobdef              => false,
-    messages            => 'Standard',
-    fileset             => 'Common',
-    max_concurrent_jobs => $max_concurrent_jobs,
   }
 }

@@ -34,7 +34,7 @@ describe 'bacula::director' do
         it { is_expected.to contain_package('bacula-server') }
         it { is_expected.to contain_package('bacula-pgsql') }
       when 'FreeBSD'
-        it { is_expected.to contain_package('bacula-server') }
+        it { is_expected.to contain_package('bacula9-server') }
       end
     end
   end

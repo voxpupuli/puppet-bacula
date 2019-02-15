@@ -43,7 +43,7 @@ describe 'bacula::storage' do
       when 'OpenBSD'
         it { is_expected.to contain_package('bacula-server') }
       when 'FreeBSD'
-        it { is_expected.to contain_package('bacula-server') }
+        it { is_expected.to contain_package('bacula9-server') }
       end
 
       context 'with default params' do

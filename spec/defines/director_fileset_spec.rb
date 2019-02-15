@@ -15,7 +15,7 @@ describe 'bacula::director::fileset' do
         options: {
           'a' => 'string',
           'b' => false,
-          'c' => %w(an array)
+          'c' => %w[an array]
         }
       }
     end

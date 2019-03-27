@@ -38,8 +38,8 @@ Bacula's functionality depends on connecting several components, together.  Due
 to the number of moving pieces in this module, you will likely want to set some
 site defaults, and tune more specifically where desired.
 
-As such, it is reasonable to set the following hiera data that will allow 
-many of the classes in this module to use those defaults sanely.
+As such, it is reasonable to set the following hiera data that will allow many
+of the classes in this module to use those defaults sanely.
 
 ```
 bacula::storage_name: 'mystorage.example.com'
@@ -54,11 +54,11 @@ bacula::director::manage_defaults: false
 
 ##### Classification
 
-This may be on the same host, or different hosts, but the name you put here 
-should be the fqdn of the target system.  The Director will require the 
-classification of `bacula::director`, and the Storage node will require the 
-classification of `bacula::storage`.  **All nodes will require classification of
- `bacula::client`.**
+This may be on the same host, or different hosts, but the name you put here
+should be the fqdn of the target system.  The Director will require the
+classification of `bacula::director`, and the Storage node will require the
+classification of `bacula::storage`.  **All nodes will require classification
+of `bacula::client`.**
 
 ##### Prefer hiera data
 
@@ -88,14 +88,14 @@ simple declaration:
 class { 'bacula::director': storage => 'mystorage.example.com' }
 ```
 
-The `storage` parameter here defines which storage server should be used for 
-all default jobs.  If left empty, it will default to the `$::fqdn` of the 
-director. This is not a problem for all in one installations, but in 
-scenarios where directors to not have the necessary storage devices attached,
-default jobs can be pointed elsewhere.  
+The `storage` parameter here defines which storage server should be used for
+all default jobs.  If left empty, it will default to the `$::fqdn` of the
+director. This is not a problem for all in one installations, but in scenarios
+where directors to not have the necessary storage devices attached, default
+jobs can be pointed elsewhere.
 
-Note that if you expect an SD to be located on the Director, you will 
-also need to include the `bacula::storage` class as follows.
+Note that if you expect an SD to be located on the Director, you will also need
+to include the `bacula::storage` class as follows.
 
 By default a 'Common' fileset is created.
 
@@ -109,8 +109,8 @@ class { 'bacula::storage': director => 'mydirector.example.com' }
 ```
 
 You will also want a storage pool that defines the retention.  You can define
- this in the Director catalog without exporting it, or you can use an 
- exported resource.
+this in the Director catalog without exporting it, or you can use an exported
+resource.
 
 ```Puppet
   bacula::director::pool { 'Corp':
@@ -130,8 +130,8 @@ The client component is run on each system that needs something backed up.
 class { 'bacula::client': director => 'mydirector.example.com' }
 ```
 
-To direct all jobs to a specific pool like the one defined above set the 
-following data. 
+To direct all jobs to a specific pool like the one defined above set the
+following data.
 
 ```Puppet
 bacula::client::default_pool: 'Corp'
@@ -147,10 +147,10 @@ wiki to configure data encryption on clients.
 
 In order for clients to be able to define jobs on the director, exported
 resources are used, thus there was a reliance on PuppetDB availability in the
-environment. In the client manifest the `bacula::job` exports a job 
-definition to the director. If you deploy multiple directors that use the
-same PuppetDB and you don't want each director to collect every job, specify
-a job_tag to group them.
+environment. In the client manifest the `bacula::job` exports a job definition
+to the director. If you deploy multiple directors that use the same PuppetDB
+and you don't want each director to collect every job, specify a job_tag to
+group them.
 
 ```puppet
 bacula::job { 'obsidian_logs':
@@ -158,9 +158,9 @@ bacula::job { 'obsidian_logs':
 }
 ```
 
-This resource will create a new `Job` entry in `/etc/bacula/conf.d/job.conf` 
+This resource will create a new `Job` entry in `/etc/bacula/conf.d/job.conf`
 the next time the director applies it's catalog that will instruct the system
-to backup the files or directories at the paths specified in the `files` 
+to backup the files or directories at the paths specified in the `files`
 parameter.
 
 If a group of jobs will contain the same files, a [FileSet resource] can be
@@ -212,13 +212,13 @@ Define a Bacula [Job resource] resource which can create new
   Defaults to `bacula::client::default_pool`. Bacula `Pool` directive.
 - `pool_full`: name of the pool to be used for 'Full' jobs.
   Defaults to `bacula::client::default_pool_full`. Bacula `Full Backup Pool`
-   directive. 
+   directive.
 - `pool_inc`: name of the pool to be used for 'Incremental' jobs.
   Defaults to `bacula::client::default_pool_inc`. Bacula `Incremental Backup Pool`
-   directive. 
+   directive.
 - `pool_diff`: name of the pool to be used for 'Incremental' jobs.
   Defaults to `bacula::client::default_pool_diff`. Bacula `Differential Backup Pool`
-   directive. 
+   directive.
 - `jobdef`: name of the `bacula::jobdef` to use.
   Defaults to `Default`. Bacula `JobDefs` directive.
 - `level`: default job level to run the job as.
@@ -277,8 +277,8 @@ Define a Bacula [Messages resource]. Parameters are:
   Defaults to `dir`.
 - `director`:
   Bacula `Director` directive.  Note this is not just the name of a director,
-   but director string as found in the documentation for [Messages resource] 
-   under the director option.  The message type must be included with the 
+   but director string as found in the documentation for [Messages resource]
+   under the director option.  The message type must be included with the
    proper formatting.
 - `append`:
   Bacula `Append` directive.

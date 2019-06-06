@@ -3,6 +3,8 @@
     String $name,
     Bacula::JobType $jobtype,
     String $pool,
+    Optional[String] $full_backup_pool,
+    Optional[String] $differential_backup_pool,
     String $sched,
     String $messages,
     Integer $priority,
@@ -13,6 +15,7 @@
     Bacula::Yesno     $reschedule_on_error,
     Bacula::Time      $reschedule_interval,
     Integer           $reschedule_times,
+    Optional[String]           $write_bootstrap,
   |
 -%>
 JobDefs {

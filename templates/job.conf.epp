@@ -22,6 +22,7 @@
     Bacula::Yesno $reschedule_on_error,
     Bacula::Time $reschedule_interval,
     Integer $reschedule_times,
+    Optional[String] $write_bootstrap,
   |
 -%>
 Job {

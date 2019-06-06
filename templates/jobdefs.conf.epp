@@ -27,10 +27,10 @@ JobDefs {
     Priority = <%= $priority %>
     Accurate = <%= bacula::yesno2str($accurate) %>
 <% if $full_backup_pool { -%>
-    Level    = <%= $full_backup_pool %>
+    Full Backup Pool = <%= $full_backup_pool %>
 <% } -%>
 <% if $differential_backup_pool { -%>
-    Level    = <%= $differential_backup_pool %>
+    Differential Backup Pool = <%= $differential_backup_pool %>
 <% } -%>
 <% if $level { -%>
     Level    = <%= $level %>

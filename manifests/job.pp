@@ -29,6 +29,7 @@
 # @param sched
 # @param selection_type
 # @param selection_pattern
+# @param write_bootstrap
 #
 # @actions
 #   * Exports job fragment for consuption on the director
@@ -73,6 +74,7 @@ define bacula::job (
   Optional[String]         $selection_type      = undef,
   Optional[String]         $selection_pattern   = undef,
   Integer                  $max_concurrent_jobs = 1,
+  Optional[String]         $write_bootstrap     = undef,
 ) {
 
   include bacula
@@ -132,6 +134,7 @@ define bacula::job (
     reschedule_on_error => $reschedule_on_error,
     reschedule_interval => $reschedule_interval,
     reschedule_times    => $reschedule_times,
+    write_bootstrap     => $write_bootstrap,
   }
 
   @@bacula::director::job { $name:

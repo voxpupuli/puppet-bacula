@@ -99,5 +99,9 @@ Job {
 <% if $max_concurrent_jobs { -%>
     Maximum Concurrent Jobs = <%= $max_concurrent_jobs %>
 <% } -%>
+<% if $write_bootstrap { -%>
+    Write Bootstrap = <%= $write_bootstrap %>
+<% } -%>
+
 }
 

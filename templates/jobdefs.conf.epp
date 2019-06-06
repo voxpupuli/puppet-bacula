@@ -23,11 +23,20 @@ JobDefs {
     Messages = <%= $messages %>
     Priority = <%= $priority %>
     Accurate = <%= bacula::yesno2str($accurate) %>
+<% if $full_backup_pool { -%>
+    Level    = <%= $full_backup_pool %>
+<% } -%>
+<% if $differential_backup_pool { -%>
+    Level    = <%= $differential_backup_pool %>
+<% } -%>
 <% if $level { -%>
     Level    = <%= $level %>
 <% } -%>
 <% if $max_concurrent_jobs { -%>
     Maximum Concurrent Jobs = <%= $max_concurrent_jobs %>
+<% } -%>
+<% if $write_bootstrap { -%>
+    Write Bootstrap = <%= $write_bootstrap %>
 <% } -%>
 <%= epp('bacula/_job_reschedule.epp', { reschedule_on_error => $reschedule_on_error, reschedule_interval => $reschedule_interval, reschedule_times => $reschedule_times }) -%>
 }

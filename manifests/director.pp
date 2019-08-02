@@ -72,7 +72,6 @@ class bacula::director (
 
   case $db_type {
     /^(pgsql|postgresql)$/: { include bacula::director::postgresql }
-    /^(mysql)$/:            { include bacula::director::postgresql }
     'none':                 { }
     default:                { fail('No db_type set') }
   }

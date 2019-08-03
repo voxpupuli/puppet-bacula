@@ -1,30 +1,25 @@
 # Define: bacula::jobdefs
 #
 # This define adds a jobdefs entry on the bacula director for reference by the client configurations.
-#
-# Parameters:
-#
-# Actions:
-#
-# Requires:
-#
-# Sample Usage:
+
+# @param full_backup_pool -  The Full Backup Pool specifies a Pool to be used for Full backups.
+# @param differential_backup_pool -  The Differential Backup Pool specifies a Pool to be used for Differential backups.
 #
 define bacula::jobdefs (
-  Bacula::JobType  $jobtype             = 'Backup',
-  String           $sched               = 'Default',
-  String           $messages            = 'Standard',
-  Integer          $priority            = 10,
-  String           $pool                = 'Default',
-  Optional[String] $full_backup_pool    = undef,
+  Bacula::JobType  $jobtype                  = 'Backup',
+  String           $sched                    = 'Default',
+  String           $messages                 = 'Standard',
+  Integer          $priority                 = 10,
+  String           $pool                     = 'Default',
+  Optional[String] $full_backup_pool         = undef,
   Optional[String] $differential_backup_pool = undef,
-  Optional[String] $level               = undef,
-  Bacula::Yesno    $accurate            = false,
-  Bacula::Yesno    $reschedule_on_error = false,
-  Bacula::Time     $reschedule_interval = '1 hour',
-  Integer          $reschedule_times    = 10,
-  Integer          $max_concurrent_jobs = 1,
-  Optional[String] $write_bootstrap     = undef,
+  Optional[String] $level                    = undef,
+  Bacula::Yesno    $accurate                 = false,
+  Bacula::Yesno    $reschedule_on_error      = false,
+  Bacula::Time     $reschedule_interval      = '1 hour',
+  Integer          $reschedule_times         = 10,
+  Integer          $max_concurrent_jobs      = 1,
+  Optional[String] $write_bootstrap          = undef,
 ) {
 
   include bacula

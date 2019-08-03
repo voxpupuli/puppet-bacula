@@ -29,7 +29,7 @@
 # @param sched
 # @param selection_type
 # @param selection_pattern
-# @param write_bootstrap
+# @param write_bootstrap -  The writebootstrap directive specifies a file name where Bacula will write a bootstrap file for each Backup job run.
 #
 # @actions
 #   * Exports job fragment for consuption on the director

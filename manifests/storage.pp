@@ -43,10 +43,9 @@ class bacula::storage (
 ) inherits bacula {
 
   # Allow for package names to include EPP syntax for db_type
-  $db_type = lookup('bacula::director::db_type')
   $package_names = $packages.map |$p| {
     $package_name = inline_epp($p, {
-      'db_type' => $db_type
+      'db_type' => $bacula::db_type
     })
   }
   ensure_packages($package_names)

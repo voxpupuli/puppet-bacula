@@ -1,5 +1,5 @@
 ---
-bacula_director_packages: [ 'bacula-director-common', "bacula-director-${db_type}", 'bacula-console' ]
+bacula_director_packages: [ 'bacula-director-common', "bacula-director-<%= $db_type %>", 'bacula-console' ]
 bacula::director::services: 'bacula-dir'
 bacula::storage::packages:
   - 'bacula-sd'

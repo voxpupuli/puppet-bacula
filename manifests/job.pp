@@ -54,10 +54,10 @@ define bacula::job (
   Optional[String]         $fileset             = undef,
   Bacula::JobType          $jobtype             = 'Backup',
   String                   $template            = 'bacula/job.conf.epp',
-  Optional[String]         $pool                = lookup('bacula::client::default_pool'),
-  Optional[String]         $pool_full           = lookup('bacula::client::default_pool_full'),
-  Optional[String]         $pool_inc            = lookup('bacula::client::default_pool_inc'),
-  Optional[String]         $pool_diff           = lookup('bacula::client::default_pool_diff'),
+  Optional[String]         $pool                = undef,
+  Optional[String]         $pool_full           = undef,
+  Optional[String]         $pool_inc            = undef,
+  Optional[String]         $pool_diff           = undef,
   Optional[String]         $storage             = undef,
   Variant[Boolean, String] $jobdef              = 'Default',
   Array[Bacula::Runscript] $runscript           = [],
@@ -78,6 +78,7 @@ define bacula::job (
 ) {
 
   include bacula
+  include bacula::client
   $conf_dir = $bacula::conf_dir
 
   if empty($files) and ! $fileset {
@@ -115,13 +116,13 @@ define bacula::job (
     name                => $name,
     jobtype             => $jobtype,
     fileset_real        => $fileset_real,
-    pool                => $pool,
+    pool                => $pool.lest || { $bacula::client::default_pool },
     storage             => $storage,
     restoredir          => $restoredir,
     messages            => $messages,
-    pool_full           => $pool_full,
-    pool_inc            => $pool_inc,
-    pool_diff           => $pool_diff,
+    pool_full           => $pool_full.lest || { $bacula::client::default_pool_full },
+    pool_inc            => $pool_inc.lest || { $bacula::client::default_pool_inc },
+    pool_diff           => $pool_diff.lest || { $bacula::client::default_pool_diff },
     selection_type      => $selection_type,
     selection_pattern   => $selection_pattern,
     jobdef              => $jobdef,

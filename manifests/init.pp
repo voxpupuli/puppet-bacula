@@ -40,6 +40,7 @@ class bacula (
   String                  $director_address,
   String                  $director_name,
   String                  $storage_name,
+  String                  $db_type                 = 'pgsql',
   String                  $homedir_mode            = '0770',
   Bacula::Yesno           $monitor                 = true,
   String                  $device_seltype          = 'bacula_store_t',

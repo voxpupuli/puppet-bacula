@@ -3,7 +3,6 @@
 # @param conf_dir
 # @param db_name: the database name
 # @param db_pw: the database user's password
-# @param db_type
 # @param db_user: the database user
 # @param director
 # @param director_address
@@ -33,7 +32,6 @@
 # TODO director_address is only used by bconsole, and is confusing as director is likely the same 
 #
 class bacula::director (
-  String                        $db_type,
   Hash[String, Bacula::Message] $messages,
   Array[String]                 $packages,
   String                        $services,
@@ -70,7 +68,7 @@ class bacula::director (
     }
   }
 
-  case $db_type {
+  case $bacula::db_type {
     /^(pgsql|postgresql)$/: { include bacula::director::postgresql }
     'none':                 { }
     default:                { fail('No db_type set') }
@@ -79,7 +77,7 @@ class bacula::director (
   # Allow for package names to include EPP syntax for db_type
   $package_names = $packages.map |$p| {
     $package_name = inline_epp($p, {
-      'db_type' => $db_type
+      'db_type' => $bacula::db_type
     })
   }
   ensure_packages($package_names)

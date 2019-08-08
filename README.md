@@ -239,6 +239,7 @@ Define a Bacula [Job resource] resource which can create new
   Defaults to `false` which disables this directive. Bacula `Priority` directive.
 - `selection_type`: determines how a copy/migration job will go about selecting what JobIds to migrate
 - `selection_pattern`: gives you fine control over exactly what JobIds are selected for a copy/migration job.
+- `write_bootstrap`: allows you to specify where a bootstrap file should be written after backup.
 
 See also `bacula::jobdefs`.
 

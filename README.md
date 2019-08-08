@@ -189,7 +189,7 @@ Defines a Bacula [FileSet resource]. Parameters are:
 - `excludes`: string or array of files to exclude from a backup.
   Defaults to `''`.  Bacula `Exclude` directive.
 - `options`: hash of options.
-  Defaults to `{'signature' => 'MD5', 'compression' => 'GZIP'}`.  Bacula `Options` directive.
+  Defaults to `{'signature' => 'SHA1', 'compression' => 'GZIP9'}`.  Bacula `Options` directive.
 
 ### bacula::job
 

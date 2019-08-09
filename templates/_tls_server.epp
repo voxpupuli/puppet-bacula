@@ -5,3 +5,6 @@
 <% $bacula::tls_allowed_cn.each |$allowed_cn| { -%>
     TLS Allowed CN          = <%= $allowed_cn %>
 <% } -%>
+<% if $bacula::tls_dh_file { -%>
+    TLS DH File             = <%= $bacula::tls_dh_file %>
+<% } -%>

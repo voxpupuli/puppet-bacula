@@ -12,9 +12,6 @@ Director {                # define myself
     Password                = "<%= $bacula::director::password %>"  # Console password
     Messages                = Daemon
 <%= epp('bacula/_tls_server.epp') %>
-<% if $bacula::director::tls_dh_file != undef { %>
-    TLS DH File             = <%= $bacula::director::tls_dh_file %>
-<% } -%>
 }
 
 # Generic catalog service

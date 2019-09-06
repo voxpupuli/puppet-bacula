@@ -1,17 +1,15 @@
 <%
   |
-    Stdlib::Ip::Address $listen_address,
+    String              $listen_address,
     Optional[Integer]   $port,
   |
 -%>
-<% $family = address_family($listen_address)
-   if $family == 'INET' { -%>
-        ipv4 = {
+        <%= $listen_address ? {
+	      Stdlib::IP::Address::V4::Nosubnet => 'ipv4',
+	      Stdlib::IP::Address::V6::Nosubnet => 'ipv6',
+              default                           => 'ip',
+            } %> = {
             addr = <%= $listen_address %>;
-<% } elsif $family == 'INET6' { -%>
-        ipv6 = {
-            addr = <%= $listen_address %>;
-<% } -%>
 <% if $port { -%>
             port = <%= $port %>;
 <% } -%>

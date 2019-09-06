@@ -31,7 +31,7 @@ class bacula::storage (
   String              $director_name  = $bacula::director_name,
   String              $group          = $bacula::bacula_group,
   String              $homedir        = $bacula::homedir,
-  Stdlib::Ip::Address $listen_address = $facts['ipaddress'],
+  Optional[String]    $listen_address = $facts['ipaddress'],
   Integer             $maxconcurjobs  = 5,
   String              $media_type     = 'File',
   String              $password       = 'secret',

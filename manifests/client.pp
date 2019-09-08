@@ -27,7 +27,7 @@ class bacula::client (
   Optional[String]        $default_pool_inc,
   Optional[String]        $default_pool_diff,
   Integer                 $port                = 9102,
-  Stdlib::Ip::Address     $listen_address      = $facts['ipaddress'],
+  Optional[String]        $listen_address      = $facts['ipaddress'],
   String                  $password            = 'secret',
   Integer                 $max_concurrent_jobs = 2,
   String                  $director_name       = $bacula::director_name,

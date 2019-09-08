@@ -56,7 +56,7 @@ Job {
     Selection Type = <%= $selection_type %>
   <%- } -%>
   <%- if $selection_pattern { -%>
-    Selection Type = <%= $selection_pattern %>
+    Selection Pattern = <%= $selection_pattern %>
   <%- } -%>
 <% } -%>
 

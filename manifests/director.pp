@@ -23,6 +23,7 @@
 # @param manage_db
 # @param db_address
 # @param db_port
+# @param make_bacula_tables
 #
 # @example
 #   class { 'bacula::director':
@@ -54,6 +55,7 @@ class bacula::director (
   Integer                       $port                = 9101,
   String                        $rundir              = $bacula::rundir,
   String                        $storage_name        = $bacula::storage_name,
+  String                        $make_bacula_tables  = '',
 ) inherits bacula {
 
   if $manage_defaults {

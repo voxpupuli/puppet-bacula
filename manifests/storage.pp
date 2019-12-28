@@ -31,14 +31,14 @@ class bacula::storage (
   String              $director_name  = $bacula::director_name,
   String              $group          = $bacula::bacula_group,
   String              $homedir        = $bacula::homedir,
-  Optional[String]    $listen_address = $facts['ipaddress'],
+  Optional[String]    $listen_address = $facts['networking']['ip'],
   Integer             $maxconcurjobs  = 5,
   String              $media_type     = 'File',
   String              $password       = 'secret',
   Integer             $port           = 9103,
   String              $rundir         = $bacula::rundir,
   String              $storage        = $trusted['certname'], # storage here is not storage_name
-  String              $address        = $facts['fqdn'],
+  String              $address        = $facts['networking']['fqdn'],
   String              $user           = $bacula::bacula_user,
 ) inherits bacula {
 

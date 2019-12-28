@@ -15,7 +15,7 @@ define bacula::director::storage (
   String  $address       = $name,
   Integer $port          = 9103,
   String  $password      = 'secret',
-  String  $device_name   = "${::fqdn}-device",
+  String  $device_name   = "${facts['networking']['fqdn']}-device",
   String  $media_type    = 'File',
   Integer $maxconcurjobs = 1,
   String  $conf_dir      = $bacula::conf_dir,

@@ -25,6 +25,6 @@ define bacula::director::job (
     target  => "${conf_dir}/conf.d/job.conf",
     content => $content,
     order   => $name,
-    tag     => "bacula-${::bacula::director_name}",
+    tag     => "bacula-${bacula::director_name}",
   }
 }

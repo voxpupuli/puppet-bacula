@@ -4,10 +4,12 @@ Gemfile.lock
 Gemfile.local
 vendor/
 .vendor/
+.fixtures.yml
 spec/fixtures/manifests/
 spec/fixtures/modules/
 .vagrant/
 .bundle/
+.env.sh
 .ruby-version
 coverage/
 log/
@@ -19,3 +21,14 @@ Puppetfile.lock
 .*.sw?
 .yardoc/
 Dockerfile
+.gitignore
+.git/
+.msync.yml
+.pmtignore
+.rspec
+.rspec_parallel
+.rubocop.yml
+.travis.yml
+.yardopts
+Jenkinsfile
+Vagrantfile

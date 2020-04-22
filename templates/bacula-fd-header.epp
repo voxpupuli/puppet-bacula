@@ -21,6 +21,7 @@ FileDaemon {
     WorkingDirectory        = <%= $bacula::client::homedir %>
     Pid Directory           = <%= $bacula::client::rundir %>
     Maximum Concurrent Jobs = <%= $bacula::client::max_concurrent_jobs %>
+    Plugin Directory        = <%= $bacula::client::plugin_dir %>
 <%= epp('bacula/_tls_client.epp') -%>
 <%= epp('bacula/_pki.epp') -%>
 }

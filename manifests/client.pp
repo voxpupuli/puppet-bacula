@@ -45,6 +45,22 @@ class bacula::client (
   $group    = $bacula::bacula_group
   $conf_dir = $bacula::conf_dir
   $config_file = "${conf_dir}/bacula-fd.conf"
+  $os_name = $facts['os']['name']
+
+  case $facts['os']['family'] {
+    'RedHat': {
+      $plugin_dir = '/usr/lib64/bacula'
+    }
+    'Debian': {
+      $plugin_dir = '/usr/lib/bacula'
+    }
+    'Suse': {
+      $plugin_dir = '/usr/lib64/bacula'
+    }
+    default: {
+      fail("The operatingsystem \"${os_name}\" is not supported.")
+    }
+  }
 
   package { $packages:
     ensure => present,

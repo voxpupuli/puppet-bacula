@@ -22,6 +22,7 @@
 # @param pki_encryption      Bacula FD option for 'PKI Encryption'
 # @param pki_keypair         Bacula FD option for 'PKI Keypair'
 # @param pki_master_key      Bacula FD option for 'PKI Master Key'
+# @param plugin_dir          Bacula FD option for the 'Plugin Directory'
 #
 # @example
 #   class { 'bacula::client': director_name => 'mydirector.example.com' }
@@ -47,6 +48,7 @@ class bacula::client (
   Optional[Bacula::Yesno] $pki_encryption      = undef,
   Optional[String]        $pki_keypair         = undef,
   Optional[String]        $pki_master_key      = undef,
+  Optional[String]        $plugin_dir          = undef,
 ) inherits bacula {
 
   $group    = $bacula::bacula_group

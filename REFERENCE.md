@@ -386,6 +386,14 @@ Bacula FD option for 'PKI Master Key'
 
 Default value: `undef`
 
+##### `plugin_dir`
+
+Data type: `Optional[String]`
+
+Bacula FD option for the 'Plugin Directory'
+
+Default value: `undef`
+
 ### bacula::common
 
 This class configures and installs the bacula client packages and enables the

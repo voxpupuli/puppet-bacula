@@ -15,6 +15,7 @@
 # @param default_pool_full The name of the Pool to use for Full jobs
 # @param default_pool_inc The name of the Pool to use for Incremental jobs
 # @param default_pool_diff The name of the Pool to use for Differential jobs
+# @param plugin_dir Bacula FD option for the 'Plugin Directory'
 #
 # @example
 #   class { 'bacula::client': director_name => 'mydirector.example.com' }
@@ -40,6 +41,7 @@ class bacula::client (
   Optional[Bacula::Yesno] $pki_encryption      = undef,
   Optional[String]        $pki_keypair         = undef,
   Optional[String]        $pki_master_key      = undef,
+  Optional[String]        $plugin_dir          = undef,
 ) inherits bacula {
 
   $group    = $bacula::bacula_group

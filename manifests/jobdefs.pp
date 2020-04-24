@@ -2,20 +2,20 @@
 #
 # This define adds a jobdefs entry on the bacula director for reference by the client configurations.
 #
-# @param jobtype
-# @param sched
-# @param messages
-# @param priority
-# @param pool
-# @param full_backup_pool         The Full Backup Pool specifies a Pool to be used for Full backups.
-# @param differential_backup_pool The Differential Backup Pool specifies a Pool to be used for Differential backups.
-# @param level
-# @param accurate
-# @param reschedule_on_error
-# @param reschedule_interval
-# @param reschedule_times
-# @param max_concurrent_jobs
-# @param write_bootstrap
+# @param jobtype                  The Type directive specifies the Job type
+# @param sched                    The Schedule directive defines what schedule is to be used for the Job
+# @param messages                 The Messages directive defines what Messages resource should be used for this job, and thus how and where the various messages are to be delivered
+# @param priority                 This directive permits you to control the order in which your jobs will be run by specifying a positive non-zero number
+# @param pool                     The Pool directive defines the pool of Volumes where your data can be backed up
+# @param full_backup_pool         The Full Backup Pool specifies a Pool to be used for Full backups
+# @param differential_backup_pool The Differential Backup Pool specifies a Pool to be used for Differential backups
+# @param level                    The Level directive specifies the default Job level to be run
+# @param accurate                 In accurate mode, the File daemon knowns exactly which files were present after the last backup
+# @param reschedule_on_error      If this directive is enabled, and the job terminates in error, the job will be rescheduled as determined by the Reschedule Interval and Reschedule Times directives
+# @param reschedule_interval      If you have specified Reschedule On Error = yes and the job terminates in error, it will be rescheduled after the interval of time specified by time-specification
+# @param reschedule_times         This directive specifies the maximum number of times to reschedule the job
+# @param max_concurrent_jobs      Maximum number of Jobs from the current Job resource that can run concurrently
+# @param write_bootstrap          The writebootstrap directive specifies a file name where Bacula will write a bootstrap file for each Backup job run
 #
 define bacula::jobdefs (
   Bacula::JobType  $jobtype                  = 'Backup',

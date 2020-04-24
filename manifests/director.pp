@@ -1,28 +1,28 @@
 # This class installs and configures the Bacula Director
 #
-# @param messages
-# @param packages
-# @param services
-# @param manage_db
-# @param conf_dir
-# @param db_name             the database name
-# @param db_pw               the database user's password
-# @param db_user             the database user
-# @param db_address
-# @param db_port
-# @param director_address
-# @param director
-# @param group
-# @param homedir
+# @param messages            Logging configuration; loaded from hiera
+# @param packages            A list of packages to install; loaded from hiera
+# @param services            A list of services to operate; loaded from hiera
+# @param manage_db           Whether the module should manage the director database
+# @param conf_dir            Path to bacula configuration directory
+# @param db_name             The database name
+# @param db_pw               The database user's password
+# @param db_user             The database user
+# @param db_address          The database address
+# @param db_port             The database port
+# @param director_address    The address of the director used by bconsole
+# @param director            The name of the director
+# @param group               The posix group for bacula
+# @param homedir             The bacula director working directory
 # @param job_tag             A string to use when realizing jobs and filesets
-# @param listen_address
-# @param max_concurrent_jobs
-# @param manage_defaults
+# @param listen_address      The listening address for the director
+# @param max_concurrent_jobs Bacula Director option for 'Maximum Concurrent Jobs'
+# @param manage_defaults     Setup default jobdef, schedule, pool and restoration jobs
 # @param password            password to connect to the director
 # @param port                The listening port for the Director
-# @param rundir
-# @param storage_name
-# @param make_bacula_tables
+# @param rundir              Bacula Director option for 'Pid Directory'
+# @param storage_name        The Name of the Storage daemon
+# @param make_bacula_tables  Path to the script that loads the database schema
 #
 # @example
 #   class { 'bacula::director':

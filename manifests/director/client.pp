@@ -2,13 +2,13 @@
 # not be used directly, but only ever exported through the `bacula::client`
 # define.  This is the director's configuration for a given client.
 #
-# @param address
-# @param port
-# @param password
-# @param file_retention
-# @param job_retention
-# @param autoprune
-# @param conf_dir
+# @param address        The address of the Bacula File server daemon
+# @param port           The port of the Bacula File server daemon
+# @param password       The password to be used when establishing a connection with the File services
+# @param file_retention The File Retention directive defines the length of time that Bacula will keep File records in the Catalog database after the End time of the Job corresponding to the File records
+# @param job_retention  The Job Retention directive defines the length of time that Bacula will keep Job records in the Catalog database after the Job End time
+# @param autoprune      If AutoPrune is set to yes, Bacula will automatically apply the File retention period and the Job retention period for the Client at the end of the Job
+# @param conf_dir       The path to the bacula configuration directory
 #
 # @example Taken from the `bacula::client` define:
 #   @@bacula::director::client { $client:

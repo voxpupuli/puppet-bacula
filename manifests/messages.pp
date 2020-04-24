@@ -1,16 +1,16 @@
 # Create a Messages resource on the $daemon (director, storage or file).
 #
-# @param append
-# @param catalog
-# @param console
-# @param daemon
-# @param director
-# @param mailcmd
-# @param mail
-# @param mname
-# @param operatorcmd
-# @param operator
-# @param syslog
+# @param append      Append the message to the filename given in the address field
+# @param catalog     Send the message to the Catalog database
+# @param console     Send the message to the Bacula console
+# @param daemon      Daemon to add Messages resource to
+# @param director    Send the message to the Director whose name is given in the address field
+# @param mailcmd     Specify exactly how to send the mail
+# @param mail        Send the message to the email addresses that are given as a comma separated list in the address field
+# @param mname       The name of the Messages resource. The name you specify here will be used to tie this Messages resource to a Job and/or to the daemon
+# @param operatorcmd This resource specification is similar to the MailCommand except that it is used for Operator messages
+# @param operator    Send the message to the email addresses that are specified as a comma separated list in the address field
+# @param syslog      Send the message to the system log (syslog) using the facility specified in the address field
 #
 define bacula::messages (
   Optional[String]        $append      = undef,

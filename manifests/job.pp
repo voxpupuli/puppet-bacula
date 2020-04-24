@@ -4,30 +4,30 @@
 #
 # @param files               An array of files that you wish to get backed up on this job for this host.  ie: ["/etc","/usr/local"]
 # @param excludes            An array of files to skip for the given job.  ie: ["/usr/local/src"]
-# @param fileset             If set to true, a fileset will be genereated based on the files and excludes paramaters specified above. If set to false, the job will attempt to use the fileset named "Common". If set to anything else, provided it's a String, that named fileset will be used.  NOTE: the fileset Common or the defined fileset must be declared elsewhere for this to work. See Class::Bacula for details.
-# @param jobtype
-# @param template
-# @param pool                string name of the pool to use by default for this job
-# @param pool_full           string name of the pool to use for Full jobs
-# @param pool_inc            string name of the pool to use for Incremental jobs
-# @param pool_diff           string name of the pool to use for Differential jobs
-# @param storage
-# @param jobdef
-# @param runscript           Array of hash(es) containing RunScript directives.
-# @param level
-# @param accurate
+# @param fileset             If set to true, a fileset will be genereated based on the files and excludes paramaters specified above. If set to false, the job will attempt to use the fileset named "Common". If set to anything else, provided it's a String, that named fileset will be used.  NOTE: the fileset Common or the defined fileset must be declared elsewhere for this to work. See Class::Bacula for details
+# @param jobtype             The type of job
+# @param template            Template to use for generating the job configuration fragment
+# @param pool                Name of the pool to use by default for this job
+# @param pool_full           Name of the pool to use for Full jobs
+# @param pool_inc            Name of the pool to use for Incremental jobs
+# @param pool_diff           Name of the pool to use for Differential jobs
+# @param storage             Name of the storage service to use
+# @param jobdef              If a JobDefs-Resource-Name is specified, all the values contained in the named JobDefs resource will be used as the defaults for the current Job
+# @param runscript           Array of hash(es) containing RunScript directives
+# @param level               The Level directive specifies the default Job level to be run
+# @param accurate            In accurate mode, the File daemon knowns exactly which files were present after the last backup. So it is able to handle deleted or renamed files
 # @param reschedule_on_error boolean for enableing disabling job option "Reschedule On Error"
-# @param reschedule_interval string time-spec for job option "Reschedule Interval"
-# @param reschedule_times    string count for job option "Reschedule Times"
-# @param messages            string containing the name of the message resource to use for this job set to false to disable this option
-# @param restoredir          string containing the prefix for restore jobs @param sched - string containing the name of the scheduler set to false to disable this option
-# @param sched
-# @param priority            string containing the priority number for the job set to false to disable this option
-# @param job_tag             string that might be used for grouping of jobs. Pass this to bacula::director to only collect jobs that match this tag.
-# @param selection_type
-# @param selection_pattern
-# @param max_concurrent_jobs
-# @param write_bootstrap     The writebootstrap directive specifies a file name where Bacula will write a bootstrap file for each Backup job run.
+# @param reschedule_interval time-spec for job option "Reschedule Interval"
+# @param reschedule_times    count for job option "Reschedule Times"
+# @param messages            containing the name of the message resource to use for this job set to false to disable this option
+# @param restoredir          containing the prefix for restore jobs
+# @param sched               containing the name of the scheduler set to false to disable this option
+# @param priority            containing the priority number for the job set to false to disable this option
+# @param job_tag             that might be used for grouping of jobs. Pass this to bacula::director to only collect jobs that match this tag
+# @param selection_type      Determines how the migration job will go about selecting what JobIds to migrate
+# @param selection_pattern   Pattern to match against to filter items with selection_type
+# @param max_concurrent_jobs Maximum number of Jobs from the current Job resource that can run concurrently
+# @param write_bootstrap     The writebootstrap directive specifies a file name where Bacula will write a bootstrap file for each Backup job run
 #
 # @example
 #   bacula::job { "${fqdn}-common":

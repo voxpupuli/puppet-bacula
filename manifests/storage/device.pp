@@ -10,12 +10,12 @@
 # @param removable_media Bacula director configuration for Device option 'RemovableMedia'
 # @param always_open     Bacula director configuration for Device option 'AlwaysOpen'
 # @param maxconcurjobs   Bacula director configuration for Device option 'Maximum Concurrent Jobs'
-# @param conf_dir
-# @param device_mode
-# @param device_owner
-# @param device_seltype
-# @param director_name
-# @param group
+# @param conf_dir        Path to bacula configuration directory
+# @param device_mode     Unix mode of the Archive Device directory
+# @param device_owner    Owner of the Archive Device directory
+# @param device_seltype  SELinux type for the device
+# @param director_name   Name of the Director allowed to connect to the Storage daemon
+# @param group           The posix group for bacula
 #
 define bacula::storage::device (
   String           $device_name     = $name,

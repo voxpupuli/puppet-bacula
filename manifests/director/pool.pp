@@ -7,16 +7,16 @@
 # @param volret         Bacula pool configuration option "Volume Retention"
 # @param maxvoljobs     Bacula pool configuration option "Maximum Volume Jobs"
 # @param maxvolbytes    Bacula pool configuration option "Maximum Volume Bytes"
-# @param maxvols
+# @param maxvols        Bacula pool configuration option "Maximum Volumes"
 # @param label          Bacula pool configuration option "Label Format"
-# @param voluseduration
-# @param storage
+# @param voluseduration Bacula pool configuration option "Volume Use Duration"
+# @param storage        Bacula pool configuration option "Storage"
 # @param pooltype       Bacula pool configuration option "Pool Type"
 # @param recycle        Bacula pool configuration option "Recycle"
 # @param autoprune      Bacula pool configuration option "AutoPrune"
 # @param purgeaction    Bacula pool configuration option "Action On Purge"
-# @param next_pool
-# @param conf_dir
+# @param next_pool      Bacula pool configuration option "Next Pool"
+# @param conf_dir       The path to the bacula configuration directory
 #
 # @example
 #   bacula::director::pool {

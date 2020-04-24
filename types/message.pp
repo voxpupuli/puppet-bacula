@@ -1,3 +1,4 @@
+# A Bacula message specification
 type Bacula::Message = Struct[{
   mname       => String,
   append      => Optional[String],

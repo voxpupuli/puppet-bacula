@@ -1,9 +1,21 @@
 # Define: bacula::jobdefs
 #
 # This define adds a jobdefs entry on the bacula director for reference by the client configurations.
-
-# @param full_backup_pool -  The Full Backup Pool specifies a Pool to be used for Full backups.
-# @param differential_backup_pool -  The Differential Backup Pool specifies a Pool to be used for Differential backups.
+#
+# @param jobtype
+# @param sched
+# @param messages
+# @param priority
+# @param pool
+# @param full_backup_pool         The Full Backup Pool specifies a Pool to be used for Full backups.
+# @param differential_backup_pool The Differential Backup Pool specifies a Pool to be used for Differential backups.
+# @param level
+# @param accurate
+# @param reschedule_on_error
+# @param reschedule_interval
+# @param reschedule_times
+# @param max_concurrent_jobs
+# @param write_bootstrap
 #
 define bacula::jobdefs (
   Bacula::JobType  $jobtype                  = 'Backup',

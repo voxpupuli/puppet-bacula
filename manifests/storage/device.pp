@@ -1,15 +1,15 @@
 # This define creates a storage device declaration.  This informs the
 # storage daemon which storage devices are available to send client backups to.
 #
-# @param device_name     - Bacula director configuration for Device option 'Name'
-# @param media_type      - Bacula director configuration for Device option 'Media Type'
-# @param device          - Bacula director configuration for Device option 'Archive Device'
-# @param label_media     - Bacula director configuration for Device option 'LabelMedia'
-# @param random_access   - Bacula director configuration for Device option 'Random Access'
-# @param automatic_mount - Bacula director configuration for Device option 'AutomaticMount'
-# @param removable_media - Bacula director configuration for Device option 'RemovableMedia'
-# @param always_open     - Bacula director configuration for Device option 'AlwaysOpen'
-# @param maxconcurjobs   - Bacula director configuration for Device option 'Maximum Concurrent Jobs'
+# @param device_name     Bacula director configuration for Device option 'Name'
+# @param media_type      Bacula director configuration for Device option 'Media Type'
+# @param device          Bacula director configuration for Device option 'Archive Device'
+# @param label_media     Bacula director configuration for Device option 'LabelMedia'
+# @param random_access   Bacula director configuration for Device option 'Random Access'
+# @param automatic_mount Bacula director configuration for Device option 'AutomaticMount'
+# @param removable_media Bacula director configuration for Device option 'RemovableMedia'
+# @param always_open     Bacula director configuration for Device option 'AlwaysOpen'
+# @param maxconcurjobs   Bacula director configuration for Device option 'Maximum Concurrent Jobs'
 # @param conf_dir
 # @param device_mode
 # @param device_owner

@@ -1,9 +1,12 @@
 # This class configures the Bacula storage daemon.
 #
+# @param services
+# @param packages
 # @param conf_dir
 # @param device
 # @param device_mode
-# @param device_password
+# @param device_name
+# @param device_owner
 # @param device_seltype
 # @param director_name
 # @param group
@@ -11,12 +14,11 @@
 # @param listen_address INET or INET6 address to listen on
 # @param maxconcurjobs
 # @param media_type
-# @param packages
-# @param port The listening port for the Storage Daemon
+# @param password
+# @param port           The listening port for the Storage Daemon
 # @param rundir
-# @param rundir
-# @param services
 # @param storage
+# @param address
 # @param user
 #
 class bacula::storage (

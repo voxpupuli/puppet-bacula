@@ -1,3 +1,4 @@
+# A Bacula Runscript specification
 type Bacula::Runscript = Struct[{
   runs_when         => Optional[Enum[
     'Before',

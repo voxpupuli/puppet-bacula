@@ -1,20 +1,25 @@
 # This class installs and configures the File Daemon to backup a client system.
 #
-# @param port The listening port for the File Daemon
-# @param listen_address The listening INET or INET6 address for File Daemon
-# @param password A password to use for communication with this File Daemon
+# @param packages            A list of packages to install; loaded from hiera
+# @param services            A list of services to operate; loaded from hiera
+# @param default_pool        The name of the Pool for this FD to use by default
+# @param default_pool_full   The name of the Pool to use for Full jobs
+# @param default_pool_inc    The name of the Pool to use for Incremental jobs
+# @param default_pool_diff   The name of the Pool to use for Differential jobs
+# @param port                The listening port for the File Daemon
+# @param listen_address      The listening INET or INET6 address for File Daemon
+# @param password            A password to use for communication with this File Daemon
 # @param max_concurrent_jobs Bacula FD option for 'Maximum Concurrent Jobs'
-# @param packages A list of packages to install; loaded from hiera
-# @param services A list of services to operate; loaded from hiera
-# @param director_name The hostname of the director for this FD
-# @param autoprune Bacula FD option for 'AutoPrune'
-# @param file_retention Bacula FD option for 'File Retention'
-# @param job_retention Bacula FD option for 'Job Retention'
-# @param client The name or address by which to contact this FD
-# @param default_pool The name of the Pool for this FD to use by default
-# @param default_pool_full The name of the Pool to use for Full jobs
-# @param default_pool_inc The name of the Pool to use for Incremental jobs
-# @param default_pool_diff The name of the Pool to use for Differential jobs
+# @param director_name       The hostname of the director for this FD
+# @param autoprune           Bacula FD option for 'AutoPrune'
+# @param file_retention      Bacula FD option for 'File Retention'
+# @param job_retention       Bacula FD option for 'Job Retention'
+# @param client              The name or address by which to contact this FD
+# @param address             The listening address for the File Daemon
+# @param pki_signatures      Bacula FD option for 'PKI Signatures'
+# @param pki_encryption      Bacula FD option for 'PKI Encryption'
+# @param pki_keypair         Bacula FD option for 'PKI Keypair'
+# @param pki_master_key      Bacula FD option for 'PKI Master Key'
 #
 # @example
 #   class { 'bacula::client': director_name => 'mydirector.example.com' }

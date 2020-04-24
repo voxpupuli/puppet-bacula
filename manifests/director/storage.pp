@@ -5,11 +5,13 @@
 # resource, so that each storage server is available as a configuration on the
 # director.
 #
-# @param port         - Bacula director configuration for Storage option 'SDPort'
-# @param password     - Bacula director configuration for Storage option 'Password'
-# @param device_name  - Bacula director configuration for Storage option 'Device'
-# @param media_type   - Bacula director configuration for Storage option 'Media Type'
-# @param maxconcurjob - Bacula director configuration for Storage option 'Media Type'
+# @param address       Bacula director configuration for Storage option 'SDAddress'
+# @param port          Bacula director configuration for Storage option 'SDPort'
+# @param password      Bacula director configuration for Storage option 'Password'
+# @param device_name   Bacula director configuration for Storage option 'Device'
+# @param media_type    Bacula director configuration for Storage option 'Media Type'
+# @param maxconcurjobs Bacula director configuration for Storage option 'Maximum Concurrent Jobs'
+# @param conf_dir      Bacula configuration directory
 #
 define bacula::director::storage (
   String  $address       = $name,

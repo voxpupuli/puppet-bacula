@@ -1,2 +1,3 @@
 --markup markdown
 --output-dir docs/
+--fail-on-warning

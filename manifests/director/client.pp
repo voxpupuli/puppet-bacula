@@ -2,6 +2,7 @@
 # not be used directly, but only ever exported through the `bacula::client`
 # define.  This is the director's configuration for a given client.
 #
+# @param address
 # @param port
 # @param password
 # @param file_retention

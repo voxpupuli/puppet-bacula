@@ -1,28 +1,27 @@
 # This class installs and configures the Bacula Director
 #
-# @param conf_dir
-# @param db_name: the database name
-# @param db_pw: the database user's password
-# @param db_user: the database user
-# @param director
-# @param director_address
-# @param group
-# @param homedir
-# @param job_tag A string to use when realizing jobs and filesets
-# @param listen_address
-# @param manage_defaults
-# @param max_concurrent_jobs
 # @param messages
 # @param packages
-# @param password
-# @param password: password to connect to the director
-# @param port The listening port for the Director
-# @param rundir
 # @param services
-# @param storage_name
 # @param manage_db
+# @param conf_dir
+# @param db_name             the database name
+# @param db_pw               the database user's password
+# @param db_user             the database user
 # @param db_address
 # @param db_port
+# @param director_address
+# @param director
+# @param group
+# @param homedir
+# @param job_tag             A string to use when realizing jobs and filesets
+# @param listen_address
+# @param max_concurrent_jobs
+# @param manage_defaults
+# @param password            password to connect to the director
+# @param port                The listening port for the Director
+# @param rundir
+# @param storage_name
 # @param make_bacula_tables
 #
 # @example
@@ -30,7 +29,7 @@
 #     storage => 'mystorage.example.com'
 #   }
 #
-# TODO director_address is only used by bconsole, and is confusing as director is likely the same 
+# TODO director_address is only used by bconsole, and is confusing as director is likely the same
 #
 class bacula::director (
   Hash[String, Bacula::Message] $messages,

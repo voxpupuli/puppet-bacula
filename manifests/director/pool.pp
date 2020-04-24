@@ -4,14 +4,19 @@
 # method.  This resources is intended to be used from bacula::storage as a way
 # to export the pool resources to the director.
 #
-# @param pooltype    - Bacula pool configuration option "Pool Type"
-# @param recycle     - Bacula pool configuration option "Recycle"
-# @param autoprune   - Bacula pool configuration option "AutoPrune"
-# @param volret      - Bacula pool configuration option "Volume Retention"
-# @param maxvoljobs  - Bacula pool configuration option "Maximum Volume Jobs"
-# @param maxvolbytes - Bacula pool configuration option "Maximum Volume Bytes"
-# @param purgeaction - Bacula pool configuration option "Action On Purge"
-# @param label       - Bacula pool configuration option "Label Format"
+# @param volret         Bacula pool configuration option "Volume Retention"
+# @param maxvoljobs     Bacula pool configuration option "Maximum Volume Jobs"
+# @param maxvolbytes    Bacula pool configuration option "Maximum Volume Bytes"
+# @param maxvols
+# @param label          Bacula pool configuration option "Label Format"
+# @param voluseduration
+# @param storage
+# @param pooltype       Bacula pool configuration option "Pool Type"
+# @param recycle        Bacula pool configuration option "Recycle"
+# @param autoprune      Bacula pool configuration option "AutoPrune"
+# @param purgeaction    Bacula pool configuration option "Action On Purge"
+# @param next_pool
+# @param conf_dir
 #
 # @example
 #   bacula::director::pool {

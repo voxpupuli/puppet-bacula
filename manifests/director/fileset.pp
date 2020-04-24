@@ -3,10 +3,10 @@
 # exported to be realized by the director.
 #
 # @param files
-# @param conf_dir The bacula configuration director.  Should not need adjusting.
-# @param excludes A list of paths to exclude from the filest
-# @param options A hash of options to include in the fileset
+# @param conf_dir      The bacula configuration director.  Should not need adjusting.
 # @param director_name The name of the director intended to receive this fileset.
+# @param excludes      A list of paths to exclude from the filest
+# @param options       A hash of options to include in the fileset
 #
 # @example
 #   bacula::director::fileset { 'Home':

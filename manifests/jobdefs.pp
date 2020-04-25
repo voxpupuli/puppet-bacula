@@ -1,4 +1,4 @@
-# Define: bacula::jobdefs
+# @summary Define a Bacula Jobdefs
 #
 # This define adds a jobdefs entry on the bacula director for reference by the client configurations.
 #

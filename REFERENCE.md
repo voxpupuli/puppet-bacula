@@ -5,26 +5,26 @@
 
 **Classes**
 
-* [`bacula`](#bacula): This class is here to hold the data about a bacula instalation.  The parameters in this class are intended to be configured through hiera.  O
-* [`bacula::client`](#baculaclient): This class installs and configures the File Daemon to backup a client system.
-* [`bacula::common`](#baculacommon): This class configures and installs the bacula client packages and enables the service, so that bacula jobs can be run on the client including
-* [`bacula::director`](#baculadirector): This class installs and configures the Bacula Director  TODO director_address is only used by bconsole, and is confusing as director is likel
-* [`bacula::director::defaults`](#baculadirectordefaults): Some default resources for the bacula director.  These are referenced by defaults in other parts of this module, but need not be used.  They 
-* [`bacula::director::postgresql`](#baculadirectorpostgresql): Deploys a postgres database server for hosting the Bacula director database.
-* [`bacula::storage`](#baculastorage): This class configures the Bacula storage daemon.
+* [`bacula`](#bacula): Main class
+* [`bacula::client`](#baculaclient): Configure the Bacula File Daemon
+* [`bacula::common`](#baculacommon): Utility class for the File Daemon
+* [`bacula::director`](#baculadirector): Configure the Bacula Director
+* [`bacula::director::defaults`](#baculadirectordefaults): Bacula Director default resources
+* [`bacula::director::postgresql`](#baculadirectorpostgresql): Manage Bacula Director PostgreSQL database
+* [`bacula::storage`](#baculastorage): Configure a Bacula Storage Daemon
 
 **Defined types**
 
-* [`bacula::director::client`](#baculadirectorclient): This define handles informing the director about a client.  This class should not be used directly, but only ever exported through the `bacul
-* [`bacula::director::fileset`](#baculadirectorfileset): This class handles a Director's fileset.conf entry.  Filesets are intended to be included on the Director catalog.  Resources of this type ma
-* [`bacula::director::job`](#baculadirectorjob): This define handles the director portion of a job.  This define should not be used directly.  It is intended to be used only from the `bacula
-* [`bacula::director::pool`](#baculadirectorpool): Define: bacula::director::pool  This define adds a pool to the bacula director configuration in the conf.d method.  This resources is intende
-* [`bacula::director::storage`](#baculadirectorstorage): This define creates a storage declaration for the director.  This informs the director which storage servers are available to send client bac
-* [`bacula::job`](#baculajob): Define: bacula::job  This class installs a bacula job on the director.  This can be used for specific applications as well as general host ba
-* [`bacula::jobdefs`](#baculajobdefs): Define: bacula::jobdefs  This define adds a jobdefs entry on the bacula director for reference by the client configurations.
-* [`bacula::messages`](#baculamessages): Create a Messages resource on the $daemon (director, storage or file).
-* [`bacula::schedule`](#baculaschedule): Creates a schedule to which jobs and jobdefs can adhere.
-* [`bacula::storage::device`](#baculastoragedevice): This define creates a storage device declaration.  This informs the storage daemon which storage devices are available to send client backups
+* [`bacula::director::client`](#baculadirectorclient): Define a Bacula Director Client
+* [`bacula::director::fileset`](#baculadirectorfileset): Configure a Bacula Director Fileset
+* [`bacula::director::job`](#baculadirectorjob): Configure a Bacula Director Job
+* [`bacula::director::pool`](#baculadirectorpool): Configure a Bacula Director Pool
+* [`bacula::director::storage`](#baculadirectorstorage): Configure a Bacula Director Storage resource
+* [`bacula::job`](#baculajob): Define a Bacula Job
+* [`bacula::jobdefs`](#baculajobdefs): Define a Bacula Jobdefs
+* [`bacula::messages`](#baculamessages): Define a Bacula Messages
+* [`bacula::schedule`](#baculaschedule): Define a Bacula Schedule
+* [`bacula::storage::device`](#baculastoragedevice): Configure a Bacula Storage Daemon Device
 
 **Functions**
 
@@ -975,8 +975,6 @@ Default value: $bacula::conf_dir
 
 ### bacula::director::pool
 
-Define: bacula::director::pool
-
 This define adds a pool to the bacula director configuration in the conf.d
 method.  This resources is intended to be used from bacula::storage as a way
 to export the pool resources to the director.
@@ -1174,8 +1172,6 @@ Bacula configuration directory
 Default value: $bacula::conf_dir
 
 ### bacula::job
-
-Define: bacula::job
 
 This class installs a bacula job on the director.  This can be used for specific applications as well as general host backups
 
@@ -1411,8 +1407,6 @@ The writebootstrap directive specifies a file name where Bacula will write a boo
 Default value: `undef`
 
 ### bacula::jobdefs
-
-Define: bacula::jobdefs
 
 This define adds a jobdefs entry on the bacula director for reference by the client configurations.
 

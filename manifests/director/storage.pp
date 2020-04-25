@@ -1,3 +1,5 @@
+# @summary Configure a Bacula Director Storage resource
+#
 # This define creates a storage declaration for the director.  This informs the
 # director which storage servers are available to send client backups to.
 #

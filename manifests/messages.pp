@@ -1,3 +1,5 @@
+# @summary Define a Bacula Messages
+#
 # Create a Messages resource on the $daemon (director, storage or file).
 #
 # @param append      Append the message to the filename given in the address field

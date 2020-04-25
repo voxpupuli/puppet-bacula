@@ -1,3 +1,5 @@
+# @summary Define a Bacula Director Client
+#
 # This define handles informing the director about a client.  This class should
 # not be used directly, but only ever exported through the `bacula::client`
 # define.  This is the director's configuration for a given client.

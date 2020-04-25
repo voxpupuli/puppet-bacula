@@ -1,3 +1,5 @@
+# @summary Define a Bacula Schedule
+#
 # Creates a schedule to which jobs and jobdefs can adhere.
 #
 # @param runs     A list of Bacula Run directives

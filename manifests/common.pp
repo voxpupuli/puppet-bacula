@@ -1,3 +1,5 @@
+# @summary Utility class for the File Daemon
+#
 # This class configures and installs the bacula client packages and enables the
 # service, so that bacula jobs can be run on the client including this
 # manifest.

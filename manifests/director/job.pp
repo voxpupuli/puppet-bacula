@@ -1,3 +1,5 @@
+# @summary Configure a Bacula Director Job
+#
 # This define handles the director portion of a job.  This define should not be
 # used directly.  It is intended to be used only from the `bacula::job` define.
 #

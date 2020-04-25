@@ -1,3 +1,5 @@
+# @summary Configure a Bacula Storage Daemon Device
+#
 # This define creates a storage device declaration.  This informs the
 # storage daemon which storage devices are available to send client backups to.
 #

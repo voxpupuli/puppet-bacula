@@ -1,3 +1,5 @@
+# @summary Configure a Bacula Director Fileset
+#
 # This class handles a Director's fileset.conf entry.  Filesets are intended to
 # be included on the Director catalog.  Resources of this type may also be
 # exported to be realized by the director.

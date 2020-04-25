@@ -1,3 +1,5 @@
+# @summary Main class
+#
 # This class is here to hold the data about a bacula instalation.  The
 # parameters in this class are intended to be configured through hiera.  Other
 # module classes will reference the values here.

@@ -1,4 +1,4 @@
-# Define: bacula::director::pool
+# @summary Configure a Bacula Director Pool
 #
 # This define adds a pool to the bacula director configuration in the conf.d
 # method.  This resources is intended to be used from bacula::storage as a way

@@ -1,3 +1,5 @@
+# @summary Configure the Bacula File Daemon
+#
 # This class installs and configures the File Daemon to backup a client system.
 #
 # @param packages            A list of packages to install; loaded from hiera

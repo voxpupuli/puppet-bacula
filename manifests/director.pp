@@ -1,3 +1,5 @@
+# @summary Configure the Bacula Director
+#
 # This class installs and configures the Bacula Director
 #
 # @param messages            Logging configuration; loaded from hiera

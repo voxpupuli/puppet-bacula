@@ -1,3 +1,5 @@
+# @summary Manage Bacula Director PostgreSQL database
+#
 # Deploys a postgres database server for hosting the Bacula director database.
 #
 # @param make_bacula_tables Path to the script that loads the database schema

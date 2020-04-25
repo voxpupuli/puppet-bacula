@@ -1,3 +1,5 @@
+# @summary Configure a Bacula Storage Daemon
+#
 # This class configures the Bacula storage daemon.
 #
 # @param services       A list of services to operate; loaded from hiera

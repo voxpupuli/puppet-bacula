@@ -31,7 +31,7 @@
 #     storage => 'mystorage.example.com'
 #   }
 #
-# TODO director_address is only used by bconsole, and is confusing as director is likely the same
+# @todo director_address is only used by bconsole, and is confusing as director is likely the same
 #
 class bacula::director (
   Hash[String, Bacula::Message] $messages,

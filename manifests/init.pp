@@ -30,9 +30,7 @@
 # @example
 #   include bacula
 #
-# TODO director_address is confusing, and is only used by the bconsole template
-# TODO Document the use of storage_name
-# TODO Document the use of director_name
+# @todo director_address is confusing, and is only used by the bconsole template; Document the use of storage_name; Document the use of director_name
 #
 class bacula (
   String                  $conf_dir,

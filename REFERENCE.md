@@ -48,9 +48,7 @@ This class is here to hold the data about a bacula instalation.  The
 parameters in this class are intended to be configured through hiera.  Other
 module classes will reference the values here.
 
-TODO director_address is confusing, and is only used by the bconsole template
-TODO Document the use of storage_name
-TODO Document the use of director_name
+* **TODO** director_address is confusing, and is only used by the bconsole template; Document the use of storage_name; Document the use of director_name
 
 #### Examples
 
@@ -398,7 +396,7 @@ manifest.
 
 This class installs and configures the Bacula Director
 
-TODO director_address is only used by bconsole, and is confusing as director is likely the same
+* **TODO** director_address is only used by bconsole, and is confusing as director is likely the same
 
 #### Examples
 

@@ -4,12 +4,10 @@ Gemfile.lock
 Gemfile.local
 vendor/
 .vendor/
-.fixtures.yml
 spec/fixtures/manifests/
 spec/fixtures/modules/
 .vagrant/
 .bundle/
-.env.sh
 .ruby-version
 coverage/
 log/
@@ -32,3 +30,4 @@ Dockerfile
 .yardopts
 Jenkinsfile
 Vagrantfile
+.fixtures.yml

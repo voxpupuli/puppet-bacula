@@ -1,0 +1,11 @@
+---
+on_tag:
+  - 'bundle'
+  - 'bundle exec rake test'
+  - 'bundle exec rake module:push'
+
+on_commit:
+  - 'bundle'
+  - 'bundle exec rake test'
+
+branches: [ 'origin/master' ]

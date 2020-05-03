@@ -1,9 +1,11 @@
+# @summary Manage Bacula Director PostgreSQL database
+#
 # Deploys a postgres database server for hosting the Bacula director database.
 #
-# @param make_bacula_tables
-# @param db_name
-# @param db_pw
-# @param db_user
+# @param make_bacula_tables Path to the script that loads the database schema
+# @param db_name            The database name
+# @param db_pw              The database user's password
+# @param db_user            The database user
 #
 class bacula::director::postgresql (
   String $make_bacula_tables = $bacula::director::make_bacula_tables,

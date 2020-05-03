@@ -1,17 +1,22 @@
-# Define: bacula::director::pool
+# @summary Configure a Bacula Director Pool
 #
 # This define adds a pool to the bacula director configuration in the conf.d
 # method.  This resources is intended to be used from bacula::storage as a way
 # to export the pool resources to the director.
 #
-# @param pooltype    - Bacula pool configuration option "Pool Type"
-# @param recycle     - Bacula pool configuration option "Recycle"
-# @param autoprune   - Bacula pool configuration option "AutoPrune"
-# @param volret      - Bacula pool configuration option "Volume Retention"
-# @param maxvoljobs  - Bacula pool configuration option "Maximum Volume Jobs"
-# @param maxvolbytes - Bacula pool configuration option "Maximum Volume Bytes"
-# @param purgeaction - Bacula pool configuration option "Action On Purge"
-# @param label       - Bacula pool configuration option "Label Format"
+# @param volret         Bacula pool configuration option "Volume Retention"
+# @param maxvoljobs     Bacula pool configuration option "Maximum Volume Jobs"
+# @param maxvolbytes    Bacula pool configuration option "Maximum Volume Bytes"
+# @param maxvols        Bacula pool configuration option "Maximum Volumes"
+# @param label          Bacula pool configuration option "Label Format"
+# @param voluseduration Bacula pool configuration option "Volume Use Duration"
+# @param storage        Bacula pool configuration option "Storage"
+# @param pooltype       Bacula pool configuration option "Pool Type"
+# @param recycle        Bacula pool configuration option "Recycle"
+# @param autoprune      Bacula pool configuration option "AutoPrune"
+# @param purgeaction    Bacula pool configuration option "Action On Purge"
+# @param next_pool      Bacula pool configuration option "Next Pool"
+# @param conf_dir       The path to the bacula configuration directory
 #
 # @example
 #   bacula::director::pool {

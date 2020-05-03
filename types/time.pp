@@ -1,3 +1,9 @@
+# A time indication
+#
+# @example
+#   "12"
+#   "12 hours 7 seconds"
+#   "8d 2h 12m"
 type Bacula::Time = Pattern[
   /^\d+$/,
   /^\d+\s+(s|sec|seconds?|mins?|minutes?|h|hours?|d|days?|w|weeks?|m|months?|q|quarters?|y|years?)(\s+\d+\s+(s|sec|seconds?|mins?|minutes?|h|hours?|d|days?|w|weeks?|m|months?|q|quarters?|y|years?))*$/, # lint:ignore:140chars

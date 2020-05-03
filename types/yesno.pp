@@ -1,3 +1,4 @@
+# A Boolean value
 type Bacula::Yesno = Variant[
   Boolean,
   Enum[

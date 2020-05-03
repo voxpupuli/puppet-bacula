@@ -1,12 +1,14 @@
+# @summary Configure a Bacula Director Fileset
+#
 # This class handles a Director's fileset.conf entry.  Filesets are intended to
 # be included on the Director catalog.  Resources of this type may also be
 # exported to be realized by the director.
 #
-# @param files
-# @param conf_dir The bacula configuration director.  Should not need adjusting.
-# @param excludes A list of paths to exclude from the filest
-# @param options A hash of options to include in the fileset
-# @param director_name The name of the director intended to receive this fileset.
+# @param files         The list of directories and/or files to be processed in the backup job
+# @param conf_dir      The bacula configuration director.  Should not need adjusting
+# @param director_name The name of the director intended to receive this fileset
+# @param excludes      A list of paths to exclude from the filest
+# @param options       A hash of options to include in the fileset
 #
 # @example
 #   bacula::director::fileset { 'Home':

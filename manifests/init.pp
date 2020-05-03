@@ -1,35 +1,36 @@
+# @summary Main class
+#
 # This class is here to hold the data about a bacula instalation.  The
 # parameters in this class are intended to be configured through hiera.  Other
 # module classes will reference the values here.
 #
-# @param bacula_group The posix group for bacula.
-# @param bacula_user The posix user for bacula.
-# @param conf_dir The path to the bacula configuration directory.
-# @param device_seltype SELinux type for the device
-# @param director_name
-# @param director_address
-# @param homedir The bacula user's home directory path
-# @param homedir_mode The bacula user's home director mode
-# @param job_tag A tag to add to all job resources
-# @param monitor Enable the Bacula Monitor option
-# @param rundir The run dir for the daemons
-# @param storage_name
-# @param tls_enable Enable TLS support
-# @param tls_require Require TLS connections
-# @param tls_certificate The full path and filename of a PEM encoded TLS certificate
-# @param tls_key The full path and filename of a PEM encoded TLS private key
-# @param tls_verify_peer Verify peer certificate.
-# @param tls_allowed_cn Common name attribute of allowed peer certificates
+# @param conf_dir                The path to the bacula configuration directory
+# @param bacula_user             The posix user for bacula
+# @param bacula_group            The posix group for bacula
+# @param homedir                 The bacula user's home directory path
+# @param rundir                  The run dir for the daemons
+# @param director_address        The default address of the director used by bconsole
+# @param director_name           The default director name
+# @param storage_name            The default storage name
+# @param db_type                 The database provider used by Bacula
+# @param homedir_mode            The bacula user's home director mode
+# @param monitor                 Enable the Bacula Monitor option
+# @param device_seltype          SELinux type for the device
+# @param tls_enable              Enable TLS support
+# @param tls_require             Require TLS connections
+# @param tls_certificate         The full path and filename of a PEM encoded TLS certificate
+# @param tls_key                 The full path and filename of a PEM encoded TLS private key
+# @param tls_verify_peer         Verify peer certificate
+# @param tls_allowed_cn          Common name attribute of allowed peer certificates
 # @param tls_ca_certificate_file The full path and filename specifying a PEM encoded TLS CA certificate(s)
-# @param tls_ca_certificate_dir Full path to TLS CA certificate directory
-# @param tls_dh_file Path to PEM encoded Diffie-Hellman parameter file
+# @param tls_ca_certificate_dir  Full path to TLS CA certificate directory
+# @param tls_dh_file             Path to PEM encoded Diffie-Hellman parameter file
+# @param job_tag                 A tag to add to all job resources
 #
 # @example
 #   include bacula
 #
-# TODO director_address is confusing, and is only used by the bconsole template
-# TODO Document the use of storage_name
-# TODO Document the use of director_name
+# @todo director_address is confusing, and is only used by the bconsole template; Document the use of storage_name; Document the use of director_name
 #
 class bacula (
   String                  $conf_dir,

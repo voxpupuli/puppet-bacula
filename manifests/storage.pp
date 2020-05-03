@@ -1,23 +1,27 @@
+# @summary Configure a Bacula Storage Daemon
+#
 # This class configures the Bacula storage daemon.
 #
-# @param conf_dir
-# @param device
-# @param device_mode
-# @param device_password
-# @param device_seltype
-# @param director_name
-# @param group
-# @param homedir
+# @param services       A list of services to operate; loaded from hiera
+# @param packages       A list of packages to install; loaded from hiera
+# @param conf_dir       Path to bacula configuration directory
+# @param device         The system file name of the storage device managed by this storage daemon
+# @param device_mode    The posix mode for device
+# @param device_name    The Name that the Director will use when asking to backup or restore to or from to this device
+# @param device_owner   The posix user owning the device directory
+# @param device_seltype SELinux type for the device
+# @param director_name  Specifies the Name of the Director allowed to connect to the Storage daemon
+# @param group          The posix group for bacula
+# @param homedir        The directory in which the Storage daemon may put its status files
 # @param listen_address INET or INET6 address to listen on
-# @param maxconcurjobs
-# @param media_type
-# @param packages
-# @param port The listening port for the Storage Daemon
-# @param rundir
-# @param rundir
-# @param services
-# @param storage
-# @param user
+# @param maxconcurjobs  maximum number of Jobs that may run concurrently
+# @param media_type     The type of media supported by this device
+# @param password       Specifies the password that must be supplied by the named Director
+# @param port           The listening port for the Storage Daemon
+# @param rundir         The directory in which the Director may put its process Id file files
+# @param storage        The address to be configured on the director to communicate with this storage server
+# @param address        The listening address for the Storage Daemon
+# @param user           The posix user for bacula
 #
 class bacula::storage (
   String              $services,

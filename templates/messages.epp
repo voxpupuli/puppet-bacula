@@ -36,11 +36,11 @@ Messages {
 <% if $mail { -%>
     Mail  = <%= $mail %>
 <% } -%>
-<% if $operator { -%>
-    Operator  = <%= $operator %>
-<% } -%>
 <% if $operatorcmd { -%>
     Operator Command = <%= $operatorcmd %>
+<% } -%>
+<% if $operator { -%>
+    Operator  = <%= $operator %>
 <% } -%>
 }
 

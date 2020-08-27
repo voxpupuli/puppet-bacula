@@ -28,6 +28,7 @@
 # @param selection_pattern   Pattern to match against to filter items with selection_type
 # @param max_concurrent_jobs Maximum number of Jobs from the current Job resource that can run concurrently
 # @param write_bootstrap     The writebootstrap directive specifies a file name where Bacula will write a bootstrap file for each Backup job run
+# @param max_full_interval   The time specifies the maximum allowed age (counting from start time) of the most recent successful Full backup that is required in order to run Incremental or Differential backup jobs. f the most recent Full backup is older than this interval, Incremental and Differential backups will be upgraded to Full backups automatically. 
 #
 # @example
 #   bacula::job { "${fqdn}-common":
@@ -67,6 +68,7 @@ define bacula::job (
   Optional[String]         $selection_pattern   = undef,
   Integer                  $max_concurrent_jobs = 1,
   Optional[String]         $write_bootstrap     = undef,
+  Optional[String]         $max_full_interval   = undef,
 ) {
   include bacula
   include bacula::client
@@ -127,6 +129,7 @@ define bacula::job (
     reschedule_interval => $reschedule_interval,
     reschedule_times    => $reschedule_times,
     write_bootstrap     => $write_bootstrap,
+    max_full_interval   => $max_full_interval,
   }
 
   @@bacula::director::job { $name:

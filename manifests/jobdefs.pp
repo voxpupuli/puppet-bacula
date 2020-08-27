@@ -16,6 +16,7 @@
 # @param reschedule_times         This directive specifies the maximum number of times to reschedule the job
 # @param max_concurrent_jobs      Maximum number of Jobs from the current Job resource that can run concurrently
 # @param write_bootstrap          The writebootstrap directive specifies a file name where Bacula will write a bootstrap file for each Backup job run
+# @param max_full_interval   The time specifies the maximum allowed age (counting from start time) of the most recent successful Full backup that is required in order to run Incremental or Differential backup jobs. f the most recent Full backup is older than this interval, Incremental and Differential backups will be upgraded to Full backups automatically. 
 #
 define bacula::jobdefs (
   Bacula::JobType  $jobtype                  = 'Backup',
@@ -32,6 +33,7 @@ define bacula::jobdefs (
   Integer          $reschedule_times         = 10,
   Integer          $max_concurrent_jobs      = 1,
   Optional[String] $write_bootstrap          = undef,
+  Optional[String] $max_full_interval        = undef,
 ) {
   include bacula
   $conf_dir = $bacula::conf_dir
@@ -52,6 +54,7 @@ define bacula::jobdefs (
     reschedule_interval       => $reschedule_interval,
     reschedule_times          => $reschedule_times,
     write_bootstrap           => $write_bootstrap,
+    max_full_interval         => $max_full_interval,
   }
 
   concat::fragment { "bacula-jobdefs-${name}":

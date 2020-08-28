@@ -13,7 +13,6 @@ class bacula::director::postgresql (
   String $db_pw              = $bacula::director::db_pw,
   String $db_user            = $bacula::director::db_user,
 ) {
-
   include bacula
 
   $services = $bacula::director::services

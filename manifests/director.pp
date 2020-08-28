@@ -58,7 +58,6 @@ class bacula::director (
   String                        $storage_name        = $bacula::storage_name,
   String                        $make_bacula_tables  = '',
 ) inherits bacula {
-
   if $manage_defaults {
     include bacula::director::defaults
 
@@ -73,15 +72,17 @@ class bacula::director (
 
   case $bacula::db_type {
     /^(pgsql|postgresql)$/: { include bacula::director::postgresql }
-    'none':                 { }
+    'none':                 {}
     default:                { fail('No db_type set') }
   }
 
   # Allow for package names to include EPP syntax for db_type
   $package_names = $packages.map |$p| {
-    $package_name = inline_epp($p, {
-      'db_type' => $bacula::db_type
-    })
+    $package_name = inline_epp($p,
+      {
+        'db_type' => $bacula::db_type
+      }
+    )
   }
   ensure_packages($package_names)
 

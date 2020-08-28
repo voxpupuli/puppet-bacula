@@ -20,7 +20,6 @@ define bacula::director::job (
   String $content,
   String $conf_dir = $bacula::conf_dir,
 ) {
-
   include bacula
 
   concat::fragment { "bacula-director-job-${name}":

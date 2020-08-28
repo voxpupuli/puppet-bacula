@@ -68,7 +68,6 @@ define bacula::job (
   Integer                  $max_concurrent_jobs = 1,
   Optional[String]         $write_bootstrap     = undef,
 ) {
-
   include bacula
   include bacula::client
   $conf_dir = $bacula::conf_dir

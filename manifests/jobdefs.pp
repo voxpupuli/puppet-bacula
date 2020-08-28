@@ -33,7 +33,6 @@ define bacula::jobdefs (
   Integer          $max_concurrent_jobs      = 1,
   Optional[String] $write_bootstrap          = undef,
 ) {
-
   include bacula
   $conf_dir = $bacula::conf_dir
 

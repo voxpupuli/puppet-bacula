@@ -6,7 +6,6 @@
 # same machine, allows clients to receive the correct configuration.
 #
 class bacula::director::defaults {
-
   bacula::jobdefs { 'Default': }
 
   bacula::schedule { 'Default':

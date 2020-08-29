@@ -5,7 +5,6 @@
 # manifest.
 #
 class bacula::common {
-
   include bacula
   include bacula::client
 
@@ -33,5 +32,4 @@ class bacula::common {
     group  => $bacula_group,
     mode   => '0750',
   }
-
 }

@@ -45,12 +45,13 @@ class bacula::storage (
   String              $address        = $facts['networking']['fqdn'],
   String              $user           = $bacula::bacula_user,
 ) inherits bacula {
-
   # Allow for package names to include EPP syntax for db_type
   $package_names = $packages.map |$p| {
-    $package_name = inline_epp($p, {
-      'db_type' => $bacula::db_type
-    })
+    $package_name = inline_epp($p,
+      {
+        'db_type' => $bacula::db_type
+      }
+    )
   }
   ensure_packages($package_names)
 

@@ -55,5 +55,6 @@ class bacula (
   Optional[String]        $tls_ca_certificate_dir  = undef,
   Optional[String]        $tls_dh_file             = undef,
   Optional[String]        $job_tag                 = undef,
-){
+) {
+  # Do nothing
 }

@@ -1,28 +1,29 @@
 <%
   |
-    String $name,
-    Bacula::JobType $jobtype,
-    String $fileset_real,
-    Optional[String] $pool,
-    Optional[String] $storage,
-    Optional[String] $restoredir,
-    Optional[String] $messages,
-    Optional[String] $pool_full,
-    Optional[String] $pool_inc,
-    Optional[String] $pool_diff,
-    Optional[String] $selection_type,
-    Optional[String] $selection_pattern,
-    Variant[Boolean,String] $jobdef,
+    String                   $name,
+    Bacula::JobType          $jobtype,
+    String                   $fileset_real,
+    Optional[String]         $pool,
+    Optional[String]         $storage,
+    Optional[String]         $restoredir,
+    Optional[String]         $messages,
+    Optional[String]         $pool_full,
+    Optional[String]         $pool_inc,
+    Optional[String]         $pool_diff,
+    Optional[String]         $selection_type,
+    Optional[String]         $selection_pattern,
+    Variant[Boolean,String]  $jobdef,
     Array[Bacula::Runscript] $runscript,
-    Bacula::Yesno $accurate,
-    Optional[String] $level,
-    Optional[String] $sched,
-    Optional[Integer] $priority,
-    Optional[Integer] $max_concurrent_jobs,
-    Bacula::Yesno $reschedule_on_error,
-    Bacula::Time $reschedule_interval,
-    Integer $reschedule_times,
-    Optional[String] $write_bootstrap,
+    Bacula::Yesno            $accurate,
+    Optional[String]         $level,
+    Optional[String]         $sched,
+    Optional[Integer]        $priority,
+    Optional[Integer]        $max_concurrent_jobs,
+    Bacula::Yesno            $reschedule_on_error,
+    Bacula::Time             $reschedule_interval,
+    Integer                  $reschedule_times,
+    Optional[String]         $write_bootstrap,
+    Optional[String]         $max_full_interval,
   |
 -%>
 Job {
@@ -102,6 +103,9 @@ Job {
 <% } -%>
 <% if $write_bootstrap { -%>
     Write Bootstrap = <%= $write_bootstrap %>
+<% } -%>
+<% if $max_full_interval { -%>
+    Max Full Interval = <%= $max_full_interval %>
 <% } -%>
 
 }

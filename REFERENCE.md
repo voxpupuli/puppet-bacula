@@ -1413,6 +1413,14 @@ The writebootstrap directive specifies a file name where Bacula will write a boo
 
 Default value: ``undef``
 
+##### `max_full_interval`
+
+Data type: `Optional[String]`
+
+The time specifies the maximum allowed age (counting from start time) of the most recent successful Full backup that is required in order to run Incremental or Differential backup jobs. f the most recent Full backup is older than this interval, Incremental and Differential backups will be upgraded to Full backups automatically.
+
+Default value: ``undef``
+
 ### `bacula::jobdefs`
 
 This define adds a jobdefs entry on the bacula director for reference by the client configurations.
@@ -1530,6 +1538,14 @@ Default value: `1`
 Data type: `Optional[String]`
 
 The writebootstrap directive specifies a file name where Bacula will write a bootstrap file for each Backup job run
+
+Default value: ``undef``
+
+##### `max_full_interval`
+
+Data type: `Optional[String]`
+
+The time specifies the maximum allowed age (counting from start time) of the most recent successful Full backup that is required in order to run Incremental or Differential backup jobs. f the most recent Full backup is older than this interval, Incremental and Differential backups will be upgraded to Full backups automatically.
 
 Default value: ``undef``
 

@@ -8,6 +8,10 @@
     Optional[String] $console,
     Optional[String] $mailcmd,
     Optional[String] $mail,
+    Optional[String] $mailonsuccesscmd,
+    Optional[String] $mailonsuccess,
+    Optional[String] $mailonerrorcmd,
+    Optional[String] $mailonerror,
     Optional[String] $operator,
     Optional[String] $operatorcmd,
   |
@@ -35,6 +39,18 @@ Messages {
 <% } -%>
 <% if $mail { -%>
     Mail  = <%= $mail %>
+<% } -%>
+<% if $mailonsuccesscmd { -%>
+    Mail Command     = <%= $mailonsuccesscmd %>
+<% } -%>
+<% if $mailonsuccess { -%>
+    Mail On Success  = <%= $mailonsuccess %>
+<% } -%>
+<% if $mailonerrorcmd { -%>
+    Mail Command     = <%= $mailonerrorcmd %>
+<% } -%>
+<% if $mailonerror { -%>
+    Mail On Error    = <%= $mailonerror %>
 <% } -%>
 <% if $operatorcmd { -%>
     Operator Command = <%= $operatorcmd %>

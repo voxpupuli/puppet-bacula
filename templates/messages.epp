@@ -18,27 +18,27 @@
 -%>
 
 Messages {
-    Name     = <%= $mname %>
+    Name             = <%= $mname %>
 <% if $director { -%>
-    Director = <%= $director %>
+    Director         = <%= $director %>
 <% } -%>
 <% if $append { -%>
-    Append   = <%= $append %>
+    Append           = <%= $append %>
 <% } -%>
 <% if $syslog { -%>
-    Syslog   = <%= $syslog %>
+    Syslog           = <%= $syslog %>
 <% } -%>
 <% if $catalog { -%>
-    Catalog  = <%= $catalog %>
+    Catalog          = <%= $catalog %>
 <% } -%>
 <% if $console { -%>
-    Console  = <%= $console %>
+    Console          = <%= $console %>
 <% } -%>
 <% if $mailcmd { -%>
-    Mail Command  = <%= $mailcmd %>
+    Mail Command     = <%= $mailcmd %>
 <% } -%>
 <% if $mail { -%>
-    Mail  = <%= $mail %>
+    Mail             = <%= $mail %>
 <% } -%>
 <% if $mailonsuccesscmd { -%>
     Mail Command     = <%= $mailonsuccesscmd %>
@@ -56,7 +56,7 @@ Messages {
     Operator Command = <%= $operatorcmd %>
 <% } -%>
 <% if $operator { -%>
-    Operator  = <%= $operator %>
+    Operator         = <%= $operator %>
 <% } -%>
 }
 

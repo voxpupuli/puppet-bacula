@@ -8,39 +8,55 @@
     Optional[String] $console,
     Optional[String] $mailcmd,
     Optional[String] $mail,
+    Optional[String] $mailonsuccesscmd,
+    Optional[String] $mailonsuccess,
+    Optional[String] $mailonerrorcmd,
+    Optional[String] $mailonerror,
     Optional[String] $operator,
     Optional[String] $operatorcmd,
   |
 -%>
 
 Messages {
-    Name     = <%= $mname %>
+    Name             = <%= $mname %>
 <% if $director { -%>
-    Director = <%= $director %>
+    Director         = <%= $director %>
 <% } -%>
 <% if $append { -%>
-    Append   = <%= $append %>
+    Append           = <%= $append %>
 <% } -%>
 <% if $syslog { -%>
-    Syslog   = <%= $syslog %>
+    Syslog           = <%= $syslog %>
 <% } -%>
 <% if $catalog { -%>
-    Catalog  = <%= $catalog %>
+    Catalog          = <%= $catalog %>
 <% } -%>
 <% if $console { -%>
-    Console  = <%= $console %>
+    Console          = <%= $console %>
 <% } -%>
 <% if $mailcmd { -%>
-    Mail Command  = <%= $mailcmd %>
+    Mail Command     = <%= $mailcmd %>
 <% } -%>
 <% if $mail { -%>
-    Mail  = <%= $mail %>
+    Mail             = <%= $mail %>
+<% } -%>
+<% if $mailonsuccesscmd { -%>
+    Mail Command     = <%= $mailonsuccesscmd %>
+<% } -%>
+<% if $mailonsuccess { -%>
+    Mail On Success  = <%= $mailonsuccess %>
+<% } -%>
+<% if $mailonerrorcmd { -%>
+    Mail Command     = <%= $mailonerrorcmd %>
+<% } -%>
+<% if $mailonerror { -%>
+    Mail On Error    = <%= $mailonerror %>
 <% } -%>
 <% if $operatorcmd { -%>
     Operator Command = <%= $operatorcmd %>
 <% } -%>
 <% if $operator { -%>
-    Operator  = <%= $operator %>
+    Operator         = <%= $operator %>
 <% } -%>
 }
 

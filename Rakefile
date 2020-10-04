@@ -1,4 +1,10 @@
-require 'voxpupuli/test/rake'
+# Attempt to load voxupuli-test (which pulls in puppetlabs_spec_helper),
+# otherwise attempt to load it directly.
+begin
+  require 'voxpupuli/test/rake'
+rescue LoadError
+  require 'puppetlabs_spec_helper/rake_tasks'
+end
 
 # load optional tasks for releases
 # only available if gem group releases is installed
@@ -24,14 +30,9 @@ task :reference, [:debug, :backtrace] do |t, args|
   Rake::Task['strings:generate:reference'].invoke(patterns, args[:debug], args[:backtrace])
 end
 
-desc 'Ensure REFERENCE.md is up-to-date'
-task 'reference:check' do |t, args|
-  Rake::Task[:reference].invoke
-  sh "git diff --exit-code REFERENCE.md"
-end
-
 begin
   require 'github_changelog_generator/task'
+  require 'puppet_blacksmith'
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     version = (Blacksmith::Modulefile.new).version
     config.future_release = "v#{version}" if version =~ /^\d+\.\d+.\d+$/

@@ -1,4 +1,10 @@
-require 'voxpupuli/test/rake'
+# Attempt to load voxupuli-test (which pulls in puppetlabs_spec_helper),
+# otherwise attempt to load it directly.
+begin
+  require 'voxpupuli/test/rake'
+rescue LoadError
+  require 'puppetlabs_spec_helper/rake_tasks'
+end
 
 # load optional tasks for releases
 # only available if gem group releases is installed
@@ -24,23 +30,22 @@ task :reference, [:debug, :backtrace] do |t, args|
   Rake::Task['strings:generate:reference'].invoke(patterns, args[:debug], args[:backtrace])
 end
 
-desc 'Ensure REFERENCE.md is up-to-date'
-task 'reference:check' do |t, args|
-  Rake::Task[:reference].invoke
-  sh "git diff --exit-code REFERENCE.md"
-end
-
 begin
   require 'github_changelog_generator/task'
+  require 'puppet_blacksmith'
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
-    version = (Blacksmith::Modulefile.new).version
-    config.future_release = "v#{version}" if version =~ /^\d+\.\d+.\d+$/
+    config.future_release = (Blacksmith::Modulefile.new).version
     config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\nEach new release typically also includes the latest modulesync defaults.\nThese should not affect the functionality of the module."
     config.exclude_labels = %w{duplicate question invalid wontfix wont-fix modulesync skip-changelog}
     config.user = 'voxpupuli'
     metadata_json = File.join(File.dirname(__FILE__), 'metadata.json')
     metadata = JSON.load(File.read(metadata_json))
-    config.project = metadata['name']
+    config.project = "puppet-#{metadata['name'].split('-').last}"
+  end
+
+  Blacksmith::RakeTask.new do |t|
+    t.tag_pattern = '%s'
+    t.commit_message_pattern = 'Bump version to %s'
   end
 
   # Workaround for https://github.com/github-changelog-generator/github-changelog-generator/issues/715

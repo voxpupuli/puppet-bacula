@@ -28,14 +28,14 @@ describe 'bacula::storage' do
         when '6'
           it do
             is_expected.to contain_package('bacula-storage-common').with(
-              'ensure' => 'present'
+              'ensure' => 'installed'
             )
           end
           it { is_expected.not_to contain_package('bacula-storage') }
         else
           it do
             is_expected.to contain_package('bacula-storage').with(
-              'ensure' => 'present'
+              'ensure' => 'installed'
             )
           end
           it { is_expected.not_to contain_package('bacula-storage-common') }

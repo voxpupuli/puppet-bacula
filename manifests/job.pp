@@ -60,7 +60,7 @@ define bacula::job (
   Bacula::Time             $reschedule_interval = '1 hour',
   Integer                  $reschedule_times    = 10,
   Optional[String]         $messages            = undef,
-  Optional[String]         $restoredir          = '/tmp/bacula-restores',
+  Stdlib::Absolutepath     $restoredir          = '/tmp/bacula-restores',
   Optional[String]         $sched               = undef,
   Optional[Integer]        $priority            = undef,
   Optional[String]         $job_tag             = undef,

@@ -3,6 +3,7 @@
 # This class installs and configures the File Daemon to backup a client system.
 #
 # @param packages            A list of packages to install; loaded from hiera
+# @param ensure              What state the package should be in.
 # @param services            A list of services to operate; loaded from hiera
 # @param default_pool        The name of the Pool for this FD to use by default
 # @param default_pool_full   The name of the Pool to use for Full jobs
@@ -52,6 +53,7 @@
 #
 class bacula::client (
   Array[String]           $packages,
+  String                  $ensure,
   String                  $services,
   String                  $default_pool,
   Optional[String]        $default_pool_full,
@@ -78,7 +80,7 @@ class bacula::client (
   $config_file = "${conf_dir}/bacula-fd.conf"
 
   package { $packages:
-    ensure => present,
+    ensure => $ensure,
   }
 
   service { $services:

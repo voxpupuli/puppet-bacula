@@ -1,6 +1,8 @@
 # Bacula
 
-[![Puppet Forge](https://img.shields.io/puppetforge/v/zleslie/bacula.svg)]() [![Build Status](https://travis-ci.org/xaque208/puppet-bacula.svg?branch=master)](https://travis-ci.org/xaque208/puppet-bacula)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/bacula.svg)](https://forge.puppetlabs.com/puppet/bacula)
+[![Build Status](https://github.com/voxpupuli/puppet-bacula/workflows/CI/badge.svg)](https://github.com/voxpupuli/puppet-bacula/actions?query=workflow%3ACI)
+[![Donated by xaque208](https://img.shields.io/badge/donated%20by-xaque208-fb7047.svg)](#authors)
 
 A puppet module for the Bacula backup system.
 
@@ -70,12 +72,12 @@ scoping issues associated with defined types and default values.
 
 Users of a previous version of this module should refer to the wiki for
 [upgrading
-instructions](https://github.com/xaque208/puppet-bacula/wiki/Upgrading).
+instructions](https://github.com/voxpupuli/puppet-bacula/wiki/Upgrading).
 
 #### Communication Encryption (TLS Setup)
 
 Refer to the [TLS
-Setup](https://github.com/xaque208/puppet-bacula/wiki/TLS-Setup) page on the
+Setup](https://github.com/voxpupuli/puppet-bacula/wiki/TLS-Setup) page on the
 wiki for instructions about configuring communication encryption.
 
 #### Director Setup
@@ -140,7 +142,7 @@ bacula::client::default_pool: 'Corp'
 #### Data Encryption (PKI Setup)
 
 Refer to the [PKI
-Setup](https://github.com/xaque208/puppet-bacula/wiki/PKI-Setup) section of the
+Setup](https://github.com/voxpupuli/puppet-bacula/wiki/PKI-Setup) section of the
 wiki to configure data encryption on clients.
 
 ## Creating Backup Jobs

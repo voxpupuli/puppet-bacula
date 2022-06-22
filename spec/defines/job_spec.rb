@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'bacula::job' do
@@ -18,6 +20,7 @@ describe 'bacula::job' do
         end
 
         it { is_expected.to contain_bacula__job('Etc') }
+
         it do
           expect(exported_resources).to contain_bacula__director__job('Etc').with_content(
             %r{Job \{\n.*Name.*=.*Etc\n.*Type.*= Backup}

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'bacula::director' do
@@ -8,6 +10,7 @@ describe 'bacula::director' do
       case facts[:osfamily]
       when 'Debian'
         it { is_expected.to contain_class('bacula::director') }
+
         case facts[:operatingsystemmajrelease]
         when '7', '8'
           it { is_expected.to contain_package('bacula-director-common') }
@@ -24,6 +27,7 @@ describe 'bacula::director' do
               'ensure' => 'present'
             )
           end
+
           it { is_expected.to contain_package('bacula-console') }
           it { is_expected.not_to contain_package('bacula-director') }
         else

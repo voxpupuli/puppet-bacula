@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Bacula::Size' do
@@ -13,6 +15,7 @@ describe 'Bacula::Size' do
       end
     end
   end
+
   context 'invalid sizes' do
     [
       '4096',

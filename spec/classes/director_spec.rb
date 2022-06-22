@@ -7,38 +7,39 @@ describe 'bacula::director' do
     context "on #{os}" do
       let(:facts) { facts }
 
+      expected_packages = []
+
       case facts[:osfamily]
       when 'Debian'
         it { is_expected.to contain_class('bacula::director') }
 
         case facts[:operatingsystemmajrelease]
         when '7', '8'
-          it { is_expected.to contain_package('bacula-director-common') }
+          expected_packages << 'bacula-director-common'
         when '9'
-          it { is_expected.to contain_package('bacula-director') }
+          expected_packages << 'bacula-director'
         end
-        it { is_expected.to contain_package('bacula-director-pgsql') }
-        it { is_expected.to contain_package('bacula-console') }
+        expected_packages << 'bacula-director-pgsql'
+        expected_packages << 'bacula-console'
       when 'RedHat'
         case facts[:operatingsystemmajrelease]
         when '6'
-          it do
-            is_expected.to contain_package('bacula-director-common').with(
-              'ensure' => 'present'
-            )
-          end
-
-          it { is_expected.to contain_package('bacula-console') }
-          it { is_expected.not_to contain_package('bacula-director') }
+          expected_packages << 'bacula-director-common'
+          expected_packages << 'bacula-console'
+          expected_packages << 'bacula-director'
         else
-          it { is_expected.to contain_package('bacula-director') }
-          it { is_expected.to contain_package('bacula-console') }
+          expected_packages << 'bacula-director'
+          expected_packages << 'bacula-console'
         end
       when 'OpenBSD'
-        it { is_expected.to contain_package('bacula-server') }
-        it { is_expected.to contain_package('bacula-pgsql') }
+        expected_packages << 'bacula-server'
+        expected_packages << 'bacula-pgsql'
       when 'FreeBSD'
-        it { is_expected.to contain_package('bacula9-server') }
+        expected_packages << 'bacula9-server'
+      end
+
+      expected_packages.each do |package|
+        it { is_expected.to contain_package(package).with('ensure' => 'installed') }
       end
     end
   end

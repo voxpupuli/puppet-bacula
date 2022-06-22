@@ -9,7 +9,6 @@ bacula::director::messages:
       console:      'all, !skipped, !saved'
       append:       '"/var/log/bacula/bacula-dir.log" = all, !skipped'
       catalog:      'all'
-bacula::director::postgresql::make_bacula_tables: ''
 bacula::director::packages: []
 
 bacula::storage::services: 'bacula-sd'

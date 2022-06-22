@@ -1,5 +1,5 @@
 ---
-bacula::director::postgresql::make_bacula_tables: '/usr/local/share/bacula/make_postgresql_tables'
+bacula::director::make_bacula_tables: '/usr/local/share/bacula/make_postgresql_tables'
 
 bacula::director::packages: [ 'bacula9-server' ]
 bacula::director::services: 'bacula-dir'

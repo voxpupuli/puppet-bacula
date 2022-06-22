@@ -1,5 +1,5 @@
 ---
-bacula::director::postgresql::make_bacula_tables: '/usr/share/bacula-director/make_postgresql_tables'
+bacula::director::make_bacula_tables: '/usr/share/bacula-director/make_postgresql_tables'
 bacula::director::packages:
   - 'bacula-director'
   - 'bacula-director-<%= $db_type %>'

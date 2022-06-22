@@ -37,6 +37,7 @@ class bacula::director (
   Hash[String, Bacula::Message] $messages,
   Array[String]                 $packages,
   String                        $services,
+  String                        $make_bacula_tables,
   Bacula::Yesno                 $manage_db           = true,
   String                        $conf_dir            = $bacula::conf_dir,
   String                        $db_name             = 'bacula',
@@ -56,7 +57,6 @@ class bacula::director (
   Integer                       $port                = 9101,
   String                        $rundir              = $bacula::rundir,
   String                        $storage_name        = $bacula::storage_name,
-  String                        $make_bacula_tables  = '',
 ) inherits bacula {
   if $manage_defaults {
     include bacula::director::defaults

@@ -1,5 +1,5 @@
 ---
-bacula::director::postgresql::make_bacula_tables: '/usr/libexec/bacula/make_bacula_tables'
+bacula::director::make_bacula_tables: '/usr/libexec/bacula/make_bacula_tables'
 bacula::director::db_type: 'postgresql'
 
 bacula::storage::packages: [ 'bacula-storage' ]

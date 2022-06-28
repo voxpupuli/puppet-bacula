@@ -13,7 +13,8 @@
 # @param director_name  Specifies the Name of the Director allowed to connect to the Storage daemon
 # @param group          The posix group for bacula
 # @param homedir        The directory in which the Storage daemon may put its status files
-# @param listen_address INET or INET6 address to listen on
+# @param listen_address The listening IP addresses for the storage daemon
+#   The notes for `bacula::client::listen_address` apply.
 # @param maxconcurjobs  maximum number of Jobs that may run concurrently
 # @param media_type     The type of media supported by this device
 # @param password       Specifies the password that must be supplied by the named Director
@@ -35,7 +36,7 @@ class bacula::storage (
   String              $director_name  = $bacula::director_name,
   String              $group          = $bacula::bacula_group,
   String              $homedir        = $bacula::homedir,
-  Optional[String]    $listen_address = $facts['networking']['ip'],
+  Array[String[1]]    $listen_address = [],
   Integer             $maxconcurjobs  = 5,
   String              $media_type     = 'File',
   String              $password       = 'secret',

@@ -17,7 +17,8 @@
 # @param group               The posix group for bacula
 # @param homedir             The bacula director working directory
 # @param job_tag             A string to use when realizing jobs and filesets
-# @param listen_address      The listening address for the director
+# @param listen_address      The listening IP addresses for the director
+#   The notes for `bacula::client::listen_address` apply.
 # @param max_concurrent_jobs Bacula Director option for 'Maximum Concurrent Jobs'
 # @param manage_defaults     Setup default jobdef, schedule, pool and restoration jobs
 # @param password            password to connect to the director
@@ -50,7 +51,7 @@ class bacula::director (
   String                        $group               = $bacula::bacula_group,
   String                        $homedir             = $bacula::homedir,
   Optional[String]              $job_tag             = $bacula::job_tag,
-  Optional[String]              $listen_address      = $facts['networking']['ip'],
+  Array[String[1]]              $listen_address      = [],
   Integer                       $max_concurrent_jobs = 20,
   Boolean                       $manage_defaults     = true,
   String                        $password            = 'secret',

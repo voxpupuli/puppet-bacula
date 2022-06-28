@@ -2,9 +2,9 @@ Storage {
     Name                    = <%= $clientcert %>-sd
     WorkingDirectory        = <%= $bacula::storage::homedir %>
     Pid Directory           = <%= $bacula::storage::rundir %>
-<% if $bacula::storage::listen_address { -%>
+<% unless $bacula::storage::listen_address.empty { -%>
     SDAddresses             = {
-<%= epp('bacula/_listen.epp', { listen_address => $bacula::storage::listen_address, port => $bacula::storage::port }) -%>
+<%= epp('bacula/_listen.epp', { listen_addresses => $bacula::storage::listen_address, port => $bacula::storage::port }) -%>
     }
 <% } -%>
 <%= epp('bacula/_tls_server.epp') -%>

@@ -1,12 +1,12 @@
 {
-  "name": "zleslie-bacula",
+  "name": "puppet-bacula",
   "version": "5.8.0",
-  "author": "zleslie",
+  "author": "Vox Pupuli",
   "summary": "A bacula module stolen from the Puppet Labs Operations team",
   "license": "Apache-2.0",
-  "source": "https://github.com/xaque208/puppet-bacula",
-  "project_page": "https://github.com/xaque208/puppet-bacula",
-  "issues_url": "https://github.com/xaque208/puppet-bacula/issues",
+  "source": "https://github.com/voxpupuli/puppet-bacula",
+  "project_page": "https://github.com/voxpupuli/puppet-bacula",
+  "issues_url": "https://github.com/voxpupuli/puppet-bacula/issues",
   "description": "It comes in the night...",
   "dependencies": [
     {
@@ -71,7 +71,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 5.0.0 < 8.0.0"
+      "version_requirement": ">= 6.1.0 < 8.0.0"
     }
   ]
 }

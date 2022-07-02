@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'bacula::storage' do
@@ -19,6 +21,7 @@ describe 'bacula::storage' do
       case facts[:osfamily]
       when 'Debian'
         it { is_expected.to contain_package('bacula-sd') }
+
         case facts[:operatingsystemmajrelease]
         when '7', '8'
           it { is_expected.to contain_package('bacula-sd-pgsql') }
@@ -31,6 +34,7 @@ describe 'bacula::storage' do
               'ensure' => 'installed'
             )
           end
+
           it { is_expected.not_to contain_package('bacula-storage') }
         else
           it do
@@ -38,6 +42,7 @@ describe 'bacula::storage' do
               'ensure' => 'installed'
             )
           end
+
           it { is_expected.not_to contain_package('bacula-storage-common') }
         end
       when 'OpenBSD'
@@ -55,10 +60,12 @@ describe 'bacula::storage' do
 
         it { expect(exported_resources).to contain_bacula__director__storage('storage.example.com').with(address: 'foo.example.com') }
       end
+
       context 'with a custom address' do
         let(:param_address) { 'address.example.com' }
 
         it { expect(exported_resources).to contain_bacula__director__storage('foo.example.com').with(address: 'address.example.com') }
+
         context 'with a custom name' do
           let(:param_storage) { 'storage.example.com' }
 

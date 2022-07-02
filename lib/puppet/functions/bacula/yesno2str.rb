@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Convert various representations of 'yes' and 'no' to 'yes' and 'no'.
 Puppet::Functions.create_function(:'bacula::yesno2str') do
   # @param value A boolean value

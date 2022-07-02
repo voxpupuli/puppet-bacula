@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Bacula::Time' do
@@ -19,6 +21,7 @@ describe 'Bacula::Time' do
       end
     end
   end
+
   context 'invalid times' do
     [
       'john',

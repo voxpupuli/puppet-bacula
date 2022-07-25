@@ -9,11 +9,11 @@ describe 'bacula::director' do
 
       expected_packages = []
 
-      case facts[:osfamily]
+      case facts[:os]['family']
       when 'Debian'
         it { is_expected.to contain_class('bacula::director') }
 
-        case facts[:operatingsystemmajrelease]
+        case facts[:os]['release']['major']
         when '7', '8'
           expected_packages << 'bacula-director-common'
         when '9'
@@ -22,7 +22,7 @@ describe 'bacula::director' do
         expected_packages << 'bacula-director-pgsql'
         expected_packages << 'bacula-console'
       when 'RedHat'
-        case facts[:operatingsystemmajrelease]
+        case facts[:os]['release']['major']
         when '6'
           expected_packages << 'bacula-director-common'
           expected_packages << 'bacula-console'

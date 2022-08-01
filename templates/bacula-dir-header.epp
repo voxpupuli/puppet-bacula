@@ -1,8 +1,8 @@
 Director {                # define myself
     Name                    = <%= $clientcert %>-dir
-<% if $bacula::director::listen_address { -%>
+<% unless $bacula::director::listen_address.empty { -%>
     DirAddresses            = {
-<%= epp('bacula/_listen.epp', { listen_address => $bacula::director::listen_address, port => $bacula::director::port }) %>
+<%= epp('bacula/_listen.epp', { listen_addresses => $bacula::director::listen_address, port => $bacula::director::port }) %>
     }
 <% } -%>
     QueryFile               = "/etc/bacula/scripts/query.sql"

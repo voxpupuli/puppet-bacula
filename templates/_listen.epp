@@ -1,9 +1,10 @@
 <%
   |
-    String              $listen_address,
+    Array[String[1]]    $listen_addresses,
     Optional[Integer]   $port,
   |
 -%>
+<%- $listen_addresses.each |$listen_address| { -%>
         <%= $listen_address ? {
 	      Stdlib::IP::Address::V4::Nosubnet => 'ipv4',
 	      Stdlib::IP::Address::V6::Nosubnet => 'ipv6',
@@ -14,3 +15,4 @@
             port = <%= $port %>;
 <% } -%>
         }
+<%- } -%>

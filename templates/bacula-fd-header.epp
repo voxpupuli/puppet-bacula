@@ -13,9 +13,9 @@ Director {
 
 FileDaemon {
     Name                    = <%= $bacula::client::client %>-fd
-<% if $bacula::client::listen_address { -%>
+<% unless $bacula::client::listen_address.empty { -%>
     FDAddresses             = {
-<%= epp('bacula/_listen.epp', { listen_address => $bacula::client::listen_address, port => $bacula::client::port }) -%>
+<%= epp('bacula/_listen.epp', { listen_addresses => $bacula::client::listen_address, port => $bacula::client::port }) -%>
     }
 <% } -%>
     WorkingDirectory        = <%= $bacula::client::homedir %>

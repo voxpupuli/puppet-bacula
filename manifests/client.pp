@@ -9,7 +9,30 @@
 # @param default_pool_inc    The name of the Pool to use for Incremental jobs
 # @param default_pool_diff   The name of the Pool to use for Differential jobs
 # @param port                The listening port for the File Daemon
-# @param listen_address      The listening INET or INET6 address for File Daemon
+# @param listen_address      The listening IP addresses for the File Daemon
+#   By default, Bacula listen an all IPv4 only, which is equivalent to
+#   ```
+#      listen_address => [
+#        '0.0.0.0',
+#      ],
+#   ```
+#   Listening on both IPv6 and IPv4 depends on your system configuration of
+#   IPv4-mapped IPv6 (RFC 3493): when enabled, the following is enough to
+#   listen on both all IPv6 and all IPv4:
+#   ```
+#      listen_address => [
+#        '::',
+#      ],
+#   ```
+#   If IPv4-mapped IPv6 is not used, each address must be indicated separately:
+#   ```
+#      listen_address => [
+#        '::',
+#        '0.0.0.0',
+#      ],
+#   ```
+#   Indicating both addresses with IPv4-mapped IPv6 enabled will result in
+#   Bacula being unable to bind twice to the IPv4 address and fail to start.
 # @param password            A password to use for communication with this File Daemon
 # @param max_concurrent_jobs Bacula FD option for 'Maximum Concurrent Jobs'
 # @param director_name       The hostname of the director for this FD
@@ -35,7 +58,7 @@ class bacula::client (
   Optional[String]        $default_pool_inc,
   Optional[String]        $default_pool_diff,
   Integer                 $port                = 9102,
-  Optional[String]        $listen_address      = $facts['networking']['ip'],
+  Array[String[1]]        $listen_address      = [],
   String                  $password            = 'secret',
   Integer                 $max_concurrent_jobs = 2,
   String                  $director_name       = $bacula::director_name,

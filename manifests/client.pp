@@ -53,12 +53,12 @@
 #
 class bacula::client (
   Array[String]           $packages,
-  String                  $ensure              = 'present',
   String                  $services,
   String                  $default_pool,
   Optional[String]        $default_pool_full,
   Optional[String]        $default_pool_inc,
   Optional[String]        $default_pool_diff,
+  String                  $ensure              = 'present',
   Integer                 $port                = 9102,
   Array[String[1]]        $listen_address      = [],
   String                  $password            = 'secret',

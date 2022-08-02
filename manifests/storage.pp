@@ -56,7 +56,7 @@ class bacula::storage (
       }
     )
   }
-  ensure_packages($package_names,{ensure => $ensure})
+  ensure_packages($package_names, { ensure => $ensure })
 
   service { $services:
     ensure  => running,

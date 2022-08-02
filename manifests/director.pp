@@ -38,9 +38,9 @@
 class bacula::director (
   Hash[String, Bacula::Message] $messages,
   Array[String]                 $packages,
-  String                        $ensure              = 'present',
   String                        $services,
   String                        $make_bacula_tables,
+  String                        $ensure              = 'present',
   Bacula::Yesno                 $manage_db           = true,
   String                        $conf_dir            = $bacula::conf_dir,
   String                        $db_name             = 'bacula',
@@ -87,7 +87,7 @@ class bacula::director (
       }
     )
   }
-  ensure_packages($package_names,{ensure => $ensure})
+  ensure_packages($package_names, { ensure => $ensure })
 
   service { $services:
     ensure  => running,

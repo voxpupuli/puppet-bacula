@@ -53,7 +53,7 @@
 #
 class bacula::client (
   Array[String]           $packages,
-  String                  $ensure,
+  String                  $ensure              = 'present',
   String                  $services,
   String                  $default_pool,
   Optional[String]        $default_pool_full,

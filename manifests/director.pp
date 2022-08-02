@@ -38,7 +38,7 @@
 class bacula::director (
   Hash[String, Bacula::Message] $messages,
   Array[String]                 $packages,
-  String                        $ensure,
+  String                        $ensure              = 'present',
   String                        $services,
   String                        $make_bacula_tables,
   Bacula::Yesno                 $manage_db           = true,

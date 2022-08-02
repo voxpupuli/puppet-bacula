@@ -10,10 +10,8 @@ bacula::director::messages:
       append:       '"/var/log/bacula/bacula-dir.log" = all, !skipped'
       catalog:      'all'
 bacula::director::packages: []
-bacula::director::ensure: 'present'
 
 bacula::storage::services: 'bacula-sd'
-bacula::storage::ensure: 'present'
 bacula::storage_name: '%{trusted.certname}'
 
 bacula::director_name: '%{trusted.certname}'
@@ -22,7 +20,6 @@ bacula::job_tag: ~
 
 bacula::client::services: 'bacula-fd'
 bacula::client::packages: ~
-bacula::client::ensure: 'present'
 bacula::client::default_pool: 'Default'
 bacula::client::default_pool_full: ~
 bacula::client::default_pool_inc: ~

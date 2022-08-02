@@ -28,7 +28,7 @@
 class bacula::storage (
   String              $services,
   Array[String]       $packages,
-  String              $ensure,
+  String              $ensure         = 'present',
   String              $conf_dir       = $bacula::conf_dir,
   String              $device         = '/bacula',
   Stdlib::Filemode    $device_mode    = '0770',

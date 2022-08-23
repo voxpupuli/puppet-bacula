@@ -43,7 +43,7 @@
 
 ## Classes
 
-### `bacula`
+### <a name="bacula"></a>`bacula`
 
 This class is here to hold the data about a bacula instalation.  The
 parameters in this class are intended to be configured through hiera.  Other
@@ -61,57 +61,80 @@ include bacula
 
 #### Parameters
 
-The following parameters are available in the `bacula` class.
+The following parameters are available in the `bacula` class:
 
-##### `conf_dir`
+* [`conf_dir`](#conf_dir)
+* [`bacula_user`](#bacula_user)
+* [`bacula_group`](#bacula_group)
+* [`homedir`](#homedir)
+* [`rundir`](#rundir)
+* [`director_address`](#director_address)
+* [`director_name`](#director_name)
+* [`storage_name`](#storage_name)
+* [`db_type`](#db_type)
+* [`homedir_mode`](#homedir_mode)
+* [`monitor`](#monitor)
+* [`device_seltype`](#device_seltype)
+* [`tls_enable`](#tls_enable)
+* [`tls_require`](#tls_require)
+* [`tls_certificate`](#tls_certificate)
+* [`tls_key`](#tls_key)
+* [`tls_verify_peer`](#tls_verify_peer)
+* [`tls_allowed_cn`](#tls_allowed_cn)
+* [`tls_ca_certificate_file`](#tls_ca_certificate_file)
+* [`tls_ca_certificate_dir`](#tls_ca_certificate_dir)
+* [`tls_dh_file`](#tls_dh_file)
+* [`job_tag`](#job_tag)
+
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
 The path to the bacula configuration directory
 
-##### `bacula_user`
+##### <a name="bacula_user"></a>`bacula_user`
 
 Data type: `String`
 
 The posix user for bacula
 
-##### `bacula_group`
+##### <a name="bacula_group"></a>`bacula_group`
 
 Data type: `String`
 
 The posix group for bacula
 
-##### `homedir`
+##### <a name="homedir"></a>`homedir`
 
 Data type: `String`
 
 The bacula user's home directory path
 
-##### `rundir`
+##### <a name="rundir"></a>`rundir`
 
 Data type: `String`
 
 The run dir for the daemons
 
-##### `director_address`
+##### <a name="director_address"></a>`director_address`
 
 Data type: `String`
 
 The default address of the director used by bconsole
 
-##### `director_name`
+##### <a name="director_name"></a>`director_name`
 
 Data type: `String`
 
 The default director name
 
-##### `storage_name`
+##### <a name="storage_name"></a>`storage_name`
 
 Data type: `String`
 
 The default storage name
 
-##### `db_type`
+##### <a name="db_type"></a>`db_type`
 
 Data type: `String`
 
@@ -119,7 +142,7 @@ The database provider used by Bacula
 
 Default value: `'pgsql'`
 
-##### `homedir_mode`
+##### <a name="homedir_mode"></a>`homedir_mode`
 
 Data type: `String`
 
@@ -127,7 +150,7 @@ The bacula user's home director mode
 
 Default value: `'0770'`
 
-##### `monitor`
+##### <a name="monitor"></a>`monitor`
 
 Data type: `Bacula::Yesno`
 
@@ -135,7 +158,7 @@ Enable the Bacula Monitor option
 
 Default value: ``true``
 
-##### `device_seltype`
+##### <a name="device_seltype"></a>`device_seltype`
 
 Data type: `String`
 
@@ -143,7 +166,7 @@ SELinux type for the device
 
 Default value: `'bacula_store_t'`
 
-##### `tls_enable`
+##### <a name="tls_enable"></a>`tls_enable`
 
 Data type: `Optional[Bacula::Yesno]`
 
@@ -151,7 +174,7 @@ Enable TLS support
 
 Default value: ``undef``
 
-##### `tls_require`
+##### <a name="tls_require"></a>`tls_require`
 
 Data type: `Optional[Bacula::Yesno]`
 
@@ -159,7 +182,7 @@ Require TLS connections
 
 Default value: ``undef``
 
-##### `tls_certificate`
+##### <a name="tls_certificate"></a>`tls_certificate`
 
 Data type: `Optional[String]`
 
@@ -167,7 +190,7 @@ The full path and filename of a PEM encoded TLS certificate
 
 Default value: ``undef``
 
-##### `tls_key`
+##### <a name="tls_key"></a>`tls_key`
 
 Data type: `Optional[String]`
 
@@ -175,7 +198,7 @@ The full path and filename of a PEM encoded TLS private key
 
 Default value: ``undef``
 
-##### `tls_verify_peer`
+##### <a name="tls_verify_peer"></a>`tls_verify_peer`
 
 Data type: `Optional[Bacula::Yesno]`
 
@@ -183,7 +206,7 @@ Verify peer certificate
 
 Default value: ``undef``
 
-##### `tls_allowed_cn`
+##### <a name="tls_allowed_cn"></a>`tls_allowed_cn`
 
 Data type: `Array[String]`
 
@@ -191,7 +214,7 @@ Common name attribute of allowed peer certificates
 
 Default value: `[]`
 
-##### `tls_ca_certificate_file`
+##### <a name="tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
 Data type: `Optional[String]`
 
@@ -199,7 +222,7 @@ The full path and filename specifying a PEM encoded TLS CA certificate(s)
 
 Default value: ``undef``
 
-##### `tls_ca_certificate_dir`
+##### <a name="tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
 Data type: `Optional[String]`
 
@@ -207,7 +230,7 @@ Full path to TLS CA certificate directory
 
 Default value: ``undef``
 
-##### `tls_dh_file`
+##### <a name="tls_dh_file"></a>`tls_dh_file`
 
 Data type: `Optional[String]`
 
@@ -215,7 +238,7 @@ Path to PEM encoded Diffie-Hellman parameter file
 
 Default value: ``undef``
 
-##### `job_tag`
+##### <a name="job_tag"></a>`job_tag`
 
 Data type: `Optional[String]`
 
@@ -223,7 +246,7 @@ A tag to add to all job resources
 
 Default value: ``undef``
 
-### `bacula::client`
+### <a name="baculaclient"></a>`bacula::client`
 
 This class installs and configures the File Daemon to backup a client system.
 
@@ -237,45 +260,67 @@ class { 'bacula::client': director_name => 'mydirector.example.com' }
 
 #### Parameters
 
-The following parameters are available in the `bacula::client` class.
+The following parameters are available in the `bacula::client` class:
 
-##### `packages`
+* [`packages`](#packages)
+* [`services`](#services)
+* [`default_pool`](#default_pool)
+* [`default_pool_full`](#default_pool_full)
+* [`default_pool_inc`](#default_pool_inc)
+* [`default_pool_diff`](#default_pool_diff)
+* [`port`](#port)
+* [`listen_address`](#listen_address)
+* [`password`](#password)
+* [`max_concurrent_jobs`](#max_concurrent_jobs)
+* [`director_name`](#director_name)
+* [`autoprune`](#autoprune)
+* [`file_retention`](#file_retention)
+* [`job_retention`](#job_retention)
+* [`client`](#client)
+* [`address`](#address)
+* [`pki_signatures`](#pki_signatures)
+* [`pki_encryption`](#pki_encryption)
+* [`pki_keypair`](#pki_keypair)
+* [`pki_master_key`](#pki_master_key)
+* [`plugin_dir`](#plugin_dir)
+
+##### <a name="packages"></a>`packages`
 
 Data type: `Array[String]`
 
 A list of packages to install; loaded from hiera
 
-##### `services`
+##### <a name="services"></a>`services`
 
 Data type: `String`
 
 A list of services to operate; loaded from hiera
 
-##### `default_pool`
+##### <a name="default_pool"></a>`default_pool`
 
 Data type: `String`
 
 The name of the Pool for this FD to use by default
 
-##### `default_pool_full`
+##### <a name="default_pool_full"></a>`default_pool_full`
 
 Data type: `Optional[String]`
 
 The name of the Pool to use for Full jobs
 
-##### `default_pool_inc`
+##### <a name="default_pool_inc"></a>`default_pool_inc`
 
 Data type: `Optional[String]`
 
 The name of the Pool to use for Incremental jobs
 
-##### `default_pool_diff`
+##### <a name="default_pool_diff"></a>`default_pool_diff`
 
 Data type: `Optional[String]`
 
 The name of the Pool to use for Differential jobs
 
-##### `port`
+##### <a name="port"></a>`port`
 
 Data type: `Integer`
 
@@ -283,15 +328,38 @@ The listening port for the File Daemon
 
 Default value: `9102`
 
-##### `listen_address`
+##### <a name="listen_address"></a>`listen_address`
 
-Data type: `Optional[String]`
+Data type: `Array[String[1]]`
 
-The listening INET or INET6 address for File Daemon
+The listening IP addresses for the File Daemon
+By default, Bacula listen an all IPv4 only, which is equivalent to
+```
+   listen_address => [
+     '0.0.0.0',
+   ],
+```
+Listening on both IPv6 and IPv4 depends on your system configuration of
+IPv4-mapped IPv6 (RFC 3493): when enabled, the following is enough to
+listen on both all IPv6 and all IPv4:
+```
+   listen_address => [
+     '::',
+   ],
+```
+If IPv4-mapped IPv6 is not used, each address must be indicated separately:
+```
+   listen_address => [
+     '::',
+     '0.0.0.0',
+   ],
+```
+Indicating both addresses with IPv4-mapped IPv6 enabled will result in
+Bacula being unable to bind twice to the IPv4 address and fail to start.
 
-Default value: `$facts['networking']['ip']`
+Default value: `[]`
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `String`
 
@@ -299,7 +367,7 @@ A password to use for communication with this File Daemon
 
 Default value: `'secret'`
 
-##### `max_concurrent_jobs`
+##### <a name="max_concurrent_jobs"></a>`max_concurrent_jobs`
 
 Data type: `Integer`
 
@@ -307,7 +375,7 @@ Bacula FD option for 'Maximum Concurrent Jobs'
 
 Default value: `2`
 
-##### `director_name`
+##### <a name="director_name"></a>`director_name`
 
 Data type: `String`
 
@@ -315,7 +383,7 @@ The hostname of the director for this FD
 
 Default value: `$bacula::director_name`
 
-##### `autoprune`
+##### <a name="autoprune"></a>`autoprune`
 
 Data type: `Bacula::Yesno`
 
@@ -323,7 +391,7 @@ Bacula FD option for 'AutoPrune'
 
 Default value: ``true``
 
-##### `file_retention`
+##### <a name="file_retention"></a>`file_retention`
 
 Data type: `Bacula::Time`
 
@@ -331,7 +399,7 @@ Bacula FD option for 'File Retention'
 
 Default value: `'45 days'`
 
-##### `job_retention`
+##### <a name="job_retention"></a>`job_retention`
 
 Data type: `Bacula::Time`
 
@@ -339,7 +407,7 @@ Bacula FD option for 'Job Retention'
 
 Default value: `'6 months'`
 
-##### `client`
+##### <a name="client"></a>`client`
 
 Data type: `String`
 
@@ -347,7 +415,7 @@ The name or address by which to contact this FD
 
 Default value: `$trusted['certname']`
 
-##### `address`
+##### <a name="address"></a>`address`
 
 Data type: `String`
 
@@ -355,7 +423,7 @@ The listening address for the File Daemon
 
 Default value: `$facts['networking']['fqdn']`
 
-##### `pki_signatures`
+##### <a name="pki_signatures"></a>`pki_signatures`
 
 Data type: `Optional[Bacula::Yesno]`
 
@@ -363,7 +431,7 @@ Bacula FD option for 'PKI Signatures'
 
 Default value: ``undef``
 
-##### `pki_encryption`
+##### <a name="pki_encryption"></a>`pki_encryption`
 
 Data type: `Optional[Bacula::Yesno]`
 
@@ -371,7 +439,7 @@ Bacula FD option for 'PKI Encryption'
 
 Default value: ``undef``
 
-##### `pki_keypair`
+##### <a name="pki_keypair"></a>`pki_keypair`
 
 Data type: `Optional[String]`
 
@@ -379,7 +447,7 @@ Bacula FD option for 'PKI Keypair'
 
 Default value: ``undef``
 
-##### `pki_master_key`
+##### <a name="pki_master_key"></a>`pki_master_key`
 
 Data type: `Optional[String]`
 
@@ -387,7 +455,7 @@ Bacula FD option for 'PKI Master Key'
 
 Default value: ``undef``
 
-##### `plugin_dir`
+##### <a name="plugin_dir"></a>`plugin_dir`
 
 Data type: `Optional[String]`
 
@@ -395,13 +463,13 @@ Bacula FD option for the 'Plugin Directory'
 
 Default value: ``undef``
 
-### `bacula::common`
+### <a name="baculacommon"></a>`bacula::common`
 
 This class configures and installs the bacula client packages and enables the
 service, so that bacula jobs can be run on the client including this
 manifest.
 
-### `bacula::director`
+### <a name="baculadirector"></a>`bacula::director`
 
 This class installs and configures the Bacula Director
 
@@ -419,27 +487,51 @@ class { 'bacula::director':
 
 #### Parameters
 
-The following parameters are available in the `bacula::director` class.
+The following parameters are available in the `bacula::director` class:
 
-##### `messages`
+* [`messages`](#messages)
+* [`packages`](#packages)
+* [`services`](#services)
+* [`manage_db`](#manage_db)
+* [`conf_dir`](#conf_dir)
+* [`db_name`](#db_name)
+* [`db_pw`](#db_pw)
+* [`db_user`](#db_user)
+* [`db_address`](#db_address)
+* [`db_port`](#db_port)
+* [`director_address`](#director_address)
+* [`director`](#director)
+* [`group`](#group)
+* [`homedir`](#homedir)
+* [`job_tag`](#job_tag)
+* [`listen_address`](#listen_address)
+* [`max_concurrent_jobs`](#max_concurrent_jobs)
+* [`manage_defaults`](#manage_defaults)
+* [`password`](#password)
+* [`port`](#port)
+* [`rundir`](#rundir)
+* [`storage_name`](#storage_name)
+* [`make_bacula_tables`](#make_bacula_tables)
+
+##### <a name="messages"></a>`messages`
 
 Data type: `Hash[String, Bacula::Message]`
 
 Logging configuration; loaded from hiera
 
-##### `packages`
+##### <a name="packages"></a>`packages`
 
 Data type: `Array[String]`
 
 A list of packages to install; loaded from hiera
 
-##### `services`
+##### <a name="services"></a>`services`
 
 Data type: `String`
 
 A list of services to operate; loaded from hiera
 
-##### `manage_db`
+##### <a name="manage_db"></a>`manage_db`
 
 Data type: `Bacula::Yesno`
 
@@ -447,7 +539,7 @@ Whether the module should manage the director database
 
 Default value: ``true``
 
-##### `conf_dir`
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
@@ -455,7 +547,7 @@ Path to bacula configuration directory
 
 Default value: `$bacula::conf_dir`
 
-##### `db_name`
+##### <a name="db_name"></a>`db_name`
 
 Data type: `String`
 
@@ -463,7 +555,7 @@ The database name
 
 Default value: `'bacula'`
 
-##### `db_pw`
+##### <a name="db_pw"></a>`db_pw`
 
 Data type: `String`
 
@@ -471,7 +563,7 @@ The database user's password
 
 Default value: `'notverysecret'`
 
-##### `db_user`
+##### <a name="db_user"></a>`db_user`
 
 Data type: `String`
 
@@ -479,7 +571,7 @@ The database user
 
 Default value: `'bacula'`
 
-##### `db_address`
+##### <a name="db_address"></a>`db_address`
 
 Data type: `Optional[String]`
 
@@ -487,7 +579,7 @@ The database address
 
 Default value: ``undef``
 
-##### `db_port`
+##### <a name="db_port"></a>`db_port`
 
 Data type: `Optional[String]`
 
@@ -495,7 +587,7 @@ The database port
 
 Default value: ``undef``
 
-##### `director_address`
+##### <a name="director_address"></a>`director_address`
 
 Data type: `String`
 
@@ -503,7 +595,7 @@ The address of the director used by bconsole
 
 Default value: `$bacula::director_address`
 
-##### `director`
+##### <a name="director"></a>`director`
 
 Data type: `String`
 
@@ -511,7 +603,7 @@ The name of the director
 
 Default value: `$trusted['certname']`
 
-##### `group`
+##### <a name="group"></a>`group`
 
 Data type: `String`
 
@@ -519,7 +611,7 @@ The posix group for bacula
 
 Default value: `$bacula::bacula_group`
 
-##### `homedir`
+##### <a name="homedir"></a>`homedir`
 
 Data type: `String`
 
@@ -527,7 +619,7 @@ The bacula director working directory
 
 Default value: `$bacula::homedir`
 
-##### `job_tag`
+##### <a name="job_tag"></a>`job_tag`
 
 Data type: `Optional[String]`
 
@@ -535,15 +627,16 @@ A string to use when realizing jobs and filesets
 
 Default value: `$bacula::job_tag`
 
-##### `listen_address`
+##### <a name="listen_address"></a>`listen_address`
 
-Data type: `Optional[String]`
+Data type: `Array[String[1]]`
 
-The listening address for the director
+The listening IP addresses for the director
+The notes for `bacula::client::listen_address` apply.
 
-Default value: `$facts['networking']['ip']`
+Default value: `[]`
 
-##### `max_concurrent_jobs`
+##### <a name="max_concurrent_jobs"></a>`max_concurrent_jobs`
 
 Data type: `Integer`
 
@@ -551,7 +644,7 @@ Bacula Director option for 'Maximum Concurrent Jobs'
 
 Default value: `20`
 
-##### `manage_defaults`
+##### <a name="manage_defaults"></a>`manage_defaults`
 
 Data type: `Boolean`
 
@@ -559,7 +652,7 @@ Setup default jobdef, schedule, pool and restoration jobs
 
 Default value: ``true``
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `String`
 
@@ -567,7 +660,7 @@ password to connect to the director
 
 Default value: `'secret'`
 
-##### `port`
+##### <a name="port"></a>`port`
 
 Data type: `Integer`
 
@@ -575,7 +668,7 @@ The listening port for the Director
 
 Default value: `9101`
 
-##### `rundir`
+##### <a name="rundir"></a>`rundir`
 
 Data type: `String`
 
@@ -583,7 +676,7 @@ Bacula Director option for 'Pid Directory'
 
 Default value: `$bacula::rundir`
 
-##### `storage_name`
+##### <a name="storage_name"></a>`storage_name`
 
 Data type: `String`
 
@@ -591,30 +684,33 @@ The Name of the Storage daemon
 
 Default value: `$bacula::storage_name`
 
-##### `make_bacula_tables`
+##### <a name="make_bacula_tables"></a>`make_bacula_tables`
 
 Data type: `String`
 
 Path to the script that loads the database schema
 
-Default value: `''`
-
-### `bacula::director::defaults`
+### <a name="baculadirectordefaults"></a>`bacula::director::defaults`
 
 Some default resources for the bacula director.  These are referenced by
 defaults in other parts of this module, but need not be used.  They are here
 to ensure that the simple case of deploying a director and storage on the
 same machine, allows clients to receive the correct configuration.
 
-### `bacula::director::postgresql`
+### <a name="baculadirectorpostgresql"></a>`bacula::director::postgresql`
 
 Deploys a postgres database server for hosting the Bacula director database.
 
 #### Parameters
 
-The following parameters are available in the `bacula::director::postgresql` class.
+The following parameters are available in the `bacula::director::postgresql` class:
 
-##### `make_bacula_tables`
+* [`make_bacula_tables`](#make_bacula_tables)
+* [`db_name`](#db_name)
+* [`db_pw`](#db_pw)
+* [`db_user`](#db_user)
+
+##### <a name="make_bacula_tables"></a>`make_bacula_tables`
 
 Data type: `String`
 
@@ -622,7 +718,7 @@ Path to the script that loads the database schema
 
 Default value: `$bacula::director::make_bacula_tables`
 
-##### `db_name`
+##### <a name="db_name"></a>`db_name`
 
 Data type: `String`
 
@@ -630,7 +726,7 @@ The database name
 
 Default value: `$bacula::director::db_name`
 
-##### `db_pw`
+##### <a name="db_pw"></a>`db_pw`
 
 Data type: `String`
 
@@ -638,7 +734,7 @@ The database user's password
 
 Default value: `$bacula::director::db_pw`
 
-##### `db_user`
+##### <a name="db_user"></a>`db_user`
 
 Data type: `String`
 
@@ -646,27 +742,48 @@ The database user
 
 Default value: `$bacula::director::db_user`
 
-### `bacula::storage`
+### <a name="baculastorage"></a>`bacula::storage`
 
 This class configures the Bacula storage daemon.
 
 #### Parameters
 
-The following parameters are available in the `bacula::storage` class.
+The following parameters are available in the `bacula::storage` class:
 
-##### `services`
+* [`services`](#services)
+* [`packages`](#packages)
+* [`conf_dir`](#conf_dir)
+* [`device`](#device)
+* [`device_mode`](#device_mode)
+* [`device_name`](#device_name)
+* [`device_owner`](#device_owner)
+* [`device_seltype`](#device_seltype)
+* [`director_name`](#director_name)
+* [`group`](#group)
+* [`homedir`](#homedir)
+* [`listen_address`](#listen_address)
+* [`maxconcurjobs`](#maxconcurjobs)
+* [`media_type`](#media_type)
+* [`password`](#password)
+* [`port`](#port)
+* [`rundir`](#rundir)
+* [`storage`](#storage)
+* [`address`](#address)
+* [`user`](#user)
+
+##### <a name="services"></a>`services`
 
 Data type: `String`
 
 A list of services to operate; loaded from hiera
 
-##### `packages`
+##### <a name="packages"></a>`packages`
 
 Data type: `Array[String]`
 
 A list of packages to install; loaded from hiera
 
-##### `conf_dir`
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
@@ -674,7 +791,7 @@ Path to bacula configuration directory
 
 Default value: `$bacula::conf_dir`
 
-##### `device`
+##### <a name="device"></a>`device`
 
 Data type: `String`
 
@@ -682,7 +799,7 @@ The system file name of the storage device managed by this storage daemon
 
 Default value: `'/bacula'`
 
-##### `device_mode`
+##### <a name="device_mode"></a>`device_mode`
 
 Data type: `Stdlib::Filemode`
 
@@ -690,7 +807,7 @@ The posix mode for device
 
 Default value: `'0770'`
 
-##### `device_name`
+##### <a name="device_name"></a>`device_name`
 
 Data type: `String`
 
@@ -698,7 +815,7 @@ The Name that the Director will use when asking to backup or restore to or from 
 
 Default value: `"${trusted['certname']}-device"`
 
-##### `device_owner`
+##### <a name="device_owner"></a>`device_owner`
 
 Data type: `String`
 
@@ -706,7 +823,7 @@ The posix user owning the device directory
 
 Default value: `$bacula::bacula_user`
 
-##### `device_seltype`
+##### <a name="device_seltype"></a>`device_seltype`
 
 Data type: `String`
 
@@ -714,7 +831,7 @@ SELinux type for the device
 
 Default value: `$bacula::device_seltype`
 
-##### `director_name`
+##### <a name="director_name"></a>`director_name`
 
 Data type: `String`
 
@@ -722,7 +839,7 @@ Specifies the Name of the Director allowed to connect to the Storage daemon
 
 Default value: `$bacula::director_name`
 
-##### `group`
+##### <a name="group"></a>`group`
 
 Data type: `String`
 
@@ -730,7 +847,7 @@ The posix group for bacula
 
 Default value: `$bacula::bacula_group`
 
-##### `homedir`
+##### <a name="homedir"></a>`homedir`
 
 Data type: `String`
 
@@ -738,15 +855,16 @@ The directory in which the Storage daemon may put its status files
 
 Default value: `$bacula::homedir`
 
-##### `listen_address`
+##### <a name="listen_address"></a>`listen_address`
 
-Data type: `Optional[String]`
+Data type: `Array[String[1]]`
 
-INET or INET6 address to listen on
+The listening IP addresses for the storage daemon
+The notes for `bacula::client::listen_address` apply.
 
-Default value: `$facts['networking']['ip']`
+Default value: `[]`
 
-##### `maxconcurjobs`
+##### <a name="maxconcurjobs"></a>`maxconcurjobs`
 
 Data type: `Integer`
 
@@ -754,7 +872,7 @@ maximum number of Jobs that may run concurrently
 
 Default value: `5`
 
-##### `media_type`
+##### <a name="media_type"></a>`media_type`
 
 Data type: `String`
 
@@ -762,7 +880,7 @@ The type of media supported by this device
 
 Default value: `'File'`
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `String`
 
@@ -770,7 +888,7 @@ Specifies the password that must be supplied by the named Director
 
 Default value: `'secret'`
 
-##### `port`
+##### <a name="port"></a>`port`
 
 Data type: `Integer`
 
@@ -778,7 +896,7 @@ The listening port for the Storage Daemon
 
 Default value: `9103`
 
-##### `rundir`
+##### <a name="rundir"></a>`rundir`
 
 Data type: `String`
 
@@ -786,7 +904,7 @@ The directory in which the Director may put its process Id file files
 
 Default value: `$bacula::rundir`
 
-##### `storage`
+##### <a name="storage"></a>`storage`
 
 Data type: `String`
 
@@ -794,7 +912,7 @@ The address to be configured on the director to communicate with this storage se
 
 Default value: `$trusted['certname']`
 
-##### `address`
+##### <a name="address"></a>`address`
 
 Data type: `String`
 
@@ -802,7 +920,7 @@ The listening address for the Storage Daemon
 
 Default value: `$facts['networking']['fqdn']`
 
-##### `user`
+##### <a name="user"></a>`user`
 
 Data type: `String`
 
@@ -812,7 +930,7 @@ Default value: `$bacula::bacula_user`
 
 ## Defined types
 
-### `bacula::director::client`
+### <a name="baculadirectorclient"></a>`bacula::director::client`
 
 This define handles informing the director about a client.  This class should
 not be used directly, but only ever exported through the `bacula::client`
@@ -835,45 +953,53 @@ define.  This is the director's configuration for a given client.
 
 #### Parameters
 
-The following parameters are available in the `bacula::director::client` defined type.
+The following parameters are available in the `bacula::director::client` defined type:
 
-##### `address`
+* [`address`](#address)
+* [`port`](#port)
+* [`password`](#password)
+* [`file_retention`](#file_retention)
+* [`job_retention`](#job_retention)
+* [`autoprune`](#autoprune)
+* [`conf_dir`](#conf_dir)
+
+##### <a name="address"></a>`address`
 
 Data type: `String`
 
 The address of the Bacula File server daemon
 
-##### `port`
+##### <a name="port"></a>`port`
 
 Data type: `Variant[String,Integer]`
 
 The port of the Bacula File server daemon
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `String`
 
 The password to be used when establishing a connection with the File services
 
-##### `file_retention`
+##### <a name="file_retention"></a>`file_retention`
 
 Data type: `Bacula::Time`
 
 The File Retention directive defines the length of time that Bacula will keep File records in the Catalog database after the End time of the Job corresponding to the File records
 
-##### `job_retention`
+##### <a name="job_retention"></a>`job_retention`
 
 Data type: `Bacula::Time`
 
 The Job Retention directive defines the length of time that Bacula will keep Job records in the Catalog database after the Job End time
 
-##### `autoprune`
+##### <a name="autoprune"></a>`autoprune`
 
 Data type: `Bacula::Yesno`
 
 If AutoPrune is set to yes, Bacula will automatically apply the File retention period and the Job retention period for the Client at the end of the Job
 
-##### `conf_dir`
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
@@ -881,7 +1007,7 @@ The path to the bacula configuration directory
 
 Default value: `$bacula::conf_dir`
 
-### `bacula::director::fileset`
+### <a name="baculadirectorfileset"></a>`bacula::director::fileset`
 
 This class handles a Director's fileset.conf entry.  Filesets are intended to
 be included on the Director catalog.  Resources of this type may also be
@@ -899,15 +1025,21 @@ bacula::director::fileset { 'Home':
 
 #### Parameters
 
-The following parameters are available in the `bacula::director::fileset` defined type.
+The following parameters are available in the `bacula::director::fileset` defined type:
 
-##### `files`
+* [`files`](#files)
+* [`conf_dir`](#conf_dir)
+* [`director_name`](#director_name)
+* [`excludes`](#excludes)
+* [`options`](#options)
+
+##### <a name="files"></a>`files`
 
 Data type: `Array[String]`
 
 The list of directories and/or files to be processed in the backup job
 
-##### `conf_dir`
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
@@ -915,7 +1047,7 @@ The bacula configuration director.  Should not need adjusting
 
 Default value: `$bacula::conf_dir`
 
-##### `director_name`
+##### <a name="director_name"></a>`director_name`
 
 Data type: `String`
 
@@ -923,7 +1055,7 @@ The name of the director intended to receive this fileset
 
 Default value: `$bacula::director_name`
 
-##### `excludes`
+##### <a name="excludes"></a>`excludes`
 
 Data type: `Array[String]`
 
@@ -931,7 +1063,7 @@ A list of paths to exclude from the filest
 
 Default value: `[]`
 
-##### `options`
+##### <a name="options"></a>`options`
 
 Data type: `Hash[String, Variant[String, Array[String], Bacula::Yesno]]`
 
@@ -942,7 +1074,7 @@ Default value: `{
     'compression' => 'GZIP9',
   }`
 
-### `bacula::director::job`
+### <a name="baculadirectorjob"></a>`bacula::director::job`
 
 This define handles the director portion of a job.  This define should not be
 used directly.  It is intended to be used only from the `bacula::job` define.
@@ -964,15 +1096,18 @@ which is useful in a multi platform environment.
 
 #### Parameters
 
-The following parameters are available in the `bacula::director::job` defined type.
+The following parameters are available in the `bacula::director::job` defined type:
 
-##### `content`
+* [`content`](#content)
+* [`conf_dir`](#conf_dir)
+
+##### <a name="content"></a>`content`
 
 Data type: `String`
 
 The full content of the job definition
 
-##### `conf_dir`
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
@@ -980,7 +1115,7 @@ Overridden at realize, should not need adjusting
 
 Default value: `$bacula::conf_dir`
 
-### `bacula::director::pool`
+### <a name="baculadirectorpool"></a>`bacula::director::pool`
 
 This define adds a pool to the bacula director configuration in the conf.d
 method.  This resources is intended to be used from bacula::storage as a way
@@ -1003,9 +1138,23 @@ bacula::director::pool {
 
 #### Parameters
 
-The following parameters are available in the `bacula::director::pool` defined type.
+The following parameters are available in the `bacula::director::pool` defined type:
 
-##### `volret`
+* [`volret`](#volret)
+* [`maxvoljobs`](#maxvoljobs)
+* [`maxvolbytes`](#maxvolbytes)
+* [`maxvols`](#maxvols)
+* [`label`](#label)
+* [`voluseduration`](#voluseduration)
+* [`storage`](#storage)
+* [`pooltype`](#pooltype)
+* [`recycle`](#recycle)
+* [`autoprune`](#autoprune)
+* [`purgeaction`](#purgeaction)
+* [`next_pool`](#next_pool)
+* [`conf_dir`](#conf_dir)
+
+##### <a name="volret"></a>`volret`
 
 Data type: `Optional[String]`
 
@@ -1013,7 +1162,7 @@ Bacula pool configuration option "Volume Retention"
 
 Default value: ``undef``
 
-##### `maxvoljobs`
+##### <a name="maxvoljobs"></a>`maxvoljobs`
 
 Data type: `Optional[Variant[String,Integer]]`
 
@@ -1021,7 +1170,7 @@ Bacula pool configuration option "Maximum Volume Jobs"
 
 Default value: ``undef``
 
-##### `maxvolbytes`
+##### <a name="maxvolbytes"></a>`maxvolbytes`
 
 Data type: `Optional[Bacula::Size]`
 
@@ -1029,7 +1178,7 @@ Bacula pool configuration option "Maximum Volume Bytes"
 
 Default value: ``undef``
 
-##### `maxvols`
+##### <a name="maxvols"></a>`maxvols`
 
 Data type: `Optional[Variant[String,Integer]]`
 
@@ -1037,7 +1186,7 @@ Bacula pool configuration option "Maximum Volumes"
 
 Default value: ``undef``
 
-##### `label`
+##### <a name="label"></a>`label`
 
 Data type: `Optional[String]`
 
@@ -1045,7 +1194,7 @@ Bacula pool configuration option "Label Format"
 
 Default value: ``undef``
 
-##### `voluseduration`
+##### <a name="voluseduration"></a>`voluseduration`
 
 Data type: `Optional[String]`
 
@@ -1053,7 +1202,7 @@ Bacula pool configuration option "Volume Use Duration"
 
 Default value: ``undef``
 
-##### `storage`
+##### <a name="storage"></a>`storage`
 
 Data type: `String`
 
@@ -1061,7 +1210,7 @@ Bacula pool configuration option "Storage"
 
 Default value: `$bacula::director::storage`
 
-##### `pooltype`
+##### <a name="pooltype"></a>`pooltype`
 
 Data type: `String`
 
@@ -1069,7 +1218,7 @@ Bacula pool configuration option "Pool Type"
 
 Default value: `'Backup'`
 
-##### `recycle`
+##### <a name="recycle"></a>`recycle`
 
 Data type: `Bacula::Yesno`
 
@@ -1077,7 +1226,7 @@ Bacula pool configuration option "Recycle"
 
 Default value: ``true``
 
-##### `autoprune`
+##### <a name="autoprune"></a>`autoprune`
 
 Data type: `Bacula::Yesno`
 
@@ -1085,7 +1234,7 @@ Bacula pool configuration option "AutoPrune"
 
 Default value: ``true``
 
-##### `purgeaction`
+##### <a name="purgeaction"></a>`purgeaction`
 
 Data type: `String`
 
@@ -1093,7 +1242,7 @@ Bacula pool configuration option "Action On Purge"
 
 Default value: `'Truncate'`
 
-##### `next_pool`
+##### <a name="next_pool"></a>`next_pool`
 
 Data type: `Optional[String]`
 
@@ -1101,7 +1250,7 @@ Bacula pool configuration option "Next Pool"
 
 Default value: ``undef``
 
-##### `conf_dir`
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
@@ -1109,7 +1258,7 @@ The path to the bacula configuration directory
 
 Default value: `$bacula::conf_dir`
 
-### `bacula::director::storage`
+### <a name="baculadirectorstorage"></a>`bacula::director::storage`
 
 This define creates a storage declaration for the director.  This informs the
 director which storage servers are available to send client backups to.
@@ -1120,9 +1269,17 @@ director.
 
 #### Parameters
 
-The following parameters are available in the `bacula::director::storage` defined type.
+The following parameters are available in the `bacula::director::storage` defined type:
 
-##### `address`
+* [`address`](#address)
+* [`port`](#port)
+* [`password`](#password)
+* [`device_name`](#device_name)
+* [`media_type`](#media_type)
+* [`maxconcurjobs`](#maxconcurjobs)
+* [`conf_dir`](#conf_dir)
+
+##### <a name="address"></a>`address`
 
 Data type: `String`
 
@@ -1130,7 +1287,7 @@ Bacula director configuration for Storage option 'SDAddress'
 
 Default value: `$name`
 
-##### `port`
+##### <a name="port"></a>`port`
 
 Data type: `Integer`
 
@@ -1138,7 +1295,7 @@ Bacula director configuration for Storage option 'SDPort'
 
 Default value: `9103`
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `String`
 
@@ -1146,7 +1303,7 @@ Bacula director configuration for Storage option 'Password'
 
 Default value: `'secret'`
 
-##### `device_name`
+##### <a name="device_name"></a>`device_name`
 
 Data type: `String`
 
@@ -1154,7 +1311,7 @@ Bacula director configuration for Storage option 'Device'
 
 Default value: `"${facts['networking']['fqdn']}-device"`
 
-##### `media_type`
+##### <a name="media_type"></a>`media_type`
 
 Data type: `String`
 
@@ -1162,7 +1319,7 @@ Bacula director configuration for Storage option 'Media Type'
 
 Default value: `'File'`
 
-##### `maxconcurjobs`
+##### <a name="maxconcurjobs"></a>`maxconcurjobs`
 
 Data type: `Integer`
 
@@ -1170,7 +1327,7 @@ Bacula director configuration for Storage option 'Maximum Concurrent Jobs'
 
 Default value: `1`
 
-##### `conf_dir`
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
@@ -1178,7 +1335,7 @@ Bacula configuration directory
 
 Default value: `$bacula::conf_dir`
 
-### `bacula::job`
+### <a name="baculajob"></a>`bacula::job`
 
 This class installs a bacula job on the director.  This can be used for specific applications as well as general host backups
 
@@ -1203,9 +1360,37 @@ bacula::job { "${fqdn}-mywebapp":
 
 #### Parameters
 
-The following parameters are available in the `bacula::job` defined type.
+The following parameters are available in the `bacula::job` defined type:
 
-##### `files`
+* [`files`](#files)
+* [`excludes`](#excludes)
+* [`fileset`](#fileset)
+* [`jobtype`](#jobtype)
+* [`template`](#template)
+* [`pool`](#pool)
+* [`pool_full`](#pool_full)
+* [`pool_inc`](#pool_inc)
+* [`pool_diff`](#pool_diff)
+* [`storage`](#storage)
+* [`jobdef`](#jobdef)
+* [`runscript`](#runscript)
+* [`level`](#level)
+* [`accurate`](#accurate)
+* [`reschedule_on_error`](#reschedule_on_error)
+* [`reschedule_interval`](#reschedule_interval)
+* [`reschedule_times`](#reschedule_times)
+* [`messages`](#messages)
+* [`restoredir`](#restoredir)
+* [`sched`](#sched)
+* [`priority`](#priority)
+* [`job_tag`](#job_tag)
+* [`selection_type`](#selection_type)
+* [`selection_pattern`](#selection_pattern)
+* [`max_concurrent_jobs`](#max_concurrent_jobs)
+* [`write_bootstrap`](#write_bootstrap)
+* [`max_full_interval`](#max_full_interval)
+
+##### <a name="files"></a>`files`
 
 Data type: `Array[String]`
 
@@ -1213,7 +1398,7 @@ An array of files that you wish to get backed up on this job for this host.  ie:
 
 Default value: `[]`
 
-##### `excludes`
+##### <a name="excludes"></a>`excludes`
 
 Data type: `Array[String]`
 
@@ -1221,7 +1406,7 @@ An array of files to skip for the given job.  ie: ["/usr/local/src"]
 
 Default value: `[]`
 
-##### `fileset`
+##### <a name="fileset"></a>`fileset`
 
 Data type: `Optional[String]`
 
@@ -1229,7 +1414,7 @@ If set to true, a fileset will be genereated based on the files and excludes par
 
 Default value: ``undef``
 
-##### `jobtype`
+##### <a name="jobtype"></a>`jobtype`
 
 Data type: `Bacula::JobType`
 
@@ -1237,7 +1422,7 @@ The type of job
 
 Default value: `'Backup'`
 
-##### `template`
+##### <a name="template"></a>`template`
 
 Data type: `String`
 
@@ -1245,7 +1430,7 @@ Template to use for generating the job configuration fragment
 
 Default value: `'bacula/job.conf.epp'`
 
-##### `pool`
+##### <a name="pool"></a>`pool`
 
 Data type: `Optional[String]`
 
@@ -1253,7 +1438,7 @@ Name of the pool to use by default for this job
 
 Default value: ``undef``
 
-##### `pool_full`
+##### <a name="pool_full"></a>`pool_full`
 
 Data type: `Optional[String]`
 
@@ -1261,7 +1446,7 @@ Name of the pool to use for Full jobs
 
 Default value: ``undef``
 
-##### `pool_inc`
+##### <a name="pool_inc"></a>`pool_inc`
 
 Data type: `Optional[String]`
 
@@ -1269,7 +1454,7 @@ Name of the pool to use for Incremental jobs
 
 Default value: ``undef``
 
-##### `pool_diff`
+##### <a name="pool_diff"></a>`pool_diff`
 
 Data type: `Optional[String]`
 
@@ -1277,7 +1462,7 @@ Name of the pool to use for Differential jobs
 
 Default value: ``undef``
 
-##### `storage`
+##### <a name="storage"></a>`storage`
 
 Data type: `Optional[String]`
 
@@ -1285,7 +1470,7 @@ Name of the storage service to use
 
 Default value: ``undef``
 
-##### `jobdef`
+##### <a name="jobdef"></a>`jobdef`
 
 Data type: `Variant[Boolean, String]`
 
@@ -1293,7 +1478,7 @@ If a JobDefs-Resource-Name is specified, all the values contained in the named J
 
 Default value: `'Default'`
 
-##### `runscript`
+##### <a name="runscript"></a>`runscript`
 
 Data type: `Array[Bacula::Runscript]`
 
@@ -1301,7 +1486,7 @@ Array of hash(es) containing RunScript directives
 
 Default value: `[]`
 
-##### `level`
+##### <a name="level"></a>`level`
 
 Data type: `Optional[String]`
 
@@ -1309,7 +1494,7 @@ The Level directive specifies the default Job level to be run
 
 Default value: ``undef``
 
-##### `accurate`
+##### <a name="accurate"></a>`accurate`
 
 Data type: `Bacula::Yesno`
 
@@ -1317,7 +1502,7 @@ In accurate mode, the File daemon knowns exactly which files were present after 
 
 Default value: ``false``
 
-##### `reschedule_on_error`
+##### <a name="reschedule_on_error"></a>`reschedule_on_error`
 
 Data type: `Bacula::Yesno`
 
@@ -1325,7 +1510,7 @@ boolean for enableing disabling job option "Reschedule On Error"
 
 Default value: ``false``
 
-##### `reschedule_interval`
+##### <a name="reschedule_interval"></a>`reschedule_interval`
 
 Data type: `Bacula::Time`
 
@@ -1333,7 +1518,7 @@ time-spec for job option "Reschedule Interval"
 
 Default value: `'1 hour'`
 
-##### `reschedule_times`
+##### <a name="reschedule_times"></a>`reschedule_times`
 
 Data type: `Integer`
 
@@ -1341,7 +1526,7 @@ count for job option "Reschedule Times"
 
 Default value: `10`
 
-##### `messages`
+##### <a name="messages"></a>`messages`
 
 Data type: `Optional[String]`
 
@@ -1349,15 +1534,15 @@ containing the name of the message resource to use for this job set to false to 
 
 Default value: ``undef``
 
-##### `restoredir`
+##### <a name="restoredir"></a>`restoredir`
 
-Data type: `Optional[String]`
+Data type: `Stdlib::Absolutepath`
 
 containing the prefix for restore jobs
 
 Default value: `'/tmp/bacula-restores'`
 
-##### `sched`
+##### <a name="sched"></a>`sched`
 
 Data type: `Optional[String]`
 
@@ -1365,7 +1550,7 @@ containing the name of the scheduler set to false to disable this option
 
 Default value: ``undef``
 
-##### `priority`
+##### <a name="priority"></a>`priority`
 
 Data type: `Optional[Integer]`
 
@@ -1373,7 +1558,7 @@ containing the priority number for the job set to false to disable this option
 
 Default value: ``undef``
 
-##### `job_tag`
+##### <a name="job_tag"></a>`job_tag`
 
 Data type: `Optional[String]`
 
@@ -1381,7 +1566,7 @@ that might be used for grouping of jobs. Pass this to bacula::director to only c
 
 Default value: ``undef``
 
-##### `selection_type`
+##### <a name="selection_type"></a>`selection_type`
 
 Data type: `Optional[String]`
 
@@ -1389,7 +1574,7 @@ Determines how the migration job will go about selecting what JobIds to migrate
 
 Default value: ``undef``
 
-##### `selection_pattern`
+##### <a name="selection_pattern"></a>`selection_pattern`
 
 Data type: `Optional[String]`
 
@@ -1397,7 +1582,7 @@ Pattern to match against to filter items with selection_type
 
 Default value: ``undef``
 
-##### `max_concurrent_jobs`
+##### <a name="max_concurrent_jobs"></a>`max_concurrent_jobs`
 
 Data type: `Integer`
 
@@ -1405,7 +1590,7 @@ Maximum number of Jobs from the current Job resource that can run concurrently
 
 Default value: `1`
 
-##### `write_bootstrap`
+##### <a name="write_bootstrap"></a>`write_bootstrap`
 
 Data type: `Optional[String]`
 
@@ -1413,7 +1598,7 @@ The writebootstrap directive specifies a file name where Bacula will write a boo
 
 Default value: ``undef``
 
-##### `max_full_interval`
+##### <a name="max_full_interval"></a>`max_full_interval`
 
 Data type: `Optional[String]`
 
@@ -1421,15 +1606,31 @@ The time specifies the maximum allowed age (counting from start time) of the mos
 
 Default value: ``undef``
 
-### `bacula::jobdefs`
+### <a name="baculajobdefs"></a>`bacula::jobdefs`
 
 This define adds a jobdefs entry on the bacula director for reference by the client configurations.
 
 #### Parameters
 
-The following parameters are available in the `bacula::jobdefs` defined type.
+The following parameters are available in the `bacula::jobdefs` defined type:
 
-##### `jobtype`
+* [`jobtype`](#jobtype)
+* [`sched`](#sched)
+* [`messages`](#messages)
+* [`priority`](#priority)
+* [`pool`](#pool)
+* [`full_backup_pool`](#full_backup_pool)
+* [`differential_backup_pool`](#differential_backup_pool)
+* [`level`](#level)
+* [`accurate`](#accurate)
+* [`reschedule_on_error`](#reschedule_on_error)
+* [`reschedule_interval`](#reschedule_interval)
+* [`reschedule_times`](#reschedule_times)
+* [`max_concurrent_jobs`](#max_concurrent_jobs)
+* [`write_bootstrap`](#write_bootstrap)
+* [`max_full_interval`](#max_full_interval)
+
+##### <a name="jobtype"></a>`jobtype`
 
 Data type: `Bacula::JobType`
 
@@ -1437,7 +1638,7 @@ The Type directive specifies the Job type
 
 Default value: `'Backup'`
 
-##### `sched`
+##### <a name="sched"></a>`sched`
 
 Data type: `String`
 
@@ -1445,7 +1646,7 @@ The Schedule directive defines what schedule is to be used for the Job
 
 Default value: `'Default'`
 
-##### `messages`
+##### <a name="messages"></a>`messages`
 
 Data type: `String`
 
@@ -1453,7 +1654,7 @@ The Messages directive defines what Messages resource should be used for this jo
 
 Default value: `'Standard'`
 
-##### `priority`
+##### <a name="priority"></a>`priority`
 
 Data type: `Integer`
 
@@ -1461,7 +1662,7 @@ This directive permits you to control the order in which your jobs will be run b
 
 Default value: `10`
 
-##### `pool`
+##### <a name="pool"></a>`pool`
 
 Data type: `String`
 
@@ -1469,7 +1670,7 @@ The Pool directive defines the pool of Volumes where your data can be backed up
 
 Default value: `'Default'`
 
-##### `full_backup_pool`
+##### <a name="full_backup_pool"></a>`full_backup_pool`
 
 Data type: `Optional[String]`
 
@@ -1477,7 +1678,7 @@ The Full Backup Pool specifies a Pool to be used for Full backups
 
 Default value: ``undef``
 
-##### `differential_backup_pool`
+##### <a name="differential_backup_pool"></a>`differential_backup_pool`
 
 Data type: `Optional[String]`
 
@@ -1485,7 +1686,7 @@ The Differential Backup Pool specifies a Pool to be used for Differential backup
 
 Default value: ``undef``
 
-##### `level`
+##### <a name="level"></a>`level`
 
 Data type: `Optional[String]`
 
@@ -1493,7 +1694,7 @@ The Level directive specifies the default Job level to be run
 
 Default value: ``undef``
 
-##### `accurate`
+##### <a name="accurate"></a>`accurate`
 
 Data type: `Bacula::Yesno`
 
@@ -1501,7 +1702,7 @@ In accurate mode, the File daemon knowns exactly which files were present after 
 
 Default value: ``false``
 
-##### `reschedule_on_error`
+##### <a name="reschedule_on_error"></a>`reschedule_on_error`
 
 Data type: `Bacula::Yesno`
 
@@ -1509,7 +1710,7 @@ If this directive is enabled, and the job terminates in error, the job will be r
 
 Default value: ``false``
 
-##### `reschedule_interval`
+##### <a name="reschedule_interval"></a>`reschedule_interval`
 
 Data type: `Bacula::Time`
 
@@ -1517,7 +1718,7 @@ If you have specified Reschedule On Error = yes and the job terminates in error,
 
 Default value: `'1 hour'`
 
-##### `reschedule_times`
+##### <a name="reschedule_times"></a>`reschedule_times`
 
 Data type: `Integer`
 
@@ -1525,7 +1726,7 @@ This directive specifies the maximum number of times to reschedule the job
 
 Default value: `10`
 
-##### `max_concurrent_jobs`
+##### <a name="max_concurrent_jobs"></a>`max_concurrent_jobs`
 
 Data type: `Integer`
 
@@ -1533,7 +1734,7 @@ Maximum number of Jobs from the current Job resource that can run concurrently
 
 Default value: `1`
 
-##### `write_bootstrap`
+##### <a name="write_bootstrap"></a>`write_bootstrap`
 
 Data type: `Optional[String]`
 
@@ -1541,7 +1742,7 @@ The writebootstrap directive specifies a file name where Bacula will write a boo
 
 Default value: ``undef``
 
-##### `max_full_interval`
+##### <a name="max_full_interval"></a>`max_full_interval`
 
 Data type: `Optional[String]`
 
@@ -1549,15 +1750,31 @@ The time specifies the maximum allowed age (counting from start time) of the mos
 
 Default value: ``undef``
 
-### `bacula::messages`
+### <a name="baculamessages"></a>`bacula::messages`
 
 Create a Messages resource on the $daemon (director, storage or file).
 
 #### Parameters
 
-The following parameters are available in the `bacula::messages` defined type.
+The following parameters are available in the `bacula::messages` defined type:
 
-##### `append`
+* [`append`](#append)
+* [`catalog`](#catalog)
+* [`console`](#console)
+* [`daemon`](#daemon)
+* [`director`](#director)
+* [`mailcmd`](#mailcmd)
+* [`mail`](#mail)
+* [`mailonerrorcmd`](#mailonerrorcmd)
+* [`mailonerror`](#mailonerror)
+* [`mailonsuccesscmd`](#mailonsuccesscmd)
+* [`mailonsuccess`](#mailonsuccess)
+* [`mname`](#mname)
+* [`operatorcmd`](#operatorcmd)
+* [`operator`](#operator)
+* [`syslog`](#syslog)
+
+##### <a name="append"></a>`append`
 
 Data type: `Optional[String]`
 
@@ -1565,7 +1782,7 @@ Append the message to the filename given in the address field
 
 Default value: ``undef``
 
-##### `catalog`
+##### <a name="catalog"></a>`catalog`
 
 Data type: `Optional[String]`
 
@@ -1573,7 +1790,7 @@ Send the message to the Catalog database
 
 Default value: ``undef``
 
-##### `console`
+##### <a name="console"></a>`console`
 
 Data type: `Optional[String]`
 
@@ -1581,7 +1798,7 @@ Send the message to the Bacula console
 
 Default value: ``undef``
 
-##### `daemon`
+##### <a name="daemon"></a>`daemon`
 
 Data type: `Enum['dir', 'fd', 'sd']`
 
@@ -1589,7 +1806,7 @@ Daemon to add Messages resource to
 
 Default value: `'dir'`
 
-##### `director`
+##### <a name="director"></a>`director`
 
 Data type: `Optional[String]`
 
@@ -1597,7 +1814,7 @@ Send the message to the Director whose name is given in the address field
 
 Default value: ``undef``
 
-##### `mailcmd`
+##### <a name="mailcmd"></a>`mailcmd`
 
 Data type: `Optional[String]`
 
@@ -1605,7 +1822,7 @@ Specify exactly how to send the mail
 
 Default value: ``undef``
 
-##### `mail`
+##### <a name="mail"></a>`mail`
 
 Data type: `Optional[String]`
 
@@ -1613,7 +1830,39 @@ Send the message to the email addresses that are given as a comma separated list
 
 Default value: ``undef``
 
-##### `mname`
+##### <a name="mailonerrorcmd"></a>`mailonerrorcmd`
+
+Data type: `Optional[String]`
+
+Specify exactly how to send error mail
+
+Default value: ``undef``
+
+##### <a name="mailonerror"></a>`mailonerror`
+
+Data type: `Optional[String]`
+
+Send the error message to the email addresses that are given as a comma separated list in the address field
+
+Default value: ``undef``
+
+##### <a name="mailonsuccesscmd"></a>`mailonsuccesscmd`
+
+Data type: `Optional[String]`
+
+Specify exactly how to send success mail
+
+Default value: ``undef``
+
+##### <a name="mailonsuccess"></a>`mailonsuccess`
+
+Data type: `Optional[String]`
+
+Send the success message to the email addresses that are given as a comma separated list in the address field
+
+Default value: ``undef``
+
+##### <a name="mname"></a>`mname`
 
 Data type: `String`
 
@@ -1621,7 +1870,7 @@ The name of the Messages resource. The name you specify here will be used to tie
 
 Default value: `'Standard'`
 
-##### `operatorcmd`
+##### <a name="operatorcmd"></a>`operatorcmd`
 
 Data type: `Optional[String]`
 
@@ -1629,7 +1878,7 @@ This resource specification is similar to the MailCommand except that it is used
 
 Default value: ``undef``
 
-##### `operator`
+##### <a name="operator"></a>`operator`
 
 Data type: `Optional[String]`
 
@@ -1637,7 +1886,7 @@ Send the message to the email addresses that are specified as a comma separated 
 
 Default value: ``undef``
 
-##### `syslog`
+##### <a name="syslog"></a>`syslog`
 
 Data type: `Optional[String]`
 
@@ -1645,7 +1894,7 @@ Send the message to the system log (syslog) using the facility specified in the 
 
 Default value: ``undef``
 
-### `bacula::schedule`
+### <a name="baculaschedule"></a>`bacula::schedule`
 
 Creates a schedule to which jobs and jobdefs can adhere.
 
@@ -1665,15 +1914,18 @@ bacula::schedule { 'Regularly':
 
 #### Parameters
 
-The following parameters are available in the `bacula::schedule` defined type.
+The following parameters are available in the `bacula::schedule` defined type:
 
-##### `runs`
+* [`runs`](#runs)
+* [`conf_dir`](#conf_dir)
+
+##### <a name="runs"></a>`runs`
 
 Data type: `Array[String]`
 
 A list of Bacula Run directives
 
-##### `conf_dir`
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
@@ -1681,16 +1933,32 @@ Path to bacula configuration directory
 
 Default value: `$bacula::conf_dir`
 
-### `bacula::storage::device`
+### <a name="baculastoragedevice"></a>`bacula::storage::device`
 
 This define creates a storage device declaration.  This informs the
 storage daemon which storage devices are available to send client backups to.
 
 #### Parameters
 
-The following parameters are available in the `bacula::storage::device` defined type.
+The following parameters are available in the `bacula::storage::device` defined type:
 
-##### `device_name`
+* [`device_name`](#device_name)
+* [`media_type`](#media_type)
+* [`device`](#device)
+* [`label_media`](#label_media)
+* [`random_access`](#random_access)
+* [`automatic_mount`](#automatic_mount)
+* [`removable_media`](#removable_media)
+* [`always_open`](#always_open)
+* [`maxconcurjobs`](#maxconcurjobs)
+* [`conf_dir`](#conf_dir)
+* [`device_mode`](#device_mode)
+* [`device_owner`](#device_owner)
+* [`device_seltype`](#device_seltype)
+* [`director_name`](#director_name)
+* [`group`](#group)
+
+##### <a name="device_name"></a>`device_name`
 
 Data type: `String`
 
@@ -1698,7 +1966,7 @@ Bacula director configuration for Device option 'Name'
 
 Default value: `$name`
 
-##### `media_type`
+##### <a name="media_type"></a>`media_type`
 
 Data type: `String`
 
@@ -1706,7 +1974,7 @@ Bacula director configuration for Device option 'Media Type'
 
 Default value: `'File'`
 
-##### `device`
+##### <a name="device"></a>`device`
 
 Data type: `String`
 
@@ -1714,7 +1982,7 @@ Bacula director configuration for Device option 'Archive Device'
 
 Default value: `'/bacula'`
 
-##### `label_media`
+##### <a name="label_media"></a>`label_media`
 
 Data type: `Bacula::Yesno`
 
@@ -1722,7 +1990,7 @@ Bacula director configuration for Device option 'LabelMedia'
 
 Default value: ``true``
 
-##### `random_access`
+##### <a name="random_access"></a>`random_access`
 
 Data type: `Bacula::Yesno`
 
@@ -1730,7 +1998,7 @@ Bacula director configuration for Device option 'Random Access'
 
 Default value: ``true``
 
-##### `automatic_mount`
+##### <a name="automatic_mount"></a>`automatic_mount`
 
 Data type: `Bacula::Yesno`
 
@@ -1738,7 +2006,7 @@ Bacula director configuration for Device option 'AutomaticMount'
 
 Default value: ``true``
 
-##### `removable_media`
+##### <a name="removable_media"></a>`removable_media`
 
 Data type: `Bacula::Yesno`
 
@@ -1746,7 +2014,7 @@ Bacula director configuration for Device option 'RemovableMedia'
 
 Default value: ``false``
 
-##### `always_open`
+##### <a name="always_open"></a>`always_open`
 
 Data type: `Bacula::Yesno`
 
@@ -1754,7 +2022,7 @@ Bacula director configuration for Device option 'AlwaysOpen'
 
 Default value: ``false``
 
-##### `maxconcurjobs`
+##### <a name="maxconcurjobs"></a>`maxconcurjobs`
 
 Data type: `Integer`
 
@@ -1762,7 +2030,7 @@ Bacula director configuration for Device option 'Maximum Concurrent Jobs'
 
 Default value: `1`
 
-##### `conf_dir`
+##### <a name="conf_dir"></a>`conf_dir`
 
 Data type: `String`
 
@@ -1770,7 +2038,7 @@ Path to bacula configuration directory
 
 Default value: `$bacula::conf_dir`
 
-##### `device_mode`
+##### <a name="device_mode"></a>`device_mode`
 
 Data type: `Stdlib::Filemode`
 
@@ -1778,7 +2046,7 @@ Unix mode of the Archive Device directory
 
 Default value: `'0770'`
 
-##### `device_owner`
+##### <a name="device_owner"></a>`device_owner`
 
 Data type: `String`
 
@@ -1786,7 +2054,7 @@ Owner of the Archive Device directory
 
 Default value: `$bacula::bacula_user`
 
-##### `device_seltype`
+##### <a name="device_seltype"></a>`device_seltype`
 
 Data type: `String`
 
@@ -1794,7 +2062,7 @@ SELinux type for the device
 
 Default value: `$bacula::device_seltype`
 
-##### `director_name`
+##### <a name="director_name"></a>`director_name`
 
 Data type: `String`
 
@@ -1802,7 +2070,7 @@ Name of the Director allowed to connect to the Storage daemon
 
 Default value: `$bacula::director_name`
 
-##### `group`
+##### <a name="group"></a>`group`
 
 Data type: `String`
 
@@ -1812,7 +2080,7 @@ Default value: `$bacula::bacula_group`
 
 ## Functions
 
-### `bacula::escape`
+### <a name="baculaescape"></a>`bacula::escape`
 
 Type: Ruby 4.x API
 
@@ -1846,7 +2114,7 @@ Data type: `String`
 
 The string to escape
 
-### `bacula::yesno2str`
+### <a name="baculayesno2str"></a>`bacula::yesno2str`
 
 Type: Ruby 4.x API
 
@@ -1892,35 +2160,50 @@ A boolean value
 
 ## Data types
 
-### `Bacula::JobType`
+### <a name="baculajobtype"></a>`Bacula::JobType`
 
 The type of job
 
-Alias of `Pattern[/^Backup/, /^Restore/, /^Admin/, /^Verify/, /^Copy/, /^Migrate/]`
+Alias of
 
-### `Bacula::Message`
+```puppet
+Pattern[/^Backup/, /^Restore/, /^Admin/, /^Verify/, /^Copy/, /^Migrate/]
+```
+
+### <a name="baculamessage"></a>`Bacula::Message`
 
 A Bacula message specification
 
-Alias of `Struct[{
-  mname       => String,
-  append      => Optional[String],
-  catalog     => Optional[String],
-  console     => Optional[String],
-  daemon      => Optional[String],
-  director    => Optional[String],
-  mail        => Optional[String],
-  mailcmd     => Optional[String],
-  operator    => Optional[String],
-  operatorcmd => Optional[String],
-  syslog      => Optional[String],
-}]`
+Alias of
 
-### `Bacula::Runscript`
+```puppet
+Struct[{
+  mname            => String,
+  append           => Optional[String],
+  catalog          => Optional[String],
+  console          => Optional[String],
+  daemon           => Optional[String],
+  director         => Optional[String],
+  mail             => Optional[String],
+  mailcmd          => Optional[String],
+  mailonsuccess    => Optional[String],
+  mailonsuccesscmd => Optional[String],
+  mailonerror      => Optional[String],
+  mailonerrorcmd   => Optional[String],
+  operator         => Optional[String],
+  operatorcmd      => Optional[String],
+  syslog           => Optional[String],
+}]
+```
+
+### <a name="bacularunscript"></a>`Bacula::Runscript`
 
 A Bacula Runscript specification
 
-Alias of `Struct[{
+Alias of
+
+```puppet
+Struct[{
   runs_when         => Optional[Enum[
     'Before',
     'After',
@@ -1933,9 +2216,10 @@ Alias of `Struct[{
   runs_on_failure   => Optional[Bacula::Yesno],
   runs_on_client    => Optional[Bacula::Yesno],
   command           => String,
-}]`
+}]
+```
 
-### `Bacula::Size`
+### <a name="baculasize"></a>`Bacula::Size`
 
 A size indication
 
@@ -1949,11 +2233,15 @@ A size indication
 "3 GB"
 ```
 
-Alias of `Variant[Integer, Pattern[
-    /(?i:\A\d+\s*[mg]b?\Z)/,
-  ]]`
+Alias of
 
-### `Bacula::Time`
+```puppet
+Variant[Integer, Pattern[
+    /(?i:\A\d+\s*[mg]b?\Z)/,
+  ]]
+```
+
+### <a name="baculatime"></a>`Bacula::Time`
 
 A time indication
 
@@ -1967,16 +2255,24 @@ A time indication
 "8d 2h 12m"
 ```
 
-Alias of `Pattern[/^\d+$/, /^\d+\s+(s|sec|seconds?|mins?|minutes?|h|hours?|d|days?|w|weeks?|m|months?|q|quarters?|y|years?)(\s+\d+\s+(s|sec|seconds?|mins?|minutes?|h|hours?|d|days?|w|weeks?|m|months?|q|quarters?|y|years?))*$/]`
+Alias of
 
-### `Bacula::Yesno`
+```puppet
+Pattern[/^\d+$/, /^\d+\s+(s|sec|seconds?|mins?|minutes?|h|hours?|d|days?|w|weeks?|m|months?|q|quarters?|y|years?)(\s+\d+\s+(s|sec|seconds?|mins?|minutes?|h|hours?|d|days?|w|weeks?|m|months?|q|quarters?|y|years?))*$/]
+```
+
+### <a name="baculayesno"></a>`Bacula::Yesno`
 
 A Boolean value
 
-Alias of `Variant[Boolean, Enum[
+Alias of
+
+```puppet
+Variant[Boolean, Enum[
     'yes',
     'no',
     'true',  # lint:ignore:quoted_booleans
     'false', # lint:ignore:quoted_booleans
-  ]]`
+  ]]
+```
 

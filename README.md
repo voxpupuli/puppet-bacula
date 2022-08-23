@@ -40,18 +40,21 @@ Bacula's functionality depends on connecting several components, together.  Due
 to the number of moving pieces in this module, you will likely want to set some
 site defaults, and tune more specifically where desired.
 
-As such, it is reasonable to set the following hiera data that will allow many
-of the classes in this module to use those defaults sanely.
+As such, it is reasonable to use the following declaration in a profile used by all your nodes:
 
-```
-bacula::storage_name: 'mystorage.example.com'
-bacula::director_name: 'mydirector.example.com'
+```puppet
+class bacula {
+  storage_name  => 'mystorage.example.com',
+  director_name => 'mydirector.example.com',
+}
 ```
 
-When using the default settings from this module, some resources get provisioned. The provisioning of these default resources can be disabled with the following parameter.
+When using the default settings from this module, some resources get provisioned. The provisioning of these default resources can be disabled with the `manage_defaults` parameter.
 
-```
-bacula::director::manage_defaults: false
+```puppet
+class { 'bacula::director':
+  manage_defaults => false,
+}
 ```
 
 ##### Classification
@@ -60,13 +63,43 @@ This may be on the same host, or different hosts, but the name you put here
 should be the fqdn of the target system.  The Director will require the
 classification of `bacula::director`, and the Storage node will require the
 classification of `bacula::storage`.  **All nodes will require classification
-of `bacula::client`.**
+of `bacula::client`, and all nodes will require the shared config by being classified `bacula`.**
 
-##### Prefer hiera data
+A common way of using the module in a simple setup is using a single node that act as a director and storage daemon for all other nodes of the fleet.  In such a scenario, you can create two profiles: `profile::bacula_client` and `profile::bacula_server`:
 
-Users should prefer setting hiera data to set class parameter values where
-possible.  A couple calls in this module rely on hiera data present to avoid
-scoping issues associated with defined types and default values.
+```puppet
+class profile::bacula_client (
+  Sensitive $password,
+) {
+  class { 'bacula':
+    storage_name  => 'bacula.example.com',
+    director_name => 'bacula.example.com',
+    # Other common settings, see below
+  }
+
+  class { 'bacula::client':
+    password => $password,
+    # File daemon specific settings, see below
+  }
+}
+```
+
+```puppet
+class profile::bacula_server (
+) {
+  include profile::bacula_client
+
+  class { 'bacula::director':
+    password => 'director-password',
+    # Director specific settings, see below
+  }
+
+  class { 'bacula::storage':
+    password => 'storage-password',
+    # File storage specific settings, see below
+  }
+}
+```
 
 ##### Upgrading from an older version
 
@@ -86,12 +119,14 @@ The director component handles coordination of backups and databasing of
 transactions.  In its simplest form, the director can be configured with a
 simple declaration:
 
-```Puppet
-class { 'bacula::director': storage => 'mystorage.example.com' }
+```puppet
+class { 'bacula::director':
+  storage => 'mystorage.example.com',
+}
 ```
 
 The `storage` parameter here defines which storage server should be used for
-all default jobs.  If left empty, it will default to the `$::fqdn` of the
+all default jobs.  If left empty, it will default to the `$facts['fqdn']` of the
 director. This is not a problem for all in one installations, but in scenarios
 where directors to not have the necessary storage devices attached, default
 jobs can be pointed elsewhere.
@@ -106,15 +141,17 @@ By default a 'Common' fileset is created.
 The storage component allocates disk storage for pools that can be used for
 holding backup data.
 
-```Puppet
-class { 'bacula::storage': director => 'mydirector.example.com' }
+```puppet
+class { 'bacula::storage':
+  director => 'mydirector.example.com',
+}
 ```
 
 You will also want a storage pool that defines the retention.  You can define
 this in the Director catalog without exporting it, or you can use an exported
 resource.
 
-```Puppet
+```puppet
   bacula::director::pool { 'Corp':
     volret      => '14 days',
     maxvolbytes => '5g',
@@ -128,15 +165,19 @@ resource.
 
 The client component is run on each system that needs something backed up.
 
-```Puppet
-class { 'bacula::client': director => 'mydirector.example.com' }
+```puppet
+class { 'bacula::client':
+  director => 'mydirector.example.com',
+}
 ```
 
 To direct all jobs to a specific pool like the one defined above set the
 following data.
 
-```Puppet
-bacula::client::default_pool: 'Corp'
+```puppet
+class { 'bacula::client':
+  default_pool => 'Corp',
+}
 ```
 
 #### Data Encryption (PKI Setup)

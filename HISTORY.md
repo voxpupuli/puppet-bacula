@@ -1,6 +1,4 @@
-## Unreleased
-
-## 2019-02-14 5.5.0
+## [5.5.0](https://github.com/voxpupuli/puppet-bacula/tree/5.5.0) (2019-02-14)
 Switch to Bacula 9 on FreeBSD
 
 ## 2018-05-26 5.4.0

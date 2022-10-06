@@ -1,6 +1,116 @@
-## Unreleased
+# Changelog
 
-## 2019-02-14 5.5.0
+All notable changes to this project will be documented in this file.
+Each new release typically also includes the latest modulesync defaults.
+These should not affect the functionality of the module.
+
+## [v6.0.0](https://github.com/voxpupuli/puppet-bacula/tree/v6.0.0) (2022-10-05)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/5.8.0...v6.0.0)
+
+**Breaking changes:**
+
+- Allow to listen on multiple IP addresses [\#174](https://github.com/voxpupuli/puppet-bacula/pull/174) ([smortex](https://github.com/smortex))
+- Drop support for Puppet 5 \(EOL\) [\#173](https://github.com/voxpupuli/puppet-bacula/pull/173) ([smortex](https://github.com/smortex))
+
+**Implemented enhancements:**
+
+- Allow up-to-date dependencies [\#177](https://github.com/voxpupuli/puppet-bacula/pull/177) ([smortex](https://github.com/smortex))
+- Add support for up-to-date OSes [\#169](https://github.com/voxpupuli/puppet-bacula/pull/169) ([smortex](https://github.com/smortex))
+- Allow the latest version of dependencies [\#167](https://github.com/voxpupuli/puppet-bacula/pull/167) ([smortex](https://github.com/smortex))
+- Add support for "Mail on success" / "Mail on error" [\#160](https://github.com/voxpupuli/puppet-bacula/pull/160) ([smortex](https://github.com/smortex))
+
+**Fixed bugs:**
+
+- Fix legacy fact usage [\#175](https://github.com/voxpupuli/puppet-bacula/pull/175) ([smortex](https://github.com/smortex))
+
+**Closed issues:**
+
+- metadata.json has old dependencies [\#166](https://github.com/voxpupuli/puppet-bacula/issues/166)
+- New puppetserver CA certs causes backup failures [\#165](https://github.com/voxpupuli/puppet-bacula/issues/165)
+
+**Merged pull requests:**
+
+- Update module documentation [\#176](https://github.com/voxpupuli/puppet-bacula/pull/176) ([smortex](https://github.com/smortex))
+- Transfer the module to Voxpupuli [\#172](https://github.com/voxpupuli/puppet-bacula/pull/172) ([smortex](https://github.com/smortex))
+- Drop support of OSes which have reached EOL [\#168](https://github.com/voxpupuli/puppet-bacula/pull/168) ([smortex](https://github.com/smortex))
+
+## [5.8.0](https://github.com/voxpupuli/puppet-bacula/tree/5.8.0) (2020-08-29)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/5.7.0...5.8.0)
+
+**Implemented enhancements:**
+
+- Add job var "Max Full Interval" [\#159](https://github.com/voxpupuli/puppet-bacula/pull/159) ([xaque208](https://github.com/xaque208))
+- Ensure all parameters are documented [\#151](https://github.com/voxpupuli/puppet-bacula/pull/151) ([smortex](https://github.com/smortex))
+
+**Fixed bugs:**
+
+- Output OperatorCommand before Operator [\#153](https://github.com/voxpupuli/puppet-bacula/pull/153) ([smortex](https://github.com/smortex))
+
+**Merged pull requests:**
+
+- Fix CI [\#158](https://github.com/voxpupuli/puppet-bacula/pull/158) ([smortex](https://github.com/smortex))
+
+## [5.7.0](https://github.com/voxpupuli/puppet-bacula/tree/5.7.0) (2020-05-02)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/5.6.0...5.7.0)
+
+**Fixed bugs:**
+
+- Rename of script used to create the PostgreSQL tables [\#148](https://github.com/voxpupuli/puppet-bacula/pull/148) ([Tamerz](https://github.com/Tamerz))
+
+## [5.6.0](https://github.com/voxpupuli/puppet-bacula/tree/5.6.0) (2019-12-28)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/5.5.1...5.6.0)
+
+**Implemented enhancements:**
+
+- Make it easier to set $make\_bacula\_tables [\#146](https://github.com/voxpupuli/puppet-bacula/pull/146) ([fraenki](https://github.com/fraenki))
+- Use the configured DH parameters with all services [\#143](https://github.com/voxpupuli/puppet-bacula/pull/143) ([smortex](https://github.com/smortex))
+- Minor README fixes [\#142](https://github.com/voxpupuli/puppet-bacula/pull/142) ([smortex](https://github.com/smortex))
+- No more lookup [\#141](https://github.com/voxpupuli/puppet-bacula/pull/141) ([smortex](https://github.com/smortex))
+- "write bootstrap" & "full/diff backup pool" [\#139](https://github.com/voxpupuli/puppet-bacula/pull/139) ([tmanninger](https://github.com/tmanninger))
+
+**Fixed bugs:**
+
+- Fix jobs' $selection\_pattern [\#144](https://github.com/voxpupuli/puppet-bacula/pull/144) ([smortex](https://github.com/smortex))
+- Fix wrong database initialization [\#140](https://github.com/voxpupuli/puppet-bacula/pull/140) ([smortex](https://github.com/smortex))
+
+**Closed issues:**
+
+- future maintenance and collaboration [\#136](https://github.com/voxpupuli/puppet-bacula/issues/136)
+
+## [5.5.1](https://github.com/voxpupuli/puppet-bacula/tree/5.5.1) (2019-02-27)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/5.5.0...5.5.1)
+
+**Implemented enhancements:**
+
+- Switch to Bacula 9 on FreeBSD [\#133](https://github.com/voxpupuli/puppet-bacula/pull/133) ([smortex](https://github.com/smortex))
+- Added option to not include the director defaults [\#132](https://github.com/voxpupuli/puppet-bacula/pull/132) ([tcassaert](https://github.com/tcassaert))
+- Switch ERB to EPP templates, improve parameters validation [\#128](https://github.com/voxpupuli/puppet-bacula/pull/128) ([smortex](https://github.com/smortex))
+- Improve $packages data-types consistency [\#126](https://github.com/voxpupuli/puppet-bacula/pull/126) ([smortex](https://github.com/smortex))
+- Normalize logging accross services [\#123](https://github.com/voxpupuli/puppet-bacula/pull/123) ([smortex](https://github.com/smortex))
+- minor improvements to make some params more forgiving [\#120](https://github.com/voxpupuli/puppet-bacula/pull/120) ([jflorian](https://github.com/jflorian))
+
+**Fixed bugs:**
+
+- Fix variable name @director\_name -\> @director [\#124](https://github.com/voxpupuli/puppet-bacula/pull/124) ([smortex](https://github.com/smortex))
+
+**Closed issues:**
+
+- Virtual resource [\#101](https://github.com/voxpupuli/puppet-bacula/issues/101)
+
+**Merged pull requests:**
+
+- Update supported dependencies versions [\#130](https://github.com/voxpupuli/puppet-bacula/pull/130) ([smortex](https://github.com/smortex))
+- Switch to Hiera 5 [\#129](https://github.com/voxpupuli/puppet-bacula/pull/129) ([smortex](https://github.com/smortex))
+- Modernize and fix style [\#127](https://github.com/voxpupuli/puppet-bacula/pull/127) ([smortex](https://github.com/smortex))
+- Remove unused template [\#125](https://github.com/voxpupuli/puppet-bacula/pull/125) ([smortex](https://github.com/smortex))
+- Use ensure\_packages to simpify packages management [\#122](https://github.com/voxpupuli/puppet-bacula/pull/122) ([smortex](https://github.com/smortex))
+
+## [5.5.0](https://github.com/voxpupuli/puppet-bacula/tree/5.5.0) (2019-02-14)
 Switch to Bacula 9 on FreeBSD
 
 ## 2018-05-26 5.4.0
@@ -147,3 +257,6 @@ This release drops a dependency on the ploperations/puppet module by
 implementing a parameter 'ssl_dir' allowing/requiring the user to specify the
 directory to retrieve the Puppet SSL data.
 
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

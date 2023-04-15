@@ -7,5 +7,6 @@ fixtures:
     postgresql: https://github.com/puppetlabs/puppetlabs-postgresql.git
     puppet: https://github.com/puppetlabs-operations/puppet-puppet.git
     stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
+    systemd: https://github.com/voxpupuli/puppet-systemd.git
   symlinks:
     bacula: "#{source_dir}"

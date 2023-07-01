@@ -4,7 +4,24 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v6.0.0](https://github.com/voxpupuli/puppet-bacula/tree/v6.0.0) (2022-10-05)
+## [v7.0.0](https://github.com/voxpupuli/puppet-bacula/tree/v7.0.0) (2023-06-28)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/v6.0.0...v7.0.0)
+
+**Breaking changes:**
+
+- Drop Puppet 6 support [\#182](https://github.com/voxpupuli/puppet-bacula/pull/182) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add support for Puppet 8 [\#185](https://github.com/voxpupuli/puppet-bacula/pull/185) ([smortex](https://github.com/smortex))
+- Relax dependencies version requirements [\#184](https://github.com/voxpupuli/puppet-bacula/pull/184) ([smortex](https://github.com/smortex))
+
+**Merged pull requests:**
+
+- Use the namespaced function `postgresql::postgresql_password()` [\#186](https://github.com/voxpupuli/puppet-bacula/pull/186) ([smortex](https://github.com/smortex))
+
+## [v6.0.0](https://github.com/voxpupuli/puppet-bacula/tree/v6.0.0) (2022-10-06)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/5.8.0...v6.0.0)
 
@@ -41,7 +58,7 @@ These should not affect the functionality of the module.
 
 **Implemented enhancements:**
 
-- Add job var "Max Full Interval" [\#159](https://github.com/voxpupuli/puppet-bacula/pull/159) ([xaque208](https://github.com/xaque208))
+- Add job var "Max Full Interval" [\#159](https://github.com/voxpupuli/puppet-bacula/pull/159) ([zachfi](https://github.com/zachfi))
 - Ensure all parameters are documented [\#151](https://github.com/voxpupuli/puppet-bacula/pull/151) ([smortex](https://github.com/smortex))
 
 **Fixed bugs:**

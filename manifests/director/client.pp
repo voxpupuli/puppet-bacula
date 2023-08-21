@@ -25,7 +25,7 @@
 define bacula::director::client (
   String                  $address,
   Variant[String,Integer] $port, # FIXME: Remove String
-  String                  $password,
+  Variant[String,Sensitive[String]] $password,
   Bacula::Time            $file_retention,
   Bacula::Time            $job_retention,
   Bacula::Yesno           $autoprune,

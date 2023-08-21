@@ -361,7 +361,7 @@ Default value: `[]`
 
 ##### <a name="-bacula--client--password"></a>`password`
 
-Data type: `String`
+Data type: `Variant[String,Sensitive[String]]`
 
 A password to use for communication with this File Daemon
 
@@ -557,7 +557,7 @@ Default value: `'bacula'`
 
 ##### <a name="-bacula--director--db_pw"></a>`db_pw`
 
-Data type: `String`
+Data type: `Variant[String,Sensitive[String]]`
 
 The database user's password
 
@@ -654,7 +654,7 @@ Default value: `true`
 
 ##### <a name="-bacula--director--password"></a>`password`
 
-Data type: `String`
+Data type: `Variant[String,Sensitive[String]]`
 
 password to connect to the director
 
@@ -882,7 +882,7 @@ Default value: `'File'`
 
 ##### <a name="-bacula--storage--password"></a>`password`
 
-Data type: `String`
+Data type: `Variant[String,Sensitive[String]]`
 
 Specifies the password that must be supplied by the named Director
 
@@ -977,7 +977,7 @@ The port of the Bacula File server daemon
 
 ##### <a name="-bacula--director--client--password"></a>`password`
 
-Data type: `String`
+Data type: `Variant[String,Sensitive[String]]`
 
 The password to be used when establishing a connection with the File services
 
@@ -1301,7 +1301,7 @@ Default value: `9103`
 
 ##### <a name="-bacula--director--storage--password"></a>`password`
 
-Data type: `String`
+Data type: `Variant[String,Sensitive[String]]`
 
 Bacula director configuration for Storage option 'Password'
 

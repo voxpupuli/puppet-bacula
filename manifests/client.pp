@@ -59,7 +59,7 @@ class bacula::client (
   Optional[String]        $default_pool_diff,
   Integer                 $port                = 9102,
   Array[String[1]]        $listen_address      = [],
-  String                  $password            = 'secret',
+  Variant[String,Sensitive[String]] $password  = 'secret',
   Integer                 $max_concurrent_jobs = 2,
   String                  $director_name       = $bacula::director_name,
   Bacula::Yesno           $autoprune           = true,

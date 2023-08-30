@@ -66,7 +66,7 @@ define bacula::job (
   Optional[String]         $job_tag             = undef,
   Optional[String]         $selection_type      = undef,
   Optional[String]         $selection_pattern   = undef,
-  Integer                  $max_concurrent_jobs = 1,
+  Integer[1]               $max_concurrent_jobs = 1,
   Optional[String]         $write_bootstrap     = undef,
   Optional[String]         $max_full_interval   = undef,
 ) {

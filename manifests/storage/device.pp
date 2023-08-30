@@ -28,7 +28,7 @@ define bacula::storage::device (
   Bacula::Yesno    $automatic_mount = true,
   Bacula::Yesno    $removable_media = false,
   Bacula::Yesno    $always_open     = false,
-  Integer          $maxconcurjobs   = 1,
+  Integer[1]       $maxconcurjobs   = 1,
   String           $conf_dir        = $bacula::conf_dir,
   Stdlib::Filemode $device_mode     = '0770',
   String           $device_owner    = $bacula::bacula_user,

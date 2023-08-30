@@ -21,7 +21,7 @@ define bacula::director::storage (
   String       $password      = 'secret',
   String       $device_name   = "${facts['networking']['fqdn']}-device",
   String       $media_type    = 'File',
-  Integer      $maxconcurjobs = 1,
+  Integer[1]   $maxconcurjobs = 1,
   String       $conf_dir      = $bacula::conf_dir,
 ) {
   $epp_storage_variables = {

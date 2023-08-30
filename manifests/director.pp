@@ -52,7 +52,7 @@ class bacula::director (
   String                        $homedir             = $bacula::homedir,
   Optional[String]              $job_tag             = $bacula::job_tag,
   Array[String[1]]              $listen_address      = [],
-  Integer                       $max_concurrent_jobs = 20,
+  Integer[1]                    $max_concurrent_jobs = 20,
   Boolean                       $manage_defaults     = true,
   String                        $password            = 'secret',
   Stdlib::Port                  $port                = 9101,

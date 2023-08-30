@@ -376,7 +376,7 @@ Default value: `'secret'`
 
 ##### <a name="-bacula--client--max_concurrent_jobs"></a>`max_concurrent_jobs`
 
-Data type: `Integer`
+Data type: `Integer[1]`
 
 Bacula FD option for 'Maximum Concurrent Jobs'
 
@@ -645,7 +645,7 @@ Default value: `[]`
 
 ##### <a name="-bacula--director--max_concurrent_jobs"></a>`max_concurrent_jobs`
 
-Data type: `Integer`
+Data type: `Integer[1]`
 
 Bacula Director option for 'Maximum Concurrent Jobs'
 
@@ -873,7 +873,7 @@ Default value: `[]`
 
 ##### <a name="-bacula--storage--maxconcurjobs"></a>`maxconcurjobs`
 
-Data type: `Integer`
+Data type: `Integer[1]`
 
 maximum number of Jobs that may run concurrently
 
@@ -1175,7 +1175,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--director--pool--maxvoljobs"></a>`maxvoljobs`
 
-Data type: `Optional[Variant[String,Integer]]`
+Data type: `Optional[Variant[String,Integer[1]]]`
 
 Bacula pool configuration option "Maximum Volume Jobs"
 
@@ -1191,7 +1191,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--director--pool--maxvols"></a>`maxvols`
 
-Data type: `Optional[Variant[String,Integer]]`
+Data type: `Optional[Variant[String,Integer[1]]]`
 
 Bacula pool configuration option "Maximum Volumes"
 
@@ -1332,7 +1332,7 @@ Default value: `'File'`
 
 ##### <a name="-bacula--director--storage--maxconcurjobs"></a>`maxconcurjobs`
 
-Data type: `Integer`
+Data type: `Integer[1]`
 
 Bacula director configuration for Storage option 'Maximum Concurrent Jobs'
 
@@ -1595,7 +1595,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--job--max_concurrent_jobs"></a>`max_concurrent_jobs`
 
-Data type: `Integer`
+Data type: `Integer[1]`
 
 Maximum number of Jobs from the current Job resource that can run concurrently
 
@@ -1739,7 +1739,7 @@ Default value: `10`
 
 ##### <a name="-bacula--jobdefs--max_concurrent_jobs"></a>`max_concurrent_jobs`
 
-Data type: `Integer`
+Data type: `Integer[1]`
 
 Maximum number of Jobs from the current Job resource that can run concurrently
 
@@ -2035,7 +2035,7 @@ Default value: `false`
 
 ##### <a name="-bacula--storage--device--maxconcurjobs"></a>`maxconcurjobs`
 
-Data type: `Integer`
+Data type: `Integer[1]`
 
 Bacula director configuration for Device option 'Maximum Concurrent Jobs'
 

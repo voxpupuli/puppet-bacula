@@ -31,7 +31,7 @@ define bacula::jobdefs (
   Bacula::Yesno    $reschedule_on_error      = false,
   Bacula::Time     $reschedule_interval      = '1 hour',
   Integer          $reschedule_times         = 10,
-  Integer          $max_concurrent_jobs      = 1,
+  Integer[1]       $max_concurrent_jobs      = 1,
   Optional[String] $write_bootstrap          = undef,
   Optional[String] $max_full_interval        = undef,
 ) {

@@ -29,19 +29,19 @@
 #   }
 #
 define bacula::director::pool (
-  Optional[String]                  $volret         = undef,
-  Optional[Variant[String,Integer]] $maxvoljobs     = undef, # FIXME: Remove String
-  Optional[Bacula::Size]            $maxvolbytes    = undef,
-  Optional[Variant[String,Integer]] $maxvols        = undef, # FIXME: Remove String
-  Optional[String]                  $label          = undef,
-  Optional[String]                  $voluseduration = undef,
-  String                            $storage        = $bacula::director::storage,
-  String                            $pooltype       = 'Backup',
-  Bacula::Yesno                     $recycle        = true,
-  Bacula::Yesno                     $autoprune      = true,
-  String                            $purgeaction    = 'Truncate',
-  Optional[String]                  $next_pool      = undef,
-  String                            $conf_dir       = $bacula::conf_dir,
+  Optional[String]                     $volret         = undef,
+  Optional[Variant[String,Integer[1]]] $maxvoljobs     = undef, # FIXME: Remove String
+  Optional[Bacula::Size]               $maxvolbytes    = undef,
+  Optional[Variant[String,Integer[1]]] $maxvols        = undef, # FIXME: Remove String
+  Optional[String]                     $label          = undef,
+  Optional[String]                     $voluseduration = undef,
+  String                               $storage        = $bacula::director::storage,
+  String                               $pooltype       = 'Backup',
+  Bacula::Yesno                        $recycle        = true,
+  Bacula::Yesno                        $autoprune      = true,
+  String                               $purgeaction    = 'Truncate',
+  Optional[String]                     $next_pool      = undef,
+  String                               $conf_dir       = $bacula::conf_dir,
 ) {
   $epp_pool_variables = {
     name           => $name,

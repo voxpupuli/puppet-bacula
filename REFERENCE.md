@@ -36,6 +36,7 @@
 
 * [`Bacula::JobType`](#Bacula--JobType): The type of job
 * [`Bacula::Message`](#Bacula--Message): A Bacula message specification
+* [`Bacula::Password`](#Bacula--Password): Temporary workarond to accept Sensitive and non-Sensitive passwords
 * [`Bacula::Runscript`](#Bacula--Runscript): A Bacula Runscript specification
 * [`Bacula::Size`](#Bacula--Size): A size indication
 * [`Bacula::Time`](#Bacula--Time): A time indication
@@ -368,7 +369,7 @@ Default value: `[]`
 
 ##### <a name="-bacula--client--password"></a>`password`
 
-Data type: `String`
+Data type: `Bacula::Password`
 
 A password to use for communication with this File Daemon
 
@@ -564,7 +565,7 @@ Default value: `'bacula'`
 
 ##### <a name="-bacula--director--db_pw"></a>`db_pw`
 
-Data type: `String`
+Data type: `Bacula::Password`
 
 The database user's password
 
@@ -661,7 +662,7 @@ Default value: `true`
 
 ##### <a name="-bacula--director--password"></a>`password`
 
-Data type: `String`
+Data type: `Bacula::Password`
 
 password to connect to the director
 
@@ -735,7 +736,7 @@ Default value: `$bacula::director::db_name`
 
 ##### <a name="-bacula--director--postgresql--db_pw"></a>`db_pw`
 
-Data type: `String`
+Data type: `Bacula::Password`
 
 The database user's password
 
@@ -889,7 +890,7 @@ Default value: `'File'`
 
 ##### <a name="-bacula--storage--password"></a>`password`
 
-Data type: `String`
+Data type: `Bacula::Password`
 
 Specifies the password that must be supplied by the named Director
 
@@ -984,7 +985,7 @@ The port of the Bacula File server daemon
 
 ##### <a name="-bacula--director--client--password"></a>`password`
 
-Data type: `String`
+Data type: `Bacula::Password`
 
 The password to be used when establishing a connection with the File services
 
@@ -1308,7 +1309,7 @@ Default value: `9103`
 
 ##### <a name="-bacula--director--storage--password"></a>`password`
 
-Data type: `String`
+Data type: `Bacula::Password`
 
 Bacula director configuration for Storage option 'Password'
 
@@ -2202,6 +2203,12 @@ Struct[{
     syslog           => Optional[String],
 }]
 ```
+
+### <a name="Bacula--Password"></a>`Bacula::Password`
+
+Temporary workarond to accept Sensitive and non-Sensitive passwords
+
+Alias of `Variant[String[1], Sensitive[String[1]]]`
 
 ### <a name="Bacula--Runscript"></a>`Bacula::Runscript`
 

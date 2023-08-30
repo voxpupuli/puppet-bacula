@@ -39,7 +39,7 @@ class bacula::storage (
   Array[String[1]]     $listen_address = [],
   Integer[1]           $maxconcurjobs  = 5,
   String               $media_type     = 'File',
-  String               $password       = 'secret',
+  Bacula::Password     $password       = 'secret',
   Stdlib::Port         $port           = 9103,
   Stdlib::Absolutepath $rundir         = $bacula::rundir,
   String               $storage        = $trusted['certname'], # storage here is not storage_name

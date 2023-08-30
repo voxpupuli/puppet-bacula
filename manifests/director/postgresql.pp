@@ -25,12 +25,13 @@ class bacula::director::postgresql (
       password => postgresql::postgresql_password($db_user, $db_pw),
       encoding => 'SQL_ASCII',
       locale   => 'C',
-      before   => Exec["/bin/sh ${make_bacula_tables}"],
-      notify   => Exec["/bin/sh ${make_bacula_tables}"],
+      before   => Exec['make_bacula_tables'],
+      notify   => Exec['make_bacula_tables'],
     }
   }
 
-  exec { "/bin/sh ${make_bacula_tables}":
+  exec { 'make_bacula_tables':
+    command     => ['/bin/sh', $make_bacula_tables],
     user        => $user,
     refreshonly => true,
     environment => ["db_name=${db_name}"],

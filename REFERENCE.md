@@ -88,7 +88,7 @@ The following parameters are available in the `bacula` class:
 
 ##### <a name="-bacula--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The path to the bacula configuration directory
 
@@ -106,13 +106,13 @@ The posix group for bacula
 
 ##### <a name="-bacula--homedir"></a>`homedir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The bacula user's home directory path
 
 ##### <a name="-bacula--rundir"></a>`rundir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The run dir for the daemons
 
@@ -184,7 +184,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--tls_certificate"></a>`tls_certificate`
 
-Data type: `Optional[String]`
+Data type: `Optional[Stdlib::Absolutepath]`
 
 The full path and filename of a PEM encoded TLS certificate
 
@@ -192,7 +192,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--tls_key"></a>`tls_key`
 
-Data type: `Optional[String]`
+Data type: `Optional[Stdlib::Absolutepath]`
 
 The full path and filename of a PEM encoded TLS private key
 
@@ -216,7 +216,7 @@ Default value: `[]`
 
 ##### <a name="-bacula--tls_ca_certificate_file"></a>`tls_ca_certificate_file`
 
-Data type: `Optional[String]`
+Data type: `Optional[Stdlib::Absolutepath]`
 
 The full path and filename specifying a PEM encoded TLS CA certificate(s)
 
@@ -224,7 +224,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--tls_ca_certificate_dir"></a>`tls_ca_certificate_dir`
 
-Data type: `Optional[String]`
+Data type: `Optional[Stdlib::Absolutepath]`
 
 Full path to TLS CA certificate directory
 
@@ -232,7 +232,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--tls_dh_file"></a>`tls_dh_file`
 
-Data type: `Optional[String]`
+Data type: `Optional[Stdlib::Absolutepath]`
 
 Path to PEM encoded Diffie-Hellman parameter file
 
@@ -448,7 +448,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--client--pki_keypair"></a>`pki_keypair`
 
-Data type: `Optional[String]`
+Data type: `Optional[Stdlib::Absolutepath]`
 
 Bacula FD option for 'PKI Keypair'
 
@@ -456,7 +456,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--client--pki_master_key"></a>`pki_master_key`
 
-Data type: `Optional[String]`
+Data type: `Optional[Stdlib::Absolutepath]`
 
 Bacula FD option for 'PKI Master Key'
 
@@ -464,7 +464,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--client--plugin_dir"></a>`plugin_dir`
 
-Data type: `Optional[String]`
+Data type: `Optional[Stdlib::Absolutepath]`
 
 Bacula FD option for the 'Plugin Directory'
 
@@ -548,7 +548,7 @@ Default value: `true`
 
 ##### <a name="-bacula--director--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Path to bacula configuration directory
 
@@ -620,7 +620,7 @@ Default value: `$bacula::bacula_group`
 
 ##### <a name="-bacula--director--homedir"></a>`homedir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The bacula director working directory
 
@@ -677,7 +677,7 @@ Default value: `9101`
 
 ##### <a name="-bacula--director--rundir"></a>`rundir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Bacula Director option for 'Pid Directory'
 
@@ -792,7 +792,7 @@ A list of packages to install; loaded from hiera
 
 ##### <a name="-bacula--storage--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Path to bacula configuration directory
 
@@ -800,7 +800,7 @@ Default value: `$bacula::conf_dir`
 
 ##### <a name="-bacula--storage--device"></a>`device`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The system file name of the storage device managed by this storage daemon
 
@@ -856,7 +856,7 @@ Default value: `$bacula::bacula_group`
 
 ##### <a name="-bacula--storage--homedir"></a>`homedir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The directory in which the Storage daemon may put its status files
 
@@ -905,7 +905,7 @@ Default value: `9103`
 
 ##### <a name="-bacula--storage--rundir"></a>`rundir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The directory in which the Director may put its process Id file files
 
@@ -1008,7 +1008,7 @@ If AutoPrune is set to yes, Bacula will automatically apply the File retention p
 
 ##### <a name="-bacula--director--client--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The path to the bacula configuration directory
 
@@ -1042,13 +1042,13 @@ The following parameters are available in the `bacula::director::fileset` define
 
 ##### <a name="-bacula--director--fileset--files"></a>`files`
 
-Data type: `Array[String]`
+Data type: `Array[Stdlib::Absolutepath]`
 
 The list of directories and/or files to be processed in the backup job
 
 ##### <a name="-bacula--director--fileset--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The bacula configuration director.  Should not need adjusting
 
@@ -1064,7 +1064,7 @@ Default value: `$bacula::director_name`
 
 ##### <a name="-bacula--director--fileset--excludes"></a>`excludes`
 
-Data type: `Array[String]`
+Data type: `Array[Stdlib::Absolutepath]`
 
 A list of paths to exclude from the filest
 
@@ -1120,7 +1120,7 @@ The full content of the job definition
 
 ##### <a name="-bacula--director--job--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Overridden at realize, should not need adjusting
 
@@ -1263,7 +1263,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--director--pool--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 The path to the bacula configuration directory
 
@@ -1340,7 +1340,7 @@ Default value: `1`
 
 ##### <a name="-bacula--director--storage--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Bacula configuration directory
 
@@ -1403,7 +1403,7 @@ The following parameters are available in the `bacula::job` defined type:
 
 ##### <a name="-bacula--job--files"></a>`files`
 
-Data type: `Array[String]`
+Data type: `Array[Stdlib::Absolutepath]`
 
 An array of files that you wish to get backed up on this job for this host.  ie: ["/etc","/usr/local"]
 
@@ -1411,7 +1411,7 @@ Default value: `[]`
 
 ##### <a name="-bacula--job--excludes"></a>`excludes`
 
-Data type: `Array[String]`
+Data type: `Array[Stdlib::Absolutepath]`
 
 An array of files to skip for the given job.  ie: ["/usr/local/src"]
 
@@ -1938,7 +1938,7 @@ A list of Bacula Run directives
 
 ##### <a name="-bacula--schedule--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Path to bacula configuration directory
 
@@ -1987,7 +1987,7 @@ Default value: `'File'`
 
 ##### <a name="-bacula--storage--device--device"></a>`device`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Bacula director configuration for Device option 'Archive Device'
 
@@ -2043,7 +2043,7 @@ Default value: `1`
 
 ##### <a name="-bacula--storage--device--conf_dir"></a>`conf_dir`
 
-Data type: `String`
+Data type: `Stdlib::Absolutepath`
 
 Path to bacula configuration directory
 

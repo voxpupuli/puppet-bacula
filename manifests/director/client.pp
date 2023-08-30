@@ -29,7 +29,7 @@ define bacula::director::client (
   Bacula::Time                 $file_retention,
   Bacula::Time                 $job_retention,
   Bacula::Yesno                $autoprune,
-  String                       $conf_dir = $bacula::conf_dir,
+  Stdlib::Absolutepath         $conf_dir = $bacula::conf_dir,
 ) {
   $epp_client_variables = {
     name           => $name,

@@ -40,7 +40,7 @@ class bacula::director (
   String                        $services,
   String                        $make_bacula_tables,
   Bacula::Yesno                 $manage_db           = true,
-  String                        $conf_dir            = $bacula::conf_dir,
+  Stdlib::Absolutepath          $conf_dir            = $bacula::conf_dir,
   String                        $db_name             = 'bacula',
   String                        $db_pw               = 'notverysecret',
   String                        $db_user             = 'bacula',
@@ -49,14 +49,14 @@ class bacula::director (
   String                        $director_address    = $bacula::director_address,
   String                        $director            = $trusted['certname'], # director here is not bacula::director
   String                        $group               = $bacula::bacula_group,
-  String                        $homedir             = $bacula::homedir,
+  Stdlib::Absolutepath          $homedir             = $bacula::homedir,
   Optional[String]              $job_tag             = $bacula::job_tag,
   Array[String[1]]              $listen_address      = [],
   Integer[1]                    $max_concurrent_jobs = 20,
   Boolean                       $manage_defaults     = true,
   String                        $password            = 'secret',
   Stdlib::Port                  $port                = 9101,
-  String                        $rundir              = $bacula::rundir,
+  Stdlib::Absolutepath          $rundir              = $bacula::rundir,
   String                        $storage_name        = $bacula::storage_name,
 ) inherits bacula {
   if $manage_defaults {

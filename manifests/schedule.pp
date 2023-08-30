@@ -15,8 +15,8 @@
 #   }
 #
 define bacula::schedule (
-  Array[String] $runs,
-  String        $conf_dir = $bacula::conf_dir,
+  Array[String]        $runs,
+  Stdlib::Absolutepath $conf_dir = $bacula::conf_dir,
 ) {
   concat::fragment { "bacula-schedule-${name}":
     target  => "${conf_dir}/conf.d/schedule.conf",

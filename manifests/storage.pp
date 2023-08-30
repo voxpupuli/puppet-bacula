@@ -25,26 +25,26 @@
 # @param user           The posix user for bacula
 #
 class bacula::storage (
-  String              $services,
-  Array[String]       $packages,
-  String              $conf_dir       = $bacula::conf_dir,
-  String              $device         = '/bacula',
-  Stdlib::Filemode    $device_mode    = '0770',
-  String              $device_name    = "${trusted['certname']}-device",
-  String              $device_owner   = $bacula::bacula_user,
-  String              $device_seltype = $bacula::device_seltype,
-  String              $director_name  = $bacula::director_name,
-  String              $group          = $bacula::bacula_group,
-  String              $homedir        = $bacula::homedir,
-  Array[String[1]]    $listen_address = [],
-  Integer[1]          $maxconcurjobs  = 5,
-  String              $media_type     = 'File',
-  String              $password       = 'secret',
-  Stdlib::Port        $port           = 9103,
-  String              $rundir         = $bacula::rundir,
-  String              $storage        = $trusted['certname'], # storage here is not storage_name
-  String              $address        = $facts['networking']['fqdn'],
-  String              $user           = $bacula::bacula_user,
+  String               $services,
+  Array[String]        $packages,
+  Stdlib::Absolutepath $conf_dir       = $bacula::conf_dir,
+  Stdlib::Absolutepath $device         = '/bacula',
+  Stdlib::Filemode     $device_mode    = '0770',
+  String               $device_name    = "${trusted['certname']}-device",
+  String               $device_owner   = $bacula::bacula_user,
+  String               $device_seltype = $bacula::device_seltype,
+  String               $director_name  = $bacula::director_name,
+  String               $group          = $bacula::bacula_group,
+  Stdlib::Absolutepath $homedir        = $bacula::homedir,
+  Array[String[1]]     $listen_address = [],
+  Integer[1]           $maxconcurjobs  = 5,
+  String               $media_type     = 'File',
+  String               $password       = 'secret',
+  Stdlib::Port         $port           = 9103,
+  Stdlib::Absolutepath $rundir         = $bacula::rundir,
+  String               $storage        = $trusted['certname'], # storage here is not storage_name
+  String               $address        = $facts['networking']['fqdn'],
+  String               $user           = $bacula::bacula_user,
 ) inherits bacula {
   # Allow for package names to include EPP syntax for db_type
   $package_names = $packages.map |$p| {

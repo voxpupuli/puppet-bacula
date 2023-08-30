@@ -16,10 +16,10 @@
 #   }
 #
 define bacula::director::fileset (
-  Array[String]                                $files,
-  String                                       $conf_dir      = $bacula::conf_dir,
-  String                                       $director_name = $bacula::director_name,
-  Array[String]                                $excludes      = [],
+  Array[Stdlib::Absolutepath] $files,
+  Stdlib::Absolutepath        $conf_dir      = $bacula::conf_dir,
+  String                      $director_name = $bacula::director_name,
+  Array[Stdlib::Absolutepath] $excludes      = [],
   Hash[String, Variant[String, Array[String], Bacula::Yesno]] $options       = {
     'signature'   => 'SHA1',
     'compression' => 'GZIP9',

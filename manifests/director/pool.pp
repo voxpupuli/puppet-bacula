@@ -41,7 +41,7 @@ define bacula::director::pool (
   Bacula::Yesno                        $autoprune      = true,
   String                               $purgeaction    = 'Truncate',
   Optional[String]                     $next_pool      = undef,
-  String                               $conf_dir       = $bacula::conf_dir,
+  Stdlib::Absolutepath                 $conf_dir       = $bacula::conf_dir,
 ) {
   $epp_pool_variables = {
     name           => $name,

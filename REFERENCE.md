@@ -1168,7 +1168,7 @@ The following parameters are available in the `bacula::director::pool` defined t
 
 ##### <a name="-bacula--director--pool--volret"></a>`volret`
 
-Data type: `Optional[String]`
+Data type: `Optional[Bacula::Time]`
 
 Bacula pool configuration option "Volume Retention"
 
@@ -1208,7 +1208,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--director--pool--voluseduration"></a>`voluseduration`
 
-Data type: `Optional[String]`
+Data type: `Optional[Bacula::Time]`
 
 Bacula pool configuration option "Volume Use Duration"
 
@@ -1612,7 +1612,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--job--max_full_interval"></a>`max_full_interval`
 
-Data type: `Optional[String]`
+Data type: `Optional[Bacula::Time]`
 
 The time specifies the maximum allowed age (counting from start time) of the most recent successful Full backup that is required in order to run Incremental or Differential backup jobs. f the most recent Full backup is older than this interval, Incremental and Differential backups will be upgraded to Full backups automatically.
 
@@ -1756,7 +1756,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--jobdefs--max_full_interval"></a>`max_full_interval`
 
-Data type: `Optional[String]`
+Data type: `Optional[Bacula::Time]`
 
 The time specifies the maximum allowed age (counting from start time) of the most recent successful Full backup that is required in order to run Incremental or Differential backup jobs. f the most recent Full backup is older than this interval, Incremental and Differential backups will be upgraded to Full backups automatically.
 

@@ -45,7 +45,7 @@ class bacula::director (
   String                        $db_pw               = 'notverysecret',
   String                        $db_user             = 'bacula',
   Optional[String]              $db_address          = undef,
-  Optional[String]              $db_port             = undef,
+  Optional[Stdlib::Port]        $db_port             = undef,
   String                        $director_address    = $bacula::director_address,
   String                        $director            = $trusted['certname'], # director here is not bacula::director
   String                        $group               = $bacula::bacula_group,
@@ -55,7 +55,7 @@ class bacula::director (
   Integer                       $max_concurrent_jobs = 20,
   Boolean                       $manage_defaults     = true,
   String                        $password            = 'secret',
-  Integer                       $port                = 9101,
+  Stdlib::Port                  $port                = 9101,
   String                        $rundir              = $bacula::rundir,
   String                        $storage_name        = $bacula::storage_name,
 ) inherits bacula {

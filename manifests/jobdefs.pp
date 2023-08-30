@@ -20,19 +20,19 @@
 #
 define bacula::jobdefs (
   Bacula::JobType        $jobtype                  = 'Backup',
-  String                 $sched                    = 'Default',
-  String                 $messages                 = 'Standard',
+  String[1]              $sched                    = 'Default',
+  String[1]              $messages                 = 'Standard',
   Integer                $priority                 = 10,
-  String                 $pool                     = 'Default',
-  Optional[String]       $full_backup_pool         = undef,
-  Optional[String]       $differential_backup_pool = undef,
-  Optional[String]       $level                    = undef,
+  String[1]              $pool                     = 'Default',
+  Optional[String[1]]    $full_backup_pool         = undef,
+  Optional[String[1]]    $differential_backup_pool = undef,
+  Optional[String[1]]    $level                    = undef,
   Bacula::Yesno          $accurate                 = false,
   Bacula::Yesno          $reschedule_on_error      = false,
   Bacula::Time           $reschedule_interval      = '1 hour',
   Integer                $reschedule_times         = 10,
   Integer[1]             $max_concurrent_jobs      = 1,
-  Optional[String]       $write_bootstrap          = undef,
+  Optional[String[1]]    $write_bootstrap          = undef,
   Optional[Bacula::Time] $max_full_interval        = undef,
 ) {
   include bacula

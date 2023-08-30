@@ -20,8 +20,8 @@
 # @param group           The posix group for bacula
 #
 define bacula::storage::device (
-  String               $device_name     = $name,
-  String               $media_type      = 'File',
+  String[1]            $device_name     = $name,
+  String[1]            $media_type      = 'File',
   Stdlib::Absolutepath $device          = '/bacula',
   Bacula::Yesno        $label_media     = true,
   Bacula::Yesno        $random_access   = true,
@@ -31,10 +31,10 @@ define bacula::storage::device (
   Integer[1]           $maxconcurjobs   = 1,
   Stdlib::Absolutepath $conf_dir        = $bacula::conf_dir,
   Stdlib::Filemode     $device_mode     = '0770',
-  String               $device_owner    = $bacula::bacula_user,
-  String               $device_seltype  = $bacula::device_seltype,
-  String               $director_name   = $bacula::director_name,
-  String               $group           = $bacula::bacula_group,
+  String[1]            $device_owner    = $bacula::bacula_user,
+  String[1]            $device_seltype  = $bacula::device_seltype,
+  String[1]            $director_name   = $bacula::director_name,
+  String[1]            $group           = $bacula::bacula_group,
 ) {
   $epp_device_variables = {
     device_name     => $device_name,

@@ -16,11 +16,11 @@
 # @param conf_dir      Bacula configuration directory
 #
 define bacula::director::storage (
-  String               $address       = $name,
+  String[1]            $address       = $name,
   Stdlib::Port         $port          = 9103,
   Bacula::Password     $password      = 'secret',
-  String               $device_name   = "${facts['networking']['fqdn']}-device",
-  String               $media_type    = 'File',
+  String[1]            $device_name   = "${facts['networking']['fqdn']}-device",
+  String[1]            $media_type    = 'File',
   Integer[1]           $maxconcurjobs = 1,
   Stdlib::Absolutepath $conf_dir      = $bacula::conf_dir,
 ) {

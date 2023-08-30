@@ -17,7 +17,7 @@
 #   }
 #
 define bacula::director::job (
-  String               $content,
+  String[1]            $content,
   Stdlib::Absolutepath $conf_dir = $bacula::conf_dir,
 ) {
   include bacula

@@ -8,10 +8,10 @@
 # @param db_user            The database user
 #
 class bacula::director::postgresql (
-  String           $make_bacula_tables = $bacula::director::make_bacula_tables,
-  String           $db_name            = $bacula::director::db_name,
+  String[1]        $make_bacula_tables = $bacula::director::make_bacula_tables,
+  String[1]        $db_name            = $bacula::director::db_name,
   Bacula::Password $db_pw              = $bacula::director::db_pw,
-  String           $db_user            = $bacula::director::db_user,
+  String[1]        $db_user            = $bacula::director::db_user,
 ) {
   include bacula
 

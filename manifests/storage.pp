@@ -25,26 +25,26 @@
 # @param user           The posix user for bacula
 #
 class bacula::storage (
-  String               $services,
-  Array[String]        $packages,
+  String[1]            $services,
+  Array[String[1]]     $packages,
   Stdlib::Absolutepath $conf_dir       = $bacula::conf_dir,
   Stdlib::Absolutepath $device         = '/bacula',
   Stdlib::Filemode     $device_mode    = '0770',
-  String               $device_name    = "${trusted['certname']}-device",
-  String               $device_owner   = $bacula::bacula_user,
-  String               $device_seltype = $bacula::device_seltype,
-  String               $director_name  = $bacula::director_name,
-  String               $group          = $bacula::bacula_group,
+  String[1]            $device_name    = "${trusted['certname']}-device",
+  String[1]            $device_owner   = $bacula::bacula_user,
+  String[1]            $device_seltype = $bacula::device_seltype,
+  String[1]            $director_name  = $bacula::director_name,
+  String[1]            $group          = $bacula::bacula_group,
   Stdlib::Absolutepath $homedir        = $bacula::homedir,
   Array[String[1]]     $listen_address = [],
   Integer[1]           $maxconcurjobs  = 5,
-  String               $media_type     = 'File',
+  String[1]            $media_type     = 'File',
   Bacula::Password     $password       = 'secret',
   Stdlib::Port         $port           = 9103,
   Stdlib::Absolutepath $rundir         = $bacula::rundir,
-  String               $storage        = $trusted['certname'], # storage here is not storage_name
-  String               $address        = $facts['networking']['fqdn'],
-  String               $user           = $bacula::bacula_user,
+  String[1]            $storage        = $trusted['certname'], # storage here is not storage_name
+  String[1]            $address        = $facts['networking']['fqdn'],
+  String[1]            $user           = $bacula::bacula_user,
 ) inherits bacula {
   # Allow for package names to include EPP syntax for db_type
   $package_names = $packages.map |$p| {

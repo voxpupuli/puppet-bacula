@@ -1,8 +1,0 @@
----
-bacula::director::packages:
-  - 'bacula-director-common'
-  - 'bacula-director-<%= $db_type %>'
-  - 'bacula-console'
-bacula::storage::packages:
-  - 'bacula-sd'
-  - 'bacula-sd-<%= $db_type %>'

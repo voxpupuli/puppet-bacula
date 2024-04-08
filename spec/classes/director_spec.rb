@@ -13,24 +13,12 @@ describe 'bacula::director' do
       when 'Debian'
         it { is_expected.to contain_class('bacula::director') }
 
-        case facts[:os]['release']['major']
-        when '7', '8'
-          expected_packages << 'bacula-director-common'
-        when '9'
-          expected_packages << 'bacula-director'
-        end
+        expected_packages << 'bacula-director'
         expected_packages << 'bacula-director-pgsql'
         expected_packages << 'bacula-console'
       when 'RedHat'
-        case facts[:os]['release']['major']
-        when '6'
-          expected_packages << 'bacula-director-common'
-          expected_packages << 'bacula-console'
-          expected_packages << 'bacula-director'
-        else
-          expected_packages << 'bacula-director'
-          expected_packages << 'bacula-console'
-        end
+        expected_packages << 'bacula-director'
+        expected_packages << 'bacula-console'
       when 'OpenBSD'
         expected_packages << 'bacula-server'
         expected_packages << 'bacula-pgsql'

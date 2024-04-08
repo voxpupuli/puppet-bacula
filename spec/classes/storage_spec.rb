@@ -21,29 +21,11 @@ describe 'bacula::storage' do
       case facts[:os]['family']
       when 'Debian'
         it { is_expected.to contain_package('bacula-sd') }
-
-        case facts[:os]['release']['major']
-        when '7', '8'
-          it { is_expected.to contain_package('bacula-sd-pgsql') }
-        end
       when 'RedHat'
-        case facts[:os]['release']['major']
-        when '6'
-          it do
-            is_expected.to contain_package('bacula-storage-common').with(
-              'ensure' => 'installed'
-            )
-          end
-
-          it { is_expected.not_to contain_package('bacula-storage') }
-        else
-          it do
-            is_expected.to contain_package('bacula-storage').with(
-              'ensure' => 'installed'
-            )
-          end
-
-          it { is_expected.not_to contain_package('bacula-storage-common') }
+        it do
+          is_expected.to contain_package('bacula-storage').with(
+            'ensure' => 'installed'
+          )
         end
       when 'OpenBSD'
         it { is_expected.to contain_package('bacula-server') }

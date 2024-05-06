@@ -19,21 +19,21 @@
 # @param syslog           Send the message to the system log (syslog) using the facility specified in the address field
 #
 define bacula::messages (
-  Optional[String]        $append           = undef,
-  Optional[String]        $catalog          = undef,
-  Optional[String]        $console          = undef,
+  Optional[String[1]]     $append           = undef,
+  Optional[String[1]]     $catalog          = undef,
+  Optional[String[1]]     $console          = undef,
   Enum['dir', 'fd', 'sd'] $daemon           = 'dir',
-  Optional[String]        $director         = undef,
-  Optional[String]        $mailcmd          = undef,
-  Optional[String]        $mail             = undef,
-  Optional[String]        $mailonerrorcmd   = undef,
-  Optional[String]        $mailonerror      = undef,
-  Optional[String]        $mailonsuccesscmd = undef,
-  Optional[String]        $mailonsuccess    = undef,
-  String                  $mname            = 'Standard',
-  Optional[String]        $operatorcmd      = undef,
-  Optional[String]        $operator         = undef,
-  Optional[String]        $syslog           = undef,
+  Optional[String[1]]     $director         = undef,
+  Optional[String[1]]     $mailcmd          = undef,
+  Optional[String[1]]     $mail             = undef,
+  Optional[String[1]]     $mailonerrorcmd   = undef,
+  Optional[String[1]]     $mailonerror      = undef,
+  Optional[String[1]]     $mailonsuccesscmd = undef,
+  Optional[String[1]]     $mailonsuccess    = undef,
+  String[1]               $mname            = 'Standard',
+  Optional[String[1]]     $operatorcmd      = undef,
+  Optional[String[1]]     $operator         = undef,
+  Optional[String[1]]     $syslog           = undef,
 ) {
   include bacula
   include bacula::common

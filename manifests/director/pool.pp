@@ -30,9 +30,9 @@
 #
 define bacula::director::pool (
   Optional[String]                  $volret         = undef,
-  Optional[Variant[String,Integer]] $maxvoljobs     = undef, # FIXME: Remove String
+  Optional[Integer[1]]              $maxvoljobs     = undef,
   Optional[Bacula::Size]            $maxvolbytes    = undef,
-  Optional[Variant[String,Integer]] $maxvols        = undef, # FIXME: Remove String
+  Optional[Integer[1]]              $maxvols        = undef,
   Optional[String]                  $label          = undef,
   Optional[String]                  $voluseduration = undef,
   String                            $storage        = $bacula::director::storage,

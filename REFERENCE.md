@@ -971,7 +971,7 @@ The address of the Bacula File server daemon
 
 ##### <a name="-bacula--director--client--port"></a>`port`
 
-Data type: `Variant[String,Integer]`
+Data type: `Stdlib::Port`
 
 The port of the Bacula File server daemon
 
@@ -1168,7 +1168,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--director--pool--maxvoljobs"></a>`maxvoljobs`
 
-Data type: `Optional[Variant[String,Integer]]`
+Data type: `Optional[Integer[1]]`
 
 Bacula pool configuration option "Maximum Volume Jobs"
 
@@ -1184,7 +1184,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--director--pool--maxvols"></a>`maxvols`
 
-Data type: `Optional[Variant[String,Integer]]`
+Data type: `Optional[Integer[1]]`
 
 Bacula pool configuration option "Maximum Volumes"
 

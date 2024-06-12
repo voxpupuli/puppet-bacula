@@ -36,6 +36,8 @@ define bacula::storage::device (
   String           $director_name   = $bacula::director_name,
   String           $group           = $bacula::bacula_group,
 ) {
+  include bacula::storage
+
   $epp_device_variables = {
     device_name     => $device_name,
     media_type      => $media_type,
@@ -60,6 +62,7 @@ define bacula::storage::device (
       group   => $group,
       mode    => $device_mode,
       seltype => $device_seltype,
+      require => Package[$bacula::storage::package_names],
     }
   }
 }

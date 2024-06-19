@@ -44,7 +44,7 @@ define bacula::director::console (
     whereacl     => $whereacl,
     jobacl       => $jobacl,
     clientacl    => $clientacl,
-    storageacl   => $scheduleacl,
+    storageacl   => $storageacl,
     scheduleacl  => $scheduleacl,
     poolacl      => $poolacl,
     filesetacl   => $filesetacl,

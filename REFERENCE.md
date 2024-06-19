@@ -35,6 +35,7 @@
 
 ### Data types
 
+* [`Bacula::Command`](#Bacula--Command): A Bacula console command
 * [`Bacula::JobType`](#Bacula--JobType): The type of job
 * [`Bacula::Message`](#Bacula--Message): A Bacula message specification
 * [`Bacula::Password`](#Bacula--Password): Temporary workarond to accept Sensitive and non-Sensitive passwords
@@ -1058,7 +1059,7 @@ When this keyword is present, any resource or command name (which ever is approp
 
 ```puppet
 bacula::director::console { 'Monitoring':
-  password     => 'monitoring_password',
+  password => 'monitoring_password',
 }
 ```
 
@@ -1150,23 +1151,7 @@ Default value: `'*all*'`
 
 ##### <a name="-bacula--director--console--commandacl"></a>`commandacl`
 
-Data type:
-
-```puppet
-Array[Enum[
-      ['add'], ['autodisplay'], ['automount'], ['cancel'], ['cloud'], ['create'], ['delete'], ['disable'], ['enable'], ['estimate'],
-      ['exit'], ['gui'], ['help'], ['label'], ['list'], ['llist'], ['messages'], ['memory'], ['mount'], ['prune'], ['purge'], ['query'],
-      ['quit'], ['relabel'], ['release'], ['reload'], ['restart'], ['resume'], ['restore'], ['run'], ['setbandwidth'], ['setdebug'],
-      ['setip'], ['show'], ['sqlquery'], ['status'], ['tag'], ['time'], ['trace'], ['umount'], ['unmount'], ['update'], ['use'], ['var'],
-      ['version'], ['wait'], ['.api'], ['.backups'], ['.clients'], ['.catalogs'], ['.defaults'], ['.die'], ['.dir'], ['.dump'], ['.exit'],
-      ['.events'], ['.filesets'], ['.help'], ['.jobs'], ['.estimate'], ['.jlist'], ['.levels'], ['.messages'], ['.msgs'], ['.pools'],
-      ['.quit'], ['.putfile'], ['.schedule'], ['.sql'], ['.status'], ['.storage'], ['.volstatus'], ['.media'], ['.mediatypes'],
-      ['.locations'], ['.actiononpurge'], ['.bvfs_lsdirs'], ['.bvfs_lsfiles'], ['.bvfs_get_volumes'], ['.bvfs_update'],
-      ['.bvfs_get_jobids'], ['.bvfs_get_jobs'], ['.bvfs_get_bootstrap'], ['.bvfs_get_fileindex'], ['.bvfs_versions'], ['.bvfs_get_delta'],
-      ['.bvfs_restore'], ['.bvfs_cleanup'], ['.bvfs_decode_lstat'], ['.bvfs_clear_cache'], ['.bvfs_update_fv'], ['.bvfs_delete_fileid'],
-      ['.setuid'], ['.ls'], ['.types'], ['.query'], ['.tags'],
-  ]]
-```
+Data type: `Array[Bacula::Command]`
 
 A list of of console commands that can be executed by the console.
 
@@ -2336,6 +2321,15 @@ Data type: `Variant[Boolean, Enum["yes", "true", "no", "false"]]`
 A boolean value
 
 ## Data types
+
+### <a name="Bacula--Command"></a>`Bacula::Command`
+
+A Bacula console command
+
+* **See also**
+  * https://www.bacula.org/15.0.x-manuals/en/console/Bacula_Enterprise_Console.html
+
+Alias of `Enum['add', 'autodisplay', 'automount', 'cancel', 'cloud', 'create', 'delete', 'disable', 'enable', 'estimate', 'exit', 'gui', 'help', 'label', 'list', 'llist', 'messages', 'memory', 'mount', 'prune', 'purge', 'query', 'quit', 'relabel', 'release', 'reload', 'restart', 'resume', 'restore', 'run', 'setbandwidth', 'setdebug', 'setip', 'show', 'sqlquery', 'status', 'tag', 'time', 'trace', 'umount', 'unmount', 'update', 'use', 'var', 'version', 'wait', '.api', '.backups', '.clients', '.catalogs', '.defaults', '.die', '.dir', '.dump', '.exit', '.events', '.filesets', '.help', '.jobs', '.estimate', '.jlist', '.levels', '.messages', '.msgs', '.pools', '.quit', '.putfile', '.schedule', '.sql', '.status', '.storage', '.volstatus', '.media', '.mediatypes', '.locations', '.actiononpurge', '.bvfs_lsdirs', '.bvfs_lsfiles', '.bvfs_get_volumes', '.bvfs_update', '.bvfs_get_jobids', '.bvfs_get_jobs', '.bvfs_get_bootstrap', '.bvfs_get_fileindex', '.bvfs_versions', '.bvfs_get_delta', '.bvfs_restore', '.bvfs_cleanup', '.bvfs_decode_lstat', '.bvfs_clear_cache', '.bvfs_update_fv', '.bvfs_delete_fileid', '.setuid', '.ls', '.types', '.query', '.tags']`
 
 ### <a name="Bacula--JobType"></a>`Bacula::JobType`
 

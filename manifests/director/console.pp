@@ -21,33 +21,21 @@
 #
 # @example
 #   bacula::director::console { 'Monitoring':
-#     password     => 'monitoring_password',
+#     password => 'monitoring_password',
 #   }
 #
 define bacula::director::console (
-  String[1] $password,
-  String $conf_dir                 = $bacula::conf_dir,
-  String[1] $catalogacl            = '*all*',
-  Array[Enum[
-      ['add'], ['autodisplay'], ['automount'], ['cancel'], ['cloud'], ['create'], ['delete'], ['disable'], ['enable'], ['estimate'],
-      ['exit'], ['gui'], ['help'], ['label'], ['list'], ['llist'], ['messages'], ['memory'], ['mount'], ['prune'], ['purge'], ['query'],
-      ['quit'], ['relabel'], ['release'], ['reload'], ['restart'], ['resume'], ['restore'], ['run'], ['setbandwidth'], ['setdebug'],
-      ['setip'], ['show'], ['sqlquery'], ['status'], ['tag'], ['time'], ['trace'], ['umount'], ['unmount'], ['update'], ['use'], ['var'],
-      ['version'], ['wait'], ['.api'], ['.backups'], ['.clients'], ['.catalogs'], ['.defaults'], ['.die'], ['.dir'], ['.dump'], ['.exit'],
-      ['.events'], ['.filesets'], ['.help'], ['.jobs'], ['.estimate'], ['.jlist'], ['.levels'], ['.messages'], ['.msgs'], ['.pools'],
-      ['.quit'], ['.putfile'], ['.schedule'], ['.sql'], ['.status'], ['.storage'], ['.volstatus'], ['.media'], ['.mediatypes'],
-      ['.locations'], ['.actiononpurge'], ['.bvfs_lsdirs'], ['.bvfs_lsfiles'], ['.bvfs_get_volumes'], ['.bvfs_update'],
-      ['.bvfs_get_jobids'], ['.bvfs_get_jobs'], ['.bvfs_get_bootstrap'], ['.bvfs_get_fileindex'], ['.bvfs_versions'], ['.bvfs_get_delta'],
-      ['.bvfs_restore'], ['.bvfs_cleanup'], ['.bvfs_decode_lstat'], ['.bvfs_clear_cache'], ['.bvfs_update_fv'], ['.bvfs_delete_fileid'],
-      ['.setuid'], ['.ls'], ['.types'], ['.query'], ['.tags'],
-  ]] $commandacl                   = ['list'],
-  Optional[String[1]] $jobacl      = undef,
-  Optional[String[1]] $clientacl   = undef,
-  Optional[String[1]] $storageacl  = undef,
-  Optional[String[1]] $scheduleacl = undef,
-  Optional[String[1]] $poolacl     = undef,
-  Optional[String[1]] $filesetacl  = undef,
-  Optional[String[1]] $whereacl    = undef,
+  String[1]              $password,
+  String                 $conf_dir    = $bacula::conf_dir,
+  String[1]              $catalogacl  = '*all*',
+  Array[Bacula::Command] $commandacl  = ['list'],
+  Optional[String[1]]    $jobacl      = undef,
+  Optional[String[1]]    $clientacl   = undef,
+  Optional[String[1]]    $storageacl  = undef,
+  Optional[String[1]]    $scheduleacl = undef,
+  Optional[String[1]]    $poolacl     = undef,
+  Optional[String[1]]    $filesetacl  = undef,
+  Optional[String[1]]    $whereacl    = undef,
 ) {
   $epp_console_variables = {
     name         => $name,

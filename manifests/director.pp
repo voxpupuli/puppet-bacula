@@ -155,6 +155,7 @@ class bacula::director (
   ]
 
   $sub_confs_with_secrets = [
+    "${conf_dir}/conf.d/console.conf",
     "${conf_dir}/conf.d/client.conf",
     "${conf_dir}/conf.d/storage.conf",
   ]

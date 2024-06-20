@@ -5,3 +5,4 @@
 @<%= $bacula::conf_dir %>/conf.d/fileset.conf
 @<%= $bacula::conf_dir %>/conf.d/jobdefs.conf
 @<%= $bacula::conf_dir %>/conf.d/job.conf
+@<%= $bacula::conf_dir %>/conf.d/console.conf

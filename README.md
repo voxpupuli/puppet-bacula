@@ -43,7 +43,7 @@ site defaults, and tune more specifically where desired.
 As such, it is reasonable to use the following declaration in a profile used by all your nodes:
 
 ```puppet
-class bacula {
+class { 'bacula':
   storage_name  => 'mystorage.example.com',
   director_name => 'mydirector.example.com',
 }

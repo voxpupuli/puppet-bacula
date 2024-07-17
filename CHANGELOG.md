@@ -4,7 +4,29 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v7.0.0](https://github.com/voxpupuli/puppet-bacula/tree/v7.0.0) (2023-06-28)
+## [v8.0.0](https://github.com/voxpupuli/puppet-bacula/tree/v8.0.0) (2024-07-17)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/v7.0.0...v8.0.0)
+
+**Breaking changes:**
+
+- Drop Ubuntu 18.04 support [\#200](https://github.com/voxpupuli/puppet-bacula/pull/200) ([Valantin](https://github.com/Valantin))
+- Drop Debian 10 support [\#198](https://github.com/voxpupuli/puppet-bacula/pull/198) ([Valantin](https://github.com/Valantin))
+
+**Implemented enhancements:**
+
+- Add RedHat 9 support [\#202](https://github.com/voxpupuli/puppet-bacula/pull/202) ([Valantin](https://github.com/Valantin))
+- Add CentOS 9 support [\#201](https://github.com/voxpupuli/puppet-bacula/pull/201) ([Valantin](https://github.com/Valantin))
+- Add ubuntu 22.04 support [\#199](https://github.com/voxpupuli/puppet-bacula/pull/199) ([Valantin](https://github.com/Valantin))
+- Add Debian 12 support [\#197](https://github.com/voxpupuli/puppet-bacula/pull/197) ([Valantin](https://github.com/Valantin))
+- puppetlabs/postgresql: Allow 10.x [\#196](https://github.com/voxpupuli/puppet-bacula/pull/196) ([zilchms](https://github.com/zilchms))
+
+**Merged pull requests:**
+
+- Drop code for unsupported OS [\#203](https://github.com/voxpupuli/puppet-bacula/pull/203) ([Valantin](https://github.com/Valantin))
+- Fix unsafe interpolation of variable [\#192](https://github.com/voxpupuli/puppet-bacula/pull/192) ([smortex](https://github.com/smortex))
+
+## [v7.0.0](https://github.com/voxpupuli/puppet-bacula/tree/v7.0.0) (2023-07-01)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/v6.0.0...v7.0.0)
 

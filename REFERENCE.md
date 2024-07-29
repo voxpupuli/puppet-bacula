@@ -265,6 +265,7 @@ The following parameters are available in the `bacula::client` class:
 
 * [`messages`](#-bacula--client--messages)
 * [`packages`](#-bacula--client--packages)
+* [`ensure`](#-bacula--client--ensure)
 * [`services`](#-bacula--client--services)
 * [`default_pool`](#-bacula--client--default_pool)
 * [`default_pool_full`](#-bacula--client--default_pool_full)
@@ -297,6 +298,14 @@ Logging configuration; loaded from hiera
 Data type: `Array[String[1]]`
 
 A list of packages to install; loaded from hiera
+
+##### <a name="-bacula--client--ensure"></a>`ensure`
+
+Data type: `String[1]`
+
+What state the package should be in.
+
+Default value: `'present'`
 
 ##### <a name="-bacula--client--services"></a>`services`
 
@@ -499,6 +508,7 @@ The following parameters are available in the `bacula::director` class:
 
 * [`messages`](#-bacula--director--messages)
 * [`packages`](#-bacula--director--packages)
+* [`ensure`](#-bacula--director--ensure)
 * [`services`](#-bacula--director--services)
 * [`manage_db`](#-bacula--director--manage_db)
 * [`conf_dir`](#-bacula--director--conf_dir)
@@ -532,6 +542,14 @@ Logging configuration; loaded from hiera
 Data type: `Array[String[1]]`
 
 A list of packages to install; loaded from hiera
+
+##### <a name="-bacula--director--ensure"></a>`ensure`
+
+Data type: `String[1]`
+
+What state the package should be in.
+
+Default value: `'present'`
 
 ##### <a name="-bacula--director--services"></a>`services`
 
@@ -760,6 +778,7 @@ The following parameters are available in the `bacula::storage` class:
 
 * [`services`](#-bacula--storage--services)
 * [`packages`](#-bacula--storage--packages)
+* [`ensure`](#-bacula--storage--ensure)
 * [`conf_dir`](#-bacula--storage--conf_dir)
 * [`device`](#-bacula--storage--device)
 * [`device_mode`](#-bacula--storage--device_mode)
@@ -790,6 +809,14 @@ A list of services to operate; loaded from hiera
 Data type: `Array[String[1]]`
 
 A list of packages to install; loaded from hiera
+
+##### <a name="-bacula--storage--ensure"></a>`ensure`
+
+Data type: `String[1]`
+
+What state the package should be in.
+
+Default value: `'present'`
 
 ##### <a name="-bacula--storage--conf_dir"></a>`conf_dir`
 

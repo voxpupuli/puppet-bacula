@@ -4,6 +4,7 @@
 #
 # @param messages            Logging configuration; loaded from hiera
 # @param packages            A list of packages to install; loaded from hiera
+# @param ensure              What state the package should be in.
 # @param services            A list of services to operate; loaded from hiera
 # @param manage_db           Whether the module should manage the director database
 # @param conf_dir            Path to bacula configuration directory
@@ -39,6 +40,7 @@ class bacula::director (
   Array[String]                 $packages,
   String                        $services,
   String                        $make_bacula_tables,
+  String                        $ensure              = 'present',
   Bacula::Yesno                 $manage_db           = true,
   String                        $conf_dir            = $bacula::conf_dir,
   String                        $db_name             = 'bacula',
@@ -85,7 +87,7 @@ class bacula::director (
       }
     )
   }
-  ensure_packages($package_names)
+  ensure_packages($package_names, { ensure => $ensure })
 
   service { $services:
     ensure  => running,

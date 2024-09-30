@@ -2,6 +2,7 @@
 #
 # This class installs and configures the File Daemon to backup a client system.
 #
+# @param messages            Logging configuration; loaded from hiera
 # @param packages            A list of packages to install; loaded from hiera
 # @param services            A list of services to operate; loaded from hiera
 # @param default_pool        The name of the Pool for this FD to use by default
@@ -35,6 +36,7 @@
 #   Bacula being unable to bind twice to the IPv4 address and fail to start.
 # @param password            A password to use for communication with this File Daemon
 # @param max_concurrent_jobs Bacula FD option for 'Maximum Concurrent Jobs'
+# @param manage_defaults     Setup default message type
 # @param director_name       The hostname of the director for this FD
 # @param autoprune           Bacula FD option for 'AutoPrune'
 # @param file_retention      Bacula FD option for 'File Retention'
@@ -51,6 +53,7 @@
 #   class { 'bacula::client': director_name => 'mydirector.example.com' }
 #
 class bacula::client (
+  Hash[String, Bacula::Message] $messages,
   Array[String]           $packages,
   String                  $services,
   String                  $default_pool,
@@ -67,12 +70,20 @@ class bacula::client (
   Bacula::Time            $job_retention       = '6 months',
   String                  $client              = $trusted['certname'],
   String                  $address             = $facts['networking']['fqdn'],
+  Boolean                 $manage_defaults     = true,
   Optional[Bacula::Yesno] $pki_signatures      = undef,
   Optional[Bacula::Yesno] $pki_encryption      = undef,
   Optional[String]        $pki_keypair         = undef,
   Optional[String]        $pki_master_key      = undef,
   Optional[String]        $plugin_dir          = undef,
 ) inherits bacula {
+  if $manage_defaults {
+    bacula::messages { 'Standard-fd':
+      daemon   => 'fd',
+      director => "${director_name}-dir = all, !skipped, !restored",
+      append   => '"/var/log/bacula/bacula-fd.log" = all, !skipped',
+    }
+  }
   $group    = $bacula::bacula_group
   $conf_dir = $bacula::conf_dir
   $config_file = "${conf_dir}/bacula-fd.conf"
@@ -103,12 +114,7 @@ class bacula::client (
     content => epp('bacula/bacula-fd-header.epp'),
   }
 
-  bacula::messages { 'Standard-fd':
-    daemon   => 'fd',
-    director => "${director_name}-dir = all, !skipped, !restored",
-    append   => '"/var/log/bacula/bacula-fd.log" = all, !skipped',
-  }
-
+  create_resources(bacula::messages, $messages)
   # Tell the director about this client config
   @@bacula::director::client { $client:
     address        => $address,

@@ -262,6 +262,7 @@ class { 'bacula::client': director_name => 'mydirector.example.com' }
 
 The following parameters are available in the `bacula::client` class:
 
+* [`messages`](#-bacula--client--messages)
 * [`packages`](#-bacula--client--packages)
 * [`services`](#-bacula--client--services)
 * [`default_pool`](#-bacula--client--default_pool)
@@ -272,6 +273,7 @@ The following parameters are available in the `bacula::client` class:
 * [`listen_address`](#-bacula--client--listen_address)
 * [`password`](#-bacula--client--password)
 * [`max_concurrent_jobs`](#-bacula--client--max_concurrent_jobs)
+* [`manage_defaults`](#-bacula--client--manage_defaults)
 * [`director_name`](#-bacula--client--director_name)
 * [`autoprune`](#-bacula--client--autoprune)
 * [`file_retention`](#-bacula--client--file_retention)
@@ -283,6 +285,12 @@ The following parameters are available in the `bacula::client` class:
 * [`pki_keypair`](#-bacula--client--pki_keypair)
 * [`pki_master_key`](#-bacula--client--pki_master_key)
 * [`plugin_dir`](#-bacula--client--plugin_dir)
+
+##### <a name="-bacula--client--messages"></a>`messages`
+
+Data type: `Hash[String, Bacula::Message]`
+
+Logging configuration; loaded from hiera
 
 ##### <a name="-bacula--client--packages"></a>`packages`
 
@@ -374,6 +382,14 @@ Data type: `Integer`
 Bacula FD option for 'Maximum Concurrent Jobs'
 
 Default value: `2`
+
+##### <a name="-bacula--client--manage_defaults"></a>`manage_defaults`
+
+Data type: `Boolean`
+
+Setup default message type
+
+Default value: `true`
 
 ##### <a name="-bacula--client--director_name"></a>`director_name`
 

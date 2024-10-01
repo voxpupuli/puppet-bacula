@@ -385,11 +385,7 @@ Default value: `2`
 
 ##### <a name="-bacula--client--manage_defaults"></a>`manage_defaults`
 
-Data type: `Boolean`
-
 Setup default message type
-
-Default value: `true`
 
 ##### <a name="-bacula--client--director_name"></a>`director_name`
 
@@ -2194,21 +2190,21 @@ Alias of
 
 ```puppet
 Struct[{
-  mname            => String,
-  append           => Optional[String],
-  catalog          => Optional[String],
-  console          => Optional[String],
-  daemon           => Optional[String],
-  director         => Optional[String],
-  mail             => Optional[String],
-  mailcmd          => Optional[String],
-  mailonsuccess    => Optional[String],
-  mailonsuccesscmd => Optional[String],
-  mailonerror      => Optional[String],
-  mailonerrorcmd   => Optional[String],
-  operator         => Optional[String],
-  operatorcmd      => Optional[String],
-  syslog           => Optional[String],
+    mname            => String,
+    append           => Optional[String],
+    catalog          => Optional[String],
+    console          => Optional[String],
+    daemon           => Optional[String],
+    director         => Optional[String],
+    mail             => Optional[String],
+    mailcmd          => Optional[String],
+    mailonsuccess    => Optional[String],
+    mailonsuccesscmd => Optional[String],
+    mailonerror      => Optional[String],
+    mailonerrorcmd   => Optional[String],
+    operator         => Optional[String],
+    operatorcmd      => Optional[String],
+    syslog           => Optional[String],
 }]
 ```
 

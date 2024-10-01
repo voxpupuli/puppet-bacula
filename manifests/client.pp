@@ -54,36 +54,28 @@
 #
 class bacula::client (
   Hash[String, Bacula::Message] $messages,
-  Array[String]           $packages,
-  String                  $services,
-  String                  $default_pool,
-  Optional[String]        $default_pool_full,
-  Optional[String]        $default_pool_inc,
-  Optional[String]        $default_pool_diff,
-  Integer                 $port                = 9102,
-  Array[String[1]]        $listen_address      = [],
-  String                  $password            = 'secret',
-  Integer                 $max_concurrent_jobs = 2,
-  String                  $director_name       = $bacula::director_name,
-  Bacula::Yesno           $autoprune           = true,
-  Bacula::Time            $file_retention      = '45 days',
-  Bacula::Time            $job_retention       = '6 months',
-  String                  $client              = $trusted['certname'],
-  String                  $address             = $facts['networking']['fqdn'],
-  Boolean                 $manage_defaults     = true,
-  Optional[Bacula::Yesno] $pki_signatures      = undef,
-  Optional[Bacula::Yesno] $pki_encryption      = undef,
-  Optional[String]        $pki_keypair         = undef,
-  Optional[String]        $pki_master_key      = undef,
-  Optional[String]        $plugin_dir          = undef,
+  Array[String]                 $packages,
+  String                        $services,
+  String                        $default_pool,
+  Optional[String]              $default_pool_full,
+  Optional[String]              $default_pool_inc,
+  Optional[String]              $default_pool_diff,
+  Integer                       $port                = 9102,
+  Array[String[1]]              $listen_address      = [],
+  String                        $password            = 'secret',
+  Integer                       $max_concurrent_jobs = 2,
+  String                        $director_name       = $bacula::director_name,
+  Bacula::Yesno                 $autoprune           = true,
+  Bacula::Time                  $file_retention      = '45 days',
+  Bacula::Time                  $job_retention       = '6 months',
+  String                        $client              = $trusted['certname'],
+  String                        $address             = $facts['networking']['fqdn'],
+  Optional[Bacula::Yesno]       $pki_signatures      = undef,
+  Optional[Bacula::Yesno]       $pki_encryption      = undef,
+  Optional[String]              $pki_keypair         = undef,
+  Optional[String]              $pki_master_key      = undef,
+  Optional[String]              $plugin_dir          = undef,
 ) inherits bacula {
-  if $manage_defaults {
-    bacula::messages { 'Standard-fd':
-      daemon   => 'fd',
-      director => "${director_name}-dir = all, !skipped, !restored",
-      append   => '"/var/log/bacula/bacula-fd.log" = all, !skipped',
-    }
-  }
   $group    = $bacula::bacula_group
   $conf_dir = $bacula::conf_dir
   $config_file = "${conf_dir}/bacula-fd.conf"

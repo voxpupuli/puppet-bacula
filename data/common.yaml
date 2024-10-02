@@ -13,7 +13,7 @@ bacula::client::messages:
     Standard-fd:
       daemon:       'fd'
       mname:        'Standard'
-      director:     "${director_name}-dir = all, !skipped, !restored"
+      director:     "%{trusted.certname}-dir = all, !skipped, !restored"
       append:       '"/var/log/bacula/bacula-fd.log" = all, !skipped'
 bacula::director::packages: []
 

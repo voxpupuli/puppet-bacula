@@ -36,7 +36,6 @@
 #   Bacula being unable to bind twice to the IPv4 address and fail to start.
 # @param password            A password to use for communication with this File Daemon
 # @param max_concurrent_jobs Bacula FD option for 'Maximum Concurrent Jobs'
-# @param manage_defaults     Setup default message type
 # @param director_name       The hostname of the director for this FD
 # @param autoprune           Bacula FD option for 'AutoPrune'
 # @param file_retention      Bacula FD option for 'File Retention'

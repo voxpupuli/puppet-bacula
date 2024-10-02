@@ -273,7 +273,6 @@ The following parameters are available in the `bacula::client` class:
 * [`listen_address`](#-bacula--client--listen_address)
 * [`password`](#-bacula--client--password)
 * [`max_concurrent_jobs`](#-bacula--client--max_concurrent_jobs)
-* [`manage_defaults`](#-bacula--client--manage_defaults)
 * [`director_name`](#-bacula--client--director_name)
 * [`autoprune`](#-bacula--client--autoprune)
 * [`file_retention`](#-bacula--client--file_retention)
@@ -382,10 +381,6 @@ Data type: `Integer`
 Bacula FD option for 'Maximum Concurrent Jobs'
 
 Default value: `2`
-
-##### <a name="-bacula--client--manage_defaults"></a>`manage_defaults`
-
-Setup default message type
 
 ##### <a name="-bacula--client--director_name"></a>`director_name`
 

@@ -16,13 +16,13 @@
 # @param conf_dir      Bacula configuration directory
 #
 define bacula::director::storage (
-  String  $address       = $name,
-  Integer $port          = 9103,
-  String  $password      = 'secret',
-  String  $device_name   = "${facts['networking']['fqdn']}-device",
-  String  $media_type    = 'File',
-  Integer $maxconcurjobs = 1,
-  String  $conf_dir      = $bacula::conf_dir,
+  String[1]            $address       = $name,
+  Stdlib::Port         $port          = 9103,
+  Bacula::Password     $password      = 'secret',
+  String[1]            $device_name   = "${facts['networking']['fqdn']}-device",
+  String[1]            $media_type    = 'File',
+  Integer[1]           $maxconcurjobs = 1,
+  Stdlib::Absolutepath $conf_dir      = $bacula::conf_dir,
 ) {
   $epp_storage_variables = {
     name          => $name,

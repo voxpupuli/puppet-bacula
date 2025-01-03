@@ -191,6 +191,11 @@ against it. You can run those locally ahead of time with:
 bundle exec rake rubocop
 ```
 
+Or if you want to run them all together at once:
+```sh
+bundle exec rake strings:generate:reference && bundle exec rake lint && bundle exec rake validate && bundle exec rake rubocop
+```
+
 ### Running the unit tests
 
 The unit test suite covers most of the code, as mentioned above please

@@ -262,6 +262,7 @@ class { 'bacula::client': director_name => 'mydirector.example.com' }
 
 The following parameters are available in the `bacula::client` class:
 
+* [`messages`](#-bacula--client--messages)
 * [`packages`](#-bacula--client--packages)
 * [`services`](#-bacula--client--services)
 * [`default_pool`](#-bacula--client--default_pool)
@@ -283,6 +284,12 @@ The following parameters are available in the `bacula::client` class:
 * [`pki_keypair`](#-bacula--client--pki_keypair)
 * [`pki_master_key`](#-bacula--client--pki_master_key)
 * [`plugin_dir`](#-bacula--client--plugin_dir)
+
+##### <a name="-bacula--client--messages"></a>`messages`
+
+Data type: `Hash[String, Bacula::Message]`
+
+Logging configuration; loaded from hiera
 
 ##### <a name="-bacula--client--packages"></a>`packages`
 
@@ -2178,21 +2185,21 @@ Alias of
 
 ```puppet
 Struct[{
-  mname            => String,
-  append           => Optional[String],
-  catalog          => Optional[String],
-  console          => Optional[String],
-  daemon           => Optional[String],
-  director         => Optional[String],
-  mail             => Optional[String],
-  mailcmd          => Optional[String],
-  mailonsuccess    => Optional[String],
-  mailonsuccesscmd => Optional[String],
-  mailonerror      => Optional[String],
-  mailonerrorcmd   => Optional[String],
-  operator         => Optional[String],
-  operatorcmd      => Optional[String],
-  syslog           => Optional[String],
+    mname            => String,
+    append           => Optional[String],
+    catalog          => Optional[String],
+    console          => Optional[String],
+    daemon           => Optional[String],
+    director         => Optional[String],
+    mail             => Optional[String],
+    mailcmd          => Optional[String],
+    mailonsuccess    => Optional[String],
+    mailonsuccesscmd => Optional[String],
+    mailonerror      => Optional[String],
+    mailonerrorcmd   => Optional[String],
+    operator         => Optional[String],
+    operatorcmd      => Optional[String],
+    syslog           => Optional[String],
 }]
 ```
 

@@ -180,6 +180,21 @@ class { 'bacula::client':
 }
 ```
 
+To exclude Info messages from the logfile.
+
+```puppet
+class { 'bacula::client':
+  messages => {
+    'Standard-fd' => {
+      daemon   => 'fd',
+      mname    => 'Standard',
+      director => "${director}-dir = all, !skipped, !restored",
+      append   => '"/var/log/bacula/bacula-fd.log" = all, !info, !skipped',
+    },
+  },
+}
+```
+
 #### Data Encryption (PKI Setup)
 
 Refer to the [PKI

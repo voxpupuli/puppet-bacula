@@ -4,6 +4,7 @@
 #
 # @param services       A list of services to operate; loaded from hiera
 # @param packages       A list of packages to install; loaded from hiera
+# @param ensure         What state the package should be in.
 # @param conf_dir       Path to bacula configuration directory
 # @param device         The system file name of the storage device managed by this storage daemon
 # @param device_mode    The posix mode for device
@@ -27,6 +28,7 @@
 class bacula::storage (
   String[1]            $services,
   Array[String[1]]     $packages,
+  String[1]            $ensure         = 'present',
   Stdlib::Absolutepath $conf_dir       = $bacula::conf_dir,
   Stdlib::Absolutepath $device         = '/bacula',
   Stdlib::Filemode     $device_mode    = '0770',
@@ -54,7 +56,7 @@ class bacula::storage (
       }
     )
   }
-  ensure_packages($package_names)
+  ensure_packages($package_names, { ensure => $ensure })
 
   service { $services:
     ensure  => running,

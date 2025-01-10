@@ -4,6 +4,7 @@
 #
 # @param messages            Logging configuration; loaded from hiera
 # @param packages            A list of packages to install; loaded from hiera
+# @param ensure              What state the package should be in.
 # @param services            A list of services to operate; loaded from hiera
 # @param default_pool        The name of the Pool for this FD to use by default
 # @param default_pool_full   The name of the Pool to use for Full jobs
@@ -59,6 +60,7 @@ class bacula::client (
   Optional[String[1]]            $default_pool_full,
   Optional[String[1]]            $default_pool_inc,
   Optional[String[1]]            $default_pool_diff,
+  String[1]                      $ensure              = 'present',
   Stdlib::Port                   $port                = 9102,
   Array[String[1]]               $listen_address      = [],
   Bacula::Password               $password            = 'secret',
@@ -80,7 +82,7 @@ class bacula::client (
   $config_file = "${conf_dir}/bacula-fd.conf"
 
   package { $packages:
-    ensure => present,
+    ensure => $ensure,
   }
 
   service { $services:

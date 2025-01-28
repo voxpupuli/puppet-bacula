@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v8.1.0](https://github.com/voxpupuli/puppet-bacula/tree/v8.1.0) (2025-01-28)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/v8.0.0...v8.1.0)
+
+**Implemented enhancements:**
+
+- Adding an option for the bacula file daemon to support custom message types [\#219](https://github.com/voxpupuli/puppet-bacula/pull/219) ([mi-reichel](https://github.com/mi-reichel))
+- add $ensure parameter for all package operations [\#216](https://github.com/voxpupuli/puppet-bacula/pull/216) ([fraenki](https://github.com/fraenki))
+- Add support for FreeBSD 14 [\#211](https://github.com/voxpupuli/puppet-bacula/pull/211) ([smortex](https://github.com/smortex))
+- Improve data types [\#193](https://github.com/voxpupuli/puppet-bacula/pull/193) ([smortex](https://github.com/smortex))
+
+**Fixed bugs:**
+
+- Adopt new service names on FreeBSD [\#220](https://github.com/voxpupuli/puppet-bacula/pull/220) ([fraenki](https://github.com/fraenki))
+
 ## [v8.0.0](https://github.com/voxpupuli/puppet-bacula/tree/v8.0.0) (2024-07-17)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/v7.0.0...v8.0.0)

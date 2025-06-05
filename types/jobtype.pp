@@ -5,4 +5,4 @@ type Bacula::JobType = Pattern[
   /^Admin/,
   /^Verify/,
   /^Copy/,
-  /^Migrate/]
+/^Migrate/]

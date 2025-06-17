@@ -1,12 +1,9 @@
+---
 fixtures:
   repositories:
-    augeas_core:
-      repo: https://github.com/puppetlabs/puppetlabs-augeas_core.git
-      puppet_version: '>= 6.0.0'
+    augeas_core: https://github.com/puppetlabs/puppetlabs-augeas_core.git
     concat: https://github.com/puppetlabs/puppetlabs-concat.git
     postgresql: https://github.com/puppetlabs/puppetlabs-postgresql.git
     puppet: https://github.com/puppetlabs-operations/puppet-puppet.git
     stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
     systemd: https://github.com/voxpupuli/puppet-systemd.git
-  symlinks:
-    bacula: "#{source_dir}"

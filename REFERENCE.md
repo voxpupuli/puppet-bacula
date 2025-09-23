@@ -2213,21 +2213,21 @@ Alias of
 
 ```puppet
 Struct[{
-    mname            => String,
-    append           => Optional[String],
-    catalog          => Optional[String],
-    console          => Optional[String],
-    daemon           => Optional[String],
-    director         => Optional[String],
-    mail             => Optional[String],
-    mailcmd          => Optional[String],
-    mailonsuccess    => Optional[String],
-    mailonsuccesscmd => Optional[String],
-    mailonerror      => Optional[String],
-    mailonerrorcmd   => Optional[String],
-    operator         => Optional[String],
-    operatorcmd      => Optional[String],
-    syslog           => Optional[String],
+  mname            => String,
+  append           => Optional[String],
+  catalog          => Optional[String],
+  console          => Optional[String],
+  daemon           => Optional[String],
+  director         => Optional[String],
+  mail             => Optional[String],
+  mailcmd          => Optional[String],
+  mailonsuccess    => Optional[String],
+  mailonsuccesscmd => Optional[String],
+  mailonerror      => Optional[String],
+  mailonerrorcmd   => Optional[String],
+  operator         => Optional[String],
+  operatorcmd      => Optional[String],
+  syslog           => Optional[String],
 }]
 ```
 
@@ -2245,18 +2245,18 @@ Alias of
 
 ```puppet
 Struct[{
-    runs_when         => Optional[Enum[
-        'Before',
-        'After',
-        'Always',
-        'AfterVSS',
-        'Never',
-    ]],
-    fail_job_on_error => Optional[Bacula::Yesno],
-    runs_on_success   => Optional[Bacula::Yesno],
-    runs_on_failure   => Optional[Bacula::Yesno],
-    runs_on_client    => Optional[Bacula::Yesno],
-    command           => String,
+  runs_when         => Optional[Enum[
+    'Before',
+    'After',
+    'Always',
+    'AfterVSS',
+    'Never',
+  ]],
+  fail_job_on_error => Optional[Bacula::Yesno],
+  runs_on_success   => Optional[Bacula::Yesno],
+  runs_on_failure   => Optional[Bacula::Yesno],
+  runs_on_client    => Optional[Bacula::Yesno],
+  command           => String,
 }]
 ```
 

@@ -1,0 +1,42 @@
+<%
+  |
+    String $name,
+    String $password,
+    String $catalogacl,
+    Array $commandacl,
+    Optional[String] $jobacl,
+    Optional[String] $clientacl,
+    Optional[String] $storageacl,
+    Optional[String] $scheduleacl,
+    Optional[String] $poolacl,
+    Optional[String] $filesetacl,
+    Optional[String] $whereacl,
+  |
+-%>
+Console {
+    Name        = <%= $name %>
+    Password    = "<%= $password %>"
+<% if $jobacl { -%>
+    JobACL      = <%= $jobacl %>
+<% } -%>
+<% if $clientacl { -%>
+    ClientACL   = <%= $clientacl %>
+<% } -%>
+<% if $storageacl { -%>
+    StorageACL  = <%= $storageacl %>
+<% } -%>
+<% if $scheduleacl { -%>
+    ScheduleACL = <%= $scheduleacl %>
+<% } -%>
+<% if $poolacl { -%>
+    PoolACL     = <%= $poolacl %>
+<% } -%>
+<% if $filesetacl { -%>
+    FileSetACL  = <%= $filesetacl %>
+<% } -%>
+    CatalogACL  = <%= $catalogacl %>
+    CommandACL  = <%= $commandacl.join(', ') %>
+<% if $whereacl { -%>
+    WhereACL = <%= $whereacl %>
+<% } -%>
+}

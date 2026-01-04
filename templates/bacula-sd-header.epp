@@ -7,6 +7,6 @@ Storage {
 <%= epp('bacula/_listen.epp', { listen_addresses => $bacula::storage::listen_address, port => $bacula::storage::port }) -%>
     }
 <% } -%>
-    Maximum Concurrent Jobs = <%= $bacula::storage::maxconcurjobs %>
+    Maximum Concurrent Jobs = <%= $bacula::storage::max_concurrent_jobs %>
 <%= epp('bacula/_tls_server.epp') -%>
 }

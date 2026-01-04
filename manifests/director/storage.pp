@@ -12,7 +12,8 @@
 # @param password      Bacula director configuration for Storage option 'Password'
 # @param device_name   Bacula director configuration for Storage option 'Device'
 # @param media_type    Bacula director configuration for Storage option 'Media Type'
-# @param maxconcurjobs Bacula director configuration for Storage option 'Maximum Concurrent Jobs'
+# @param maxconcurjobs DEPRECATED Bacula director configuration for Storage option 'Maximum Concurrent Jobs'
+# @param max_concurrent_jobs Bacula director configuration for Storage option 'Maximum Concurrent Jobs'
 # @param conf_dir      Bacula configuration directory
 #
 define bacula::director::storage (
@@ -21,9 +22,14 @@ define bacula::director::storage (
   Bacula::Password     $password      = 'secret',
   String[1]            $device_name   = "${facts['networking']['fqdn']}-device",
   String[1]            $media_type    = 'File',
-  Integer[1]           $maxconcurjobs = 1,
+  Optional[Integer[1]] $maxconcurjobs = undef,
+  Integer[1]           $max_concurrent_jobs = 1,
   Stdlib::Absolutepath $conf_dir      = $bacula::conf_dir,
 ) {
+  if $maxconcurjobs {
+    deprecation('bacula::director::maxconcurjobs', 'This parameter is deprecated.  Use bacula::director::max_concurrent_jobs instead.')
+  }
+
   $epp_storage_variables = {
     name          => $name,
     address       => $address,
@@ -31,7 +37,7 @@ define bacula::director::storage (
     password      => $password,
     device_name   => $device_name,
     media_type    => $media_type,
-    maxconcurjobs => $maxconcurjobs,
+    max_concurrent_jobs => pick($maxconcurjobs, $max_concurrent_jobs),
   }
 
   concat::fragment { "bacula-director-storage-${name}":

@@ -17,7 +17,6 @@
 # @param homedir                    The directory in which the Storage daemon may put its status files
 # @param listen_address             The listening IP addresses for the storage daemon
 #   The notes for `bacula::client::listen_address` apply.
-# @param maxconcurjobs              DEPRECATED maximum number of Jobs that may run concurrently
 # @param max_concurrent_jobs        The maximum number of Jobs that may run concurrently
 # @param media_type                 The type of media supported by this device
 # @param password                   Specifies the password that must be supplied by the named Director
@@ -42,7 +41,6 @@ class bacula::storage (
   String[1]            $group                      = $bacula::bacula_group,
   Stdlib::Absolutepath $homedir                    = $bacula::homedir,
   Array[String[1]]     $listen_address             = [],
-  Optional[Integer[1]] $maxconcurjobs              = undef,
   Integer[1]           $max_concurrent_jobs        = 20,
   String[1]            $media_type                 = 'File',
   Bacula::Password     $password                   = 'secret',
@@ -52,10 +50,6 @@ class bacula::storage (
   String[1]            $address                    = $facts['networking']['fqdn'],
   String[1]            $user                       = $bacula::bacula_user,
 ) inherits bacula {
-  if $maxconcurjobs {
-    deprecation('bacula::storage::maxconcurjobs', 'This parameter is deprecated.  Use bacula::storage::device_max_concurrent_jobs instead.')
-  }
-
   # Allow for package names to include EPP syntax for db_type
   $package_names = $packages.map |$p| {
     $package_name = inline_epp($p,
@@ -80,7 +74,7 @@ class bacula::storage (
 
   bacula::storage::device { $device_name:
     device              => $device,
-    max_concurrent_jobs => pick($maxconcurjobs, $device_max_concurrent_jobs),
+    max_concurrent_jobs => $device_max_concurrent_jobs,
   }
 
   concat::fragment { 'bacula-storage-dir':

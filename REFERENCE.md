@@ -790,7 +790,6 @@ The following parameters are available in the `bacula::storage` class:
 * [`group`](#-bacula--storage--group)
 * [`homedir`](#-bacula--storage--homedir)
 * [`listen_address`](#-bacula--storage--listen_address)
-* [`maxconcurjobs`](#-bacula--storage--maxconcurjobs)
 * [`max_concurrent_jobs`](#-bacula--storage--max_concurrent_jobs)
 * [`media_type`](#-bacula--storage--media_type)
 * [`password`](#-bacula--storage--password)
@@ -908,14 +907,6 @@ The listening IP addresses for the storage daemon
 The notes for `bacula::client::listen_address` apply.
 
 Default value: `[]`
-
-##### <a name="-bacula--storage--maxconcurjobs"></a>`maxconcurjobs`
-
-Data type: `Optional[Integer[1]]`
-
-DEPRECATED maximum number of Jobs that may run concurrently
-
-Default value: `undef`
 
 ##### <a name="-bacula--storage--max_concurrent_jobs"></a>`max_concurrent_jobs`
 
@@ -1333,7 +1324,6 @@ The following parameters are available in the `bacula::director::storage` define
 * [`password`](#-bacula--director--storage--password)
 * [`device_name`](#-bacula--director--storage--device_name)
 * [`media_type`](#-bacula--director--storage--media_type)
-* [`maxconcurjobs`](#-bacula--director--storage--maxconcurjobs)
 * [`max_concurrent_jobs`](#-bacula--director--storage--max_concurrent_jobs)
 * [`conf_dir`](#-bacula--director--storage--conf_dir)
 
@@ -1376,14 +1366,6 @@ Data type: `String[1]`
 Bacula director configuration for Storage option 'Media Type'
 
 Default value: `'File'`
-
-##### <a name="-bacula--director--storage--maxconcurjobs"></a>`maxconcurjobs`
-
-Data type: `Optional[Integer[1]]`
-
-DEPRECATED Bacula director configuration for Storage option 'Maximum Concurrent Jobs'
-
-Default value: `undef`
 
 ##### <a name="-bacula--director--storage--max_concurrent_jobs"></a>`max_concurrent_jobs`
 
@@ -2016,7 +1998,6 @@ The following parameters are available in the `bacula::storage::device` defined 
 * [`automatic_mount`](#-bacula--storage--device--automatic_mount)
 * [`removable_media`](#-bacula--storage--device--removable_media)
 * [`always_open`](#-bacula--storage--device--always_open)
-* [`maxconcurjobs`](#-bacula--storage--device--maxconcurjobs)
 * [`max_concurrent_jobs`](#-bacula--storage--device--max_concurrent_jobs)
 * [`conf_dir`](#-bacula--storage--device--conf_dir)
 * [`device_mode`](#-bacula--storage--device--device_mode)
@@ -2088,14 +2069,6 @@ Data type: `Bacula::Yesno`
 Bacula director configuration for Device option 'AlwaysOpen'
 
 Default value: `false`
-
-##### <a name="-bacula--storage--device--maxconcurjobs"></a>`maxconcurjobs`
-
-Data type: `Optional[Integer[1]]`
-
-DEPRECATED Bacula director configuration for Device option 'Maximum Concurrent Jobs'
-
-Default value: `undef`
 
 ##### <a name="-bacula--storage--device--max_concurrent_jobs"></a>`max_concurrent_jobs`
 

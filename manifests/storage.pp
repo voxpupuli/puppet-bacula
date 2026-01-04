@@ -2,55 +2,55 @@
 #
 # This class configures the Bacula storage daemon.
 #
-# @param services       A list of services to operate; loaded from hiera
-# @param packages       A list of packages to install; loaded from hiera
-# @param ensure         What state the package should be in.
-# @param conf_dir       Path to bacula configuration directory
-# @param device         The system file name of the storage device managed by this storage daemon
-# @param device_mode    The posix mode for device
-# @param device_name    The Name that the Director will use when asking to backup or restore to or from to this device
-# @param device_owner   The posix user owning the device directory
-# @param device_seltype SELinux type for the device
+# @param services                   A list of services to operate; loaded from hiera
+# @param packages                   A list of packages to install; loaded from hiera
+# @param ensure                     What state the package should be in.
+# @param conf_dir                   Path to bacula configuration directory
+# @param device                     The system file name of the storage device managed by this storage daemon
+# @param device_mode                The posix mode for device
+# @param device_name                The Name that the Director will use when asking to backup or restore to or from to this device
+# @param device_owner               The posix user owning the device directory
+# @param device_seltype             SELinux type for the device
 # @param device_max_concurrent_jobs The maximum number of Jobs that may run concurrently on the device
-# @param director_name  Specifies the Name of the Director allowed to connect to the Storage daemon
-# @param group          The posix group for bacula
-# @param homedir        The directory in which the Storage daemon may put its status files
-# @param listen_address The listening IP addresses for the storage daemon
+# @param director_name              Specifies the Name of the Director allowed to connect to the Storage daemon
+# @param group                      The posix group for bacula
+# @param homedir                    The directory in which the Storage daemon may put its status files
+# @param listen_address             The listening IP addresses for the storage daemon
 #   The notes for `bacula::client::listen_address` apply.
-# @param maxconcurjobs  DEPRECATED maximum number of Jobs that may run concurrently
-# @param max_concurrent_jobs The maximum number of Jobs that may run concurrently
-# @param media_type     The type of media supported by this device
-# @param password       Specifies the password that must be supplied by the named Director
-# @param port           The listening port for the Storage Daemon
-# @param rundir         The directory in which the Director may put its process Id file files
-# @param storage        The address to be configured on the director to communicate with this storage server
-# @param address        The listening address for the Storage Daemon
-# @param user           The posix user for bacula
+# @param maxconcurjobs              DEPRECATED maximum number of Jobs that may run concurrently
+# @param max_concurrent_jobs        The maximum number of Jobs that may run concurrently
+# @param media_type                 The type of media supported by this device
+# @param password                   Specifies the password that must be supplied by the named Director
+# @param port                       The listening port for the Storage Daemon
+# @param rundir                     The directory in which the Director may put its process Id file files
+# @param storage                    The address to be configured on the director to communicate with this storage server
+# @param address                    The listening address for the Storage Daemon
+# @param user                       The posix user for bacula
 #
 class bacula::storage (
   String[1]            $services,
   Array[String[1]]     $packages,
-  String[1]            $ensure         = 'present',
-  Stdlib::Absolutepath $conf_dir       = $bacula::conf_dir,
-  Stdlib::Absolutepath $device         = '/bacula',
-  Stdlib::Filemode     $device_mode    = '0770',
-  String[1]            $device_name    = "${trusted['certname']}-device",
-  String[1]            $device_owner   = $bacula::bacula_user,
-  String[1]            $device_seltype = $bacula::device_seltype,
+  String[1]            $ensure                     = 'present',
+  Stdlib::Absolutepath $conf_dir                   = $bacula::conf_dir,
+  Stdlib::Absolutepath $device                     = '/bacula',
+  Stdlib::Filemode     $device_mode                = '0770',
+  String[1]            $device_name                = "${trusted['certname']}-device",
+  String[1]            $device_owner               = $bacula::bacula_user,
+  String[1]            $device_seltype             = $bacula::device_seltype,
   Integer[1]           $device_max_concurrent_jobs = 5,
-  String[1]            $director_name  = $bacula::director_name,
-  String[1]            $group          = $bacula::bacula_group,
-  Stdlib::Absolutepath $homedir        = $bacula::homedir,
-  Array[String[1]]     $listen_address = [],
-  Optional[Integer[1]] $maxconcurjobs  = undef,
-  Integer[1]           $max_concurrent_jobs = 20,
-  String[1]            $media_type     = 'File',
-  Bacula::Password     $password       = 'secret',
-  Stdlib::Port         $port           = 9103,
-  Stdlib::Absolutepath $rundir         = $bacula::rundir,
-  String[1]            $storage        = $trusted['certname'], # storage here is not storage_name
-  String[1]            $address        = $facts['networking']['fqdn'],
-  String[1]            $user           = $bacula::bacula_user,
+  String[1]            $director_name              = $bacula::director_name,
+  String[1]            $group                      = $bacula::bacula_group,
+  Stdlib::Absolutepath $homedir                    = $bacula::homedir,
+  Array[String[1]]     $listen_address             = [],
+  Optional[Integer[1]] $maxconcurjobs              = undef,
+  Integer[1]           $max_concurrent_jobs        = 20,
+  String[1]            $media_type                 = 'File',
+  Bacula::Password     $password                   = 'secret',
+  Stdlib::Port         $port                       = 9103,
+  Stdlib::Absolutepath $rundir                     = $bacula::rundir,
+  String[1]            $storage                    = $trusted['certname'], # storage here is not storage_name
+  String[1]            $address                    = $facts['networking']['fqdn'],
+  String[1]            $user                       = $bacula::bacula_user,
 ) inherits bacula {
   if $maxconcurjobs {
     deprecation('bacula::storage::maxconcurjobs', 'This parameter is deprecated.  Use bacula::storage::device_max_concurrent_jobs instead.')
@@ -79,7 +79,7 @@ class bacula::storage (
   }
 
   bacula::storage::device { $device_name:
-    device        => $device,
+    device              => $device,
     max_concurrent_jobs => pick($maxconcurjobs, $device_max_concurrent_jobs),
   }
 
@@ -107,12 +107,12 @@ class bacula::storage (
   }
 
   @@bacula::director::storage { $storage:
-    address       => $address,
-    port          => $port,
-    password      => $password,
-    device_name   => $device_name,
-    media_type    => $media_type,
+    address             => $address,
+    port                => $port,
+    password            => $password,
+    device_name         => $device_name,
+    media_type          => $media_type,
     max_concurrent_jobs => $max_concurrent_jobs,
-    tag           => "bacula-${director_name}",
+    tag                 => "bacula-${director_name}",
   }
 }

@@ -6,7 +6,7 @@
     String $password,
     String $device_name,
     String $media_type,
-    Integer $maxconcurjobs,
+    Integer $max_concurrent_jobs,
   |
 -%>
 Storage {
@@ -16,7 +16,7 @@ Storage {
     Password   = "<%= $password %>"
     Device     = <%= $device_name %>
     Media Type = <%= $media_type %>
-    Maximum Concurrent Jobs = <%= $maxconcurjobs %>
+    Maximum Concurrent Jobs = <%= $max_concurrent_jobs %>
 <%= epp('bacula/_tls_client.epp') -%>
 }
 

@@ -11,7 +11,8 @@
 # @param automatic_mount Bacula director configuration for Device option 'AutomaticMount'
 # @param removable_media Bacula director configuration for Device option 'RemovableMedia'
 # @param always_open     Bacula director configuration for Device option 'AlwaysOpen'
-# @param maxconcurjobs   Bacula director configuration for Device option 'Maximum Concurrent Jobs'
+# @param maxconcurjobs   DEPRECATED Bacula director configuration for Device option 'Maximum Concurrent Jobs'
+# @param max_concurrent_jobs Bacula director configuration for Device option 'Maximum Concurrent Jobs'
 # @param conf_dir        Path to bacula configuration directory
 # @param device_mode     Unix mode of the Archive Device directory
 # @param device_owner    Owner of the Archive Device directory
@@ -28,7 +29,8 @@ define bacula::storage::device (
   Bacula::Yesno        $automatic_mount = true,
   Bacula::Yesno        $removable_media = false,
   Bacula::Yesno        $always_open     = false,
-  Integer[1]           $maxconcurjobs   = 1,
+  Optional[Integer[1]] $maxconcurjobs   = undef,
+  Integer[1]           $max_concurrent_jobs = 1,
   Stdlib::Absolutepath $conf_dir        = $bacula::conf_dir,
   Stdlib::Filemode     $device_mode     = '0770',
   String[1]            $device_owner    = $bacula::bacula_user,
@@ -37,6 +39,10 @@ define bacula::storage::device (
   String[1]            $group           = $bacula::bacula_group,
 ) {
   include bacula::storage
+
+  if $maxconcurjobs {
+    deprecation('bacula::storage::device::maxconcurjobs', 'This parameter is deprecated.  Use bacula::storage::device::max_concurrent_jobs instead.')
+  }
 
   $epp_device_variables = {
     device_name     => $device_name,
@@ -47,7 +53,7 @@ define bacula::storage::device (
     automatic_mount => $automatic_mount,
     removable_media => $removable_media,
     always_open     => $always_open,
-    maxconcurjobs   => $maxconcurjobs,
+    max_concurrent_jobs => pick($maxconcurjobs, $max_concurrent_jobs),
   }
 
   concat::fragment { "bacula-storage-device-${name}":

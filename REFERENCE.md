@@ -17,6 +17,7 @@
 ### Defined types
 
 * [`bacula::director::client`](#bacula--director--client): Define a Bacula Director Client
+* [`bacula::director::console`](#bacula--director--console): Define a Bacula Director Console
 * [`bacula::director::fileset`](#bacula--director--fileset): Configure a Bacula Director Fileset
 * [`bacula::director::job`](#bacula--director--job): Configure a Bacula Director Job
 * [`bacula::director::pool`](#bacula--director--pool): Configure a Bacula Director Pool
@@ -34,6 +35,7 @@
 
 ### Data types
 
+* [`Bacula::Command`](#Bacula--Command): A Bacula console command
 * [`Bacula::JobType`](#Bacula--JobType): The type of job
 * [`Bacula::Message`](#Bacula--Message): A Bacula message specification
 * [`Bacula::Password`](#Bacula--Password): Temporary workarond to accept Sensitive and non-Sensitive passwords
@@ -1041,6 +1043,127 @@ Data type: `Stdlib::Absolutepath`
 The path to the bacula configuration directory
 
 Default value: `$bacula::conf_dir`
+
+### <a name="bacula--director--console"></a>`bacula::director::console`
+
+This define creates a console declaration for the director.
+Resources of this type are intended to manage conf.d/console.conf entries.
+
+Aside from Director resource names and console command names,
+the special keyword *all* can be specified in any of the above access control lists.
+When this keyword is present, any resource or command name (which ever is appropriate) will be accepted.
+
+#### Examples
+
+##### 
+
+```puppet
+bacula::director::console { 'Monitoring':
+  password => 'monitoring_password',
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `bacula::director::console` defined type:
+
+* [`conf_dir`](#-bacula--director--console--conf_dir)
+* [`password`](#-bacula--director--console--password)
+* [`jobacl`](#-bacula--director--console--jobacl)
+* [`clientacl`](#-bacula--director--console--clientacl)
+* [`storageacl`](#-bacula--director--console--storageacl)
+* [`scheduleacl`](#-bacula--director--console--scheduleacl)
+* [`poolacl`](#-bacula--director--console--poolacl)
+* [`filesetacl`](#-bacula--director--console--filesetacl)
+* [`catalogacl`](#-bacula--director--console--catalogacl)
+* [`commandacl`](#-bacula--director--console--commandacl)
+* [`whereacl`](#-bacula--director--console--whereacl)
+
+##### <a name="-bacula--director--console--conf_dir"></a>`conf_dir`
+
+Data type: `String`
+
+The bacula configuration director.  Should not need adjusting
+
+Default value: `$bacula::conf_dir`
+
+##### <a name="-bacula--director--console--password"></a>`password`
+
+Data type: `String[1]`
+
+The password that must be supplied for a named Bacula Console to be authorized
+
+##### <a name="-bacula--director--console--jobacl"></a>`jobacl`
+
+Data type: `Optional[String[1]]`
+
+A list of Job resource names that can be accessed by the console.
+
+Default value: `undef`
+
+##### <a name="-bacula--director--console--clientacl"></a>`clientacl`
+
+Data type: `Optional[String[1]]`
+
+A list of Client resource names that can be accessed by the console.
+
+Default value: `undef`
+
+##### <a name="-bacula--director--console--storageacl"></a>`storageacl`
+
+Data type: `Optional[String[1]]`
+
+A list of Storage resource names that can be accessed by the console.
+
+Default value: `undef`
+
+##### <a name="-bacula--director--console--scheduleacl"></a>`scheduleacl`
+
+Data type: `Optional[String[1]]`
+
+A list of Schedule resource names that can be accessed by the console.
+
+Default value: `undef`
+
+##### <a name="-bacula--director--console--poolacl"></a>`poolacl`
+
+Data type: `Optional[String[1]]`
+
+A list of Pool resource names that can be accessed by the console.
+
+Default value: `undef`
+
+##### <a name="-bacula--director--console--filesetacl"></a>`filesetacl`
+
+Data type: `Optional[String[1]]`
+
+A list of FileSet resource names that can be accessed by the console.
+
+Default value: `undef`
+
+##### <a name="-bacula--director--console--catalogacl"></a>`catalogacl`
+
+Data type: `String[1]`
+
+A list of Catalog resource names that can be accessed by the console.
+
+Default value: `'*all*'`
+
+##### <a name="-bacula--director--console--commandacl"></a>`commandacl`
+
+Data type: `Array[Bacula::Command]`
+
+A list of of console commands that can be executed by the console.
+
+Default value: `['list']`
+
+##### <a name="-bacula--director--console--whereacl"></a>`whereacl`
+
+Data type: `Optional[String[1]]`
+
+This directive permits you to specify where a restricted console can restore files.
+
+Default value: `undef`
 
 ### <a name="bacula--director--fileset"></a>`bacula::director::fileset`
 
@@ -2198,6 +2321,15 @@ Data type: `Variant[Boolean, Enum["yes", "true", "no", "false"]]`
 A boolean value
 
 ## Data types
+
+### <a name="Bacula--Command"></a>`Bacula::Command`
+
+A Bacula console command
+
+* **See also**
+  * https://www.bacula.org/15.0.x-manuals/en/console/Bacula_Enterprise_Console.html
+
+Alias of `Enum['add', 'autodisplay', 'automount', 'cancel', 'cloud', 'create', 'delete', 'disable', 'enable', 'estimate', 'exit', 'gui', 'help', 'label', 'list', 'llist', 'messages', 'memory', 'mount', 'prune', 'purge', 'query', 'quit', 'relabel', 'release', 'reload', 'restart', 'resume', 'restore', 'run', 'setbandwidth', 'setdebug', 'setip', 'show', 'sqlquery', 'status', 'tag', 'time', 'trace', 'umount', 'unmount', 'update', 'use', 'var', 'version', 'wait', '.api', '.backups', '.clients', '.catalogs', '.defaults', '.die', '.dir', '.dump', '.exit', '.events', '.filesets', '.help', '.jobs', '.estimate', '.jlist', '.levels', '.messages', '.msgs', '.pools', '.quit', '.putfile', '.schedule', '.sql', '.status', '.storage', '.volstatus', '.media', '.mediatypes', '.locations', '.actiononpurge', '.bvfs_lsdirs', '.bvfs_lsfiles', '.bvfs_get_volumes', '.bvfs_update', '.bvfs_get_jobids', '.bvfs_get_jobs', '.bvfs_get_bootstrap', '.bvfs_get_fileindex', '.bvfs_versions', '.bvfs_get_delta', '.bvfs_restore', '.bvfs_cleanup', '.bvfs_decode_lstat', '.bvfs_clear_cache', '.bvfs_update_fv', '.bvfs_delete_fileid', '.setuid', '.ls', '.types', '.query', '.tags']`
 
 ### <a name="Bacula--JobType"></a>`Bacula::JobType`
 

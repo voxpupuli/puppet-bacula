@@ -25,7 +25,7 @@
 define bacula::director::client (
   String[1]            $address,
   Stdlib::Port         $port,
-  Bacula::Password     $password,
+  Sensitive[String[1]] $password,
   Bacula::Time         $file_retention,
   Bacula::Time         $job_retention,
   Bacula::Yesno        $autoprune,

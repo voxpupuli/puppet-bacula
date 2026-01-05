@@ -45,7 +45,7 @@ class bacula::storage (
   Optional[Integer[1]] $maxconcurjobs              = undef,
   Integer[1]           $max_concurrent_jobs        = 20,
   String[1]            $media_type                 = 'File',
-  Bacula::Password     $password                   = Sensitive('secret'),
+  Sensitive[String[1]] $password                   = Sensitive('secret'),
   Stdlib::Port         $port                       = 9103,
   Stdlib::Absolutepath $rundir                     = $bacula::rundir,
   String[1]            $storage                    = $trusted['certname'], # storage here is not storage_name
@@ -99,11 +99,10 @@ class bacula::storage (
   Concat::Fragment <<| tag == "bacula-storage-dir-${director_name}" |>>
 
   concat { "${conf_dir}/bacula-sd.conf":
-    owner     => 'root',
-    group     => $group,
-    mode      => '0640',
-    show_diff => false,
-    notify    => Service[$services],
+    owner  => 'root',
+    group  => $group,
+    mode   => '0640',
+    notify => Service[$services],
   }
 
   @@bacula::director::storage { $storage:

@@ -14,11 +14,11 @@ describe 'bacula::director::console' do
 
         let(:params) do
           {
-            password: 'monitoring_password',
+            password: sensitive('monitoring_password'),
           }
         end
 
-        it { is_expected.to contain_concat__fragment('bacula-director-console-Monitoring').with(content: <<~FRAGMENT) }
+        it { is_expected.to contain_concat__fragment('bacula-director-console-Monitoring').with(content: sensitive(<<~FRAGMENT)) }
           Console {
               Name        = Monitoring
               Password    = "monitoring_password"
@@ -33,7 +33,7 @@ describe 'bacula::director::console' do
 
         let(:params) do
           {
-            password: 'A different UntrustedUser',
+            password: sensitive('A different UntrustedUser'),
             jobacl: 'Restricted Client Save',
             clientacl: 'restricted-client',
             storageacl: 'second-storage',
@@ -46,7 +46,7 @@ describe 'bacula::director::console' do
           }
         end
 
-        it { is_expected.to contain_concat__fragment('bacula-director-console-restricted-user').with(content: <<~FRAGMENT) }
+        it { is_expected.to contain_concat__fragment('bacula-director-console-restricted-user').with(content: sensitive(<<~FRAGMENT)) }
           Console {
               Name        = restricted-user
               Password    = "A different UntrustedUser"

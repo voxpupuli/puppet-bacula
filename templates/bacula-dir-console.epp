@@ -1,16 +1,16 @@
 <%
   |
-    String $name,
-    String $password,
-    String $catalogacl,
-    Array $commandacl,
-    Optional[String] $jobacl,
-    Optional[String] $clientacl,
-    Optional[String] $storageacl,
-    Optional[String] $scheduleacl,
-    Optional[String] $poolacl,
-    Optional[String] $filesetacl,
-    Optional[String] $whereacl,
+    String[1] $name,
+    Sensitive[String[1]] $password,
+    String[1] $catalogacl,
+    Array[Bacula::Command] $commandacl,
+    Optional[String[1]] $jobacl,
+    Optional[String[1]] $clientacl,
+    Optional[String[1]] $storageacl,
+    Optional[String[1]] $scheduleacl,
+    Optional[String[1]] $poolacl,
+    Optional[String[1]] $filesetacl,
+    Optional[String[1]] $whereacl,
   |
 -%>
 Console {

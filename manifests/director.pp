@@ -44,7 +44,7 @@ class bacula::director (
   Bacula::Yesno                    $manage_db           = true,
   Stdlib::Absolutepath             $conf_dir            = $bacula::conf_dir,
   String[1]                        $db_name             = 'bacula',
-  Bacula::Password                 $db_pw               = Sensitive('notverysecret'),
+  Sensitive[String[1]]             $db_pw               = Sensitive('notverysecret'),
   String[1]                        $db_user             = 'bacula',
   Optional[String[1]]              $db_address          = undef,
   Optional[Stdlib::Port]           $db_port             = undef,
@@ -56,7 +56,7 @@ class bacula::director (
   Array[String[1]]                 $listen_address      = [],
   Integer[1]                       $max_concurrent_jobs = 20,
   Boolean                          $manage_defaults     = true,
-  Bacula::Password                 $password            = Sensitive('secret'),
+  Sensitive[String[1]]             $password            = Sensitive('secret'),
   Stdlib::Port                     $port                = 9101,
   Stdlib::Absolutepath             $rundir              = $bacula::rundir,
   String[1]                        $storage_name        = $bacula::storage_name,
@@ -100,11 +100,10 @@ class bacula::director (
   }
 
   file { "${conf_dir}/bconsole.conf":
-    owner     => 'root',
-    group     => $group,
-    mode      => '0640',
-    show_diff => false,
-    content   => epp('bacula/bconsole.conf.epp');
+    owner   => 'root',
+    group   => $group,
+    mode    => '0640',
+    content => epp('bacula/bconsole.conf.epp');
   }
 
   Concat {
@@ -145,7 +144,6 @@ class bacula::director (
   Concat::Fragment <<| tag == "bacula-${director}" |>>
 
   concat { "${conf_dir}/bacula-dir.conf":
-    show_diff => false,
   }
 
   $sub_confs = [
@@ -154,19 +152,12 @@ class bacula::director (
     "${conf_dir}/conf.d/job.conf",
     "${conf_dir}/conf.d/jobdefs.conf",
     "${conf_dir}/conf.d/fileset.conf",
-  ]
-
-  $sub_confs_with_secrets = [
     "${conf_dir}/conf.d/console.conf",
     "${conf_dir}/conf.d/client.conf",
     "${conf_dir}/conf.d/storage.conf",
   ]
 
   concat { $sub_confs: }
-
-  concat { $sub_confs_with_secrets:
-    show_diff => false,
-  }
 
   bacula::director::fileset { 'Common':
     files => ['/etc'],

@@ -30,6 +30,7 @@
 class bacula::storage (
   String[1]            $services,
   Array[String[1]]     $packages,
+  Sensitive[String[1]] $password,
   String[1]            $ensure                     = 'present',
   Stdlib::Absolutepath $conf_dir                   = $bacula::conf_dir,
   Stdlib::Absolutepath $device                     = '/bacula',
@@ -45,7 +46,6 @@ class bacula::storage (
   Optional[Integer[1]] $maxconcurjobs              = undef,
   Integer[1]           $max_concurrent_jobs        = 20,
   String[1]            $media_type                 = 'File',
-  Sensitive[String[1]] $password                   = Sensitive('secret'),
   Stdlib::Port         $port                       = 9103,
   Stdlib::Absolutepath $rundir                     = $bacula::rundir,
   String[1]            $storage                    = $trusted['certname'], # storage here is not storage_name

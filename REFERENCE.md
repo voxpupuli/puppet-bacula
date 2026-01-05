@@ -383,8 +383,6 @@ Data type: `Sensitive[String[1]]`
 
 A password to use for communication with this File Daemon
 
-Default value: `Sensitive('secret')`
-
 ##### <a name="-bacula--client--max_concurrent_jobs"></a>`max_concurrent_jobs`
 
 Data type: `Integer[1]`
@@ -588,8 +586,6 @@ Data type: `Sensitive[String[1]]`
 
 The database user's password
 
-Default value: `Sensitive('notverysecret')`
-
 ##### <a name="-bacula--director--db_user"></a>`db_user`
 
 Data type: `String[1]`
@@ -684,8 +680,6 @@ Default value: `true`
 Data type: `Sensitive[String[1]]`
 
 password to connect to the director
-
-Default value: `Sensitive('secret')`
 
 ##### <a name="-bacula--director--port"></a>`port`
 
@@ -939,8 +933,6 @@ Default value: `'File'`
 Data type: `Sensitive[String[1]]`
 
 Specifies the password that must be supplied by the named Director
-
-Default value: `Sensitive('secret')`
 
 ##### <a name="-bacula--storage--port"></a>`port`
 
@@ -1480,8 +1472,6 @@ Default value: `9103`
 Data type: `Sensitive[String[1]]`
 
 Bacula director configuration for Storage option 'Password'
-
-Default value: `Sensitive('secret')`
 
 ##### <a name="-bacula--director--storage--device_name"></a>`device_name`
 

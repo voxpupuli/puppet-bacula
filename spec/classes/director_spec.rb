@@ -7,6 +7,21 @@ describe 'bacula::director' do
     context "on #{os}" do
       let(:facts) { facts }
 
+      let(:pre_condition) do
+        <<~PP
+          class { 'bacula::client':
+            password => Sensitive('fd-secret'),
+          }
+        PP
+      end
+
+      let(:params) do
+        {
+          db_pw: sensitive('db-secret'),
+          password: sensitive('dir-secret')
+        }
+      end
+
       expected_packages = []
 
       case facts[:os]['family']

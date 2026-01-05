@@ -7,7 +7,16 @@ describe 'bacula::storage::device' do
     context "on #{os}" do
       let(:facts) { facts }
 
-      let(:pre_condition) { 'include bacula' }
+      let(:pre_condition) do
+        <<~PP
+          class { 'bacula::client':
+            password => Sensitive('fd-secret'),
+          }
+          class { 'bacula::storage':
+            password => Sensitive('sd-secret'),
+          }
+        PP
+      end
 
       context 'with default parameters' do
         let(:title) { 'Foo' }

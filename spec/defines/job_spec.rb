@@ -8,7 +8,11 @@ describe 'bacula::job' do
       let(:facts) { facts }
 
       let(:pre_condition) do
-        'include bacula::client'
+        <<~PP
+          class { 'bacula::client':
+            password => Sensitive('fd-secret'),
+          }
+        PP
       end
 
       context 'A simple files job' do

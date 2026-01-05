@@ -10,7 +10,8 @@ describe 'bacula::client' do
       let(:params) do
         {
           client: param_client,
-          address: param_address
+          address: param_address,
+          password: sensitive('fd-secret')
         }
       end
       let(:param_client) { :undef }

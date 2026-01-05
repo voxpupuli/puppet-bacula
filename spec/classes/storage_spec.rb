@@ -10,11 +10,20 @@ describe 'bacula::storage' do
       let(:params) do
         {
           storage: param_storage,
-          address: param_address
+          address: param_address,
+          password: sensitive('sd-secret')
         }
       end
       let(:param_storage) { :undef }
       let(:param_address) { :undef }
+
+      let(:pre_condition) do
+        <<~PP
+          class { 'bacula::client':
+            password => Sensitive('fd-secret'),
+          }
+        PP
+      end
 
       it { is_expected.to contain_class('bacula::storage') }
 

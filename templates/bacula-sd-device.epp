@@ -8,7 +8,7 @@
     Bacula::Yesno $automatic_mount,
     Bacula::Yesno $removable_media,
     Bacula::Yesno $always_open,
-    Integer $maxconcurjobs,
+    Integer $max_concurrent_jobs,
   |
 -%>
 Device {
@@ -20,5 +20,5 @@ Device {
     AutomaticMount = <%= bacula::yesno2str($automatic_mount) %>;
     RemovableMedia = <%= bacula::yesno2str($removable_media) %>;
     AlwaysOpen     = <%= bacula::yesno2str($always_open) %>;
-    Maximum Concurrent Jobs = <%= $maxconcurjobs %>
+    Maximum Concurrent Jobs = <%= $max_concurrent_jobs %>
 }

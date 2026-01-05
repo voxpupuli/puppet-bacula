@@ -50,7 +50,7 @@ describe 'bacula::storage::device' do
             automatic_mount: false,
             removable_media: true,
             always_open: true,
-            maxconcurjobs: 7,
+            max_concurrent_jobs: 7,
             # conf_dir: # FIXME: Should probably not be a parameter
             device_mode: '0700',
             device_owner: 'bob',

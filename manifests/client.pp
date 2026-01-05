@@ -63,7 +63,7 @@ class bacula::client (
   String[1]                      $ensure              = 'present',
   Stdlib::Port                   $port                = 9102,
   Array[String[1]]               $listen_address      = [],
-  Bacula::Password               $password            = 'secret',
+  Bacula::Password               $password            = Sensitive('secret'),
   Integer[1]                     $max_concurrent_jobs = 2,
   String[1]                      $director_name       = $bacula::director_name,
   Bacula::Yesno                  $autoprune           = true,

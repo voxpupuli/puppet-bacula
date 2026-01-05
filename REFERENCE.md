@@ -1089,7 +1089,7 @@ Default value: `$bacula::conf_dir`
 
 ##### <a name="-bacula--director--console--password"></a>`password`
 
-Data type: `String[1]`
+Data type: `Bacula::Password`
 
 The password that must be supplied for a named Bacula Console to be authorized
 

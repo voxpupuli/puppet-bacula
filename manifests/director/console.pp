@@ -25,7 +25,7 @@
 #   }
 #
 define bacula::director::console (
-  String[1]              $password,
+  Bacula::Password       $password,
   String                 $conf_dir    = $bacula::conf_dir,
   String[1]              $catalogacl  = '*all*',
   Array[Bacula::Command] $commandacl  = ['list'],

@@ -45,7 +45,7 @@ class bacula::storage (
   Optional[Integer[1]] $maxconcurjobs              = undef,
   Integer[1]           $max_concurrent_jobs        = 20,
   String[1]            $media_type                 = 'File',
-  Bacula::Password     $password                   = 'secret',
+  Bacula::Password     $password                   = Sensitive('secret'),
   Stdlib::Port         $port                       = 9103,
   Stdlib::Absolutepath $rundir                     = $bacula::rundir,
   String[1]            $storage                    = $trusted['certname'], # storage here is not storage_name

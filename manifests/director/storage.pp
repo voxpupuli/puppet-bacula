@@ -19,7 +19,7 @@
 define bacula::director::storage (
   String[1]            $address             = $name,
   Stdlib::Port         $port                = 9103,
-  Bacula::Password     $password            = 'secret',
+  Bacula::Password     $password            = Sensitive('secret'),
   String[1]            $device_name         = "${facts['networking']['fqdn']}-device",
   String[1]            $media_type          = 'File',
   Optional[Integer[1]] $maxconcurjobs       = undef,

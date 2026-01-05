@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v9.0.0](https://github.com/voxpupuli/puppet-bacula/tree/v9.0.0) (2026-01-05)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/v8.1.0...v9.0.0)
+
+After [Perforce discontinued OSS Puppet](https://www.puppet.com/blog/open-source-puppet-updates-2025), the VoxPupuli community had to adjust its CI pipelines to continue to be able to test modules.  Because we cannot run these test against Puppet anymore, support for it was removed, which is a backwards-incompatible change. Instead, we switched to testing against [OpenVox, the community fork of Puppet](https://voxpupuli.org/openvox/).
+
+As a consequence, while this version focus on backwards-compatible changes, we had to bump its major version number.
+
+**Breaking changes:**
+
+- Drop puppet, update openvox minimum version to 8.19 [\#228](https://github.com/voxpupuli/puppet-bacula/pull/228) ([TheMeier](https://github.com/TheMeier))
+
+**Implemented enhancements:**
+
+- Allow passing a `Sensitive` as password to `Bacula::Director::Console` [\#238](https://github.com/voxpupuli/puppet-bacula/pull/238) ([smortex](https://github.com/smortex))
+- Add support for FreeBSD 15 [\#234](https://github.com/voxpupuli/puppet-bacula/pull/234) ([smortex](https://github.com/smortex))
+- Add support for OpenVox [\#225](https://github.com/voxpupuli/puppet-bacula/pull/225) ([jstraw](https://github.com/jstraw))
+- Add Console section to the Director configuration [\#210](https://github.com/voxpupuli/puppet-bacula/pull/210) ([lemrouch](https://github.com/lemrouch))
+
+**Fixed bugs:**
+
+- Add missing `Maximum Concurrent Jobs` to the Storage configuration [\#235](https://github.com/voxpupuli/puppet-bacula/pull/235) ([smortex](https://github.com/smortex))
+- Manage storage directories after intallation [\#206](https://github.com/voxpupuli/puppet-bacula/pull/206) ([smortex](https://github.com/smortex))
+
+**Merged pull requests:**
+
+- Fix example in README.md [\#213](https://github.com/voxpupuli/puppet-bacula/pull/213) ([tamerz](https://github.com/tamerz))
+
 ## [v8.1.0](https://github.com/voxpupuli/puppet-bacula/tree/v8.1.0) (2025-01-28)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-bacula/compare/v8.0.0...v8.1.0)
@@ -112,7 +140,7 @@ These should not affect the functionality of the module.
 
 **Fixed bugs:**
 
-- Rename of script used to create the PostgreSQL tables [\#148](https://github.com/voxpupuli/puppet-bacula/pull/148) ([Tamerz](https://github.com/Tamerz))
+- Rename of script used to create the PostgreSQL tables [\#148](https://github.com/voxpupuli/puppet-bacula/pull/148) ([tamerz](https://github.com/tamerz))
 
 ## [5.6.0](https://github.com/voxpupuli/puppet-bacula/tree/5.6.0) (2019-12-28)
 

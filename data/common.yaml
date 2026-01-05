@@ -1,4 +1,13 @@
 ---
+lookup_options:
+  "bacula::client::password":
+    convert_to: "Sensitive"
+  "bacula::director::db_pw":
+    convert_to: "Sensitive"
+  "bacula::director::password":
+    convert_to: "Sensitive"
+  "bacula::storage::password":
+    convert_to: "Sensitive"
 bacula::director::messages:
     Daemon:
       mname:        'Daemon'

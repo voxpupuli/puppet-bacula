@@ -9,6 +9,14 @@ describe 'bacula::messages' do
     context "on #{os}" do
       let(:facts) { facts.merge(concat_basedir: '/dne') }
 
+      let(:pre_condition) do
+        <<~PP
+          class { 'bacula::client':
+            password => Sensitive('fd-secret'),
+          }
+        PP
+      end
+
       context 'mail messages' do
         let(:params) do
           {

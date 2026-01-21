@@ -34,7 +34,7 @@ define bacula::director::storage (
     name                => $name,
     address             => $address,
     port                => $port,
-    password            => $password,
+    password            => Sensitive($password),
     device_name         => $device_name,
     media_type          => $media_type,
     max_concurrent_jobs => pick($maxconcurjobs, $max_concurrent_jobs),

@@ -35,7 +35,7 @@ define bacula::director::client (
     name           => $name,
     address        => $address,
     port           => $port,
-    password       => $password,
+    password       => Sensitive($password),
     file_retention => $file_retention,
     job_retention  => $job_retention,
     autoprune      => $autoprune,

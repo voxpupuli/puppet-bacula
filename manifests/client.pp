@@ -111,7 +111,7 @@ class bacula::client (
   @@bacula::director::client { $client:
     address        => $address,
     port           => $port,
-    password       => $password,
+    password       => $password.unwrap,
     autoprune      => $autoprune,
     file_retention => $file_retention,
     job_retention  => $job_retention,

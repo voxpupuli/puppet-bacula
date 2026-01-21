@@ -108,7 +108,7 @@ class bacula::storage (
   @@bacula::director::storage { $storage:
     address             => $address,
     port                => $port,
-    password            => $password,
+    password            => $password.unwrap,
     device_name         => $device_name,
     media_type          => $media_type,
     max_concurrent_jobs => $max_concurrent_jobs,

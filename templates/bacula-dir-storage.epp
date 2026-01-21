@@ -3,7 +3,7 @@
     String $name,
     String $address,
     Integer $port,
-    Sensitive[String[1]] $password,
+    String[1] $password,
     String $device_name,
     String $media_type,
     Integer $max_concurrent_jobs,

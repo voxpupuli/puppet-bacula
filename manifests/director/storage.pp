@@ -17,7 +17,7 @@
 # @param conf_dir            Bacula configuration directory
 #
 define bacula::director::storage (
-  Sensitive[String[1]] $password,
+  String[1]            $password,
   String[1]            $address             = $name,
   Stdlib::Port         $port                = 9103,
   String[1]            $device_name         = "${facts['networking']['fqdn']}-device",

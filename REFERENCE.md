@@ -1023,7 +1023,7 @@ The port of the Bacula File server daemon
 
 ##### <a name="-bacula--director--client--password"></a>`password`
 
-Data type: `Sensitive[String[1]]`
+Data type: `String[1]`
 
 The password to be used when establishing a connection with the File services
 
@@ -1469,7 +1469,7 @@ Default value: `9103`
 
 ##### <a name="-bacula--director--storage--password"></a>`password`
 
-Data type: `Sensitive[String[1]]`
+Data type: `String[1]`
 
 Bacula director configuration for Storage option 'Password'
 

@@ -38,7 +38,6 @@
 * [`Bacula::Command`](#Bacula--Command): A Bacula console command
 * [`Bacula::JobType`](#Bacula--JobType): The type of job
 * [`Bacula::Message`](#Bacula--Message): A Bacula message specification
-* [`Bacula::Password`](#Bacula--Password): Temporary workarond to accept Sensitive and non-Sensitive passwords
 * [`Bacula::Runscript`](#Bacula--Runscript): A Bacula Runscript specification
 * [`Bacula::Size`](#Bacula--Size): A size indication
 * [`Bacula::Time`](#Bacula--Time): A time indication
@@ -380,11 +379,9 @@ Default value: `[]`
 
 ##### <a name="-bacula--client--password"></a>`password`
 
-Data type: `Bacula::Password`
+Data type: `Sensitive[String[1]]`
 
 A password to use for communication with this File Daemon
-
-Default value: `'secret'`
 
 ##### <a name="-bacula--client--max_concurrent_jobs"></a>`max_concurrent_jobs`
 
@@ -585,11 +582,9 @@ Default value: `'bacula'`
 
 ##### <a name="-bacula--director--db_pw"></a>`db_pw`
 
-Data type: `Bacula::Password`
+Data type: `Sensitive[String[1]]`
 
 The database user's password
-
-Default value: `'notverysecret'`
 
 ##### <a name="-bacula--director--db_user"></a>`db_user`
 
@@ -682,11 +677,9 @@ Default value: `true`
 
 ##### <a name="-bacula--director--password"></a>`password`
 
-Data type: `Bacula::Password`
+Data type: `Sensitive[String[1]]`
 
 password to connect to the director
-
-Default value: `'secret'`
 
 ##### <a name="-bacula--director--port"></a>`port`
 
@@ -756,7 +749,7 @@ Default value: `$bacula::director::db_name`
 
 ##### <a name="-bacula--director--postgresql--db_pw"></a>`db_pw`
 
-Data type: `Bacula::Password`
+Data type: `Sensitive[String[1]]`
 
 The database user's password
 
@@ -937,11 +930,9 @@ Default value: `'File'`
 
 ##### <a name="-bacula--storage--password"></a>`password`
 
-Data type: `Bacula::Password`
+Data type: `Sensitive[String[1]]`
 
 Specifies the password that must be supplied by the named Director
-
-Default value: `'secret'`
 
 ##### <a name="-bacula--storage--port"></a>`port`
 
@@ -1026,13 +1017,13 @@ The address of the Bacula File server daemon
 
 ##### <a name="-bacula--director--client--port"></a>`port`
 
-Data type: `Variant[String[1],Stdlib::Port]`
+Data type: `Stdlib::Port`
 
 The port of the Bacula File server daemon
 
 ##### <a name="-bacula--director--client--password"></a>`password`
 
-Data type: `Bacula::Password`
+Data type: `String[1]`
 
 The password to be used when establishing a connection with the File services
 
@@ -1107,7 +1098,7 @@ Default value: `$bacula::conf_dir`
 
 ##### <a name="-bacula--director--console--password"></a>`password`
 
-Data type: `Bacula::Password`
+Data type: `Sensitive[String[1]]`
 
 The password that must be supplied for a named Bacula Console to be authorized
 
@@ -1344,7 +1335,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--director--pool--maxvoljobs"></a>`maxvoljobs`
 
-Data type: `Optional[Variant[String[1],Integer[1]]]`
+Data type: `Optional[Integer[1]]`
 
 Bacula pool configuration option "Maximum Volume Jobs"
 
@@ -1360,7 +1351,7 @@ Default value: `undef`
 
 ##### <a name="-bacula--director--pool--maxvols"></a>`maxvols`
 
-Data type: `Optional[Variant[String[1],Integer[1]]]`
+Data type: `Optional[Integer[1]]`
 
 Bacula pool configuration option "Maximum Volumes"
 
@@ -1478,11 +1469,9 @@ Default value: `9103`
 
 ##### <a name="-bacula--director--storage--password"></a>`password`
 
-Data type: `Bacula::Password`
+Data type: `String[1]`
 
 Bacula director configuration for Storage option 'Password'
-
-Default value: `'secret'`
 
 ##### <a name="-bacula--director--storage--device_name"></a>`device_name`
 
@@ -2398,12 +2387,6 @@ Struct[{
   syslog           => Optional[String],
 }]
 ```
-
-### <a name="Bacula--Password"></a>`Bacula::Password`
-
-Temporary workarond to accept Sensitive and non-Sensitive passwords
-
-Alias of `Variant[String[1], Sensitive[String[1]]]`
 
 ### <a name="Bacula--Runscript"></a>`Bacula::Runscript`
 

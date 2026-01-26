@@ -30,6 +30,7 @@
 class bacula::storage (
   String[1]            $services,
   Array[String[1]]     $packages,
+  Sensitive[String[1]] $password,
   String[1]            $ensure                     = 'present',
   Stdlib::Absolutepath $conf_dir                   = $bacula::conf_dir,
   Stdlib::Absolutepath $device                     = '/bacula',
@@ -45,7 +46,6 @@ class bacula::storage (
   Optional[Integer[1]] $maxconcurjobs              = undef,
   Integer[1]           $max_concurrent_jobs        = 20,
   String[1]            $media_type                 = 'File',
-  Bacula::Password     $password                   = 'secret',
   Stdlib::Port         $port                       = 9103,
   Stdlib::Absolutepath $rundir                     = $bacula::rundir,
   String[1]            $storage                    = $trusted['certname'], # storage here is not storage_name
@@ -64,7 +64,7 @@ class bacula::storage (
       }
     )
   }
-  ensure_packages($package_names, { ensure => $ensure })
+  stdlib::ensure_packages($package_names, { ensure => $ensure })
 
   service { $services:
     ensure  => running,
@@ -99,17 +99,16 @@ class bacula::storage (
   Concat::Fragment <<| tag == "bacula-storage-dir-${director_name}" |>>
 
   concat { "${conf_dir}/bacula-sd.conf":
-    owner     => 'root',
-    group     => $group,
-    mode      => '0640',
-    show_diff => false,
-    notify    => Service[$services],
+    owner  => 'root',
+    group  => $group,
+    mode   => '0640',
+    notify => Service[$services],
   }
 
   @@bacula::director::storage { $storage:
     address             => $address,
     port                => $port,
-    password            => $password,
+    password            => $password.unwrap,
     device_name         => $device_name,
     media_type          => $media_type,
     max_concurrent_jobs => $max_concurrent_jobs,

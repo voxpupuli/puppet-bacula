@@ -60,10 +60,10 @@ class bacula::client (
   Optional[String[1]]            $default_pool_full,
   Optional[String[1]]            $default_pool_inc,
   Optional[String[1]]            $default_pool_diff,
+  Sensitive[String[1]]           $password,
   String[1]                      $ensure              = 'present',
   Stdlib::Port                   $port                = 9102,
   Array[String[1]]               $listen_address      = [],
-  Bacula::Password               $password            = 'secret',
   Integer[1]                     $max_concurrent_jobs = 2,
   String[1]                      $director_name       = $bacula::director_name,
   Bacula::Yesno                  $autoprune           = true,
@@ -94,12 +94,11 @@ class bacula::client (
   $use_pki = ($pki_signatures or $pki_encryption) and $pki_keypair
 
   concat { $config_file:
-    owner     => 'root',
-    group     => $group,
-    mode      => '0640',
-    show_diff => false,
-    require   => Package[$packages],
-    notify    => Service[$services],
+    owner   => 'root',
+    group   => $group,
+    mode    => '0640',
+    require => Package[$packages],
+    notify  => Service[$services],
   }
 
   concat::fragment { 'bacula-client-header':
@@ -112,7 +111,7 @@ class bacula::client (
   @@bacula::director::client { $client:
     address        => $address,
     port           => $port,
-    password       => $password,
+    password       => $password.unwrap,
     autoprune      => $autoprune,
     file_retention => $file_retention,
     job_retention  => $job_retention,

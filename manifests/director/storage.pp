@@ -17,9 +17,9 @@
 # @param conf_dir            Bacula configuration directory
 #
 define bacula::director::storage (
+  String[1]            $password,
   String[1]            $address             = $name,
   Stdlib::Port         $port                = 9103,
-  Bacula::Password     $password            = 'secret',
   String[1]            $device_name         = "${facts['networking']['fqdn']}-device",
   String[1]            $media_type          = 'File',
   Optional[Integer[1]] $maxconcurjobs       = undef,
@@ -34,7 +34,7 @@ define bacula::director::storage (
     name                => $name,
     address             => $address,
     port                => $port,
-    password            => $password,
+    password            => Sensitive($password),
     device_name         => $device_name,
     media_type          => $media_type,
     max_concurrent_jobs => pick($maxconcurjobs, $max_concurrent_jobs),

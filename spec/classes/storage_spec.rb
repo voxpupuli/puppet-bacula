@@ -7,51 +7,52 @@ describe 'bacula::storage' do
     context "on #{os}" do
       let(:node) { 'foo.example.com' }
       let(:facts) { facts }
-      let(:params) do
-        {
-          storage: param_storage,
-          address: param_address
-        }
+
+      let(:pre_condition) do
+        <<~PP
+          class { 'bacula::client':
+            password => Sensitive('fd-secret'),
+          }
+        PP
       end
-      let(:param_storage) { :undef }
-      let(:param_address) { :undef }
 
-      it { is_expected.to contain_class('bacula::storage') }
-
-      case facts[:os]['family']
-      when 'Debian'
-        it { is_expected.to contain_package('bacula-sd') }
-      when 'RedHat'
-        it do
-          is_expected.to contain_package('bacula-storage').with(
-            'ensure' => 'installed'
-          )
+      context 'with default parameters' do
+        let(:params) do
+          {
+            password: sensitive('sd-secret')
+          }
         end
-      when 'OpenBSD'
-        it { is_expected.to contain_package('bacula-server') }
-      when 'FreeBSD'
-        it { is_expected.to contain_package('bacula9-server') }
+        let(:sd_package) do
+          {
+            'Debian' => 'bacula-sd',
+            'RedHat' => 'bacula-storage',
+            'OpenBSD' => 'bacula-server',
+            'FreeBSD' => 'bacula9-server'
+          }[facts[:os]['family']]
+        end
+
+        it { is_expected.to compile.with_all_deps }
+
+        it do
+          expect(exported_resources).to contain_bacula__director__storage('foo.example.com').with(address: 'foo.example.com')
+        end
+
+        it { is_expected.to contain_package(sd_package).with(ensure: 'installed') }
       end
 
-      context 'with default params' do
-        it { expect(exported_resources).to contain_bacula__director__storage('foo.example.com').with(address: 'foo.example.com') }
-      end
+      context 'with all parameters set' do
+        let(:params) do
+          {
+            password: sensitive('sd-secret'),
+            address: 'address.example.com',
+            storage: 'storage.example.com'
+          }
+        end
 
-      context 'with a custom name' do
-        let(:param_storage) { 'storage.example.com' }
+        it { is_expected.to compile.with_all_deps }
 
-        it { expect(exported_resources).to contain_bacula__director__storage('storage.example.com').with(address: 'foo.example.com') }
-      end
-
-      context 'with a custom address' do
-        let(:param_address) { 'address.example.com' }
-
-        it { expect(exported_resources).to contain_bacula__director__storage('foo.example.com').with(address: 'address.example.com') }
-
-        context 'with a custom name' do
-          let(:param_storage) { 'storage.example.com' }
-
-          it { expect(exported_resources).to contain_bacula__director__storage('storage.example.com').with(address: 'address.example.com') }
+        it do
+          expect(exported_resources).to contain_bacula__director__storage('storage.example.com').with(address: 'address.example.com')
         end
       end
     end

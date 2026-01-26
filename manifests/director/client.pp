@@ -23,19 +23,19 @@
 #   }
 #
 define bacula::director::client (
-  String[1]                       $address,
-  Variant[String[1],Stdlib::Port] $port, # FIXME: Remove String
-  Bacula::Password                $password,
-  Bacula::Time                    $file_retention,
-  Bacula::Time                    $job_retention,
-  Bacula::Yesno                   $autoprune,
-  Stdlib::Absolutepath            $conf_dir = $bacula::conf_dir,
+  String[1]            $address,
+  Stdlib::Port         $port,
+  String[1]            $password,
+  Bacula::Time         $file_retention,
+  Bacula::Time         $job_retention,
+  Bacula::Yesno        $autoprune,
+  Stdlib::Absolutepath $conf_dir = $bacula::conf_dir,
 ) {
   $epp_client_variables = {
     name           => $name,
     address        => $address,
     port           => $port,
-    password       => $password,
+    password       => Sensitive($password),
     file_retention => $file_retention,
     job_retention  => $job_retention,
     autoprune      => $autoprune,

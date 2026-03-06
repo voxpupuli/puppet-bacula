@@ -17,7 +17,7 @@ describe 'bacula::messages' do
             mailonerrorcmd: '"/usr/sbin/bsmtp -h localhost -f \\"(Bacula) <bacula@example.com>\\" -s \\"BACULA ERROR: %t %e of %n %l\\" %r"',
             mailonerror: 'sysadmins@example.com = all',
             mailonsuccesscmd: '"/usr/sbin/bsmtp -h localhost -f \\"(Bacula) <bacula@example.com>\\" -s \\"Backup: %t %e of %n %l\\" %r"',
-            mailonsuccess: 'customer@example.net = all'
+            mailonsuccess: 'customer@example.net = all',
           }
         end
 

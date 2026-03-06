@@ -10,7 +10,7 @@ describe 'bacula::storage' do
       let(:params) do
         {
           storage: param_storage,
-          address: param_address
+          address: param_address,
         }
       end
       let(:param_storage) { :undef }
@@ -24,7 +24,7 @@ describe 'bacula::storage' do
       when 'RedHat'
         it do
           is_expected.to contain_package('bacula-storage').with(
-            'ensure' => 'installed'
+            'ensure' => 'installed',
           )
         end
       when 'OpenBSD'

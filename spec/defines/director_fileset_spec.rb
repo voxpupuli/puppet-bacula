@@ -10,15 +10,15 @@ describe 'bacula::director::fileset' do
       {
         files: [
           '/a',
-          '/b'
+          '/b',
         ],
         conf_dir: '/etc/bacula',
         director_name: 'director_name',
         options: {
           'a' => 'string',
           'b' => false,
-          'c' => %w[an array]
-        }
+          'c' => %w[an array],
+        },
       }
     end
 

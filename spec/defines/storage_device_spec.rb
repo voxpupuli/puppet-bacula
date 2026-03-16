@@ -16,7 +16,7 @@ describe 'bacula::storage::device' do
           {
             # FIXME: `include bacula` setup a default device which use the default device.
             # If we do not customize this, we end-up with a duplicate resource declaration.
-            device: '/tank'
+            device: '/tank',
           }
         end
 

@@ -15,7 +15,7 @@ describe 'bacula::job' do
         let(:title) { 'Etc' }
         let(:params) do
           {
-            files: ['/etc']
+            files: ['/etc'],
           }
         end
 
@@ -23,19 +23,19 @@ describe 'bacula::job' do
 
         it do
           expect(exported_resources).to contain_bacula__director__job('Etc').with_content(
-            %r{Job \{\n.*Name.*=.*Etc\n.*Type.*= Backup}
+            %r{Job \{\n.*Name.*=.*Etc\n.*Type.*= Backup},
           )
         end
 
         it do
           expect(exported_resources).to contain_bacula__director__job('Etc').with_content(
-            %r{FileSet.*=.*Etc}
+            %r{FileSet.*=.*Etc},
           )
         end
 
         it do
           expect(exported_resources).to contain_bacula__director__fileset('Etc').with_files(
-            ['/etc']
+            ['/etc'],
           )
         end
       end
@@ -45,7 +45,7 @@ describe 'bacula::job' do
         let(:params) do
           {
             files: ['/etc'],
-            job_tag: 'simple'
+            job_tag: 'simple',
           }
         end
 

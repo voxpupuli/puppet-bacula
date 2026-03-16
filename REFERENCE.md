@@ -125,17 +125,23 @@ Data type: `String[1]`
 
 The default address of the director used by bconsole
 
+Default value: `'%{trusted.certname}'`
+
 ##### <a name="-bacula--director_name"></a>`director_name`
 
 Data type: `String[1]`
 
 The default director name
 
+Default value: `'%{trusted.certname}'`
+
 ##### <a name="-bacula--storage_name"></a>`storage_name`
 
 Data type: `String[1]`
 
 The default storage name
+
+Default value: `'%{trusted.certname}'`
 
 ##### <a name="-bacula--db_type"></a>`db_type`
 
@@ -295,11 +301,15 @@ Data type: `Hash[String, Bacula::Message]`
 
 Logging configuration; loaded from hiera
 
+Default value: `{ 'Standard-fd' => { 'daemon' => 'fd', 'mname' => 'Standard', 'director' => '%{trusted.certname}-dir = all, !skipped, !restored', 'append' => '"/var/log/bacula/bacula-fd.log" = all, !skipped' } }`
+
 ##### <a name="-bacula--client--packages"></a>`packages`
 
 Data type: `Array[String[1]]`
 
 A list of packages to install; loaded from hiera
+
+Default value: `undef`
 
 ##### <a name="-bacula--client--ensure"></a>`ensure`
 
@@ -315,11 +325,15 @@ Data type: `String[1]`
 
 A list of services to operate; loaded from hiera
 
+Default value: `'bacula-fd'`
+
 ##### <a name="-bacula--client--default_pool"></a>`default_pool`
 
 Data type: `String[1]`
 
 The name of the Pool for this FD to use by default
+
+Default value: `'Default'`
 
 ##### <a name="-bacula--client--default_pool_full"></a>`default_pool_full`
 
@@ -327,17 +341,23 @@ Data type: `Optional[String[1]]`
 
 The name of the Pool to use for Full jobs
 
+Default value: `undef`
+
 ##### <a name="-bacula--client--default_pool_inc"></a>`default_pool_inc`
 
 Data type: `Optional[String[1]]`
 
 The name of the Pool to use for Incremental jobs
 
+Default value: `undef`
+
 ##### <a name="-bacula--client--default_pool_diff"></a>`default_pool_diff`
 
 Data type: `Optional[String[1]]`
 
 The name of the Pool to use for Differential jobs
+
+Default value: `undef`
 
 ##### <a name="-bacula--client--port"></a>`port`
 
@@ -539,11 +559,15 @@ Data type: `Hash[String[1], Bacula::Message]`
 
 Logging configuration; loaded from hiera
 
+Default value: `{ 'Daemon' => { 'mname' => 'Daemon', 'console' => 'all, !skipped, !saved', 'append' => '"/var/log/bacula/bacula-dir.log" = all, !skipped' }, 'Standard-dir' => { 'mname' => 'Standard', 'console' => 'all, !skipped, !saved', 'append' => '"/var/log/bacula/bacula-dir.log" = all, !skipped', 'catalog' => 'all' } }`
+
 ##### <a name="-bacula--director--packages"></a>`packages`
 
 Data type: `Array[String[1]]`
 
 A list of packages to install; loaded from hiera
+
+Default value: `[]`
 
 ##### <a name="-bacula--director--ensure"></a>`ensure`
 
@@ -807,6 +831,8 @@ The following parameters are available in the `bacula::storage` class:
 Data type: `String[1]`
 
 A list of services to operate; loaded from hiera
+
+Default value: `'bacula-sd'`
 
 ##### <a name="-bacula--storage--packages"></a>`packages`
 

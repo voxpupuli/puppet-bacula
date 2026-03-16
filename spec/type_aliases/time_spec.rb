@@ -14,7 +14,7 @@ describe 'Bacula::Time' do
       '2 quarters',
       '5 years',
       '1 month 2 days 30 sec',
-      '1 week 2 days 3 hours 10 mins'
+      '1 week 2 days 3 hours 10 mins',
     ].each do |value|
       context value.inspect do
         it { is_expected.to allow_value(value) }
@@ -26,7 +26,7 @@ describe 'Bacula::Time' do
     [
       'john',
       '8hours',
-      '1 month2 hours'
+      '1 month2 hours',
     ].each do |value|
       context value.inspect do
         it { is_expected.not_to allow_value(value) }

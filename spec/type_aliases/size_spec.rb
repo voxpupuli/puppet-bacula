@@ -8,7 +8,7 @@ describe 'Bacula::Size' do
       4096,
       '1m',
       '10gb',
-      '4M'
+      '4M',
     ].each do |value|
       context value.inspect do
         it { is_expected.to allow_value(value) }
@@ -21,7 +21,7 @@ describe 'Bacula::Size' do
       '4096',
       'john',
       '8 hours',
-      'o12GB1'
+      'o12GB1',
     ].each do |value|
       context value.inspect do
         it { is_expected.not_to allow_value(value) }

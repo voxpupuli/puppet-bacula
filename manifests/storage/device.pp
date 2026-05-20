@@ -11,7 +11,6 @@
 # @param automatic_mount     Bacula director configuration for Device option 'AutomaticMount'
 # @param removable_media     Bacula director configuration for Device option 'RemovableMedia'
 # @param always_open         Bacula director configuration for Device option 'AlwaysOpen'
-# @param maxconcurjobs       DEPRECATED Bacula director configuration for Device option 'Maximum Concurrent Jobs'
 # @param max_concurrent_jobs Bacula director configuration for Device option 'Maximum Concurrent Jobs'
 # @param conf_dir            Path to bacula configuration directory
 # @param device_mode         Unix mode of the Archive Device directory
@@ -29,7 +28,6 @@ define bacula::storage::device (
   Bacula::Yesno        $automatic_mount     = true,
   Bacula::Yesno        $removable_media     = false,
   Bacula::Yesno        $always_open         = false,
-  Optional[Integer[1]] $maxconcurjobs       = undef,
   Integer[1]           $max_concurrent_jobs = 1,
   Stdlib::Absolutepath $conf_dir            = $bacula::conf_dir,
   Stdlib::Filemode     $device_mode         = '0770',
@@ -40,10 +38,6 @@ define bacula::storage::device (
 ) {
   include bacula::storage
 
-  if $maxconcurjobs {
-    deprecation('bacula::storage::device::maxconcurjobs', 'This parameter is deprecated.  Use bacula::storage::device::max_concurrent_jobs instead.')
-  }
-
   $epp_device_variables = {
     device_name         => $device_name,
     media_type          => $media_type,
@@ -53,7 +47,7 @@ define bacula::storage::device (
     automatic_mount     => $automatic_mount,
     removable_media     => $removable_media,
     always_open         => $always_open,
-    max_concurrent_jobs => pick($maxconcurjobs, $max_concurrent_jobs),
+    max_concurrent_jobs => $max_concurrent_jobs,
   }
 
   concat::fragment { "bacula-storage-device-${name}":

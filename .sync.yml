@@ -3,3 +3,5 @@
   extra_configs:
     RSpec/RepeatedExample:
       Enabled: False
+spec/spec_helper_acceptance.rb:
+  unmanaged: false

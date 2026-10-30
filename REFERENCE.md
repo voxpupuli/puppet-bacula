@@ -56,7 +56,7 @@ module classes will reference the values here.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 include bacula
@@ -261,7 +261,7 @@ This class installs and configures the File Daemon to backup a client system.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 class { 'bacula::client': director_name => 'mydirector.example.com' }
@@ -516,7 +516,7 @@ This class installs and configures the Bacula Director
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 class { 'bacula::director':
@@ -1099,7 +1099,7 @@ When this keyword is present, any resource or command name (which ever is approp
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 bacula::director::console { 'Monitoring':
@@ -1217,7 +1217,7 @@ exported to be realized by the director.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 bacula::director::fileset { 'Home':
@@ -1329,7 +1329,7 @@ to export the pool resources to the director.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 bacula::director::pool {
@@ -1556,7 +1556,7 @@ This class installs a bacula job on the director.  This can be used for specific
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 bacula::job { "${fqdn}-common":
@@ -1564,7 +1564,7 @@ bacula::job { "${fqdn}-common":
 }
 ```
 
-##### 
+#####
 
 ```puppet
 bacula::job { "${fqdn}-mywebapp":
@@ -2115,7 +2115,7 @@ Creates a schedule to which jobs and jobdefs can adhere.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 bacula::schedule { 'Regularly':
@@ -2312,7 +2312,7 @@ Return a quoted escaped string suitable for bacula configuration
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 bacula::escape('sed -i "" -e s|a|b| /tmp/tmp.U6BF0NIS') #=> "\"sed -i \\\"\\\" -e s|a|b| /tmp/tmp.U6BF0NIS\""
@@ -2326,7 +2326,7 @@ Returns: `String` The escaped string
 
 ##### Examples
 
-###### 
+######
 
 ```puppet
 bacula::escape('sed -i "" -e s|a|b| /tmp/tmp.U6BF0NIS') #=> "\"sed -i \\\"\\\" -e s|a|b| /tmp/tmp.U6BF0NIS\""
@@ -2346,7 +2346,7 @@ Convert various representations of 'yes' and 'no' to 'yes' and 'no'.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 bacula::yesno2str(true)    #=> 'yes'
@@ -2365,7 +2365,7 @@ Returns: `String` Either 'yes' or 'no'
 
 ##### Examples
 
-###### 
+######
 
 ```puppet
 bacula::yesno2str(true)    #=> 'yes'
@@ -2460,7 +2460,7 @@ A size indication
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 12
@@ -2482,7 +2482,7 @@ A time indication
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 "12"
@@ -2506,4 +2506,3 @@ Variant[Boolean, Enum[
     'false', # lint:ignore:quoted_booleans
   ]]
 ```
-
